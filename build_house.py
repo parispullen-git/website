@@ -11,6 +11,7 @@ enough to keep house.html current.
 """
 import json
 import re
+from pathlib import Path
 
 _index_src = open("index.html", encoding="utf-8").read()
 SITE_HEADER = re.search(r'<header class="worldnav">.*?</header>', _index_src, re.S).group(0)
@@ -266,17 +267,7 @@ COCKTAIL_UNLOCK = '''<div class="unlock">
                   <p class="unlock__eyebrow" style="margin-top:var(--s4)">Sponsor to be announced</p>
                 </div>'''
 
-PIANO_PLAYLISTS = [
-    dict(type="playlist", id="6XS1tFYgCi82SrDtHFLUov", label="UR WELCOME Vol.1"),
-    dict(type="album", id="5mz0mJxb80gqJIcRf9LGHJ", label="Nothing Was The Same"),
-    dict(type="playlist", id="7b46c5syjtG86a77R7SnMs", label="All Drake Songs On Spotify"),
-    dict(type="album", id="40GMAhriYJRO1rsY4YdrZb", label="Views"),
-    dict(type="album", id="6qhOiAW8Zes8U4UyhMYCpx", label="(a)Live In Vegas"),
-    dict(type="album", id="0OAv7DCME2AV4q1KPO95HY", label="ICEMAN"),
-    dict(type="album", id="4dHcuizgdi9fpKX8MKQm43", label="LUCKY YOU"),
-    dict(type="album", id="60cNc5CdvVCTEF5A6FRhFN", label="with all due respect"),
-    dict(type="album", id="36KvnNSPeyCHUrAQVpgwwN", label="For All The Right Reasons Vol. 1"),
-]
+PIANO_PLAYLISTS = json.loads((Path(__file__).resolve().parent / "data" / "house-music.json").read_text(encoding="utf-8"))
 _piano_first = PIANO_PLAYLISTS[0]
 _piano_json = json.dumps(PIANO_PLAYLISTS).replace('"', "&quot;")
 PIANO_PLAYER = f'''<div class="piano-player" data-piano-player data-playlists="{_piano_json}">
