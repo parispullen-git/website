@@ -1,0 +1,12 @@
+# Local Netlify folder
+.netlify
+
+# Dependencies
+node_modules
+
+# macOS junk
+.DS_Store
+._*
+
+# Local content-console runtime (Phase 2/3)
+local-admin/node_modules

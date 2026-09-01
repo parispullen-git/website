@@ -1,0 +1,147 @@
+#!/usr/bin/env python3
+"""
+Copies each brand's live site into paris-pullen/<path_slug>/ (a plain path
+under the main domain, e.g. parispullen.com/dantesimpson) and injects the
+password gate + noindex into every HTML page. Re-run after any source brand
+site changes. Never hand-edit files under these output folders -- edit the
+source project and re-run this script.
+
+Each brand also gets an entry in _redirects mapping <subdomain>.parispullen.com
+to the same folder, ready for whenever real subdomains get wired up in
+Netlify/IONOS -- until then the plain path is what's live.
+"""
+import re
+import shutil
+from pathlib import Path
+
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+from gate_snippet import GATE_SNIPPET, NOINDEX
+
+ROOT = Path(__file__).resolve().parent.parent          # .../paris-pullen
+CLAUDE_DIR = ROOT.parent                                # .../Claude
+
+# (subdomain slug, path slug -- live now at parispullen.com/<path slug>,
+#  source dir relative to CLAUDE_DIR, extra excludes)
+BRANDS = [
+    ("dante",      "dantesimpson",         "dante-simpson",              []),
+    ("burnsbrims", "burnsbrims",           "burns-brims",                [
+        "assets/founder-source", "assets/original", "assets/reimagined",
+        "assets/video/brand-film.ts",
+    ]),
+    ("harvey",     "harveycummings",       "harvey-cummings",            [".claude"]),
+    ("ynnt",       "yournewnailtech",      "your-new-nail-tech",         []),
+    ("goodwill",   "goodwillgrooming",     "goodwill-grooming/dist",     []),
+    ("el",         "ellambert",            "ellambert",                  []),
+    ("threepiece", "threepieceentertainment", "threepiece-entertainment", ["proposals/__pycache__"]),
+]
+
+SKIP_NAMES = {".DS_Store", "__pycache__", ".claude"}
+
+
+def should_skip(rel_path: Path, excludes) -> bool:
+    parts = rel_path.parts
+    if any(p.startswith("._") or p == ".DS_Store" for p in parts):
+        return True
+    if any(p in SKIP_NAMES for p in parts):
+        return True
+    rel_str = str(rel_path)
+    for ex in excludes:
+        if rel_str == ex or rel_str.startswith(ex + "/"):
+            return True
+    return False
+
+
+def copy_brand(path_slug: str, src_rel: str, excludes: list[str]) -> Path:
+    src = CLAUDE_DIR / src_rel
+    dst = ROOT / path_slug
+    if dst.exists():
+        shutil.rmtree(dst)
+    dst.mkdir(parents=True)
+
+    count = 0
+    for f in src.rglob("*"):
+        if f.is_dir():
+            continue
+        rel = f.relative_to(src)
+        if should_skip(rel, excludes):
+            continue
+        out = dst / rel
+        out.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(f, out)  # not copy2 -- copy2 preserves xattrs, which makes
+        count += 1           # this volume spontaneously regenerate ._ shadow files
+    return dst, count
+
+
+def sweep_shadows(dst: Path) -> int:
+    """Remove AppleDouble ._ files the volume regenerates on every write
+    (copy, or the gate-injection rewrite below). Call after all writes."""
+    n = 0
+    for stray in dst.rglob("._*"):
+        if stray.is_file():
+            stray.unlink()
+            n += 1
+    return n
+
+
+HEAD_RE = re.compile(r"(<head[^>]*>)", re.IGNORECASE)
+BODY_RE = re.compile(r"(<body[^>]*>)", re.IGNORECASE)
+
+
+def inject_gate(html_path: Path):
+    text = html_path.read_text(encoding="utf-8", errors="ignore")
+
+    if "ppgate" in text:
+        return False  # already gated, skip (idempotent re-run)
+
+    if HEAD_RE.search(text):
+        text = HEAD_RE.sub(lambda m: m.group(1) + "\n" + NOINDEX, text, count=1)
+    if BODY_RE.search(text):
+        text = BODY_RE.sub(lambda m: m.group(1) + "\n" + GATE_SNIPPET, text, count=1)
+
+    html_path.write_text(text, encoding="utf-8")
+    return True
+
+
+def main():
+    redirects_lines = []
+
+    for slug, path_slug, src_rel, excludes in BRANDS:
+        dst, _ = copy_brand(path_slug, src_rel, excludes)
+        sweep_shadows(dst)  # first pass: shadows created by the copy
+
+        html_files = [h for h in dst.rglob("*.html") if not h.name.startswith("._")]
+        gated = sum(1 for h in html_files if inject_gate(h))
+
+        sweep_shadows(dst)  # second pass: shadows created by rewriting the html above
+
+        total_files = sum(1 for f in dst.rglob("*") if f.is_file())
+        size_mb = sum(f.stat().st_size for f in dst.rglob("*") if f.is_file()) / 1_000_000
+        print(f"{path_slug:24s} <- {src_rel:32s} {total_files:4d} files, {len(html_files):3d} html ({gated} gated), {size_mb:6.1f}MB")
+        # not active until the subdomain + Netlify domain alias is set up --
+        # the plain path (parispullen.com/<path_slug>) is what's live for now.
+        redirects_lines.append(f"https://{slug}.parispullen.com/*  /{path_slug}/:splat  200")
+
+    redirects_path = ROOT / "_redirects"
+    existing = redirects_path.read_text(encoding="utf-8") if redirects_path.exists() else ""
+    marker_start = "# --- brand subdomain previews (generated by build_brands.py; not active until DNS + Netlify domain aliases are set up) ---"
+    marker_end = "# --- end brand subdomain previews ---"
+    block = marker_start + "\n" + "\n".join(redirects_lines) + "\n" + marker_end + "\n"
+
+    if marker_start in existing:
+        existing = re.sub(
+            re.escape(marker_start) + r".*?" + re.escape(marker_end) + r"\n?",
+            block,
+            existing,
+            flags=re.S,
+        )
+    else:
+        existing = existing.rstrip("\n") + ("\n\n" if existing.strip() else "") + block
+
+    redirects_path.write_text(existing, encoding="utf-8")
+    print(f"\nWrote {redirects_path}")
+
+
+
+if __name__ == "__main__":
+    main()

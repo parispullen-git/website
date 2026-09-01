@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The House — Paris Pullen</title>
+<meta name="description" content="Fifteen floors of The Compliment, from the inventory to the skyline club. Every floor a room you have just walked into.">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="worldnav">
+  <a class="worldnav__mark" href="/"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
+  <button class="worldnav__toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu">
+    <span class="worldnav__label">Menu</span>
+    <span class="worldnav__bars" aria-hidden="true"><i></i><i></i></span>
+  </button>
+</header>
+
+<nav class="menu" id="menu" aria-label="World navigation">
+  <ul class="menu__list">
+    <li><a href="index.html"><span class="idx">01</span>The World</a></li>
+    <li><a href="urwelcome.html"><span class="idx">02</span>The Fragrance</a></li>
+    <li><a href="charlotte.html"><span class="idx">03</span>The City</a></li>
+    <li><a href="casefiles.html"><span class="idx">04</span>The Firm</a></li>
+    <li><a href="journal.html"><span class="idx">05</span>The Journal</a></li>
+    <li><a href="house.html"><span class="idx">06</span>The Compliment</a></li>
+  </ul>
+  <div class="menu__foot">
+    <div class="social">
+      <span class="social__label">@parispullen</span>
+      <a href="https://instagram.com/parispullen" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.43.42.7.83.9 1.4.18.4.38 1 .43 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.22.6-.48 1-.9 1.4-.42.43-.83.7-1.4.9-.4.18-1 .38-2.2.43-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.22-1-.48-1.4-.9-.43-.42-.7-.83-.9-1.4-.18-.4-.38-1-.43-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.22-.6.48-1 .9-1.4.42-.43.83-.7 1.4-.9.4-.18 1-.38 2.2-.43C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.7.07-.9.04-1.4.2-1.7.32-.43.17-.74.37-1.06.7-.32.31-.52.62-.7 1.05-.12.3-.28.8-.32 1.7C3.45 8.5 3.44 8.9 3.44 12s0 3.5.07 4.7c.4.9.2 1.4.32 1.7.17.43.37.74.7 1.06.31.32.62.52 1.05.7.3.12.8.28 1.7.32 1.2.06 1.6.07 4.7.07s3.5 0 4.7-.07c.9-.04 1.4-.2 1.7-.32.43-.17.74-.37 1.06-.7.32-.31.52-.62.7-1.05.12-.3.28-.8.32-1.7.06-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.04-.9-.2-1.4-.32-1.7a2.9 2.9 0 0 0-.7-1.06 2.9 2.9 0 0 0-1.05-.7c-.3-.12-.8-.28-1.7-.32-1.2-.06-1.6-.07-4.7-.07Zm0 3.06a4.94 4.94 0 1 1 0 9.88 4.94 4.94 0 0 1 0-9.88Zm0 8.15a3.2 3.2 0 1 0 0-6.42 3.2 3.2 0 0 0 0 6.42Zm6.3-8.35a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0Z"/></svg>
+      </a>
+      <a href="https://x.com/parispullen" target="_blank" rel="noopener" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 3h3.2l-7 8 8.2 10.9h-6.4l-5-6.6-5.8 6.6H1.5l7.5-8.6L1.2 3h6.6l4.6 6.1L17.5 3Zm-1.1 17h1.8L7.7 4.8H5.7L16.4 20Z"/></svg>
+      </a>
+      <a href="https://tiktok.com/@parispullen" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 2h-3.1v13.2a2.5 2.5 0 1 1-2.5-2.5c.26 0 .5.04.74.11V9.6a5.9 5.9 0 0 0-.74-.05 5.7 5.7 0 1 0 5.7 5.7V8.9a7.1 7.1 0 0 0 4.1 1.3V7a4.2 4.2 0 0 1-4.2-4.2V2Z"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/parispullen" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05a4.2 4.2 0 0 1 3.75-2c4 0 4.75 2.6 4.75 6.05V21h-4v-5.5c0-1.3-.03-3-1.85-3-1.85 0-2.13 1.44-2.13 2.9V21h-4V9Z"/></svg>
+      </a>
+      <a href="https://youtube.com/@parispullen" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.75-1.77C18.3 5 12 5 12 5s-6.3 0-7.85.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.75 1.77C5.7 19 12 19 12 19s6.3 0 7.85-.43a2.5 2.5 0 0 0 1.75-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1-5.2 3.1Z"/></svg>
+      </a>
+    </div>
+    <p class="classified">Charlotte, North Carolina &#183; <a class="link-under" href="mailto:hello@parispullen.com">hello@parispullen.com</a> <a class="vaultkey" href="vault.html" aria-label="Vault"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 1 1 6 0v3H9Zm3 3a1.6 1.6 0 0 1 1.6 1.6c0 .6-.34 1.12-.83 1.4l.36 2.15a.3.3 0 0 1-.3.35h-1.66a.3.3 0 0 1-.3-.35l.36-2.15a1.6 1.6 0 0 1 .77-3Z"/></svg></a></p>
+  </div>
+</nav>
+
+<nav class="elevator" aria-label="Floors">
+  <a class="elevator__stop" href="#skyline" data-track="skyline"><i></i>29</a>
+  <a class="elevator__stop" href="#penthouse-living" data-track="penthouse-living"><i></i>27</a>
+  <a class="elevator__stop" href="#bedroom" data-track="bedroom"><i></i>28</a>
+  <a class="elevator__stop" href="#bath" data-track="bath"><i></i>28</a>
+  <a class="elevator__stop" href="#closet" data-track="closet"><i></i>28</a>
+  <a class="elevator__stop" href="#kitchen" data-track="kitchen"><i></i>27</a>
+  <a class="elevator__stop" href="#study" data-track="study"><i></i>27</a>
+  <a class="elevator__stop" href="#cinema" data-track="cinema"><i></i>27</a>
+  <a class="elevator__stop" href="#corridor" data-track="corridor"><i></i>26</a>
+  <a class="elevator__stop" href="#order" data-track="order"><i></i>25</a>
+  <a class="elevator__stop" href="#operations" data-track="operations"><i></i>24</a>
+  <a class="elevator__stop" href="#lab" data-track="lab"><i></i>18</a>
+  <a class="elevator__stop" href="#haberdashery" data-track="haberdashery"><i></i>12</a>
+  <a class="elevator__stop" href="#armoury" data-track="armoury"><i></i>12M</a>
+  <a class="elevator__stop" href="#fitting" data-track="fitting"><i></i>11</a>
+  <a class="elevator__stop" href="#restaurant" data-track="restaurant"><i></i>03</a>
+  <a class="elevator__stop" href="#bar" data-track="bar"><i></i>02</a>
+  <a class="elevator__stop" href="#coffee" data-track="coffee"><i></i>01</a>
+  <a class="elevator__stop" href="#lobby" data-track="lobby"><i></i>G</a>
+  <a class="elevator__stop" href="#motor" data-track="motor"><i></i>B1</a>
+  <a class="elevator__stop" href="#inventory" data-track="inventory"><i></i>B2</a>
+</nav>
+
+<main>
+
+<section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,13rem)">
+  <div class="wrap">
+    <header class="stack reveal" style="max-width:900px">
+      <p class="eyebrow">The Compliment &#183; Charlotte</p>
+      <h1 class="display display--mega">The<br>House</h1>
+      <p class="lede">Fifteen floors, stacked in the order he built them. Every one of them is a room you have just walked into, and every one of them has things in it worth picking up.</p>
+      <p class="classified">Select any artifact &#183; Esc closes</p>
+    </header>
+
+    <div class="directory reveal reveal-d1" style="margin-top:var(--s8)">
+      <a class="directory__row" href="#skyline">
+        <span class="directory__lvl">29</span>
+        <span class="directory__name">The Skyline Club</span>
+        <span class="directory__state" data-state="members">members</span>
+      </a>
+      <a class="directory__row" href="#penthouse-living">
+        <span class="directory__lvl">27</span>
+        <span class="directory__name">The Living Floor</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#bedroom">
+        <span class="directory__lvl">28</span>
+        <span class="directory__name">The Bedroom</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#bath">
+        <span class="directory__lvl">28</span>
+        <span class="directory__name">The Bathroom</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#closet">
+        <span class="directory__lvl">28</span>
+        <span class="directory__name">The Closet</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#kitchen">
+        <span class="directory__lvl">27</span>
+        <span class="directory__name">The Kitchen</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#study">
+        <span class="directory__lvl">27</span>
+        <span class="directory__name">The Study</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#cinema">
+        <span class="directory__lvl">27</span>
+        <span class="directory__name">The Cinema</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#corridor">
+        <span class="directory__lvl">26</span>
+        <span class="directory__name">The Corridor</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#order">
+        <span class="directory__lvl">25</span>
+        <span class="directory__name">The Order</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#operations">
+        <span class="directory__lvl">24</span>
+        <span class="directory__name">The Operations Room</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#lab">
+        <span class="directory__lvl">18</span>
+        <span class="directory__name">The Lab</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#haberdashery">
+        <span class="directory__lvl">12</span>
+        <span class="directory__name">The Haberdashery</span>
+        <span class="directory__state" data-state="members">members</span>
+      </a>
+      <a class="directory__row" href="#armoury">
+        <span class="directory__lvl">12M</span>
+        <span class="directory__name">The Armoury</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+      <a class="directory__row" href="#fitting">
+        <span class="directory__lvl">11</span>
+        <span class="directory__name">The Fitting Floor</span>
+        <span class="directory__state" data-state="members">members</span>
+      </a>
+      <a class="directory__row" href="#restaurant">
+        <span class="directory__lvl">03</span>
+        <span class="directory__name">The Restaurant</span>
+        <span class="directory__state" data-state="public">public</span>
+      </a>
+      <a class="directory__row" href="#bar">
+        <span class="directory__lvl">02</span>
+        <span class="directory__name">The Bar</span>
+        <span class="directory__state" data-state="public">public</span>
+      </a>
+      <a class="directory__row" href="#coffee">
+        <span class="directory__lvl">01</span>
+        <span class="directory__name">The Coffee House</span>
+        <span class="directory__state" data-state="public">public</span>
+      </a>
+      <a class="directory__row" href="#lobby">
+        <span class="directory__lvl">G</span>
+        <span class="directory__name">The Lobby</span>
+        <span class="directory__state" data-state="public">public</span>
+      </a>
+      <a class="directory__row" href="#motor">
+        <span class="directory__lvl">B1</span>
+        <span class="directory__name">The Motor Club</span>
+        <span class="directory__state" data-state="members">members</span>
+      </a>
+      <a class="directory__row" href="#inventory">
+        <span class="directory__lvl">B2</span>
+        <span class="directory__name">The Inventory</span>
+        <span class="directory__state" data-state="restricted">restricted</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="floor-scene" id="skyline" tabindex="-1" aria-label="Level 29 — The Skyline Club">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-rooftop.jpg"
+         srcset="assets/img/env-rooftop@sm.jpg 1200w, assets/img/env-rooftop.jpg 2400w"
+         sizes="100vw" alt="The Skyline Club" loading="lazy"
+         style="--focus:50% 46%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>29</b> <span>The Skyline Club</span></p>
+      <h2 class="floor-plate__name">The Skyline Club</h2>
+      <p class="floor-plate__note">You step out of the lift into moving air and the sound of a room that started without you.</p>
+      <p class="floor-plate__count"><i></i>4 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:62%;--y:64%" data-artifact="pool">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Water</span>
+        </button>
+        <button class="artifact" style="--x:24%;--y:52%" data-artifact="parapet">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Parapet</span>
+        </button>
+        <button class="artifact" style="--x:82%;--y:58%" data-artifact="cabana">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Cabanas</span>
+        </button>
+        <button class="artifact" style="--x:44%;--y:78%" data-artifact="booth">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Corner Booth</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-skyline" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="pool" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 29 &#183; Artifact</p>
+                <h3 class="drawer__name">The Water</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">The pool is four feet deep and nobody has ever swum in it. It exists to put moving light on the faces of people having conversations near it, which it does exceptionally well.</p>
+                <dl class="drawer__spec"><div><dt>Depth</dt><dd>4 ft</dd></div><div><dt>Purpose</dt><dd>Lighting</dd></div><div><dt>Swimmers</dt><dd>None on record</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="parapet" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 29 &#183; Artifact</p>
+                <h3 class="drawer__name">The Parapet</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">The glass edge. Every significant conversation on this roof has happened within six feet of it, because people tell the truth more readily when they can see how far down it is.</p>
+                <dl class="drawer__spec"><div><dt>Height</dt><dd>29 floors</dd></div><div><dt>Glass</dt><dd>Structural</dd></div><div><dt>Rule</dt><dd>No phones out</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="cabana" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 29 &#183; Artifact</p>
+                <h3 class="drawer__name">The Cabanas</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Four of them. Three can be booked. The fourth has never been available on any night, to anyone, and the staff have been trained not to explain why.</p>
+                <dl class="drawer__spec"><div><dt>Total</dt><dd>Four</dd></div><div><dt>Bookable</dt><dd>Three</dd></div><div><dt>The fourth</dt><dd>Not discussed</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="booth" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 29 &#183; Artifact</p>
+                <h3 class="drawer__name">The Corner Booth</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Faces the door, backs to the wall, worst view in the building. Held permanently. If you are sitting in it you were invited to sit in it.</p>
+                <dl class="drawer__spec"><div><dt>View</dt><dd>Deliberately poor</dd></div><div><dt>Sightline</dt><dd>The lift</dd></div><div><dt>Held</dt><dd>Permanently</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="penthouse-living" tabindex="-1" aria-label="Level 27 — The Living Floor">
+  <div class="floor-scene__view">
+    <img src="assets/img/room-living.jpg"
+         srcset="assets/img/room-living@sm.jpg 1200w, assets/img/room-living.jpg 2400w"
+         sizes="100vw" alt="The Living Floor" loading="lazy"
+         style="--focus:50% 50%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__screen" style="--x:57.5%;--y:24.3%;--w:19%;--h:15%" data-tv data-channel-set="living" data-box="0.4854,0.1742,0.6646,0.3113">
+    <div class="floor-scene__screen-frame">
+      <iframe src="https://www.youtube.com/embed/4xVVFJuycww?autoplay=1&mute=1&loop=1&playlist=4xVVFJuycww&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1"
+              title="" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+    </div>
+    <div class="tv-lowerthird" data-tv-lowerthird>
+      <p class="tv-lowerthird__eyebrow">Paris Pullen &#183; Now Screening</p>
+      <p class="tv-lowerthird__title" data-tv-lowerthird-title>The Gentlemen</p>
+    </div>
+    <div class="tv-remote" data-tv-remote>
+      <p class="tv-remote__channel" data-tv-channel-label>The Gentlemen</p>
+      <div class="tv-remote__row">
+        <button type="button" data-tv-action="ch-prev">&#9664; Ch</button>
+        <button type="button" data-tv-action="ch-next">Ch &#9654;</button>
+      </div>
+      <div class="tv-remote__row">
+        <button type="button" data-tv-action="vol-down">Vol &#8722;</button>
+        <button type="button" data-tv-action="mute">Mute</button>
+        <button type="button" data-tv-action="vol-up">Vol &#43;</button>
+      </div>
+      <button type="button" class="tv-remote__expand" data-tv-action="expand">Watch Full Screen</button>
+    </div>
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>27</b> <span>The Living Floor</span></p>
+      <h2 class="floor-plate__name">The Living Floor</h2>
+      <p class="floor-plate__note">Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.</p>
+      <p class="floor-plate__count"><i></i>5 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:44%;--y:39%" data-artifact="bike">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Motorcycle</span>
+        </button>
+        <button class="artifact" style="--x:28%;--y:91%" data-artifact="book">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Open Book</span>
+        </button>
+        <button class="artifact" style="--x:72%;--y:9%" data-artifact="mezzanine">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Mezzanine</span>
+        </button>
+        <button class="artifact" style="--x:72%;--y:88%" data-artifact="piano">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Piano</span>
+        </button>
+        <button class="artifact" style="--x:91%;--y:70%" data-artifact="safe">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Door</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-penthouse-living" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="bike" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Motorcycle</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Parked indoors, beside the fire, on a floor that cost more than the bike. It runs. It has been ridden this month. It is not furniture and he will correct you if you call it that.</p>
+                <dl class="drawer__spec"><div><dt>Runs</dt><dd>Yes</dd></div><div><dt>Ridden</dt><dd>This month</dd></div><div><dt>Furniture</dt><dd>No</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="book" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Open Book</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Left face-down and open, which he knows ruins a spine. Beside it a glass with an inch left in it and no coaster.</p>
+                <dl class="drawer__spec"><div><dt>Position</dt><dd>Face-down</dd></div><div><dt>Glass</dt><dd>One inch</dd></div><div><dt>Coaster</dt><dd>Declined</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="mezzanine" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Mezzanine</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">The upper floor runs the length of the room behind glass. From up there you can see who is in the apartment without entering it, which is either hospitable or the opposite.</p>
+                <dl class="drawer__spec"><div><dt>Runs</dt><dd>Full length</dd></div><div><dt>Balustrade</dt><dd>Glass</dd></div><div><dt>Sightline</dt><dd>Total</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="piano" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Piano</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">He played trumpet for seven years, first chair, and cannot play this at all. It is here because a room with a piano in it behaves differently from a room without one.</p>
+                <dl class="drawer__spec"><div><dt>Played by him</dt><dd>No</dd></div><div><dt>Actual instrument</dt><dd>Trumpet</dd></div><div><dt>Function</dt><dd>Atmosphere</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="safe" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Door</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Brass wheel, black steel, set into the wall beside the piano and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for.</p>
+                <dl class="drawer__spec"><div><dt>Concealed</dt><dd>No</dd></div><div><dt>Contents</dt><dd>Paper</dd></div><div><dt>Combination</dt><dd>One person</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="bedroom" tabindex="-1" aria-label="Level 28 — The Bedroom">
+  <div class="floor-scene__view">
+    <img src="assets/img/room-bedroom.jpg"
+         srcset="assets/img/room-bedroom@sm.jpg 1200w, assets/img/room-bedroom.jpg 2400w"
+         sizes="100vw" alt="The Bedroom" loading="lazy"
+         style="--focus:50% 52%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>28</b> <span>The Bedroom</span></p>
+      <h2 class="floor-plate__name">The Bedroom</h2>
+      <p class="floor-plate__note">Blackout to the glass, and a bed that faces away from the view on purpose.</p>
+      <p class="floor-plate__count"><i></i>4 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:46%;--y:62%" data-artifact="bed">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Bed</span>
+        </button>
+        <button class="artifact" style="--x:20%;--y:46%" data-artifact="window">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Glass</span>
+        </button>
+        <button class="artifact" style="--x:10%;--y:72%" data-artifact="chair">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Lounge Chair</span>
+        </button>
+        <button class="artifact" style="--x:93%;--y:54%" data-artifact="door">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Closet Door</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-bedroom" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="bed" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Bed</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Faces away from the window. A view that good will keep a man up, and he decided some years ago that he would rather sleep.</p>
+                <dl class="drawer__spec"><div><dt>Orientation</dt><dd>Away from the glass</dd></div><div><dt>Wake</dt><dd>5:40, unaided</dd></div><div><dt>Phone</dt><dd>Charges across the room</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="window" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Glass</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Floor to ceiling, blackout-lined. The city is thirty floors down and completely silent from here, which takes most people a night to get used to.</p>
+                <dl class="drawer__spec"><div><dt>Glazing</dt><dd>Acoustic</dd></div><div><dt>Blinds</dt><dd>Blackout</dd></div><div><dt>Sound at night</dt><dd>None</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="chair" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Lounge Chair</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.</p>
+                <dl class="drawer__spec"><div><dt>Faces</dt><dd>The city</dd></div><div><dt>Television</dt><dd>None</dd></div><div><dt>Hours logged</dt><dd>Considerable</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="door" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Closet Door</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Left open more often than not. What is behind it is arranged by occasion, not by colour — see the Closet.</p>
+                <dl class="drawer__spec"><div><dt>Kept</dt><dd>Open</dd></div><div><dt>Ordered by</dt><dd>Occasion</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="bath" tabindex="-1" aria-label="Level 28 — The Bathroom">
+  <div class="floor-scene__view">
+    <img src="assets/img/room-bath.jpg"
+         srcset="assets/img/room-bath@sm.jpg 1200w, assets/img/room-bath.jpg 2400w"
+         sizes="100vw" alt="The Bathroom" loading="lazy"
+         style="--focus:50% 50%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>28</b> <span>The Bathroom</span></p>
+      <h2 class="floor-plate__name">The Bathroom</h2>
+      <p class="floor-plate__note">Stone, brass and steam, with the whole city on the other side of the glass.</p>
+      <p class="floor-plate__count"><i></i>4 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:47%;--y:64%" data-artifact="tub">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Tub</span>
+        </button>
+        <button class="artifact" style="--x:16%;--y:62%" data-artifact="vanity">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Vanity</span>
+        </button>
+        <button class="artifact" style="--x:74%;--y:50%" data-artifact="shower">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Shower</span>
+        </button>
+        <button class="artifact" style="--x:31%;--y:44%" data-artifact="robe">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Robe</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-bath" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="tub" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Tub</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Freestanding, deep, set square to the window. Filled perhaps twice a month and always at the end of a long one.</p>
+                <dl class="drawer__spec"><div><dt>Position</dt><dd>Facing the glass</dd></div><div><dt>Used</dt><dd>Rarely, deliberately</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="vanity" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Vanity</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Double basins, unlacquered brass gone dark at the handles. The mirror is lit from the sides so a man sees his face rather than his shadow.</p>
+                <dl class="drawer__spec"><div><dt>Brass</dt><dd>Unlacquered</dd></div><div><dt>Lighting</dt><dd>Side-lit, never overhead</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="shower" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Shower</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Marble on three sides, glass on the fourth. The bench is not decorative; it is where the day gets thought about before it starts.</p>
+                <dl class="drawer__spec"><div><dt>Enclosure</dt><dd>Stone and glass</dd></div><div><dt>Bench</dt><dd>Used</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="robe" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Robe</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Hung where it is reachable from the tub. Heavy waffle cotton, no monogram, replaced every year without discussion.</p>
+                <dl class="drawer__spec"><div><dt>Cloth</dt><dd>Waffle cotton</dd></div><div><dt>Monogram</dt><dd>None</dd></div><div><dt>Replaced</dt><dd>Annually</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="closet" tabindex="-1" aria-label="Level 28 — The Closet">
+  <div class="floor-scene__view">
+    <img src="assets/img/room-closet.jpg"
+         srcset="assets/img/room-closet@sm.jpg 1200w, assets/img/room-closet.jpg 2400w"
+         sizes="100vw" alt="The Closet" loading="lazy"
+         style="--focus:50% 52%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>28</b> <span>The Closet</span></p>
+      <h2 class="floor-plate__name">The Closet</h2>
+      <p class="floor-plate__note">Not a room of clothes. A room of decisions already made.</p>
+      <p class="floor-plate__count"><i></i>4 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:50%;--y:42%" data-artifact="suits">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Rails</span>
+        </button>
+        <button class="artifact" style="--x:9%;--y:62%" data-artifact="shoes">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Shoes</span>
+        </button>
+        <button class="artifact" style="--x:91%;--y:56%" data-artifact="ties">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Ties</span>
+        </button>
+        <button class="artifact" style="--x:50%;--y:70%" data-artifact="case">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Case</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-closet" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="suits" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Rails</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like.</p>
+                <dl class="drawer__spec"><div><dt>Ordered by</dt><dd>Occasion</dd></div><div><dt>Navy</dt><dd>Twelve</dd></div><div><dt>Black</dt><dd>Two, both evening</dd></div></dl>
+                <a class="cta pent__open" href="wardrobe.html" style="margin-top:var(--s2)"><span>Enter the Wardrobe</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="shoes" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Shoes</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Cedar-treed, rotated, never worn two days running. The oldest pair on the shelf is fourteen years old and still the best thing in the room.</p>
+                <dl class="drawer__spec"><div><dt>Rotation</dt><dd>Enforced</dd></div><div><dt>Oldest pair</dt><dd>14 years</dd></div><div><dt>Trees</dt><dd>Cedar</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="ties" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Ties</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.</p>
+                <dl class="drawer__spec"><div><dt>Hung</dt><dd>Never rolled</dd></div><div><dt>Worn regularly</dt><dd>Six</dd></div><div><dt>Owned</dt><dd>Considerably more</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="case" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 28 &#183; Artifact</p>
+                <h3 class="drawer__name">The Case</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Glass-topped, lit from within. Watches, cufflinks, and the star stud he has worn since he was nineteen.</p>
+                <dl class="drawer__spec"><div><dt>Lit</dt><dd>From within</dd></div><div><dt>The stud</dt><dd>Since nineteen</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="kitchen" tabindex="-1" aria-label="Level 27 — The Kitchen">
+  <div class="floor-scene__view">
+    <img src="assets/img/room-kitchen.jpg"
+         srcset="assets/img/room-kitchen@sm.jpg 1200w, assets/img/room-kitchen.jpg 2400w"
+         sizes="100vw" alt="The Kitchen" loading="lazy"
+         style="--focus:50% 54%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>27</b> <span>The Kitchen</span></p>
+      <h2 class="floor-plate__name">The Kitchen</h2>
+      <p class="floor-plate__note">Black marble, brass and a range that has seen more entertaining than cooking.</p>
+      <p class="floor-plate__count"><i></i>4 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:46%;--y:64%" data-artifact="island">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Island</span>
+        </button>
+        <button class="artifact" style="--x:42%;--y:28%" data-artifact="pendants">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Pendants</span>
+        </button>
+        <button class="artifact" style="--x:62%;--y:22%" data-artifact="glass">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Glassware</span>
+        </button>
+        <button class="artifact" style="--x:57%;--y:44%" data-artifact="range">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Range</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-kitchen" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="island" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Island</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">One slab of black marble with a brass sink cut into it. Everyone ends up standing at this island regardless of how many rooms are open.</p>
+                <dl class="drawer__spec"><div><dt>Stone</dt><dd>Single slab</dd></div><div><dt>Sink</dt><dd>Brass</dd></div><div><dt>Where guests stand</dt><dd>Here, always</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="pendants" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Pendants</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Solid brass, hung low enough to light hands rather than faces. Somebody said they were too low. They were not moved.</p>
+                <dl class="drawer__spec"><div><dt>Material</dt><dd>Solid brass</dd></div><div><dt>Height</dt><dd>Deliberate</dd></div><div><dt>Complaints</dt><dd>One, ignored</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="glass" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Glassware</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Lit shelves of crystal, most of it inherited or won. The good stuff is used; the rule in this apartment is that nothing waits for an occasion.</p>
+                <dl class="drawer__spec"><div><dt>Used</dt><dd>All of it</dd></div><div><dt>Kept for best</dt><dd>Nothing</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="range" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Range</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Professional, gas, immaculate. He cooks perhaps twice a month and it shows in how clean it is.</p>
+                <dl class="drawer__spec"><div><dt>Fuel</dt><dd>Gas</dd></div><div><dt>Used</dt><dd>~2x monthly</dd></div><div><dt>Condition</dt><dd>Suspiciously good</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="study" tabindex="-1" aria-label="Level 27 — The Study">
+  <div class="floor-scene__view">
+    <img src="assets/img/room-study.jpg"
+         srcset="assets/img/room-study@sm.jpg 1200w, assets/img/room-study.jpg 2400w"
+         sizes="100vw" alt="The Study" loading="lazy"
+         style="--focus:50% 52%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>27</b> <span>The Study</span></p>
+      <h2 class="floor-plate__name">The Study</h2>
+      <p class="floor-plate__note">The room where the answer is usually no, and where it gets said politely.</p>
+      <p class="floor-plate__count"><i></i>5 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:57%;--y:30%" data-artifact="monogram">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Monogram</span>
+        </button>
+        <button class="artifact" style="--x:52%;--y:62%" data-artifact="desk">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Desk</span>
+        </button>
+        <button class="artifact" style="--x:91%;--y:44%" data-artifact="map">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Map</span>
+        </button>
+        <button class="artifact" style="--x:83%;--y:50%" data-artifact="bottles">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Shelf</span>
+        </button>
+        <button class="artifact" style="--x:44%;--y:76%" data-artifact="chairs">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Two Chairs</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-study" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="monogram" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Monogram</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.</p>
+                <dl class="drawer__spec"><div><dt>Material</dt><dd>Brass</dd></div><div><dt>Other branding here</dt><dd>None</dd></div><div><dt>Self-aware</dt><dd>Entirely</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="desk" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Desk</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Walnut, faces the door rather than the window. A man who sits with his back to a room is not paying attention to it.</p>
+                <dl class="drawer__spec"><div><dt>Faces</dt><dd>The door</dd></div><div><dt>Wood</dt><dd>Walnut</dd></div><div><dt>Rule</dt><dd>Never back to the room</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="map" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Map</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.</p>
+                <dl class="drawer__spec"><div><dt>Marks</dt><dd>Cities worked</dd></div><div><dt>Not</dt><dd>Cities visited</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="bottles" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Shelf</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">The whiskey is at eye level and the books are above it, which several visitors have pointed out is the wrong way round.</p>
+                <dl class="drawer__spec"><div><dt>Whiskey</dt><dd>Eye level</dd></div><div><dt>Books</dt><dd>Higher</dd></div><div><dt>Observed by guests</dt><dd>Frequently</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="chairs" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Two Chairs</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Placed on the guest side, close enough together that two people arriving must sit as a pair. Negotiations go differently when nobody can flank.</p>
+                <dl class="drawer__spec"><div><dt>Count</dt><dd>Two</dd></div><div><dt>Spacing</dt><dd>Deliberate</dd></div><div><dt>Effect</dt><dd>No flanking</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="cinema" tabindex="-1" aria-label="Level 27 — The Cinema">
+  <div class="floor-scene__view">
+    <img src="assets/img/room-cinema.jpg"
+         srcset="assets/img/room-cinema@sm.jpg 1200w, assets/img/room-cinema.jpg 2400w"
+         sizes="100vw" alt="The Cinema" loading="lazy"
+         style="--focus:50% 54%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__screen" style="--x:50%;--y:37.6%;--w:27.9%;--h:29.3%" data-tv data-channel-set="cinema" data-box="0.3604,0.2296,0.6396,0.5222">
+    <div class="floor-scene__screen-frame">
+      <iframe src="https://www.youtube.com/embed/w7fuOkF74Zw?autoplay=1&mute=1&loop=1&playlist=w7fuOkF74Zw&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1"
+              title="" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+    </div>
+    <div class="tv-lowerthird" data-tv-lowerthird>
+      <p class="tv-lowerthird__eyebrow">Paris Pullen &#183; Now Screening</p>
+      <p class="tv-lowerthird__title" data-tv-lowerthird-title>Power — First Look</p>
+    </div>
+    <div class="tv-remote" data-tv-remote>
+      <p class="tv-remote__channel" data-tv-channel-label>Power — First Look</p>
+      <div class="tv-remote__row">
+        <button type="button" data-tv-action="ch-prev">&#9664; Ch</button>
+        <button type="button" data-tv-action="ch-next">Ch &#9654;</button>
+      </div>
+      <div class="tv-remote__row">
+        <button type="button" data-tv-action="vol-down">Vol &#8722;</button>
+        <button type="button" data-tv-action="mute">Mute</button>
+        <button type="button" data-tv-action="vol-up">Vol &#43;</button>
+      </div>
+      <button type="button" class="tv-remote__expand" data-tv-action="expand">Watch Full Screen</button>
+    </div>
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>27</b> <span>The Cinema</span></p>
+      <h2 class="floor-plate__name">The Cinema</h2>
+      <p class="floor-plate__note">Nine seats, one screen, and a rule about phones that is actually enforced.</p>
+      <p class="floor-plate__count"><i></i>1 artifact on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:12%;--y:42%" data-artifact="posters">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Posters</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-cinema" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="posters" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 27 &#183; Artifact</p>
+                <h3 class="drawer__name">The Posters</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.</p>
+                <dl class="drawer__spec"><div><dt>Register</dt><dd>One</dd></div><div><dt>Claimed purpose</dt><dd>Research</dd></div><div><dt>Actual</dt><dd>Partly</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene grade--cold" id="corridor" tabindex="-1" aria-label="Level 26 — The Corridor">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-network.jpg"
+         srcset="assets/img/env-network@sm.jpg 1200w, assets/img/env-network.jpg 2400w"
+         sizes="100vw" alt="The Corridor" loading="lazy"
+         style="--focus:40% 56%;--zoom:1.16" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>26</b> <span>The Corridor</span></p>
+      <h2 class="floor-plate__name">The Corridor</h2>
+      <p class="floor-plate__note">No numbers on these doors. The carpet is thicker here, which is not a decorating choice.</p>
+      <p class="floor-plate__count"><i></i>3 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:30%;--y:48%" data-artifact="door">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Unmarked Door</span>
+        </button>
+        <button class="artifact" style="--x:58%;--y:82%" data-artifact="carpet">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Carpet</span>
+        </button>
+        <button class="artifact" style="--x:74%;--y:44%" data-artifact="lift">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Second Lift</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-corridor" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="door" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 26 &#183; Artifact</p>
+                <h3 class="drawer__name">The Unmarked Door</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">There is no handle on this side. It opens from within, or it does not open. Staff are instructed never to knock on it, and never to mention it to a guest who has not mentioned it first.</p>
+                <dl class="drawer__spec"><div><dt>Handle</dt><dd>Interior only</dd></div><div><dt>Knocking</dt><dd>Prohibited</dd></div><div><dt>Mentioned first by</dt><dd>The guest</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="carpet" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 26 &#183; Artifact</p>
+                <h3 class="drawer__name">The Carpet</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Deeper pile than the floors above and below. Sound does not carry in this hallway, and that is the entire specification.</p>
+                <dl class="drawer__spec"><div><dt>Pile</dt><dd>Deep</dd></div><div><dt>Acoustic</dt><dd>Dead</dd></div><div><dt>Specification</dt><dd>One line</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="lift" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 26 &#183; Artifact</p>
+                <h3 class="drawer__name">The Second Lift</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">It does not appear on the panel in the main bank. It is called by a card, not a button, and it only travels between three floors.</p>
+                <dl class="drawer__spec"><div><dt>Called by</dt><dd>Card</dd></div><div><dt>Serves</dt><dd>Three floors</dd></div><div><dt>On the panel</dt><dd>No</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="order" tabindex="-1" aria-label="Level 25 — The Order">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-chamber.jpg"
+         srcset="assets/img/env-chamber@sm.jpg 1200w, assets/img/env-chamber.jpg 2400w"
+         sizes="100vw" alt="The Order" loading="lazy"
+         style="--focus:50% 50%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>25</b> <span>The Order</span></p>
+      <h2 class="floor-plate__name">The Order</h2>
+      <p class="floor-plate__note">Twelve chairs. Eleven are spoken for. Nobody sits down until the last person is standing.</p>
+      <p class="floor-plate__count"><i></i>3 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:62%;--y:56%" data-artifact="twelfth">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Twelfth Chair</span>
+        </button>
+        <button class="artifact" style="--x:50%;--y:70%" data-artifact="table">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Table</span>
+        </button>
+        <button class="artifact" style="--x:44%;--y:24%" data-artifact="lamps">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Lamps</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-order" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="twelfth" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 25 &#183; Artifact</p>
+                <h3 class="drawer__name">The Twelfth Chair</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Identical to the other eleven and never once occupied. It is not reserved for anyone. It is there so that everybody seated can see that the table is not full.</p>
+                <dl class="drawer__spec"><div><dt>Occupied</dt><dd>Never</dd></div><div><dt>Reserved for</dt><dd>No one</dd></div><div><dt>Purpose</dt><dd>Visible incompleteness</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="table" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 25 &#183; Artifact</p>
+                <h3 class="drawer__name">The Table</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">One piece of walnut, brought in before the walls were finished because it does not fit through the door. The room was built around it, which is the point being made.</p>
+                <dl class="drawer__spec"><div><dt>Material</dt><dd>Single walnut slab</dd></div><div><dt>Installed</dt><dd>Before the walls</dd></div><div><dt>Removable</dt><dd>No</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="lamps" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 25 &#183; Artifact</p>
+                <h3 class="drawer__name">The Lamps</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Hung low enough that everyone&#8217;s face is lit and nobody&#8217;s eyes are in shadow. You cannot lie comfortably at this table. That is engineering, not decor.</p>
+                <dl class="drawer__spec"><div><dt>Height</dt><dd>Low</dd></div><div><dt>Shadow</dt><dd>None on the face</dd></div><div><dt>Effect</dt><dd>Deliberate</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="operations" tabindex="-1" aria-label="Level 24 — The Operations Room">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-opsroom.jpg"
+         srcset="assets/img/env-opsroom@sm.jpg 1200w, assets/img/env-opsroom.jpg 2400w"
+         sizes="100vw" alt="The Operations Room" loading="lazy"
+         style="--focus:50% 54%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>24</b> <span>The Operations Room</span></p>
+      <h2 class="floor-plate__name">The Operations Room</h2>
+      <p class="floor-plate__note">The warmest room in the building, and the only one where the furniture is doing arithmetic.</p>
+      <p class="floor-plate__count"><i></i>3 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:40%;--y:64%" data-artifact="table">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Table</span>
+        </button>
+        <button class="artifact" style="--x:62%;--y:58%" data-artifact="instruments">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Instruments</span>
+        </button>
+        <button class="artifact" style="--x:86%;--y:36%" data-artifact="library">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Shelves</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-operations" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="table" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 24 &#183; Artifact</p>
+                <h3 class="drawer__name">The Table</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Walnut with smoked glass inlaid flush into the surface, lit from beneath in fine amber linework. It shows the city as relationships rather than streets. At rest it is a very good table.</p>
+                <dl class="drawer__spec"><div><dt>Output</dt><dd>Amber only</dd></div><div><dt>Ceiling</dt><dd>12% brightness</dd></div><div><dt>At rest</dt><dd>Furniture</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="instruments" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 24 &#183; Artifact</p>
+                <h3 class="drawer__name">The Instruments</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Machined brass and titanium, laid out like surgical tools. None of them have a screen. Every one of them does something a screen would do worse.</p>
+                <dl class="drawer__spec"><div><dt>Screens</dt><dd>None</dd></div><div><dt>Material</dt><dd>Brass, titanium</dd></div><div><dt>Read by</dt><dd>Touch</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="library" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 24 &#183; Artifact</p>
+                <h3 class="drawer__name">The Shelves</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Real books, read. The technology in this room is deliberately outnumbered by things made of paper, which is a decision he will defend at length if asked.</p>
+                <dl class="drawer__spec"><div><dt>Books</dt><dd>Read, not staged</dd></div><div><dt>Ratio</dt><dd>Paper wins</dd></div><div><dt>Defends this</dt><dd>At length</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene grade--amber" id="lab" tabindex="-1" aria-label="Level 18 — The Lab">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-atelier.jpg"
+         srcset="assets/img/env-atelier@sm.jpg 1200w, assets/img/env-atelier.jpg 2400w"
+         sizes="100vw" alt="The Lab" loading="lazy"
+         style="--focus:50% 52%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>18</b> <span>The Lab</span></p>
+      <h2 class="floor-plate__name">The Lab</h2>
+      <p class="floor-plate__note">It smells like the inside of a cigar box and faintly of citrus. This is where the whole thing started.</p>
+      <p class="floor-plate__count"><i></i>4 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:34%;--y:62%" data-artifact="scales">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Scales</span>
+        </button>
+        <button class="artifact" style="--x:58%;--y:54%" data-artifact="blotters">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Blotters</span>
+        </button>
+        <button class="artifact" style="--x:24%;--y:82%" data-artifact="notebook">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Notebook</span>
+        </button>
+        <button class="artifact" style="--x:76%;--y:44%" data-artifact="bottles">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Unlabelled Bottles</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-lab" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="scales" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 18 &#183; Artifact</p>
+                <h3 class="drawer__name">The Scales</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Accurate to a hundredth of a gram. Everything else in the building is measured in impressions and relationships. This is the one room that deals in numbers that cannot be argued with.</p>
+                <dl class="drawer__spec"><div><dt>Accuracy</dt><dd>0.01 g</dd></div><div><dt>Arguable</dt><dd>No</dd></div><div><dt>Calibrated</dt><dd>Weekly</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="blotters" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 18 &#183; Artifact</p>
+                <h3 class="drawer__name">The Blotters</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Fanned in a brass rack, each one a version that did not make it. She keeps them. He has asked why. She has not answered.</p>
+                <dl class="drawer__spec"><div><dt>Kept</dt><dd>All of them</dd></div><div><dt>Reason given</dt><dd>None</dd></div><div><dt>Versions to date</dt><dd>Undisclosed</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="notebook" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 18 &#183; Artifact</p>
+                <h3 class="drawer__name">The Notebook</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Leather, handwritten, and the only complete formula record in existence. There is no digital copy, on purpose, and it does not leave this room.</p>
+                <dl class="drawer__spec"><div><dt>Copies</dt><dd>One</dd></div><div><dt>Digital</dt><dd>None</dd></div><div><dt>Leaves the room</dt><dd>No</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="bottles" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 18 &#183; Artifact</p>
+                <h3 class="drawer__name">The Unlabelled Bottles</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Amber glass, no labels, arranged in an order that makes sense to exactly one person. Moving them is the fastest way to be asked to leave.</p>
+                <dl class="drawer__spec"><div><dt>Labels</dt><dd>None</dd></div><div><dt>Order</dt><dd>Personal</dd></div><div><dt>Touched by others</dt><dd>Never</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="haberdashery" tabindex="-1" aria-label="Level 12 — The Haberdashery">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-bespoke.jpg"
+         srcset="assets/img/env-bespoke@sm.jpg 1200w, assets/img/env-bespoke.jpg 2400w"
+         sizes="100vw" alt="The Haberdashery" loading="lazy"
+         style="--focus:50% 50%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>12</b> <span>The Haberdashery</span></p>
+      <h2 class="floor-plate__name">The Haberdashery</h2>
+      <p class="floor-plate__note">Warm wood, cold discipline. The room where the building decides what you are going to look like.</p>
+      <p class="floor-plate__count"><i></i>4 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:74%;--y:40%" data-artifact="cloth">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Cloth Wall</span>
+        </button>
+        <button class="artifact" style="--x:46%;--y:76%" data-artifact="table">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Cutting Table</span>
+        </button>
+        <button class="artifact" style="--x:20%;--y:70%" data-artifact="shoes">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Shoes</span>
+        </button>
+        <button class="artifact" style="--x:88%;--y:62%" data-artifact="hiddendoor">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Panel That Is Not A Panel</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-haberdashery" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="cloth" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 12 &#183; Artifact</p>
+                <h3 class="drawer__name">The Cloth Wall</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Bolts stacked by weight, not colour. A client who asks for the blue one is gently redirected. A client who asks what will still look correct in nine years is offered a chair.</p>
+                <dl class="drawer__spec"><div><dt>Ordered by</dt><dd>Weight</dd></div><div><dt>Wrong question</dt><dd>Colour</dd></div><div><dt>Right question</dt><dd>Longevity</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="table" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 12 &#183; Artifact</p>
+                <h3 class="drawer__name">The Cutting Table</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Chalk, shears and forty years of hands. Nothing is cut on this table that has not been argued about first.</p>
+                <dl class="drawer__spec"><div><dt>Chalk</dt><dd>Tailor&#8217;s</dd></div><div><dt>Argued about</dt><dd>Everything</dd></div><div><dt>Cut twice</dt><dd>Never</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="shoes" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 12 &#183; Artifact</p>
+                <h3 class="drawer__name">The Shoes</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">A rack of them, all dark, all polished past the point of necessity. The first thing the doorman checks and the last thing an amateur thinks about.</p>
+                <dl class="drawer__spec"><div><dt>Finish</dt><dd>Excessive</dd></div><div><dt>Checked by</dt><dd>The doorman</dd></div><div><dt>Noticed by amateurs</dt><dd>No</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="hiddendoor" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 12 &#183; Artifact</p>
+                <h3 class="drawer__name">The Panel That Is Not A Panel</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Third panel from the corner. It reads as joinery. It is a door, and behind it the room is not about tailoring.</p>
+                <dl class="drawer__spec"><div><dt>Reads as</dt><dd>Joinery</dd></div><div><dt>Actually</dt><dd>A door</dd></div><div><dt>Behind it</dt><dd>See below</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene grade--noir" id="armoury" tabindex="-1" aria-label="Level 12M — The Armoury">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-bespoke.jpg"
+         srcset="assets/img/env-bespoke@sm.jpg 1200w, assets/img/env-bespoke.jpg 2400w"
+         sizes="100vw" alt="The Armoury" loading="lazy"
+         style="--focus:86% 58%;--zoom:1.3" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>12M</b> <span>The Armoury</span></p>
+      <h2 class="floor-plate__name">The Armoury</h2>
+      <p class="floor-plate__note">A gentleman&#8217;s defensive kit, in the Savile Row tradition. Nothing in here fires anything.</p>
+      <p class="floor-plate__count"><i></i>4 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:32%;--y:46%" data-artifact="umbrellas">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Umbrellas</span>
+        </button>
+        <button class="artifact" style="--x:54%;--y:52%" data-artifact="canes">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Canes</span>
+        </button>
+        <button class="artifact" style="--x:70%;--y:44%" data-artifact="sabres">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Sabres</span>
+        </button>
+        <button class="artifact" style="--x:46%;--y:78%" data-artifact="case">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Locked Case</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-armoury" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="umbrellas" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 12M &#183; Artifact</p>
+                <h3 class="drawer__name">The Umbrellas</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Storm-rated, reinforced along the spine, weighted correctly for the hand. It rains a great deal in this state and a man should not be caught holding something flimsy.</p>
+                <dl class="drawer__spec"><div><dt>Frame</dt><dd>Reinforced</dd></div><div><dt>Weight</dt><dd>Hand-balanced</dd></div><div><dt>Fires</dt><dd>Nothing</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="canes" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 12M &#183; Artifact</p>
+                <h3 class="drawer__name">The Canes</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Malacca and blackthorn. Two of them belonged to men who are named on the wall downstairs. They are carried on occasions that call for being reminded of something.</p>
+                <dl class="drawer__spec"><div><dt>Woods</dt><dd>Malacca, blackthorn</dd></div><div><dt>Inherited</dt><dd>Two</dd></div><div><dt>Ceremonial</dt><dd>Mostly</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="sabres" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 12M &#183; Artifact</p>
+                <h3 class="drawer__name">The Sabres</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Fencing blades, buttoned, kept sharp enough to be respected and blunt enough to be legal. He fences badly and enjoys it enormously.</p>
+                <dl class="drawer__spec"><div><dt>Buttoned</dt><dd>Yes</dd></div><div><dt>His standard</dt><dd>Poor</dd></div><div><dt>His enthusiasm</dt><dd>Total</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="case" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 12M &#183; Artifact</p>
+                <h3 class="drawer__name">The Locked Case</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">The only locked thing in the building. It contains correspondence, not hardware, which is the joke and also the truth.</p>
+                <dl class="drawer__spec"><div><dt>Contents</dt><dd>Paper</dd></div><div><dt>Hardware</dt><dd>None</dd></div><div><dt>Key held by</dt><dd>One person</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene grade--warm" id="fitting" tabindex="-1" aria-label="Level 11 — The Fitting Floor">
+  <div class="floor-scene__view">
+    <img src="assets/img/paris-bespoke.jpg"
+         srcset="assets/img/paris-bespoke@sm.jpg 1200w, assets/img/paris-bespoke.jpg 2400w"
+         sizes="100vw" alt="The Fitting Floor" loading="lazy"
+         style="--focus:50% 42%;--zoom:1.08" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>11</b> <span>The Fitting Floor</span></p>
+      <h2 class="floor-plate__name">The Fitting Floor</h2>
+      <p class="floor-plate__note">Three mirrors, angled so you cannot avoid yourself. Somebody is mid-fitting. He does not stop.</p>
+      <p class="floor-plate__count"><i></i>3 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:24%;--y:36%" data-artifact="mirrors">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Three Mirrors</span>
+        </button>
+        <button class="artifact" style="--x:82%;--y:54%" data-artifact="rails">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Rails</span>
+        </button>
+        <button class="artifact" style="--x:46%;--y:62%" data-artifact="cuff">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Cuff</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-fitting" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="mirrors" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 11 &#183; Artifact</p>
+                <h3 class="drawer__name">The Three Mirrors</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Set so that you see your own back. Most men have never seen how they actually stand, and the first fitting is largely about surviving that information.</p>
+                <dl class="drawer__spec"><div><dt>Angles</dt><dd>Three</dd></div><div><dt>Shows</dt><dd>Your back</dd></div><div><dt>First reaction</dt><dd>Silence</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="rails" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 11 &#183; Artifact</p>
+                <h3 class="drawer__name">The Rails</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Finished garments waiting on brass. Each one has a name on the ticket and a date, and the date is when it was promised rather than when it was finished.</p>
+                <dl class="drawer__spec"><div><dt>On the ticket</dt><dd>Name and date</dd></div><div><dt>Date means</dt><dd>Promised</dd></div><div><dt>Late</dt><dd>Occasionally</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="cuff" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 11 &#183; Artifact</p>
+                <h3 class="drawer__name">The Cuff</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Half an inch of shirt, no more. He adjusts it without thinking about it roughly forty times a day, which the Cutter finds funny and has never mentioned.</p>
+                <dl class="drawer__spec"><div><dt>Exposure</dt><dd>0.5 in</dd></div><div><dt>Adjusted</dt><dd>~40/day</dd></div><div><dt>Conscious</dt><dd>No</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene grade--warm" id="restaurant" tabindex="-1" aria-label="Level 03 — The Restaurant">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-gala.jpg"
+         srcset="assets/img/env-gala@sm.jpg 1200w, assets/img/env-gala.jpg 2400w"
+         sizes="100vw" alt="The Restaurant" loading="lazy"
+         style="--focus:50% 56%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>03</b> <span>The Restaurant</span></p>
+      <h2 class="floor-plate__name">The Restaurant</h2>
+      <p class="floor-plate__note">Sixty covers, one seating, and a kitchen that closes when it is finished rather than when the clock says so.</p>
+      <p class="floor-plate__count"><i></i>3 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:22%;--y:60%" data-artifact="corner">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Corner Table</span>
+        </button>
+        <button class="artifact" style="--x:62%;--y:44%" data-artifact="pass">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Pass</span>
+        </button>
+        <button class="artifact" style="--x:82%;--y:52%" data-artifact="flowers">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Arrangements</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-restaurant" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="corner" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 03 &#183; Artifact</p>
+                <h3 class="drawer__name">The Corner Table</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Two chairs, both facing out. Every deal this building has ever done was either agreed at this table or fell apart at it.</p>
+                <dl class="drawer__spec"><div><dt>Covers</dt><dd>Two</dd></div><div><dt>Both facing</dt><dd>Out</dd></div><div><dt>Record</dt><dd>Mixed</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="pass" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 03 &#183; Artifact</p>
+                <h3 class="drawer__name">The Pass</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Visible from the room on purpose. Diners can watch the kitchen work, and the kitchen can watch who has arrived, which matters more than the diners realise.</p>
+                <dl class="drawer__spec"><div><dt>Visible</dt><dd>Both directions</dd></div><div><dt>Matters more to</dt><dd>The kitchen</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="flowers" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 03 &#183; Artifact</p>
+                <h3 class="drawer__name">The Arrangements</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Replaced entirely twice a week, dark and slightly overgrown rather than neat. Neat flowers make a room look like it is trying.</p>
+                <dl class="drawer__spec"><div><dt>Replaced</dt><dd>2x weekly</dd></div><div><dt>Style</dt><dd>Overgrown</dd></div><div><dt>Neatness</dt><dd>Avoided</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="bar" tabindex="-1" aria-label="Level 02 — The Bar">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-bar.jpg"
+         srcset="assets/img/env-bar@sm.jpg 1200w, assets/img/env-bar.jpg 2400w"
+         sizes="100vw" alt="The Bar" loading="lazy"
+         style="--focus:46% 54%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>02</b> <span>The Bar</span></p>
+      <h2 class="floor-plate__name">The Bar</h2>
+      <p class="floor-plate__note">Low ceiling, low light, low voices. The best-run room in the building and the one he is proudest of.</p>
+      <p class="floor-plate__count"><i></i>4 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:22%;--y:32%" data-artifact="backbar">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Back Bar</span>
+        </button>
+        <button class="artifact" style="--x:36%;--y:64%" data-artifact="ice">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Ice</span>
+        </button>
+        <button class="artifact" style="--x:56%;--y:82%" data-artifact="rail">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Brass Rail</span>
+        </button>
+        <button class="artifact" style="--x:82%;--y:62%" data-artifact="banquette">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Banquettes</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-bar" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="backbar" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 02 &#183; Artifact</p>
+                <h3 class="drawer__name">The Back Bar</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Lit from within, unlabelled by house policy. If you want to know what you are drinking you have to ask, and asking is how conversations start.</p>
+                <dl class="drawer__spec"><div><dt>Labels</dt><dd>Removed</dd></div><div><dt>Policy</dt><dd>House</dd></div><div><dt>Effect</dt><dd>You ask</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="ice" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 02 &#183; Artifact</p>
+                <h3 class="drawer__name">The Ice</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Cut from a single block each afternoon. Clear ice melts slower, dilutes less, and signals that somebody spent time on your drink before you ordered it.</p>
+                <dl class="drawer__spec"><div><dt>Cut</dt><dd>Daily</dd></div><div><dt>Clarity</dt><dd>Total</dd></div><div><dt>Signals</dt><dd>Effort</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="rail" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 02 &#183; Artifact</p>
+                <h3 class="drawer__name">The Brass Rail</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Unlacquered, so it takes a fingerprint and keeps it. Polished once a week, never more, because a rail with no wear on it means nobody is standing here.</p>
+                <dl class="drawer__spec"><div><dt>Finish</dt><dd>Unlacquered</dd></div><div><dt>Polished</dt><dd>Weekly</dd></div><div><dt>Wear</dt><dd>Wanted</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="banquette" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 02 &#183; Artifact</p>
+                <h3 class="drawer__name">The Banquettes</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Burgundy leather, deliberately slightly too deep, so that people sit back rather than forward. Nobody has ever had a rushed conversation in one.</p>
+                <dl class="drawer__spec"><div><dt>Depth</dt><dd>Excessive</dd></div><div><dt>Posture</dt><dd>Back</dd></div><div><dt>Rushed talk</dt><dd>None</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene grade--dawn" id="coffee" tabindex="-1" aria-label="Level 01 — The Coffee House">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-bar.jpg"
+         srcset="assets/img/env-bar@sm.jpg 1200w, assets/img/env-bar.jpg 2400w"
+         sizes="100vw" alt="The Coffee House" loading="lazy"
+         style="--focus:30% 60%;--zoom:1.2" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>01</b> <span>The Coffee House</span></p>
+      <h2 class="floor-plate__name">The Coffee House</h2>
+      <p class="floor-plate__note">The same marble counter, twelve hours earlier. Different room entirely.</p>
+      <p class="floor-plate__count"><i></i>3 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:34%;--y:62%" data-artifact="counter">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Counter</span>
+        </button>
+        <button class="artifact" style="--x:70%;--y:70%" data-artifact="regulars">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Regulars</span>
+        </button>
+        <button class="artifact" style="--x:86%;--y:40%" data-artifact="window">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Window</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-coffee" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="counter" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 01 &#183; Artifact</p>
+                <h3 class="drawer__name">The Counter</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">This is the bar. At six in the morning the bottles are shuttered, the lights come up, and the same stone serves espresso to people who have no idea what happens here after dark.</p>
+                <dl class="drawer__spec"><div><dt>Same stone</dt><dd>Yes</dd></div><div><dt>Shuttered</dt><dd>The back bar</dd></div><div><dt>Overlap</dt><dd>Two hours</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="regulars" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 01 &#183; Artifact</p>
+                <h3 class="drawer__name">The Regulars</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Bankers at six, builders at seven, the Cutter at eight-fifteen without fail. He orders the same thing and has never once said thank you, which everyone finds endearing.</p>
+                <dl class="drawer__spec"><div><dt>Cutter arrives</dt><dd>08:15</dd></div><div><dt>Order</dt><dd>Unchanged</dd></div><div><dt>Thanks anyone</dt><dd>No</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="window" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 01 &#183; Artifact</p>
+                <h3 class="drawer__name">The Window</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Ground floor, full height, facing the street. The only room in the building where the public can see in — and the only floor where that is the entire idea.</p>
+                <dl class="drawer__spec"><div><dt>Visibility</dt><dd>Total</dd></div><div><dt>Deliberate</dt><dd>Yes</dd></div><div><dt>Only floor like it</dt><dd>Yes</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene grade--jewel" id="lobby" tabindex="-1" aria-label="Level G — The Lobby">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-lobby.jpg"
+         srcset="assets/img/env-lobby@sm.jpg 1200w, assets/img/env-lobby.jpg 2400w"
+         sizes="100vw" alt="The Lobby" loading="lazy"
+         style="--focus:50% 52%;--zoom:1.05" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>G</b> <span>The Lobby</span></p>
+      <h2 class="floor-plate__name">The Lobby</h2>
+      <p class="floor-plate__note">The doors give, the noise of the street stops, and the building tells you everything about itself in about four seconds.</p>
+      <p class="floor-plate__count"><i></i>5 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:80%;--y:50%" data-artifact="doors">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Doors</span>
+        </button>
+        <button class="artifact" style="--x:50%;--y:44%" data-artifact="flowers">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Arrangements</span>
+        </button>
+        <button class="artifact" style="--x:44%;--y:80%" data-artifact="water">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Water</span>
+        </button>
+        <button class="artifact" style="--x:29%;--y:58%" data-artifact="desk">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Desk</span>
+        </button>
+        <button class="artifact" style="--x:62%;--y:11%" data-artifact="ceiling">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Ceiling</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-lobby" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="doors" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level G &#183; Artifact</p>
+                <h3 class="drawer__name">The Doors</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Brass, and heavier than they need to be. The weight is the point — you have to commit to opening them, and by the time you are through you have already made a small decision about being here.</p>
+                <dl class="drawer__spec"><div><dt>Material</dt><dd>Solid brass</dd></div><div><dt>Weight</dt><dd>Deliberate</dd></div><div><dt>Held for you</dt><dd>Only sometimes</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="flowers" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level G &#183; Artifact</p>
+                <h3 class="drawer__name">The Arrangements</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Replaced entirely twice a week and never symmetrical. They are cut tall enough that you cannot see the whole room at once, so the lobby reveals itself in pieces rather than all at once.</p>
+                <dl class="drawer__spec"><div><dt>Replaced</dt><dd>2x weekly</dd></div><div><dt>Symmetry</dt><dd>Avoided</dd></div><div><dt>Function</dt><dd>Concealment</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="water" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level G &#183; Artifact</p>
+                <h3 class="drawer__name">The Water</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">A still black basin, no fountain, no movement. It exists so the room has a sound floor — the faint hush that stops a marble hall from ringing like a bank.</p>
+                <dl class="drawer__spec"><div><dt>Movement</dt><dd>None</dd></div><div><dt>Purpose</dt><dd>Acoustic</dd></div><div><dt>Depth</dt><dd>Shallow</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="desk" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level G &#183; Artifact</p>
+                <h3 class="drawer__name">The Desk</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Honed black marble, no computer visible, no queue rope, no signage. Whoever is standing behind it already knows your name or is about to find it out.</p>
+                <dl class="drawer__spec"><div><dt>Screens</dt><dd>Hidden</dd></div><div><dt>Queue</dt><dd>Never</dd></div><div><dt>Signage</dt><dd>None</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="ceiling" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level G &#183; Artifact</p>
+                <h3 class="drawer__name">The Ceiling</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Four storeys of it. Every material expense in this building was argued about except this one — height is the only luxury that cannot be faked, and he paid for it without discussion.</p>
+                <dl class="drawer__spec"><div><dt>Height</dt><dd>Four storeys</dd></div><div><dt>Argued about</dt><dd>No</dd></div><div><dt>Fakeable</dt><dd>Not at all</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene" id="motor" tabindex="-1" aria-label="Level B1 — The Motor Club">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-motorclub.jpg"
+         srcset="assets/img/env-motorclub@sm.jpg 1200w, assets/img/env-motorclub.jpg 2400w"
+         sizes="100vw" alt="The Motor Club" loading="lazy"
+         style="--focus:50% 50%;--zoom:1.04" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>B1</b> <span>The Motor Club</span></p>
+      <h2 class="floor-plate__name">The Motor Club</h2>
+      <p class="floor-plate__note">Cool air, polished concrete, and twenty-four reasons somebody had a good year.</p>
+      <p class="floor-plate__count"><i></i>3 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:40%;--y:56%" data-artifact="bays">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Bays</span>
+        </button>
+        <button class="artifact" style="--x:78%;--y:52%" data-artifact="lounge">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Lounge</span>
+        </button>
+        <button class="artifact" style="--x:88%;--y:64%" data-artifact="lift">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Private Lift</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-motor" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="bays" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level B1 &#183; Artifact</p>
+                <h3 class="drawer__name">The Bays</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Twenty-four, each lit like an exhibit. The Curator can tell you what closed the deal that paid for every single one, and will, at length, if you make eye contact.</p>
+                <dl class="drawer__spec"><div><dt>Bays</dt><dd>24</dd></div><div><dt>Lit as</dt><dd>Exhibits</dd></div><div><dt>Stories</dt><dd>Unavoidable</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="lounge" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level B1 &#183; Artifact</p>
+                <h3 class="drawer__name">The Lounge</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">At the far end, behind glass, so members can sit with a drink and look at the collection. Nobody has ever sat facing away from it.</p>
+                <dl class="drawer__spec"><div><dt>Glazing</dt><dd>Full</dd></div><div><dt>Seating</dt><dd>Faces in</dd></div><div><dt>Exceptions</dt><dd>None</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="lift" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level B1 &#183; Artifact</p>
+                <h3 class="drawer__name">The Private Lift</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Goes up. Does not stop at the lobby, the bar or the restaurant. There is only one card that calls it from down here.</p>
+                <dl class="drawer__spec"><div><dt>Stops</dt><dd>Not the lobby</dd></div><div><dt>Callable by</dt><dd>One card</dd></div><div><dt>Direction</dt><dd>Up</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+<section class="floor-scene grade--noir" id="inventory" tabindex="-1" aria-label="Level B2 — The Inventory">
+  <div class="floor-scene__view">
+    <img src="assets/img/env-motorclub.jpg"
+         srcset="assets/img/env-motorclub@sm.jpg 1200w, assets/img/env-motorclub.jpg 2400w"
+         sizes="100vw" alt="The Inventory" loading="lazy"
+         style="--focus:18% 62%;--zoom:1.34" width="2400" height="1340">
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>B2</b> <span>The Inventory</span></p>
+      <h2 class="floor-plate__name">The Inventory</h2>
+      <p class="floor-plate__note">Below the club. Colder, darker, and considerably more interesting.</p>
+      <p class="floor-plate__count"><i></i>3 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+        <button class="artifact" style="--x:30%;--y:48%" data-artifact="racks">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Racks</span>
+        </button>
+        <button class="artifact" style="--x:56%;--y:64%" data-artifact="ledger">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Ledger</span>
+        </button>
+        <button class="artifact" style="--x:78%;--y:72%" data-artifact="crates">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Crates</span>
+        </button>
+  </div>
+
+  <div class="drawer" id="drawer-inventory" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="racks" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level B2 &#183; Artifact</p>
+                <h3 class="drawer__name">The Racks</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Parts, panels and things that no longer exist anywhere else. When a car upstairs needs something unobtainable, it is obtained from down here.</p>
+                <dl class="drawer__spec"><div><dt>Contents</dt><dd>Unobtainable</dd></div><div><dt>Catalogue</dt><dd>Handwritten</dd></div><div><dt>Insured</dt><dd>Separately</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="ledger" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level B2 &#183; Artifact</p>
+                <h3 class="drawer__name">The Ledger</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">A handwritten record of every acquisition, what was paid, and who was outbid. That last column is the one people ask about and the one that never gets shown.</p>
+                <dl class="drawer__spec"><div><dt>Columns</dt><dd>Three</dd></div><div><dt>Third column</dt><dd>Who lost</dd></div><div><dt>Shown</dt><dd>Never</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="crates" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level B2 &#183; Artifact</p>
+                <h3 class="drawer__name">The Crates</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Unopened. Some for years. He buys things he does not need in order to be the person who has them when somebody finally does need one.</p>
+                <dl class="drawer__spec"><div><dt>Opened</dt><dd>Some, eventually</dd></div><div><dt>Needed</dt><dd>Rarely</dd></div><div><dt>Strategy</dt><dd>Patience</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot foot--film">
+  <div class="foot__film" aria-hidden="true">
+    <video data-lazy muted loop playsinline preload="none" poster="assets/img/env-motorclub@sm.jpg" width="1280" height="716">
+      <source data-src="assets/video/footer-motorclub.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="foot__filmscrim" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="center" style="margin-bottom:var(--s8)">
+      <div class="seal seal--lg" aria-hidden="true">
+        <svg class="seal__ring" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46"/>
+          <line x1="69.75" y1="15.79" x2="72.75" y2="10.60"/>
+          <line x1="84.21" y1="30.25" x2="89.40" y2="27.25"/>
+          <line x1="89.50" y1="50.00" x2="95.50" y2="50.00"/>
+          <line x1="84.21" y1="69.75" x2="89.40" y2="72.75"/>
+          <line x1="69.75" y1="84.21" x2="72.75" y2="89.40"/>
+          <line x1="50.00" y1="89.50" x2="50.00" y2="95.50"/>
+          <line x1="30.25" y1="84.21" x2="27.25" y2="89.40"/>
+          <line x1="15.79" y1="69.75" x2="10.60" y2="72.75"/>
+          <line x1="10.50" y1="50.00" x2="4.50" y2="50.00"/>
+          <line x1="15.79" y1="30.25" x2="10.60" y2="27.25"/>
+          <line x1="30.25" y1="15.79" x2="27.25" y2="10.60"/>
+        </svg>
+        <span class="foxx"></span>
+      </div>
+    </div>
+    <div class="foot__grid">
+      <div class="foot__col">
+        <h4>The World</h4>
+        <ul>
+          <li><a href="bespoke.html">Foxx Bespoke</a></li>
+          <li><a href="wardrobe.html">The Wardrobe</a></li>
+          <li><a href="house.html">The Compliment</a></li>
+          <li><a href="house.html#motor">Foxx Motor Club</a></li>
+          <li><a href="urwelcome.html">UR Welcome</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <h4>Deeper</h4>
+        <ul>
+          <li><a href="network.html">The Foxx Network</a></li>
+          <li><a href="journal.html">The Journal</a></li>
+          <li><a href="charlotte.html">Charlotte</a></li>
+          <li><a href="about.html">The Man</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@parispullen.com">hello@parispullen.com</a></li>
+          <li><a href="mailto:press@parispullen.com">Press &amp; partnerships</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <h4>Doctrine</h4>
+        <p class="classified" style="line-height:2">Presence arrives<br>before introduction.</p>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>&copy; <span data-year>2026</span> Paris Pullen</span>
+      <span>Charlotte, North Carolina</span>
+      <span>The Compliment, Foxx Bespoke and Foxx Motor Club are the fictional architecture of an ongoing creative world.</span>
+      <a class="vaultkey" href="vault.html" aria-label="Vault"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 1 1 6 0v3H9Zm3 3a1.6 1.6 0 0 1 1.6 1.6c0 .6-.34 1.12-.83 1.4l.36 2.15a.3.3 0 0 1-.3.35h-1.66a.3.3 0 0 1-.3-.35l.36-2.15a1.6 1.6 0 0 1 .77-3Z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/world.js" defer></script>
+<script src="assets/js/tv-remote.js" defer></script>
+</body>
+</html>

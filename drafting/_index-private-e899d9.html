@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/world.css">
+<title>Level 19 &#8212; The Drafting Room</title>
+<style>
+  .dr-wrap{max-width:1240px;margin-inline:auto;padding:clamp(6rem,14vh,9rem) var(--gutter) var(--s9)}
+  .dr-narrow{max-width:880px}
+  .dr__state{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+  .dr__state[data-state="draft"]{color:var(--graphite)}
+  .dr__state[data-state="sent"]{color:var(--brass-lit)}
+  .dr__state[data-state="viewed"]{color:var(--champagne)}
+  .dr__state[data-state="won"]{color:#6FA187}
+  .dr__state[data-state="passed"]{color:#B4566A}
+  .dr-warn{border-left:1px solid #B4566A;padding:var(--s4) var(--s5);color:var(--bone);max-width:74ch}
+  code{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;color:var(--champagne);
+       background:var(--ink);border:1px solid var(--hairline);padding:.3em .6em;white-space:nowrap}
+
+  .dr-table{width:100%;border-collapse:collapse;margin-top:var(--s7)}
+  .dr-table th{text-align:left;font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:400;
+    padding:0 var(--s4) var(--s3) 0;border-bottom:1px solid var(--rule);white-space:nowrap}
+  .dr-table td{padding:var(--s4) var(--s4) var(--s4) 0;border-bottom:1px solid var(--rule);
+    vertical-align:top;font-size:var(--t-label);color:var(--silver)}
+  .dr-table tr.dr__noterow td{padding-top:0;font-size:var(--t-micro);color:var(--ash);line-height:1.7}
+  .dr-table td b{display:block;font-family:var(--font-display);font-size:var(--t-h3);
+    line-height:1.15;color:var(--ivory);font-weight:400}
+  .dr-table td small{display:block;margin-top:.3em;font-family:var(--font-mono);
+    font-size:var(--t-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--ash)}
+  .dr-table td.r{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .dr__no{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--brass);letter-spacing:.18em}
+  .dr__go{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.18em;text-transform:uppercase;
+    color:var(--bone);border-bottom:1px solid var(--hairline);white-space:nowrap;
+    transition:color var(--d-fast),border-color var(--d-fast)}
+  .dr__go:hover{color:var(--brass-lit);border-color:var(--brass)}
+  .dr__thumbcell{width:15rem}
+  .dr__thumb{position:relative;display:block;width:15rem;aspect-ratio:16/10;overflow:hidden;
+    border:1px solid var(--rule);background:var(--charcoal)}
+  .dr__thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;
+    filter:grayscale(.45) contrast(1.05) brightness(.82);
+    transition:transform var(--d-cine) var(--ease-out),filter var(--d-cine) var(--ease-out)}
+  .dr__thumb:hover img{transform:scale(1.04);filter:none}
+  .dr__thumbgo{position:absolute;inset:auto 0 0 0;padding:.5em .7em;
+    background:linear-gradient(transparent,rgba(10,10,11,.9));
+    font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
+    text-transform:uppercase;color:var(--champagne);opacity:0;
+    transition:opacity var(--d-med) var(--ease-out)}
+  .dr__thumb:hover .dr__thumbgo{opacity:1}
+  @media(max-width:1100px){
+    .dr-table thead{display:none}
+    .dr__thumbcell,.dr__thumb{width:100%}
+    .dr__thumb{margin-bottom:var(--s4)}
+    .dr-table tr{display:block;border-bottom:1px solid var(--rule);padding-block:var(--s5)}
+    .dr-table td{display:block;border:0;padding:0;text-align:left !important}
+    .dr-table td[data-l]{display:grid;grid-template-columns:8.5rem 1fr;gap:var(--s4);
+      align-items:baseline;padding:.35rem 0}
+    .dr-table td[data-l]::before{content:attr(data-l);font-family:var(--font-mono);
+      font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--brass)}
+    .dr-table td[data-l] code,.dr-table td[data-l] .dr__state{justify-self:start}
+    .dr-table td.dr__no{margin-bottom:var(--s2)}
+    .dr-table td b{margin-bottom:var(--s3)}
+    .dr-table tr.dr__noterow{border:0;padding-top:0;padding-bottom:var(--s5)}
+    .dr-table tr.dr__noterow td{padding-top:var(--s3)}
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<div class="dr-wrap">
+
+  <header class="stack">
+    <div class="lockup lockup--row" style="margin-bottom:var(--s6)">
+      <span class="foxx" aria-hidden="true"></span>
+      <div>
+        <p class="lockup__name">Paris Pullen LLC</p>
+        <p class="lockup__sub">Level 19 &#183; Restricted</p>
+      </div>
+    </div>
+    <p class="floor-plate__level"><b>19</b> <span>The Drafting Room</span></p>
+    <h1 class="display display--h1" style="margin-block:var(--s3)">The Drafting Room</h1>
+    <p class="lede">Work built for people who have not yet agreed to buy it. Every site on this floor exists, runs, and is finished enough to hand over &#8212; which is the whole argument.</p>
+    <p class="classified">Not on the elevator panel &#183; Not linked from the site &#183; Not indexed</p>
+  </header>
+
+  <div class="casebar" style="margin-top:var(--s7)">
+    <div><b>Commissions</b><span>4</span></div>
+    <div><b>Open pipeline</b><span>2</span></div>
+    <div><b>Potential</b><span>$3,000</span></div>
+    <div><b>Won</b><span>2</span></div>
+    <div><b>Standard build</b><span>$1,500 &#183; $50/mo care</span></div>
+  </div>
+
+  <table class="dr-table">
+    <thead><tr>
+      <th></th><th></th><th>Client &amp; project</th><th>Status</th>
+      <th class="r">Build</th><th class="r">Care</th><th>Code</th><th class="r">Expires</th>
+      <th></th><th></th><th></th>
+    </tr></thead>
+    <tbody>
+        <tr>
+          <td class="dr__no">01</td>
+          <td class="dr__thumbcell"><a class="dr__thumb" href="http://localhost:4350/goodwill-grooming/index.html" target="_blank" rel="noopener" aria-label="Open the Goodwill Grooming site"><img src="thumbs/goodwill.jpg" srcset="thumbs/goodwill@sm.jpg 440w, thumbs/goodwill.jpg 880w" sizes="(max-width:1100px) 100vw, 15rem" alt="Goodwill Grooming site" loading="lazy" width="880" height="550"><span class="dr__thumbgo">Open &#8599;</span></a></td>
+          <td><b>Goodwill Grooming</b><small>Barber &amp; Recording Artist</small></td>
+          <td data-l="Status"><span class="dr__state" data-state="won">Won</span></td>
+          <td class="r" data-l="Build">$1,500</td>
+          <td class="r" data-l="Care">$50/mo</td>
+          <td data-l="Access code"><code>GOODWILL25</code></td>
+          <td class="r" data-l="Expires">15 Oct 2026</td>
+          <td class="r"><a class="dr__go" href="goodwill-grooming-8e3eecdd.html">Proposal &#8599;</a></td>
+          <td class="r"><a class="dr__go" href="http://localhost:4350/goodwill-grooming/index.html" target="_blank" rel="noopener">Site &#8599;</a></td>
+          <td class="r"><span class="dr__go" style="opacity:.4;border:0">No link</span></td>
+        </tr>
+        <tr class="dr__noterow"><td></td><td colspan="10" class="dr__note">Built and delivered. Domain registration still outstanding on their side.</td></tr>
+        <tr>
+          <td class="dr__no">02</td>
+          <td class="dr__thumbcell"><a class="dr__thumb" href="http://localhost:4350/threepiece-entertainment/index.html" target="_blank" rel="noopener" aria-label="Open the Three Piece Entertainment site"><img src="thumbs/threepiece.jpg" srcset="thumbs/threepiece@sm.jpg 440w, thumbs/threepiece.jpg 880w" sizes="(max-width:1100px) 100vw, 15rem" alt="Three Piece Entertainment site" loading="lazy" width="880" height="550"><span class="dr__thumbgo">Open &#8599;</span></a></td>
+          <td><b>Three Piece Entertainment</b><small>Live Music, Production &amp; Education</small></td>
+          <td data-l="Status"><span class="dr__state" data-state="won">Won</span></td>
+          <td class="r" data-l="Build">$1,500</td>
+          <td class="r" data-l="Care">$50/mo</td>
+          <td data-l="Access code"><code>3PE0825</code></td>
+          <td class="r" data-l="Expires">31 Dec 2026</td>
+          <td class="r"><a class="dr__go" href="threepiece-entertainment-6e47c4c8.html">Proposal &#8599;</a></td>
+          <td class="r"><a class="dr__go" href="http://localhost:4350/threepiece-entertainment/index.html" target="_blank" rel="noopener">Site &#8599;</a></td>
+          <td class="r"><span class="dr__go" style="opacity:.4;border:0">No link</span></td>
+        </tr>
+        <tr class="dr__noterow"><td></td><td colspan="10" class="dr__note">The pattern the Drafting Room itself was modelled on.</td></tr>
+        <tr>
+          <td class="dr__no">03</td>
+          <td class="dr__thumbcell"><a class="dr__thumb" href="http://localhost:4350/your-new-nail-tech/index.html" target="_blank" rel="noopener" aria-label="Open the Your New Nail Tech site"><img src="thumbs/nailtech.jpg" srcset="thumbs/nailtech@sm.jpg 440w, thumbs/nailtech.jpg 880w" sizes="(max-width:1100px) 100vw, 15rem" alt="Your New Nail Tech site" loading="lazy" width="880" height="550"><span class="dr__thumbgo">Open &#8599;</span></a></td>
+          <td><b>Your New Nail Tech</b><small>Luxury Nail Artistry</small></td>
+          <td data-l="Status"><span class="dr__state" data-state="viewed">Viewed</span></td>
+          <td class="r" data-l="Build">$1,500</td>
+          <td class="r" data-l="Care">$50/mo</td>
+          <td data-l="Access code"><code>NAILTECH25</code></td>
+          <td class="r" data-l="Expires">18 Sep 2026</td>
+          <td class="r"><a class="dr__go" href="your-new-nail-tech-cd3b2f98.html">Proposal &#8599;</a></td>
+          <td class="r"><a class="dr__go" href="http://localhost:4350/your-new-nail-tech/index.html" target="_blank" rel="noopener">Site &#8599;</a></td>
+          <td class="r"><span class="dr__go" style="opacity:.4;border:0">No link</span></td>
+        </tr>
+        <tr class="dr__noterow"><td></td><td colspan="10" class="dr__note">Opened twice, no reply yet. Spotify ID and opening hours still unconfirmed.</td></tr>
+        <tr>
+          <td class="dr__no">04</td>
+          <td class="dr__thumbcell"><a class="dr__thumb" href="http://localhost:4350/burns-brims/index.html" target="_blank" rel="noopener" aria-label="Open the Burns &amp; Brims site"><img src="thumbs/burns.jpg" srcset="thumbs/burns@sm.jpg 440w, thumbs/burns.jpg 880w" sizes="(max-width:1100px) 100vw, 15rem" alt="Burns &amp; Brims site" loading="lazy" width="880" height="550"><span class="dr__thumbgo">Open &#8599;</span></a></td>
+          <td><b>Burns &amp; Brims</b><small>Uncover Your Confidence</small></td>
+          <td data-l="Status"><span class="dr__state" data-state="draft">Draft</span></td>
+          <td class="r" data-l="Build">$1,500</td>
+          <td class="r" data-l="Care">$50/mo</td>
+          <td data-l="Access code"><code>BRIMS0825</code></td>
+          <td class="r" data-l="Expires">01 Oct 2026</td>
+          <td class="r"><a class="dr__go" href="burns-brims-e1fc3b5c.html">Proposal &#8599;</a></td>
+          <td class="r"><a class="dr__go" href="http://localhost:4350/burns-brims/index.html" target="_blank" rel="noopener">Site &#8599;</a></td>
+          <td class="r"><span class="dr__go" style="opacity:.4;border:0">No link</span></td>
+        </tr>
+        <tr class="dr__noterow"><td></td><td colspan="10" class="dr__note">NOT YET PRESENTED. Finish the shop section before sending. Asset folder is 254MB &#8212; compress before deploy.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="stack" style="margin-top:var(--s9);border-top:1px solid var(--rule);padding-top:var(--s7)">
+    <p class="eyebrow">The pitch</p>
+    <p class="statement" style="max-width:40ch">Most people are sold a proposal.<br>These people are handed the finished thing.</p>
+  </div>
+
+  <div class="dr-warn" style="margin-top:var(--s7)">
+    <b>Before sending any of these:</b> paste a real Stripe Payment Link into
+    <code>drafting_data.py</code> and re-run the build &#8212; until then the pay button is
+    inert and the client is told an invoice will follow. Local preview URLs
+    (<code>localhost</code>) only work on this machine; replace them with deployed
+    URLs before a proposal leaves the building.
+  </div>
+
+  <div class="dr-warn" style="margin-top:var(--s5)">
+    <b>On security.</b> The unlisted URL is the boundary. Access codes are presentation
+    and friction, not protection &#8212; the code sits in the page source. Never put
+    contracts, payment details or client data on this floor.
+  </div>
+
+  <p class="classified" style="margin-top:var(--s7)">
+    Generated by <code>build_drafting.py</code> from <code>drafting_data.py</code>
+  </p>
+
+</div>
+</body>
+</html>

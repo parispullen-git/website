@@ -1,0 +1,145 @@
+<!doctype html><html lang="en"><head>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><title>Proposal index — internal</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/proposal.css">
+<style>
+.wrap{max-width:1100px;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) var(--pad)}
+table{width:100%;border-collapse:collapse;margin-top:2.5rem}
+th{text-align:left;font-size:.5625rem;text-transform:uppercase;letter-spacing:.22em;color:var(--brass);
+   font-variation-settings:'wdth' 86,'wght' 700;padding:0 1rem .9rem 0;border-bottom:1px solid var(--line-2)}
+td{padding:1.1rem 1rem 1.1rem 0;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9375rem}
+td b{display:block;font-variation-settings:'wdth' 100,'wght' 650}
+td small{display:block;margin-top:.25rem;font-size:.625rem;text-transform:uppercase;letter-spacing:.16em;color:var(--bone-3)}
+td.r{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+code{background:var(--ink-3);border:1px solid var(--line-2);padding:.35rem .7rem;color:var(--brass);
+  font-family:ui-monospace,Menlo,monospace;font-size:.8125rem;letter-spacing:.08em}
+.go{color:var(--bone);border-bottom:1px solid var(--line-2);font-size:.8125rem;white-space:nowrap}
+.go:hover{color:var(--brass);border-color:var(--brass)}
+.warn{margin-top:3rem;padding:1.25rem 1.5rem;border-left:2px solid var(--brass);
+  background:rgba(199,154,75,.08);font-size:.875rem;color:var(--bone-2);line-height:1.7;max-width:70ch}
+</style></head><body>
+<script>(function(){
+var KEY='pp_gate_ok';
+try{if(sessionStorage.getItem(KEY)==='1')return;}catch(e){}
+var ov=document.createElement('div');
+ov.id='ppgate';
+ov.innerHTML='<div class="ppgate__panel"><p class="ppgate__eyebrow">Paris Pullen &#8212; Private Preview</p><h1>This is a client build in progress.</h1><form id="ppgateform" autocomplete="off"><input id="ppgateinput" type="password" autocomplete="new-password" placeholder="Password" aria-label="Password"><button type="submit">Enter</button></form><p class="ppgate__err" id="ppgateerr" hidden>Incorrect password.</p></div>';
+var css=document.createElement('style');
+css.textContent='#ppgate{position:fixed;inset:0;z-index:2147483647;background:#0A0A0B;color:#EDE7DA;display:flex;align-items:center;justify-content:center;padding:1.5rem}'+
+'.ppgate__panel{max-width:380px;width:100%;text-align:center;padding:2.5rem 2rem;border:1px solid rgba(201,169,97,.35);font-family:Georgia,\'Times New Roman\',serif}'+
+'.ppgate__eyebrow{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:#C9A961;margin:0 0 1rem}'+
+'#ppgate h1{font-size:1.4rem;font-weight:400;line-height:1.3;margin:0 0 1.75rem;color:#EDE7DA}'+
+'#ppgateform{display:flex;gap:.5rem}'+
+'#ppgateinput{flex:1;min-width:0;background:transparent;border:1px solid rgba(237,231,218,.28);color:#EDE7DA;padding:.75em .9em;font-size:1rem;font-family:ui-monospace,Menlo,Consolas,monospace;border-radius:0}'+
+'#ppgateinput:focus{outline:none;border-color:#C9A961}'+
+'#ppgateform button{background:#C9A961;color:#0A0A0B;border:0;padding:.75em 1.2em;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:ui-monospace,Menlo,Consolas,monospace}'+
+'#ppgateform button:hover{background:#EDE7DA}'+
+'.ppgate__err{color:#C0555A;font-size:.78rem;margin-top:1rem;font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.04em}';
+document.head.appendChild(css);
+document.body.appendChild(ov);
+var prevOverflow=document.documentElement.style.overflow;
+document.documentElement.style.overflow='hidden';
+document.getElementById('ppgateform').addEventListener('submit',function(e){
+e.preventDefault();
+var v=document.getElementById('ppgateinput').value.trim().toLowerCase();
+if(v==='legend'){
+try{sessionStorage.setItem(KEY,'1');}catch(e){}
+ov.remove();
+document.documentElement.style.overflow=prevOverflow;
+}else{
+document.getElementById('ppgateerr').hidden=false;
+document.getElementById('ppgateinput').value='';
+document.getElementById('ppgateinput').focus();
+}
+});
+setTimeout(function(){var i=document.getElementById('ppgateinput');if(i)i.focus();},50);
+})();</script>
+<div class="grain"></div>
+<div class="wrap">
+  <p class="pkicker">Internal — not linked from the site</p>
+  <h1 class="ptitle">Proposal <em>index</em></h1>
+  <p class="psub">Every live proposal, its access code, and its expiry.</p>
+  <table>
+    <thead><tr><th>Client &amp; occasion</th><th>Access code</th><th class="r">Range</th><th class="r">Expires</th><th></th></tr></thead>
+    <tbody><tr>
+  <td><b>An Orchestral Celebration</b><small>Entertainment Proposal</small></td>
+  <td><code>WHITNEY18</code></td>
+  <td class="r">$6,800 – $13,500<small>3 options</small></td>
+  <td class="r">01 Sep 2026</td>
+  <td><a class="go" href="urbanleague-wmy-gala-4b71e9c2.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>An Evening Worth Traveling For</b><small>Corporate Entertainment Proposal</small></td>
+  <td><code>GANTT0922</code></td>
+  <td class="r">$2,500 – $4,700<small>4 options</small></td>
+  <td class="r">17 Sep 2026</td>
+  <td><a class="go" href="naaia-welcome-reception-8c3f21a7.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>Fifty Years of Service</b><small>Entertainment Proposal</small></td>
+  <td><code>MEMA1950</code></td>
+  <td class="r">$1,500 – $3,600<small>3 options</small></td>
+  <td class="r">01 Sep 2026</td>
+  <td><a class="go" href="mema-50th-anniversary-d92a4f18.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>Fifty Years, One Horn</b><small>Anniversary Entertainment Proposal</small></td>
+  <td><code>BALLANTYNE50</code></td>
+  <td class="r">$750 – $1,100<small>2 options</small></td>
+  <td class="r">17 Sep 2026</td>
+  <td><a class="go" href="roach-50th-anniversary-6e18b4d3.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>Live Saxophone for the Measell Wedding</b><small>Wedding Entertainment Proposal</small></td>
+  <td><code>ANGUSBARN27</code></td>
+  <td class="r">$750 – $1,400<small>3 options</small></td>
+  <td class="r">17 Sep 2026</td>
+  <td><a class="go" href="measell-wedding-a37c95e1.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>Live Saxophone for Melonie&#x27;s Day</b><small>Wedding Entertainment Proposal</small></td>
+  <td><code>LUMEN0626</code></td>
+  <td class="r">$450 – $1,200<small>3 options</small></td>
+  <td class="r">17 Sep 2026</td>
+  <td><a class="go" href="davis-wedding-c81f7d40.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>Caitlyn &amp;amp; Maleek</b><small>Wedding Entertainment Proposal</small></td>
+  <td><code>BEAUMONDE27</code></td>
+  <td class="r">$5,750 – $6,000<small>2 options</small></td>
+  <td class="r">17 Sep 2026</td>
+  <td><a class="go" href="caitlyn-maleek-wedding-72d4e9b6.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>Live Jazz for Pearls for a Purpose</b><small>Jazz Brunch Entertainment Proposal</small></td>
+  <td><code>PEARLS1025</code></td>
+  <td class="r">$1,050 – $2,100<small>3 options</small></td>
+  <td class="r">17 Sep 2026</td>
+  <td><a class="go" href="yellow-tea-rose-brunch-15a8c73f.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>An Evening in White</b><small>Entertainment Proposal</small></td>
+  <td><code>WHITE0911</code></td>
+  <td class="r">$1,200 – $2,500<small>3 options</small></td>
+  <td class="r">17 Sep 2026</td>
+  <td><a class="go" href="watts-chapel-evening-in-white-93b2e6a4.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>BLK Girl BLK Dress Finale</b><small>Entertainment Partnership Proposal</small></td>
+  <td><code>BGBD0830</code></td>
+  <td class="r">$1,800 – $4,200<small>3 options</small></td>
+  <td class="r">17 Sep 2026</td>
+  <td><a class="go" href="blk-girl-blk-dress-finale-2fa96c58.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>A Season for Monroe</b><small>Cultural Programming Proposal</small></td>
+  <td><code>MONROE2026</code></td>
+  <td class="r">$62,000 – $225,000<small>3 options</small></td>
+  <td class="r">17 Sep 2026</td>
+  <td><a class="go" href="city-of-monroe-programming-e504a1d9.html" target="_blank">Open &nearr;</a></td>
+</tr><tr>
+  <td><b>The Question</b><small>Performance Proposal</small></td>
+  <td><code>BELK0919</code></td>
+  <td class="r">$500<small>1 options</small></td>
+  <td class="r">01 Sep 2026</td>
+  <td><a class="go" href="belk-proposal-performance-b6027fc3.html" target="_blank">Open &nearr;</a></td>
+</tr></tbody>
+  </table>
+  <p class="warn"><b>Before sending any of these:</b> replace the placeholder payment links in
+  <code>_build.py</code> with real Stripe Payment Links and re-run the build. Until then, selecting an
+  option shows a reminder instead of taking the client to checkout. Remember the access code is
+  client-side friction, not security — the unlisted URL is the real boundary.</p>
+</div></body></html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsroom &amp; Blog — Dante Simpson</title>
+<meta name="description" content="Every article, interview and episode featuring Dante Simpson and ESPAT — summarized here, linked out to the original source. Reviewed weekly.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="bar">
+    <a href="index.html" class="logo">DANTE <span>SIMPSON</span></a>
+    <nav class="main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="ventures.html">The Empire</a>
+      <a href="case-studies/index.html">Case Studies</a>
+      <a href="newsroom.html" class="active">Newsroom</a>
+      <a href="media.html">Media</a>
+      <a href="pitch.html" class="nav-cta">Pitch Dante</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<section class="page-hero reveal">
+  <div class="wrap">
+    <div class="badge">Newsroom &amp; Blog</div>
+    <h1>Every move, in order.</h1>
+    <p>A single running feed — deals, partnerships, leadership moves, interviews and episodes of <em style="font-style:normal;color:var(--ink);">The Table</em>. Every entry is a short summary with a link to read or watch the original in full. Compiled from public reporting and refreshed weekly.</p>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="feed-filters" id="filters">
+      <button class="active" data-cat="All">All</button>
+      <button data-cat="Video">Video</button>
+      <button data-cat="The Table">The Table</button>
+      <button data-cat="Film">Film</button>
+      <button data-cat="Partnership">Partnership</button>
+      <button data-cat="AI / Labs">AI / Labs</button>
+      <button data-cat="Leadership">Leadership</button>
+      <button data-cat="Advisory">Advisory</button>
+      <button data-cat="Speaking">Speaking</button>
+      <button data-cat="Origin">Origin</button>
+    </div>
+    <div id="feed-mount"></div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="card reveal" style="border:1px solid var(--line);padding:40px 44px;">
+      <div class="eyebrow">How this page works</div>
+      <p style="color:var(--ink-dim);margin-top:12px;max-width:720px;font-size:14.5px;">Every article, interview and episode of The Table is summarized here in a few sentences, with a "Read more" or "Watch" link out to the original source — we don't republish full articles or rehost video. This feed is compiled from public announcements, trade press, interviews and fintech.tv, and is reviewed weekly for new coverage of ESPAT TV, ESPAT Studios and ESPAT Labs. Promotional or self-reported figures (e.g. valuation or revenue claims) are flagged where the underlying source is not independent trade reporting or audited financials. Spot something we should add or correct? <a href="pitch.html" style="color:var(--gold);border-bottom:1px solid var(--gold);">Let us know →</a></p>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h4>Dante Simpson</h4>
+        <p style="max-width:280px;">Co-Founder, ESPAT TV. CEO, ESPAT Labs. Building at the intersection of gaming, entertainment, culture and AI.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Site</h4>
+        <a href="about.html">About</a>
+        <a href="ventures.html">The Empire</a>
+        <a href="case-studies/index.html">Case Studies</a>
+        <a href="newsroom.html">Newsroom</a>
+        <a href="media.html">Media</a>
+      </div>
+      <div class="foot-col">
+        <h4>Ecosystem</h4>
+        <a href="https://espat.tv" target="_blank" rel="noopener">ESPAT TV ↗</a>
+        <a href="https://espat.tv" target="_blank" rel="noopener">ESPAT Studios ↗</a>
+        <a href="ventures.html#labs">ESPAT Labs</a>
+      </div>
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <a href="pitch.html">Pitch Dante</a>
+        <a href="mailto:team@dantesimpson.com">team@dantesimpson.com</a>
+        <a href="https://www.instagram.com/dsa_boss" target="_blank" rel="noopener">Instagram — @dsa_boss ↗</a>
+        <a href="https://www.linkedin.com/in/dante-simpson/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Dante Simpson. All rights reserved.</span>
+      <span>Newsroom compiled from public reporting — reviewed weekly.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+  const ALL_POSTS = getBlogFeed();
+  const mount = document.getElementById('feed-mount');
+  renderFeed(ALL_POSTS, mount);
+
+  document.querySelectorAll('#filters button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#filters button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      const items = cat === 'All' ? ALL_POSTS : ALL_POSTS.filter(i => i.cat === cat);
+      renderFeed(items, mount);
+    });
+  });
+</script>
+</body>
+</html>

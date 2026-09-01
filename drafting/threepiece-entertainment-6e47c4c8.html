@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/world.css">
+<title>Three Piece Entertainment &#8212; Proposal</title>
+<style>
+  .dr-wrap{max-width:1240px;margin-inline:auto;padding:clamp(6rem,14vh,9rem) var(--gutter) var(--s9)}
+  .dr-narrow{max-width:880px}
+  .dr__state{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+  .dr__state[data-state="draft"]{color:var(--graphite)}
+  .dr__state[data-state="sent"]{color:var(--brass-lit)}
+  .dr__state[data-state="viewed"]{color:var(--champagne)}
+  .dr__state[data-state="won"]{color:#6FA187}
+  .dr__state[data-state="passed"]{color:#B4566A}
+  .dr-warn{border-left:1px solid #B4566A;padding:var(--s4) var(--s5);color:var(--bone);max-width:74ch}
+  code{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;color:var(--champagne);
+       background:var(--ink);border:1px solid var(--hairline);padding:.3em .6em;white-space:nowrap}
+
+  /* countdown bar */
+  .pbar{position:sticky;top:0;z-index:60;display:flex;flex-wrap:wrap;gap:var(--s4);
+    align-items:center;justify-content:center;padding:var(--s3) var(--gutter);
+    background:rgba(10,10,11,.96);border-bottom:1px solid var(--rule);
+    font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ash);backdrop-filter:blur(8px)}
+  .pbar__clock{display:flex;gap:var(--s3)}
+  .pbar__unit{display:inline-flex;align-items:baseline;gap:.2em;color:var(--champagne)}
+  .pbar__unit b{font-family:var(--font-display);font-size:1.05rem;font-weight:400;letter-spacing:0}
+  .pbar.is-soon{border-bottom-color:var(--brass)}
+  .pbar.is-soon .pbar__unit{color:var(--brass-lit)}
+  .pbar.is-dead{color:#B4566A;border-bottom-color:#B4566A}
+  .pbar.is-dead .pbar__unit{color:#B4566A}
+
+  /* gate */
+  .gate-card{min-height:100svh;display:grid;place-items:center;text-align:center;padding:var(--gutter)}
+  .gate-card form{display:flex;gap:var(--s3);flex-wrap:wrap;justify-content:center;margin-top:var(--s5)}
+  .gate-card input{background:transparent;border:1px solid var(--graphite);color:var(--ivory);
+    padding:1em 1.2em;font-family:var(--font-mono);font-size:var(--t-label);letter-spacing:.22em;
+    text-transform:uppercase;text-align:center;min-width:15rem}
+  .gate-card input:focus{outline:none;border-color:var(--brass)}
+  .gate-err{color:#B4566A;font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.14em;margin-top:var(--s4);min-height:1.2em}
+
+  /* features */
+  .feat{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:var(--s5)}
+  .feat__row{background:var(--bg);display:grid;grid-template-columns:minmax(0,13rem) 1fr;
+    gap:var(--s5);padding:var(--s5)}
+  .feat__k{font-family:var(--font-display);font-size:var(--t-h3);line-height:1.15;color:var(--ivory)}
+  .feat__v{color:var(--silver);font-size:var(--t-label);line-height:1.7}
+  @media(max-width:720px){.feat__row{grid-template-columns:1fr;gap:var(--s2)}}
+
+  /* price blocks */
+  .price{display:grid;gap:var(--s5);grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));margin-top:var(--s6)}
+  .price__card{border:1px solid var(--rule);padding:var(--s6);display:grid;gap:var(--s3);align-content:start}
+  .price__card--lead{border-color:var(--brass)}
+  .price__k{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.24em;
+    text-transform:uppercase;color:var(--brass)}
+  .price__n{font-family:var(--font-display);font-size:clamp(2.5rem,1.6rem+3.2vw,4rem);
+    line-height:.95;color:var(--ivory);letter-spacing:-.03em}
+  .price__n small{font-size:.28em;letter-spacing:.2em;color:var(--ash);margin-left:.4em}
+  .price__note{color:var(--ash);font-size:var(--t-label);line-height:1.7}
+  .price__list{margin-top:var(--s3);display:grid;gap:var(--s2)}
+  .price__list li{color:var(--bone);font-size:var(--t-label);line-height:1.6;
+    padding-left:1.1em;position:relative}
+  .price__list li::before{content:"—";position:absolute;left:0;color:var(--brass)}
+
+  /* modal */
+  .pmodal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:var(--gutter);
+    background:rgba(6,6,7,.86);backdrop-filter:blur(6px);opacity:0;visibility:hidden;
+    transition:opacity var(--d-med) var(--ease-out),visibility var(--d-med)}
+  .pmodal.is-open{opacity:1;visibility:visible}
+  .pmodal__card{position:relative;background:var(--ink);border:1px solid var(--brass);
+    padding:clamp(var(--s6),5vw,var(--s8));max-width:620px;width:100%;text-align:center;
+    max-height:88svh;overflow-y:auto}
+  .pmodal__close{position:absolute;top:var(--s4);right:var(--s5);font-family:var(--font-mono);
+    font-size:var(--t-micro);letter-spacing:.2em;color:var(--ash)}
+  .pmodal__close:hover{color:var(--champagne)}
+  .exit__clock{display:flex;justify-content:center;gap:var(--s5);margin:var(--s6) 0}
+  .exit__clock div{display:grid;gap:.2em}
+  .exit__clock b{font-family:var(--font-display);font-size:2rem;font-weight:400;color:var(--champagne);line-height:1}
+  .exit__clock small{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ash)}
+  .exit__dismiss{margin-top:var(--s5);font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.2em;text-transform:uppercase;color:var(--graphite)}
+  .exit__dismiss:hover{color:var(--silver)}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<div class="gate-card" id="gate">
+  <div class="stack" style="justify-items:center">
+    <span class="foxx" aria-hidden="true" style="--foxx-size:48px;width:48px"></span>
+    <p class="eyebrow" style="margin-top:var(--s5)">Private document</p>
+    <h1 class="display display--h2" style="margin-block:var(--s3)">Enter your access code</h1>
+    <p class="body" style="text-align:center;margin-inline:auto">Prepared for Three Piece Entertainment by Paris Pullen LLC. Not intended for onward circulation.</p>
+    <form id="gate-form">
+      <input id="gate-input" type="text" placeholder="Access code" autocomplete="off" spellcheck="false" aria-label="Access code">
+      <button class="cta" type="submit"><span>Open</span></button>
+    </form>
+    <p class="gate-err" id="gate-err" role="alert"></p>
+  </div>
+</div>
+
+<div id="doc" hidden>
+
+<div class="pbar" id="pbar">
+  <span id="pbar-label">This proposal expires in</span>
+  <span class="pbar__clock" id="pbar-clock"></span>
+</div>
+
+<div class="dr-wrap dr-narrow">
+
+  <header class="stack">
+    <div class="lockup lockup--row" style="margin-bottom:var(--s6)">
+      <span class="foxx" aria-hidden="true"></span>
+      <div>
+        <p class="lockup__name">Paris Pullen LLC</p>
+        <p class="lockup__sub">Charlotte, North Carolina</p>
+      </div>
+    </div>
+    <p class="eyebrow">Prepared for Three Piece Entertainment</p>
+    <h1 class="display display--h1" style="margin-block:var(--s3)">Live Music, Production &amp; Education</h1>
+    <p class="statement">The proposal is the product.</p>
+  </header>
+
+  <section class="stack" style="margin-top:var(--s8)">
+    <p class="eyebrow">The argument</p>
+    <p class="lede">Most entertainment companies email a PDF. This one sends a private, expiring document with the client&#8217;s name on it and three priced options. It closes better because it behaves like the service it is selling.</p>
+    <p class="body">The site already exists. It was built before you were asked to pay for it, which removes every abstract objection at once &#8212; nobody has to imagine what it might look like, or trust that a mockup will become a real site. Open it and judge it.</p>
+    <div class="hero__ctas" style="margin-top:var(--s5)"><a class="cta cta--ghost" href="http://localhost:4350/threepiece-entertainment/index.html" target="_blank" rel="noopener"><span>Open the site</span></a></div>
+  </section>
+
+  <section class="stack" style="margin-top:var(--s9)">
+    <p class="eyebrow">What the build includes</p>
+    <div class="feat"><div class="feat__row"><p class="feat__k">The site</p><p class="feat__v">A complete, responsive site — built, running and ready to hand over. Not a mockup.</p></div><div class="feat__row"><p class="feat__k">Mobile first</p><p class="feat__v">Recomposed for phones rather than shrunk. Most of your traffic arrives that way.</p></div><div class="feat__row"><p class="feat__k">Booking / contact</p><p class="feat__v">A working enquiry path so the site produces something, not just impressions.</p></div><div class="feat__row"><p class="feat__k">Photography</p><p class="feat__v">Every image treated, cropped and compressed to load fast without looking cheap.</p></div><div class="feat__row"><p class="feat__k">Search basics</p><p class="feat__v">Titles, descriptions, structured data and social preview cards done properly.</p></div><div class="feat__row"><p class="feat__k">Speed</p><p class="feat__v">Responsive images, lazy loading and no framework weight. It opens immediately.</p></div><div class="feat__row"><p class="feat__k">Accessibility</p><p class="feat__v">Keyboard navigation, real contrast, reduced-motion support.</p></div><div class="feat__row"><p class="feat__k">Handover</p><p class="feat__v">Every file is yours. No lock-in, no proprietary builder, no monthly ransom.</p></div><div class="feat__row"><p class="feat__k">Specific to you</p><p class="feat__v">A proposal engine generating gated, expiring client documents</p></div><div class="feat__row"><p class="feat__k">Specific to you</p><p class="feat__v">Fourteen live proposals with access codes and tiered pricing</p></div><div class="feat__row"><p class="feat__k">Specific to you</p><p class="feat__v">A private index tracking every one</p></div></div>
+  </section>
+
+  <section class="stack" style="margin-top:var(--s9)">
+    <p class="eyebrow">What it costs</p>
+    <div class="price">
+      <div class="price__card price__card--lead">
+        <p class="price__k">The build &#183; one time</p>
+        <p class="price__n">$1,500</p>
+        <p class="price__note">Everything above, delivered and handed over. One round of revisions included. Every file is yours.</p>
+      </div>
+      <div class="price__card">
+        <p class="price__k">Care &#183; monthly</p>
+        <p class="price__n">$50<small>/mo</small></p>
+        <ul class="price__list"><li>Two content updates a month — copy, images, prices, hours</li><li>Hosting and SSL certificate</li><li>Weekly backups</li><li>Uptime monitoring and fixes if something breaks</li><li>Cancel any month; the site and files remain yours</li></ul>
+        <p class="price__note" style="margin-top:var(--s3)">Optional. Cancel any month.</p>
+      </div>
+    </div>
+
+    <div class="hero__ctas" style="margin-top:var(--s7)">
+      <span class="cta" style="opacity:.45;cursor:default;border-color:var(--graphite)"><span>Payment link pending</span></span>
+      <a class="cta cta--ghost" href="mailto:hello@parispullen.com?subject=Re%3A%20Three%20Piece%20Entertainment"><span>Ask Paris a question</span></a>
+    </div>
+    <p class="classified" style="margin-top:var(--s4)">Stripe link not yet attached &#8212; Paris will send a secure checkout link directly, or you can settle by invoice.</p>
+  </section>
+
+  <footer class="foot foot--film" style="margin-top:var(--s9)">
+    <div class="foot__film" aria-hidden="true">
+      <video data-lazy muted loop playsinline preload="none" poster="../assets/img/env-motorclub@sm.jpg" width="1280" height="716">
+        <source data-src="../assets/video/footer-motorclub.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="foot__filmscrim" aria-hidden="true"></div>
+    <div class="foot__base" style="border:0;padding-top:0">
+      <span>Paris Pullen LLC</span>
+      <span><a class="link-under" href="mailto:hello@parispullen.com">hello@parispullen.com</a></span>
+      <span>Private document &#183; not for circulation</span>
+    </div>
+  </footer>
+
+</div>
+</div>
+
+<div class="pmodal" id="exit-modal" role="dialog" aria-modal="true" aria-labelledby="exit-title">
+  <div class="pmodal__card">
+    <button class="pmodal__close" data-close aria-label="Close">Close &#215;</button>
+    <p class="eyebrow">Before you go</p>
+    <h2 class="display display--h2" id="exit-title" style="margin-block:var(--s3)">The site is<br>still yours to take.</h2>
+    <p class="body" style="text-align:center;margin-inline:auto">This price holds until the clock runs out. $1,500 to own it outright, $50 a month if you want it looked after.</p>
+    <div class="exit__clock" id="exit-clock"></div>
+    <div class="hero__ctas" style="justify-content:center"><span class="cta" style="opacity:.45;cursor:default;border-color:var(--graphite)"><span>Payment link pending</span></span></div>
+    <button class="exit__dismiss" id="exit-dismiss">I&#8217;ll come back to this</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CODE   = "3PE0825";
+  var EXPIRES= new Date("2026-12-31T23:59:00-05:00");
+  var KEY    = "pp_dr_6e47c4c8";
+  var $ = function(s){ return document.querySelector(s); };
+
+  /* ---- gate ---- */
+  var gate=$('#gate'), doc=$('#doc'), form=$('#gate-form'),
+      input=$('#gate-input'), err=$('#gate-err');
+  function openDoc(){ gate.hidden=true; doc.hidden=false; }
+  try { if (sessionStorage.getItem(KEY)==='1') openDoc(); } catch(e){}
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (input.value.trim().toUpperCase() === CODE) {
+      try { sessionStorage.setItem(KEY,'1'); } catch(e){}
+      openDoc();
+    } else {
+      err.textContent='That code does not match this document.';
+      input.value=''; input.focus();
+    }
+  });
+
+  /* ---- countdown ---- */
+  var bar=$('#pbar'), clock=$('#pbar-clock'), label=$('#pbar-label'), exitClock=$('#exit-clock');
+  var UNITS={d:'days',h:'hours',m:'mins',s:'secs'};
+  function parts(ms){
+    var s=Math.max(0,Math.floor(ms/1000));
+    return {d:Math.floor(s/86400),h:Math.floor(s%86400/3600),m:Math.floor(s%3600/60),s:s%60};
+  }
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var left=EXPIRES.getTime()-Date.now(), t=parts(left), dead=left<=0;
+    if(clock) clock.innerHTML = dead ? '<span class="pbar__unit"><b>Expired</b></span>'
+      : ['d','h','m','s'].map(function(u){ return '<span class="pbar__unit"><b>'+pad(t[u])+'</b>'+u+'</span>'; }).join('');
+    if(label) label.textContent = dead ? 'This proposal has expired' : 'This proposal expires in';
+    if(bar){ bar.classList.toggle('is-dead',dead); bar.classList.toggle('is-soon',!dead && left<72*3600*1000); }
+    if(exitClock) exitClock.innerHTML = ['d','h','m','s'].map(function(u){
+      return '<div><b>'+pad(t[u])+'</b><small>'+UNITS[u]+'</small></div>'; }).join('');
+  }
+  tick(); setInterval(tick,1000);
+
+  /* ---- exit intent ---- */
+  var modal=$('#exit-modal'), shown=false;
+  function canShow(){ return modal && !shown && !doc.hidden; }
+  function fire(){ if(!canShow()) return; shown=true; modal.classList.add('is-open'); }
+  function close(){ modal.classList.remove('is-open'); }
+  modal.querySelector('[data-close]').addEventListener('click',close);
+  $('#exit-dismiss').addEventListener('click',close);
+  modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+
+  /* Arm only after the reader has actually engaged: the cursor must have been
+     inside the page at least once, and six seconds must have passed. Without the
+     engagement check a stray mouseout fires the modal at people whose pointer was
+     never in the window. */
+  var armed=false, entered=false;
+  document.addEventListener('mousemove',function(){ entered=true; },{once:true});
+  document.addEventListener('scroll',function(){ entered=true; },{once:true,passive:true});
+  setTimeout(function(){ armed=true; },6000);
+  document.addEventListener('mouseout',function(e){
+    if(!armed || !entered || e.relatedTarget || e.clientY>12) return;
+    fire();
+  });
+  /* ---- footer film: load only when it scrolls into view ---- */
+  var fv = document.querySelector('.foot__film video');
+  if (fv && 'IntersectionObserver' in window &&
+      !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    new IntersectionObserver(function(entries, ob){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return;
+        var src = fv.querySelector('source[data-src]');
+        if(src && !src.src){ src.src = src.dataset.src; fv.load(); }
+        fv.play().catch(function(){});
+        ob.disconnect();
+      });
+    },{rootMargin:'200px'}).observe(fv);
+  }
+
+  if(matchMedia('(hover:none)').matches){
+    history.pushState({pp:1},'');
+    addEventListener('popstate',function(){
+      if(canShow()){ history.pushState({pp:1},''); fire(); }
+    });
+  }
+})();
+</script>
+</body>
+</html>

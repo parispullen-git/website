@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard — Paris Pullen</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+<style>
+  .dash{max-width:1080px;margin-inline:auto;padding-top:clamp(4rem,10vh,6rem);padding-bottom:var(--s10)}
+  .dash__gate{max-width:420px;margin-inline:auto;text-align:center;padding-top:clamp(8rem,22vh,14rem)}
+  .dash__gate input{width:100%;background:transparent;border:1px solid var(--hairline);color:var(--ivory);
+    padding:.85em 1em;font-family:var(--font-mono);font-size:1rem;margin-top:var(--s5);text-align:center}
+  .dash__gate .cta{margin-top:var(--s4);width:100%;justify-content:center}
+  .dash__err{color:#C0555A;margin-top:var(--s4)}
+
+  .dash__tabs{display:flex;gap:var(--s3);flex-wrap:wrap;border-bottom:1px solid var(--rule);
+    margin-top:var(--s6);padding-bottom:var(--s4)}
+  .dash__tab{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--graphite);background:none;border:1px solid var(--hairline);padding:.6em 1.1em;cursor:pointer}
+  .dash__tab.is-active{color:var(--brass-lit);border-color:var(--brass)}
+  .dash__panel{display:none;margin-top:var(--s7)}
+  .dash__panel.is-active{display:block}
+
+  .dash__row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);flex-wrap:wrap}
+  .dash__loading,.dash__empty{color:var(--graphite);font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.08em;margin-top:var(--s5)}
+
+  .card{border:1px solid var(--hairline);padding:var(--s5);margin-top:var(--s4)}
+  .card__top{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;align-items:baseline}
+  .card__title{font-family:var(--font-display);font-size:1.15rem;color:var(--ivory)}
+  .card__meta{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--graphite);letter-spacing:.06em}
+  .card__body{margin-top:var(--s3);color:var(--bone);font-size:.95rem;line-height:1.6}
+  .card__row{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;margin-top:var(--s4)}
+  .badge{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;text-transform:uppercase;
+    border:1px solid var(--hairline);padding:.25em .7em;color:var(--bone)}
+  .badge--brass{border-color:var(--brass);color:var(--brass-lit)}
+
+  .fld{display:grid;gap:.4em}
+  .fld label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;
+    text-transform:uppercase;color:var(--graphite)}
+  .fld input,.fld select,.fld textarea{background:#0A0A0B;border:1px solid var(--hairline);
+    color:var(--ivory);padding:.65em .85em;font-family:var(--font-body);font-size:.95rem;width:100%}
+  .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--brass)}
+  .fld textarea{min-height:6rem;font-family:var(--font-mono);font-size:.82rem}
+
+  .btn-sm{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;text-transform:uppercase;
+    background:none;border:1px solid var(--hairline);color:var(--bone);padding:.5em 1em;cursor:pointer}
+  .btn-sm:hover{border-color:var(--brass);color:var(--brass-lit)}
+  .btn-sm:disabled{opacity:.4;cursor:default}
+
+  .newform{border:1px solid var(--rule);padding:var(--s5);margin-top:var(--s5);display:grid;gap:var(--s4)}
+  .newform .grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
+  @media(max-width:640px){.newform .grid2{grid-template-columns:1fr}}
+  .msgbox{background:#111;border:1px solid var(--hairline);padding:var(--s4);margin-top:var(--s3);
+    font-size:.9rem;line-height:1.6;color:var(--bone);white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="worldnav">
+  <a class="worldnav__mark" href="index.html"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
+</header>
+
+<main>
+<section class="scene scene--pad" id="dashgate">
+  <div class="wrap dash__gate">
+    <p class="eyebrow">Private</p>
+    <h1 class="display display--h2">Dashboard</h1>
+    <p class="body" style="margin-top:var(--s3)">Invoices, orders, proposals, inquiries, clients, and site content.</p>
+    <form id="dashgateform">
+      <input id="dashgateinput" type="password" autocomplete="off" placeholder="Passphrase" aria-label="Passphrase">
+      <button type="submit" class="cta"><span>Enter</span></button>
+    </form>
+    <p class="dash__err" id="dashgateerr" hidden>Wrong passphrase.</p>
+  </div>
+</section>
+
+<section class="scene scene--pad" id="dashcontent" hidden>
+  <div class="wrap dash">
+    <div class="dash__row">
+      <div>
+        <p class="eyebrow">Backend</p>
+        <h1 class="display display--h2">Dashboard</h1>
+      </div>
+      <a class="link-under" href="atelier.html">+ New Invoice &#8594;</a>
+    </div>
+
+    <nav class="dash__tabs">
+      <button class="dash__tab is-active" data-tab="orders">Orders</button>
+      <button class="dash__tab" data-tab="invoices">Invoices</button>
+      <button class="dash__tab" data-tab="proposals">Proposals</button>
+      <button class="dash__tab" data-tab="inquiries">Inquiries</button>
+      <button class="dash__tab" data-tab="clients">Clients</button>
+      <button class="dash__tab" data-tab="content">Content</button>
+    </nav>
+
+    <!-- ORDERS -->
+    <div class="dash__panel is-active" id="panel-orders">
+      <p class="body">Track order status per invoice. Updating status can email the client automatically (Resend) and always gives you a copy-paste message for iMessage/SMS.</p>
+
+      <div class="newform" id="orders-newform">
+        <p class="eyebrow">Add / Update Order</p>
+        <div class="grid2">
+          <div class="fld"><label>Stripe Invoice ID</label><input id="ord-invoiceid" placeholder="in_..."></div>
+          <div class="fld"><label>Status</label>
+            <select id="ord-status">
+              <option value="processing">Processing</option>
+              <option value="shipped">Shipped</option>
+              <option value="arrived">Arrived</option>
+              <option value="ready_for_pickup">Ready for Pickup</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label>Client Name</label><input id="ord-name"></div>
+          <div class="fld"><label>Client Email</label><input id="ord-email" type="email"></div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label>Item</label><input id="ord-item"></div>
+          <div class="fld"><label>Tracking (optional)</label><input id="ord-tracking"></div>
+        </div>
+        <div class="card__row">
+          <label style="display:flex;align-items:center;gap:.5em;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.08em;color:var(--graphite)">
+            <input type="checkbox" id="ord-sendemail" checked style="width:auto"> Email client on status change
+          </label>
+          <button type="button" class="btn-sm" id="ord-save">Save Order</button>
+        </div>
+        <p class="dash__err" id="ord-err" hidden></p>
+      </div>
+
+      <p class="dash__loading" id="orders-loading">Loading&#8230;</p>
+      <div id="orders-list"></div>
+    </div>
+
+    <!-- INVOICES -->
+    <div class="dash__panel" id="panel-invoices">
+      <p class="body">Live from Stripe.</p>
+      <p class="dash__loading" id="invoices-loading">Loading&#8230;</p>
+      <div id="invoices-list"></div>
+    </div>
+
+    <!-- PROPOSALS -->
+    <div class="dash__panel" id="panel-proposals">
+      <p class="body">Quote builder. Each proposal gets a unique id — build a public viewer at proposal.html?id=&#8230; when ready to share.</p>
+      <div class="newform">
+        <p class="eyebrow">New Proposal</p>
+        <div class="grid2">
+          <div class="fld"><label>Client Name</label><input id="prop-name"></div>
+          <div class="fld"><label>Client Email</label><input id="prop-email" type="email"></div>
+        </div>
+        <div id="prop-items">
+          <div class="grid2" data-prop-item>
+            <div class="fld"><label>Item / Description</label><input data-prop-desc placeholder="e.g. Custom Tuxedo Jacket"></div>
+            <div class="fld"><label>Amount (USD)</label><input data-prop-amt type="number" min="0" step="0.01"></div>
+          </div>
+        </div>
+        <div class="card__row"><button type="button" class="btn-sm" id="prop-additem">+ Add Item</button></div>
+        <div class="fld"><label>Notes</label><textarea id="prop-notes" placeholder="Timeline, terms, anything else&#8230;"></textarea></div>
+        <div class="grid2">
+          <div class="fld"><label>Expires In (days)</label><input id="prop-expires" type="number" min="1" step="1" value="14"></div>
+        </div>
+        <div class="card__row"><button type="button" class="btn-sm" id="prop-save">Save Proposal</button></div>
+        <p class="dash__err" id="prop-err" hidden></p>
+      </div>
+      <p class="dash__loading" id="proposals-loading">Loading&#8230;</p>
+      <div id="proposals-list"></div>
+    </div>
+
+    <!-- INQUIRIES -->
+    <div class="dash__panel" id="panel-inquiries">
+      <p class="body">Wardrobe inquiry submissions.</p>
+      <p class="dash__loading" id="inquiries-loading">Loading&#8230;</p>
+      <div id="inquiries-list"></div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div class="dash__panel" id="panel-clients">
+      <p class="body">Auto-built from invoice, proposal, and inquiry activity.</p>
+      <p class="dash__loading" id="clients-loading">Loading&#8230;</p>
+      <div id="clients-list"></div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="dash__panel" id="panel-content">
+      <p class="body">Raw editor for Vault, Wardrobe, Journal, and Case Files records. Each record is a JSON object stored in its collection.</p>
+      <div class="fld" style="max-width:16rem"><label>Collection</label>
+        <select id="content-collection">
+          <option value="vault-reserve">Vault — Reserve List</option>
+          <option value="vault-links">Vault — Proposal Links</option>
+          <option value="wardrobe">Wardrobe</option>
+          <option value="journal">Journal</option>
+          <option value="casefiles">Case Files</option>
+        </select>
+      </div>
+      <div class="newform">
+        <p class="eyebrow">New / Edit Record</p>
+        <div class="fld"><label>Record ID (leave blank to create new)</label><input id="content-id" placeholder="auto-generated if blank"></div>
+        <div class="fld"><label>JSON Data</label><textarea id="content-json" placeholder='{"title":"...","body":"..."}' style="min-height:10rem"></textarea></div>
+        <div class="card__row"><button type="button" class="btn-sm" id="content-save">Save Record</button></div>
+        <p class="dash__err" id="content-err" hidden></p>
+      </div>
+      <p class="dash__loading" id="content-loading">Loading&#8230;</p>
+      <div id="content-list"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  var EXPECTED_HASH = '0b06e677c8027192f4185ec04bb876fdbd164b75ace10db1654e1de5213c1365';
+  var GATE_KEY = 'pp_atelier_ok';
+  var storedHash = null;
+
+  async function sha256Hex(text){
+    var enc = new TextEncoder().encode(text);
+    var buf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.prototype.map.call(new Uint8Array(buf), function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+  }
+
+  var gate = document.getElementById('dashgate');
+  var content = document.getElementById('dashcontent');
+  var gateForm = document.getElementById('dashgateform');
+  var gateInput = document.getElementById('dashgateinput');
+  var gateErr = document.getElementById('dashgateerr');
+
+  function unlock(hash){
+    storedHash = hash;
+    gate.hidden = true;
+    content.hidden = false;
+    try { sessionStorage.setItem(GATE_KEY, hash); } catch(e){}
+    initDashboard();
+  }
+
+  (async function tryRestore(){
+    try {
+      var saved = sessionStorage.getItem(GATE_KEY);
+      if (saved && saved === EXPECTED_HASH) unlock(saved);
+    } catch(e){}
+  })();
+
+  gateForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var hash = await sha256Hex(gateInput.value.trim());
+    if (hash === EXPECTED_HASH) {
+      gateErr.hidden = true;
+      unlock(hash);
+    } else {
+      gateErr.hidden = false;
+      gateInput.value = '';
+      gateInput.focus();
+    }
+  });
+
+  function money(v){
+    var n = Number(v || 0);
+    return n.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function fmtDate(ts){
+    if (!ts) return '';
+    try { return new Date(ts).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); }
+    catch(e){ return ''; }
+  }
+
+  var dashboardInited = false;
+
+  function initDashboard(){
+    if (dashboardInited) return;
+    dashboardInited = true;
+
+    // tabs
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.dash__tab'));
+    var panels = {};
+    tabs.forEach(function(t){ panels[t.dataset.tab] = document.getElementById('panel-' + t.dataset.tab); });
+    tabs.forEach(function(t){
+      t.addEventListener('click', function(){
+        tabs.forEach(function(x){ x.classList.remove('is-active'); });
+        Object.keys(panels).forEach(function(k){ panels[k].classList.remove('is-active'); });
+        t.classList.add('is-active');
+        panels[t.dataset.tab].classList.add('is-active');
+      });
+    });
+
+    loadOrders();
+    loadInvoices();
+    loadProposals();
+    loadInquiries();
+    loadClients();
+    loadContent();
+
+    document.getElementById('content-collection').addEventListener('change', loadContent);
+  }
+
+  // ---------- ORDERS ----------
+  var STATUS_LABEL = {processing:'Processing', shipped:'Shipped', arrived:'Arrived', ready_for_pickup:'Ready for Pickup'};
+
+  function loadOrders(){
+    var loading = document.getElementById('orders-loading');
+    var list = document.getElementById('orders-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/orders?passphraseHash=' + encodeURIComponent(storedHash))
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var orders = data.orders || [];
+        if (!orders.length) { list.innerHTML = '<p class="dash__empty">No orders yet.</p>'; return; }
+        list.innerHTML = orders.map(function(o){
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(o.clientName || 'Unnamed') + '</span>' +
+              '<span class="badge badge--brass">' + esc(o.statusLabel || STATUS_LABEL[o.status] || o.status) + '</span>' +
+            '</div>' +
+            '<p class="card__meta">' + esc(o.invoiceId) + ' &#183; ' + esc(o.clientEmail || '') + ' &#183; updated ' + fmtDate(o.updatedAt) + '</p>' +
+            '<div class="card__body">' + esc(o.item || '') + (o.tracking ? ' &#183; Tracking: ' + esc(o.tracking) : '') + '</div>' +
+            '<div class="msgbox">' + esc(o.message || '') + '</div>' +
+            '<div class="card__row">' +
+              '<button type="button" class="btn-sm" data-copy-msg="' + encodeURIComponent(o.message || '') + '">Copy Message</button>' +
+              '<button type="button" class="btn-sm" data-edit-order=\'' + encodeURIComponent(JSON.stringify(o)) + '\'>Edit</button>' +
+              '<button type="button" class="btn-sm" data-delete-order="' + esc(o.invoiceId) + '">Delete</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load orders.'; });
+  }
+
+  document.getElementById('orders-list').addEventListener('click', function(e){
+    var copyBtn = e.target.closest('[data-copy-msg]');
+    if (copyBtn) {
+      var msg = decodeURIComponent(copyBtn.getAttribute('data-copy-msg'));
+      navigator.clipboard.writeText(msg).then(function(){
+        var prev = copyBtn.textContent; copyBtn.textContent = 'Copied';
+        setTimeout(function(){ copyBtn.textContent = prev; }, 1500);
+      });
+      return;
+    }
+    var editBtn = e.target.closest('[data-edit-order]');
+    if (editBtn) {
+      var o = JSON.parse(decodeURIComponent(editBtn.getAttribute('data-edit-order')));
+      document.getElementById('ord-invoiceid').value = o.invoiceId || '';
+      document.getElementById('ord-status').value = o.status || 'processing';
+      document.getElementById('ord-name').value = o.clientName || '';
+      document.getElementById('ord-email').value = o.clientEmail || '';
+      document.getElementById('ord-item').value = o.item || '';
+      document.getElementById('ord-tracking').value = o.tracking || '';
+      document.getElementById('orders-newform').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    var delBtn = e.target.closest('[data-delete-order]');
+    if (delBtn) {
+      if (!confirm('Delete this order permanently?')) return;
+      var invoiceId = delBtn.getAttribute('data-delete-order');
+      fetch('/.netlify/functions/orders?invoiceId=' + encodeURIComponent(invoiceId) + '&passphraseHash=' + encodeURIComponent(storedHash), {
+        method: 'DELETE'
+      }).then(function(){ loadOrders(); });
+    }
+  });
+
+  document.getElementById('ord-save').addEventListener('click', function(){
+    var err = document.getElementById('ord-err');
+    err.hidden = true;
+    var invoiceId = document.getElementById('ord-invoiceid').value.trim();
+    if (!invoiceId) { err.textContent = 'Stripe Invoice ID is required.'; err.hidden = false; return; }
+    var payload = {
+      passphraseHash: storedHash,
+      invoiceId: invoiceId,
+      status: document.getElementById('ord-status').value,
+      clientName: document.getElementById('ord-name').value.trim(),
+      clientEmail: document.getElementById('ord-email').value.trim(),
+      item: document.getElementById('ord-item').value.trim(),
+      tracking: document.getElementById('ord-tracking').value.trim(),
+      sendEmail: document.getElementById('ord-sendemail').checked,
+    };
+    var btn = document.getElementById('ord-save');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    fetch('/.netlify/functions/orders', {
+      method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        if (!res.ok) throw new Error(res.data.error || 'Failed to save.');
+        btn.textContent = 'Save Order';
+        btn.disabled = false;
+        document.getElementById('ord-invoiceid').value = '';
+        document.getElementById('ord-name').value = '';
+        document.getElementById('ord-email').value = '';
+        document.getElementById('ord-item').value = '';
+        document.getElementById('ord-tracking').value = '';
+        loadOrders();
+      })
+      .catch(function(e){
+        btn.textContent = 'Save Order'; btn.disabled = false;
+        err.textContent = e.message; err.hidden = false;
+      });
+  });
+
+  // ---------- INVOICES ----------
+  function loadInvoices(){
+    var loading = document.getElementById('invoices-loading');
+    var list = document.getElementById('invoices-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/invoices?passphraseHash=' + encodeURIComponent(storedHash))
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var invoices = data.invoices || [];
+        if (!invoices.length) { list.innerHTML = '<p class="dash__empty">No invoices yet.</p>'; return; }
+        list.innerHTML = invoices.map(function(inv){
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(inv.customerName || inv.customerEmail || 'Unnamed') + '</span>' +
+              '<span class="badge' + (inv.status === 'paid' ? ' badge--brass' : '') + '">' + esc(inv.status || '') + '</span>' +
+            '</div>' +
+            '<p class="card__meta">' + esc(inv.number || inv.id) + ' &#183; $' + money((inv.total||0)/100) + ' &#183; ' + fmtDate(inv.created) + '</p>' +
+            '<div class="card__row">' +
+              (inv.hostedUrl ? '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(inv.hostedUrl) + '" target="_blank" rel="noopener">Open</a>' : '') +
+              '<button type="button" class="btn-sm" data-use-invoice=\'' + encodeURIComponent(JSON.stringify({invoiceId: inv.id, clientName: inv.customerName, clientEmail: inv.customerEmail})) + '\'>Use in Orders</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load invoices.'; });
+  }
+
+  document.getElementById('invoices-list').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-use-invoice]');
+    if (!btn) return;
+    var d = JSON.parse(decodeURIComponent(btn.getAttribute('data-use-invoice')));
+    document.querySelector('[data-tab="orders"]').click();
+    document.getElementById('ord-invoiceid').value = d.invoiceId || '';
+    document.getElementById('ord-name').value = d.clientName || '';
+    document.getElementById('ord-email').value = d.clientEmail || '';
+    document.getElementById('orders-newform').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  // ---------- PROPOSALS ----------
+  function loadProposals(){
+    var loading = document.getElementById('proposals-loading');
+    var list = document.getElementById('proposals-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/proposals?passphraseHash=' + encodeURIComponent(storedHash))
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var proposals = data.records || [];
+        if (!proposals.length) { list.innerHTML = '<p class="dash__empty">No proposals yet.</p>'; return; }
+        list.innerHTML = proposals.map(function(p){
+          var itemsLabel = (p.items || []).map(function(it){ return it.description + ' ($' + money(it.amount) + ')'; }).join(', ');
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(p.name || 'Untitled') + '</span>' +
+              '<span class="badge">$' + money(p.total || 0) + '</span>' +
+            '</div>' +
+            '<p class="card__meta">' + esc(p.email || '') + ' &#183; ' + esc(p.status || 'draft') + ' &#183; ' + fmtDate(p.createdAt) + '</p>' +
+            '<div class="card__body">' + esc(itemsLabel) + (p.notes ? '<br>' + esc(p.notes) : '') + '</div>' +
+            '<p class="card__meta" style="margin-top:var(--s3)">id: ' + esc(p.id) + '</p>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load proposals.'; });
+  }
+
+  document.getElementById('prop-additem').addEventListener('click', function(){
+    var wrap = document.getElementById('prop-items');
+    var row = wrap.querySelector('[data-prop-item]').cloneNode(true);
+    row.querySelector('[data-prop-desc]').value = '';
+    row.querySelector('[data-prop-amt]').value = '';
+    wrap.appendChild(row);
+  });
+
+  document.getElementById('prop-save').addEventListener('click', function(){
+    var err = document.getElementById('prop-err');
+    err.hidden = true;
+    var name = document.getElementById('prop-name').value.trim();
+    var email = document.getElementById('prop-email').value.trim();
+    var items = Array.prototype.slice.call(document.querySelectorAll('[data-prop-item]')).map(function(row){
+      return { description: row.querySelector('[data-prop-desc]').value.trim(), amount: Number(row.querySelector('[data-prop-amt]').value || 0) };
+    }).filter(function(it){ return it.description && it.amount > 0; });
+    if (!name || !email || !items.length) { err.textContent = 'Client name, email, and at least one valid item are required.'; err.hidden = false; return; }
+    var payload = {
+      passphraseHash: storedHash,
+      name: name,
+      email: email,
+      items: items,
+      notes: document.getElementById('prop-notes').value.trim(),
+      expiresInDays: Number(document.getElementById('prop-expires').value || 14),
+    };
+    var btn = document.getElementById('prop-save');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    fetch('/.netlify/functions/proposals', {
+      method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        if (!res.ok) throw new Error(res.data.error || 'Failed to save.');
+        btn.textContent = 'Save Proposal'; btn.disabled = false;
+        document.getElementById('prop-name').value = '';
+        document.getElementById('prop-email').value = '';
+        document.getElementById('prop-notes').value = '';
+        document.getElementById('prop-expires').value = 14;
+        var wrap = document.getElementById('prop-items');
+        Array.prototype.slice.call(wrap.querySelectorAll('[data-prop-item]')).slice(1).forEach(function(r){ r.remove(); });
+        wrap.querySelector('[data-prop-desc]').value = '';
+        wrap.querySelector('[data-prop-amt]').value = '';
+        loadProposals();
+      })
+      .catch(function(e){
+        btn.textContent = 'Save Proposal'; btn.disabled = false;
+        err.textContent = e.message; err.hidden = false;
+      });
+  });
+
+  // ---------- INQUIRIES ----------
+  function loadInquiries(){
+    var loading = document.getElementById('inquiries-loading');
+    var list = document.getElementById('inquiries-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/inquiries?passphraseHash=' + encodeURIComponent(storedHash))
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var inquiries = data.records || [];
+        if (!inquiries.length) { list.innerHTML = '<p class="dash__empty">No inquiries yet.</p>'; return; }
+        list.innerHTML = inquiries.map(function(q){
+          var itemsLabel = (q.items || []).map(function(it){ return typeof it === 'string' ? it : (it.name || it.n || JSON.stringify(it)); }).join(', ');
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(q.name || 'Unnamed') + '</span>' +
+              '<span class="card__meta">' + fmtDate(q.createdAt) + '</span>' +
+            '</div>' +
+            '<p class="card__meta">' + esc(q.email || '') + (q.phone ? ' &#183; ' + esc(q.phone) : '') + '</p>' +
+            '<div class="card__body">' + esc(itemsLabel) + (q.notes ? '<br>' + esc(q.notes) : '') + '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load inquiries.'; });
+  }
+
+  // ---------- CLIENTS ----------
+  function loadClients(){
+    var loading = document.getElementById('clients-loading');
+    var list = document.getElementById('clients-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/clients?passphraseHash=' + encodeURIComponent(storedHash))
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var clients = data.clients || [];
+        if (!clients.length) { list.innerHTML = '<p class="dash__empty">No clients yet.</p>'; return; }
+        list.innerHTML = clients.map(function(c){
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(c.name || c.email || 'Unnamed') + '</span>' +
+              '<span class="badge">$' + money((c.totalInvoiced||0)/100) + '</span>' +
+            '</div>' +
+            '<p class="card__meta">' + esc(c.email || '') + ' &#183; last activity ' + fmtDate(c.lastActivity) + '</p>' +
+            '<p class="card__meta">' + (c.invoices||[]).length + ' invoice(s) &#183; ' + (c.proposals||[]).length + ' proposal(s) &#183; ' + (c.inquiries||[]).length + ' inquiry(ies)</p>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load clients.'; });
+  }
+
+  // ---------- CONTENT ----------
+  function loadContent(){
+    var loading = document.getElementById('content-loading');
+    var list = document.getElementById('content-list');
+    var collection = document.getElementById('content-collection').value;
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/content?collection=' + encodeURIComponent(collection) + '&passphraseHash=' + encodeURIComponent(storedHash))
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var records = data.records || [];
+        if (!records.length) { list.innerHTML = '<p class="dash__empty">No records in this collection yet.</p>'; return; }
+        list.innerHTML = records.map(function(r){
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(r.title || r.name || r.id) + '</span>' +
+              '<span class="card__meta">' + esc(r.id) + '</span>' +
+            '</div>' +
+            '<div class="card__body"><pre style="white-space:pre-wrap;font-family:var(--font-mono);font-size:.78rem;color:var(--graphite)">' + esc(JSON.stringify(r, null, 2)) + '</pre></div>' +
+            '<div class="card__row">' +
+              '<button type="button" class="btn-sm" data-edit-content=\'' + encodeURIComponent(JSON.stringify(r)) + '\'>Edit</button>' +
+              '<button type="button" class="btn-sm" data-delete-content="' + esc(r.id) + '">Delete</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load records.'; });
+  }
+
+  document.getElementById('content-list').addEventListener('click', function(e){
+    var editBtn = e.target.closest('[data-edit-content]');
+    if (editBtn) {
+      var r = JSON.parse(decodeURIComponent(editBtn.getAttribute('data-edit-content')));
+      document.getElementById('content-id').value = r.id || '';
+      document.getElementById('content-json').value = JSON.stringify(r, null, 2);
+      document.getElementById('content-id').closest('.newform').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    var delBtn = e.target.closest('[data-delete-content]');
+    if (delBtn) {
+      if (!confirm('Delete this record permanently?')) return;
+      var id = delBtn.getAttribute('data-delete-content');
+      var collection = document.getElementById('content-collection').value;
+      fetch('/.netlify/functions/content?collection=' + encodeURIComponent(collection) + '&id=' + encodeURIComponent(id), {
+        method: 'DELETE', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({passphraseHash: storedHash})
+      }).then(function(){ loadContent(); });
+    }
+  });
+
+  document.getElementById('content-save').addEventListener('click', function(){
+    var err = document.getElementById('content-err');
+    err.hidden = true;
+    var collection = document.getElementById('content-collection').value;
+    var id = document.getElementById('content-id').value.trim();
+    var raw = document.getElementById('content-json').value.trim();
+    var parsed;
+    try { parsed = raw ? JSON.parse(raw) : {}; }
+    catch(e){ err.textContent = 'Invalid JSON.'; err.hidden = false; return; }
+    var payload = {passphraseHash: storedHash, id: id || undefined, data: parsed};
+    var btn = document.getElementById('content-save');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    fetch('/.netlify/functions/content?collection=' + encodeURIComponent(collection), {
+      method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        if (!res.ok) throw new Error(res.data.error || 'Failed to save.');
+        btn.textContent = 'Save Record'; btn.disabled = false;
+        document.getElementById('content-id').value = '';
+        document.getElementById('content-json').value = '';
+        loadContent();
+      })
+      .catch(function(e){
+        btn.textContent = 'Save Record'; btn.disabled = false;
+        err.textContent = e.message; err.hidden = false;
+      });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+/* ============================================================
+   The Penthouse navigator — move through the apartment.
+   Left/right walks along a floor, up/down changes storey.
+   Arrow keys, the on-screen pad, the floor plan, or a swipe.
+   ============================================================ */
+(function () {
+  'use strict';
+  var root = document.getElementById('pent');
+  if (!root) return;
+
+  var ROOMS = [
+    // row 0 — Level 28
+    { r:0, c:0, id:'closet',  lvl:'Level 28', name:'The Closet',
+      note:'Not a room of clothes. A room of decisions already made.', img:'room-closet' },
+    { r:0, c:1, id:'bedroom', lvl:'Level 28', name:'The Bedroom',
+      note:'Blackout to the glass, and a bed that faces away from the view on purpose.', img:'room-bedroom' },
+    { r:0, c:2, id:'bath',    lvl:'Level 28', name:'The Bathroom',
+      note:'Stone, brass and steam, with the whole city on the other side of the glass.', img:'room-bath' },
+    // row 1 — Level 27
+    { r:1, c:0, id:'kitchen', lvl:'Level 27', name:'The Kitchen',
+      note:'Black marble, brass and a range that has seen more entertaining than cooking.', img:'room-kitchen' },
+    { r:1, c:1, id:'penthouse-living', lvl:'Level 27', name:'The Living Floor',
+      note:'Two storeys of it, and a motorcycle parked by the fire. Somebody was sitting here twenty minutes ago.', img:'room-living' },
+    { r:1, c:2, id:'study',   lvl:'Level 27', name:'The Study',
+      note:'The room where the answer is usually no, and where it gets said politely.', img:'room-study' },
+    { r:1, c:3, id:'cinema',  lvl:'Level 27', name:'The Cinema',
+      note:'Nine seats, one screen, and a rule about phones that is actually enforced.', img:'room-cinema' }
+  ];
+
+  var ARTS = {
+    'penthouse-living': [
+      { key:'bike', name:'The Motorcycle', x:'44%', y:'39%', body:'Parked indoors, beside the fire, on a floor that cost more than the bike. It runs. It has been ridden this month. It is not furniture and he will correct you if you call it that.', specs:[['Runs', 'Yes'], ['Ridden', 'This month'], ['Furniture', 'No']] },
+      { key:'book', name:'The Open Book', x:'28%', y:'91%', body:'Left face-down and open, which he knows ruins a spine. Beside it a glass with an inch left in it and no coaster.', specs:[['Position', 'Face-down'], ['Glass', 'One inch'], ['Coaster', 'Declined']] },
+      { key:'mezzanine', name:'The Mezzanine', x:'72%', y:'9%', body:'The upper floor runs the length of the room behind glass. From up there you can see who is in the apartment without entering it, which is either hospitable or the opposite.', specs:[['Runs', 'Full length'], ['Balustrade', 'Glass'], ['Sightline', 'Total']] },
+      { key:'piano', name:'The Piano', x:'72%', y:'88%', body:'He played trumpet for seven years, first chair, and cannot play this at all. It is here because a room with a piano in it behaves differently from a room without one.', specs:[['Played by him', 'No'], ['Actual instrument', 'Trumpet'], ['Function', 'Atmosphere']] },
+      { key:'safe', name:'The Door', x:'91%', y:'70%', body:'Brass wheel, black steel, set into the wall beside the piano and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for.', specs:[['Concealed', 'No'], ['Contents', 'Paper'], ['Combination', 'One person']] },
+    ],
+    'bedroom': [
+      { key:'bed', name:'The Bed', x:'46%', y:'62%', body:'Faces away from the window. A view that good will keep a man up, and he decided some years ago that he would rather sleep.', specs:[['Orientation', 'Away from the glass'], ['Wake', '5:40, unaided'], ['Phone', 'Charges across the room']] },
+      { key:'window', name:'The Glass', x:'20%', y:'46%', body:'Floor to ceiling, blackout-lined. The city is thirty floors down and completely silent from here, which takes most people a night to get used to.', specs:[['Glazing', 'Acoustic'], ['Blinds', 'Blackout'], ['Sound at night', 'None']] },
+      { key:'chair', name:'The Lounge Chair', x:'10%', y:'72%', body:'Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.', specs:[['Faces', 'The city'], ['Television', 'None'], ['Hours logged', 'Considerable']] },
+      { key:'door', name:'The Closet Door', x:'93%', y:'54%', body:'Left open more often than not. What is behind it is arranged by occasion, not by colour — see the Closet.', specs:[['Kept', 'Open'], ['Ordered by', 'Occasion']] },
+    ],
+    'bath': [
+      { key:'tub', name:'The Tub', x:'47%', y:'64%', body:'Freestanding, deep, set square to the window. Filled perhaps twice a month and always at the end of a long one.', specs:[['Position', 'Facing the glass'], ['Used', 'Rarely, deliberately']] },
+      { key:'vanity', name:'The Vanity', x:'16%', y:'62%', body:'Double basins, unlacquered brass gone dark at the handles. The mirror is lit from the sides so a man sees his face rather than his shadow.', specs:[['Brass', 'Unlacquered'], ['Lighting', 'Side-lit, never overhead']] },
+      { key:'shower', name:'The Shower', x:'74%', y:'50%', body:'Marble on three sides, glass on the fourth. The bench is not decorative; it is where the day gets thought about before it starts.', specs:[['Enclosure', 'Stone and glass'], ['Bench', 'Used']] },
+      { key:'robe', name:'The Robe', x:'31%', y:'44%', body:'Hung where it is reachable from the tub. Heavy waffle cotton, no monogram, replaced every year without discussion.', specs:[['Cloth', 'Waffle cotton'], ['Monogram', 'None'], ['Replaced', 'Annually']] },
+    ],
+    'closet': [
+      { key:'suits', name:'The Rails', x:'50%', y:'42%', body:'Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like.', specs:[['Ordered by', 'Occasion'], ['Navy', 'Twelve'], ['Black', 'Two, both evening']] },
+      { key:'shoes', name:'The Shoes', x:'9%', y:'62%', body:'Cedar-treed, rotated, never worn two days running. The oldest pair on the shelf is fourteen years old and still the best thing in the room.', specs:[['Rotation', 'Enforced'], ['Oldest pair', '14 years'], ['Trees', 'Cedar']] },
+      { key:'ties', name:'The Ties', x:'91%', y:'56%', body:'Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.', specs:[['Hung', 'Never rolled'], ['Worn regularly', 'Six'], ['Owned', 'Considerably more']] },
+      { key:'case', name:'The Case', x:'50%', y:'70%', body:'Glass-topped, lit from within. Watches, cufflinks, and the star stud he has worn since he was nineteen.', specs:[['Lit', 'From within'], ['The stud', 'Since nineteen']] },
+    ],
+    'kitchen': [
+      { key:'island', name:'The Island', x:'46%', y:'64%', body:'One slab of black marble with a brass sink cut into it. Everyone ends up standing at this island regardless of how many rooms are open.', specs:[['Stone', 'Single slab'], ['Sink', 'Brass'], ['Where guests stand', 'Here, always']] },
+      { key:'pendants', name:'The Pendants', x:'42%', y:'28%', body:'Solid brass, hung low enough to light hands rather than faces. Somebody said they were too low. They were not moved.', specs:[['Material', 'Solid brass'], ['Height', 'Deliberate'], ['Complaints', 'One, ignored']] },
+      { key:'glass', name:'The Glassware', x:'62%', y:'22%', body:'Lit shelves of crystal, most of it inherited or won. The good stuff is used; the rule in this apartment is that nothing waits for an occasion.', specs:[['Used', 'All of it'], ['Kept for best', 'Nothing']] },
+      { key:'range', name:'The Range', x:'57%', y:'44%', body:'Professional, gas, immaculate. He cooks perhaps twice a month and it shows in how clean it is.', specs:[['Fuel', 'Gas'], ['Used', '~2x monthly'], ['Condition', 'Suspiciously good']] },
+    ],
+    'study': [
+      { key:'monogram', name:'The Monogram', x:'57%', y:'30%', body:'Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.', specs:[['Material', 'Brass'], ['Other branding here', 'None'], ['Self-aware', 'Entirely']] },
+      { key:'desk', name:'The Desk', x:'52%', y:'62%', body:'Walnut, faces the door rather than the window. A man who sits with his back to a room is not paying attention to it.', specs:[['Faces', 'The door'], ['Wood', 'Walnut'], ['Rule', 'Never back to the room']] },
+      { key:'map', name:'The Map', x:'91%', y:'44%', body:'Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.', specs:[['Marks', 'Cities worked'], ['Not', 'Cities visited']] },
+      { key:'bottles', name:'The Shelf', x:'83%', y:'50%', body:'The whiskey is at eye level and the books are above it, which several visitors have pointed out is the wrong way round.', specs:[['Whiskey', 'Eye level'], ['Books', 'Higher'], ['Observed by guests', 'Frequently']] },
+      { key:'chairs', name:'The Two Chairs', x:'44%', y:'76%', body:'Placed on the guest side, close enough together that two people arriving must sit as a pair. Negotiations go differently when nobody can flank.', specs:[['Count', 'Two'], ['Spacing', 'Deliberate'], ['Effect', 'No flanking']] },
+    ],
+    'cinema': [
+      { key:'posters', name:'The Posters', x:'12%', y:'42%', body:'All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.', specs:[['Register', 'One'], ['Claimed purpose', 'Research'], ['Actual', 'Partly']] },
+    ],
+  };
+
+  // Rooms with a playable screen — id/label must match the matching entry in
+  // CHANNEL_SETS[channelSet][0] in assets/js/tv-remote.js.
+  var TV_SCREENS = {
+    'penthouse-living': { x:'57.5%', y:'24.3%', w:'19%', h:'15%',
+      box:'0.4854,0.1742,0.6646,0.3113', channelSet:'living',
+      id:'4xVVFJuycww', label:'The Gentlemen' },
+    'cinema': { x:'50%', y:'37.6%', w:'27.9%', h:'29.3%',
+      box:'0.3604,0.2296,0.6396,0.5222', channelSet:'cinema',
+      id:'w7fuOkF74Zw', label:'Power — First Look' }
+  };
+
+  var ROWS = 2;
+  var COLS = [3, 4];                 // rooms per floor
+  var pos = { r: 1, c: 1 };          // start on the living floor
+
+  var track   = root.querySelector('.pent__track');
+  var plate   = root.querySelector('.pent__plate');
+  var mapWrap = root.querySelector('.pent__map');
+  var pad     = root.querySelector('.pent__pad');
+
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c];
+    });
+  };
+  var at = function (r, c) {
+    return ROOMS.filter(function (x) { return x.r === r && x.c === c; })[0];
+  };
+
+  /* ---------- build the rooms ---------- */
+  track.innerHTML = ROOMS.map(function (m) {
+    var arts = ARTS[m.id] || [];
+    var spots = arts.map(function (a) {
+      // a.name/body/specs come pre-escaped (entities already in the source
+      // data) -- do not run esc() on them again, unlike the plain m.name below
+      return '<button class="artifact" style="--x:' + a.x + ';--y:' + a.y + '" ' +
+               'data-room="' + m.id + '" data-key="' + a.key + '">' +
+               '<span class="artifact__dot" aria-hidden="true"></span>' +
+               '<span class="artifact__label">' + a.name + '</span>' +
+             '</button>';
+    }).join('');
+    var ts = TV_SCREENS[m.id];
+    var screen = ts
+      ? '<div class="floor-scene__screen" style="--x:' + ts.x + ';--y:' + ts.y + ';--w:' + ts.w + ';--h:' + ts.h + '" ' +
+          'data-tv data-channel-set="' + ts.channelSet + '" data-box="' + ts.box + '">' +
+          '<div class="floor-scene__screen-frame">' +
+            '<iframe src="https://www.youtube.com/embed/' + ts.id + '?autoplay=1&mute=1&loop=1&playlist=' + ts.id + '&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1" ' +
+            'title="" allow="autoplay; encrypted-media" loading="lazy"></iframe>' +
+          '</div>' +
+          '<div class="tv-lowerthird" data-tv-lowerthird>' +
+            '<p class="tv-lowerthird__eyebrow">Paris Pullen &#183; Now Screening</p>' +
+            '<p class="tv-lowerthird__title" data-tv-lowerthird-title>' + esc(ts.label) + '</p>' +
+          '</div>' +
+          '<div class="tv-remote" data-tv-remote>' +
+            '<p class="tv-remote__channel" data-tv-channel-label>' + esc(ts.label) + '</p>' +
+            '<div class="tv-remote__row">' +
+              '<button type="button" data-tv-action="ch-prev">&#9664; Ch</button>' +
+              '<button type="button" data-tv-action="ch-next">Ch &#9654;</button>' +
+            '</div>' +
+            '<div class="tv-remote__row">' +
+              '<button type="button" data-tv-action="vol-down">Vol &#8722;</button>' +
+              '<button type="button" data-tv-action="mute">Mute</button>' +
+              '<button type="button" data-tv-action="vol-up">Vol &#43;</button>' +
+            '</div>' +
+            '<button type="button" class="tv-remote__expand" data-tv-action="expand">Watch Full Screen</button>' +
+          '</div>' +
+        '</div>'
+      : '';
+    return '<article class="pent__room" style="--r:' + m.r + ';--c:' + m.c + '" ' +
+             'aria-label="' + esc(m.name) + '">' +
+             '<img src="assets/img/' + m.img + '.jpg" ' +
+             'srcset="assets/img/' + m.img + '@sm.jpg 1200w, assets/img/' + m.img + '.jpg 2400w" ' +
+             'sizes="100vw" alt="' + esc(m.name) + '" loading="lazy" width="2400" height="1350">' +
+             screen +
+             '<div class="artifacts">' + spots + '</div>' +
+           '</article>';
+  }).join('');
+
+  /* ---------- floor plan ---------- */
+  mapWrap.innerHTML = [0,1].map(function (r) {
+    var cells = ROOMS.filter(function (m) { return m.r === r; })
+      .sort(function (a,b) { return a.c - b.c; })
+      .map(function (m) {
+        return '<button class="pent__cell" data-r="' + m.r + '" data-c="' + m.c + '">' +
+               esc(m.name.replace(/^The /,'')) + '</button>';
+      }).join('');
+    return '<div class="pent__floor"><b>' + (r === 0 ? '28' : '27') + '</b>' + cells + '</div>';
+  }).join('');
+
+  /* ---------- render ---------- */
+  function render() {
+    closeArtifact();
+    var m = at(pos.r, pos.c);
+    track.style.setProperty('--row', pos.r);
+    track.style.setProperty('--col', pos.c);
+
+    plate.innerHTML =
+      '<p class="pent__lvl">' + esc(m.lvl) + '</p>' +
+      '<h3 class="pent__name">' + esc(m.name) + '</h3>' +
+      '<p class="pent__note">' + esc(m.note) + '</p>' +
+      '<a class="cta cta--ghost pent__open" href="house.html#' + m.id + '"><span>Open this room</span></a>';
+
+    Array.prototype.forEach.call(root.querySelectorAll('.pent__cell'), function (b) {
+      b.classList.toggle('is-here', +b.dataset.r === pos.r && +b.dataset.c === pos.c);
+    });
+    root.querySelector('.pent__btn--u').disabled = !canGo(-1, 0);
+    root.querySelector('.pent__btn--d').disabled = !canGo(1, 0);
+    root.querySelector('.pent__btn--l').disabled = !canGo(0, -1);
+    root.querySelector('.pent__btn--r').disabled = !canGo(0, 1);
+  }
+
+  function target(dr, dc) {
+    var r = Math.min(ROWS - 1, Math.max(0, pos.r + dr));
+    var c = pos.c + dc;
+    // moving between floors, clamp to a room that exists on the new one
+    if (dr !== 0) c = Math.min(COLS[r] - 1, pos.c);
+    c = Math.min(COLS[r] - 1, Math.max(0, c));
+    return { r: r, c: c };
+  }
+  function canGo(dr, dc) {
+    var t = target(dr, dc);
+    return !(t.r === pos.r && t.c === pos.c);
+  }
+  function go(dr, dc) {
+    if (!canGo(dr, dc)) return;
+    pos = target(dr, dc);
+    render();
+  }
+
+  /* ---------- artifacts + drawer ---------- */
+  var pentDrawer = document.getElementById('pent-drawer');
+  var drawerSlot = pentDrawer ? pentDrawer.querySelector('.drawer__slot') : null;
+  var drawerClose = pentDrawer ? pentDrawer.querySelector('.drawer__close') : null;
+
+  function closeArtifact() {
+    if (!pentDrawer) return;
+    pentDrawer.classList.remove('is-open');
+    pentDrawer.setAttribute('aria-hidden', 'true');
+    Array.prototype.forEach.call(root.querySelectorAll('.artifact.is-active'), function (s) {
+      s.classList.remove('is-active');
+      s.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  function openArtifact(roomId, key, spot) {
+    var art = (ARTS[roomId] || []).filter(function (a) { return a.key === key; })[0];
+    if (!art || !pentDrawer) return;
+    var room = ROOMS.filter(function (r) { return r.id === roomId; })[0];
+
+    var spec = art.specs.map(function (kv) {
+      return '<div><dt>' + kv[0] + '</dt><dd>' + kv[1] + '</dd></div>';
+    }).join('');
+
+    var wardrobeCta = (roomId === 'closet' && key === 'suits')
+      ? '<a class="cta pent__open" href="wardrobe.html" style="margin-top:var(--s2)"><span>Enter the Wardrobe</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
+      : '';
+
+    drawerSlot.innerHTML =
+      '<div class="drawer__inner">' +
+        '<div class="drawer__head">' +
+          '<p class="drawer__tag">' + esc(room ? room.lvl : '') + ' &#183; Artifact</p>' +
+          '<h3 class="drawer__name">' + art.name + '</h3>' +
+        '</div>' +
+        '<div class="drawer__body">' +
+          '<p class="body">' + art.body + '</p>' +
+          '<dl class="drawer__spec">' + spec + '</dl>' +
+          wardrobeCta +
+        '</div>' +
+      '</div>';
+
+    Array.prototype.forEach.call(root.querySelectorAll('.artifact'), function (s) {
+      s.classList.toggle('is-active', s === spot);
+      s.setAttribute('aria-expanded', String(s === spot));
+    });
+    pentDrawer.classList.add('is-open');
+    pentDrawer.setAttribute('aria-hidden', 'false');
+  }
+
+  track.addEventListener('click', function (e) {
+    var b = e.target.closest('.artifact');
+    if (!b) return;
+    e.preventDefault();
+    if (b.classList.contains('is-active')) { closeArtifact(); return; }
+    openArtifact(b.dataset.room, b.dataset.key, b);
+  });
+
+  if (drawerClose) drawerClose.addEventListener('click', closeArtifact);
+
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && pentDrawer && pentDrawer.classList.contains('is-open')) {
+      closeArtifact();
+    }
+  });
+
+  /* ---------- controls ---------- */
+  pad.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-go]');
+    if (!b) return;
+    var d = b.dataset.go;
+    go(d === 'u' ? -1 : d === 'd' ? 1 : 0, d === 'l' ? -1 : d === 'r' ? 1 : 0);
+  });
+
+  mapWrap.addEventListener('click', function (e) {
+    var b = e.target.closest('.pent__cell');
+    if (!b) return;
+    pos = { r: +b.dataset.r, c: +b.dataset.c };
+    render();
+  });
+
+  root.querySelector('.pent__stage').setAttribute('tabindex', '0');
+  root.addEventListener('keydown', function (e) {
+    var map = { ArrowUp:[-1,0], ArrowDown:[1,0], ArrowLeft:[0,-1], ArrowRight:[0,1] };
+    if (!map[e.key]) return;
+    e.preventDefault();
+    go(map[e.key][0], map[e.key][1]);
+  });
+
+  // swipe / drag
+  var stage = root.querySelector('.pent__stage'), sx = 0, sy = 0, down = false;
+  stage.addEventListener('pointerdown', function (e) { down = true; sx = e.clientX; sy = e.clientY; });
+  stage.addEventListener('pointerup', function (e) {
+    if (!down) return;
+    down = false;
+    var dx = e.clientX - sx, dy = e.clientY - sy;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 45) return;
+    if (Math.abs(dx) > Math.abs(dy)) go(0, dx < 0 ? 1 : -1);
+    else go(dy < 0 ? 1 : -1, 0);
+  });
+  stage.addEventListener('pointercancel', function () { down = false; });
+
+  render();
+})();

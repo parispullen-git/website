@@ -1,0 +1,393 @@
+#!/usr/bin/env python3
+"""
+Generates house.html — the twelve-plus floor building.
+Each floor is a full-view scene with clickable artifacts.
+Edit FLOORS below and re-run:  python3 build_house.py
+
+Header/menu/footer are pulled live from index.html at build time (not
+hand-authored here) so they can never drift out of sync with the rest of
+the site -- editing index.html's nav/footer and re-running this script is
+enough to keep house.html current.
+"""
+import re
+
+_index_src = open("index.html", encoding="utf-8").read()
+SITE_HEADER = re.search(r'<header class="worldnav">.*?</header>', _index_src, re.S).group(0)
+SITE_MENU = re.search(r'<nav class="menu".*?</nav>', _index_src, re.S).group(0)
+SITE_FOOT = re.search(r'<footer class="foot foot--film">.*?</footer>', _index_src, re.S).group(0)
+
+FLOORS = [
+ dict(id="skyline", lvl="29", name="The Skyline Club", state="members",
+   img="env-rooftop", grade="", focus="50% 46%",
+   note="You step out of the lift into moving air and the sound of a room that started without you.",
+   arts=[
+    ("pool","The Water","62%","64%","The pool is four feet deep and nobody has ever swum in it. It exists to put moving light on the faces of people having conversations near it, which it does exceptionally well.",[("Depth","4 ft"),("Purpose","Lighting"),("Swimmers","None on record")]),
+    ("parapet","The Parapet","24%","52%","The glass edge. Every significant conversation on this roof has happened within six feet of it, because people tell the truth more readily when they can see how far down it is.",[("Height","29 floors"),("Glass","Structural"),("Rule","No phones out")]),
+    ("cabana","The Cabanas","82%","58%","Four of them. Three can be booked. The fourth has never been available on any night, to anyone, and the staff have been trained not to explain why.",[("Total","Four"),("Bookable","Three"),("The fourth","Not discussed")]),
+    ("booth","The Corner Booth","44%","78%","Faces the door, backs to the wall, worst view in the building. Held permanently. If you are sitting in it you were invited to sit in it.",[("View","Deliberately poor"),("Sightline","The lift"),("Held","Permanently")]),
+   ]),
+
+ dict(id="penthouse-living", lvl="27", name="The Living Floor", state="restricted",
+   img="room-living", grade="", focus="50% 50%",
+   note="Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.",
+   arts=[
+    ("bike","The Motorcycle","44%","39%","Parked indoors, beside the fire, on a floor that cost more than the bike. It runs. It has been ridden this month. It is not furniture and he will correct you if you call it that.",[("Runs","Yes"),("Ridden","This month"),("Furniture","No")]),
+    ("book","The Open Book","28%","91%","Left face-down and open, which he knows ruins a spine. Beside it a glass with an inch left in it and no coaster.",[("Position","Face-down"),("Glass","One inch"),("Coaster","Declined")]),
+    ("mezzanine","The Mezzanine","72%","9%","The upper floor runs the length of the room behind glass. From up there you can see who is in the apartment without entering it, which is either hospitable or the opposite.",[("Runs","Full length"),("Balustrade","Glass"),("Sightline","Total")]),
+    ("piano","The Piano","72%","88%","He played trumpet for seven years, first chair, and cannot play this at all. It is here because a room with a piano in it behaves differently from a room without one.",[("Played by him","No"),("Actual instrument","Trumpet"),("Function","Atmosphere")]),
+    ("safe","The Door","91%","70%","Brass wheel, black steel, set into the wall beside the piano and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for.",[("Concealed","No"),("Contents","Paper"),("Combination","One person")]),
+   ]),
+
+ dict(id="bedroom", lvl="28", name="The Bedroom", state="restricted",
+   img="room-bedroom", grade="", focus="50% 52%",
+   note="Blackout to the glass, and a bed that faces away from the view on purpose.",
+   arts=[
+    ("bed","The Bed","46%","62%","Faces away from the window. A view that good will keep a man up, and he decided some years ago that he would rather sleep.",[("Orientation","Away from the glass"),("Wake","5:40, unaided"),("Phone","Charges across the room")]),
+    ("window","The Glass","20%","46%","Floor to ceiling, blackout-lined. The city is thirty floors down and completely silent from here, which takes most people a night to get used to.",[("Glazing","Acoustic"),("Blinds","Blackout"),("Sound at night","None")]),
+    ("chair","The Lounge Chair","10%","72%","Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.",[("Faces","The city"),("Television","None"),("Hours logged","Considerable")]),
+    ("door","The Closet Door","93%","54%","Left open more often than not. What is behind it is arranged by occasion, not by colour \u2014 see the Closet.",[("Kept","Open"),("Ordered by","Occasion")]),
+   ]),
+
+ dict(id="bath", lvl="28", name="The Bathroom", state="restricted",
+   img="room-bath", grade="", focus="50% 50%",
+   note="Stone, brass and steam, with the whole city on the other side of the glass.",
+   arts=[
+    ("tub","The Tub","47%","64%","Freestanding, deep, set square to the window. Filled perhaps twice a month and always at the end of a long one.",[("Position","Facing the glass"),("Used","Rarely, deliberately")]),
+    ("vanity","The Vanity","16%","62%","Double basins, unlacquered brass gone dark at the handles. The mirror is lit from the sides so a man sees his face rather than his shadow.",[("Brass","Unlacquered"),("Lighting","Side-lit, never overhead")]),
+    ("shower","The Shower","74%","50%","Marble on three sides, glass on the fourth. The bench is not decorative; it is where the day gets thought about before it starts.",[("Enclosure","Stone and glass"),("Bench","Used")]),
+    ("robe","The Robe","31%","44%","Hung where it is reachable from the tub. Heavy waffle cotton, no monogram, replaced every year without discussion.",[("Cloth","Waffle cotton"),("Monogram","None"),("Replaced","Annually")]),
+   ]),
+
+ dict(id="closet", lvl="28", name="The Closet", state="restricted",
+   img="room-closet", grade="", focus="50% 52%",
+   note="Not a room of clothes. A room of decisions already made.",
+   arts=[
+    ("suits","The Rails","50%","42%","Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like.",[("Ordered by","Occasion"),("Navy","Twelve"),("Black","Two, both evening")]),
+    ("shoes","The Shoes","9%","62%","Cedar-treed, rotated, never worn two days running. The oldest pair on the shelf is fourteen years old and still the best thing in the room.",[("Rotation","Enforced"),("Oldest pair","14 years"),("Trees","Cedar")]),
+    ("ties","The Ties","91%","56%","Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.",[("Hung","Never rolled"),("Worn regularly","Six"),("Owned","Considerably more")]),
+    ("case","The Case","50%","70%","Glass-topped, lit from within. Watches, cufflinks, and the star stud he has worn since he was nineteen.",[("Lit","From within"),("The stud","Since nineteen")]),
+   ]),
+
+ dict(id="kitchen", lvl="27", name="The Kitchen", state="restricted",
+   img="room-kitchen", grade="", focus="50% 54%",
+   note="Black marble, brass and a range that has seen more entertaining than cooking.",
+   arts=[
+    ("island","The Island","46%","64%","One slab of black marble with a brass sink cut into it. Everyone ends up standing at this island regardless of how many rooms are open.",[("Stone","Single slab"),("Sink","Brass"),("Where guests stand","Here, always")]),
+    ("pendants","The Pendants","42%","28%","Solid brass, hung low enough to light hands rather than faces. Somebody said they were too low. They were not moved.",[("Material","Solid brass"),("Height","Deliberate"),("Complaints","One, ignored")]),
+    ("glass","The Glassware","62%","22%","Lit shelves of crystal, most of it inherited or won. The good stuff is used; the rule in this apartment is that nothing waits for an occasion.",[("Used","All of it"),("Kept for best","Nothing")]),
+    ("range","The Range","57%","44%","Professional, gas, immaculate. He cooks perhaps twice a month and it shows in how clean it is.",[("Fuel","Gas"),("Used","~2x monthly"),("Condition","Suspiciously good")]),
+   ]),
+
+ dict(id="study", lvl="27", name="The Study", state="restricted",
+   img="room-study", grade="", focus="50% 52%",
+   note="The room where the answer is usually no, and where it gets said politely.",
+   arts=[
+    ("monogram","The Monogram","57%","30%","Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.",[("Material","Brass"),("Other branding here","None"),("Self-aware","Entirely")]),
+    ("desk","The Desk","52%","62%","Walnut, faces the door rather than the window. A man who sits with his back to a room is not paying attention to it.",[("Faces","The door"),("Wood","Walnut"),("Rule","Never back to the room")]),
+    ("map","The Map","91%","44%","Brass inlay on black. Cities he has worked, not cities he has visited \u2014 a distinction he will make if you ask.",[("Marks","Cities worked"),("Not","Cities visited")]),
+    ("bottles","The Shelf","83%","50%","The whiskey is at eye level and the books are above it, which several visitors have pointed out is the wrong way round.",[("Whiskey","Eye level"),("Books","Higher"),("Observed by guests","Frequently")]),
+    ("chairs","The Two Chairs","44%","76%","Placed on the guest side, close enough together that two people arriving must sit as a pair. Negotiations go differently when nobody can flank.",[("Count","Two"),("Spacing","Deliberate"),("Effect","No flanking")]),
+   ]),
+
+ dict(id="cinema", lvl="27", name="The Cinema", state="restricted",
+   img="room-cinema", grade="", focus="50% 54%",
+   note="Nine seats, one screen, and a rule about phones that is actually enforced.",
+   arts=[
+    ("posters","The Posters","12%","42%","All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.",[("Register","One"),("Claimed purpose","Research"),("Actual","Partly")]),
+   ]),
+
+ dict(id="corridor", lvl="26", name="The Corridor", state="restricted",
+   img="env-network", grade="grade--cold", focus="40% 56%", zoom="1.16",
+   note="No numbers on these doors. The carpet is thicker here, which is not a decorating choice.",
+   arts=[
+    ("door","The Unmarked Door","30%","48%","There is no handle on this side. It opens from within, or it does not open. Staff are instructed never to knock on it, and never to mention it to a guest who has not mentioned it first.",[("Handle","Interior only"),("Knocking","Prohibited"),("Mentioned first by","The guest")]),
+    ("carpet","The Carpet","58%","82%","Deeper pile than the floors above and below. Sound does not carry in this hallway, and that is the entire specification.",[("Pile","Deep"),("Acoustic","Dead"),("Specification","One line")]),
+    ("lift","The Second Lift","74%","44%","It does not appear on the panel in the main bank. It is called by a card, not a button, and it only travels between three floors.",[("Called by","Card"),("Serves","Three floors"),("On the panel","No")]),
+   ]),
+
+ dict(id="order", lvl="25", name="The Order", state="restricted",
+   img="env-chamber", grade="", focus="50% 50%",
+   note="Twelve chairs. Eleven are spoken for. Nobody sits down until the last person is standing.",
+   arts=[
+    ("twelfth","The Twelfth Chair","62%","56%","Identical to the other eleven and never once occupied. It is not reserved for anyone. It is there so that everybody seated can see that the table is not full.",[("Occupied","Never"),("Reserved for","No one"),("Purpose","Visible incompleteness")]),
+    ("table","The Table","50%","70%","One piece of walnut, brought in before the walls were finished because it does not fit through the door. The room was built around it, which is the point being made.",[("Material","Single walnut slab"),("Installed","Before the walls"),("Removable","No")]),
+    ("lamps","The Lamps","44%","24%","Hung low enough that everyone's face is lit and nobody's eyes are in shadow. You cannot lie comfortably at this table. That is engineering, not decor.",[("Height","Low"),("Shadow","None on the face"),("Effect","Deliberate")]),
+   ]),
+
+ dict(id="operations", lvl="24", name="The Operations Room", state="restricted",
+   img="env-opsroom", grade="", focus="50% 54%",
+   note="The warmest room in the building, and the only one where the furniture is doing arithmetic.",
+   arts=[
+    ("table","The Table","40%","64%","Walnut with smoked glass inlaid flush into the surface, lit from beneath in fine amber linework. It shows the city as relationships rather than streets. At rest it is a very good table.",[("Output","Amber only"),("Ceiling","12% brightness"),("At rest","Furniture")]),
+    ("instruments","The Instruments","62%","58%","Machined brass and titanium, laid out like surgical tools. None of them have a screen. Every one of them does something a screen would do worse.",[("Screens","None"),("Material","Brass, titanium"),("Read by","Touch")]),
+    ("library","The Shelves","86%","36%","Real books, read. The technology in this room is deliberately outnumbered by things made of paper, which is a decision he will defend at length if asked.",[("Books","Read, not staged"),("Ratio","Paper wins"),("Defends this","At length")]),
+   ]),
+
+ dict(id="lab", lvl="18", name="The Lab", state="restricted",
+   img="env-atelier", grade="grade--amber", focus="50% 52%",
+   note="It smells like the inside of a cigar box and faintly of citrus. This is where the whole thing started.",
+   arts=[
+    ("scales","The Scales","34%","62%","Accurate to a hundredth of a gram. Everything else in the building is measured in impressions and relationships. This is the one room that deals in numbers that cannot be argued with.",[("Accuracy","0.01 g"),("Arguable","No"),("Calibrated","Weekly")]),
+    ("blotters","The Blotters","58%","54%","Fanned in a brass rack, each one a version that did not make it. She keeps them. He has asked why. She has not answered.",[("Kept","All of them"),("Reason given","None"),("Versions to date","Undisclosed")]),
+    ("notebook","The Notebook","24%","82%","Leather, handwritten, and the only complete formula record in existence. There is no digital copy, on purpose, and it does not leave this room.",[("Copies","One"),("Digital","None"),("Leaves the room","No")]),
+    ("bottles","The Unlabelled Bottles","76%","44%","Amber glass, no labels, arranged in an order that makes sense to exactly one person. Moving them is the fastest way to be asked to leave.",[("Labels","None"),("Order","Personal"),("Touched by others","Never")]),
+   ]),
+
+ dict(id="haberdashery", lvl="12", name="The Haberdashery", state="members",
+   img="env-bespoke", grade="", focus="50% 50%",
+   note="Warm wood, cold discipline. The room where the building decides what you are going to look like.",
+   arts=[
+    ("cloth","The Cloth Wall","74%","40%","Bolts stacked by weight, not colour. A client who asks for the blue one is gently redirected. A client who asks what will still look correct in nine years is offered a chair.",[("Ordered by","Weight"),("Wrong question","Colour"),("Right question","Longevity")]),
+    ("table","The Cutting Table","46%","76%","Chalk, shears and forty years of hands. Nothing is cut on this table that has not been argued about first.",[("Chalk","Tailor's"),("Argued about","Everything"),("Cut twice","Never")]),
+    ("shoes","The Shoes","20%","70%","A rack of them, all dark, all polished past the point of necessity. The first thing the doorman checks and the last thing an amateur thinks about.",[("Finish","Excessive"),("Checked by","The doorman"),("Noticed by amateurs","No")]),
+    ("hiddendoor","The Panel That Is Not A Panel","88%","62%","Third panel from the corner. It reads as joinery. It is a door, and behind it the room is not about tailoring.",[("Reads as","Joinery"),("Actually","A door"),("Behind it","See below")]),
+   ]),
+
+ dict(id="armoury", lvl="12M", name="The Armoury", state="restricted",
+   img="env-bespoke", grade="grade--noir", focus="86% 58%", zoom="1.3",
+   note="A gentleman's defensive kit, in the Savile Row tradition. Nothing in here fires anything.",
+   arts=[
+    ("umbrellas","The Umbrellas","32%","46%","Storm-rated, reinforced along the spine, weighted correctly for the hand. It rains a great deal in this state and a man should not be caught holding something flimsy.",[("Frame","Reinforced"),("Weight","Hand-balanced"),("Fires","Nothing")]),
+    ("canes","The Canes","54%","52%","Malacca and blackthorn. Two of them belonged to men who are named on the wall downstairs. They are carried on occasions that call for being reminded of something.",[("Woods","Malacca, blackthorn"),("Inherited","Two"),("Ceremonial","Mostly")]),
+    ("sabres","The Sabres","70%","44%","Fencing blades, buttoned, kept sharp enough to be respected and blunt enough to be legal. He fences badly and enjoys it enormously.",[("Buttoned","Yes"),("His standard","Poor"),("His enthusiasm","Total")]),
+    ("case","The Locked Case","46%","78%","The only locked thing in the building. It contains correspondence, not hardware, which is the joke and also the truth.",[("Contents","Paper"),("Hardware","None"),("Key held by","One person")]),
+   ]),
+
+ dict(id="fitting", lvl="11", name="The Fitting Floor", state="members",
+   img="paris-bespoke", grade="grade--warm", focus="50% 42%", zoom="1.08",
+   note="Three mirrors, angled so you cannot avoid yourself. Somebody is mid-fitting. He does not stop.",
+   arts=[
+    ("mirrors","The Three Mirrors","24%","36%","Set so that you see your own back. Most men have never seen how they actually stand, and the first fitting is largely about surviving that information.",[("Angles","Three"),("Shows","Your back"),("First reaction","Silence")]),
+    ("rails","The Rails","82%","54%","Finished garments waiting on brass. Each one has a name on the ticket and a date, and the date is when it was promised rather than when it was finished.",[("On the ticket","Name and date"),("Date means","Promised"),("Late","Occasionally")]),
+    ("cuff","The Cuff","46%","62%","Half an inch of shirt, no more. He adjusts it without thinking about it roughly forty times a day, which the Cutter finds funny and has never mentioned.",[("Exposure","0.5 in"),("Adjusted","~40/day"),("Conscious","No")]),
+   ]),
+
+ dict(id="restaurant", lvl="03", name="The Restaurant", state="public",
+   img="env-gala", grade="grade--warm", focus="50% 56%",
+   note="Sixty covers, one seating, and a kitchen that closes when it is finished rather than when the clock says so.",
+   arts=[
+    ("corner","The Corner Table","22%","60%","Two chairs, both facing out. Every deal this building has ever done was either agreed at this table or fell apart at it.",[("Covers","Two"),("Both facing","Out"),("Record","Mixed")]),
+    ("pass","The Pass","62%","44%","Visible from the room on purpose. Diners can watch the kitchen work, and the kitchen can watch who has arrived, which matters more than the diners realise.",[("Visible","Both directions"),("Matters more to","The kitchen")]),
+    ("flowers","The Arrangements","82%","52%","Replaced entirely twice a week, dark and slightly overgrown rather than neat. Neat flowers make a room look like it is trying.",[("Replaced","2x weekly"),("Style","Overgrown"),("Neatness","Avoided")]),
+   ]),
+
+ dict(id="bar", lvl="02", name="The Bar", state="public",
+   img="env-bar", grade="", focus="46% 54%",
+   note="Low ceiling, low light, low voices. The best-run room in the building and the one he is proudest of.",
+   arts=[
+    ("backbar","The Back Bar","22%","32%","Lit from within, unlabelled by house policy. If you want to know what you are drinking you have to ask, and asking is how conversations start.",[("Labels","Removed"),("Policy","House"),("Effect","You ask")]),
+    ("ice","The Ice","36%","64%","Cut from a single block each afternoon. Clear ice melts slower, dilutes less, and signals that somebody spent time on your drink before you ordered it.",[("Cut","Daily"),("Clarity","Total"),("Signals","Effort")]),
+    ("rail","The Brass Rail","56%","82%","Unlacquered, so it takes a fingerprint and keeps it. Polished once a week, never more, because a rail with no wear on it means nobody is standing here.",[("Finish","Unlacquered"),("Polished","Weekly"),("Wear","Wanted")]),
+    ("banquette","The Banquettes","82%","62%","Burgundy leather, deliberately slightly too deep, so that people sit back rather than forward. Nobody has ever had a rushed conversation in one.",[("Depth","Excessive"),("Posture","Back"),("Rushed talk","None")]),
+   ]),
+
+ dict(id="coffee", lvl="01", name="The Coffee House", state="public",
+   img="env-bar", grade="grade--dawn", focus="30% 60%", zoom="1.2",
+   note="The same marble counter, twelve hours earlier. Different room entirely.",
+   arts=[
+    ("counter","The Counter","34%","62%","This is the bar. At six in the morning the bottles are shuttered, the lights come up, and the same stone serves espresso to people who have no idea what happens here after dark.",[("Same stone","Yes"),("Shuttered","The back bar"),("Overlap","Two hours")]),
+    ("regulars","The Regulars","70%","70%","Bankers at six, builders at seven, the Cutter at eight-fifteen without fail. He orders the same thing and has never once said thank you, which everyone finds endearing.",[("Cutter arrives","08:15"),("Order","Unchanged"),("Thanks anyone","No")]),
+    ("window","The Window","86%","40%","Ground floor, full height, facing the street. The only room in the building where the public can see in — and the only floor where that is the entire idea.",[("Visibility","Total"),("Deliberate","Yes"),("Only floor like it","Yes")]),
+   ]),
+
+ dict(id="lobby", lvl="G", name="The Lobby", state="public",
+   img="env-lobby", grade="grade--jewel", focus="50% 52%", zoom="1.05",
+   note="The doors give, the noise of the street stops, and the building tells you everything about itself in about four seconds.",
+   arts=[
+    ("doors","The Doors","80%","50%","Brass, and heavier than they need to be. The weight is the point \u2014 you have to commit to opening them, and by the time you are through you have already made a small decision about being here.",[("Material","Solid brass"),("Weight","Deliberate"),("Held for you","Only sometimes")]),
+    ("flowers","The Arrangements","50%","44%","Replaced entirely twice a week and never symmetrical. They are cut tall enough that you cannot see the whole room at once, so the lobby reveals itself in pieces rather than all at once.",[("Replaced","2x weekly"),("Symmetry","Avoided"),("Function","Concealment")]),
+    ("water","The Water","44%","80%","A still black basin, no fountain, no movement. It exists so the room has a sound floor \u2014 the faint hush that stops a marble hall from ringing like a bank.",[("Movement","None"),("Purpose","Acoustic"),("Depth","Shallow")]),
+    ("desk","The Desk","29%","58%","Honed black marble, no computer visible, no queue rope, no signage. Whoever is standing behind it already knows your name or is about to find it out.",[("Screens","Hidden"),("Queue","Never"),("Signage","None")]),
+    ("ceiling","The Ceiling","62%","11%","Four storeys of it. Every material expense in this building was argued about except this one \u2014 height is the only luxury that cannot be faked, and he paid for it without discussion.",[("Height","Four storeys"),("Argued about","No"),("Fakeable","Not at all")]),
+   ]),
+
+ dict(id="motor", lvl="B1", name="The Motor Club", state="members",
+   img="env-motorclub", grade="", focus="50% 50%",
+   note="Cool air, polished concrete, and twenty-four reasons somebody had a good year.",
+   arts=[
+    ("bays","The Bays","40%","56%","Twenty-four, each lit like an exhibit. The Curator can tell you what closed the deal that paid for every single one, and will, at length, if you make eye contact.",[("Bays","24"),("Lit as","Exhibits"),("Stories","Unavoidable")]),
+    ("lounge","The Lounge","78%","52%","At the far end, behind glass, so members can sit with a drink and look at the collection. Nobody has ever sat facing away from it.",[("Glazing","Full"),("Seating","Faces in"),("Exceptions","None")]),
+    ("lift","The Private Lift","88%","64%","Goes up. Does not stop at the lobby, the bar or the restaurant. There is only one card that calls it from down here.",[("Stops","Not the lobby"),("Callable by","One card"),("Direction","Up")]),
+   ]),
+
+ dict(id="inventory", lvl="B2", name="The Inventory", state="restricted",
+   img="env-motorclub", grade="grade--noir", focus="18% 62%", zoom="1.34",
+   note="Below the club. Colder, darker, and considerably more interesting.",
+   arts=[
+    ("racks","The Racks","30%","48%","Parts, panels and things that no longer exist anywhere else. When a car upstairs needs something unobtainable, it is obtained from down here.",[("Contents","Unobtainable"),("Catalogue","Handwritten"),("Insured","Separately")]),
+    ("ledger","The Ledger","56%","64%","A handwritten record of every acquisition, what was paid, and who was outbid. That last column is the one people ask about and the one that never gets shown.",[("Columns","Three"),("Third column","Who lost"),("Shown","Never")]),
+    ("crates","The Crates","78%","72%","Unopened. Some for years. He buys things he does not need in order to be the person who has them when somebody finally does need one.",[("Opened","Some, eventually"),("Needed","Rarely"),("Strategy","Patience")]),
+   ]),
+]
+
+def esc(t):
+    return t.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#8217;")
+
+# Rooms with a playable screen — id/label must match the matching entry in
+# CHANNEL_SETS[channel_set][0] in assets/js/tv-remote.js.
+TV_SCREENS = {
+    "penthouse-living": dict(
+        x="57.5%", y="24.3%", w="19%", h="15%",
+        box="0.4854,0.1742,0.6646,0.3113",
+        channel_set="living", id="4xVVFJuycww", label="The Gentlemen",
+    ),
+    "cinema": dict(
+        x="50%", y="37.6%", w="27.9%", h="29.3%",
+        box="0.3604,0.2296,0.6396,0.5222",
+        channel_set="cinema", id="w7fuOkF74Zw", label="Power — First Look",
+    ),
+}
+
+def floor_html(f):
+    zoom = f.get("zoom","1.04")
+    grade = (" "+f["grade"]) if f.get("grade") else ""
+    arts, panels = [], []
+    for key,name,x,y,body,specs in f["arts"]:
+        arts.append(
+f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key}">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">{esc(name)}</span>
+        </button>''')
+        spec = "".join(f'<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>' for k,v in specs)
+        wardrobe_cta = (
+            '<a class="cta pent__open" href="wardrobe.html" style="margin-top:var(--s2)">'
+            '<span>Enter the Wardrobe</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
+            if f["id"] == "closet" and key == "suits" else ""
+        )
+        panels.append(
+f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level {f["lvl"]} &#183; Artifact</p>
+                <h3 class="drawer__name">{esc(name)}</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">{esc(body)}</p>
+                <dl class="drawer__spec">{spec}</dl>
+                {wardrobe_cta}
+              </div>
+            </div>
+          </div>''')
+
+    tv = ''
+    ts = TV_SCREENS.get(f["id"])
+    if ts:
+        tv = f'''  <div class="floor-scene__screen" style="--x:{ts["x"]};--y:{ts["y"]};--w:{ts["w"]};--h:{ts["h"]}" data-tv data-channel-set="{ts["channel_set"]}" data-box="{ts["box"]}">
+    <div class="floor-scene__screen-frame">
+      <iframe src="https://www.youtube.com/embed/{ts["id"]}?autoplay=1&mute=1&loop=1&playlist={ts["id"]}&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1"
+              title="" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+    </div>
+    <div class="tv-lowerthird" data-tv-lowerthird>
+      <p class="tv-lowerthird__eyebrow">Paris Pullen &#183; Now Screening</p>
+      <p class="tv-lowerthird__title" data-tv-lowerthird-title>{ts["label"]}</p>
+    </div>
+    <div class="tv-remote" data-tv-remote>
+      <p class="tv-remote__channel" data-tv-channel-label>{ts["label"]}</p>
+      <div class="tv-remote__row">
+        <button type="button" data-tv-action="ch-prev">&#9664; Ch</button>
+        <button type="button" data-tv-action="ch-next">Ch &#9654;</button>
+      </div>
+      <div class="tv-remote__row">
+        <button type="button" data-tv-action="vol-down">Vol &#8722;</button>
+        <button type="button" data-tv-action="mute">Mute</button>
+        <button type="button" data-tv-action="vol-up">Vol &#43;</button>
+      </div>
+      <button type="button" class="tv-remote__expand" data-tv-action="expand">Watch Full Screen</button>
+    </div>
+  </div>
+'''
+
+    return f'''<section class="floor-scene{grade}" id="{f["id"]}" tabindex="-1" aria-label="Level {f["lvl"]} — {esc(f["name"])}">
+  <div class="floor-scene__view">
+    <img src="assets/img/{f["img"]}.jpg"
+         srcset="assets/img/{f["img"]}@sm.jpg 1200w, assets/img/{f["img"]}.jpg 2400w"
+         sizes="100vw" alt="{esc(f["name"])}" loading="lazy"
+         style="--focus:{f["focus"]};--zoom:{zoom}" width="2400" height="1340">
+  </div>
+{tv}  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>{f["lvl"]}</b> <span>{esc(f["name"])}</span></p>
+      <h2 class="floor-plate__name">{esc(f["name"])}</h2>
+      <p class="floor-plate__note">{esc(f["note"])}</p>
+      <p class="floor-plate__count"><i></i>{len(f["arts"])} artifact{'s' if len(f["arts"]) != 1 else ''} on this floor</p>
+    </div>
+  </div>
+
+  <div class="artifacts">
+{chr(10).join(arts)}
+  </div>
+
+  <div class="drawer" id="drawer-{f["id"]}" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+{chr(10).join(panels)}
+  </div>
+</section>
+'''
+
+directory = "".join(
+f'''      <a class="directory__row" href="#{f["id"]}">
+        <span class="directory__lvl">{f["lvl"]}</span>
+        <span class="directory__name">{esc(f["name"])}</span>
+        <span class="directory__state" data-state="{f["state"]}">{f["state"]}</span>
+      </a>
+''' for f in FLOORS)
+
+elevator = "".join(
+f'''  <a class="elevator__stop" href="#{f["id"]}" data-track="{f["id"]}"><i></i>{f["lvl"]}</a>
+''' for f in FLOORS)
+
+html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The House — Paris Pullen</title>
+<meta name="description" content="Fifteen floors of The Compliment, from the inventory to the skyline club. Every floor a room you have just walked into.">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+{SITE_HEADER}
+
+{SITE_MENU}
+
+<nav class="elevator" aria-label="Floors">
+{elevator}</nav>
+
+<main>
+
+<section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,13rem)">
+  <div class="wrap">
+    <header class="stack reveal" style="max-width:900px">
+      <p class="eyebrow">The Compliment &#183; Charlotte</p>
+      <h1 class="display display--mega">The<br>House</h1>
+      <p class="lede">Fifteen floors, stacked in the order he built them. Every one of them is a room you have just walked into, and every one of them has things in it worth picking up.</p>
+      <p class="classified">Select any artifact &#183; Esc closes</p>
+    </header>
+
+    <div class="directory reveal reveal-d1" style="margin-top:var(--s8)">
+{directory}    </div>
+  </div>
+</section>
+
+{"".join(floor_html(f) for f in FLOORS)}
+</main>
+
+{SITE_FOOT}
+
+<script src="assets/js/world.js" defer></script>
+<script src="assets/js/tv-remote.js" defer></script>
+</body>
+</html>
+'''
+
+open("house.html","w",encoding="utf-8").write(html)
+print(f"house.html written — {len(FLOORS)} floors, {sum(len(f['arts']) for f in FLOORS)} artifacts")

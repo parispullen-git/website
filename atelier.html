@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atelier — Paris Pullen</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+<style>
+  .atl{max-width:560px;margin-inline:auto;padding-top:clamp(6rem,16vh,10rem);padding-bottom:var(--s10)}
+  .atl__gate{max-width:420px;margin-inline:auto;text-align:center;padding-top:clamp(8rem,22vh,14rem)}
+  .atl__gate input{width:100%;background:transparent;border:1px solid var(--hairline);color:var(--ivory);
+    padding:.85em 1em;font-family:var(--font-mono);font-size:1rem;margin-top:var(--s5);text-align:center}
+  .atl__gate .cta{margin-top:var(--s4);width:100%;justify-content:center}
+  .atl__err{color:#C0555A;margin-top:var(--s4)}
+  .atl__field{display:grid;gap:.4em}
+  .atl__field label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;
+    text-transform:uppercase;color:var(--graphite)}
+  .atl__field input,.atl__field textarea{background:transparent;border:1px solid var(--hairline);
+    color:var(--ivory);padding:.75em .9em;font-family:var(--font-body);font-size:1rem;width:100%}
+  .atl__field input:focus,.atl__field textarea:focus{outline:none;border-color:var(--brass)}
+  .atl__row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
+  .atl__submit{width:100%;justify-content:center;margin-top:var(--s5)}
+  .atl__result{border:1px solid var(--brass);padding:var(--s5);margin-top:var(--s6);display:grid;gap:var(--s3)}
+  .atl__result a{word-break:break-all}
+  .atl__manual{border-top:1px solid var(--rule);margin-top:var(--s8);padding-top:var(--s6)}
+  .atl__manual .row{display:flex;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s4)}
+  .atl__manual a.cta{flex:1;min-width:10rem;justify-content:center}
+  .atl__hint{color:var(--graphite);font-size:var(--t-micro);margin-top:var(--s3)}
+  .atl__field select{background:#0A0A0B;border:1px solid var(--hairline);color:var(--ivory);
+    padding:.75em .9em;font-family:var(--font-body);font-size:1rem;width:100%}
+  .atl__field select:focus{outline:none;border-color:var(--brass)}
+  .atl__items{display:grid;gap:var(--s4)}
+  .atl__item{border:1px solid var(--hairline);padding:var(--s4) 2.6rem var(--s4) var(--s4);position:relative}
+  .atl__itemrow{display:grid;grid-template-columns:8rem 1fr 7.5rem;gap:var(--s3);align-items:start}
+  .atl__itemrow .atl__field{min-width:0}
+  .atl__itemrow select,.atl__itemrow input{min-width:0}
+  .atl__itemremove{position:absolute;top:var(--s3);right:var(--s3);width:1.6rem;height:1.6rem;
+    display:grid;place-items:center;color:var(--graphite);font-size:1.1rem;line-height:1;
+    border:1px solid var(--hairline);border-radius:50%;transition:color var(--d-fast),border-color var(--d-fast)}
+  .atl__itemremove:hover{color:#C0555A;border-color:#C0555A}
+  .atl__itemremove:disabled{opacity:.25;cursor:default}
+  .atl__additem{width:100%;justify-content:center}
+  .atl__total{margin-top:var(--s4);font-family:var(--font-mono);font-size:var(--t-label);
+    color:var(--bone);text-align:right}
+  .atl__total b{color:var(--brass-lit)}
+  @media(max-width:640px){.atl__itemrow{grid-template-columns:1fr;gap:var(--s3)}
+    .atl__item{padding:var(--s4)}
+    .atl__itemremove{position:static;justify-self:end;border-radius:0;width:auto;height:auto;
+      font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;padding:.3em .6em;border:none}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="worldnav">
+  <a class="worldnav__mark" href="index.html"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
+</header>
+
+<main>
+<section class="scene scene--pad" id="atlgate">
+  <div class="wrap atl__gate">
+    <p class="eyebrow">Private</p>
+    <h1 class="display display--h2">The Atelier</h1>
+    <p class="body" style="margin-top:var(--s3)">Invoicing and payment requests. Not for browsing.</p>
+    <form id="atlgateform">
+      <input id="atlgateinput" type="password" autocomplete="off" placeholder="Passphrase" aria-label="Passphrase">
+      <button type="submit" class="cta"><span>Enter</span></button>
+    </form>
+    <p class="atl__err" id="atlgateerr" hidden>Wrong passphrase.</p>
+  </div>
+</section>
+
+<section class="scene scene--pad" id="atlcontent" hidden>
+  <div class="wrap atl">
+    <p class="eyebrow">The Atelier</p>
+    <h1 class="display display--h2">New Payment Request</h1>
+    <p class="body" style="margin-top:var(--s3)">Creates a real Stripe invoice — the client gets a hosted payment page that takes card and Apple Pay automatically (Apple Pay shows on supported devices/browsers only). Nothing here is visible anywhere else on the site.</p>
+
+    <form id="atlform" style="margin-top:var(--s7);display:grid;gap:var(--s4)" novalidate>
+      <div class="atl__row">
+        <div class="atl__field">
+          <label for="atl-name">Client name</label>
+          <input id="atl-name" name="name" type="text" required>
+        </div>
+        <div class="atl__field">
+          <label for="atl-email">Client email</label>
+          <input id="atl-email" name="email" type="email" required>
+        </div>
+      </div>
+      <div class="atl__items" id="atl-items">
+        <div class="atl__item" data-item>
+          <div class="atl__itemrow">
+            <div class="atl__field">
+              <label>Type</label>
+              <select name="type" data-type>
+                <option value="Suit / Tuxedo" selected>Suit / Tuxedo</option>
+                <option value="Jacket">Jacket</option>
+                <option value="Pants">Pants</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="atl__field">
+              <label>Item / Description</label>
+              <select data-description-select>
+                <option value="">&#8212; Custom / Other &#8212;</option>
+              </select>
+              <input type="text" data-description-custom placeholder="Describe the item" style="margin-top:.5em" hidden>
+            </div>
+            <div class="atl__field">
+              <label>Amount (USD)</label>
+              <input type="number" data-amount min="1" step="0.01" placeholder="0.00">
+            </div>
+          </div>
+          <button type="button" class="atl__itemremove" data-remove disabled aria-label="Remove item">&#215;</button>
+        </div>
+      </div>
+      <button type="button" class="cta cta--ghost atl__additem" id="atl-additem"><span>&#43; Add Another Item</span></button>
+      <p class="atl__total">Total: <b id="atl-total">$0.00</b></p>
+
+      <div class="atl__field">
+        <label for="atl-due">Due in (days)</label>
+        <input id="atl-due" name="daysUntilDue" type="number" min="1" step="1" value="7" style="max-width:10rem">
+      </div>
+      <p class="atl__err" id="atl-err" hidden></p>
+      <button type="submit" class="cta atl__submit" id="atl-submit"><span>Create Invoice</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>
+    </form>
+
+    <div class="atl__result" id="atl-result" hidden>
+      <p class="body" id="atl-result-head"></p>
+      <p><a class="link-under" id="atl-result-link" href="#" target="_blank" rel="noopener">Open the payment page &#8594;</a></p>
+      <p><a class="link-under" id="atl-result-pdf" href="#" target="_blank" rel="noopener">Download PDF &#8594;</a></p>
+      <button type="button" class="cta cta--ghost" id="atl-copy" style="justify-self:start"><span>Copy Payment Link</span></button>
+    </div>
+
+    <div class="atl__manual">
+      <p class="eyebrow">Or Collect Manually</p>
+      <p class="body" style="margin-top:var(--s2)">Uses the total above. Opens Venmo or Cash App with everything pre-filled &#8212; no Stripe invoice created.</p>
+      <div class="row">
+        <a class="cta cta--ghost" id="atl-venmo" href="#" target="_blank" rel="noopener"><span>Request via Venmo</span></a>
+        <a class="cta cta--ghost" id="atl-cashapp" href="#" target="_blank" rel="noopener"><span>Request via Cash App</span></a>
+      </div>
+      <p class="atl__hint">Venmo @parispullen &#183; Cash App $parispullen. Apple Pay isn&#8217;t available through either &#8212; use the Stripe link above, where it shows automatically on supported devices.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+var WARDROBE_ITEMS = [{"n":"The Abernathy — Black","p":1150},{"n":"The Abernathy — White","p":1210},{"n":"The Adam — Navy","p":1180},{"n":"The Andre — Burgundy","p":1195},{"n":"The Ari — Navy","p":1210},{"n":"The Ashford — Black","p":1095},{"n":"The Ashford — Black","p":1110},{"n":"The Ashford — Purple","p":1065},{"n":"The Ashford — Purple","p":1080},{"n":"The Ashworth — Black","p":1180},{"n":"The Ashworth — Black","p":1160},{"n":"The Ashworth — Gold","p":1160},{"n":"The Ashworth — Navy","p":1165},{"n":"The Ashworth — Navy","p":1160},{"n":"The Ashworth — Navy","p":1160},{"n":"The Ashworth — Navy","p":1160},{"n":"The Ashworth — White","p":1160},{"n":"The Astor — Blue","p":995},{"n":"The Astor — Blue","p":1005},{"n":"The Astor — Blue","p":1005},{"n":"The Astor — Burgundy","p":1055},{"n":"The Astor — Ivory","p":1005},{"n":"The Astor — Navy","p":1010},{"n":"The Astor — White","p":1040},{"n":"The Axelrod — Black","p":1050},{"n":"The Axelrod — Burgundy","p":1055},{"n":"The Axelrod — Chartreuse","p":1055},{"n":"The Axelrod — Dark Green","p":1055},{"n":"The Axelrod — Grey","p":1080},{"n":"The Axelrod — Mint","p":1055},{"n":"The Axelrod — Navy","p":1050},{"n":"The Axelrod — Navy","p":1055},{"n":"The Axelrod — Olive","p":1055},{"n":"The Axelrod — Rust","p":1095},{"n":"The Axelrod — Sky Blue","p":1055},{"n":"The Axelrod — White","p":1095},{"n":"The Barksdale — Black","p":1250},{"n":"The Beaumont — Black","p":995},{"n":"The Beaumont — Brown","p":1040},{"n":"The Beaumont — Navy","p":1010},{"n":"The Beaumont — Purple","p":1055},{"n":"The Beaumont — Red","p":1040},{"n":"The Blackwood — Black","p":1180},{"n":"The Blackwood — Black","p":1160},{"n":"The Blackwood — Navy/Gold","p":1160},{"n":"The Blackwood — Orange","p":1195},{"n":"The Blake — Grey","p":1180},{"n":"The Blofeld — Blue","p":1060},{"n":"The Blofeld — Charcoal","p":1060},{"n":"The Blofeld — Grey","p":1110},{"n":"The Blofeld — Grey","p":1060},{"n":"The Blofeld — Navy","p":1110},{"n":"The Blofeld — Navy","p":1050},{"n":"The Blofeld — Navy","p":1060},{"n":"The Blofeld — Tan","p":1060},{"n":"The Bond — Blue","p":925},{"n":"The Bond — Burgundy","p":910},{"n":"The Bond — Gold","p":925},{"n":"The Bond — Grey","p":940},{"n":"The Bond — Purple","p":1110},{"n":"The Bond — Tan","p":1110},{"n":"The Branson — Purple","p":1055},{"n":"The Brantley — Burgundy","p":1160},{"n":"The Brantley — Navy","p":1150},{"n":"The Brantley — Navy","p":1165},{"n":"The Brantley — Plum","p":1160},{"n":"The Buchanan — Gold","p":1095},{"n":"The Callahan — Charcoal","p":1160},{"n":"The Callahan — Gold","p":1160},{"n":"The Callahan — Grey","p":1195},{"n":"The Callahan — White","p":1150},{"n":"The Cameron — Blush","p":1055},{"n":"The Cameron — Grey","p":1080},{"n":"The Cameron — Sage","p":1055},{"n":"The Cameron — Sky Blue","p":1055},{"n":"The Cameron — Tan","p":1065},{"n":"The Cameron — Tan","p":1065},{"n":"The Cameron — Tan","p":1055},{"n":"The Campbell — Tan","p":1050},{"n":"The Carraway — Blue","p":895},{"n":"The Carraway — Burgundy","p":895},{"n":"The Carraway — Navy","p":925},{"n":"The Carraway — White","p":910},{"n":"The Carrington — Green","p":1150},{"n":"The Carson — Navy","p":1080},{"n":"The Cavendish — Burgundy","p":1195},{"n":"The Cavendish — Burgundy","p":1210},{"n":"The Cavendish — Burgundy","p":1160},{"n":"The Cavendish — Dark Green","p":1160},{"n":"The Chalky — Denim","p":1095},{"n":"The Chalky — Mauve","p":1060},{"n":"The Chalky — Navy","p":1110},{"n":"The Chalky — Navy","p":1050},{"n":"The Chalky — Rust","p":1050},{"n":"The Chalky — Slate Blue","p":1060},{"n":"The Chalmers — Black","p":1040},{"n":"The Chalmers — Burgundy","p":1020},{"n":"The Chalmers — Emerald","p":1020},{"n":"The Chalmers — Gold","p":1175},{"n":"The Chalmers — Navy","p":1010},{"n":"The Chalmers — Navy","p":1020},{"n":"The Chalmers — Teal","p":1025},{"n":"The Cooper — Grey","p":1110},{"n":"The Corleone — Blue","p":1075},{"n":"The Corleone — Blue","p":1025},{"n":"The Corleone — Blush","p":1005},{"n":"The Corleone — Burgundy","p":1040},{"n":"The Corleone — Grey","p":1025},{"n":"The Corleone — Navy","p":1010},{"n":"The Corleone — Teal","p":1005},{"n":"The Covington — Ivory","p":1165},{"n":"The Covington — Ivory","p":1160},{"n":"The Covington — Red","p":1180},{"n":"The Crawley — Tan","p":1065},{"n":"The Crown — Black","p":1080},{"n":"The Crown — Black","p":1050},{"n":"The Crown — Black","p":1050},{"n":"The Crown — Blue","p":1065},{"n":"The Crown — Blush","p":1065},{"n":"The Crown — Burgundy","p":1095},{"n":"The Crown — Burgundy","p":1095},{"n":"The Crown — Gold","p":1080},{"n":"The Crown — Green","p":1080},{"n":"The Crown — Grey","p":1110},{"n":"The Crown — Grey","p":1065},{"n":"The Crown — Navy","p":1110},{"n":"The Crown — Navy","p":1050},{"n":"The Crown — Navy","p":1065},{"n":"The Crown — Navy","p":1050},{"n":"The Crown — Navy","p":1095},{"n":"The Crown — Rust","p":1050},{"n":"The Crown — Tan","p":1110},{"n":"The Crown — Teal","p":1110},{"n":"The Dashwood — Black","p":1160},{"n":"The Dashwood — Blue","p":1150},{"n":"The Dashwood — Navy","p":1210},{"n":"The Dashwood — Royal Blue","p":1160},{"n":"The Delacroix — Grey","p":1055},{"n":"The Delacroix — Lavender","p":1150},{"n":"The Delacroix — Lavender","p":1055},{"n":"The Delacroix — Navy","p":1055},{"n":"The Delacroix — Peach","p":1055},{"n":"The Delacroix — Red","p":1055},{"n":"The Delacroix — Teal","p":1055},{"n":"The Drama — Ivory","p":1165},{"n":"The Draper — Black/White","p":1005},{"n":"The Draper — Blue","p":1005},{"n":"The Draper — Blush","p":1075},{"n":"The Draper — Grey","p":1055},{"n":"The Draper — Grey","p":1005},{"n":"The Draper — Ivory","p":1040},{"n":"The Draper — Navy","p":1025},{"n":"The Draper — Navy","p":1055},{"n":"The Draper — Tan","p":1005},{"n":"The Eggsy — Navy","p":995},{"n":"The Ellison — Navy","p":1080},{"n":"The Ellsworth — Black","p":1195},{"n":"The Ellsworth — Black","p":1160},{"n":"The Ellsworth — Ivory","p":1150},{"n":"The Ellsworth — White/Black","p":1160},{"n":"The Everhart — Black","p":1150},{"n":"The Everhart — Black","p":1165},{"n":"The Everhart — Black","p":1160},{"n":"The Everhart — Green","p":1160},{"n":"The Fairweather — Burgundy","p":1165},{"n":"The Fairweather — Gold","p":1160},{"n":"The Fairweather — Grey","p":1180},{"n":"The Fairweather — Silver","p":1160},{"n":"The Fitzgerald — Black","p":1055},{"n":"The Fitzgerald — Burgundy","p":1040},{"n":"The Fitzgerald — Burgundy","p":1055},{"n":"The Fitzgerald — Teal","p":1025},{"n":"The Fleming — Burgundy","p":1050},{"n":"The Fleming — Emerald","p":1055},{"n":"The Fleming — Green","p":1080},{"n":"The Fleming — Navy","p":1055},{"n":"The Fleming — Tan","p":1065},{"n":"The Gatsby — Black","p":1195},{"n":"The Gatsby — Ivory","p":1195},{"n":"The Gatsby — Navy","p":1195},{"n":"The Gatsby — Navy","p":1180},{"n":"The Gatsby — Navy","p":1210},{"n":"The Gatsby — Red","p":1195},{"n":"The Grantham — Red","p":1110},{"n":"The Griggs — Purple","p":1065},{"n":"The Grosvenor — Black","p":1160},{"n":"The Grosvenor — Burgundy","p":1195},{"n":"The Grosvenor — Gold","p":1160},{"n":"The Grosvenor — Red","p":1160},{"n":"The Grosvenor — White","p":1195},{"n":"The Hakeem — Purple","p":1165},{"n":"The Hart — Black","p":1025},{"n":"The Hart — Charcoal","p":1095},{"n":"The Hart — Dark Green","p":1010},{"n":"The Hart — Grey","p":1040},{"n":"The Hart — Grey","p":1010},{"n":"The Hart — Navy","p":995},{"n":"The Hart — Sky Blue","p":1010},{"n":"The Hart — Tan","p":1055},{"n":"The Hart — Tan","p":1010},{"n":"The Hart — Yellow","p":1010},{"n":"The Harvey — Black","p":895},{"n":"The Harvey — Black","p":1065},{"n":"The Harvey — Blue","p":955},{"n":"The Harvey — Burgundy","p":940},{"n":"The Harvey — Green","p":895},{"n":"The Harvey — Grey","p":1095},{"n":"The Harvey — Navy","p":925},{"n":"The Harvey — Navy","p":925},{"n":"The Harvey — Navy","p":910},{"n":"The Harvey — Navy","p":925},{"n":"The Harvey — Rust","p":895},{"n":"The Harvey — Tan","p":1080},{"n":"The Harvey — Teal","p":910},{"n":"The Harvey — Teal","p":940},{"n":"The Hastings — Navy","p":1080},{"n":"The Hollingsworth — Black","p":1150},{"n":"The Hollingsworth — Red","p":1150},{"n":"The Huntington — Black","p":1180},{"n":"The Huntington — Black","p":1160},{"n":"The Huntington — Ivory","p":1160},{"n":"The Huntington — Navy","p":1160},{"n":"The Huntington — Navy","p":1160},{"n":"The Huntington — Orange","p":1160},{"n":"The Huntington — Purple","p":1165},{"n":"The Huntington — White","p":1160},{"n":"The Ivanhoe — Burgundy","p":1165},{"n":"The Ivanhoe — White","p":1210},{"n":"The Ivanhoe — White","p":1160},{"n":"The Jack — Blue","p":1180},{"n":"The Jimmy — Blush","p":1065},{"n":"The Julian — Ivory","p":1055},{"n":"The Julian — Navy","p":1095},{"n":"The Kane — Green","p":1095},{"n":"The Kendall — Black","p":1060},{"n":"The Kendall — Charcoal","p":1060},{"n":"The Kendall — Grey","p":1060},{"n":"The Kendall — Navy","p":1080},{"n":"The Kendall — Navy","p":1110},{"n":"The Kendall — Navy","p":1060},{"n":"The Kendall — Tan","p":1095},{"n":"The Kensington — Black","p":995},{"n":"The Kensington — Blue","p":1010},{"n":"The Kensington — Grey","p":1025},{"n":"The Kensington — Grey","p":1005},{"n":"The Kensington — Navy","p":995},{"n":"The Kevin — Grey","p":1195},{"n":"The Kingsley — Gold","p":1180},{"n":"The Kingsley — Teal","p":1050},{"n":"The Kingston — Black","p":1005},{"n":"The Kingston — Blush","p":1025},{"n":"The Kingston — Coral","p":1010},{"n":"The Kingston — Navy","p":1010},{"n":"The Kingston — Navy","p":1005},{"n":"The Kingston — Purple","p":995},{"n":"The Lancaster — Blue","p":1025},{"n":"The Lancaster — Burgundy","p":1005},{"n":"The Lancaster — Grey","p":995},{"n":"The Lancaster — Grey","p":1010},{"n":"The Lancaster — Lavender","p":995},{"n":"The Lancaster — Red","p":1005},{"n":"The Langford — Blue","p":1055},{"n":"The Langford — Green","p":1040},{"n":"The Leiter — Blush","p":1065},{"n":"The Leiter — Burgundy","p":1110},{"n":"The Leiter — Dark Green","p":1055},{"n":"The Leiter — Grey","p":1055},{"n":"The Leiter — Rust","p":1095},{"n":"The Leiter — Tan","p":1055},{"n":"The Litt — Burgundy","p":1080},{"n":"The Litt — Navy","p":1065},{"n":"The Litt — Purple","p":1095},{"n":"The Lockhart — Black","p":1110},{"n":"The Logan — Blue","p":1065},{"n":"The Logan — Brown","p":1065},{"n":"The Logan — Dark Teal","p":1065},{"n":"The Logan — Grey","p":1080},{"n":"The Logan — Mauve","p":1065},{"n":"The Logan — Navy","p":1080},{"n":"The Logan — Red","p":1065},{"n":"The Louis — Blush","p":1050},{"n":"The Louis — Grey","p":1110},{"n":"The Louis — Navy","p":1080},{"n":"The Lucious — Navy","p":1180},{"n":"The Malone — Burgundy","p":1010},{"n":"The Malone — Grey","p":995},{"n":"The Malone — Grey","p":1025},{"n":"The Malone — Tan","p":1010},{"n":"The Malone — Teal","p":1160},{"n":"The Marchetti — Blue","p":1225},{"n":"The Marlowe — Black","p":1195},{"n":"The Marlowe — Black","p":1210},{"n":"The Marlowe — Grey","p":1150},{"n":"The Matthew — Tan","p":1065},{"n":"The Merlin — Brown","p":1180},{"n":"The Merriweather — Blue","p":1050},{"n":"The Merriweather — Blush","p":1055},{"n":"The Mickey — Brown","p":1010},{"n":"The Mickey — Brown","p":1010},{"n":"The Mickey — Burgundy","p":1025},{"n":"The Mickey — Navy","p":1055},{"n":"The Mickey — Navy","p":995},{"n":"The Mickey — Navy","p":1010},{"n":"The Mickey — Rust","p":1045},{"n":"The Mickey — Sage","p":1010},{"n":"The Mickey — Tan","p":1045},{"n":"The Mickey — Tan","p":1040},{"n":"The Mickey — Tan","p":1010},{"n":"The Montgomery — Black","p":1005},{"n":"The Montgomery — Grey","p":1005},{"n":"The Montgomery — Navy","p":1040},{"n":"The Montgomery — Navy","p":1055},{"n":"The Montgomery — Teal","p":995},{"n":"The Montgomery — Teal","p":1040},{"n":"The Norwood — Black","p":1180},{"n":"The Norwood — Black","p":1160},{"n":"The Norwood — Black","p":1160},{"n":"The Norwood — Black","p":1160},{"n":"The Norwood — Blue","p":1165},{"n":"The Norwood — Dark Green","p":1160},{"n":"The Norwood — Dark Teal","p":1160},{"n":"The Norwood — Gold","p":1160},{"n":"The Norwood — Gold","p":1160},{"n":"The Norwood — Ivory","p":1160},{"n":"The Norwood — Ivory","p":1160},{"n":"The Norwood — Ivory","p":1160},{"n":"The Norwood — Magenta","p":1160},{"n":"The Norwood — Navy","p":1160},{"n":"The Nucky — Black","p":1050},{"n":"The Nucky — Black","p":1055},{"n":"The Nucky — Blue","p":1125},{"n":"The Nucky — Blue","p":1055},{"n":"The Nucky — Burgundy","p":1125},{"n":"The Nucky — Burgundy","p":1050},{"n":"The Nucky — Burgundy","p":1055},{"n":"The Nucky — Chartreuse","p":1055},{"n":"The Nucky — Copper","p":1055},{"n":"The Nucky — Magenta","p":1055},{"n":"The Nucky — Navy","p":1055},{"n":"The Nucky — Navy","p":1055},{"n":"The Nucky — Olive","p":1055},{"n":"The Nucky — Royal Blue","p":1055},{"n":"The Nucky — Teal","p":1055},{"n":"The Nucky — Yellow","p":1055},{"n":"The Osgood — Black","p":1065},{"n":"The Osgood — Grey","p":1110},{"n":"The Osgood — Purple","p":1080},{"n":"The Owen — Blue","p":1055},{"n":"The Owen — Charcoal","p":1055},{"n":"The Owen — Emerald","p":1055},{"n":"The Owen — Ivory","p":1055},{"n":"The Owen — Navy","p":1055},{"n":"The Owen — Navy","p":1055},{"n":"The Owen — Navy","p":1055},{"n":"The Owen — Navy","p":1055},{"n":"The Owen — Powder Blue","p":1055},{"n":"The Owen — Royal Blue","p":1055},{"n":"The Owen — Silver","p":1055},{"n":"The Owen — White","p":1050},{"n":"The Pearson — Black","p":1080},{"n":"The Pearson — Black","p":1055},{"n":"The Pearson — Black","p":1055},{"n":"The Pearson — Charcoal","p":1055},{"n":"The Pearson — Charcoal","p":1055},{"n":"The Pearson — Green","p":1095},{"n":"The Pearson — Grey","p":1050},{"n":"The Pearson — Navy","p":1065},{"n":"The Pearson — Navy","p":1055},{"n":"The Pearson — Navy","p":1055},{"n":"The Pearson — Navy","p":1055},{"n":"The Pearson — Pink","p":1055},{"n":"The Pearson — Rust","p":1095},{"n":"The Pearson — Teal","p":1095},{"n":"The Pearson — Teal","p":1055},{"n":"The Pearson — Yellow","p":1055},{"n":"The Pemberton — Black/Gold","p":1175},{"n":"The Pemberton — Blue","p":1165},{"n":"The Pemberton — Blue","p":1175},{"n":"The Pemberton — Blush","p":1175},{"n":"The Pemberton — Burgundy","p":1150},{"n":"The Pemberton — Grey","p":1175},{"n":"The Pemberton — Ivory","p":1175},{"n":"The Pendleton — Black","p":1225},{"n":"The Pendleton — Grey","p":1225},{"n":"The Pierce — Navy","p":1095},{"n":"The Prescott — Black","p":1005},{"n":"The Prescott — Burgundy","p":1025},{"n":"The Prescott — Burgundy","p":1005},{"n":"The Prescott — Grey","p":995},{"n":"The Prescott — Grey","p":1010},{"n":"The Prescott — Tan","p":1025},{"n":"The Q — White","p":1110},{"n":"The Radcliffe — Black","p":1080},{"n":"The Radcliffe — Black","p":1080},{"n":"The Radcliffe — Black","p":1080},{"n":"The Radcliffe — Black","p":1080},{"n":"The Radcliffe — Black/Gold","p":1160},{"n":"The Radcliffe — Charcoal/Gold","p":1160},{"n":"The Radcliffe — Ivory","p":1080},{"n":"The Radcliffe — Navy","p":1180},{"n":"The Radcliffe — Navy","p":1080},{"n":"The Radcliffe — Royal Blue","p":1160},{"n":"The Radcliffe — White","p":1080},{"n":"The Radcliffe — White/Black","p":1080},{"n":"The Randall — Navy","p":1210},{"n":"The Rhoades — Black","p":995},{"n":"The Rhoades — Blue","p":995},{"n":"The Rhoades — Brown","p":995},{"n":"The Rhoades — Green","p":995},{"n":"The Robert — Rust","p":1050},{"n":"The Rockefeller — Grey","p":925},{"n":"The Rockefeller — Navy","p":910},{"n":"The Rockefeller — Navy","p":895},{"n":"The Rockefeller — Orange","p":895},{"n":"The Roger — Tan","p":1095},{"n":"The Rothstein — Brown","p":1080},{"n":"The Roy — Black","p":1080},{"n":"The Roy — Black","p":1095},{"n":"The Roy — Grey","p":1065},{"n":"The Roy — Navy","p":1065},{"n":"The Roy — Royal Blue","p":1065},{"n":"The Roy — Teal","p":1065},{"n":"The Sanford — Blue","p":925},{"n":"The Sanford — Orange","p":955},{"n":"The Sheffield — Black","p":1195},{"n":"The Sheffield — Black","p":1165},{"n":"The Sheffield — Ivory","p":1160},{"n":"The Sheffield — Silver","p":1160},{"n":"The Sinclair — Black","p":1095},{"n":"The Sinclair — Black","p":1165},{"n":"The Sinclair — Gold","p":1160},{"n":"The Sinclair — Olive","p":1065},{"n":"The Sinclair — Purple","p":1110},{"n":"The Sinclair — Rose Gold","p":1160},{"n":"The Sinclair — Teal","p":1095},{"n":"The Slade — Burgundy","p":1095},{"n":"The Slade — Green","p":1095},{"n":"The Slade — Tan","p":1080},{"n":"The Specter — Black","p":1040},{"n":"The Specter — Black","p":1210},{"n":"The Specter — Black","p":1150},{"n":"The Specter — Black","p":1010},{"n":"The Specter — Black","p":1160},{"n":"The Specter — Black/White","p":1010},{"n":"The Specter — Blush","p":1055},{"n":"The Specter — Blush","p":1010},{"n":"The Specter — Dark Green","p":1010},{"n":"The Specter — Green","p":1010},{"n":"The Specter — Grey","p":1010},{"n":"The Specter — Grey","p":1010},{"n":"The Specter — Ivory","p":1010},{"n":"The Specter — Ivory","p":1010},{"n":"The Specter — Magenta","p":1010},{"n":"The Specter — Mint","p":1010},{"n":"The Specter — Navy","p":995},{"n":"The Specter — Navy","p":1055},{"n":"The Specter — Navy","p":995},{"n":"The Specter — Navy","p":1010},{"n":"The Specter — Plum","p":1010},{"n":"The Specter — Royal Blue","p":1010},{"n":"The Specter — Yellow","p":1010},{"n":"The St. Patrick — Black","p":1010},{"n":"The St. Patrick — Blue","p":1005},{"n":"The St. Patrick — Blush","p":1005},{"n":"The St. Patrick — Blush","p":1005},{"n":"The St. Patrick — Burgundy","p":1040},{"n":"The St. Patrick — Burgundy","p":1005},{"n":"The St. Patrick — Burgundy","p":1005},{"n":"The St. Patrick — Charcoal","p":1005},{"n":"The St. Patrick — Charcoal","p":1005},{"n":"The St. Patrick — Green","p":1025},{"n":"The St. Patrick — Grey","p":1025},{"n":"The St. Patrick — Grey","p":1005},{"n":"The St. Patrick — Lavender","p":1005},{"n":"The St. Patrick — Lavender","p":1005},{"n":"The St. Patrick — Navy","p":1025},{"n":"The St. Patrick — Navy","p":1010},{"n":"The St. Patrick — Navy","p":1055},{"n":"The St. Patrick — Navy","p":1005},{"n":"The St. Patrick — Navy","p":1005},{"n":"The St. Patrick — Plum","p":1005},{"n":"The St. Patrick — Plum","p":1005},{"n":"The St. Patrick — Sage","p":1005},{"n":"The St. Patrick — Tan","p":1005},{"n":"The St. Patrick — Tan","p":1005},{"n":"The St. Patrick — Tan","p":1005},{"n":"The St. Patrick — Teal","p":1005},{"n":"The St. Patrick — Teal","p":1005},{"n":"The St. Patrick — Turquoise","p":1005},{"n":"The St. Patrick — Yellow","p":1005},{"n":"The Stark — Ivory","p":1050},{"n":"The Stark — Ivory","p":1065},{"n":"The Stark — Teal","p":1050},{"n":"The Sterling — Burgundy","p":945},{"n":"The Sterling — Green","p":945},{"n":"The Sterling — Navy","p":895},{"n":"The Sterling — Navy","p":955},{"n":"The Sterling — Orange","p":910},{"n":"The Steven — Navy","p":1210},{"n":"The Stringer — Black","p":1295},{"n":"The Talbot — Teal","p":1050},{"n":"The Thomas — Black","p":1080},{"n":"The Thomas — Black","p":1095},{"n":"The Thomas — Blue","p":1065},{"n":"The Thomas — Blue","p":1055},{"n":"The Thomas — Blush","p":1095},{"n":"The Thomas — Blush","p":1110},{"n":"The Thomas — Burgundy","p":1110},{"n":"The Thomas — Burgundy","p":1095},{"n":"The Thomas — Green","p":1050},{"n":"The Thomas — Green","p":1095},{"n":"The Thomas — Green","p":1050},{"n":"The Thomas — Green","p":1095},{"n":"The Thomas — Grey","p":1065},{"n":"The Thomas — Grey","p":1055},{"n":"The Thomas — Navy","p":1080},{"n":"The Thomas — Navy","p":1110},{"n":"The Thomas — Navy","p":1080},{"n":"The Thomas — Navy","p":1110},{"n":"The Thomas — Navy","p":1055},{"n":"The Thomas — Navy","p":1055},{"n":"The Thomas — Navy","p":1055},{"n":"The Thomas — Olive","p":1055},{"n":"The Thomas — Orange","p":1055},{"n":"The Thomas — Purple","p":1050},{"n":"The Thomas — Red","p":1110},{"n":"The Thomas — Red","p":1050},{"n":"The Thomas — Red","p":1050},{"n":"The Thomas — Tan","p":1065},{"n":"The Thomas — Tan","p":1080},{"n":"The Thomas — Tan","p":1065},{"n":"The Thomas — Teal","p":1065},{"n":"The Thomas — Teal","p":1055},{"n":"The Thomas — White","p":1055},{"n":"The Thomas — Yellow","p":1055},{"n":"The Thornton — Ivory","p":1210},{"n":"The Thornton — Navy","p":1180},{"n":"The Vance — Blush","p":1065},{"n":"The Vanderbilt — Black","p":895},{"n":"The Vanderbilt — Blue","p":895},{"n":"The Vanderbilt — Navy","p":915},{"n":"The Vanderbilt — Tan","p":895},{"n":"The Vincent — Grey","p":1195},{"n":"The Wags — White","p":1165},{"n":"The Wayne — Ivory","p":1065},{"n":"The Wayne — Navy","p":1080},{"n":"The Wayne — Rust","p":1065},{"n":"The Wayne — Sage","p":1055},{"n":"The Wayne — Sky Blue","p":1055},{"n":"The Weatherby — Charcoal","p":1160},{"n":"The Weatherby — Navy","p":1210},{"n":"The Weatherby — Navy","p":1160},{"n":"The Weatherby — White","p":1195},{"n":"The Wellington — Burgundy","p":1125},{"n":"The Wellington — Ivory","p":1095},{"n":"The Wellington — Navy","p":1050},{"n":"The Wellington — Navy","p":1055},{"n":"The Wellington — Navy","p":1055},{"n":"The Wellington — Red","p":1080},{"n":"The Wellington — Red/Green","p":1055},{"n":"The Wellington — Tan","p":1055},{"n":"The Wellington — Tan","p":1055},{"n":"The Whitfield — Blue","p":995},{"n":"The Whitfield — Navy","p":1040},{"n":"The Whitfield — Navy","p":1055},{"n":"The Whitfield — Navy","p":1010},{"n":"The Whitfield — Red","p":1005},{"n":"The Whitmore — Gold","p":1110},{"n":"The Windermere — Burgundy","p":1150},{"n":"The Windermere — Green","p":1150},{"n":"The Windermere — Ivory","p":1150},{"n":"The Windsor — Black","p":1095},{"n":"The Windsor — Burgundy","p":1110},{"n":"The Windsor — Camel","p":1065},{"n":"The Windsor — Charcoal","p":1055},{"n":"The Windsor — Charcoal","p":1055},{"n":"The Windsor — Grey","p":1150},{"n":"The Windsor — Navy","p":1110},{"n":"The Windsor — Olive","p":1065},{"n":"The Windsor — Plum","p":1065},{"n":"The Windsor — Red","p":1150},{"n":"The Windsor — White","p":1055},{"n":"The Winslow — Black","p":1160},{"n":"The Winslow — Black","p":1160},{"n":"The Winslow — Burgundy","p":1160},{"n":"The Winslow — Ivory","p":1160},{"n":"The Winslow — Ivory","p":1160},{"n":"The Winslow — Navy","p":1225},{"n":"The Winslow — Navy","p":1160},{"n":"The Winslow — Navy","p":1160},{"n":"The Winslow — Navy","p":1160},{"n":"The Winslow — Royal Blue","p":1160},{"n":"The Zane — Black","p":1065},{"n":"The Zane — Gold","p":1055},{"n":"The Zane — Grey","p":1050},{"n":"The Zane — Navy","p":1050},{"n":"The Zane — Pink","p":1055},{"n":"The Zane — Royal Blue","p":1055},{"n":"The Zane — Silver","p":1055}];
+(function(){
+  'use strict';
+  var EXPECTED_HASH = '0b06e677c8027192f4185ec04bb876fdbd164b75ace10db1654e1de5213c1365';
+  var GATE_KEY = 'pp_atelier_ok';
+
+  async function sha256Hex(text){
+    var enc = new TextEncoder().encode(text);
+    var buf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.prototype.map.call(new Uint8Array(buf), function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+  }
+
+  var gate = document.getElementById('atlgate');
+  var content = document.getElementById('atlcontent');
+  var gateForm = document.getElementById('atlgateform');
+  var gateInput = document.getElementById('atlgateinput');
+  var gateErr = document.getElementById('atlgateerr');
+  var storedHash = null;
+
+  function unlock(hash){
+    storedHash = hash;
+    gate.hidden = true;
+    content.hidden = false;
+    try { sessionStorage.setItem(GATE_KEY, hash); } catch(e){}
+  }
+
+  (async function tryRestore(){
+    try {
+      var saved = sessionStorage.getItem(GATE_KEY);
+      if (saved && saved === EXPECTED_HASH) unlock(saved);
+    } catch(e){}
+  })();
+
+  gateForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var hash = await sha256Hex(gateInput.value.trim());
+    if (hash === EXPECTED_HASH) {
+      gateErr.hidden = true;
+      unlock(hash);
+    } else {
+      gateErr.hidden = false;
+      gateInput.value = '';
+      gateInput.focus();
+    }
+  });
+
+  var form = document.getElementById('atlform');
+  var submitBtn = document.getElementById('atl-submit');
+  var errEl = document.getElementById('atl-err');
+  var resultEl = document.getElementById('atl-result');
+  var itemsWrap = document.getElementById('atl-items');
+  var addItemBtn = document.getElementById('atl-additem');
+  var totalEl = document.getElementById('atl-total');
+
+  function money(v){
+    var n = Number(v || 0);
+    return n.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+
+  function itemRows(){
+    return Array.prototype.slice.call(itemsWrap.querySelectorAll('[data-item]'));
+  }
+
+  function populateDescriptionSelect(select){
+    WARDROBE_ITEMS.forEach(function(it, i){
+      var opt = document.createElement('option');
+      opt.value = String(i);
+      opt.dataset.name = it.n;
+      opt.dataset.price = it.p;
+      opt.textContent = it.n + ' — $' + it.p.toLocaleString();
+      select.appendChild(opt);
+    });
+  }
+  populateDescriptionSelect(itemsWrap.querySelector('[data-description-select]'));
+
+  function syncCustomVisibility(row){
+    var select = row.querySelector('[data-description-select]');
+    var custom = row.querySelector('[data-description-custom]');
+    var isCustom = select.value === '';
+    custom.hidden = !isCustom;
+    if (isCustom) custom.focus();
+  }
+
+  function readItems(){
+    return itemRows().map(function(row){
+      var select = row.querySelector('[data-description-select]');
+      var opt = select.options[select.selectedIndex];
+      var isCustom = select.value === '';
+      return {
+        type: row.querySelector('[data-type]').value,
+        description: isCustom ? row.querySelector('[data-description-custom]').value.trim() : opt.dataset.name,
+        amount: row.querySelector('[data-amount]').value,
+      };
+    });
+  }
+
+  function updateRemoveButtons(){
+    var rows = itemRows();
+    rows.forEach(function(row){
+      row.querySelector('[data-remove]').disabled = rows.length <= 1;
+    });
+  }
+
+  function total(){
+    return readItems().reduce(function(sum, it){ return sum + (Number(it.amount) || 0); }, 0);
+  }
+
+  function updateManualLinks(){
+    var items = readItems().filter(function(it){ return it.description || Number(it.amount) > 0; });
+    var t = total();
+    var labels = items.map(function(it){ return it.type + (it.description ? ' — ' + it.description : ''); });
+    var note = encodeURIComponent(labels.join('; ') || 'Paris Pullen');
+    var amt = t > 0 ? money(t) : '';
+    document.getElementById('atl-venmo').href = 'https://venmo.com/parispullen?txn=pay' + (amt ? '&amount=' + amt : '') + '&note=' + note;
+    document.getElementById('atl-cashapp').href = 'https://cash.app/$parispullen' + (amt ? '/' + amt : '');
+  }
+
+  function updateTotal(){
+    totalEl.textContent = '$' + money(total());
+    updateManualLinks();
+  }
+
+  function newItemRow(){
+    var row = itemRows()[0].cloneNode(true);
+    row.querySelector('[data-type]').value = 'Suit / Tuxedo';
+    row.querySelector('[data-description-select]').value = '';
+    row.querySelector('[data-description-custom]').value = '';
+    row.querySelector('[data-description-custom]').hidden = true;
+    row.querySelector('[data-amount]').value = '';
+    return row;
+  }
+
+  addItemBtn.addEventListener('click', function(){
+    itemsWrap.appendChild(newItemRow());
+    updateRemoveButtons();
+    updateTotal();
+  });
+
+  itemsWrap.addEventListener('change', function(e){
+    var select = e.target.closest('[data-description-select]');
+    if (!select) return;
+    var row = select.closest('[data-item]');
+    syncCustomVisibility(row);
+    var opt = select.options[select.selectedIndex];
+    var amountField = row.querySelector('[data-amount]');
+    if (opt.dataset.price && !amountField.value) {
+      amountField.value = opt.dataset.price;
+    }
+  });
+
+  itemsWrap.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-remove]');
+    if (!btn || btn.disabled) return;
+    btn.closest('[data-item]').remove();
+    updateRemoveButtons();
+    updateTotal();
+  });
+
+  itemsWrap.addEventListener('input', updateTotal);
+  itemsWrap.addEventListener('change', updateTotal);
+  updateRemoveButtons();
+  updateTotal();
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    errEl.hidden = true;
+    resultEl.hidden = true;
+
+    var items = readItems();
+    var validItems = items.every(function(it){ return it.description && Number(it.amount) > 0; });
+    var name = form.name.value.trim();
+    var email = form.email.value.trim();
+
+    if (!name || !email || !items.length || !validItems) {
+      errEl.textContent = 'Fill in every item with a description and a valid amount, plus your client’s name and email.';
+      errEl.hidden = false;
+      return;
+    }
+
+    var payload = {
+      name: name,
+      email: email,
+      items: items,
+      daysUntilDue: form.daysUntilDue.value || 7,
+      passphraseHash: storedHash,
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.querySelector('span').textContent = 'Creating…';
+
+    try {
+      var res = await fetch('/.netlify/functions/create-invoice', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      var data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Something went wrong.');
+
+      document.getElementById('atl-result-head').textContent =
+        'Invoice ' + (data.number || '') + ' — $' + money(data.amount / 100) + ' created.';
+      document.getElementById('atl-result-link').href = data.url;
+      document.getElementById('atl-result-pdf').href = data.pdf;
+      resultEl.hidden = false;
+
+      form.reset();
+      itemRows().slice(1).forEach(function(row){ row.remove(); });
+      document.getElementById('atl-due').value = 7;
+      updateRemoveButtons();
+      updateTotal();
+    } catch (err) {
+      errEl.textContent = err.message || 'Something went wrong. Try again.';
+      errEl.hidden = false;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.querySelector('span').textContent = 'Create Invoice';
+    }
+  });
+
+  document.getElementById('atl-copy').addEventListener('click', function(){
+    var link = document.getElementById('atl-result-link').href;
+    navigator.clipboard.writeText(link).then(function(){
+      var span = document.getElementById('atl-copy').querySelector('span');
+      var prev = span.textContent;
+      span.textContent = 'Copied';
+      setTimeout(function(){ span.textContent = prev; }, 1500);
+    });
+  });
+})();
+</script>
+</body>
+</html>

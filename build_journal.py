@@ -1,0 +1,647 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Generates journal.html (the .jlead featured post + the .jgrid card grid)
+and one long-form article page per post (journal-<slug>.html) for
+The Paris Pullen Journal.
+
+Header/menu/footer are pulled live from index.html at build time (same
+pattern as build_charlotte.py / build_house.py) so they never drift out
+of sync with the rest of the site.
+
+The "Vol. 10" pantry card (The Only Standing Order in the Apartment) is
+intentionally NOT data-driven here -- it already correctly links to
+pantry.html and is reproduced verbatim (PANTRY_CARD_HTML) so it is never
+touched by this generator.
+
+Images:
+  - Site's own photography (assets/img/env-*, room-*, paris-*, etc.) is
+    used for Charlotte, the two ancient-myth pieces, Laws, the wordplay
+    business piece, and all nine original lifestyle/business/style posts.
+  - A handful of entries reference real copyrighted media (a film, an
+    album, a game, a book, two vehicles) and use ONE official poster /
+    cover-art / press image each, fetched from Wikipedia / Wikimedia
+    Commons at build time and saved locally under assets/img/press-*.
+    See the build report for sourcing notes.
+
+Edit JOURNAL_POSTS below and re-run:  python3 build_journal.py
+"""
+import re
+
+_index_src = open("index.html", encoding="utf-8").read()
+SITE_HEADER = re.search(r'<header class="worldnav">.*?</header>', _index_src, re.S).group(0)
+SITE_MENU = re.search(r'<nav class="menu".*?</nav>', _index_src, re.S).group(0)
+SITE_FOOT = re.search(r'<footer class="foot foot--film">.*?</footer>', _index_src, re.S).group(0)
+
+def esc(t):
+    if t is None:
+        return ""
+    return str(t).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+# ----------------------------------------------------------------------
+# Category filter list -- "Automotive" is new (Karma / Mercedes Concept).
+# ----------------------------------------------------------------------
+CATS = [
+    ("strategy", "Strategy"),
+    ("style", "Style"),
+    ("charlotte", "Charlotte"),
+    ("philosophy", "Philosophy"),
+    ("fragrance", "Fragrance"),
+    ("business", "Business"),
+    ("culture", "Culture"),
+    ("music", "Music"),
+    ("life", "Life"),
+    ("automotive", "Automotive"),
+]
+
+def PQ(text):
+    return "PQ::" + text
+
+# ----------------------------------------------------------------------
+# Posts, in reading/vol order. Each dict:
+#   slug, cat, catlabel, vol, read, title, stand, featured, wide,
+#   hero=dict(img, ext, mode['cover'|'contain'], alt, srcset[bool]),
+#   body=[ ...paragraphs, PQ("...") for the pullquote... ]
+# ----------------------------------------------------------------------
+JOURNAL_POSTS = [
+
+  dict(slug="access-currency", cat="strategy", catlabel="Strategy", vol="01", read="5 min read",
+    title="Access Is a Currency. Here Is the Exchange Rate.",
+    stand="The room does not open because you knocked well. It opens because someone in it already owes the person who let you in.",
+    featured=False, wide=False,
+    hero=dict(img="env-network", ext="jpg", mode="cover", srcset=True,
+      alt="A private club interior, low light, empty chairs arranged for a conversation not yet started"),
+    body=[
+      "Every man arrives at his first real room believing the door opens because of merit — the résumé, the deal closed, the introduction earned through hard work. It is a comforting theory, and it is wrong often enough that believing it will cost him years.",
+      "Access is not a reward. It is a currency, and like any currency it has an exchange rate that fluctuates depending on who is spending it and what they are spending it on. A favor called in by the right person is worth more than the identical favor called in by the wrong one.",
+      PQ("Nobody opens a door because you deserve it. They open it because closing it would cost them something with the person who asked."),
+      "This is why the man who tries to buy his way into a room with money alone so often finds the door politely, permanently shut. Money is liquid. It has no memory of who spent it and no relationship to protect. A favor is owed to a specific person, and that person's judgment is now on the line the moment the door opens.",
+      "Watch how this plays out at the club level. The newer member who tips well and remembers names is liked. The member three tables over who once quietly vouched for someone, and never mentioned it again, can get a table on a Friday night with four minutes' notice. Those are not the same currency, and only one of them compounds.",
+      "The exchange rate moves for a second reason too — scarcity of the asker. A man who calls in favors constantly devalues his own currency; by the tenth ask, the room has started discounting him before he finishes the sentence. The man who asks rarely, and only when it matters, finds his currency appreciating every year he does not spend it.",
+      "So the real skill is not learning who to ask. It is learning who to become owed to, quietly, over years, without ever presenting the invoice. Become useful to someone before you need anything from them, and the favor exists before the ask does — the only version of currency that never depreciates.",
+      "Walk into any room that matters and you will find, if you look carefully, that nobody in it got there on merit alone. They got there because somebody already in the room owed somebody who let them in. Learn the ledger. Learn who is currently solvent. Then spend carefully, because everyone in that room is watching how you spend it more closely than they are watching what you spent it on.",
+    ]),
+
+  dict(slug="suit-system", cat="style", catlabel="Style", vol="02", read="4 min read",
+    title="The Suit Is a System, Not an Outfit",
+    stand="Buy the jacket for the shoulders and the trouser for the break. Everything else is alteration, and alteration is where the money actually goes.",
+    featured=False, wide=False,
+    hero=dict(img="paris-bespoke", ext="jpg", mode="cover", srcset=True,
+      alt="A bespoke suit jacket mid-fitting, chalk marks visible on the shoulder seam"),
+    body=[
+      "A suit is not a single purchase. It behaves like one at the register and like a system everywhere after, which is the first thing that confuses a man buying his first genuinely good one — he expects the jacket to fit the way it looked on the hanger, and it never does, because the hanger was not built like him.",
+      "Shoulders are the one structural element a tailor cannot meaningfully change after the fact. Everything below the collarbone can be taken in, let out, shortened, reshaped. The shoulder seam is closer to permanent, which is why it is the only measurement worth obsessing over before the fabric is even cut.",
+      "The trouser earns the same obsession for a different reason — the break. Too much fabric pooling at the ankle reads as inherited, not chosen. Too little reads as outgrown. The correct break is a narrow window, and it is the detail a well-trained eye clocks before it registers the fabric, the cut, or the color.",
+      PQ("Everything else is alteration, and alteration is where the money actually goes."),
+      "This is the part nobody explains at the point of sale. The suit on the rack was never meant to be worn as sold. It is a starting position, a rough draft in cloth, and the real cost of owning it well is not the tag price but the three or four visits to a tailor afterward — taking in the waist, softening the sleeve, moving a button half an inch, because half an inch is the entire difference between a suit that fits and one that merely covers.",
+      "Men who skip this step are easy to spot in any room, and not for a reason they'd want pointed out. The fabric can be extraordinary and the fit can still be wrong, and a wrong fit on expensive cloth reads worse than a right fit on modest cloth — it announces money spent without judgment applied.",
+      "The system extends past the suit itself. A shirt collar that doesn't sit correctly against a jacket lapel undoes both. A shoe that fights the trouser break undoes the whole line from the knee down. None of these pieces were designed in isolation, and buying them that way is how a closet fills with expensive items that never once look like they belong to the same wardrobe.",
+      "Treat the first good suit as tuition, not a purchase. What it teaches — shoulder first, break second, alteration budget built in from day one — is the only part of the transaction that pays dividends on every suit bought after it.",
+    ]),
+
+  dict(slug="charlotte-decisions", cat="charlotte", catlabel="Charlotte", vol="03", read="7 min read",
+    title="Where the City Actually Makes Its Decisions",
+    stand="It is not in the room with the best view. It is not on the agenda. Three tables decide more than the council chamber, and two of them do not have a sign on the door.",
+    featured=True, wide=False,
+    hero=dict(img="citymap-plate", ext="jpg", mode="cover", srcset=True,
+      alt="A brass city map plate of Charlotte, North Carolina"),
+    body=[
+      "The council chamber runs on a published agenda, a public comment period, and a clock everyone in the room can see. That is precisely why nothing that happens there decides anything. Real decisions in this city get made somewhere the acoustics are worse and nobody is taking minutes.",
+      "Three tables account for most of it, and only one of them has ever been photographed for a magazine. The first sits in the private dining room of a club two blocks off Tryon, where membership costs less than the favors traded across the tablecloth. The second is a hotel bar counter, weeknights, where the conversation ends the moment a waiter gets within earshot.",
+      PQ("The room does not care what you know. It cares who already owes the person sitting across from you."),
+      "The third table is the one nobody writes about, because it does not look like a table. It is a coffee counter at seven in the morning, the same four or five men rotating through, ordering the same thing, discussing nothing that would survive being repeated. By nine it has been decided. The public meeting that afternoon will simply confirm it, slowly, for the record.",
+      "What makes these rooms work is not secrecy, though the tabloids would prefer that story. It is deniability. A decision made over eggs has no paper trail and no vote count, which means it can be walked back without anyone losing face — a courtesy the council chamber, with its transcript and its cameras, cannot offer anyone.",
+      "A man who is new to the city tends to make the same mistake twice. He mistakes access to the room for standing in it — shows up once, contributes nothing but his presence, and wonders why the second invitation never lands. The four or five men at that coffee counter did not get there by attending. They got there by being the reason someone else's morning got easier, repeatedly, without asking for credit.",
+      "Getting a seat at one of these tables is not about being invited once. Invitations expire the moment you fail to be useful again. It is about becoming the kind of presence a table cannot function as well without — reliable, discreet, and never the one who explains afterward what was said inside it.",
+      "The skyline gets photographed because it is the part of the city built to be seen. The decisions get made in the parts that were built not to be. Learn which rooms those are, and Charlotte stops looking like a map and starts looking like a schedule.",
+    ]),
+
+  dict(slug="finishing-what-you-start", cat="philosophy", catlabel="Philosophy", vol="04", read="6 min read",
+    title="On Finishing What You Start",
+    stand="Most men do not fail at the hard part. They fail at the boring part, three weeks after the hard part stopped being exciting.",
+    featured=False, wide=False,
+    hero=dict(img="paris-rooftop", ext="jpg", mode="cover", srcset=True,
+      alt="A man alone on a rooftop at dusk, city lights beginning to come on below"),
+    body=[
+      "Every ambitious plan has a beginning that feels like a movie. There's a decision, a first meeting, maybe a purchase that makes it feel real — the domain name, the gym membership, the notebook bought specifically for the new discipline. That part is not hard. It is designed by the brain to feel almost effortless, because novelty is doing half the work.",
+      "The hard part, the part people brace for, usually arrives on schedule and gets handled, because everyone expected it and prepared accordingly. It's the part after that ends most projects — the stretch once the adrenaline of starting has fully worn off and the outcome is still nowhere in sight.",
+      PQ("They fail at the boring part, three weeks after the hard part stopped being exciting."),
+      "Call it week three. The idea has lost its shine, the outcome is not yet visible, and the only thing left to do is the unglamorous repetition nobody photographs for the announcement post. This is where most ambitious men quietly stop, usually without admitting that's what happened — they call it a pivot, a reprioritization, a decision to focus on something more promising.",
+      "The men who actually finish things are not the ones with more discipline in the abstract. They are the ones who correctly predicted week three would feel this way and built something into the plan that didn't depend on motivation to survive it — a standing appointment, a person checking in, a cost of quitting steep enough to make the boring part cheaper than stopping.",
+      "There is also a quieter reason the boring part gets skipped: it offers nothing to talk about. The exciting start makes a good story at dinner. The unglamorous middle does not, and men used to being interesting find that silence uncomfortable enough to abandon the project rather than sit in it.",
+      "Finishing does not require loving the middle. It requires being willing to be boring in public for exactly as long as the thing takes, without needing anyone to notice the effort while it's happening. The reward for that is quiet too, at first — and then, eventually, it is the only thing anyone remembers you for.",
+    ]),
+
+  dict(slug="oil-beats-alcohol", cat="fragrance", catlabel="Fragrance", vol="05", read="5 min read",
+    title="Why Oil Beats Alcohol, and Why Nobody Tells You",
+    stand="Alcohol announces itself and leaves. Oil sits on the skin and finishes the sentence four hours later, quietly, to someone standing closer than a room usually allows.",
+    featured=False, wide=True,
+    hero=dict(img="env-atelier", ext="jpg", mode="cover", srcset=True,
+      alt="A perfumer's atelier bench, oils and bottles arranged in low amber light"),
+    body=[
+      "Most fragrance is built to be noticed in the first ten seconds and forgiven for disappearing after that. Alcohol-based sprays are engineered for the opening — the burst that fills a doorway, turns a head, does its entire job in the time it takes to walk from the elevator to the desk. Then it evaporates, along with most of the impression it made.",
+      "Oil works on a different contract. It does not announce itself across a room, because it was never trying to. It sits close to the skin, warms with the body instead of the air, and releases in increments small enough that nobody notices the fragrance so much as they notice the person wearing it.",
+      PQ("Oil sits on the skin and finishes the sentence four hours later, quietly, to someone standing closer than a room usually allows."),
+      "This is the part almost nobody explains at the counter, because the counter is built to sell first impressions. A shop assistant spraying alcohol-based fragrance onto a card is optimizing for the version of the scent that survives sixty seconds of testing, not the version that survives a four-hour dinner.",
+      "Oil-based formulations skip that theater entirely and skip the sillage that comes with it — the trail a heavy spray leaves in an elevator after the wearer has already left. What it trades instead is proximity. The person who notices an oil is standing close enough that the scent was never meant to leave a public record.",
+      "That trade only works for someone comfortable being examined at close range rather than announced from across a room, which is exactly why it reads as more confident. A man wearing oil is not competing for attention on entry. He is investing in the second half of the evening, after the room has thinned out and the conversation has gotten quieter.",
+      "The math is simple once someone explains it, and almost nobody does, because the alcohol-based version is easier to manufacture, easier to bottle at scale, and easier to sell in sixty seconds under fluorescent lighting. Oil takes longer to notice and longer to forget, and the second part is the entire point.",
+    ]),
+
+  dict(slug="day-job-compromise", cat="business", catlabel="Business", vol="06", read="6 min read",
+    title="The Day Job Is Not the Compromise You Think It Is",
+    stand="The steady paycheck bought the years the brand needed to be built without needing to be profitable yet. That is not a consolation. That is the strategy.",
+    featured=False, wide=True,
+    hero=dict(img="env-opsroom", ext="jpg", mode="cover", srcset=True,
+      alt="A dim operations room, monitors and papers on a long desk, late at night"),
+    body=[
+      "There's a particular kind of embarrassment men carry about keeping a day job while building something else, as if the paycheck were evidence the real thing isn't real yet. That embarrassment is almost always misplaced, and it comes from watching a highlight reel of outcomes rather than the balance sheet that made them possible.",
+      "Nearly every brand worth admiring was underwritten, in its early years, by something boring and reliable that never made it into the origin story. Rent got paid. Inventory got funded. Bad months got survived. None of that required the new thing to be profitable on any particular week, because something else in the man's life was covering the difference.",
+      PQ("That is not a consolation. That is the strategy."),
+      "Treating the day job as a temporary embarrassment to escape as fast as possible produces exactly the pressure that kills good ideas early — decisions made out of desperation instead of judgment, corners cut because the runway is measured in weeks instead of years, growth chased before the product is actually ready for it.",
+      "The steady paycheck removes that pressure entirely, and removing pressure from a decision almost always improves the decision. A man who does not need this quarter's revenue to make rent can say no to the wrong deal. He can let a product sit unreleased for another six months because it isn't right yet, instead of shipping it broken because the mortgage doesn't care about quality control.",
+      "There is a cost, obviously — time, mostly, and the particular fatigue of building two things simultaneously while most of the room assumes you're only building one. But the version of the brand that gets built slowly, funded by something stable, tends to arrive at profitability already knowing who it is. The version built under financial duress tends to arrive there having compromised on everything along the way to survive.",
+      "Quit the day job when the new thing can carry its own weight, not one day before, and not because staying started to feel embarrassing at a dinner party. The paycheck was never the compromise. It was the only reason the real thing got the years it needed to become worth quitting for.",
+    ]),
+
+  dict(slug="only-one-in-the-room", cat="culture", catlabel="Culture", vol="07", read="5 min read",
+    title="Being the Only One in the Room, Then Changing the Room",
+    stand="You do not fix the room by complaining about it from outside. You fix it by staying long enough that the room starts to look like you belong.",
+    featured=False, wide=False,
+    hero=dict(img="env-gala", ext="jpg", mode="cover", srcset=True,
+      alt="A gala room mid-evening, chandeliers and a crowd out of focus"),
+    body=[
+      "Being the only one of you in a room is a specific kind of pressure that people who have never experienced it tend to underestimate. It is not just visibility — it is the sense that every mistake gets filed under a category larger than yourself, and every success gets treated as an exception rather than evidence.",
+      "The instinct, understandably, is to either perform harder than anyone else in the room or to leave and build a room of your own instead — both reasonable responses, and both, taken alone, incomplete. Overperforming buys tolerance, not belonging. Leaving solves the discomfort but leaves the room exactly as it was for the next person who walks in alone.",
+      PQ("You fix it by staying long enough that the room starts to look like you belong."),
+      "There's a third option that gets talked about less because it takes longer and offers no dramatic before-and-after — staying, doing the work at a level nobody can argue with, and letting the room's memory of who belongs in it slowly get rewritten by repetition instead of by speeches.",
+      "This is not a passive strategy. It requires showing up on the hardest nights, taking the assignments other people quietly avoid, and being visibly excellent often enough that eventually the room stops noticing you're the only one and starts noticing what you did. That shift, when it finally happens, is worth more than any single confrontation could have bought.",
+      "It also changes what the room looks like for the next person who walks in the way you did — nervous, alone, doing the math on how much they'll have to prove before anyone extends them the benefit of the doubt automatically. If you stayed long enough, that math gets a little easier for them, without you ever having to explain why.",
+      "Complaining about the room from outside it feels righteous and changes nothing about the room itself. Staying inside it, doing the work, and letting your presence become unremarkable over years — that's slower, and it's the only version that actually moves the room instead of just describing it.",
+    ]),
+
+  dict(slug="seven-years-trumpet", cat="music", catlabel="Music", vol="08", read="4 min read",
+    title="Seven Years of Trumpet and What It Taught About Rooms",
+    stand="A band learns a room in eight bars. Read the size of it, the mood of it, who is listening and who is only waiting to talk. The skill transfers.",
+    featured=False, wide=False,
+    hero=dict(img="env-bar", ext="jpg", mode="cover", srcset=True,
+      alt="A dim bar with a small stage, instruments set up, before the room fills"),
+    body=[
+      "Seven years of trumpet, first chair, most of it spent playing rooms that had no idea a teenager behind the horn was quietly studying them instead of the sheet music. That habit never left, even after the horn mostly did.",
+      "A band gets exactly one measure of silence to figure out a room before the first note commits them to a read. Too loud too early and half the room recoils before the set has a chance to earn their attention. Too quiet and the other half never notices the band arrived at all. Eight bars in, the good ones have already adjusted.",
+      PQ("Read the size of it, the mood of it, who is listening and who is only waiting to talk."),
+      "What gets read in those eight bars is not the crowd's taste in music. It's their attention — who came to actually listen, who came to be seen listening, and who is only in the room because leaving felt more awkward than staying. Playing to the wrong group in that split is how a set dies politely, without anyone ever saying so out loud.",
+      "That same read applies to almost every room that matters later — a negotiation, a pitch, a dinner where the real conversation is happening underneath the one everyone can hear. The people actually listening are rarely the loudest ones in the room, and mistaking volume for attention is a mistake a trumpet section corrects out of you fast, because the audience corrects it back with silence.",
+      "The other lesson seven years of first chair leaves behind is timing that isn't yours alone. A soloist can be technically flawless and still ruin a song by playing it a half-beat ahead of where the room's ear expected it. Reading a room means matching its rhythm before trying to lead it somewhere new, and most men skip straight to leading.",
+      "He doesn't play anymore, not really — an instrument he can't touch sits in a house full of things chosen once and left alone, and the piano beside it is wired to whatever he's actually listening to instead. But the training never left the way it left the case. Every room he's walked into since has gotten the same eight bars of silence before he decided how to play it.",
+    ]),
+
+  dict(slug="people-who-can-hurt-you", cat="life", catlabel="Life", vol="09", read="5 min read",
+    title="The People Who Can Still Hurt You",
+    stand="Keep the list short. Everyone on it earned the position before any of this started, and no amount of it will add a name.",
+    featured=False, wide=False,
+    hero=dict(img="paris-hero", ext="jpg", mode="cover", srcset=True,
+      alt="A portrait, half in shadow, looking just past the camera"),
+    body=[
+      "Success has a strange side effect nobody warns a man about early enough — it makes almost everyone easier to keep at arm's length, and a small number of people impossible to. The second group is worth paying attention to, because it doesn't grow. It only gets confirmed.",
+      "Most relationships that arrive after any kind of visible success carry a built-in asymmetry. The other person knows what you have now, has usually done the math on what that might mean for them, and the friendship — however genuine it might also be — is negotiating with that math whether either party admits it or not.",
+      PQ("Everyone on it earned the position before any of this started, and no amount of it will add a name."),
+      "The people who can actually hurt you are the ones who were there before any of that math existed — who knew the version of you that had nothing anyone would want, and stayed anyway, for reasons that had nothing to do with what you'd eventually become. That history is the only credential that counts, and it cannot be issued retroactively no matter how close someone later gets.",
+      "This is why the list stays short on purpose, not by accident. It is tempting, especially early, to let it grow — new people are interesting, flattering, useful, and it feels ungenerous to keep them at a permanent distance. But the list isn't about who's interesting. It's about who gets access to the parts of you that aren't performing for anyone, and that access is the one thing worth protecting deliberately.",
+      "There's a test that tends to work better than instinct: would this person's opinion of you have been identical five years before any of it happened. If the honest answer is no, they belong somewhere valuable and real, just not on that particular list — and confusing the two categories is how good men end up exposed to people who were never actually positioned to catch them.",
+      "None of this makes a man cold. It makes him accurate about where his actual protection is coming from, which is usually a shorter list than his social calendar would suggest. Guard it accordingly, and let everyone else enjoy the version of you that's allowed to be generous with everything except that.",
+    ]),
+
+  # ---------------------------------------------------------------
+  # New posts (from the handwritten topic list). Skyfall was crossed
+  # out by the user in their own notebook and is deliberately absent.
+  # ---------------------------------------------------------------
+
+  dict(slug="karma-automotive", cat="automotive", catlabel="Automotive", vol="11", read="4 min read",
+    title="Karma Automotive, and the Case for a Badge Nobody Recognizes",
+    stand="Nobody at the valet stand knows the name. That is the point — the car is explaining something to the one person in the room who does.",
+    featured=False, wide=False,
+    hero=dict(img="press-karma", ext="jpg", mode="cover", srcset=True,
+      alt="A Karma Automotive coupe on an auto-show floor"),
+    body=[
+      "Karma Automotive builds cars that most valet attendants will misidentify on sight, and the company seems entirely at peace with that. It is not chasing the three-pointed star or the prancing animal, the badges that do half the talking before a driver ever gets out. It is betting that a smaller, more particular kind of recognition is worth more.",
+      "That bet says something specific about who the car is built for. A man who buys for the badge is buying an argument he expects to win before anyone examines the details — a shortcut through the whole conversation about taste. A man who buys a car almost nobody recognizes is making a different claim entirely: that he doesn't need the shortcut, and would rather the details do the convincing.",
+      PQ("The car is explaining something to the one person in the room who does."),
+      "The extended-range electric architecture Karma has built its recent lineup around is itself a kind of quiet confidence — neither fully conceding to the range anxiety that scares buyers away from pure electric, nor pretending the internal combustion era isn't ending. It solves a real problem without making a spectacle of solving it, which is the same instinct visible in the design language: doors that open upward instead of a wing that announces itself from a block away, a silhouette that reveals itself slowly instead of all at once.",
+      "This is a harder sell than a recognizable badge, and Karma clearly knows it. The company is not competing for the buyer who wants applause at the valet stand. It's competing for the buyer who has already had that applause, decided it wasn't the point, and started looking for a car that agrees with him instead of performing for everyone else in the lot.",
+      "There is a risk in building for that buyer exclusively — a smaller audience, a slower path to the kind of scale that funds the next generation of the car. But it also means every unit on the road is doing something a mass-market badge cannot: it is starting a conversation instead of ending one, because the only way anyone learns what it is happens to be by asking the man standing next to it.",
+      "That's the actual value proposition, once you strip away the horsepower figures and the carbon fiber. Karma isn't selling a badge that does the explaining for you. It's selling the specific, quieter confidence required to own a car you'll have to explain yourself — and betting that the right buyer would rather have that conversation than skip it.",
+    ]),
+
+  dict(slug="the-gentlemen", cat="culture", catlabel="Culture", vol="12", read="5 min read",
+    title="On Being Underestimated: Notes on The Gentlemen",
+    stand="Every man in that film is underestimated by someone in the first ten minutes and finishes the movie having made them regret it. That is the whole genre, done properly.",
+    featured=False, wide=False,
+    hero=dict(img="press-the-gentlemen", ext="jpg", mode="contain", srcset=False,
+      alt="Official poster for Guy Ritchie's The Gentlemen (2019)"),
+    body=[
+      "There's a genre of British crime film that lives or dies on one specific trick — letting every character look, for the first several minutes, like exactly what a lazier film would have made them permanently. The stoner looks disposable. The posh one looks soft. The retired gangster looks retired. Guy Ritchie's The Gentlemen spends its whole runtime proving that first impression was the joke, not the plot.",
+      "What makes it worth revisiting past the plot mechanics is the class commentary sitting quietly underneath the caper — old aristocracy and new money circling the same territory, each side certain the other doesn't understand how things are really done, both occasionally right. The film never explains this directly. It just keeps putting men who misjudge each other's competence in the same room and letting the misjudgment cost someone something.",
+      PQ("Every man in that film is underestimated by someone in the first ten minutes and finishes the movie having made them regret it."),
+      "That structure — the quiet man mistaken for harmless, correcting the record without raising his voice to do it — is the entire appeal of the genre when it's done well, and most attempts at it get the tone wrong in one direction or the other. Too much menace and it stops being fun. Too little and there's nothing at stake when the correction finally lands.",
+      "Ritchie's version threads that needle mostly by refusing to let anyone stay underestimated for long. The moment a character's real capability surfaces, the film moves on immediately instead of lingering on the reveal, which is a more confident choice than it sounds — it trusts the audience to have been paying attention instead of needing the point explained twice.",
+      "It plays on a screen here in a room built for exactly this kind of thing, the sort of space where a film gets watched at low volume with a drink in hand and half the room's attention, and it holds up fine under those conditions, which not every prestige crime picture manages. Some films need the theater's silence to work. This one is comfortable being the background to a good night, and comes forward when it earns it.",
+      "What sticks longest isn't any single twist. It's the reminder that being underestimated is not a weakness a man has to correct loudly — the correction can just as easily be a quiet accumulation of results, delivered so calmly the other party doesn't notice they've lost the argument until it's already over.",
+    ]),
+
+  dict(slug="september-in-charlotte", cat="charlotte", catlabel="Charlotte", vol="13", read="6 min read",
+    title="September: Things to Do in Charlotte",
+    stand="August leaves quietly and nobody throws it a party. September is when the city remembers it has a personality, and it only lasts about six weeks.",
+    featured=False, wide=True,
+    hero=dict(img="charlotte", ext="jpg", mode="cover", srcset=True,
+      alt="The Charlotte, North Carolina skyline in early evening light"),
+    body=[
+      "August in Charlotte is a season everyone survives rather than enjoys — heat that sits on the city like a held breath, humidity thick enough to change a suit's decisions for you. Nobody plans anything ambitious in August. They just wait for it to be over.",
+      "September is the reward for that patience, and the window is shorter than people account for when they're making plans. The heat breaks gradually rather than all at once, evenings start arriving with something close to relief in them, and for about six weeks the city behaves like it actually wants to be outside instead of merely tolerating the idea.",
+      PQ("September is when the city remembers it has a personality, and it only lasts about six weeks."),
+      "This is the month to take a rooftop seriously again — Merchant &amp; Trade, nineteen floors up over South Church Street, or Novelty House further into Uptown, both of them useless in July and exactly right the moment the air stops fighting back. A drink at either one in late September does more work than the same drink would in June, because the view finally has weather worth looking at.",
+      "It's also the best stretch for the kind of evening that starts formal and loosens as it goes — a proper hour at The Punch Room inside the Ritz-Carlton, dim and unhurried, before moving somewhere the night can get a little looser without losing the thread entirely. September evenings are long enough to hold both moods without rushing between them.",
+      "For the daytime hours, this is the window Quail Hollow's calendar tends to matter most, and Freedom Park stops being a place you drive past and starts being a place you actually use — worth the walk in weather that no longer punishes you for taking it. NoDa earns its reputation properly this time of year too, the patios at The Evening Muse and Neighborhood Theatre finally worth sitting on instead of ducking past toward the air conditioning inside.",
+      "None of this requires a plan more elaborate than paying attention to the calendar and being willing to leave the apartment more than the previous ten weeks allowed. September doesn't announce itself the way the holidays do. It just quietly hands the city back to the people willing to notice, for about six weeks, before October changes the conversation again.",
+      "The full list of what's worth knowing about this city, neighborhood by neighborhood, lives in the Guide — worth a look before the window closes.",
+    ]),
+
+  dict(slug="gta-6-anticipation", cat="business", catlabel="Business", vol="14", read="5 min read",
+    title="What Twelve Years of Waiting for GTA 6 Says About Attention",
+    stand="Nobody has played it. Everybody has an opinion about it. That gap is the most valuable real estate in entertainment right now, and almost nothing else on earth can hold it for twelve years.",
+    featured=False, wide=False,
+    hero=dict(img="press-gta6", ext="jpg", mode="contain", srcset=True,
+      alt="Official box art for Grand Theft Auto VI"),
+    body=[
+      "There is exactly one entertainment property on earth that can go over a decade between major releases and still command the room every time it so much as clears its throat. Grand Theft Auto VI has been the subject of theory, leaked footage, box-art forensics and fan debate for years now, and none of that required a single person outside the studio to have actually played it.",
+      "That is not luck. It is a specific kind of business discipline that almost no other entertainment company on earth has the patience, or the market position, to attempt — the willingness to let anticipation compound for years instead of monetizing it early with a rushed release that would have ended the conversation.",
+      PQ("That gap is the most valuable real estate in entertainment right now, and almost nothing else on earth can hold it for twelve years."),
+      "Most companies treat attention as a resource that decays the moment it isn't actively fed, which is why the entertainment calendar is so crowded with sequels, trailers, and content designed mainly to keep a property in the conversation between real releases. Rockstar has done the opposite, on purpose, betting that scarcity itself is the marketing — that silence, held long enough, becomes its own kind of noise.",
+      "It is a bet that only works from a position most competitors don't have. A studio without an existing, obsessive fanbase cannot simply go quiet for years and expect the anticipation to survive the silence; it would just be forgotten. Rockstar can, because the previous entry in the series became close to a cultural institution rather than a product, and institutions get remembered without needing to be reminded.",
+      "What's actually being sold in the years before release isn't the game. It's the anticipation itself — the box-art breakdowns, the trailer frame-by-frame analysis, the arguments over a single detail in a screenshot. All of that has commercial value independent of the eventual release, and Rockstar has been remarkably disciplined about not rushing to convert it into a product before the product was actually ready.",
+      "Whether the game itself lives up to twelve years of theorizing is a separate question, and an honest one, because expectation this large has broken plenty of releases before it. But as a case study in what patience can do to the value of attention, it's already a masterclass — proof that in an industry addicted to constant content, the rarest and most valuable move left is simply not showing up until you mean it.",
+    ]),
+
+  dict(slug="the-room-playlist", cat="music", catlabel="Music", vol="15", read="4 min read",
+    title="The Philosophy of a Room That Has Its Own Playlist",
+    stand="Nobody has ever asked what's playing and not gotten an answer. That is the only metric that matters, and it has nothing to do with the number of songs on the list.",
+    featured=False, wide=False,
+    hero=dict(img="room-living", ext="jpg", mode="cover", srcset=True,
+      alt="A living room in low evening light, a piano visible against the far wall"),
+    body=[
+      "A room with music playing in it behaves differently from the same room in silence, and most people who curate a playlist for their own space never quite reckon with how much responsibility that actually is. The wrong choice doesn't just sound bad. It changes the temperature of every conversation happening underneath it.",
+      "The instinct most men have when building a playlist for a room they entertain in is to build a highlight reel — the songs that get the biggest reaction, stacked back to back. That instinct produces a set that's exhausting after forty minutes, because it never lets a room breathe between peaks. A playlist that has to work for hours needs restraint a highlight reel doesn't.",
+      PQ("Nobody has ever asked what's playing and not gotten an answer. That is the only metric that matters."),
+      "The better model is closer to what a good hotel does in its lobby — music that's doing real work without asking to be the center of attention, low enough that two people can lean in and talk over it without raising their voices, but composed carefully enough that if the conversation lulls, the silence doesn't feel awkward, it feels intentional.",
+      "This is harder to build than a highlight reel, because it requires taste that doesn't need credit. Nobody thanks a host for the ambient jazz playing quietly at eleven the way they'd thank him for a song everyone sings along to. The reward for getting it right is subtler and, honestly, better — a room people don't want to leave, without being able to say exactly why.",
+      "There's a piano in the room too, unplayed most nights, wired instead to whatever's actually on. It's an admission, in furniture form, that the atmosphere matters more than the performance of having live music — a piano nobody plays says something a piano being played never could, which is that the room was designed for the guests, not for an audience.",
+      "Track counts and genre tags are the wrong way to judge a playlist like this. The only real metric is what happens when someone finally asks what's playing — whether the answer feels like a discovery worth remembering, or an admission that nobody thought about it at all. Build for the first outcome, every time, even when it means leaving your own favorite song off the list because it doesn't fit the room.",
+    ]),
+
+  dict(slug="mercedes-concept", cat="automotive", catlabel="Automotive", vol="16", read="4 min read",
+    title="What a Concept Car Is Actually For",
+    stand="It will never be built the way it stands on that stage, and that was never the assignment. The assignment was to tell you what the badge believes before the accountants get a vote.",
+    featured=False, wide=True,
+    hero=dict(img="press-mercedes-concept", ext="jpg", mode="cover", srcset=True,
+      alt="A Mercedes-Benz concept coupe under stage lighting, front three-quarter view"),
+    body=[
+      "A concept car is not a preview of what you'll be able to buy. Almost nobody outside the industry believes that the first time they see one under stage lighting, and almost every concept car quietly disappoints that belief a year or two later when the production version arrives with half the ambition sanded off.",
+      "That's not a failure of the concept. It's the concept doing exactly the job it was built for, which has nothing to do with the showroom. A concept car exists to say, out loud and without compromise, what a brand believes design should look like once every constraint an accountant or a safety regulator would normally impose gets temporarily suspended.",
+      PQ("The assignment was to tell you what the badge believes before the accountants get a vote."),
+      "This is why the interior details on a concept car tend to be the most revealing part, more than the silhouette. A grille that lights up, a cabin built around a single sculptural gesture instead of ten thousand small compromises for manufacturability — none of that is meant to survive contact with a production line. It's meant to be photographed, studied, and slowly absorbed into whatever does eventually reach a dealership, in smaller doses, over several years.",
+      "The luxury end of the industry treats this ritual more seriously than most, because the concept car is doing double duty — it's a design study, but it's also a statement of confidence, a way of telling the market that the brand still knows exactly what it stands for even while the entire industry reorganizes itself around electrification and questions nobody had to answer a decade ago.",
+      "Watching one of these unveiled tells you more about a brand's next decade than reading its quarterly earnings call would. The earnings call tells you what already sold. The concept tells you what the design studio believes should exist, unconstrained by what already sold — which is a far more honest signal of where taste is actually headed.",
+      "None of this means the concept is a fantasy with no consequence. Pieces of it survive, translated and diluted, into the cars that do eventually reach a driveway. The trick, for anyone actually paying attention rather than just admiring the stage lighting, is learning to spot which pieces those will be — because that's the whole game, and almost nobody plays it on purpose.",
+    ]),
+
+  dict(slug="the-odyssey", cat="philosophy", catlabel="Philosophy", vol="17", read="6 min read",
+    title="The Odyssey, and the Case for the Long Way Home",
+    stand="He spends ten years getting home and roughly none of them are wasted. Every detour is doing something the straight line couldn't.",
+    featured=False, wide=False,
+    hero=dict(img="room-study", ext="jpg", mode="cover", srcset=True,
+      alt="A quiet study, bookshelves in shadow, a single lamp lit"),
+    body=[
+      "Strip away the monsters and the gods intervening from offstage, and what's left of the story is a man trying to get home and taking a decade longer than the trip should require. Modern instinct treats that as tragedy — the hero delayed, the return withheld, time stolen from a life that should have been spent somewhere else.",
+      "But the story never actually reads that way if you sit with it honestly. The delay isn't punishment for its own sake. Nearly every detour costs the man something and teaches him something in the same breath, and by the time he finally reaches the shore he left decades earlier, he is not the same man who left it — and the home he's returning to required exactly that change to survive contact with.",
+      PQ("Every detour is doing something the straight line couldn't."),
+      "There's a version of this story that gets told as pure adventure, and there's a truer version underneath it about disguise — a man who spends much of his own homecoming pretending to be someone smaller than he is, gathering information before revealing anything about who he's actually become. That instinct, arriving quietly and reading the room before announcing yourself, is not cowardice. It's patience wearing a strategy.",
+      "The waiting on the other end of the journey matters just as much as the wandering. A household holds itself together for two decades on faith that a return is still possible, long after most reasonable people would have declared the man gone for good. That kind of loyalty doesn't get nearly the credit the journey does, but it's the harder discipline of the two — sustaining belief across years with no evidence, rather than surviving a single dramatic ordeal.",
+      "What the story keeps insisting on, if you let it, is that the long way round is not a failure of navigation. Sometimes it's the only route capable of delivering a man who's actually ready for what's waiting when he arrives — the direct path would have gotten him home years sooner, and gotten him there as someone unequipped to stay.",
+      "Most men measure a return by how fast they made it back. This story measures it by whether the man who arrives is capable of being worth the wait — and it spends two thousand years insisting those are not the same question at all.",
+    ]),
+
+  dict(slug="troy", cat="culture", catlabel="Culture", vol="18", read="5 min read",
+    title="Troy, and What Ten Years Outside the Walls Actually Proves",
+    stand="Ten years to take one city, and the thing that finally works is not the army. It is patience wearing a disguise.",
+    featured=False, wide=False,
+    hero=dict(img="env-chamber", ext="jpg", mode="cover", srcset=True,
+      alt="A dim stone chamber, heavy and old, lit by a single source"),
+    body=[
+      "Ten years camped outside a single set of walls is not a story about siege warfare so much as it's a story about the limits of force applied directly and repeatedly to a problem that force alone was never going to solve. An army arrives outside a city convinced that enough pressure, sustained long enough, will eventually crack anything. A decade later, the walls are still standing.",
+      "What finally works isn't more force. It's a different kind of thinking entirely — a plan built on deception, patience, and the willingness to look like retreat for as long as the trick requires. The wooden horse gets remembered as a clever object, but the actual genius of it was psychological: convincing an exhausted city that the danger had finally passed, at the exact moment it hadn't.",
+      PQ("The thing that finally works is not the army. It is patience wearing a disguise."),
+      "There's a lesson in there about pride that the whole story keeps circling without ever stating outright — how much of the ten years was actually necessary, and how much of it was two sides too proud to end things any other way. Grievances compound. Reputations get staked on outcomes. By year six, the actual dispute that started the war is almost beside the point; nobody can afford to be the side that walks away first.",
+      "Set beside the story of the long way home that follows it, Troy reads almost like a warning about a different kind of failure — not the failure to persevere, but the failure to know when perseverance has stopped being a virtue and started being stubbornness with better public relations. Ten years of grinding at a wall is not automatically evidence of resolve. Sometimes it's evidence that nobody involved was willing to be the one who suggested a smarter approach three years earlier.",
+      "The city falls, in the end, not because anyone finally out-fought it, but because someone finally out-thought it — solved a problem that direct pressure had failed to solve for a decade, in a single night, with patience disguised as surrender. That reversal is the actual point of the story, more than any individual battle inside it.",
+      "Every long, grinding effort eventually has to ask itself the same question the war outside those walls waited ten years to ask: whether the current approach is working and simply needs more time, or whether it stopped working years ago and pride is the only thing still funding it. Knowing the difference is worth more than any wall ever built to keep the answer out.",
+    ]),
+
+  dict(slug="still-listening-to-iceman", cat="music", catlabel="Music", vol="19", read="3 min read",
+    title="Still Listening to Iceman",
+    stand="Some albums get a week. This one got moved into the rotation permanently, and nobody in the room has asked to change it since.",
+    featured=False, wide=False,
+    hero=dict(img="press-drake-iceman", ext="jpg", mode="contain", srcset=False,
+      alt="Official cover art for Drake's album Iceman"),
+    body=[
+      "Most albums, even good ones, get roughly two weeks of genuine attention before they quietly slide into the back catalog — played occasionally, referenced fondly, but no longer the thing actually queued up on a given night. Iceman didn't follow that pattern here, and it's worth asking honestly why, instead of just noting that it happened.",
+      "Part of it is pacing. An album built for genuine repeat listening has to reward attention on the fifth pass the same way it rewarded it on the first, which is a much harder trick than making a strong first impression. Most records front-load their best material and let the back half coast; this one keeps giving the listener a reason to stay through the whole runtime, which is the actual test of whether something belongs in permanent rotation or just a good first week.",
+      PQ("Some albums get a week. This one got moved into the rotation permanently."),
+      "There's also something to be said for an album that holds up as background and as foreground equally well — playing during a working afternoon without demanding attention, and holding up just as well at higher volume with actual focus on it later that night. That range is rarer than it should be, and it's the difference between an album you like and an album you live with.",
+      "It plays on repeat in a specific room here, alongside a certain British crime picture that never seems to leave the rotation either — two very different things sharing screen and speaker time simply because neither one has worn out its welcome yet, months in. That's a higher bar than most culture clears, and most of what clears it does so quietly, without campaign.",
+      "None of this is a lyric-by-lyric breakdown, on purpose — the specifics of what's actually being said belong to the person who wrote it, and repeating them here would miss the point of what actually makes an album worth this kind of loyalty anyway. It isn't any single line. It's the cumulative effect of an album built to survive familiarity instead of relying on novelty to carry it.",
+      "Most music gets judged in its first week and forgotten by its third. The real test — the only one that actually matters months later — is whether it's still getting chosen on a night when literally anything else in the catalog was available instead. This one keeps getting chosen, and at some point that stops being a coincidence and starts being the whole review.",
+    ]),
+
+  dict(slug="new-drake-album", cat="music", catlabel="Music", vol="20", read="4 min read",
+    title="On the First Listen, Before Anyone Else's Opinion Gets There First",
+    stand="The first play happens once. Everything after that is memory pretending to be a first impression.",
+    featured=False, wide=False,
+    hero=dict(img="press-drake-maidofhonour", ext="jpg", mode="contain", srcset=False,
+      alt="Official cover art for Drake's album Maid of Honour"),
+    body=[
+      "There's a specific kind of attention a new album gets exactly once — the first play, cold, before a single opinion has had the chance to attach itself to any of it. Every listen after that is contaminated, in a good way, by everything the listener already knows or has already decided. The first one is the only pure data point anyone ever gets.",
+      "That's part of why album releases have become events rather than just product drops, especially at a certain level of cultural weight — the anticipation itself is now a shared experience, timestamped, discussed in real time by people all having their one uncontaminated listen within the same few hours of each other, comparing first reactions before anyone's had time to actually sit with the thing properly.",
+      PQ("The first play happens once. Everything after that is memory pretending to be a first impression."),
+      "There's a cost to that speed, though, that doesn't get discussed enough. An album released into a culture built for instant reaction gets judged, publicly, before most listeners have given it the time an album actually needs to reveal itself. The verdict often forms in the first forty-eight hours and then calcifies, regardless of whether the record was ever built to be understood that fast.",
+      "The smarter move, and the harder one, is treating that first play as data rather than as a verdict — noting what stood out, resisting the urge to publish an opinion before the record has had a week to actually settle, and letting the second and third listens do the real work of deciding whether something's good or just loud in the moment.",
+      "Multiple albums landing from the same artist within the same stretch only sharpens that problem. Attention is finite, and a listener has to make quick, mostly unconscious decisions about where to spend it first — which record gets the careful first listen, and which one gets queued for later, sometimes much later, sometimes never given the chance it might have deserved.",
+      "None of that is a complaint about the music itself, which stands or falls on its own terms regardless of the noise around its release. It's a note about how differently the same album gets received depending on when someone finally gives it that first honest, undistracted listen — early in the noise, or quietly, weeks later, once the noise has cleared enough to actually hear it.",
+    ]),
+
+  dict(slug="unlabel", cat="business", catlabel="Business", vol="21", read="5 min read",
+    title="Unlabel, and the Gap Between the Man and the Brand",
+    stand="The brand that survives contact with the man behind it was never a costume to begin with. That is a harder thing to build than it sounds, and most people give up around year two.",
+    featured=False, wide=True,
+    hero=dict(img="press-unlabel", ext="jpg", mode="contain", srcset=False,
+      alt="Cover of the book Unlabel: Selling You Without Selling Out, by Marc Ecko"),
+    body=[
+      "There's a particular failure mode in personal branding that shows up almost every time, usually around the second year — the version of a man presented publicly and the version who actually exists start to diverge, slowly at first, and then noticeably enough that people who meet both start asking which one is real.",
+      "Marc Ecko, who built an actual apparel empire out of exactly this problem, spent a book making the case that the divergence is optional — that a brand doesn't have to be a costume worn over an authentic self, competing with it for airtime. Built correctly from the start, the brand is closer to an amplifier for something that was already true, rather than a substitute for it.",
+      PQ("The brand that survives contact with the man behind it was never a costume to begin with."),
+      "That distinction sounds obvious stated plainly and turns out to be genuinely difficult in practice, because the market rewards the costume faster than it rewards the substance underneath it. A polished, confident persona gets attention immediately. The actual character work — becoming, in private, the kind of man the public version claims to be — takes years, offers no immediate return, and nobody's applauding it while it's happening.",
+      "The gap between the two is where most personal brands eventually collapse, usually in public and usually expensively. A costume can be maintained for a while through sheer performance, but it requires constant energy to keep up, and the moment the performer gets tired, careless, or simply human in front of the wrong audience, the distance between the brand and the man becomes the whole story instead of a footnote to it.",
+      "The alternative isn't abandoning the brand for some myth of pure, unmanaged authenticity — that's its own kind of naivety, and it ignores that presentation always matters, in any room that counts. The alternative is closing the gap deliberately, on purpose, until the brand isn't describing an aspiration anymore. It's just accurately describing what's already there.",
+      "That's a slower, less flattering process than building a persona from scratch, because it requires the private work to actually keep pace with the public claim instead of just outrunning it for a while on charisma. Most people give up on that discipline around year two, once the persona is already working well enough that closing the gap starts to feel unnecessary. The ones who keep closing it anyway are the only ones whose brand is still standing a decade later, unchanged by scrutiny, because there was never a costume there to begin with.",
+    ]),
+
+  dict(slug="laws", cat="philosophy", catlabel="Philosophy", vol="22", read="5 min read",
+    title="Laws",
+    stand="Most of the rules a man actually lives by were never written down, which is exactly why they keep getting broken. Write them down.",
+    featured=False, wide=False,
+    hero=dict(img="env-editorial", ext="jpg", mode="cover", srcset=True,
+      alt="A writing desk, lamplight, a page half filled"),
+    body=[
+      "Every man operates by a private code whether he's ever articulated it or not — a set of lines he won't cross, standards he holds himself to even when nobody's checking, instincts about how to treat people that override whatever's convenient in the moment. Most of that code stays unwritten for an entire lifetime, which is precisely why it erodes so easily under pressure.",
+      "An unwritten rule is easy to bend exactly once, quietly, when the circumstances feel unusual enough to justify the exception. The trouble is that circumstances always feel unusual in the moment — that's what makes them feel like exceptions rather than a slow abandonment of the rule itself. Write the rule down, and the exception has to argue with something concrete instead of with a feeling that's conveniently on its side.",
+      PQ("Write them down."),
+      "What follows here isn't philosophy borrowed from anyone else's system. It's a working code, built from what's actually held up under real pressure rather than what sounded good in theory. Never negotiate a price twice — once agreed, it's settled, and revisiting it later just because leverage shifted is how a man's word stops meaning anything to the people who extended him credit on it. Be early enough that waiting is never something someone else does on your behalf.",
+      "Do not discuss with a stranger what was said in confidence by someone who trusted the room to be closed — not the flattering version, not the funny version, none of it. A confidence repeated even once, even to someone who'd never repeat it further, has already been broken; the second person hearing it was never the point.",
+      "Spend the first sentence of any disagreement making sure the other man knows he's being heard before spending the second sentence making your own case — most arguments are lost or won in that first sentence, long before either side gets to the substance. And never let a debt, financial or otherwise, sit unacknowledged past the point where the other party might start to wonder if you've forgotten it. You haven't. Say so.",
+      "None of these are complicated. That's the point — a code that requires a law degree to interpret gets abandoned the first time it's inconvenient, because nobody has the patience to consult it under pressure. A short list, actually followed, outperforms a long list that only gets read once and then filed away with good intentions. Keep it short. Follow it especially on the days following it costs you something.",
+    ]),
+
+  dict(slug="jobs-vs-steve-jobs", cat="business", catlabel="Business", vol="23", read="6 min read",
+    title="Jobs vs. Steve Jobs",
+    stand="One of those is something you have. The other is something you build so thoroughly that eventually it forgets it needed you at all.",
+    featured=False, wide=True,
+    hero=dict(img="hero-boardroom", ext="jpg", mode="cover", srcset=True,
+      alt="An empty boardroom at the top of a tower, city lights beyond the glass"),
+    body=[
+      "The English language plays a trick on anyone thinking seriously about work, because it uses the same word for two entirely different relationships to it. A job is something you have — granted by someone else, revocable by someone else, defined by a description written before you ever showed up to fill it. It is, structurally, something done to you as much as something you do.",
+      "Steve Jobs, whatever else gets said about him, represents the other model almost perfectly — not because of any particular genius unique to him, but because of the basic mechanics of what he built. A company started in a garage with a handful of collaborators is not a job in the traditional sense at all. There's no description written in advance, because nobody existed yet to write one.",
+      PQ("One of those is something you have. The other is something you build so thoroughly that eventually it forgets it needed you at all."),
+      "That's the real distinction worth sitting with, stripped of the mythology that tends to attach itself to any story this well known. It isn't really about talent, or about the specific products that came out of that garage, or any of the details that get repeated until they stop meaning anything. It's about which side of the sentence a man is standing on — the one who has a job, or the one who built the thing other people eventually have jobs at.",
+      "Most men will spend most of their working lives on the first side of that sentence, and there's no shame whatsoever in that — the economy runs on it, and pretending otherwise is its own kind of self-deception. The mistake isn't having a job. The mistake is mistaking the job for the ceiling, when for the right person at the right moment it was only ever the floor.",
+      "Building the second kind of thing is slower, riskier, and offers none of the structural certainty a job provides — no description written by someone else, no guaranteed paycheck, no org chart explaining where you fit. What it offers instead, on the rare occasions it works, is a company that eventually runs without needing the person who started it to explain what it is anymore. That's the actual finish line, and it's further away than the origin story ever lets on.",
+      "The wordplay is almost too easy — a job, and Jobs — but the substance underneath it isn't a joke at all. It's a genuine fork in how a man can relate to his working life: something assigned to him, or something he assigned himself the impossible task of building from nothing. Most days, having the job is the wiser bet. Every so often, a man decides the garage is worth the risk instead.",
+    ]),
+
+]
+
+# ----------------------------------------------------------------------
+# The Vol. 10 pantry card is intentionally left untouched (see docstring).
+# Reproduced verbatim from the existing journal.html.
+# ----------------------------------------------------------------------
+PANTRY_CARD_HTML = '''      <a class="jcard" data-cat="life" href="pantry.html">
+        <div class="jcard__media"><img src="assets/img/room-kitchen@sm.jpg" alt="" loading="lazy"></div>
+        <p class="jcard__cat">Life</p>
+        <h3 class="jcard__title">The Only Standing Order in the Apartment</h3>
+        <p class="jcard__stand">Everything else here was chosen once and left alone. This is the one thing that renews itself weekly, without being asked, and he has never once thought to change it.</p>
+        <p class="jcard__meta"><span>Vol. 10</span><span>3 min read</span><span>HelloFresh &#215; Paris Pullen</span></p>
+      </a>'''
+
+ARTICLE_CSS = '''<style>
+  .jread-hero{position:relative;overflow:hidden;border-radius:2px;margin-top:var(--s7);background:var(--charcoal)}
+  .jread-hero--cover img{width:100%;height:clamp(260px,42vw,480px);object-fit:cover;display:block;filter:brightness(.82)}
+  .jread-hero--contain{display:flex;align-items:center;justify-content:center;padding:var(--s8) var(--s6);
+    background:linear-gradient(180deg,var(--charcoal),var(--ink))}
+  .jread-hero--contain img{max-height:420px;max-width:100%;width:auto;height:auto;display:block;
+    box-shadow:0 30px 80px rgba(0,0,0,.55)}
+  .jread-body{margin-top:var(--s8);display:grid;gap:var(--s5);max-width:var(--measure)}
+  .jread-body .pullquote{margin:var(--s3) 0}
+  .jread-nav{margin-top:var(--s10);border-top:1px solid var(--rule);padding-top:var(--s7);
+    display:flex;flex-wrap:wrap;gap:var(--s5);justify-content:space-between;align-items:baseline}
+  .jread-nav a{color:var(--bone)}
+  .jread-nav__next{text-align:right;max-width:32ch}
+  .jread-credit{margin-top:var(--s4);font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
+</style>'''
+
+def hero_html(post, forpage=False):
+    h = post["hero"]
+    img = h["img"]; ext = h["ext"]; mode = h.get("mode", "cover")
+    alt = esc(h.get("alt", ""))
+    cls = "jread-hero jread-hero--cover" if mode == "cover" else "jread-hero jread-hero--contain"
+    if h.get("srcset"):
+        src = f'assets/img/{img}@sm.{ext}'
+        srcset = f'assets/img/{img}@sm.{ext} 1200w, assets/img/{img}.{ext} 2400w'
+        img_tag = f'<img src="{src}" srcset="{srcset}" sizes="100vw" alt="{alt}" loading="eager">'
+    else:
+        img_tag = f'<img src="assets/img/{img}.{ext}" alt="{alt}" loading="eager">'
+    return f'<div class="{cls}">{img_tag}</div>'
+
+def body_html(post):
+    out = []
+    for para in post["body"]:
+        if para.startswith("PQ::"):
+            out.append(f'<p class="pullquote">{para[4:]}</p>')
+        else:
+            out.append(f'<p class="body">{para}</p>')
+    return "\n      ".join(out)
+
+def article_url(post):
+    return f'journal-{post["slug"]}.html'
+
+def render_jlead(post):
+    return f'''    <a class="jlead reveal" href="{article_url(post)}" data-cat="{post['cat']}">
+      <div class="jlead__media">
+        <img src="assets/img/{post['hero']['img']}@sm.{post['hero']['ext']}" srcset="assets/img/{post['hero']['img']}@sm.{post['hero']['ext']} 960w, assets/img/{post['hero']['img']}.{post['hero']['ext']} 2000w" sizes="(max-width:900px) 100vw, 60vw" alt="" loading="eager">
+        <span class="jlead__tag">{post['catlabel']} &#183; Vol. {post['vol']}</span>
+      </div>
+      <div class="stack">
+        <h2 class="jlead__title">{esc(post['title'])}</h2>
+        <p class="jcard__stand">{post['stand']}</p>
+        <p class="jcard__meta"><span>Featured</span><span>{post['read']}</span></p>
+      </div>
+    </a>'''
+
+def render_jcard(post):
+    wide = " jcard--wide" if post.get("wide") else ""
+    return f'''      <a class="jcard{wide}" data-cat="{post['cat']}" href="{article_url(post)}">
+        <div class="jcard__media"><img src="assets/img/{post['hero']['img']}@sm.{post['hero']['ext']}" alt="" loading="lazy"></div>
+        <p class="jcard__cat">{post['catlabel']}</p>
+        <h3 class="jcard__title">{esc(post['title'])}</h3>
+        <p class="jcard__stand">{post['stand']}</p>
+        <p class="jcard__meta"><span>Vol. {post['vol']}</span><span>{post['read']}</span></p>
+      </a>'''
+
+# ----------------------------------------------------------------------
+# journal.html
+# ----------------------------------------------------------------------
+def build_journal_index():
+    featured = [p for p in JOURNAL_POSTS if p.get("featured")][0]
+    grid_posts = [p for p in JOURNAL_POSTS if not p.get("featured")]
+
+    filter_buttons = "\n      ".join(
+        f'<button type="button" data-cat="{slug}">{label}</button>' for slug, label in CATS
+    )
+
+    grid_html = "\n".join(render_jcard(p) for p in grid_posts) + "\n" + PANTRY_CARD_HTML
+
+    html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Journal &#8212; Paris Pullen</title>
+<meta name="description" content="Style, strategy, culture, Charlotte, music, fragrance, business, philosophy and life. Written the way it is lived.">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+{SITE_HEADER}
+{SITE_MENU}
+<main>
+<section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,14rem)">
+  <div class="wrap">
+    <header class="split reveal" style="align-items:end;margin-bottom:var(--s8)">
+      <div class="stack stack--tight">
+        <p class="eyebrow">The Gentleman&#8217;s Journal</p>
+        <h1 class="display display--mega">The<br>Journal</h1>
+      </div>
+      <div class="stack">
+        <p class="lede">Ten categories. No filler. Each entry earns its place by being useful to a man building something.</p>
+      </div>
+    </header>
+
+    <nav class="jfilter reveal" aria-label="Filter by category">
+      <button type="button" class="is-on" data-cat="all">All</button>
+      {filter_buttons}
+    </nav>
+
+{render_jlead(featured)}
+
+    <div class="jgrid reveal reveal-d1" id="jgrid">
+{grid_html}
+    </div>
+    <p class="jempty" id="jempty" hidden>No entries in this category yet.</p>
+
+    <div class="split reveal" style="margin-top:var(--s10);border-top:1px solid var(--rule);padding-top:var(--s7)">
+      <p class="pullquote">You don&#8217;t need to be the loudest man in the room.</p>
+      <div class="stack">
+        <p class="body">Just the one everyone remembers.</p>
+        <p class="body">New entries are irregular by design. If it is not worth reading twice, it does not go up.</p>
+        <a class="link-under" href="mailto:hello@parispullen.com?subject=The%20Journal">Get told when one lands &#8594;</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+{SITE_FOOT}
+<script src="assets/js/journal.js" defer></script>
+<script src="assets/js/world.js" defer></script>
+</body>
+</html>
+'''
+    with open("journal.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print("wrote journal.html")
+
+# ----------------------------------------------------------------------
+# journal-<slug>.html article pages
+# ----------------------------------------------------------------------
+def build_article_pages():
+    posts = JOURNAL_POSTS
+    n = len(posts)
+    for i, post in enumerate(posts):
+        prev_post = posts[i - 1]
+        next_post = posts[(i + 1) % n]
+        html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{esc(post['title'])} &#8212; The Journal &#8212; Paris Pullen</title>
+<meta name="description" content="{esc(post['stand'])}">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+{ARTICLE_CSS}
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+{SITE_HEADER}
+{SITE_MENU}
+<main>
+<section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,14rem)">
+  <div class="wrap wrap--narrow">
+    <header class="stack stack--tight reveal">
+      <p class="eyebrow">{post['catlabel']} &#183; Vol. {post['vol']} &#183; {post['read']}</p>
+      <h1 class="display display--h1">{esc(post['title'])}</h1>
+      <p class="lede">{post['stand']}</p>
+    </header>
+
+    {hero_html(post, forpage=True)}
+
+    <div class="jread-body reveal reveal-d1">
+      {body_html(post)}
+    </div>
+
+    <nav class="jread-nav reveal">
+      <a class="link-under" href="journal.html">&#8592; Back to the Journal</a>
+      <a class="link-under jread-nav__next" href="{article_url(next_post)}">Next &#8212; {esc(next_post['title'])} &#8594;</a>
+    </nav>
+  </div>
+</section>
+</main>
+{SITE_FOOT}
+<script src="assets/js/world.js" defer></script>
+</body>
+</html>
+'''
+        fname = article_url(post)
+        with open(fname, "w", encoding="utf-8") as f:
+            f.write(html)
+    print(f"wrote {n} article pages")
+
+if __name__ == "__main__":
+    build_journal_index()
+    build_article_pages()

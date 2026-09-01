@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Compliment — Paris Pullen</title>
+<meta name="description" content="Everyone is welcome. Not everyone gets access. A vertical journey through the lobby, suites, private floor, motor club and rooftop.">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="worldnav">
+  <a class="worldnav__mark" href="index.html">Paris Pullen</a>
+  <button class="worldnav__toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu">
+    <span class="worldnav__label">Menu</span>
+    <span class="worldnav__bars" aria-hidden="true"><i></i><i></i></span>
+  </button>
+</header>
+
+<nav class="menu" id="menu" aria-label="World navigation">
+  <ul class="menu__list">
+    <li><a href="index.html#world"><span class="idx">01</span>The World</a></li>
+    <li><a href="ascent.html"><span class="idx">02</span>The Ascent</a></li>
+    <li><a href="associates.html"><span class="idx">03</span>The Associates</a></li>
+    <li><a href="bespoke.html"><span class="idx">04</span>Foxx Bespoke</a></li>
+    <li><a href="compliment.html"><span class="idx">05</span>The Compliment</a></li>
+    <li><a href="urwelcome.html"><span class="idx">06</span>UR Welcome</a></li>
+    <li><a href="systems.html"><span class="idx">07</span>The Systems</a></li>
+    <li><a href="network.html"><span class="idx">08</span>The Network</a></li>
+    <li><a href="journal.html"><span class="idx">09</span>The Journal</a></li>
+    <li><a href="charlotte.html"><span class="idx">10</span>Charlotte</a></li>
+    <li><a href="about.html"><span class="idx">11</span>The Man</a></li>
+  </ul>
+  <div class="menu__foot">
+    <p class="classified">Charlotte, North Carolina</p>
+    <p class="classified">Enquiries &#183; <a class="link-under" href="mailto:hello@parispullen.com">hello@parispullen.com</a></p>
+  </div>
+</nav>
+
+<!-- Elevator -->
+<nav class="elevator" aria-label="Floors">
+  <a class="elevator__stop" href="#rooftop" data-track="rooftop"><i></i>Rooftop</a>
+  <a class="elevator__stop" href="#private" data-track="private"><i></i>Private Floor</a>
+  <a class="elevator__stop" href="#suites" data-track="suites"><i></i>Suites</a>
+  <a class="elevator__stop" href="#lobby" data-track="lobby"><i></i>Lobby</a>
+  <a class="elevator__stop" href="#motor" data-track="motor"><i></i>Motor Club</a>
+</nav>
+
+<main>
+
+<!-- ARRIVAL -->
+<section class="floor" id="arrival">
+  <div class="scene__media">
+    <video class="scene__video" data-lazy muted loop playsinline preload="none"
+           poster="assets/img/env-compliment.jpg" width="1280" height="720"
+           style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+      <source data-src="assets/video/compliment.mp4" type="video/mp4">
+    </video>
+    <img src="assets/img/env-compliment.jpg" srcset="assets/img/env-compliment@sm.jpg 1200w, assets/img/env-compliment.jpg 2400w" sizes="100vw" alt="The Compliment hotel tower at blue hour" data-parallax="0.10" width="2400" height="1340">
+  </div>
+  <div class="scene__scrim scene__scrim--heavy"></div>
+  <p class="scene__index">THE COMPLIMENT / ARRIVAL</p>
+  <span class="floor__tag">Ground</span>
+
+  <div class="wrap center">
+    <div class="stack reveal" style="justify-items:center;max-width:840px;margin-inline:auto">
+      <p class="eyebrow">Charlotte, North Carolina</p>
+      <h1 class="display display--h1">The Compliment</h1>
+      <p class="statement" style="text-align:center;max-width:34ch">Everyone is welcome.<br>Not everyone gets access.</p>
+      <p class="classified" style="margin-top:var(--s5)">Five stops &#183; Take the elevator</p>
+      <div class="cue" aria-hidden="true"><span class="cue__line"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOBBY -->
+<section class="floor" id="lobby">
+  <div class="scene__media">
+    <img src="assets/img/env-compliment.jpg" alt="The illuminated atrium of The Compliment" loading="lazy" data-parallax="0.12" width="2400" height="1340">
+  </div>
+  <div class="scene__scrim scene__scrim--left"></div>
+  <p class="scene__index">STOP 01 / LOBBY</p>
+  <span class="floor__tag">Level 01</span>
+
+  <div class="wrap">
+    <div class="stack reveal" style="max-width:620px">
+      <p class="eyebrow">The Lobby</p>
+      <h2 class="display display--h2">The room that reads you first.</h2>
+      <p class="lede">Marble, dark walnut, brass, water and flowers cut at a scale that tells you the budget was never the constraint.</p>
+      <p class="body">Nobody is turned away at the door. That would be crude, and it would be bad business. The sorting happens later, quietly, in the direction the concierge points you. <span class="door" data-door="d-concierge">Ask the concierge.</span></p>
+      <div class="reveal-panel" id="d-concierge">
+        <p class="classified" style="margin-bottom:var(--s3)">Concierge protocol</p>
+        <p class="body">Three questions, none of them intrusive: who are you here to see, how long are you staying, and what would make the evening worth it. The answers decide which elevator you are shown to. Most guests never learn there are two.</p>
+      </div>
+      <div class="stats" style="margin-top:var(--s6)">
+        <div class="stat"><p class="stat__num">29</p><p class="stat__label">Floors</p></div>
+        <div class="stat"><p class="stat__num">2</p><p class="stat__label">Elevator banks</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUITES -->
+<section class="floor" id="suites" style="background:var(--espresso)">
+  <p class="scene__index">STOP 02 / SUITES</p>
+  <span class="floor__tag">Levels 04&#8211;22</span>
+  <div class="wrap">
+    <div class="split">
+      <div class="stack reveal">
+        <p class="eyebrow">The Suites</p>
+        <h2 class="display display--h2">Rooms that keep what they hear.</h2>
+        <p class="lede">Deep tubs, heavy curtains, a desk built for actual work, and a door that closes with the weight of a bank vault.</p>
+        <p class="body">A suite is not a bedroom with a better view. It is a private office you happen to be able to sleep in — which is exactly how the people who book them use them.</p>
+      </div>
+      <div class="loadout reveal reveal-d1">
+        <div class="loadout__row">
+          <span class="loadout__idx loadout__head">01</span><span class="loadout__item loadout__head">The Corner</span><span class="loadout__fn loadout__head">Light</span>
+          <div class="loadout__body"><p class="body">Two walls of glass, morning on one side, the skyline on the other. Booked by people who take calls before six.</p></div>
+        </div>
+        <div class="loadout__row">
+          <span class="loadout__idx">02</span><span class="loadout__item">The Study</span><span class="loadout__fn">Focus</span>
+          <div class="loadout__body"><p class="body">Panelled, low-lit, no television. There is a decanter and a good chair and nothing else asking for your attention.</p></div>
+        </div>
+        <div class="loadout__row">
+          <span class="loadout__idx">03</span><span class="loadout__item">The Residence</span><span class="loadout__fn">Permanence</span>
+          <div class="loadout__body"><p class="body">A kitchen, a dressing room, a second entrance. For guests whose stay is measured in seasons.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVATE FLOOR -->
+<section class="floor" id="private" style="background:var(--forest)">
+  <p class="scene__index">STOP 03 / PRIVATE FLOOR</p>
+  <span class="floor__tag">Unlisted</span>
+  <div class="wrap center">
+    <div class="stack reveal" style="justify-items:center;max-width:760px;margin-inline:auto">
+      <p class="eyebrow">The Private Floor</p>
+      <h2 class="display display--h2">Every room has a door.</h2>
+      <p class="pullquote pullquote--wide" style="text-align:center;margin-inline:auto">Not every door is for everyone.</p>
+      <p class="body" style="text-align:center;margin-inline:auto">It does not appear on the elevator panel. It is not on the floor plan the fire marshal has, and yes, that is a joke. There is a library, a long table, six chairs, and a rule that nothing said at that table gets repeated at any other one.</p>
+      <p class="classified"><span class="door" data-door="d-floor">The right people always know.</span></p>
+      <div class="reveal-panel" id="d-floor" style="text-align:left">
+        <p class="body">Membership is not applied for. It is noticed. Somebody already at the table says a name, the table agrees, and an invitation arrives with no explanation of how it was decided. The absence of a process <em>is</em> the process.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOTOR CLUB -->
+<section class="floor" id="motor">
+  <div class="scene__media">
+    <video class="scene__video" data-lazy muted loop playsinline preload="none"
+           poster="assets/img/env-motorclub.jpg" width="1280" height="720"
+           style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
+      <source data-src="assets/video/motorclub.mp4" type="video/mp4">
+    </video>
+    <img src="assets/img/env-motorclub.jpg" srcset="assets/img/env-motorclub@sm.jpg 1200w, assets/img/env-motorclub.jpg 2400w" sizes="100vw" alt="The Foxx Motor Club behind glass walls" data-parallax="0.12" width="2400" height="1340">
+  </div>
+  <div class="scene__scrim scene__scrim--left"></div>
+  <p class="scene__index">STOP 04 / FOXX MOTOR CLUB</p>
+  <span class="floor__tag">Below Grade</span>
+
+  <div class="wrap">
+    <div class="stack reveal" style="max-width:640px">
+      <p class="eyebrow">Foxx Motor Club</p>
+      <h2 class="display display--h2">Machines<br>with manners.</h2>
+      <p class="lede">Automotive culture for people who understand the difference between having a car and having a presence.</p>
+      <p class="body">Glass walls, polished concrete, a lounge at the far end and a private elevator that goes up to a floor most guests do not know exists. The cars are lit like sculpture because that is what they are.</p>
+      <div class="stats" style="margin-top:var(--s6)">
+        <div class="stat"><p class="stat__num">24</p><p class="stat__label">Bays</p></div>
+        <div class="stat"><p class="stat__num">1</p><p class="stat__label">Private lift</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOFTOP -->
+<section class="floor" id="rooftop">
+  <div class="scene__media">
+    <img src="assets/img/env-rooftop.jpg" srcset="assets/img/env-rooftop@sm.jpg 1200w, assets/img/env-rooftop.jpg 2400w" sizes="100vw" alt="The rooftop terrace at night above the city" loading="lazy" data-parallax="0.10" width="2400" height="1340">
+  </div>
+  <div class="scene__scrim scene__scrim--heavy"></div>
+  <p class="scene__index">STOP 05 / THE ROOFTOP</p>
+  <span class="floor__tag">Level 29</span>
+
+  <div class="wrap">
+    <div class="split">
+      <div class="stack reveal">
+        <p class="eyebrow">The Rooftop</p>
+        <h2 class="display display--h2">Everybody<br>wants in.</h2>
+        <p class="lede">Infinity pool, private dining, cabanas, a sound system somebody actually paid for, and a view that makes people honest.</p>
+      </div>
+      <div class="stack reveal reveal-d1">
+        <p class="pullquote pullquote--wide">Information has a way of finding the right room.</p>
+        <p class="body">You do not need to be the loudest man up here. Just the one everyone remembers on Monday.</p>
+        <a class="cta" href="network.html"><span>Who Is Up Here</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__base">
+      <span>&copy; <span data-year>2026</span> Paris Pullen</span>
+      <span><a class="link-under" href="index.html">Back to the world</a></span>
+      <span>The Compliment is the fictional architecture of an ongoing creative world.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/world.js" defer></script>
+</body>
+</html>

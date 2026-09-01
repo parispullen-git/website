@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paris Pullen — The Gentleman Operator</title>
+<meta name="description" content="The world of Paris Pullen. Style, strategy, culture and access, built at the intersection of American luxury and Charlotte, North Carolina.">
+<meta name="theme-color" content="#0A0A0B">
+
+<meta property="og:title" content="Paris Pullen — The Gentleman Operator">
+<meta property="og:description" content="The city thinks he's selling luxury. The people who matter know he's selling access.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://parispullen.com/">
+<meta property="og:image" content="https://parispullen.com/assets/img/hero-boardroom.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://parispullen.com/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/img/hero-boardroom.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Paris Pullen","alternateName":"Agent Foxx",
+"jobTitle":"Brand Builder, Creative Director, Host","url":"https://parispullen.com/",
+"address":{"@type":"PostalAddress","addressLocality":"Charlotte","addressRegion":"NC","addressCountry":"US"},
+"knowsAbout":["Menswear","Hospitality","Brand Strategy","Automotive Culture","Fragrance","Nightlife"]}
+</script>
+</head>
+<body>
+
+<!-- ============ THE GATE ============ -->
+<div class="gate" id="gate" role="dialog" aria-label="Enter the world of Paris Pullen">
+  <div class="gate__seq">
+    <p class="classified gate__line gate__line--1">File 006 &#183; Open</p>
+    <p class="classified gate__line gate__line--2">Charlotte / America</p>
+    <div class="gate__line--3">
+      <span class="foxx" aria-hidden="true" style="--foxx-size:54px;width:54px;margin:0 auto var(--s5)"></span>
+      <p class="gate__name">Paris Pullen</p>
+      <div class="gate__enter">
+        <button class="cta" id="gate-enter"><span>Open the File</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>
+      </div>
+    </div>
+  </div>
+  <button class="gate__skip" id="gate-skip">Skip &#183; Esc</button>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="worldnav">
+  <a class="worldnav__mark" href="/"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
+  <button class="worldnav__toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu">
+    <span class="worldnav__label">Menu</span>
+    <span class="worldnav__bars" aria-hidden="true"><i></i><i></i></span>
+  </button>
+</header>
+
+<nav class="menu" id="menu" aria-label="World navigation">
+  <ul class="menu__list">
+    <li><a href="index.html"><span class="idx">01</span>The World</a></li>
+    <li><a href="urwelcome.html"><span class="idx">02</span>The Fragrance</a></li>
+    <li><a href="charlotte.html"><span class="idx">03</span>The City</a></li>
+    <li><a href="casefiles.html"><span class="idx">04</span>The Firm</a></li>
+    <li><a href="journal.html"><span class="idx">05</span>The Journal</a></li>
+    <li><a href="index.html#penthouse"><span class="idx">06</span>The Compliment</a></li>
+  </ul>
+  <div class="menu__foot">
+    <div class="social">
+      <span class="social__label">@parispullen</span>
+      <a href="https://instagram.com/parispullen" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.43.42.7.83.9 1.4.18.4.38 1 .43 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.22.6-.48 1-.9 1.4-.42.43-.83.7-1.4.9-.4.18-1 .38-2.2.43-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.22-1-.48-1.4-.9-.43-.42-.7-.83-.9-1.4-.18-.4-.38-1-.43-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.22-.6.48-1 .9-1.4.42-.43.83-.7 1.4-.9.4-.18 1-.38 2.2-.43C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.7.07-.9.04-1.4.2-1.7.32-.43.17-.74.37-1.06.7-.32.31-.52.62-.7 1.05-.12.3-.28.8-.32 1.7C3.45 8.5 3.44 8.9 3.44 12s0 3.5.07 4.7c.4.9.2 1.4.32 1.7.17.43.37.74.7 1.06.31.32.62.52 1.05.7.3.12.8.28 1.7.32 1.2.06 1.6.07 4.7.07s3.5 0 4.7-.07c.9-.04 1.4-.2 1.7-.32.43-.17.74-.37 1.06-.7.32-.31.52-.62.7-1.05.12-.3.28-.8.32-1.7.06-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.04-.9-.2-1.4-.32-1.7a2.9 2.9 0 0 0-.7-1.06 2.9 2.9 0 0 0-1.05-.7c-.3-.12-.8-.28-1.7-.32-1.2-.06-1.6-.07-4.7-.07Zm0 3.06a4.94 4.94 0 1 1 0 9.88 4.94 4.94 0 0 1 0-9.88Zm0 8.15a3.2 3.2 0 1 0 0-6.42 3.2 3.2 0 0 0 0 6.42Zm6.3-8.35a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0Z"/></svg>
+      </a>
+      <a href="https://x.com/parispullen" target="_blank" rel="noopener" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 3h3.2l-7 8 8.2 10.9h-6.4l-5-6.6-5.8 6.6H1.5l7.5-8.6L1.2 3h6.6l4.6 6.1L17.5 3Zm-1.1 17h1.8L7.7 4.8H5.7L16.4 20Z"/></svg>
+      </a>
+      <a href="https://tiktok.com/@parispullen" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 2h-3.1v13.2a2.5 2.5 0 1 1-2.5-2.5c.26 0 .5.04.74.11V9.6a5.9 5.9 0 0 0-.74-.05 5.7 5.7 0 1 0 5.7 5.7V8.9a7.1 7.1 0 0 0 4.1 1.3V7a4.2 4.2 0 0 1-4.2-4.2V2Z"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/parispullen" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05a4.2 4.2 0 0 1 3.75-2c4 0 4.75 2.6 4.75 6.05V21h-4v-5.5c0-1.3-.03-3-1.85-3-1.85 0-2.13 1.44-2.13 2.9V21h-4V9Z"/></svg>
+      </a>
+      <a href="https://youtube.com/@parispullen" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.75-1.77C18.3 5 12 5 12 5s-6.3 0-7.85.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.75 1.77C5.7 19 12 19 12 19s6.3 0 7.85-.43a2.5 2.5 0 0 0 1.75-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1-5.2 3.1Z"/></svg>
+      </a>
+    </div>
+    <p class="classified">Charlotte, North Carolina &#183; <a class="link-under" href="mailto:hello@parispullen.com">hello@parispullen.com</a> <a class="vaultkey" href="vault.html" aria-label="Vault"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 1 1 6 0v3H9Zm3 3a1.6 1.6 0 0 1 1.6 1.6c0 .6-.34 1.12-.83 1.4l.36 2.15a.3.3 0 0 1-.3.35h-1.66a.3.3 0 0 1-.3-.35l.36-2.15a1.6 1.6 0 0 1 .77-3Z"/></svg></a></p>
+  </div>
+</nav>
+
+<nav class="rail-nav" aria-label="Section navigation">
+  <a href="#the-man" data-track="the-man">Paris</a>
+  <a href="#penthouse" data-track="penthouse">The Penthouse</a>
+  <a href="#balcony" data-track="balcony">The City</a>
+  <a href="#fragrance" data-track="fragrance">UR Welcome</a>
+  <a href="#firm" data-track="firm">The Firm</a>
+  <a href="#journal" data-track="journal">The Journal</a>
+</nav>
+
+<main>
+
+<!-- ============ 01 · THE MAN ============ -->
+<section class="scene scene--full" id="the-man">
+  <div class="scene__media scene__media--hero">
+    <img src="assets/img/hero-boardroom.jpg"
+         srcset="assets/img/hero-boardroom@sm.jpg 1200w, assets/img/hero-boardroom.jpg 2048w"
+         sizes="100vw"
+         alt="Paris Pullen at the head of a boardroom table above the Charlotte skyline at sunset"
+         data-parallax="0.07" fetchpriority="high" width="2048" height="1152">
+  </div>
+  <div class="scene__scrim scene__scrim--left"></div>
+
+  <div class="wrap">
+    <div class="hero__inner">
+      <p class="eyebrow reveal">Charlotte / America</p>
+      <h1 class="display display--mega hero__title reveal reveal-d1">Paris<br>Pullen</h1>
+      <p class="eyebrow eyebrow--muted reveal reveal-d2">The Gentleman Operator</p>
+      <p class="lede reveal reveal-d2">Brand development out of Charlotte, North Carolina. A fragrance, a hotel, a city guide, and a short list of clients whose work is on the walls.</p>
+      <div class="hero__ctas reveal reveal-d3">
+        <a class="cta" href="#penthouse"><span>Enter the Penthouse</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="cta cta--ghost" href="#firm"><span>The Firm</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__meta">
+    <div class="cue" aria-hidden="true"><span class="cue__line"></span><span class="classified">Scroll</span></div>
+  </div>
+</section>
+
+<!-- ============ 02 · THE PENTHOUSE ============ -->
+<section class="scene scene--pad" id="penthouse" style="background:var(--ink)">
+  <div class="wrap">
+    <header class="split reveal" style="align-items:end;margin-bottom:var(--s7)">
+      <div class="stack stack--tight">
+        <p class="eyebrow">Inside The Compliment &#183; Levels 27&#8211;28</p>
+        <h2 class="display display--h2">The Penthouse</h2>
+      </div>
+      <div class="stack">
+        <p class="lede">Seven rooms open. The rest, in time.</p>
+        <p class="classified">Arrow keys &#183; the pad &#183; the elevator &#183; or swipe</p>
+      </div>
+    </header>
+
+    <div class="pent reveal reveal-d1" id="pent">
+      <div class="pent__stage">
+        <div class="pent__track"><!-- rooms injected by penthouse.js --></div>
+        <div class="pent__plate"></div>
+        <nav class="pent__pad" aria-label="Move through the penthouse">
+          <button class="pent__btn pent__btn--u" data-go="u" aria-label="Up a floor">&#9650;</button>
+          <button class="pent__btn pent__btn--l" data-go="l" aria-label="Left">&#9664;</button>
+          <i>MOVE</i>
+          <button class="pent__btn pent__btn--r" data-go="r" aria-label="Right">&#9654;</button>
+          <button class="pent__btn pent__btn--d" data-go="d" aria-label="Down a floor">&#9660;</button>
+        </nav>
+        <div class="pent__drawer" id="pent-drawer" aria-hidden="true">
+          <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__slot"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack" style="margin-top:var(--s7)">
+      <p class="eyebrow">The Elevator &#183; Every Floor</p>
+      <nav class="pent-elevator directory" id="pent-elevator" aria-label="All floors"></nav>
+    </div>
+
+    <div class="rooms reveal reveal-d2" style="margin-top:var(--s6)">
+      <a class="room-btn" href="#balcony">The Balcony</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE ROOM POPUP — full-bleed room viewer ============ -->
+<div class="room-popup" id="room-popup" aria-hidden="true">
+  <button type="button" class="room-popup__close" data-room-popup-close aria-label="Close">Close &#215;</button>
+  <nav class="popup-elevator" id="popup-elevator" aria-label="Switch floor"></nav>
+  <div class="room-pager" id="popup-pager" data-room-pager>
+    <div class="room-pager__viewport" id="popup-pager-viewport" data-room-pager-viewport><!-- rooms injected by penthouse.js --></div>
+    <button type="button" class="room-pager__nav room-pager__nav--prev" data-room-pager-prev aria-label="Previous room"><span aria-hidden="true">&#8249;</span></button>
+    <button type="button" class="room-pager__nav room-pager__nav--next" data-room-pager-next aria-label="Next room"><span aria-hidden="true">&#8250;</span></button>
+  </div>
+</div>
+
+<!-- ============ 03 · THE BALCONY — CITY GUIDE ============ -->
+<section class="cityscape" id="balcony">
+  <div class="cityscape__head reveal">
+    <p class="eyebrow">The Gentleman&#8217;s City Guide</p>
+    <h2 class="display display--h2" style="margin-block:var(--s3)">Charlotte, from the balcony.</h2>
+    <p class="lede">Thirteen districts, each with its own hours, its own dress code and its own reason to go. Select one, and the venues worth knowing come up with it &#8212; select a venue, and it opens.</p>
+  </div>
+
+  <div class="cityscape__surface reveal reveal-d1">
+    <div class="cityplate">
+      <img src="assets/img/citymap-plate.jpg"
+           srcset="assets/img/citymap-plate@sm.jpg 1300w, assets/img/citymap-plate.jpg 2600w"
+           sizes="100vw" alt="Aerial map of Charlotte with district boundaries"
+           loading="lazy" width="2600" height="1463">
+      <div class="cityplate__scrim"></div>
+      <svg class="citymap-svg" id="citymap" viewBox="0 0 2000 1125"
+           role="group" aria-label="Charlotte districts">
+        <!-- chrome and districts injected by city.js -->
+      </svg>
+      <!-- venue hotspots for the selected district injected by city-explorer.js -->
+    </div>
+  </div>
+
+  <div class="cityhud reveal reveal-d2">
+    <div class="cityread" id="cityread"></div>
+    <p class="classified" style="margin-top:var(--s4)">Hover or tab across the city &#183; select a venue to open it</p>
+    <div class="rooms" style="margin-top:var(--s5)">
+      <a class="room-btn" href="charlotte.html">The full Charlotte guide</a>
+    </div>
+  </div>
+</section>
+
+<!-- Condensed venue preview for this homepage widget -- mirrors #pent-drawer's
+     role but opens the smaller #cityquick drawer, since the full vquick
+     drawer's data only exists on charlotte.html itself. See
+     assets/js/city-explorer.js. -->
+<div class="vquick" id="cityquick" aria-hidden="true">
+  <div class="vquick__scrim" data-cityquick-close></div>
+  <div class="vquick__panel" role="dialog" aria-modal="true" aria-label="Venue preview">
+    <button class="vquick__close" data-cityquick-close aria-label="Close">&#215;</button>
+    <div class="vquick__body" style="padding-top:var(--s8)">
+      <p class="vquick__cat" id="cityquick-cat"></p>
+      <h3 class="vquick__name" id="cityquick-name"></h3>
+      <p class="body vquick__desc" id="cityquick-note"></p>
+      <div class="vquick__actions">
+        <a class="cta" id="cityquick-link" href="charlotte.html"><span>View Full Listing</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="cta cta--ghost" id="cityquick-all" href="charlotte.html"><span>All Charlotte Listings</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 04 · UR WELCOME ============ -->
+<section id="fragrance">
+  <div class="vault reveal" id="vault">
+      <div class="vault__plate">
+        <img src="assets/img/vault.jpg"
+             srcset="assets/img/vault@sm.jpg 1200w, assets/img/vault.jpg 2400w"
+             sizes="(max-width:980px) 100vw, 58vw"
+             alt="The UR Welcome reserve bottle under glass inside the vault"
+             loading="lazy" width="2400" height="1348">
+        <button class="vault__node" aria-label="Open the UR Welcome reserve">
+          <span class="vault__ping" aria-hidden="true"></span>
+          <span class="vault__ping" aria-hidden="true"></span>
+          <span class="vault__core" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="vault__panel">
+
+        <div class="vault__step is-on" data-step="intro">
+          <p class="eyebrow">Vault &#183; Level S</p>
+          <h3 class="display display--h3">Under glass.</h3>
+          <p class="body">One hundred bottles were made by hand. Ninety-nine went out. The first stayed here, lit, behind an inch of glass, because a house that sells access ought to keep something it will not sell.</p>
+          <p class="classified">Select the bottle to open the file</p>
+        </div>
+
+        <div class="vault__step" data-step="product">
+          <p class="eyebrow">UR Welcome</p>
+          <h3 class="display display--h3">Exclusive Reserve</h3>
+          <p class="body">A hundred percent oil, mixed by hand in batches too small to be a business. It does not shout on arrival &#8212; it warms over an hour, settles into the skin, and stays on a collar for two days.</p>
+          <dl class="vault__edition">
+            <div><dt>Edition</dt><dd>001 / 100</dd></div>
+            <div><dt>Format</dt><dd>Oil, 30ml</dd></div>
+            <div><dt>Wear</dt><dd>8&#8211;10 hours</dd></div>
+            <div><dt>Price</dt><dd>$240</dd></div>
+          </dl>
+          <p class="body" style="font-size:var(--t-label)">Bergamot and black pepper, into leather and tobacco flower, down to oud, vanilla and amber.</p>
+          <div class="hero__ctas">
+            <span class="cta vault__buy" aria-disabled="true"><span>Buy now</span></span>
+            <span class="vault__soldout">Sold out</span>
+          </div>
+          <p class="body" style="font-size:var(--t-label)">The next hundred have not been mixed yet. When they are, the reserve list is told first &#8212; and it is told before anyone else.</p>
+          <a class="cta" href="#" data-goto="list" style="justify-self:start"><span>Join the reserve list</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+        </div>
+
+        <div class="vault__step" data-step="list">
+          <p class="eyebrow">The Reserve List</p>
+          <h3 class="display display--h3">Tell me where to find you.</h3>
+          <p class="body">Two fields. You will hear from me when the next hundred are ready, and not about anything else.</p>
+          <form class="vault__form" novalidate>
+            <div class="vault__field">
+              <label for="ur-name">Name</label>
+              <input id="ur-name" name="name" type="text" autocomplete="name" spellcheck="false" required>
+            </div>
+            <div class="vault__field">
+              <label for="ur-email">Email</label>
+              <input id="ur-email" name="email" type="email" autocomplete="email" spellcheck="false" required>
+            </div>
+            <p class="vault__err" role="alert"></p>
+            <button class="cta" type="submit" style="justify-self:start"><span>Put me on the list</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>
+          </form>
+          <p class="vault__small">No list is sold, shared or rented. Four letters a year at the very most, and usually fewer.</p>
+          <a class="link-under" href="#" data-goto="product">Back to the bottle</a>
+        </div>
+
+        <div class="vault__step" data-step="thanks">
+          <p class="eyebrow">You are on it</p>
+          <h3 class="display display--h3">Thank you, <span data-greet>friend</span>.</h3>
+          <div class="vault__note">
+            <p>Most people find out about a thing after it has already gone. That is usually the point of the thing. This is the exception I make.</p>
+            <p>When the next hundred are mixed you will hear from me before the site does, before the shop does, and before anybody who found out about it from somebody else. You will get a number to choose from and a few days to decide.</p>
+            <p>Until then it stays under glass, and you have my word that nothing else lands in your inbox.</p>
+            <p class="vault__sign">&#8212; Paris</p>
+          </div>
+          <p class="vault__small" data-caveat></p>
+          <a class="link-under" href="#" data-goto="product">Back to the bottle</a>
+        </div>
+
+      </div>
+    </div>
+</section>
+
+<!-- ============ 05 · THE FIRM ============ -->
+<section class="scene scene--pad tint-ink" id="firm">
+  <div class="wrap">
+    <header class="split reveal" style="align-items:end;margin-bottom:var(--s7)">
+      <div class="stack stack--tight">
+        <p class="eyebrow">Paris Pullen LLC</p>
+        <h2 class="display display--h2">The Firm</h2>
+      </div>
+      <div class="stack">
+        <p class="lede">Brand development for a short list of people building something in Charlotte.</p>
+        <p class="classified">Four files on the wall &#183; select one</p>
+      </div>
+    </header>
+
+    <div class="studio reveal reveal-d1">
+      <img src="assets/img/env-editorial.jpg"
+           srcset="assets/img/env-editorial@sm.jpg 1200w, assets/img/env-editorial.jpg 2400w"
+           sizes="100vw" alt="The studio wall, client work pinned and threaded"
+           loading="lazy" width="2400" height="1339">
+      <div class="studio__scrim"></div>
+
+      <a class="pin" style="--x:8.3%;--y:22%;--i:0" href="casefiles.html#goodwill-grooming">
+        <span class="pin__ping" aria-hidden="true"></span>
+        <span class="pin__core" aria-hidden="true"></span>
+        <span class="pin__tag">Goodwill Grooming</span>
+      </a>
+      <a class="pin" style="--x:17.3%;--y:19.3%;--i:1" href="casefiles.html#threepiece-entertainment">
+        <span class="pin__ping" aria-hidden="true"></span>
+        <span class="pin__core" aria-hidden="true"></span>
+        <span class="pin__tag">Three Piece Entertainment</span>
+      </a>
+      <a class="pin" style="--x:12.3%;--y:41.7%;--i:2" href="casefiles.html#your-new-nail-tech">
+        <span class="pin__ping" aria-hidden="true"></span>
+        <span class="pin__core" aria-hidden="true"></span>
+        <span class="pin__tag">Your New Nail Tech</span>
+      </a>
+      <a class="pin" style="--x:29.5%;--y:39.4%;--i:3" href="casefiles.html#burns-brims">
+        <span class="pin__ping" aria-hidden="true"></span>
+        <span class="pin__core" aria-hidden="true"></span>
+        <span class="pin__tag">Burns &amp; Brims</span>
+      </a>
+    </div>
+
+    <nav class="filemenu reveal reveal-d2" style="margin-top:var(--s8)" aria-label="Case files">
+      <a class="filemenu__item" href="casefiles.html#goodwill-grooming">
+        <span class="filemenu__no">File 01</span>
+        <span class="filemenu__name">Goodwill Grooming</span>
+        <span class="filemenu__kind">Barber &amp; recording artist</span>
+        <span class="filemenu__state" data-state="live"><b>Live</b><span class="filemenu__open">Open &#8599;</span></span>
+      </a>
+      <a class="filemenu__item" href="casefiles.html#threepiece-entertainment">
+        <span class="filemenu__no">File 02</span>
+        <span class="filemenu__name">Three Piece Entertainment</span>
+        <span class="filemenu__kind">Live music, production &amp; education</span>
+        <span class="filemenu__state" data-state="live"><b>Live</b><span class="filemenu__open">Open &#8599;</span></span>
+      </a>
+      <a class="filemenu__item" href="casefiles.html#your-new-nail-tech">
+        <span class="filemenu__no">File 03</span>
+        <span class="filemenu__name">Your New Nail Tech</span>
+        <span class="filemenu__kind">Luxury nail artistry</span>
+        <span class="filemenu__state" data-state="out"><b>Proposal out</b><span class="filemenu__open">Open &#8599;</span></span>
+      </a>
+      <a class="filemenu__item" href="casefiles.html#burns-brims">
+        <span class="filemenu__no">File 04</span>
+        <span class="filemenu__name">Burns &amp; Brims</span>
+        <span class="filemenu__kind">Millinery</span>
+        <span class="filemenu__state" data-state="draft"><b>In the workroom</b><span class="filemenu__open">Open &#8599;</span></span>
+      </a>
+    </nav>
+
+    <div class="split reveal" style="margin-top:var(--s8);border-top:1px solid var(--rule);padding-top:var(--s7)">
+      <p class="pullquote">Most people are sold a proposal. These people were handed the finished thing.</p>
+      <div class="stack">
+        <p class="body">The site gets built <em>before</em> anyone is asked to pay for it. Nobody has to imagine what it might look like, or trust a mockup to become real. It already is one. The only question left is whether they want to own it.</p>
+        <div class="hero__ctas">
+          <a class="cta" href="casefiles.html"><span>All case files</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="cta cta--ghost" href="mailto:hello@parispullen.com?subject=The%20Firm"><span>Start a conversation</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · THE JOURNAL ============ -->
+<section class="scene scene--pad" id="journal">
+  <div class="wrap">
+    <header class="split reveal" style="align-items:end;margin-bottom:var(--s7)">
+      <div class="stack stack--tight">
+        <p class="eyebrow">The Gentleman&#8217;s Journal</p>
+        <h2 class="display display--h2">The Journal</h2>
+      </div>
+      <p class="body">Style, strategy, culture, Charlotte, music, fragrance, business, philosophy, life. Written the way it is lived &#8212; in short, useful pieces.</p>
+    </header>
+
+    <div class="jgrid reveal reveal-d1">
+      <a class="jcard" data-cat="life" href="journal.html">
+        <div class="jcard__media"><img src="assets/img/paris-hero@sm.jpg" alt="" loading="lazy"></div>
+        <p class="jcard__cat">Life</p>
+        <h3 class="jcard__title">The People Who Can Still Hurt You</h3>
+        <p class="jcard__stand">Keep the list short. Everyone on it earned the position before any of this started, and no amount of it will add a name.</p>
+        <p class="jcard__meta"><span>Vol. 09</span><span>5 min read</span></p>
+      </a>
+      <a class="jcard" data-cat="music" href="journal.html">
+        <div class="jcard__media"><img src="assets/img/env-bar@sm.jpg" alt="" loading="lazy"></div>
+        <p class="jcard__cat">Music</p>
+        <h3 class="jcard__title">Seven Years of Trumpet and What It Taught About Rooms</h3>
+        <p class="jcard__stand">A band learns a room in eight bars. Read the size of it, the mood of it, who is listening and who is only waiting to talk. The skill transfers.</p>
+        <p class="jcard__meta"><span>Vol. 08</span><span>4 min read</span></p>
+      </a>
+      <a class="jcard" data-cat="culture" href="journal.html">
+        <div class="jcard__media"><img src="assets/img/env-gala@sm.jpg" alt="" loading="lazy"></div>
+        <p class="jcard__cat">Culture</p>
+        <h3 class="jcard__title">Being the Only One in the Room, Then Changing the Room</h3>
+        <p class="jcard__stand">You do not fix the room by complaining about it from outside. You fix it by staying long enough that the room starts to look like you belong.</p>
+        <p class="jcard__meta"><span>Vol. 07</span><span>5 min read</span></p>
+      </a>
+      <a class="jcard" data-cat="business" href="journal.html">
+        <div class="jcard__media"><img src="assets/img/env-opsroom@sm.jpg" alt="" loading="lazy"></div>
+        <p class="jcard__cat">Business</p>
+        <h3 class="jcard__title">The Day Job Is Not the Compromise You Think It Is</h3>
+        <p class="jcard__stand">The steady paycheck bought the years the brand needed to be built without needing to be profitable yet. That is not a consolation. That is the strategy.</p>
+        <p class="jcard__meta"><span>Vol. 06</span><span>6 min read</span></p>
+      </a>
+      <a class="jcard" data-cat="fragrance" href="journal.html">
+        <div class="jcard__media"><img src="assets/img/env-atelier@sm.jpg" alt="" loading="lazy"></div>
+        <p class="jcard__cat">Fragrance</p>
+        <h3 class="jcard__title">Why Oil Beats Alcohol, and Why Nobody Tells You</h3>
+        <p class="jcard__stand">Alcohol announces itself and leaves. Oil sits on the skin and finishes the sentence four hours later, quietly, to someone standing closer than a room usually allows.</p>
+        <p class="jcard__meta"><span>Vol. 05</span><span>5 min read</span></p>
+      </a>
+      <a class="jcard" data-cat="philosophy" href="journal.html">
+        <div class="jcard__media"><img src="assets/img/paris-rooftop@sm.jpg" alt="" loading="lazy"></div>
+        <p class="jcard__cat">Philosophy</p>
+        <h3 class="jcard__title">On Finishing What You Start</h3>
+        <p class="jcard__stand">Most men do not fail at the hard part. They fail at the boring part, three weeks after the hard part stopped being exciting.</p>
+        <p class="jcard__meta"><span>Vol. 04</span><span>6 min read</span></p>
+      </a>
+    </div>
+    <a class="link-under" href="journal.html" style="margin-top:var(--s6);display:inline-block">All entries &#8594;</a>
+  </div>
+</section>
+
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot foot--film">
+  <div class="foot__film" aria-hidden="true">
+    <video data-lazy muted loop playsinline preload="none" poster="assets/img/env-motorclub@sm.jpg" width="1280" height="716">
+      <source data-src="assets/video/footer-motorclub.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="foot__filmscrim" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="center" style="margin-bottom:var(--s8)">
+      <div class="seal seal--lg" aria-hidden="true">
+        <svg class="seal__ring" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46"/>
+          <line x1="69.75" y1="15.79" x2="72.75" y2="10.60"/>
+          <line x1="84.21" y1="30.25" x2="89.40" y2="27.25"/>
+          <line x1="89.50" y1="50.00" x2="95.50" y2="50.00"/>
+          <line x1="84.21" y1="69.75" x2="89.40" y2="72.75"/>
+          <line x1="69.75" y1="84.21" x2="72.75" y2="89.40"/>
+          <line x1="50.00" y1="89.50" x2="50.00" y2="95.50"/>
+          <line x1="30.25" y1="84.21" x2="27.25" y2="89.40"/>
+          <line x1="15.79" y1="69.75" x2="10.60" y2="72.75"/>
+          <line x1="10.50" y1="50.00" x2="4.50" y2="50.00"/>
+          <line x1="15.79" y1="30.25" x2="10.60" y2="27.25"/>
+          <line x1="30.25" y1="15.79" x2="27.25" y2="10.60"/>
+        </svg>
+        <span class="foxx"></span>
+      </div>
+    </div>
+    <div class="foot__grid">
+      <div class="foot__col">
+        <h4>The World</h4>
+        <ul>
+          <li><a href="bespoke.html">Foxx Bespoke</a></li>
+          <li><a href="wardrobe.html">The Wardrobe</a></li>
+          <li><a href="index.html#penthouse">The Compliment</a></li>
+          <li><a href="house.html#motor">Foxx Motor Club</a></li>
+          <li><a href="urwelcome.html">UR Welcome</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <h4>Deeper</h4>
+        <ul>
+          <li><a href="network.html">The Foxx Network</a></li>
+          <li><a href="journal.html">The Journal</a></li>
+          <li><a href="charlotte.html">Charlotte</a></li>
+          <li><a href="about.html">The Man</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@parispullen.com">hello@parispullen.com</a></li>
+          <li><a href="mailto:press@parispullen.com">Press &amp; partnerships</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <h4>Doctrine</h4>
+        <p class="classified" style="line-height:2">Presence arrives<br>before introduction.</p>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>&copy; <span data-year>2026</span> Paris Pullen</span>
+      <span>Charlotte, North Carolina</span>
+      <span>The Compliment, Foxx Bespoke and Foxx Motor Club are the fictional architecture of an ongoing creative world.</span>
+      <a class="vaultkey" href="vault.html" aria-label="Vault"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 1 1 6 0v3H9Zm3 3a1.6 1.6 0 0 1 1.6 1.6c0 .6-.34 1.12-.83 1.4l.36 2.15a.3.3 0 0 1-.3.35h-1.66a.3.3 0 0 1-.3-.35l.36-2.15a1.6 1.6 0 0 1 .77-3Z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<button class="sound" id="sound" aria-pressed="false">
+  <span class="sound__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="sound__label">Sound off</span>
+</button>
+
+<script src="assets/js/penthouse.js" defer></script>
+<script src="assets/js/room-pager.js" defer></script>
+<script src="assets/js/tv-remote.js" defer></script>
+<script src="assets/js/vault.js" defer></script>
+<script src="assets/js/city-explorer.js" defer></script>
+<script src="assets/js/city.js" defer></script>
+<script src="assets/js/world.js" defer></script>
+<script src="assets/js/guide-portal.js" defer></script>
+<script src="assets/js/vault-entrance.js" defer></script>
+<script src="assets/js/piano-player.js" defer></script>
+</body>
+</html>

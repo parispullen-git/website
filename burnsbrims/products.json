@@ -1,0 +1,258 @@
+[
+ {
+  "name": "Sunkiss (Red Tag)",
+  "slug": "sunkiss-red-tag",
+  "price": 500.0,
+  "inStock": false,
+  "img": "assets/img/product-sunkiss-red-tag.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/0c0jndcs7loy3iibl6b9ncie0b3zbw"
+ },
+ {
+  "name": "Forever Diamonds",
+  "slug": "forever-diamonds",
+  "price": 500.0,
+  "inStock": false,
+  "img": "assets/img/product-forever-diamonds.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/0z6wp0to9u1uxiewyh113c80anzql3"
+ },
+ {
+  "name": "Cherokee Bill",
+  "slug": "cherokee-bill",
+  "price": 500.0,
+  "inStock": false,
+  "img": "assets/img/product-cherokee-bill.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/pqbhybj7e1se5g1s3m1pr21xquf2pt"
+ },
+ {
+  "name": "Sunset Bloom",
+  "slug": "sunset-bloom",
+  "price": 475.0,
+  "inStock": false,
+  "img": "assets/img/product-sunset-bloom.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/purple-butterfly-wwczl-xxw8j"
+ },
+ {
+  "name": "The \"Z\" Experience",
+  "slug": "the-z-experience",
+  "price": 475.0,
+  "inStock": false,
+  "img": "assets/img/product-the-z-experience.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/90kdg84zl5zqakxu6m7xyujri878ve"
+ },
+ {
+  "name": "HEAVY METAL",
+  "slug": "heavy-metal",
+  "price": 475.0,
+  "inStock": false,
+  "img": "assets/img/product-heavy-metal.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/s5855nwf0wut9fzjvxzxl02yl3b9i0"
+ },
+ {
+  "name": "Phoenix",
+  "slug": "phoenix",
+  "price": 450.0,
+  "inStock": true,
+  "img": "assets/img/product-phoenix.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/phoenix"
+ },
+ {
+  "name": "I'M JUST SAIYAN!",
+  "slug": "i-m-just-saiyan",
+  "price": 450.0,
+  "inStock": false,
+  "img": "assets/img/product-i-m-just-saiyan.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/fclw9zyt9m4m0ge766grts297fchdq"
+ },
+ {
+  "name": "Mad Max",
+  "slug": "mad-max",
+  "price": 425.0,
+  "inStock": true,
+  "img": "assets/img/product-mad-max.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/mad-max"
+ },
+ {
+  "name": "Volcanic Crown",
+  "slug": "volcanic-crown",
+  "price": 425.0,
+  "inStock": true,
+  "img": "assets/img/product-volcanic-crown.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/volcanic-crown"
+ },
+ {
+  "name": "Purple Butterfly",
+  "slug": "purple-butterfly",
+  "price": 400.0,
+  "inStock": true,
+  "img": "assets/img/product-purple-butterfly.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/purple-butterfly-699cx"
+ },
+ {
+  "name": "Fallaway Green",
+  "slug": "fallaway-green",
+  "price": 400.0,
+  "inStock": false,
+  "img": "assets/img/product-fallaway-green.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/purple-butterfly"
+ },
+ {
+  "name": "Dessert Lotus",
+  "slug": "dessert-lotus",
+  "price": 375.0,
+  "inStock": false,
+  "img": "assets/img/product-dessert-lotus.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/purple-butterfly-wwczl"
+ },
+ {
+  "name": "Brazil",
+  "slug": "brazil",
+  "price": 375.0,
+  "inStock": true,
+  "img": "assets/img/product-brazil.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/brazil"
+ },
+ {
+  "name": "Top That",
+  "slug": "top-that",
+  "price": 375.0,
+  "inStock": true,
+  "img": "assets/img/product-top-that.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/top-that"
+ },
+ {
+  "name": "Firebird",
+  "slug": "firebird",
+  "price": 375.0,
+  "inStock": false,
+  "img": "assets/img/product-firebird.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/firebird"
+ },
+ {
+  "name": "MidNight Derby",
+  "slug": "midnight-derby",
+  "price": 375.0,
+  "inStock": true,
+  "img": "assets/img/product-midnight-derby.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/o9vlc496mbuf2h59p12wqp8wqo1uj5"
+ },
+ {
+  "name": "Emerald City",
+  "slug": "emerald-city",
+  "price": 375.0,
+  "inStock": false,
+  "img": "assets/img/product-emerald-city.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/sf1uouo5y2u12mjkic3gn94eeo86s4"
+ },
+ {
+  "name": "House of Hearts",
+  "slug": "house-of-hearts",
+  "price": 375.0,
+  "inStock": false,
+  "img": "assets/img/product-house-of-hearts.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/c7otecllnu0lf28y0i489w8mjc1ohp"
+ },
+ {
+  "name": "QUEENS HIVE",
+  "slug": "queens-hive",
+  "price": 375.0,
+  "inStock": false,
+  "img": "assets/img/product-queens-hive.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/5aopbl75wsajm364jq9w8x5flwes4c"
+ },
+ {
+  "name": "Derby of Kotor",
+  "slug": "derby-of-kotor",
+  "price": 375.0,
+  "inStock": false,
+  "img": "assets/img/product-derby-of-kotor.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/derby-of-kotor"
+ },
+ {
+  "name": "Desert Storm",
+  "slug": "desert-storm",
+  "price": 350.0,
+  "inStock": false,
+  "img": "assets/img/product-desert-storm.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/6v7knw239amof4s2pmans505144y8s"
+ },
+ {
+  "name": "Midnight Maverick",
+  "slug": "midnight-maverick",
+  "price": 300.0,
+  "inStock": false,
+  "img": "assets/img/product-midnight-maverick.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/purple-butterfly-wwczl-z6gl5"
+ },
+ {
+  "name": "Achromic Principle",
+  "slug": "achromic-principle",
+  "price": 275.0,
+  "inStock": false,
+  "img": "assets/img/product-achromic-principle.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/achromic-principle"
+ },
+ {
+  "name": "Mobster",
+  "slug": "mobster",
+  "price": 275.0,
+  "inStock": false,
+  "img": "assets/img/product-mobster.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/mobster"
+ },
+ {
+  "name": "Wonka Riddler",
+  "slug": "wonka-riddler",
+  "price": 275.0,
+  "inStock": true,
+  "img": "assets/img/product-wonka-riddler.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/wonka-riddler"
+ },
+ {
+  "name": "Burns Brims Rice hat",
+  "slug": "burns-brims-rice-hat",
+  "price": 200.0,
+  "inStock": true,
+  "img": "assets/img/product-burns-brims-rice-hat.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/burns-brims-rice-hat"
+ },
+ {
+  "name": "White Flame",
+  "slug": "white-flame",
+  "price": 200.0,
+  "inStock": false,
+  "img": "assets/img/product-white-flame.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/s2a31nvh5hc2okv9kgzdg1jbkywm24"
+ },
+ {
+  "name": "Semitic king",
+  "slug": "semitic-king",
+  "price": 175.0,
+  "inStock": false,
+  "img": "assets/img/product-semitic-king.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/semitic-king"
+ },
+ {
+  "name": "Fly Watermen Bucket",
+  "slug": "fly-watermen-bucket",
+  "price": 50.0,
+  "inStock": true,
+  "img": "assets/img/product-fly-watermen-bucket.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/fly-watermen-bucket"
+ },
+ {
+  "name": "Pitch Black Trucker",
+  "slug": "pitch-black-trucker",
+  "price": 45.0,
+  "inStock": false,
+  "img": "assets/img/product-pitch-black-trucker.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/pitch-black-trucker"
+ },
+ {
+  "name": "Matchbox Trucker",
+  "slug": "matchbox-trucker",
+  "price": 40.0,
+  "inStock": true,
+  "img": "assets/img/product-matchbox-trucker.jpg",
+  "url": "https://www.burnsbrims.com/fire-crowns/p/matchbox-trucker"
+ }
+]

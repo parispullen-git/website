@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design System — Paris Pullen</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+<style>
+  /* documentation-only chrome — not part of the system */
+  .ds-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,11,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+  .ds-nav ul{display:flex;flex-wrap:wrap;gap:var(--s5);padding:var(--s4) var(--gutter);max-width:var(--maxw);margin-inline:auto}
+  .ds-nav a{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--ash)}
+  .ds-nav a:hover{color:var(--champagne)}
+  .ds-sec{padding-block:var(--s9);border-bottom:1px solid var(--rule)}
+  .ds-grid{display:grid;gap:var(--s5);grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr))}
+  .sw{display:grid;gap:var(--s2)}
+  .sw__chip{height:84px;border:1px solid var(--rule)}
+  .sw__name{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;color:var(--bone)}
+  .sw__val{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--graphite)}
+  .ds-demo{border:1px solid var(--rule);padding:var(--s6);display:grid;gap:var(--s5);align-content:start}
+  .ds-label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.24em;text-transform:uppercase;color:var(--brass)}
+  .ds-code{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--silver);background:var(--ink);border-left:1px solid var(--brass);padding:var(--s3) var(--s4);overflow-x:auto;white-space:pre}
+  .ds-two{display:grid;gap:var(--s6);grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+  .ds-table{width:100%;border-collapse:collapse;font-size:var(--t-label)}
+  .ds-table th,.ds-table td{text-align:left;padding:var(--s3) var(--s4);border-bottom:1px solid var(--rule);vertical-align:top}
+  .ds-table th{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--brass);font-weight:400}
+  .ds-table td{color:var(--silver)}
+  .ds-table td b{color:var(--ivory);font-weight:400}
+  .ds-note{border-left:1px solid var(--brass);padding:var(--s3) var(--s5);color:var(--bone)}
+  .ds-warn{border-left:1px solid #B4566A;padding:var(--s3) var(--s5);color:var(--bone)}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="ds-nav">
+  <ul>
+    <li><a href="#foundations">Foundations</a></li>
+    <li><a href="#mark">The Mark</a></li>
+    <li><a href="#type">Type</a></li>
+    <li><a href="#components">Components</a></li>
+    <li><a href="#investigation">Investigation</a></li>
+    <li><a href="#building">Building</a></li>
+    <li><a href="#voice">Voice</a></li>
+    <li><a href="#ia">Architecture</a></li>
+    <li><a href="#assets">Assets</a></li>
+    <li><a href="#city">City</a></li>
+    <li><a href="#museum">Museum</a></li>
+    <li><a href="#commerce">Vault</a></li>
+    <li><a href="#drafting">Drafting</a></li>
+    <li><a href="#desk">Desk</a></li>
+    <li><a href="#gaps">Gaps</a></li>
+    <li><a href="index.html">&#8592; Site</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+<header class="ds-sec" style="padding-top:var(--s8)">
+  <p class="eyebrow">Single source of truth</p>
+  <h1 class="display display--h1" style="margin-block:var(--s4)">The Design System</h1>
+  <p class="lede">Everything on parispullen.com is built from the tokens and components on this page. This document reads the live stylesheet, so it cannot drift from the site &#8212; if a swatch here changes, the site changed.</p>
+  <p class="classified" style="margin-top:var(--s5)">Supersedes the previous bundled build &#183; archived at <code>_superseded/old-bundle/</code></p>
+</header>
+
+<!-- FOUNDATIONS -->
+<section class="ds-sec" id="foundations">
+  <p class="ds-label">01</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">Foundations</h2>
+
+  <h3 class="display display--h3" style="margin-bottom:var(--s5)">Surface &amp; text</h3>
+  <div class="ds-grid" data-swatches="--obsidian,--ink,--charcoal,--smoke,--graphite,--hairline,--ash,--silver,--bone,--ivory"></div>
+
+  <h3 class="display display--h3" style="margin:var(--s8) 0 var(--s5)">Metal &amp; accent</h3>
+  <div class="ds-grid" data-swatches="--brass,--brass-lit,--champagne,--espresso,--forest,--burgundy,--navy"></div>
+
+  <div class="ds-note" style="margin-top:var(--s7)">
+    Colour is deliberately scarce. Brass is the only accent that recurs; everything else is a value, not a hue. Secondary accents &#8212; forest, burgundy, navy &#8212; appear at most once per page.
+  </div>
+
+  <h3 class="display display--h3" style="margin:var(--s8) 0 var(--s5)">Spacing &amp; motion</h3>
+  <div class="ds-two">
+    <table class="ds-table">
+      <tr><th>Token</th><th>Value</th></tr>
+      <tr><td><b>--s1 … --s11</b></td><td>.25rem → 12rem, on a 4pt-derived ramp</td></tr>
+      <tr><td><b>--gutter</b></td><td>clamp(1.25rem, 4vw, 5rem)</td></tr>
+      <tr><td><b>--measure</b></td><td>62ch — hard cap on body copy</td></tr>
+      <tr><td><b>--maxw</b></td><td>1680px</td></tr>
+    </table>
+    <table class="ds-table">
+      <tr><th>Motion</th><th>Value</th></tr>
+      <tr><td><b>--ease-out</b></td><td>cubic-bezier(.16,1,.3,1)</td></tr>
+      <tr><td><b>--d-fast</b></td><td>220ms — hovers</td></tr>
+      <tr><td><b>--d-med</b></td><td>520ms — panels, drawers</td></tr>
+      <tr><td><b>--d-slow</b></td><td>1100ms — scroll reveals</td></tr>
+      <tr><td><b>--d-cine</b></td><td>1800ms — image and gate transitions</td></tr>
+    </table>
+  </div>
+  <div class="ds-note" style="margin-top:var(--s5)">Every animation collapses under <code>prefers-reduced-motion: reduce</code>, including the opening gate.</div>
+</section>
+
+<!-- THE MARK -->
+<section class="ds-sec" id="mark">
+  <p class="ds-label">02</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">The Foxx Mark</h2>
+  <p class="body" style="margin-bottom:var(--s7)">The fox is the <b>house mark</b>. It sits above Bespoke, Motor Club, the Network and the hotel. The Compliment is a property beneath it and takes a wordmark endorsed by the fox, never a competing emblem.</p>
+
+  <div class="ds-two">
+    <div class="ds-demo">
+      <p class="ds-label">Bare mark</p>
+      <span class="foxx" style="--foxx-size:64px;width:64px"></span>
+      <p class="ds-code">&lt;span class="foxx"&gt;&lt;/span&gt;
+--foxx-size: 28px;
+--foxx-color: var(--brass-lit);</p>
+      <p class="card__note">Mounted as a CSS <code>mask</code>, not an image — a plain silhouette recolours to any token automatically. No inverted artwork needed.</p>
+    </div>
+    <div class="ds-demo">
+      <p class="ds-label">The seal</p>
+      <div class="seal seal--lg" aria-hidden="true">
+        <svg class="seal__ring" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46"/>
+          <line x1="69.75" y1="15.79" x2="72.75" y2="10.60"/>
+          <line x1="84.21" y1="30.25" x2="89.40" y2="27.25"/>
+          <line x1="89.50" y1="50.00" x2="95.50" y2="50.00"/>
+          <line x1="84.21" y1="69.75" x2="89.40" y2="72.75"/>
+          <line x1="69.75" y1="84.21" x2="72.75" y2="89.40"/>
+          <line x1="50.00" y1="89.50" x2="50.00" y2="95.50"/>
+          <line x1="30.25" y1="84.21" x2="27.25" y2="89.40"/>
+          <line x1="15.79" y1="69.75" x2="10.60" y2="72.75"/>
+          <line x1="10.50" y1="50.00" x2="4.50" y2="50.00"/>
+          <line x1="15.79" y1="30.25" x2="10.60" y2="27.25"/>
+          <line x1="30.25" y1="15.79" x2="27.25" y2="10.60"/>
+        </svg>
+        <span class="foxx"></span>
+      </div>
+      <p class="card__note">Twelve tick positions, the twelfth left empty. It is the twelfth chair, hidden in plain sight, and it appears in every page footer.</p>
+    </div>
+  </div>
+
+  <div class="ds-demo" style="margin-top:var(--s6)">
+    <p class="ds-label">Lockup</p>
+    <div class="lockup">
+      <span class="foxx"></span>
+      <hr class="lockup__rule">
+      <p class="lockup__name">The Compliment</p>
+      <p class="lockup__sub">Charlotte, North Carolina</p>
+    </div>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section class="ds-sec" id="type">
+  <p class="ds-label">03</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">Typography</h2>
+  <div class="stack stack--loose">
+    <div><p class="ds-label">display--mega</p><p class="display display--mega">Paris Pullen</p></div>
+    <div><p class="ds-label">display--h1</p><p class="display display--h1">The Gentleman Operator</p></div>
+    <div><p class="ds-label">display--h2</p><p class="display display--h2">Everybody wants in.</p></div>
+    <div><p class="ds-label">display--h3</p><p class="display display--h3">Machines with manners.</p></div>
+    <div><p class="ds-label">lede</p><p class="lede">A life built at the intersection of style, strategy, culture and ambition.</p></div>
+    <div><p class="ds-label">body</p><p class="body">Most men shop. A few men brief. The difference shows up in the shoulder, the break, and how long a room waits before deciding what you are worth.</p></div>
+    <div><p class="ds-label">eyebrow</p><p class="eyebrow">Charlotte / America</p></div>
+    <div><p class="ds-label">classified — mono, classified moments only</p><p class="classified">File 006 &#183; Open</p></div>
+    <div><p class="ds-label">statement</p><p class="statement">Everyone is welcome.<br>Not everyone gets access.</p></div>
+    <div><p class="ds-label">pullquote</p><p class="pullquote">Information has a way of finding the right room.</p></div>
+  </div>
+  <div class="ds-warn" style="margin-top:var(--s7)">Monospace is reserved for classified and metadata moments. It never carries body copy.</div>
+</section>
+
+<!-- COMPONENTS -->
+<section class="ds-sec" id="components">
+  <p class="ds-label">04</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">Core components</h2>
+  <div class="ds-two">
+    <div class="ds-demo">
+      <p class="ds-label">Buttons</p>
+      <div style="display:flex;flex-wrap:wrap;gap:var(--s4)">
+        <a class="cta" href="#components"><span>Enter the World</span><span class="cta__arrow">&#8594;</span></a>
+        <a class="cta cta--ghost" href="#components"><span>Meet Paris</span></a>
+      </div>
+      <a class="link-under" href="#components">Underline link &#8594;</a>
+    </div>
+    <div class="ds-demo">
+      <p class="ds-label">Statistics</p>
+      <div class="stats">
+        <div class="stat"><p class="stat__num">006</p><p class="stat__label">Call sign</p></div>
+        <div class="stat"><p class="stat__num">36<sup>+</sup></p><p class="stat__label">Cities hosted</p></div>
+      </div>
+    </div>
+    <div class="ds-demo">
+      <p class="ds-label">Loadout — accordion</p>
+      <div class="loadout">
+        <div class="loadout__row"><span class="loadout__idx">01</span><span class="loadout__item">The Suit</span><span class="loadout__fn">Authority</span>
+          <div class="loadout__body"><p class="body">Structure at the shoulder does the work so the man doesn&#8217;t have to.</p></div></div>
+        <div class="loadout__row"><span class="loadout__idx">02</span><span class="loadout__item">The Watch</span><span class="loadout__fn">Precision</span>
+          <div class="loadout__body"><p class="body">Not for telling time. For telling people you respect theirs.</p></div></div>
+      </div>
+    </div>
+    <div class="ds-demo">
+      <p class="ds-label">Secret door — inline reveal</p>
+      <p class="body">Style is not decoration. It is <span class="door" data-door="ds-door">positioning</span>.</p>
+      <div class="reveal-panel" id="ds-door"><p class="body">A suit answers the question before it is asked.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTIGATION -->
+<section class="ds-sec" id="investigation">
+  <p class="ds-label">05</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">Investigation layer</h2>
+  <div class="casebar" style="margin-bottom:var(--s6)">
+    <div><b>Subject</b><span>Pullen, Paris</span></div>
+    <div><b>Known as</b><span>Agent Foxx &#183; 006</span></div>
+    <div><b>Status</b><span>Active &#183; expanding</span></div>
+  </div>
+  <div class="findings" style="margin-bottom:var(--s6)">
+    <div class="finding"><span class="finding__no">F/01</span><p class="finding__text">The businesses were built in a deliberate order.</p><span class="finding__state" data-state="confirmed">Confirmed</span></div>
+    <div class="finding"><span class="finding__no">F/02</span><p class="finding__text">Six people run the operating side.</p><span class="finding__state" data-state="unverified">Unverified</span></div>
+    <div class="finding"><span class="finding__no">F/03</span><p class="finding__text">The twelfth chair has never been filled.</p><span class="finding__state" data-state="sealed">Sealed</span></div>
+  </div>
+  <div style="display:flex;gap:var(--s5);flex-wrap:wrap">
+    <span class="stamp">Classified</span>
+    <span class="stamp stamp--sealed">Sealed</span>
+    <span class="stamp stamp--open">Open</span>
+  </div>
+</section>
+
+<!-- BUILDING -->
+<section class="ds-sec" id="building">
+  <p class="ds-label">06</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">The building</h2>
+  <p class="body" style="margin-bottom:var(--s6)"><code>house.html</code> is <b>generated</b> from a Python data structure in <code>build_house.py</code>. Never hand-edit it. Sixteen floors, fifty-seven artifacts.</p>
+  <p class="ds-code">dict(id="bar", lvl="02", name="The Bar", state="public",
+     img="env-bar", grade="", focus="46% 54%",
+     note="Low ceiling, low light, low voices…",
+     arts=[("ice","The Ice","36%","64%","Cut from a single block…",
+            [("Cut","Daily")])])</p>
+  <table class="ds-table" style="margin-top:var(--s6)">
+    <tr><th>Piece</th><th>Class</th><th>Behaviour</th></tr>
+    <tr><td><b>Floor scene</b></td><td>.floor-scene</td><td>Full-viewport room. <code>--focus</code> sets object-position, <code>--zoom</code> the scale.</td></tr>
+    <tr><td><b>Grades</b></td><td>.grade--warm / noir / cold / dawn / amber / jewel</td><td>Lets one photograph serve several rooms</td></tr>
+    <tr><td><b>Artifact</b></td><td>.artifact</td><td>Hotspot at <code>--x</code>/<code>--y</code>. Pulsing brass dot, label on hover.</td></tr>
+    <tr><td><b>Drawer</b></td><td>.drawer</td><td>One panel at a time. Esc closes. Leaving the floor closes it.</td></tr>
+  </table>
+  <div class="ds-warn" style="margin-top:var(--s6)">Artifact positions are element-relative, not image-relative. Because floors use <code>object-fit: cover</code>, hotspots drift slightly against the underlying object as viewport aspect changes. Treat them as regions of interest, not pixel pins.</div>
+</section>
+
+<!-- VOICE -->
+<section class="ds-sec" id="voice">
+  <p class="ds-label">07</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">Voice</h2>
+  <div class="ds-two">
+    <div>
+      <p class="ds-label" style="margin-bottom:var(--s4)">Rules</p>
+      <table class="ds-table">
+        <tr><td><b>Short statements with double meanings.</b> Never explain the joke.</td></tr>
+        <tr><td><b>Specific numbers beat adjectives.</b> "Twenty-four bays", not "many cars".</td></tr>
+        <tr><td><b>Understate the flex.</b> The rail is polished weekly <em>because a rail with no wear means nobody is standing here</em>.</td></tr>
+        <tr><td><b>Never</b> corporate, motivational-speaker, or hustle language.</td></tr>
+        <tr><td><b>Admit the cost.</b> The dossier names the open ledger. That is what makes the rest credible.</td></tr>
+      </table>
+    </div>
+    <div>
+      <p class="ds-label" style="margin-bottom:var(--s4)">Canonical lines</p>
+      <table class="ds-table">
+        <tr><td>The city thinks he&#8217;s selling luxury. The people who matter know he&#8217;s selling access.</td></tr>
+        <tr><td>Everyone is welcome. Not everyone gets access.</td></tr>
+        <tr><td>Presence arrives before introduction.</td></tr>
+        <tr><td>Information has a way of finding the right room.</td></tr>
+        <tr><td>Your measurements are held under a record number, not your name.</td></tr>
+        <tr><td>Nothing is charged today. The fee is settled at the fitting.</td></tr>
+      </table>
+      <p class="classified" style="margin-top:var(--s4)">Last two recovered from the previous build &#8212; retained, they are the best commerce copy we have.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IA -->
+<section class="ds-sec" id="ia">
+  <p class="ds-label">08</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">Architecture</h2>
+  <table class="ds-table">
+    <tr><th>Page</th><th>Role</th></tr>
+    <tr><td><b>index</b></td><td>Gate, hero, the Penthouse navigator, the city guide, the UR Welcome vault, The Firm studio wall, the Journal</td></tr>
+    <tr><td><b>casefiles</b></td><td>Public brand case files &#8212; brief, move, what was built, where it stands. Generated.</td></tr>
+    <tr><td><b>ascent</b></td><td>The six moves: scent → cut → room → record → house → order</td></tr>
+    <tr><td><b>associates</b></td><td>Six composite characters, named by function</td></tr>
+    <tr><td><b>house</b></td><td>Sixteen floors, fifty-seven artifacts — generated</td></tr>
+    <tr><td><b>bespoke</b></td><td>Tailoring house, wardrobe, loadouts</td></tr>
+    <tr><td><b>urwelcome</b></td><td>The fragrance</td></tr>
+    <tr><td><b>systems</b></td><td>The kit — six instruments</td></tr>
+    <tr><td><b>network</b></td><td>Eleven-node interactive map</td></tr>
+    <tr><td><b>journal</b> / <b>charlotte</b> / <b>about</b></td><td>Editorial index, the city, the dossier</td></tr>
+  </table>
+</section>
+
+<!-- ASSETS -->
+<section class="ds-sec" id="assets">
+  <p class="ds-label">09</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">Assets</h2>
+  <table class="ds-table">
+    <tr><th>Rule</th><th>Detail</th></tr>
+    <tr><td><b>Paris likeness</b></td><td>Every generation MUST reference OpenArt upload <code>tU0VcefkjHaXk2cuh08t</code> via image2image. Never text-only.</td></tr>
+    <tr><td><b>TEXT RULE</b></td><td>Every prompt forbids invented brand names, plaques and signage. These models stamp fake brands unprompted.</td></tr>
+    <tr><td><b>Technology</b></td><td>Warm amber and brass only. Blue, cyan, neon, holograms and sci-fi glow explicitly forbidden.</td></tr>
+    <tr><td><b>Masters</b></td><td>Full-res PNGs live outside the web root in <code>../paris-pullen-masters/</code></td></tr>
+    <tr><td><b>Web images</b></td><td>JPEG at two widths — <code>name.jpg</code> and <code>name@sm.jpg</code> — wired through srcset</td></tr>
+    <tr><td><b>Spend to date</b></td><td>1,665 credits across five phases</td></tr>
+  </table>
+</section>
+
+<!-- COMMERCE -->
+<section class="ds-sec" id="commerce">
+  <p class="ds-label">12</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">The Vault &amp; the Wall</h2>
+
+  <h3 class="display display--h3" style="margin-bottom:var(--s4)">UR Welcome &#8212; the vault</h3>
+  <p class="body" style="margin-bottom:var(--s5)">A node on the bottle opens a four-step panel: intro &#8594; product &#8594; reserve list &#8594; thank you. The product is <b>sold out</b> and the buy button is deliberately inert; the path forward is the list.</p>
+  <div class="ds-warn" style="margin-bottom:var(--s6)"><b>Where the details actually go.</b> A static site stores nothing. <code>assets/js/vault.js</code> opens with <code>window.UR_WELCOME_ENDPOINT</code>. Paste a Formspree / Netlify / Basin endpoint and submissions POST there with a silent confirmation. Leave it empty and the form falls back to opening a pre-addressed email &#8212; which works, but the thank-you then says so honestly rather than claiming a signup that did not happen. <b>Never change that copy to imply storage that is not configured.</b></div>
+  <table class="ds-table">
+    <tr><th>Piece</th><th>Behaviour</th></tr>
+    <tr><td><b>.vault__node</b></td><td>Two offset pings plus a core, pinned to the bottle at 50% / 53%</td></tr>
+    <tr><td><b>.vault__step</b></td><td>One visible at a time, switched by <code>data-goto</code></td></tr>
+    <tr><td><b>.vault__soldout</b></td><td>The honest state. <code>.vault__buy</code> is styled disabled and carries <code>aria-disabled</code>.</td></tr>
+    <tr><td><b>.vault__note</b></td><td>The personal message from Paris, signed. Shown only after a successful submit, with the first name interpolated.</td></tr>
+  </table>
+
+  <h3 class="display display--h3" style="margin:var(--s8) 0 var(--s4)">The Firm &#8212; the studio wall</h3>
+  <p class="body" style="margin-bottom:var(--s5)">Client work pinned to a wall. Each <code>.pin</code> sits at <code>--x</code>/<code>--y</code>, pulses on its own <code>--i</code> offset, names the brand on hover and opens that brand&#8217;s file in <code>casefiles.html</code>, generated by <code>build_casefiles.py</code>.</p>
+  <div class="ds-note">Case files state where each brand actually stands &#8212; including &#8220;opened twice, no reply yet&#8221; and &#8220;not yet presented&#8221;. That candour is what makes the live ones credible. Do not sand it off.</div>
+</section>
+
+<!-- DRAFTING -->
+<section class="ds-sec" id="drafting">
+  <p class="ds-label">13</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">The Drafting Room &#8212; hidden floor</h2>
+  <p class="body" style="margin-bottom:var(--s6)">Level 19. A private index of speculative work: sites built for a brand before they have agreed to buy. Generated by <code>build_drafting.py</code>. <b>Not on the elevator panel, not in the directory, not linked from any public page, and <code>noindex</code>.</b></p>
+  <table class="ds-table">
+    <tr><th>Piece</th><th>Detail</th></tr>
+    <tr><td><b>Index</b></td><td><code>drafting/_index-private-&lt;suffix&gt;.html</code> — pipeline table with status, ask, code and expiry</td></tr>
+    <tr><td><b>Proposal</b></td><td><code>drafting/&lt;slug&gt;-&lt;hex&gt;.html</code> — one per brand, access-code gated, Paris Pullen LLC lockup</td></tr>
+    <tr><td><b>Status</b></td><td>draft · sent · viewed · won · passed — each with its own colour</td></tr>
+    <tr><td><b>Pricing</b></td><td>$1,500 build (one time) &#183; $50/mo care &#8212; 2 updates, hosting, SSL, backups, monitoring</td></tr>
+    <tr><td><b>Countdown</b></td><td>Sticky bar to the expiry date. Turns brass under 72 hours, red on expiry.</td></tr>
+    <tr><td><b>Exit intent</b></td><td>Fires on cursor leaving through the top &#8212; but only after the reader has engaged (a real mousemove or scroll) AND six seconds have passed. Back-button fallback on touch. Once per session.</td></tr>
+    <tr><td><b>Stripe</b></td><td>Payment Link per commission. Empty = button inert and the client is told an invoice follows. Never ship with a dead link.</td></tr>
+    <tr><td><b>Data</b></td><td>All commissions live in <code>drafting_data.py</code>; the builder only renders</td></tr>
+    <tr><td><b>Rotate URLs</b></td><td>Change <code>SUFFIX</code> / <code>hexid</code> in the data file and re-run</td></tr>
+  </table>
+  <div class="ds-warn" style="margin-top:var(--s6)"><b>The unlisted URL is the only real boundary.</b> Access codes are presentation and friction — the code sits in the page source, so anyone with the link and a devtools window can read it. Never put payment details, contracts or client data on this floor. Anything genuinely confidential needs a server with real authentication.</div>
+</section>
+
+<!-- CITY -->
+<section class="ds-sec" id="city">
+  <p class="ds-label">10</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">The City Guide</h2>
+  <p class="body" style="margin-bottom:var(--s5)">A full-bleed interactive map surface: the aerial plate with a survey overlay pinned to it and a HUD card reading out the selected district.</p>
+  <p class="body" style="margin-bottom:var(--s6)">The balcony on the homepage is Charlotte, rendered as thirteen districts over the skyline. <b>Districts are data, not markup</b> &#8212; edit <code>assets/js/city.js</code> and the SVG rebuilds itself over the aerial plate.</p>
+  <p class="ds-code">{ id:'noda', name:'NoDa', x:626, y:208, rx:70, ry:46, rot:14,
+  kind:'Arts district',
+  note:'Murals, live rooms and the best crowd in the city…',
+  best:'Late', dress:'Yourself, but pressed',
+  venues:[ { name:'…', kind:'Bar' } ] }</p>
+  <table class="ds-table" style="margin-top:var(--s6)">
+    <tr><th>Piece</th><th>Behaviour</th></tr>
+    <tr><td><b>.cm-zone</b></td><td>One district. Hover, focus or click lights it brass and paints the reading panel. Keyboard reachable.</td></tr>
+    <tr><td><b>.cityread</b></td><td>The panel: kind, name, note, best/dress/listed, then venues. Falls back to &#8220;Venues being compiled&#8221; while <code>venues</code> is empty.</td></tr>
+    <tr><td><b>.citymap-wrap::before</b></td><td>A radial well behind the map so districts read over a bright skyline</td></tr>
+    <tr><td><b>Positions</b></td><td>Pinned to the aerial plate in its own 2000&#215;849 coordinate space, so the overlay lines up with the photograph at any width. Placement is <b>compositional</b> &#8212; districts sit where they read in the frame, not where a survey would put them.</td></tr>
+    <tr><td><b>Markers</b></td><td>Always-visible brass dot and halo; on hover a soft radial lights the district, a dashed ring appears, four reticle brackets snap around it and the label brightens</td></tr>
+    <tr><td><b>Surface</b></td><td>Full-bleed, aspect-locked to the plate (2800&#215;1188). Under 980px it pans sideways rather than squashing.</td></tr>
+    <tr><td><b>Blueprint chrome</b></td><td>Survey grid, edge ticks, corner brackets, compass, scale bar and a slow scan sweep &#8212; all drawn in <code>chrome()</code>, all brass, no sci-fi glow</td></tr>
+  </table>
+  <div class="ds-note" style="margin-top:var(--s6)">To add a venue, push <code>{ name, kind }</code> onto that district&#8217;s <code>venues</code> array. The count in the panel updates itself.</div>
+</section>
+
+<!-- MUSEUM -->
+<section class="ds-sec" id="museum">
+  <p class="ds-label">11</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">The Museum</h2>
+  <p class="body" style="margin-bottom:var(--s5)">Client work on the homepage, shown as exhibits. <code>.ba</code> is a before/after wipe &#8212; drag, or arrow-key when focused.</p>
+  <div class="ds-warn"><b>Every current exhibit is &#8220;built from nothing&#8221;</b> &#8212; none of the four clients had a prior site, so the before panel shows a hatched plate rather than a fabricated &#8220;bad old website&#8221;. When a genuine before exists, drop it in as <code>.ba__before</code> and remove the <code>.ba__none</code> plate.</div>
+</section>
+
+<!-- DESK -->
+<section class="ds-sec" id="desk">
+  <p class="ds-label">14</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">The Drafting Room desk</h2>
+  <p class="body" style="margin-bottom:var(--s6)">A local macOS app at <code>/Applications/Drafting Room.app</code>, source in <code>/Volumes/HQ/Claude/drafting-room/</code>. The pipeline is rendered as floors of The Compliment &#8212; a client sits on the floor matching their stage, and each brand has a locker there.</p>
+  <table class="ds-table">
+    <tr><th>Stage</th><th>Floor</th><th>Room</th></tr>
+    <tr><td><b>Mockup</b></td><td>B2</td><td>Inventory</td></tr>
+    <tr><td><b>Proposal</b></td><td>19</td><td>Drafting Room</td></tr>
+    <tr><td><b>Pitch</b></td><td>02</td><td>The Bar</td></tr>
+    <tr><td><b>Closing</b></td><td>03</td><td>The Restaurant</td></tr>
+    <tr><td><b>Onboarding</b></td><td>G</td><td>The Lobby</td></tr>
+    <tr><td><b>In Build</b></td><td>11</td><td>Fitting Floor</td></tr>
+    <tr><td><b>Live</b></td><td>29</td><td>Skyline Club</td></tr>
+  </table>
+  <p class="body" style="margin-top:var(--s5)">It pulls <code>world.css</code> and the Foxx mark from this project at runtime, so the desk cannot drift from the design system. Data is <code>data/clients.json</code>, written atomically with forty rolling backups.</p>
+  <div class="ds-warn" style="margin-top:var(--s6)"><b>Not a CRM platform.</b> No email or SMS sending, no calendar sync, no payments, no automation, no multi-user. It binds to localhost with no authentication &#8212; never store card numbers, passwords or signed contracts in it.</div>
+</section>
+
+<!-- GAPS -->
+<section class="ds-sec" id="gaps">
+  <p class="ds-label">15</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">Gaps &amp; roadmap</h2>
+  <p class="body" style="margin-bottom:var(--s6)">Recovered from the previous build. This site is a <b>world</b>; the old build was a <b>business</b>. None of the commerce layer exists here yet.</p>
+  <table class="ds-table">
+    <tr><th>Missing</th><th>From the old build</th></tr>
+    <tr><td><b>Booking</b></td><td>Book a Fitting · Made to Measure · Alterations · The Docket · The Process</td></tr>
+    <tr><td><b>Commerce</b></td><td>Shop · sizes · Sold Out states · The Arrival Set · valet tray and UR Welcome candle</td></tr>
+    <tr><td><b>Membership</b></td><td>House Accounts · The Card · Request Access · Join the Waitlist · "Four of two hundred"</td></tr>
+    <tr><td><b>Registers</b></td><td>The Cloth Register · The Rotation · The Ledger · The House Promise</td></tr>
+    <tr><td><b>Journal</b></td><td>Nine article titles exist; none are written</td></tr>
+    <tr><td><b>Charlotte</b></td><td>Eight categories exist; no real venues named</td></tr>
+  </table>
+  <div class="ds-note" style="margin-top:var(--s6)">Eight images were recovered from the old bundle and archived at <code>_superseded/old-bundle/</code>. Worth reviewing before generating anything new for the commerce layer.</div>
+</section>
+
+<footer class="foot foot--film" style="margin-top:0">
+  <div class="foot__film" aria-hidden="true">
+    <video data-lazy muted loop playsinline preload="none" poster="assets/img/env-motorclub@sm.jpg" width="1280" height="716">
+      <source data-src="assets/video/footer-motorclub.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="foot__filmscrim" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="center" style="margin-bottom:var(--s7)">
+      <div class="seal" aria-hidden="true">
+        <svg class="seal__ring" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46"/>
+          <line x1="69.75" y1="15.79" x2="72.75" y2="10.60"/><line x1="84.21" y1="30.25" x2="89.40" y2="27.25"/>
+          <line x1="89.50" y1="50.00" x2="95.50" y2="50.00"/><line x1="84.21" y1="69.75" x2="89.40" y2="72.75"/>
+          <line x1="69.75" y1="84.21" x2="72.75" y2="89.40"/><line x1="50.00" y1="89.50" x2="50.00" y2="95.50"/>
+          <line x1="30.25" y1="84.21" x2="27.25" y2="89.40"/><line x1="15.79" y1="69.75" x2="10.60" y2="72.75"/>
+          <line x1="10.50" y1="50.00" x2="4.50" y2="50.00"/><line x1="15.79" y1="30.25" x2="10.60" y2="27.25"/>
+          <line x1="30.25" y1="15.79" x2="27.25" y2="10.60"/>
+        </svg>
+        <span class="foxx"></span>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>Design system &#183; <span data-year>2026</span></span>
+      <span><a class="link-under" href="index.html">Back to the site</a></span>
+      <span>Updated as the site changes</span>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<script>
+// Render swatches straight from the live stylesheet so this page can never drift.
+document.querySelectorAll('[data-swatches]').forEach(function (grid) {
+  var cs = getComputedStyle(document.documentElement);
+  grid.dataset.swatches.split(',').forEach(function (token) {
+    var val = cs.getPropertyValue(token).trim();
+    var el = document.createElement('div');
+    el.className = 'sw';
+    el.innerHTML = '<div class="sw__chip" style="background:' + val + '"></div>' +
+                   '<p class="sw__name">' + token + '</p>' +
+                   '<p class="sw__val">' + val + '</p>';
+    grid.appendChild(el);
+  });
+});
+</script>
+<script src="assets/js/world.js" defer></script>
+</body>
+</html>
