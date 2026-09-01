@@ -7,23 +7,34 @@ from pathlib import Path
 
 CASES = json.loads((Path(__file__).resolve().parent / "data" / "casefiles.json").read_text(encoding="utf-8"))
 
+
+def esc(t):
+    """HTML-escape plain text so the Operator Console never has to know
+    entity syntax -- callers pass ordinary text like 'Burns & Brims', not
+    pre-encoded HTML."""
+    if t is None:
+        return ""
+    return (str(t).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            .replace('"', "&quot;"))
+
+
 def block(c):
-    built = "".join(f'<li class="body" style="margin-bottom:var(--s2)">&#8212; {b}</li>' for b in c["built"])
+    built = "".join(f'<li class="body" style="margin-bottom:var(--s2)">&#8212; {esc(b)}</li>' for b in c["built"])
     return f"""
-<section class="scene scene--pad" id="{c['id']}" style="border-top:1px solid var(--rule)">
+<section class="scene scene--pad" id="{esc(c['id'])}" style="border-top:1px solid var(--rule)">
   <div class="wrap">
     <div class="split" style="align-items:start">
       <div class="stack reveal">
-        <p class="eyebrow">Case file {c['no']}</p>
-        <h2 class="display display--h2" style="margin-block:var(--s2)">{c['client']}</h2>
-        <p class="classified">{c['kind']} &#183; {c['status']}</p>
-        <p class="statement" style="margin-top:var(--s4)">{c['line']}</p>
+        <p class="eyebrow">Case file {esc(c['no'])}</p>
+        <h2 class="display display--h2" style="margin-block:var(--s2)">{esc(c['client'])}</h2>
+        <p class="classified">{esc(c['kind'])} &#183; {esc(c['status'])}</p>
+        <p class="statement" style="margin-top:var(--s4)">{esc(c['line'])}</p>
       </div>
-      <a class="exhibit reveal reveal-d1" href="{c['site']}" target="_blank" rel="noopener">
-        <img src="drafting/thumbs/{c['thumb']}.jpg"
-             srcset="drafting/thumbs/{c['thumb']}@sm.jpg 440w, drafting/thumbs/{c['thumb']}.jpg 880w"
+      <a class="exhibit reveal reveal-d1" href="{esc(c['site'])}" target="_blank" rel="noopener">
+        <img src="drafting/thumbs/{esc(c['thumb'])}.jpg"
+             srcset="drafting/thumbs/{esc(c['thumb'])}@sm.jpg 440w, drafting/thumbs/{esc(c['thumb'])}.jpg 880w"
              sizes="(max-width:900px) 100vw, 50vw"
-             alt="{c['client']} site" loading="lazy" width="880" height="550">
+             alt="{esc(c['client'])} site" loading="lazy" width="880" height="550">
         <span class="exhibit__tag">Open the site &#8599;</span>
       </a>
     </div>
@@ -31,11 +42,11 @@ def block(c):
     <div class="split reveal" style="margin-top:var(--s8)">
       <div class="stack">
         <p class="eyebrow">The brief</p>
-        <p class="body">{c['brief']}</p>
+        <p class="body">{esc(c['brief'])}</p>
       </div>
       <div class="stack">
         <p class="eyebrow">The move</p>
-        <p class="body">{c['move']}</p>
+        <p class="body">{esc(c['move'])}</p>
       </div>
     </div>
 
@@ -46,7 +57,7 @@ def block(c):
       </div>
       <div class="stack">
         <p class="eyebrow">Where it stands</p>
-        <p class="body">{c['result']}</p>
+        <p class="body">{esc(c['result'])}</p>
       </div>
     </div>
   </div>
@@ -57,11 +68,11 @@ PIN_POS = [("8.3%","22%"),("17.3%","19.3%"),("12.3%","41.7%"),("29.5%","39.4%")]
 PINS = "".join(
     f'''
         <button class="pin" style="--x:{pos[0]};--y:{pos[1]};--i:{i}"
-                data-no="File {c['no']}" data-name="{c['client']}" data-kind="{c['kind']}"
-                data-file="{c['id']}" aria-label="Step up to {c['client']}">
+                data-no="File {esc(c['no'])}" data-name="{esc(c['client'])}" data-kind="{esc(c['kind'])}"
+                data-file="{esc(c['id'])}" aria-label="Step up to {esc(c['client'])}">
           <span class="pin__ping" aria-hidden="true"></span>
           <span class="pin__core" aria-hidden="true"></span>
-          <span class="pin__tag">{c['client']}</span>
+          <span class="pin__tag">{esc(c['client'])}</span>
         </button>'''
     for i, (c, pos) in enumerate(zip(CASES, PIN_POS)))
 
