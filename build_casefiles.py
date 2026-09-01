@@ -1,47 +1,11 @@
 #!/usr/bin/env python3
-"""Public brand case files. Edit CASES and re-run: python3 build_casefiles.py"""
+"""Public brand case files. Data lives in data/casefiles.json (edit directly,
+or via the local Operator Console) -- then re-run: python3 build_casefiles.py"""
 
-CASES = [
- dict(id="goodwill-grooming", no="01", client="Goodwill Grooming",
-      kind="Barber &amp; recording artist", status="Live",
-      thumb="goodwill", site="http://localhost:4350/goodwill-grooming/index.html",
-      line="One man, two crafts, one room.",
-      brief="A barber who records. Two audiences, two vocabularies, and every existing option forcing him to pick one.",
-      move="Refuse the split. One site, one voice, two reasons to walk in — the chair and the booth sharing a page without competing for it.",
-      built=["Single-page site with a full booking flow","Barber and music on equal footing",
-             "Deployed to Hostinger","Preview and template variants retained"],
-      result="Built and delivered. Domain registration is the last outstanding item on their side."),
+import json
+from pathlib import Path
 
- dict(id="threepiece-entertainment", no="02", client="Three Piece Entertainment",
-      kind="Live music, production &amp; education", status="Live",
-      thumb="threepiece", site="http://localhost:4350/threepiece-entertainment/index.html",
-      line="The proposal is the product.",
-      brief="An entertainment company emailing PDFs into a market where the pitch is the first proof of quality.",
-      move="Make the proposal behave like the service. Private, expiring documents with the client’s name on them and three priced options.",
-      built=["Main site and a dedicated artist page","A proposal engine generating gated client documents",
-             "Fourteen live proposals with access codes and tiered pricing","A private index tracking every one"],
-      result="Live and running. It is the pattern the Drafting Room itself was modelled on."),
-
- dict(id="your-new-nail-tech", no="03", client="Your New Nail Tech",
-      kind="Luxury nail artistry", status="Proposal out",
-      thumb="nailtech", site="http://localhost:4350/your-new-nail-tech/index.html",
-      line="Clean luxury, not clinical.",
-      brief="A category that defaults to either clinical white or heavy glamour, with nothing in between for someone whose work is genuinely fine.",
-      move="Sit between them. Restrained, expensive-feeling, and built so the work in the photographs is the loudest thing on the page.",
-      built=["Single-page site with booking","A service and pricing structure that lets clients self-qualify",
-             "An identity that avoids both category defaults","Ready to deploy"],
-      result="Opened twice, no reply yet. Spotify ID and opening hours still unconfirmed."),
-
- dict(id="burns-brims", no="04", client="Burns &amp; Brims",
-      kind="Millinery", status="In the workroom",
-      thumb="burns", site="http://localhost:4350/burns-brims/index.html",
-      line="A hat is a decision.",
-      brief="Millinery sells badly online because the photography flattens it. A hat is a three-dimensional object being sold as a cut-out.",
-      move="Treat every piece as an object with weight and shadow. Light it like sculpture, not like stock.",
-      built=["Single-page site built around the existing tagline","Product photography treated as objects",
-             "Shop section — in progress"],
-      result="Not yet presented. The shop section needs finishing, and the 254MB asset folder needs compressing before deploy."),
-]
+CASES = json.loads((Path(__file__).resolve().parent / "data" / "casefiles.json").read_text(encoding="utf-8"))
 
 def block(c):
     built = "".join(f'<li class="body" style="margin-bottom:var(--s2)">&#8212; {b}</li>' for b in c["built"])
