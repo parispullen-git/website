@@ -1,26 +1,21 @@
 /* Clickable TV overlays (see .floor-scene__screen) — click the screen to open
    a small remote: mute/volume via the YouTube postMessage API, channel
    switching across a per-screen list of {id,label} videos, and a "Watch Full
-   Screen" button that opens a single shared large-view modal. */
+   Screen" button that opens a single shared large-view modal.
+
+   Channel lists live in data/house-channels.json (edit directly, or via the
+   local Operator Console) rather than hardcoded here — this is a plain
+   runtime fetch of a static JSON file, so edits take effect on next deploy
+   with no rebuild step. */
 (function () {
   'use strict';
 
-  var CHANNEL_SETS = {
-    living: [
-      { id: '4xVVFJuycww', label: 'The Gentlemen' },
-      { id: 'uDB1CScElo4', label: 'Iceman — Drake' },
-      { id: 'zBlytYhNCKg', label: 'Ali Siddiq: Mondays' },
-      { id: 'Q_55Qr814NM', label: "Steph Curry's Greatest Stories" },
-      { id: '1xVtwc0oVlM', label: 'Most Luxurious Cars' },
-      { id: 'LWbH_LwS0Ss', label: 'Beverly Hills Mega Mansion' }
-    ],
-    cinema: [
-      { id: 'w7fuOkF74Zw', label: 'Power — First Look' }
-    ]
-    // add more named lists here, then set data-channel-set="<name>" on a
-    // .floor-scene__screen to give that screen its own channels to flip through
-  };
+  var CHANNEL_SETS = {};
   var DEFAULT_SET = 'living';
+  var channelsReady = fetch('data/house-channels.json')
+    .then(function (r) { return r.json(); })
+    .then(function (data) { CHANNEL_SETS = data || {}; })
+    .catch(function () { CHANNEL_SETS = {}; });
 
   function embedSrc(id, muted) {
     return 'https://www.youtube.com/embed/' + id +
@@ -303,7 +298,9 @@
   });
 
   function init() {
-    Array.prototype.forEach.call(document.querySelectorAll('.floor-scene__screen[data-tv]'), initScreen);
+    channelsReady.then(function () {
+      Array.prototype.forEach.call(document.querySelectorAll('.floor-scene__screen[data-tv]'), initScreen);
+    });
   }
 
   if (document.readyState === 'loading') {
