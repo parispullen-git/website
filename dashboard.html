@@ -189,25 +189,11 @@
 
     <!-- CONTENT -->
     <div class="dash__panel" id="panel-content">
-      <p class="body">Raw editor for Vault, Wardrobe, Journal, and Case Files records. Each record is a JSON object stored in its collection.</p>
-      <div class="fld" style="max-width:16rem"><label>Collection</label>
-        <select id="content-collection">
-          <option value="vault-reserve">Vault — Reserve List</option>
-          <option value="vault-links">Vault — Proposal Links</option>
-          <option value="wardrobe">Wardrobe</option>
-          <option value="journal">Journal</option>
-          <option value="casefiles">Case Files</option>
-        </select>
+      <p class="body">Wardrobe, Journal, Case Files, the Charlotte guide, and House music/TV/cinema are edited through the local Operator Console (run locally — it needs filesystem and build-script access this public dashboard can never have). This panel used to write to a Blobs store nothing on the live site actually read; it's been retired rather than left pointing at dead data.</p>
+      <div class="card" style="margin-top:var(--s5)">
+        <p class="card__title">Local Operator Console</p>
+        <p class="card__body">On your machine: <code>node local-admin/server.js</code>, then open <code>local-admin/console.html</code>. Edits regenerate the real static pages via the existing <code>build_*.py</code> scripts — review the result, then deploy as usual.</p>
       </div>
-      <div class="newform">
-        <p class="eyebrow">New / Edit Record</p>
-        <div class="fld"><label>Record ID (leave blank to create new)</label><input id="content-id" placeholder="auto-generated if blank"></div>
-        <div class="fld"><label>JSON Data</label><textarea id="content-json" placeholder='{"title":"...","body":"..."}' style="min-height:10rem"></textarea></div>
-        <div class="card__row"><button type="button" class="btn-sm" id="content-save">Save Record</button></div>
-        <p class="dash__err" id="content-err" hidden></p>
-      </div>
-      <p class="dash__loading" id="content-loading">Loading&#8230;</p>
-      <div id="content-list"></div>
     </div>
   </div>
 </section>
@@ -299,9 +285,6 @@
     loadProposals();
     loadInquiries();
     loadClients();
-    loadContent();
-
-    document.getElementById('content-collection').addEventListener('change', loadContent);
   }
 
   // ---------- ORDERS ----------
@@ -458,6 +441,7 @@
         if (!proposals.length) { list.innerHTML = '<p class="dash__empty">No proposals yet.</p>'; return; }
         list.innerHTML = proposals.map(function(p){
           var itemsLabel = (p.items || []).map(function(it){ return it.description + ' ($' + money(it.amount) + ')'; }).join(', ');
+          var link = window.location.origin + '/proposal.html?id=' + encodeURIComponent(p.id);
           return '<div class="card">' +
             '<div class="card__top">' +
               '<span class="card__title">' + esc(p.name || 'Untitled') + '</span>' +
@@ -465,12 +449,25 @@
             '</div>' +
             '<p class="card__meta">' + esc(p.email || '') + ' &#183; ' + esc(p.status || 'draft') + ' &#183; ' + fmtDate(p.createdAt) + '</p>' +
             '<div class="card__body">' + esc(itemsLabel) + (p.notes ? '<br>' + esc(p.notes) : '') + '</div>' +
-            '<p class="card__meta" style="margin-top:var(--s3)">id: ' + esc(p.id) + '</p>' +
+            '<div class="card__row">' +
+              '<button type="button" class="btn-sm" data-copy-proposal-link="' + esc(link) + '">Copy Client Link</button>' +
+              '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(link) + '" target="_blank" rel="noopener">Preview</a>' +
+            '</div>' +
           '</div>';
         }).join('');
       })
       .catch(function(){ loading.textContent = 'Could not load proposals.'; });
   }
+
+  document.getElementById('proposals-list').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-copy-proposal-link]');
+    if (!btn) return;
+    var link = btn.getAttribute('data-copy-proposal-link');
+    navigator.clipboard.writeText(link).then(function(){
+      var prev = btn.textContent; btn.textContent = 'Copied';
+      setTimeout(function(){ btn.textContent = prev; }, 1500);
+    });
+  });
 
   document.getElementById('prop-additem').addEventListener('click', function(){
     var wrap = document.getElementById('prop-items');
@@ -572,83 +569,6 @@
       .catch(function(){ loading.textContent = 'Could not load clients.'; });
   }
 
-  // ---------- CONTENT ----------
-  function loadContent(){
-    var loading = document.getElementById('content-loading');
-    var list = document.getElementById('content-list');
-    var collection = document.getElementById('content-collection').value;
-    loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/content?collection=' + encodeURIComponent(collection) + '&passphraseHash=' + encodeURIComponent(storedHash))
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        loading.hidden = true;
-        var records = data.records || [];
-        if (!records.length) { list.innerHTML = '<p class="dash__empty">No records in this collection yet.</p>'; return; }
-        list.innerHTML = records.map(function(r){
-          return '<div class="card">' +
-            '<div class="card__top">' +
-              '<span class="card__title">' + esc(r.title || r.name || r.id) + '</span>' +
-              '<span class="card__meta">' + esc(r.id) + '</span>' +
-            '</div>' +
-            '<div class="card__body"><pre style="white-space:pre-wrap;font-family:var(--font-mono);font-size:.78rem;color:var(--graphite)">' + esc(JSON.stringify(r, null, 2)) + '</pre></div>' +
-            '<div class="card__row">' +
-              '<button type="button" class="btn-sm" data-edit-content=\'' + encodeURIComponent(JSON.stringify(r)) + '\'>Edit</button>' +
-              '<button type="button" class="btn-sm" data-delete-content="' + esc(r.id) + '">Delete</button>' +
-            '</div>' +
-          '</div>';
-        }).join('');
-      })
-      .catch(function(){ loading.textContent = 'Could not load records.'; });
-  }
-
-  document.getElementById('content-list').addEventListener('click', function(e){
-    var editBtn = e.target.closest('[data-edit-content]');
-    if (editBtn) {
-      var r = JSON.parse(decodeURIComponent(editBtn.getAttribute('data-edit-content')));
-      document.getElementById('content-id').value = r.id || '';
-      document.getElementById('content-json').value = JSON.stringify(r, null, 2);
-      document.getElementById('content-id').closest('.newform').scrollIntoView({behavior:'smooth', block:'center'});
-      return;
-    }
-    var delBtn = e.target.closest('[data-delete-content]');
-    if (delBtn) {
-      if (!confirm('Delete this record permanently?')) return;
-      var id = delBtn.getAttribute('data-delete-content');
-      var collection = document.getElementById('content-collection').value;
-      fetch('/.netlify/functions/content?collection=' + encodeURIComponent(collection) + '&id=' + encodeURIComponent(id), {
-        method: 'DELETE', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({passphraseHash: storedHash})
-      }).then(function(){ loadContent(); });
-    }
-  });
-
-  document.getElementById('content-save').addEventListener('click', function(){
-    var err = document.getElementById('content-err');
-    err.hidden = true;
-    var collection = document.getElementById('content-collection').value;
-    var id = document.getElementById('content-id').value.trim();
-    var raw = document.getElementById('content-json').value.trim();
-    var parsed;
-    try { parsed = raw ? JSON.parse(raw) : {}; }
-    catch(e){ err.textContent = 'Invalid JSON.'; err.hidden = false; return; }
-    var payload = {passphraseHash: storedHash, id: id || undefined, data: parsed};
-    var btn = document.getElementById('content-save');
-    btn.disabled = true; btn.textContent = 'Saving…';
-    fetch('/.netlify/functions/content?collection=' + encodeURIComponent(collection), {
-      method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
-    }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
-      .then(function(res){
-        if (!res.ok) throw new Error(res.data.error || 'Failed to save.');
-        btn.textContent = 'Save Record'; btn.disabled = false;
-        document.getElementById('content-id').value = '';
-        document.getElementById('content-json').value = '';
-        loadContent();
-      })
-      .catch(function(e){
-        btn.textContent = 'Save Record'; btn.disabled = false;
-        err.textContent = e.message; err.hidden = false;
-      });
-  });
 })();
 </script>
 </body>
