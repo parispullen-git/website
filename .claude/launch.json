@@ -6,6 +6,13 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "4321"],
       "port": 4321
+    },
+    {
+      "name": "operator-console",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["local-admin/server.js"],
+      "port": 5175,
+      "url": "http://127.0.0.1:5175"
     }
   ]
 }

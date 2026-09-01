@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operator Console — Local</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/world.css">
+<style>
+  body{padding-bottom:4rem}
+  .op{max-width:1200px;margin-inline:auto;padding-top:clamp(2.5rem,6vh,4rem)}
+  .op__banner{border:1px solid var(--brass);background:rgba(198,161,91,.08);padding:var(--s4) var(--s5);
+    display:flex;gap:var(--s3);align-items:baseline;margin-bottom:var(--s6)}
+  .op__banner b{color:var(--brass-lit)}
+  .op__tabs{display:flex;gap:var(--s3);flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:var(--s4)}
+  .op__tab{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--graphite);background:none;border:1px solid var(--hairline);padding:.6em 1.1em;cursor:pointer}
+  .op__tab.is-active{color:var(--brass-lit);border-color:var(--brass)}
+  .op__panel{display:none;margin-top:var(--s6)}
+  .op__panel.is-active{display:grid;grid-template-columns:19rem 1fr;gap:var(--s6);align-items:start}
+  @media(max-width:900px){.op__panel.is-active{grid-template-columns:1fr}}
+
+  .op__list{border:1px solid var(--hairline);max-height:70vh;overflow-y:auto}
+  .op__search{width:100%;background:#0A0A0B;border:none;border-bottom:1px solid var(--hairline);
+    color:var(--ivory);padding:.75em .9em;font-family:var(--font-body);font-size:.9rem;position:sticky;top:0}
+  .op__search:focus{outline:none}
+  .op__row{display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--hairline);
+    color:var(--bone);padding:.7em .9em;font-size:.85rem;cursor:pointer;font-family:var(--font-body)}
+  .op__row:hover{background:#151310}
+  .op__row.is-active{background:rgba(198,161,91,.1);color:var(--brass-lit)}
+  .op__newbtn{width:100%;padding:.8em;background:none;border:none;border-bottom:1px solid var(--hairline);
+    color:var(--brass);font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;
+    text-transform:uppercase;cursor:pointer}
+  .op__newbtn:hover{background:rgba(198,161,91,.08)}
+
+  .op__editor{border:1px solid var(--hairline);padding:var(--s5)}
+  .op__editor.is-empty{color:var(--graphite);font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.06em;padding:var(--s8);text-align:center}
+  .fld{display:grid;gap:.4em;margin-bottom:var(--s4)}
+  .fld label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;
+    text-transform:uppercase;color:var(--graphite)}
+  .fld input[type=text],.fld input[type=number],.fld select,.fld textarea{
+    background:#0A0A0B;border:1px solid var(--hairline);color:var(--ivory);
+    padding:.65em .85em;font-family:var(--font-body);font-size:.9rem;width:100%}
+  .fld textarea{min-height:5rem;font-family:var(--font-mono);font-size:.8rem}
+  .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--brass)}
+  .fld--check{display:flex;flex-direction:row;align-items:center;gap:.6em}
+  .fld--check input{width:auto}
+  .op__row2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
+  @media(max-width:640px){.op__row2{grid-template-columns:1fr}}
+  .op__actions{display:flex;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s5);padding-top:var(--s5);
+    border-top:1px solid var(--rule)}
+  .btn-sm{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;text-transform:uppercase;
+    background:none;border:1px solid var(--hairline);color:var(--bone);padding:.55em 1.1em;cursor:pointer}
+  .btn-sm:hover{border-color:var(--brass);color:var(--brass-lit)}
+  .btn-sm--danger:hover{border-color:#C0555A;color:#C0555A}
+  .btn-sm--primary{border-color:var(--brass);color:var(--brass-lit)}
+  .op__msg{margin-top:var(--s4);font-size:.85rem;padding:var(--s3) var(--s4);border:1px solid var(--hairline)}
+  .op__msg--ok{border-color:#6B9C6E;color:#9FCB9F}
+  .op__msg--err{border-color:#C0555A;color:#E39C9C}
+  .op__output{margin-top:var(--s3);white-space:pre-wrap;font-family:var(--font-mono);font-size:.72rem;
+    color:var(--graphite);max-height:12rem;overflow-y:auto;background:#0A0A0B;padding:var(--s3);border:1px solid var(--hairline)}
+  .op__hint{color:var(--graphite);font-size:.78rem;margin-top:-.6em;margin-bottom:var(--s4)}
+
+  /* house-channels special panel */
+  .chset{border:1px solid var(--hairline);padding:var(--s4);margin-bottom:var(--s4)}
+  .chset__head{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);margin-bottom:var(--s3)}
+  .chrow{display:grid;grid-template-columns:10rem 1fr auto;gap:var(--s3);align-items:center;margin-bottom:.5em}
+  .chrow input{background:#0A0A0B;border:1px solid var(--hairline);color:var(--ivory);padding:.5em .7em;
+    font-family:var(--font-body);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="worldnav">
+  <a class="worldnav__mark" href="../index.html"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
+</header>
+
+<main>
+<section class="scene scene--pad">
+  <div class="wrap op">
+    <p class="eyebrow">Local Only</p>
+    <h1 class="display display--h2">Operator Console</h1>
+    <div class="op__banner">
+      <span class="badge badge--brass">LOCAL</span>
+      <p class="body">Edits write to <code>data/*.json</code> on this machine, then regenerate the real static page via the existing <code>build_*.py</code> script. Nothing here touches the live site until you deploy the regenerated file yourself.</p>
+    </div>
+
+    <nav class="op__tabs" id="tabs"></nav>
+    <div id="panels"></div>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+  'use strict';
+
+  var SCHEMAS = {
+    wardrobe: {
+      label: 'Wardrobe', idField: 'id',
+      summary: function(r){ return (r.name||'Untitled') + ' — $' + (r.price||0); },
+      fields: [
+        {key:'id', label:'ID (slug, unique)', type:'text', required:true},
+        {key:'handle', label:'Handle', type:'text'},
+        {key:'name', label:'Name', type:'text', required:true},
+        {key:'cat', label:'Category', type:'select', options:['two-piece','three-piece','double-breasted','tuxedo']},
+        {key:'color', label:'Color', type:'text'},
+        {key:'price', label:'Price (USD)', type:'number'},
+        {key:'img', label:'Primary image URL', type:'text'},
+        {key:'gallery', label:'Gallery (one URL per line)', type:'lines'},
+        {key:'note', label:'Note', type:'textarea'},
+      ]
+    },
+    journal: {
+      label: 'Journal', idField: 'slug',
+      summary: function(r){ return (r.title||'Untitled') + ' — Vol.' + (r.vol||'?'); },
+      fields: [
+        {key:'slug', label:'Slug (unique)', type:'text', required:true},
+        {key:'cat', label:'Category key', type:'text'},
+        {key:'catlabel', label:'Category label', type:'text'},
+        {key:'vol', label:'Volume', type:'text'},
+        {key:'read', label:'Read time', type:'text'},
+        {key:'title', label:'Title', type:'text', required:true},
+        {key:'stand', label:'Standfirst', type:'textarea'},
+        {key:'featured', label:'Featured', type:'checkbox'},
+        {key:'wide', label:'Wide layout', type:'checkbox'},
+        {key:'hero.img', label:'Hero image (filename, no extension)', type:'text'},
+        {key:'hero.ext', label:'Hero image extension', type:'text'},
+        {key:'hero.mode', label:'Hero fit', type:'select', options:['cover','contain']},
+        {key:'hero.alt', label:'Hero alt text', type:'textarea'},
+        {key:'hero.srcset', label:'Hero has @sm srcset', type:'checkbox'},
+        {key:'body', label:'Body — one paragraph per line. Prefix a line with PQ:: to render it as a pull-quote.', type:'lines'},
+      ]
+    },
+    casefiles: {
+      label: 'Case Files', idField: 'id',
+      summary: function(r){ return (r.client||'Untitled') + ' — ' + (r.status||''); },
+      fields: [
+        {key:'id', label:'ID (slug, unique)', type:'text', required:true},
+        {key:'no', label:'Number', type:'text'},
+        {key:'client', label:'Client', type:'text', required:true},
+        {key:'kind', label:'Kind', type:'text'},
+        {key:'status', label:'Status', type:'text'},
+        {key:'thumb', label:'Thumbnail key', type:'text'},
+        {key:'site', label:'Site URL', type:'text'},
+        {key:'line', label:'One-liner', type:'text'},
+        {key:'brief', label:'Brief', type:'textarea'},
+        {key:'move', label:'The Move', type:'textarea'},
+        {key:'built', label:'Built — one bullet per line', type:'lines'},
+        {key:'result', label:'Result', type:'textarea'},
+      ]
+    },
+    'charlotte-locations': {
+      label: 'Charlotte Map', idField: 'id',
+      summary: function(r){ return (r.name||'Untitled') + ' — ' + ((r.venues||[]).length) + ' venues'; },
+      fields: [
+        {key:'id', label:'ID (slug, unique)', type:'text', required:true},
+        {key:'order', label:'Order', type:'text'},
+        {key:'name', label:'District name', type:'text', required:true},
+        {key:'blurb', label:'Blurb', type:'textarea'},
+        {key:'venues', label:'Venues — advanced, raw JSON array (each: name, cat, addr, price, access, desc, best[], spec[], mapq, site, filters[])', type:'json'},
+      ]
+    },
+    'house-music': {
+      label: 'House Music', idField: null,
+      summary: function(r){ return (r.label||'Untitled') + ' (' + (r.type||'') + ')'; },
+      fields: [
+        {key:'type', label:'Type', type:'select', options:['playlist','album']},
+        {key:'id', label:'Spotify ID', type:'text', required:true},
+        {key:'label', label:'Label', type:'text', required:true},
+      ]
+    },
+  };
+
+  function getNested(obj, path){
+    return path.split('.').reduce(function(o,k){ return (o && o[k] !== undefined) ? o[k] : undefined; }, obj);
+  }
+  function setNested(obj, path, value){
+    var keys = path.split('.');
+    var last = keys.pop();
+    var target = keys.reduce(function(o,k){ if(!o[k]) o[k] = {}; return o[k]; }, obj);
+    target[last] = value;
+  }
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  var state = {}; // name -> { records: [], selected: index|null, dirty: bool }
+
+  function api(path, opts){
+    return fetch('/api/' + path, opts).then(function(r){
+      return r.json().then(function(d){ return {ok: r.ok, data: d}; });
+    });
+  }
+
+  // ---------------- generic schema-driven panels ----------------
+  // Builds the panel shell once (list + editor containers side by side).
+  // Saves/deletes refresh just the row list afterward (via state[name].refreshRows)
+  // rather than rebuilding the whole panel, so the editor and its status
+  // message survive the refresh instead of being wiped out immediately.
+  function initPanel(name){
+    var schema = SCHEMAS[name];
+    var panel = document.getElementById('panel-' + name);
+    panel.innerHTML =
+      '<div class="op__list">' +
+        '<input type="text" class="op__search" placeholder="Search…" id="search-' + name + '">' +
+        '<button type="button" class="op__newbtn" id="new-' + name + '">+ New Record</button>' +
+        '<div id="rows-' + name + '"></div>' +
+      '</div>' +
+      '<div class="op__editor is-empty" id="editor-' + name + '">Select a record, or start a new one.</div>';
+
+    function renderRows(filter){
+      var rows = document.getElementById('rows-' + name);
+      var records = state[name].records;
+      var q = (filter||'').toLowerCase();
+      rows.innerHTML = records.map(function(r, i){
+        var s = schema.summary(r);
+        if (q && s.toLowerCase().indexOf(q) === -1) return '';
+        return '<button type="button" class="op__row' + (state[name].selected===i?' is-active':'') + '" data-idx="' + i + '">' + esc(s) + '</button>';
+      }).join('');
+    }
+    state[name].refreshRows = function(){ renderRows(document.getElementById('search-' + name).value); };
+
+    document.getElementById('search-' + name).addEventListener('input', function(e){ renderRows(e.target.value); });
+    document.getElementById('new-' + name).addEventListener('click', function(){
+      state[name].selected = -1; // -1 = new/unsaved
+      renderRows(document.getElementById('search-' + name).value);
+      renderEditor(name, {});
+    });
+    document.getElementById('rows-' + name).addEventListener('click', function(e){
+      var btn = e.target.closest('[data-idx]');
+      if (!btn) return;
+      var idx = Number(btn.dataset.idx);
+      state[name].selected = idx;
+      renderRows(document.getElementById('search-' + name).value);
+      renderEditor(name, state[name].records[idx]);
+    });
+
+    renderRows('');
+  }
+
+  function fieldInput(name, f, value){
+    var id = 'f-' + name + '-' + f.key.replace('.', '_');
+    if (f.type === 'select') {
+      return '<select id="' + id + '">' + f.options.map(function(o){
+        return '<option value="' + esc(o) + '"' + (o===value?' selected':'') + '>' + esc(o) + '</option>';
+      }).join('') + '</select>';
+    }
+    if (f.type === 'checkbox') {
+      return '<input type="checkbox" id="' + id + '"' + (value?' checked':'') + '>';
+    }
+    if (f.type === 'textarea') {
+      return '<textarea id="' + id + '">' + esc(value||'') + '</textarea>';
+    }
+    if (f.type === 'lines') {
+      var lines = Array.isArray(value) ? value.join('\n') : '';
+      return '<textarea id="' + id + '">' + esc(lines) + '</textarea>';
+    }
+    if (f.type === 'json') {
+      return '<textarea id="' + id + '" style="min-height:14rem">' + esc(JSON.stringify(value||[], null, 2)) + '</textarea>';
+    }
+    if (f.type === 'number') {
+      return '<input type="number" id="' + id + '" value="' + (value==null?'':esc(value)) + '">';
+    }
+    return '<input type="text" id="' + id + '" value="' + esc(value||'') + '">';
+  }
+
+  function renderEditor(name, record){
+    var schema = SCHEMAS[name];
+    var editor = document.getElementById('editor-' + name);
+    editor.classList.remove('is-empty');
+    var isNew = state[name].selected === -1;
+    editor.innerHTML =
+      (isNew ? '<p class="eyebrow">New Record</p>' : '<p class="eyebrow">Editing</p>') +
+      schema.fields.map(function(f){
+        var v = getNested(record, f.key);
+        var checkClass = f.type === 'checkbox' ? ' fld--check' : '';
+        var order = f.type === 'checkbox'
+          ? fieldInput(name, f, v) + '<label>' + esc(f.label) + '</label>'
+          : '<label>' + esc(f.label) + '</label>' + fieldInput(name, f, v);
+        return '<div class="fld' + checkClass + '">' + order + '</div>';
+      }).join('') +
+      '<div class="op__actions">' +
+        '<button type="button" class="btn-sm btn-sm--primary" id="save-' + name + '">Save</button>' +
+        (isNew ? '' : '<button type="button" class="btn-sm btn-sm--danger" id="delete-' + name + '">Delete</button>') +
+        '<button type="button" class="btn-sm" id="rebuild-' + name + '">Save &amp; Rebuild Page</button>' +
+      '</div>' +
+      '<div id="msg-' + name + '"></div>';
+
+    function readForm(){
+      var out = {};
+      schema.fields.forEach(function(f){
+        var id = 'f-' + name + '-' + f.key.replace('.', '_');
+        var el = document.getElementById(id);
+        var val;
+        if (f.type === 'checkbox') val = el.checked;
+        else if (f.type === 'number') val = el.value === '' ? null : Number(el.value);
+        else if (f.type === 'lines') val = el.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+        else if (f.type === 'json') { try { val = JSON.parse(el.value || '[]'); } catch(e) { throw new Error('Invalid JSON in "' + f.label + '": ' + e.message); } }
+        else val = el.value;
+        setNested(out, f.key, val);
+      });
+      return out;
+    }
+
+    function showMsg(kind, text){
+      document.getElementById('msg-' + name).innerHTML = '<div class="op__msg op__msg--' + kind + '">' + esc(text) + '</div>';
+    }
+
+    function persist(){
+      var idField = schema.idField;
+      var updated = readForm();
+      if (idField && !updated[idField]) { showMsg('err', 'Missing required field: ' + idField); return null; }
+      var records = state[name].records;
+      if (isNew) {
+        if (idField && records.some(function(r){ return r[idField] === updated[idField]; })) {
+          showMsg('err', 'A record with that ' + idField + ' already exists.'); return null;
+        }
+        records.push(updated);
+        state[name].selected = records.length - 1;
+      } else {
+        records[state[name].selected] = updated;
+      }
+      return records;
+    }
+
+    document.getElementById('save-' + name).addEventListener('click', function(){
+      var records;
+      try { records = persist(); } catch(e) { showMsg('err', e.message); return; }
+      if (!records) return;
+      api('collection/' + name, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(records)})
+        .then(function(res){
+          if (!res.ok) throw new Error(res.data.error || 'Save failed');
+          state[name].refreshRows();
+          renderEditor(name, records[state[name].selected]);
+          showMsg('ok', 'Saved to data/' + name + '.json.');
+        })
+        .catch(function(e){ showMsg('err', e.message); });
+    });
+
+    if (!isNew) {
+      document.getElementById('delete-' + name).addEventListener('click', function(){
+        if (!confirm('Delete this record permanently from data/' + name + '.json?')) return;
+        var records = state[name].records;
+        records.splice(state[name].selected, 1);
+        state[name].selected = null;
+        api('collection/' + name, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(records)})
+          .then(function(){
+            state[name].refreshRows();
+            var editor = document.getElementById('editor-' + name);
+            editor.className = 'op__editor is-empty';
+            editor.textContent = 'Deleted. Select a record, or start a new one.';
+          })
+          .catch(function(e){ showMsg('err', e.message); });
+      });
+    }
+
+    document.getElementById('rebuild-' + name).addEventListener('click', function(){
+      var records;
+      try { records = persist(); } catch(e) { showMsg('err', e.message); return; }
+      if (!records) return;
+      showMsg('ok', 'Saving and rebuilding…');
+      api('collection/' + name, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(records)})
+        .then(function(res){
+          if (!res.ok) throw new Error(res.data.error || 'Save failed');
+          return api('rebuild/' + name, {method:'POST'});
+        })
+        .then(function(res){
+          if (!res.data.ok) throw new Error(res.data.error || 'Rebuild failed');
+          state[name].refreshRows();
+          renderEditor(name, records[state[name].selected]);
+          var page = res.data.page;
+          document.getElementById('msg-' + name).innerHTML =
+            '<div class="op__msg op__msg--ok">Rebuilt. <a class="link-under" href="/' + page + '" target="_blank" rel="noopener">Open ' + page + ' &#8594;</a></div>' +
+            '<div class="op__output">' + esc(res.data.output || '') + '</div>';
+        })
+        .catch(function(e){ showMsg('err', e.message); });
+    });
+  }
+
+  // ---------------- house-channels: special panel (dict of named lists) ----------------
+  function renderChannelsPanel(){
+    var panel = document.getElementById('panel-house-channels');
+    var data = state['house-channels'].records; // an object, not an array, for this one
+
+    function row(setName, entry, i){
+      return '<div class="chrow" data-set="' + esc(setName) + '" data-i="' + i + '">' +
+        '<input type="text" data-role="id" placeholder="YouTube video ID" value="' + esc(entry.id) + '">' +
+        '<input type="text" data-role="label" placeholder="Label" value="' + esc(entry.label) + '">' +
+        '<button type="button" class="btn-sm btn-sm--danger" data-remove-entry>&#215;</button>' +
+      '</div>';
+    }
+
+    panel.innerHTML =
+      '<div>' +
+      Object.keys(data).map(function(setName){
+        return '<div class="chset" data-set="' + esc(setName) + '">' +
+          '<div class="chset__head">' +
+            '<p class="card__title" style="margin:0">' + esc(setName) + '</p>' +
+            '<button type="button" class="btn-sm" data-add-entry="' + esc(setName) + '">+ Add Video</button>' +
+          '</div>' +
+          '<div class="chset__rows">' + data[setName].map(function(e,i){ return row(setName, e, i); }).join('') + '</div>' +
+        '</div>';
+      }).join('') +
+      '<div class="op__actions">' +
+        '<button type="button" class="btn-sm btn-sm--primary" id="save-house-channels">Save</button>' +
+        '<p class="op__hint" style="margin:auto 0">No rebuild needed — house.html fetches this file live.</p>' +
+      '</div>' +
+      '<div id="msg-house-channels"></div>' +
+      '</div>';
+
+    panel.addEventListener('click', function(e){
+      var add = e.target.closest('[data-add-entry]');
+      if (add) {
+        data[add.dataset.addEntry].push({id:'', label:''});
+        renderChannelsPanel();
+        return;
+      }
+      var remove = e.target.closest('[data-remove-entry]');
+      if (remove) {
+        var rowEl = remove.closest('[data-set]');
+        data[rowEl.dataset.set].splice(Number(rowEl.dataset.i), 1);
+        renderChannelsPanel();
+        return;
+      }
+    });
+
+    document.getElementById('save-house-channels').addEventListener('click', function(){
+      // read all rows back into data before saving
+      panel.querySelectorAll('.chset').forEach(function(setEl){
+        var setName = setEl.dataset.set;
+        var entries = [];
+        setEl.querySelectorAll('.chrow').forEach(function(rowEl){
+          entries.push({
+            id: rowEl.querySelector('[data-role="id"]').value.trim(),
+            label: rowEl.querySelector('[data-role="label"]').value.trim(),
+          });
+        });
+        data[setName] = entries;
+      });
+      api('collection/house-channels', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)})
+        .then(function(res){
+          var msg = document.getElementById('msg-house-channels');
+          if (!res.ok) { msg.innerHTML = '<div class="op__msg op__msg--err">' + esc(res.data.error||'Save failed') + '</div>'; return; }
+          msg.innerHTML = '<div class="op__msg op__msg--ok">Saved. Live immediately — no rebuild needed. <a class="link-under" href="/house.html" target="_blank" rel="noopener">Open house.html &#8594;</a></div>';
+        });
+    });
+  }
+
+  // ---------------- boot ----------------
+  var NAMES = ['wardrobe', 'journal', 'casefiles', 'charlotte-locations', 'house-music', 'house-channels'];
+  var LABELS = { wardrobe:'Wardrobe', journal:'Journal', casefiles:'Case Files',
+    'charlotte-locations':'Charlotte Map', 'house-music':'House Music', 'house-channels':'House Channels' };
+
+  var tabs = document.getElementById('tabs');
+  var panels = document.getElementById('panels');
+  tabs.innerHTML = NAMES.map(function(n,i){
+    return '<button type="button" class="op__tab' + (i===0?' is-active':'') + '" data-name="' + n + '">' + LABELS[n] + '</button>';
+  }).join('');
+  panels.innerHTML = NAMES.map(function(n,i){
+    return '<div class="op__panel' + (i===0?' is-active':'') + '" id="panel-' + n + '"></div>';
+  }).join('');
+
+  tabs.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-name]');
+    if (!btn) return;
+    Array.prototype.forEach.call(tabs.children, function(t){ t.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+    Array.prototype.forEach.call(panels.children, function(p){ p.classList.remove('is-active'); });
+    document.getElementById('panel-' + btn.dataset.name).classList.add('is-active');
+  });
+
+  NAMES.forEach(function(name){
+    api('collection/' + name).then(function(res){
+      if (!res.ok) { document.getElementById('panel-' + name).innerHTML = '<p class="dash__err">Could not load data/' + name + '.json</p>'; return; }
+      state[name] = { records: res.data, selected: null };
+      if (name === 'house-channels') renderChannelsPanel();
+      else initPanel(name);
+    });
+  });
+})();
+</script>
+</body>
+</html>

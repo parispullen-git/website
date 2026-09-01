@@ -1,13 +1,34 @@
 {
   "living": [
-    { "id": "4xVVFJuycww", "label": "The Gentlemen" },
-    { "id": "uDB1CScElo4", "label": "Iceman — Drake" },
-    { "id": "zBlytYhNCKg", "label": "Ali Siddiq: Mondays" },
-    { "id": "Q_55Qr814NM", "label": "Steph Curry's Greatest Stories" },
-    { "id": "1xVtwc0oVlM", "label": "Most Luxurious Cars" },
-    { "id": "LWbH_LwS0Ss", "label": "Beverly Hills Mega Mansion" }
+    {
+      "id": "4xVVFJuycww",
+      "label": "The Gentlemen"
+    },
+    {
+      "id": "uDB1CScElo4",
+      "label": "Iceman — Drake"
+    },
+    {
+      "id": "zBlytYhNCKg",
+      "label": "Ali Siddiq: Mondays"
+    },
+    {
+      "id": "Q_55Qr814NM",
+      "label": "Steph Curry's Greatest Stories"
+    },
+    {
+      "id": "1xVtwc0oVlM",
+      "label": "Most Luxurious Cars"
+    },
+    {
+      "id": "LWbH_LwS0Ss",
+      "label": "Beverly Hills Mega Mansion"
+    }
   ],
   "cinema": [
-    { "id": "w7fuOkF74Zw", "label": "Power — First Look" }
+    {
+      "id": "w7fuOkF74Zw",
+      "label": "Power — First Look"
+    }
   ]
 }
