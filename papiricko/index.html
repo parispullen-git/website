@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papi Ricko Latin Kitchen & Lounge | Charlotte, NC</title>
+<meta name="description" content="Latin food by day, lounge energy by night on Central Ave. Tacos, small plates, and signature cocktails in Charlotte, NC. Open Tue-Sun. Call (704) 595-3048.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Inter:wght@400;500;600;700;800&family=Cutive+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#2B1330; --plum-2:#3B1D42; --plum-3:#4C2856;
+  --mango:#F0783C; --mango-dk:#A6431B; --mango-soft:#FCE3D2;
+  --gold:#D9A441; --gold-dk:#8F6A24;
+  --paper:#FBF4EC; --card:#FFFFFF; --ink:#231020; --ink-2:#5B4C57; --steel:#8A7C86;
+  --line:#EFE0D8; --line-hard:#DEC7BB;
+  --shadow:0 1px 2px rgba(35,16,32,.08), 0 16px 32px -18px rgba(35,16,32,.32);
+  --disp:"Yeseva One", Georgia, serif;
+  --body:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:"Cutive Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{text-wrap:balance;margin:0;font-family:var(--disp);font-weight:400}
+p{margin:0 0 1em}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:100px;font-weight:700;font-size:15.5px;letter-spacing:.02em;border:2px solid transparent;cursor:pointer;transition:transform .15s ease, background .15s ease}
+.btn-mango{background:var(--mango);color:#fff;}
+.btn-mango:hover{transform:translateY(-1px);background:#FF8A4D}
+.btn-gold{background:var(--gold);color:var(--plum)}
+.btn-gold:hover{transform:translateY(-1px);background:#E5B457}
+.btn-outline{border-color:rgba(255,255,255,.4);color:#fff}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+header{position:sticky;top:0;z-index:50;background:rgba(43,19,48,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.1)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;color:#fff}
+.brand .mark{width:38px;height:38px;border:2px solid var(--mango);border-radius:50%;display:grid;place-items:center;color:var(--mango);font-family:var(--disp);font-size:17px}
+.brand .word{font-family:var(--disp);font-size:19px;letter-spacing:.01em;line-height:1.1}
+.brand .word span{display:block;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-top:3px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.82);font-size:14px;font-weight:500}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:flex;align-items:center;gap:18px}
+.nav-phone{color:#fff;font-weight:700;font-family:var(--mono);font-size:14.5px;display:flex;align-items:center;gap:7px}
+.burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+@media (max-width:900px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-phone{font-size:12.5px;white-space:nowrap}
+  .nav-phone span.lbl{display:none}
+}
+
+/* hero */
+.hero{position:relative;background:radial-gradient(1000px 500px at 80% -10%, var(--plum-3) 0%, var(--plum) 55%), var(--plum);color:#fff;overflow:hidden;padding:88px 0 90px}
+.hero::before{content:"";position:absolute;inset:0;opacity:.16;background-image:radial-gradient(2px 2px at 20% 30%, var(--gold), transparent),radial-gradient(2px 2px at 60% 70%, var(--mango), transparent),radial-gradient(1.5px 1.5px at 80% 20%, var(--gold), transparent),radial-gradient(1.5px 1.5px at 40% 85%, var(--mango), transparent);background-size:280px 280px}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);background:rgba(217,164,65,.12);border:1px solid rgba(217,164,65,.4);padding:6px 12px;border-radius:100px;margin-bottom:22px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--mango);box-shadow:0 0 0 3px rgba(240,120,60,.3)}
+h1.headline{font-size:clamp(34px,5vw,58px);line-height:1.08}
+h1.headline em{font-style:normal;color:var(--mango)}
+.hero-sub{font-size:18px;color:rgba(255,255,255,.8);max-width:50ch;margin:20px 0 30px;font-family:var(--body)}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.trust-strip{display:flex;flex-wrap:wrap;gap:22px 28px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14)}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.85)}
+.trust-item b{color:#fff;font-family:var(--mono);font-size:14.5px}
+.trust-ico{width:20px;height:20px;flex:none;color:var(--gold)}
+
+.hero-card{background:var(--plum-2);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+.hero-card .imgph{aspect-ratio:4/3;border-radius:10px;background:linear-gradient(160deg, #4C2856 0%, #1D0D21 100%);position:relative;overflow:hidden;display:grid;place-items:center;margin-bottom:14px}
+.hero-card .imgph::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg, rgba(240,120,60,.08) 0 2px, transparent 2px 14px)}
+.ph-label{position:relative;z-index:1;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.62);border:1px dashed rgba(255,255,255,.32);padding:8px 14px;border-radius:100px}
+.hero-card .quote{font-size:14.5px;color:rgba(255,255,255,.85);line-height:1.55}
+.hero-card .quote b{color:var(--gold)}
+
+/* sections */
+section{padding:84px 0}
+.section-head{max-width:640px;margin:0 0 46px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mango-dk);margin-bottom:10px;display:block}
+h2{font-size:clamp(28px,3.6vw,42px)}
+.section-sub{color:var(--ink-2);font-size:16.5px;margin-top:12px;font-family:var(--body)}
+
+/* day/night split */
+.duality{background:var(--card)}
+.dual-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.dual-half{padding:44px 38px;position:relative;min-height:340px;display:flex;flex-direction:column;justify-content:center}
+.dual-half.day{background:linear-gradient(155deg, #FCE3D2, #FBF4EC);color:var(--ink)}
+.dual-half.night{background:linear-gradient(155deg, var(--plum-3), var(--plum));color:#fff}
+.dual-half .tag2{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:100px;margin-bottom:16px;width:fit-content}
+.dual-half.day .tag2{background:var(--mango-soft);color:var(--mango-dk)}
+.dual-half.night .tag2{background:rgba(217,164,65,.15);color:var(--gold)}
+.dual-half h3{font-size:26px;margin-bottom:10px}
+.dual-half p{font-size:15px;margin-bottom:0}
+.dual-half.day p{color:var(--ink-2)}
+.dual-half.night p{color:rgba(255,255,255,.75)}
+@media (max-width:760px){.dual-grid{grid-template-columns:1fr}}
+
+/* menu categories */
+.menu{background:var(--paper)}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.menu-card{background:var(--card);border:1px solid var(--line-hard);border-radius:12px;padding:28px;box-shadow:var(--shadow)}
+.menu-ico{width:44px;height:44px;color:var(--mango);background:var(--mango-soft);border-radius:50%;display:grid;place-items:center;margin-bottom:16px}
+.menu-card h3{font-size:20px;margin-bottom:10px}
+.menu-card p{color:var(--ink-2);font-size:14.5px;margin-bottom:12px}
+.menu-tags{display:flex;flex-wrap:wrap;gap:6px}
+.menu-tags span{font-family:var(--mono);font-size:11px;background:var(--paper);border:1px solid var(--line-hard);padding:4px 9px;border-radius:100px;color:var(--ink-2)}
+@media (max-width:900px){.menu-grid{grid-template-columns:1fr}}
+
+/* instagram / social proof */
+.social{background:var(--plum);color:#fff}
+.social-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.social-stats{display:flex;gap:36px;margin-top:26px;flex-wrap:wrap}
+.stat b{display:block;font-family:var(--disp);font-size:32px;color:var(--gold)}
+.stat span{font-size:13px;color:rgba(255,255,255,.65);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ig-item{aspect-ratio:1;border-radius:8px;background:linear-gradient(155deg, var(--mango), var(--mango-dk));position:relative;overflow:hidden;display:grid;place-items:center}
+.ig-item:nth-child(3n+2){background:linear-gradient(155deg, var(--gold), var(--gold-dk))}
+.ig-item:nth-child(3n+3){background:linear-gradient(155deg, var(--plum-3), #1D0D21)}
+.ig-item .ph-label{font-size:9.5px;color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.35)}
+
+/* reviews */
+.reviews{background:var(--card)}
+.rev-top{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:38px}
+.stars{color:var(--mango-dk);font-size:22px;letter-spacing:2px}
+.rev-score{font-family:var(--disp);font-size:32px}
+.rev-count{color:var(--ink-2);font-size:14.5px;font-family:var(--body)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev-card{background:var(--paper);border:1px solid var(--line-hard);border-radius:12px;padding:24px}
+.rev-card .stars{font-size:15px;margin-bottom:12px;display:block}
+.rev-card p{font-size:15px;color:var(--ink);margin:0 0 14px;font-style:italic}
+.rev-src{font-family:var(--mono);font-size:12px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.06em}
+@media (max-width:820px){.rev-grid{grid-template-columns:1fr}}
+
+/* reservations / catering CTA */
+.cta-band{background:linear-gradient(120deg, var(--plum-2), var(--plum));color:#fff;text-align:center}
+.cta-band h2{margin-bottom:14px;color:#fff}
+.cta-band p{color:rgba(255,255,255,.75);max-width:52ch;margin:0 auto 30px;font-family:var(--body)}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* hours / contact */
+.contact{background:var(--paper)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.contact-list{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.contact-list li{display:flex;gap:14px;align-items:flex-start}
+.c-ico{width:38px;height:38px;border-radius:8px;background:var(--card);border:1px solid var(--line-hard);display:grid;place-items:center;flex:none;color:var(--mango-dk)}
+.contact-list b{display:block;font-size:15.5px;margin-bottom:2px;font-family:var(--body);font-weight:700}
+.contact-list span{color:var(--ink-2);font-size:14.5px}
+.hours-card{background:var(--card);border:1px solid var(--line-hard);border-radius:12px;padding:26px}
+.hours-card h3{font-size:16px;margin-bottom:16px;font-family:var(--body);font-weight:800}
+.hours-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px;font-family:var(--body)}
+.hours-row:last-child{border-bottom:none}
+.hours-row span:first-child{color:var(--ink-2)}
+.hours-row span:last-child{font-family:var(--mono);font-weight:600}
+.hours-row.lounge span:last-child{color:var(--mango-dk)}
+
+footer{background:var(--plum);color:rgba(255,255,255,.55);padding:38px 0}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13.5px}
+.foot-brand{color:#fff;font-family:var(--disp);font-size:16px}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .social-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark">PR</span>
+      <span class="word">Papi Ricko<span>Latin Kitchen &amp; Lounge</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#duality">Day &amp; Night</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Hours &amp; Location</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:17045953048" class="nav-phone"><span class="lbl">Call:</span> (704) 595-3048</a>
+      <button class="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Open Tuesday – Sunday</span>
+      <h1 class="headline">Latin kitchen by day. <em>Lounge by night.</em></h1>
+      <p class="hero-sub">Central Ave's spot for tacos, birria, and small plates that turns into a cocktail-and-hookah lounge once the sun goes down. Come for lunch, stay till 2AM on the weekend.</p>
+      <div class="hero-ctas">
+        <a href="tel:17045953048" class="btn btn-mango">Call (704) 595-3048</a>
+        <a href="#contact" class="btn btn-gold">Reservations &amp; Catering</a>
+      </div>
+      <div class="trust-strip">
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3 6.5 7 .9-5.2 5 1.3 7-6.1-3.4-6.1 3.4 1.3-7-5.2-5 7-.9z"/></svg>
+          <div><b>4.5★</b> from 500+ reviews</div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          <div><b>@papirickoclt</b> on Instagram</div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <div>Fri–Sat open till <b>2AM</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="imgph"><span class="ph-label">Photo: birria tacos plated, warm bar lighting</span></div>
+      <p class="quote">"<b>Vibrant, club-like atmosphere</b> with floral and greenery accents — lively but still warm." — the vibe regulars keep coming back for</p>
+    </div>
+  </div>
+</section>
+
+<section class="duality" id="duality">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">One spot, two moods</span>
+      <h2>Same address. Completely different night.</h2>
+    </div>
+    <div class="dual-grid">
+      <div class="dual-half day">
+        <span class="tag2">Daytime — Tue–Sun, 11AM</span>
+        <h3>Latin kitchen, full plates</h3>
+        <p>Tacos, birria, seafood, and rice-and-beans done right. Come hungry, sit down, eat well — lunch through early evening.</p>
+      </div>
+      <div class="dual-half night">
+        <span class="tag2">Nights — Fri &amp; Sat till 2AM</span>
+        <h3>Lounge energy takes over</h3>
+        <p>Signature cocktails, hookah, and a room that turns into Central Ave's late-night hangout once the kitchen crowd thins out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">On the menu</span>
+      <h2>Latin small plates to late-night cocktails</h2>
+      <p class="section-sub">A few of the dishes and drinks regulars order by name.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2v20"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Tacos &amp; Small Plates</h3>
+        <p>Al pastor and campechano tacos, shrimp tacos, birria, and shareable starters.</p>
+        <div class="menu-tags"><span>Al Pastor Tacos</span><span>Birria</span><span>Hot Cheeto Birria Balls</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v18M18 3v18M6 8h12M6 16h12"/></svg></div>
+        <h3>Mains &amp; Seafood</h3>
+        <p>Chimichurri steak, calamari, and surf-and-turf tacos alongside rice &amp; refried beans.</p>
+        <div class="menu-tags"><span>Chimichurri Steak</span><span>Calamari</span><span>Surf &amp; Turf Tacos</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V8a2 2 0 0 1 2-2h5l2-2 2 2h3a2 2 0 0 1 2 2v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3>Signature Cocktails &amp; Lounge</h3>
+        <p>House cocktails, hookah, and a bar list built for the night crowd.</p>
+        <div class="menu-tags"><span>Golden Shower</span><span>El Tucanazo</span><span>Hookah</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="social">
+  <div class="wrap social-grid">
+    <div>
+      <span class="kicker" style="color:var(--gold)">On Instagram</span>
+      <h2 style="color:#fff">@papirickoclt</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.7)">Heavy Instagram presence, and it shows — new plates, new cocktails, and lounge nights posted constantly.</p>
+      <div class="social-stats">
+        <div class="stat"><b>55+</b><span>Yelp Reviews</span></div>
+        <div class="stat"><b>4.5★</b><span>Average Rating</span></div>
+        <div class="stat"><b>Tue–Sun</b><span>Open Weekly</span></div>
+      </div>
+    </div>
+    <div class="ig-grid">
+      <div class="ig-item"><span class="ph-label">Plated tacos, overhead</span></div>
+      <div class="ig-item"><span class="ph-label">Cocktail pour, bar light</span></div>
+      <div class="ig-item"><span class="ph-label">Lounge crowd, night</span></div>
+      <div class="ig-item"><span class="ph-label">Floral decor detail</span></div>
+      <div class="ig-item"><span class="ph-label">Chef plating dish</span></div>
+      <div class="ig-item"><span class="ph-label">Hookah table, evening</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="rev-top">
+      <span class="stars">★★★★★</span>
+      <span class="rev-score">4.5</span>
+      <span class="rev-count">From over 500 customers on Yelp &amp; Google</span>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <span class="stars">★★★★★</span>
+        <p>"The shrimp tacos and campechano are the move. Portions are generous and the flavor is on point."</p>
+        <div class="rev-src">Yelp · Charlotte</div>
+      </div>
+      <div class="rev-card">
+        <span class="stars">★★★★★</span>
+        <p>"Comes alive at night — great cocktails, hookah, and a genuinely fun crowd."</p>
+        <div class="rev-src">Google · Charlotte</div>
+      </div>
+      <div class="rev-card">
+        <span class="stars">★★★★★</span>
+        <p>"Staff remembered our order from last time. Warm and attentive every visit."</p>
+        <div class="rev-src">Yelp · Charlotte</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Book a table or plan your event</h2>
+    <p>Reservations for dinner and the late-night lounge, plus catering for your next gathering.</p>
+    <div class="cta-actions">
+      <a href="tel:17045953048" class="btn btn-mango">Call (704) 595-3048</a>
+      <a href="#contact" class="btn btn-outline">Catering Inquiries</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="kicker">Find us</span>
+      <h2 style="margin-bottom:24px">On Central Ave</h2>
+      <ul class="contact-list">
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><b>(704) 595-3048</b><span>Reservations &amp; catering</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><b>1226 Central Ave A</b><span>Charlotte, NC 28204</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></div>
+          <div><b>@papirickoclt</b><span>Follow for menu drops &amp; lounge nights</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="hours-card">
+      <h3>Hours</h3>
+      <div class="hours-row"><span>Tuesday – Thursday</span><span>11AM – 11PM</span></div>
+      <div class="hours-row lounge"><span>Friday – Saturday</span><span>11AM – 2AM</span></div>
+      <div class="hours-row"><span>Sunday</span><span>11AM – 11PM</span></div>
+      <div class="hours-row"><span>Monday</span><span>Closed</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="foot-brand">Papi Ricko Latin Kitchen &amp; Lounge</span>
+    <span>(704) 595-3048 · 1226 Central Ave A, Charlotte, NC 28204</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.burger').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  links.style.display = open ? 'none' : 'flex';
+  links.style.cssText += open ? '' : 'flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#2B1330;padding:20px 24px;gap:16px;';
+});
+</script>
+</body>
+</html>

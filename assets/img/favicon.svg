@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill-rule="evenodd">
+  <!-- Tab mark: the PP monogram in brass on the site's own obsidian, so it
+       holds contrast against both a light and a dark browser chrome. Shape is
+       identical to monogram-mark.svg, scaled about its own ink centre
+       (x 26 to 214, y 18 to 202 in that file's 240x208 grid). -->
+  <rect width="64" height="64" rx="12" fill="#0A0A0B"/>
+  <g fill="#C9A961" transform="translate(32,32) scale(0.25) translate(-120,-110)">
+    <path d="M121 18h14v150h-14z"/>
+    <path d="M135 18h15c46 0 64 22 64 49s-18 49-64 49h-15zm0 15h15c34 0 46 14 46 34s-12 34-46 34h-15z"/>
+    <g transform="translate(240,0) scale(-1,1)">
+      <path d="M121 18h14v150h-14z"/>
+      <path d="M135 18h15c46 0 64 22 64 49s-18 49-64 49h-15zm0 15h15c34 0 46 14 46 34s-12 34-46 34h-15z"/>
+    </g>
+    <path d="M88 190c12 0 17-7 17-18v-6h30v6c0 11 5 18 17 18v12H88z"/>
+  </g>
+</svg>

@@ -171,6 +171,7 @@ html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Charlotte: A Gentleman's Guide &#8212; Paris Pullen</title>
 <meta name="description" content="A real, verified guide to Charlotte, North Carolina &#8212; {total_venues} restaurants, bars, cigar lounges, clubs and coffee counters across seven districts, sourced and checked, not invented.">

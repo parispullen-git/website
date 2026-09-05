@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loyal Mobile Mechanic Services | Charlotte, NC</title>
+<meta name="description" content="24hr mobile mechanic serving Charlotte, NC. We come to your driveway, office, or roadside for diagnostics, brakes, batteries & more. Call (980) 499-0222.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#1F5C56; --teal-2:#256B63; --teal-3:#2F7D72;
+  --coral:#F2794A; --coral-dk:#B4491F; --coral-soft:#FDE6D8;
+  --cream:#FBF6ED; --card:#FFFFFF; --ink:#22201B; --ink-2:#5B564A; --steel:#847F70;
+  --line:#EAE2D2; --line-hard:#D8CBAE;
+  --shadow:0 1px 2px rgba(31,92,86,.08), 0 16px 32px -18px rgba(31,92,86,.28);
+  --disp:"Fredoka", "Arial Rounded MT Bold", sans-serif;
+  --body:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0 0 1em}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:100px;font-weight:600;font-size:15.5px;border:2px solid transparent;cursor:pointer;transition:transform .15s ease, background .15s ease;font-family:var(--disp)}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-coral:hover{transform:translateY(-1px);background:#F68A5F}
+.btn-outline{border-color:rgba(255,255,255,.4);color:#fff}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.btn-dark{background:var(--teal);color:#fff}
+
+header{position:sticky;top:0;z-index:50;background:rgba(31,92,86,.97);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:15px 0}
+.brand{display:flex;align-items:center;gap:11px;color:#fff}
+.brand .mark{width:40px;height:40px;background:var(--coral);border-radius:50%;display:grid;place-items:center;color:#fff;font-family:var(--disp);font-weight:700;font-size:16px}
+.brand .word{font-family:var(--disp);font-weight:600;font-size:17px;letter-spacing:.005em;line-height:1.1}
+.brand .word span{display:block;font-family:var(--mono);font-weight:500;font-size:10px;letter-spacing:.08em;color:var(--coral-soft);text-transform:uppercase;margin-top:4px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.82);font-size:14.5px;font-weight:500}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:flex;align-items:center;gap:18px}
+.nav-phone{color:#fff;font-weight:700;font-family:var(--mono);font-size:14.5px}
+.burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+@media (max-width:860px){.nav-links{display:none}.burger{display:block}.nav-phone{font-size:13px;white-space:nowrap}.nav-phone span.lbl{display:none}}
+
+/* hero */
+.hero{position:relative;background:linear-gradient(160deg, var(--teal-2) 0%, var(--teal) 70%);color:#fff;overflow:hidden;padding:78px 0 88px}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--coral-soft);background:rgba(242,121,74,.16);border:1px solid rgba(242,121,74,.4);padding:7px 14px;border-radius:100px;margin-bottom:22px}
+h1.headline{font-family:var(--disp);font-weight:600;font-size:clamp(32px,4.6vw,52px);line-height:1.08}
+h1.headline em{font-style:normal;color:var(--coral-soft)}
+.hero-sub{font-size:18px;color:rgba(255,255,255,.82);max-width:50ch;margin:20px 0 30px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.trust-strip{display:flex;flex-wrap:wrap;gap:14px}
+.trust-pill{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:9px 15px;border-radius:100px}
+.trust-pill svg{width:16px;height:16px;color:var(--coral-soft);flex:none}
+
+.hero-photo{aspect-ratio:1/1;border-radius:50%;position:relative;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 25%, #3F8F82 0%, var(--teal-3) 45%, var(--teal) 100%);box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.van-ico{width:96px;height:96px;color:var(--coral-soft)}
+.ph-label{position:absolute;bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.7);border:1px dashed rgba(255,255,255,.35);padding:7px 13px;border-radius:100px;background:rgba(0,0,0,.15);text-align:center;width:74%}
+
+section{padding:84px 0}
+.section-head{max-width:640px;margin:0 auto 46px;text-align:center}
+.section-head.left{text-align:left;margin-left:0}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--coral-dk);margin-bottom:10px;display:block}
+h2{font-family:var(--disp);font-weight:600;font-size:clamp(28px,3.6vw,40px)}
+.section-sub{color:var(--ink-2);font-size:16.5px;margin-top:12px}
+
+/* how it works — dashed connector flow */
+.how{background:var(--card)}
+.how-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+.how-flow::before{content:"";position:absolute;top:34px;left:12%;right:12%;height:0;border-top:3px dashed var(--line-hard)}
+.hstep{text-align:center;padding:0 20px;position:relative}
+.hstep .circ{width:68px;height:68px;border-radius:50%;background:var(--coral-soft);color:var(--coral-dk);display:grid;place-items:center;margin:0 auto 18px;position:relative;z-index:1;border:4px solid var(--card)}
+.hstep .circ svg{width:30px;height:30px}
+.hstep h4{font-family:var(--disp);font-weight:600;font-size:19px;margin-bottom:8px}
+.hstep p{color:var(--ink-2);font-size:14.5px;margin:0}
+@media (max-width:760px){.how-flow{grid-template-columns:1fr;gap:36px}.how-flow::before{display:none}}
+
+/* services */
+.services{background:var(--cream)}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 20px;text-align:center}
+.svc-ico{width:44px;height:44px;color:var(--teal);background:var(--coral-soft);border-radius:50%;display:grid;place-items:center;margin:0 auto 14px}
+.svc-ico svg{width:22px;height:22px}
+.svc h3{font-size:15.5px;font-weight:700;margin-bottom:6px}
+.svc p{color:var(--ink-2);font-size:13px;margin:0}
+@media (max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.svc-grid{grid-template-columns:1fr}}
+
+/* comparison */
+.compare{background:var(--card)}
+.comp-table{width:100%;border-collapse:collapse;border:1px solid var(--line-hard);border-radius:12px;overflow:hidden}
+.comp-table th,.comp-table td{padding:16px 20px;text-align:left;font-size:14.5px;border-bottom:1px solid var(--line)}
+.comp-table thead th{background:var(--teal);color:#fff;font-family:var(--disp);font-weight:600;font-size:15px}
+.comp-table thead th:first-child{color:rgba(255,255,255,.6);font-weight:500;font-family:var(--body);font-size:13px}
+.comp-table tbody th{color:var(--ink-2);font-weight:600;background:var(--cream);width:34%}
+.comp-table tbody td:nth-child(2){color:var(--steel)}
+.comp-table tbody td:nth-child(3){color:var(--teal);font-weight:700}
+.comp-table tbody tr:last-child td, .comp-table tbody tr:last-child th{border-bottom:none}
+.tblwrap{overflow-x:auto}
+
+/* faq accordion */
+.faq{background:var(--cream)}
+.faq-list{max-width:760px;margin:0 auto;display:grid;gap:12px}
+.faq-item{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.faq-item summary{padding:18px 22px;font-family:var(--disp);font-weight:600;font-size:16px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-size:22px;color:var(--coral);flex:none;font-family:var(--body)}
+.faq-item[open] summary::after{content:"–"}
+.faq-item p{padding:0 22px 20px;color:var(--ink-2);font-size:14.5px;margin:0}
+
+/* area */
+.area{background:var(--card)}
+.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.area-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tag{font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:100px;background:var(--coral-soft);color:var(--coral-dk);border:1px solid #F6C9AE}
+.map-ph{aspect-ratio:4/3;border-radius:14px;background:
+  linear-gradient(0deg, var(--cream) 24px, transparent 24px),
+  linear-gradient(90deg, var(--cream) 24px, transparent 24px), var(--line-hard);
+  background-size:100% 25px, 25px 100%;
+  border:1px solid var(--line-hard);position:relative;display:grid;place-items:center}
+.map-pin{width:44px;height:44px;background:var(--teal);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;box-shadow:0 8px 20px -6px rgba(31,92,86,.5)}
+.map-pin span{transform:rotate(45deg);color:var(--coral-soft);font-size:18px}
+
+/* cta */
+.cta-band{background:linear-gradient(120deg,var(--teal-2),var(--teal));color:#fff;text-align:center}
+.cta-band h2{margin-bottom:14px}
+.cta-band p{color:rgba(255,255,255,.8);max-width:52ch;margin:0 auto 30px}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* contact */
+.contact{background:var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.contact-list{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.contact-list li{display:flex;gap:14px;align-items:flex-start}
+.c-ico{width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--line-hard);display:grid;place-items:center;flex:none;color:var(--teal)}
+.contact-list b{display:block;font-size:15.5px;margin-bottom:2px}
+.contact-list span{color:var(--ink-2);font-size:14.5px}
+.hours-card{background:var(--card);border:1px solid var(--line-hard);border-radius:14px;padding:26px}
+.hours-card h3{font-family:var(--disp);font-size:17px;margin-bottom:16px;font-weight:600}
+.hours-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.hours-row:last-child{border-bottom:none}
+.hours-row span:first-child{color:var(--ink-2)}
+.hours-row span:last-child{font-family:var(--mono);font-weight:700;color:var(--coral-dk)}
+
+footer{background:var(--teal);color:rgba(255,255,255,.65);padding:36px 0}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13.5px}
+.foot-brand{color:#fff;font-family:var(--disp);font-weight:600;font-size:16px}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-photo{order:-1;max-width:280px;margin:0 auto}
+  .area-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark">L</span>
+      <span class="word">LOYAL MOBILE MECHANIC<span>24hr Service · Charlotte NC</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How It Works</a>
+      <a href="#services">Services</a>
+      <a href="#compare">Why Mobile</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:19804990222" class="nav-phone"><span class="lbl">Call:</span> (980) 499-0222</a>
+      <button class="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">● 24hr mobile mechanic services</span>
+      <h1 class="headline">Car trouble? <em>Your driveway is our shop.</em></h1>
+      <p class="hero-sub">Loyal Mobile Mechanic comes to you — home, office, or wherever your car decided to quit — anywhere around Charlotte, any hour. No tow truck, no waiting room.</p>
+      <div class="hero-ctas">
+        <a href="tel:19804990222" class="btn btn-coral">Call (980) 499-0222</a>
+        <a href="#how" class="btn btn-outline">See How It Works</a>
+      </div>
+      <div class="trust-strip">
+        <div class="trust-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>24/7 Availability</div>
+        <div class="trust-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>We Come To You</div>
+        <div class="trust-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>All Makes &amp; Models</div>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <svg class="van-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 15h11V7H5L2 11z"/><path d="M13 15h7l2-4h-6"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg>
+      <span class="ph-label">Photo: mechanic working roadside</span>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>Three steps, zero towing</h2>
+      <p class="section-sub">No dropping the car off and waiting days for a callback.</p>
+    </div>
+    <div class="how-flow">
+      <div class="hstep">
+        <div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h4>You call</h4>
+        <p>Tell us what's going on and where you're parked — driveway, office lot, or shoulder of the road.</p>
+      </div>
+      <div class="hstep">
+        <div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 15h11V7H5L2 11z"/><path d="M13 15h7l2-4h-6"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg></div>
+        <h4>We come to you</h4>
+        <p>Fully equipped and rolling to your location — any hour, any day of the week.</p>
+      </div>
+      <div class="hstep">
+        <div class="circ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h4>Back on the road</h4>
+        <p>Diagnosed and fixed on the spot when possible — clear pricing before any work starts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What we handle</span>
+      <h2>Mobile repair &amp; diagnostics</h2>
+      <p class="section-sub">If it's a daily-driver problem, chances are we've fixed it curbside.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></div><h3>Diagnostics</h3><p>Check-engine lights and rough running, read and explained plainly.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="3" width="10" height="18" rx="1"/><path d="M9 7h6"/></svg></div><h3>Battery &amp; Alternator</h3><p>Won't start or dying fast — tested, jumped, or replaced on site.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Brakes</h3><p>Pads, rotors, and that grinding noise you've been ignoring.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M4 14h16v6H4z"/></svg></div><h3>Belts &amp; Hoses</h3><p>Squeals, leaks, and worn rubber replaced before they strand you.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 11-14h-7l0-6z"/></svg></div><h3>Starters</h3><p>Click-and-nothing mornings diagnosed and fixed same visit.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div><h3>Pre-Purchase Inspection</h3><p>Buying a used car? We check it over before you hand over cash.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12l2 5v11a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H7v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8z"/><circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/></svg></div><h3>Oil Changes</h3><p>Routine maintenance without a shop waiting room.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div><h3>Roadside &amp; Breakdowns</h3><p>Stuck on the shoulder? We come straight to you, day or night.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="compare" id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Why mobile</span>
+      <h2>Skip the shop entirely</h2>
+      <p class="section-sub">Same repairs, without the drop-off and the wait.</p>
+    </div>
+    <div class="tblwrap">
+      <table class="comp-table">
+        <thead><tr><th></th><th>Traditional Shop</th><th>Loyal Mobile Mechanic</th></tr></thead>
+        <tbody>
+          <tr><th>Getting there</th><td>You drive it in — or get it towed</td><td>We drive to you</td></tr>
+          <tr><th>Waiting</th><td>Drop off, wait for a callback</td><td>Wait at home, work, or wherever you are</td></tr>
+          <tr><th>Hours</th><td>Business hours only</td><td>24 hours, every day</td></tr>
+          <tr><th>Diagnosis</th><td>Sometimes upsold on extras</td><td>Straight answer, straight price</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Questions</span>
+      <h2>Good to know</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Do you charge extra just to come to me?</summary>
+        <p>Call for a straight quote on the repair and the trip out — you'll know the number before we start, no surprise dispatch fee sprung on you after.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if my car won't start at all?</summary>
+        <p>That's most of what we do. Give us the location and we'll bring what's needed to diagnose it on site — battery, starter, or something else.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you really work nights and weekends?</summary>
+        <p>Yes — we're a 24hr mobile mechanic service. Cars don't break down on a schedule, so neither do we.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What areas do you cover?</summary>
+        <p>Charlotte and the surrounding metro. Call with your location and we'll confirm we can get to you.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="area" id="area-map">
+  <div class="wrap area-grid">
+    <div>
+      <span class="kicker">Service area</span>
+      <h2>Serving Charlotte, wherever you are</h2>
+      <p class="section-sub">No shop address — the whole business is built around coming to you, across Charlotte and the surrounding towns.</p>
+      <div class="area-tags">
+        <span class="tag">Charlotte</span>
+        <span class="tag">Matthews</span>
+        <span class="tag">Pineville</span>
+        <span class="tag">University City</span>
+        <span class="tag">Concord</span>
+        <span class="tag">Gastonia</span>
+      </div>
+    </div>
+    <div class="map-ph"><div class="map-pin"><span>🔧</span></div></div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Stuck somewhere right now?</h2>
+    <p>Call and tell us where you are — we'll get someone headed your way.</p>
+    <div class="cta-actions">
+      <a href="tel:19804990222" class="btn btn-coral">Call (980) 499-0222</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="kicker">Get in touch</span>
+      <h2 style="margin-bottom:24px">We'll come find you</h2>
+      <ul class="contact-list">
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><b>(980) 499-0222</b><span>Call any time — we answer 24/7</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><b>Charlotte, NC &amp; surrounding areas</b><span>Fully mobile — no shop to drive to</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+          <div><b>Find us on Facebook</b><span>24hr Mobile Mechanic Services</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="hours-card">
+      <h3>Hours</h3>
+      <div class="hours-row"><span>Every day</span><span>Open 24 Hours</span></div>
+      <div class="hours-row"><span>Emergency / roadside</span><span>Always on call</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="foot-brand">LOYAL MOBILE MECHANIC SERVICES</span>
+    <span>(980) 499-0222 · Charlotte, NC · 24hr Service</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.burger').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  links.style.display = open ? 'none' : 'flex';
+  links.style.cssText += open ? '' : 'flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#1F5C56;padding:20px 24px;gap:16px;';
+});
+</script>
+</body>
+</html>

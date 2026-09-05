@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>South Charlotte Pressure Washing | Providence Rd Corridor</title>
+<meta name="description" content="Driveway, siding, deck & roof pressure washing along the Providence Rd corridor in South Charlotte, NC. Neighborhood Favorite 2021 & 2022. Call (980) 210-1755.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0E2A3D; --navy-2:#153A52; --navy-3:#1D4C6B;
+  --aqua:#2FB6C4; --aqua-dk:#1A7A85; --aqua-soft:#DFF6F7;
+  --paper:#F6FAFA; --card:#FFFFFF; --ink:#12232B; --ink-2:#4C6570; --steel:#78919B;
+  --line:#DCEAEC; --line-hard:#C2DBDE;
+  --shadow:0 1px 2px rgba(14,42,61,.06), 0 16px 34px -18px rgba(14,42,61,.26);
+  --disp:"Sora", "Arial", sans-serif;
+  --body:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:"Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0 0 1em}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 27px;border-radius:8px;font-weight:700;font-size:15.5px;border:2px solid transparent;cursor:pointer;transition:transform .15s ease, background .15s ease}
+.btn-aqua{background:var(--aqua);color:#fff}
+.btn-aqua:hover{transform:translateY(-1px);background:#3FC7D4}
+.btn-outline{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-dark{background:var(--navy);color:#fff}
+
+header{position:sticky;top:0;z-index:50;background:rgba(14,42,61,.96);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.brand{display:flex;align-items:center;gap:11px;color:#fff}
+.brand .mark{width:36px;height:36px;background:var(--aqua);border-radius:8px;display:grid;place-items:center;color:var(--navy)}
+.brand .mark svg{width:19px;height:19px}
+.brand .word{font-family:var(--disp);font-weight:700;font-size:15.5px;letter-spacing:.01em;line-height:1.15}
+.brand .word span{display:block;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.06em;color:var(--aqua);text-transform:uppercase;margin-top:4px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.82);font-size:14.5px;font-weight:500}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:flex;align-items:center;gap:18px}
+.nav-phone{color:#fff;font-weight:700;font-family:var(--mono);font-size:14.5px}
+.burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+@media (max-width:860px){.nav-links{display:none}.burger{display:block}.nav-phone{font-size:13px;white-space:nowrap}.nav-phone span.lbl{display:none}}
+
+/* hero */
+.hero{position:relative;background:linear-gradient(155deg, var(--navy-2) 0%, var(--navy) 65%);color:#fff;overflow:hidden;padding:78px 0 0}
+.hero-top{position:relative;text-align:center;max-width:720px;margin:0 auto;padding-bottom:50px}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--navy);background:var(--aqua-soft);padding:7px 14px;border-radius:100px;margin-bottom:24px;font-weight:700}
+h1.headline{font-family:var(--disp);font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.08;letter-spacing:-.01em}
+h1.headline em{font-style:normal;color:var(--aqua)}
+.hero-sub{font-size:18px;color:rgba(255,255,255,.8);max-width:52ch;margin:22px auto 32px}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:0}
+.hero-photo{aspect-ratio:21/9;position:relative;overflow:hidden;
+  background:linear-gradient(100deg, #0E2A3D 0%, #1D4C6B 45%, #2FB6C4 100%)}
+.hero-photo::after{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(100deg, rgba(255,255,255,.06) 0 3px, transparent 3px 26px)}
+.ph-label{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:1;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);border:1px dashed rgba(255,255,255,.35);padding:8px 15px;border-radius:100px;background:rgba(0,0,0,.2);white-space:nowrap}
+.trust-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:24px 34px;padding:28px 0;background:var(--navy-2);border-top:1px solid rgba(255,255,255,.1)}
+.trust-item{font-size:14px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:9px}
+.trust-item svg{width:18px;height:18px;color:var(--aqua);flex:none}
+.trust-item b{color:#fff}
+
+section{padding:88px 0}
+.section-head{max-width:640px;margin:0 0 46px}
+.section-head.center{margin:0 auto 50px;text-align:center}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--aqua-dk);margin-bottom:10px;display:block}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(28px,3.5vw,40px);letter-spacing:-.005em}
+.section-sub{color:var(--ink-2);font-size:16.5px;margin-top:12px}
+
+/* gallery — stacked split before/after showcase */
+.gallery{background:var(--card)}
+.showcase{display:grid;gap:40px}
+.split-card{display:grid;grid-template-columns:1fr 1fr;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+.split-half{aspect-ratio:16/11;position:relative;display:flex;align-items:flex-end;padding:18px}
+.split-half.before{background:linear-gradient(160deg,#8A9296,#5B6266)}
+.split-half.after{background:linear-gradient(160deg,#2FB6C4,#1A7A85)}
+.split-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.35);padding:6px 12px;border-radius:100px}
+.split-divider{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;transform:translateX(-50%);z-index:2}
+.split-cap{margin-top:14px;font-size:14.5px;color:var(--ink-2);text-align:center}
+.split-cap b{color:var(--ink);font-family:var(--disp)}
+@media (max-width:640px){.split-card{grid-template-columns:1fr}.split-divider{display:none}}
+
+/* services */
+.services{background:var(--paper)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 24px;box-shadow:var(--shadow)}
+.svc-ico{width:42px;height:42px;color:var(--navy);background:var(--aqua-soft);border-radius:10px;display:grid;place-items:center;margin-bottom:16px}
+.svc-ico svg{width:22px;height:22px}
+.svc h3{font-family:var(--disp);font-size:18px;font-weight:700;margin-bottom:8px}
+.svc p{color:var(--ink-2);font-size:14.5px;margin:0}
+@media (max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.svc-grid{grid-template-columns:1fr}}
+
+/* why */
+.why{background:var(--card)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+.why-list{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.why-list li{display:flex;gap:14px;align-items:flex-start}
+.why-ico{width:36px;height:36px;border-radius:9px;background:var(--aqua-soft);color:var(--aqua-dk);display:grid;place-items:center;flex:none}
+.why-list h4{margin:0 0 4px;font-family:var(--disp);font-size:16.5px;font-weight:700}
+.why-list p{margin:0;color:var(--ink-2);font-size:14.5px}
+.why-photo{aspect-ratio:4/3;border-radius:14px;position:relative;overflow:hidden;box-shadow:var(--shadow);
+  background:linear-gradient(150deg,var(--navy-3),var(--navy))}
+.why-photo::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(100deg, rgba(47,182,196,.14) 0 3px, transparent 3px 24px)}
+.why-photo .ph-label{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7)}
+
+/* area */
+.area{background:var(--paper)}
+.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.area-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tag{font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:100px;background:var(--aqua-soft);color:var(--aqua-dk);border:1px solid #B9E7EA}
+.map-ph{aspect-ratio:4/3;border-radius:14px;background:
+  linear-gradient(0deg, var(--paper) 24px, transparent 24px),
+  linear-gradient(90deg, var(--paper) 24px, transparent 24px), var(--line-hard);
+  background-size:100% 25px, 25px 100%;
+  border:1px solid var(--line-hard);position:relative;display:grid;place-items:center}
+.map-pin{width:44px;height:44px;background:var(--navy);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;box-shadow:0 8px 20px -6px rgba(14,42,61,.5)}
+.map-pin span{transform:rotate(45deg);color:var(--aqua);font-size:18px}
+
+/* cta */
+.cta-band{background:linear-gradient(120deg,var(--navy-2),var(--navy));color:#fff;text-align:center}
+.cta-band h2{margin-bottom:14px}
+.cta-band p{color:rgba(255,255,255,.75);max-width:52ch;margin:0 auto 30px}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* contact */
+.contact{background:var(--card)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.contact-list{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.contact-list li{display:flex;gap:14px;align-items:flex-start}
+.c-ico{width:38px;height:38px;border-radius:9px;background:var(--paper);border:1px solid var(--line-hard);display:grid;place-items:center;flex:none;color:var(--navy)}
+.contact-list b{display:block;font-size:15.5px;margin-bottom:2px}
+.contact-list span{color:var(--ink-2);font-size:14.5px}
+.quote-card{background:var(--paper);border:1px solid var(--line-hard);border-radius:14px;padding:26px}
+.quote-card h3{font-family:var(--disp);font-size:16px;margin-bottom:12px;font-weight:700}
+.quote-card p{color:var(--ink-2);font-size:14.5px;margin:0 0 16px}
+.quote-card .step{display:flex;gap:10px;align-items:baseline;font-size:14px;margin-bottom:8px}
+.quote-card .step b{font-family:var(--mono);color:var(--aqua-dk)}
+
+footer{background:var(--navy);color:rgba(255,255,255,.6);padding:36px 0}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13.5px}
+.foot-brand{color:#fff;font-family:var(--disp);font-weight:700;font-size:15px}
+
+@media (max-width:900px){
+  .why-grid{grid-template-columns:1fr}
+  .why-photo{order:-1}
+  .area-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M4 20c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M12 3v10"/><path d="M8 7l4-4 4 4"/></svg></span>
+      <span class="word">SOUTH CHARLOTTE<span>Pressure Washing</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#gallery">Before &amp; After</a>
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:19802101755" class="nav-phone"><span class="lbl">Call:</span> (980) 210-1755</a>
+      <button class="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-top">
+    <span class="badge">★ Neighborhood Favorite, 2021 &amp; 2022</span>
+    <h1 class="headline">Driveways, siding, decks — <em>clean like the day they were built.</em></h1>
+    <p class="hero-sub">Serving the Providence Rd corridor and South Charlotte with soft-wash and pressure-wash service that doesn't cut corners — or damage what it's cleaning.</p>
+    <div class="hero-ctas">
+      <a href="tel:19802101755" class="btn btn-aqua">Call (980) 210-1755</a>
+      <a href="#contact" class="btn btn-outline">Get a Free Quote</a>
+    </div>
+  </div>
+  <div class="hero-photo"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkCPuI1ov0iDUAVLAdBKRqrUUqhBZZvroyQdBipBDWM6ybBly8R9OqhVKPp9xUxetZMPAzCuefSafL-Bbnd8Eqylk-o1h8i0Zam6eteuS9yINjslF9kaPljoEltq1851s1MvPjNVcv1hxw=w1400" alt="South Charlotte Pressure Washing crew mid-job on a residential driveway" loading="lazy" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></div>
+  <div class="trust-strip">
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3 6.5 7 .9-5.2 5 1.3 7-6.1-3.4-6.1 3.4 1.3-7-5.2-5 7-.9z"/></svg><b>100%</b>&nbsp;recommend on Facebook</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Neighborhood <b>Favorite</b> '21 &amp; '22</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><b>Providence Rd</b>&nbsp;corridor &amp; South Charlotte</div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="kicker">See the difference</span>
+      <h2>Before &amp; after</h2>
+      <p class="section-sub">The kind of transformation that's easy to show and hard to argue with.</p>
+    </div>
+    <div class="showcase">
+      <div class="split-card">
+        <div class="split-half before"><span class="split-tag">Before</span></div>
+        <div class="split-half after"><span class="split-tag">After</span></div>
+        <div class="split-divider"></div>
+      </div>
+      <p class="split-cap"><b>Concrete driveway</b> — years of algae and tire staining lifted in one visit</p>
+      <div class="split-card">
+        <div class="split-half before"><span class="split-tag">Before</span></div>
+        <div class="split-half after"><span class="split-tag">After</span></div>
+        <div class="split-divider"></div>
+      </div>
+      <p class="split-cap"><b>Vinyl siding</b> — soft-washed to lift mildew without stripping the finish</p>
+      <div class="split-card">
+        <div class="split-half before"><span class="split-tag">Before</span></div>
+        <div class="split-half after"><span class="split-tag">After</span></div>
+        <div class="split-divider"></div>
+      </div>
+      <p class="split-cap"><b>Composite deck</b> — deep-cleaned boards, ready for the season</p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What we clean</span>
+      <h2>Exterior cleaning, done carefully</h2>
+      <p class="section-sub">Right pressure, right chemical, right surface — every time.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20h18"/><path d="M5 20V10l7-6 7 6v10"/></svg></div><h3>Driveways &amp; Walkways</h3><p>Concrete and paver surfaces stripped of algae, oil stains, and tire marks.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><h3>House Siding</h3><p>Soft-wash technique that lifts mildew and grime without damaging the finish.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V10h16v11"/><path d="M9 21v-6h6v6"/></svg></div><h3>Decks &amp; Fences</h3><p>Wood and composite decking cleaned and brightened, ready for stain or sealing.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div><h3>Roof Soft Washing</h3><p>Low-pressure treatment that removes black streaks without lifting shingles.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><h3>Gutters</h3><p>Exterior gutter brightening so the whole roofline looks finished.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg></div><h3>Commercial &amp; HOA</h3><p>Storefronts, sidewalks, and shared common areas kept presentable on a schedule.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="why">
+  <div class="wrap why-grid">
+    <ul class="why-list">
+      <li><div class="why-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3 6.5 7 .9-5.2 5 1.3 7-6.1-3.4-6.1 3.4 1.3-7-5.2-5 7-.9z"/></svg></div><div><h4>A neighborhood favorite, two years running</h4><p>Named a Nextdoor Neighborhood Favorite in both 2021 and 2022 by the homeowners who've used us.</p></div></li>
+      <li><div class="why-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div><div><h4>100% recommend rating</h4><p>Every review on our Facebook page recommends us — that's the bar we work to keep.</p></div></li>
+      <li><div class="why-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4>Local to the Providence Rd corridor</h4><p>We know the surfaces, the HOAs, and the finishes common to South Charlotte homes.</p></div></li>
+      <li><div class="why-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><div><h4>Led by Sebastian</h4><p>Customers consistently point to the owner going the extra step to get a job done right.</p></div></li>
+    </ul>
+    <div class="why-photo"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkzD7GvAyxX8A52DqhTqf3CeUvQDJDqUwltWy1WGC0LKVGQWSoh4PfXs6Sf7hwk6qfggqT_5qqi86s-jUrmiCh3qu1POrCS3zSCPyZrfQwp7J9kKwDwwgIfVPa5iSwGe_bqO-Iegw=w1000" alt="South Charlotte Pressure Washing — real siding soft-wash job" loading="lazy" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover"></div>
+  </div>
+</section>
+
+<section class="area" id="area">
+  <div class="wrap area-grid">
+    <div>
+      <span class="kicker">Service area</span>
+      <h2>Providence Rd corridor &amp; South Charlotte</h2>
+      <p class="section-sub">Based along the Providence Rd corridor, running jobs throughout South Charlotte and neighboring towns.</p>
+      <div class="area-tags">
+        <span class="tag">South Charlotte</span>
+        <span class="tag">Providence Rd</span>
+        <span class="tag">Ballantyne</span>
+        <span class="tag">Waxhaw</span>
+        <span class="tag">Matthews</span>
+        <span class="tag">Pineville</span>
+      </div>
+    </div>
+    <div class="map-ph"><div class="map-pin"><span>💧</span></div></div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>See what a proper clean actually looks like</h2>
+    <p>Free quotes, no pressure (pun intended) — just tell us what needs cleaning.</p>
+    <div class="cta-actions">
+      <a href="tel:19802101755" class="btn btn-aqua">Call (980) 210-1755</a>
+      <a href="#contact" class="btn btn-outline">Request a Quote</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="kicker">Get in touch</span>
+      <h2 style="margin-bottom:24px">Let's get it looking new</h2>
+      <ul class="contact-list">
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><b>(980) 210-1755</b><span>Call or text for a free quote</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><b>Providence Rd corridor, South Charlotte</b><span>Mobile service — we come to you</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+          <div><b>Find us on Facebook</b><span>South Charlotte Pressure Washing</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="quote-card">
+      <h3>Getting a quote</h3>
+      <p>Every job is priced after we know the surface and square footage — here's how it goes:</p>
+      <div class="step"><b>01</b> Call or message with what needs cleaning</div>
+      <div class="step"><b>02</b> We give you a straight price, no site visit required for most jobs</div>
+      <div class="step"><b>03</b> We schedule around your week, not the other way around</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="foot-brand">SOUTH CHARLOTTE PRESSURE WASHING</span>
+    <span>(980) 210-1755 · Providence Rd Corridor, South Charlotte NC</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.burger').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  links.style.display = open ? 'none' : 'flex';
+  links.style.cssText += open ? '' : 'flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#0E2A3D;padding:20px 24px;gap:16px;';
+});
+</script>
+</body>
+</html>

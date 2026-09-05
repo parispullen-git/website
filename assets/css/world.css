@@ -283,7 +283,18 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 
 /* Mark sitting inside the fixed nav */
 .worldnav__mark{display:flex;align-items:center;gap:var(--s3)}
-.worldnav__mark .foxx{--foxx-size:20px;width:20px;--foxx-color:#fff}
+/* The header lockup and the opening gate both use the PP monogram (the brass
+   mark mounted in the Study) rather than the foxx silhouette -- same
+   mask-tint mechanism, just a different shape, so each one's own fill and
+   hover colour still apply. The footer seal is deliberately still the foxx.
+   The monogram is wider than tall, so it overrides .foxx's 814/1180. */
+.worldnav__mark .foxx,
+.gate .foxx{
+  aspect-ratio:240/208;
+  -webkit-mask-image:url("../img/monogram-mark.svg");
+          mask-image:url("../img/monogram-mark.svg");
+}
+.worldnav__mark .foxx{--foxx-size:32px;width:32px;--foxx-color:#fff}
 
 /* ---------- 4b2. HERO GRADE ----------
    The boardroom plate is already golden-hour warm, so it needs pulling
@@ -354,6 +365,12 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .worldnav__mark{
   font-family:var(--font-display);font-size:1rem;letter-spacing:.28em;text-transform:uppercase;color:#fff;
 }
+.worldnav__actions{display:flex;align-items:center;gap:var(--s5)}
+.worldnav__city{
+  font-size:var(--t-label);letter-spacing:.28em;text-transform:uppercase;color:#fff;
+  opacity:.82;transition:opacity var(--d-fast) var(--ease-out);
+}
+.worldnav__city:hover,.worldnav__city:focus-visible{opacity:1}
 .worldnav__toggle{
   display:flex;align-items:center;gap:var(--s3);
   font-size:var(--t-label);letter-spacing:.28em;text-transform:uppercase;color:#fff;
@@ -400,7 +417,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 
 /* Menu overlay */
 .menu{
-  position:fixed;inset:0;z-index:890;
+  position:fixed;inset:0;z-index:890;overflow-y:auto;
   background:var(--ink);
   display:grid;grid-template-columns:1fr;align-content:center;
   padding:var(--s10) var(--gutter) var(--s7);
@@ -420,6 +437,21 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   font-family:var(--font-mono);font-size:var(--t-micro);color:var(--brass);
   vertical-align:super;margin-right:var(--s3);letter-spacing:.1em;
 }
+/* Every room, reachable straight from the hamburger -- Drake Related's
+   own mobile menu does the same thing (an "Explore" list of every room)
+   rather than making a visitor dig through a directory page for it. */
+.menu__explore{margin-top:var(--s7);padding-top:var(--s5);border-top:1px solid var(--rule)}
+.menu__explore-label{
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--brass);margin:0 0 var(--s4);
+}
+.menu__explore-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0 var(--s6)}
+.menu__explore-link{
+  font-family:var(--font-body);font-size:var(--t-label);color:var(--ash);
+  padding:.7em 0;min-height:44px;display:flex;align-items:center;
+  transition:color var(--d-fast);
+}
+.menu__explore-link:hover{color:var(--ivory)}
 .menu__foot{
   margin-top:var(--s8);display:flex;flex-wrap:wrap;gap:var(--s6);
   border-top:1px solid var(--rule);padding-top:var(--s5);
@@ -592,20 +624,6 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.5em;text-transform:uppercase;color:var(--ash);
   text-shadow:0 1px 14px rgba(0,0,0,.85);
 }
-.elevator{
-  position:fixed;left:var(--gutter);top:50%;transform:translateY(-50%);z-index:800;
-  display:grid;gap:var(--s4);
-}
-.elevator__stop{
-  display:flex;align-items:center;gap:var(--s3);
-  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--graphite);
-  transition:color var(--d-fast) var(--ease-out);
-}
-.elevator__stop i{display:block;width:18px;height:1px;background:currentColor;transition:width var(--d-med) var(--ease-out)}
-.elevator__stop:hover,.elevator__stop.is-active{color:var(--champagne)}
-.elevator__stop.is-active i{width:34px;background:var(--brass)}
-@media(max-width:1100px){.elevator{display:none}}
-
 /* ---------- 15. NETWORK INTERFACE ---------- */
 .netgrid{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:clamp(var(--s6),5vw,var(--s9));align-items:start}
 @media(max-width:900px){.netgrid{grid-template-columns:1fr}}
@@ -646,7 +664,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .jfilter{display:flex;flex-wrap:wrap;gap:var(--s2);border-block:1px solid var(--rule);
   padding-block:var(--s4);margin-bottom:var(--s7)}
 .jfilter button{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
-  text-transform:uppercase;color:var(--ash);padding:.6em .9em;border:1px solid transparent;
+  text-transform:uppercase;color:var(--ash);padding:.6em .9em;border:1px solid transparent;border-radius:999px;
   transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast)}
 .jfilter button:hover{color:var(--bone);border-color:var(--hairline)}
 .jfilter button.is-on{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
@@ -703,6 +721,82 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .jempty{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
   text-transform:uppercase;color:var(--graphite);padding:var(--s8) 0;text-align:center}
 
+/* ---------- 16b-ii. THE JOURNAL, MAGAZINE LAYOUT ----------
+   Full-bleed hero carousel, a labelled "Latest" grid four across,
+   and an editor's-pick split. Same brass-on-ink palette and display
+   face as the rest of the site -- only the arrangement is new. */
+.jhero{position:relative;width:100%;height:clamp(28rem,74vh,46rem);overflow:hidden;
+  background:var(--charcoal)}
+.jhero__slide{position:absolute;inset:0;opacity:0;visibility:hidden;
+  transition:opacity 900ms var(--ease-out),visibility 900ms}
+.jhero__slide.is-on{opacity:1;visibility:visible}
+.jhero__slide img{width:100%;height:100%;object-fit:cover;display:block}
+.jhero__scrim{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,10,11,.55) 0%,rgba(10,10,11,.12) 34%,
+    rgba(10,10,11,.72) 78%,rgba(10,10,11,.94) 100%)}
+.jhero__inner{position:absolute;left:0;right:0;bottom:0;
+  padding-bottom:clamp(var(--s6),6vh,var(--s9))}
+.jhero__cat{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.26em;
+  text-transform:uppercase;color:var(--brass-lit);margin-bottom:var(--s4)}
+.jhero__title{font-family:var(--font-display);font-weight:500;
+  font-size:clamp(2.1rem, 1.2rem + 3.6vw, 4.1rem);line-height:1.02;letter-spacing:-.02em;
+  color:var(--ivory);max-width:19ch;text-wrap:balance;margin:0}
+.jhero a:hover .jhero__title{color:var(--champagne)}
+.jhero__stand{color:var(--bone);font-size:var(--t-lede);line-height:1.55;font-weight:300;
+  max-width:56ch;margin-top:var(--s4);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.jhero__by{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ash);margin-top:var(--s5)}
+.jhero__link{display:block;text-decoration:none;color:inherit}
+.jhero__dots{position:absolute;right:clamp(var(--s5),4vw,var(--s8));
+  bottom:clamp(var(--s5),4vh,var(--s7));display:flex;gap:.6em;z-index:2}
+.jhero__dot{width:26px;height:2px;padding:0;border:0;cursor:pointer;
+  background:rgba(232,227,217,.28);transition:background var(--d-fast),width var(--d-fast)}
+.jhero__dot:hover{background:rgba(232,227,217,.6)}
+.jhero__dot.is-on{background:var(--brass-lit);width:44px}
+.jhero__dot:focus-visible{outline:1px solid var(--brass-lit);outline-offset:4px}
+@media(max-width:600px){
+  .jhero{height:clamp(24rem,66vh,32rem)}
+  .jhero__stand{-webkit-line-clamp:3}
+}
+
+/* section label with a trailing hairline */
+.jsection{display:flex;align-items:center;gap:var(--s4);margin-bottom:var(--s6)}
+.jsection__label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.26em;
+  text-transform:uppercase;color:var(--brass);white-space:nowrap}
+.jsection::after{content:"";flex:1;height:1px;background:var(--rule)}
+
+/* four across, image → headline → category, as in the reference */
+.jgrid .jcard{grid-column:span 3;gap:var(--s3)}
+@media(max-width:1100px){.jgrid .jcard{grid-column:span 4}}
+@media(max-width:900px){.jgrid .jcard{grid-column:span 3}}
+@media(max-width:600px){.jgrid .jcard{grid-column:1/-1}}
+.jcard__title--lead{font-size:clamp(1.05rem, .95rem + .4vw, 1.3rem);line-height:1.2}
+
+/* editor's pick — image left, story right */
+.jpick{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:clamp(var(--s6),4vw,var(--s8));align-items:center;text-decoration:none;color:inherit}
+@media(max-width:820px){.jpick{grid-template-columns:1fr}}
+.jpick__media{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--charcoal)}
+.jpick__media img{width:100%;height:100%;object-fit:cover;
+  transition:transform 1200ms var(--ease-out)}
+.jpick:hover .jpick__media img{transform:scale(1.04)}
+.jpick__cat{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.26em;
+  text-transform:uppercase;color:var(--brass)}
+.jpick__title{font-family:var(--font-display);font-weight:500;
+  font-size:clamp(1.8rem, 1.2rem + 2.2vw, 3rem);line-height:1.05;letter-spacing:-.02em;
+  color:var(--ivory);margin:var(--s4) 0 0;text-wrap:balance;transition:color var(--d-fast)}
+.jpick:hover .jpick__title{color:var(--champagne)}
+.jpick__stand{color:var(--ash);font-size:var(--t-label);line-height:1.7;
+  max-width:52ch;margin-top:var(--s4)}
+.jpick__foot{display:flex;align-items:center;gap:var(--s4);margin-top:var(--s6);
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
+  text-transform:uppercase;color:var(--graphite)}
+.jpick__cta{margin-top:var(--s5);font-family:var(--font-mono);font-size:var(--t-micro);
+  letter-spacing:.2em;text-transform:uppercase;color:var(--brass-lit);
+  display:inline-flex;align-items:center;gap:.7em}
+.jpick:hover .jpick__cta{color:var(--champagne)}
+
 /* ============================================================
    16c. THE WARDROBE — lookbook catalog
    ============================================================ */
@@ -712,7 +806,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .wfilter__label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
   text-transform:uppercase;color:var(--graphite);width:5.2rem;flex:none}
 .wfilter button{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;
-  text-transform:uppercase;color:var(--ash);padding:.55em .85em;border:1px solid transparent;
+  text-transform:uppercase;color:var(--ash);padding:.55em .85em;border:1px solid transparent;border-radius:999px;
   transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast)}
 .wfilter button:hover{color:var(--bone);border-color:var(--hairline)}
 .wfilter button.is-on{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
@@ -927,8 +1021,47 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .reveal-panel.is-open{max-height:34rem;opacity:1;margin-block:var(--s5);padding:var(--s4) var(--s5)}
 
 /* ---------- 18b. FOOTER FILM ----------
-   The motor club, running quietly under the footer on every page. */
-.foot--film{position:relative;isolation:isolate;overflow:hidden}
+   The motor club, running quietly under the footer. The footer itself is
+   a toggleable overlay now (world.js), not page-flow content -- opened
+   from the small "Footer" button fixed at the bottom of the screen,
+   closed via its own close button or by clicking outside .wrap. */
+.foot--film{
+  position:relative;isolation:isolate;overflow:hidden;
+}
+/* Generic "this section is a toggleable full-screen overlay, not page
+   flow" pair -- world.js's makeToggleableOverlay() adds these classes to
+   whichever section it's given (the footer, the City Guide's legend/
+   methodology block, ...); not scoped to any one section's own class so
+   it works for all of them off one rule. */
+.is-toggleable{
+  position:fixed;inset:0;z-index:920;overflow-y:auto;
+  opacity:0;visibility:hidden;pointer-events:none;
+  padding-top:calc(var(--s8) + 3rem);
+  transition:opacity var(--d-med) var(--ease-out),visibility var(--d-med);
+}
+.is-toggleable.is-open{opacity:1;visibility:visible;pointer-events:auto}
+.footer-toggle,.guide-info-toggle{
+  position:fixed;bottom:var(--s5);z-index:850;
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
+  border-radius:999px;padding:.6em 1em;cursor:pointer;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast);
+}
+.footer-toggle{left:var(--gutter)}
+.guide-info-toggle{right:var(--gutter)}
+.footer-toggle:hover,.guide-info-toggle:hover{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
+/* Lives inside .wrap (the popup's own content column) as its first
+   child, not pinned to the raw viewport corner -- that used to land it
+   directly on top of the persistent site header's Menu button instead
+   of reading as part of this panel. Shared by every toggleable overlay. */
+.overlay-close{
+  display:flex;margin-left:auto;margin-bottom:var(--s6);
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(10,10,11,.6);border:1px solid var(--hairline);color:var(--bone);
+  padding:.6em 1em;border-radius:4px;cursor:pointer;
+}
+.overlay-close:hover{border-color:var(--brass);color:var(--brass-lit)}
 .foot__film{position:absolute;inset:0;z-index:-2;pointer-events:none}
 .foot__film video,.foot__film img{width:100%;height:100%;object-fit:cover;
   filter:saturate(.5) contrast(1.08) brightness(.62)}
@@ -951,21 +1084,42 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;color:var(--graphite);text-transform:uppercase;
 }
 
-/* ---------- 20. SOUND TOGGLE ---------- */
-.sound{
+/* ---------- 20. PLAY/PAUSE TOGGLE ----------
+   Was a "Sound on/off" ambience toggle that pointed at an #ambience
+   element which never existed on this site -- purely cosmetic. Replaced
+   with a real, working control: play/pause for whichever TV/Cinema
+   screen is contextually current (see initSuiteRemote's STATE_BY_KEY /
+   pp:room-change plumbing in tv-remote.js, which this reuses directly). */
+.playpause-toggle{
   position:fixed;bottom:var(--s5);right:var(--gutter);z-index:850;
   display:flex;align-items:center;gap:var(--s3);
-  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--graphite);
-  transition:color var(--d-fast);
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
+  border-radius:999px;padding:.6em 1em;cursor:pointer;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast);
 }
-.sound:hover{color:var(--champagne)}
-.sound__bars{display:flex;align-items:flex-end;gap:2px;height:11px}
-.sound__bars i{width:2px;height:3px;background:currentColor;transition:height var(--d-fast)}
-.sound.is-on{color:var(--champagne)}
-.sound.is-on .sound__bars i{animation:eq 900ms var(--ease-in-out) infinite alternate}
-.sound.is-on .sound__bars i:nth-child(2){animation-delay:150ms}
-.sound.is-on .sound__bars i:nth-child(3){animation-delay:300ms}
-@keyframes eq{to{height:11px}}
+.playpause-toggle:hover{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
+.playpause-toggle[hidden]{display:none}
+.playpause-toggle__icon{display:inline-block;width:1em;text-align:center}
+.playpause-toggle__icon::before{content:'\23F8'} /* pause glyph -- playing, tap to pause */
+.playpause-toggle.is-paused .playpause-toggle__icon::before{content:'\25B6'} /* play glyph */
+
+/* Same corner, sitting to the left of .playpause-toggle -- shown one at a
+   time (see tv-remote.js's pp:room-change listener), one instance per TV
+   channel set so each reuses that TV's own existing toggle wiring
+   untouched. */
+.remote-toggle{
+  position:fixed;bottom:var(--s5);right:calc(var(--gutter) + 6.4rem);z-index:850;
+  display:flex;align-items:center;gap:var(--s3);
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
+  border-radius:999px;padding:.6em 1em;cursor:pointer;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast);
+}
+.remote-toggle:hover{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
+.remote-toggle[hidden]{display:none}
 
 /* ---------- 21. SCROLL REVEAL ---------- */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity var(--d-slow) var(--ease-out),transform var(--d-slow) var(--ease-out)}
@@ -1194,15 +1348,29 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
    house-pager.js) only adds arrows, keyboard parity, and rewires the
    directory/elevator links to page to a room instead of the old
    vertical scrollIntoView. ---------- */
-.room-pager{position:relative;height:100svh;overflow:hidden;isolation:isolate}
+/* .room-pager is the STATIONARY clip -- overflow:hidden here, never
+   transformed. .room-pager__viewport is the WIDE inner track (its flex
+   children total far more than 100%, see below) that gets translateX'd
+   to page between rooms; it must NOT also clip its own overflow-x, or
+   the transform would carry its own clip boundary along with it and
+   just relocate an unchanging, always-child-0 clipped snapshot off
+   screen instead of sliding between children -- the classic carousel
+   structure needs the clip and the transform on two different elements. */
+/* overflow-anchor:none on both -- without it, CSS scroll anchoring treats
+   .room-pager (overflow:hidden, so technically a scroll container) as
+   needing to "compensate" for .room-pager__viewport's large on-screen
+   reposition every time its transform changes (see scrollToIndex() in
+   room-pager.js), nudging .room-pager's own scrollLeft off zero and
+   throwing every room's rendered position off by that amount -- visually
+   showing two half-rooms instead of one full one. */
+.room-pager{position:relative;height:100svh;overflow:hidden;isolation:isolate;overflow-anchor:none}
 .room-pager__viewport{
   height:100%;display:flex;
-  overflow-x:auto;overflow-y:hidden;
-  scroll-snap-type:x mandatory;
-  touch-action:pan-x;
-  -webkit-overflow-scrolling:touch;
   scrollbar-width:none;-ms-overflow-style:none;
+  transition:transform .5s cubic-bezier(.65,0,.35,1);
+  overflow-anchor:none;
 }
+@media(prefers-reduced-motion:reduce){.room-pager__viewport{transition:none}}
 .room-pager__viewport::-webkit-scrollbar{display:none}
 .room-pager__viewport > .floor-scene{
   flex:0 0 100%;width:100%;height:100%;min-height:0;
@@ -1222,26 +1390,122 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .room-pager__nav--prev{left:clamp(var(--s4),3vw,var(--s6))}
 .room-pager__nav--next{right:clamp(var(--s4),3vw,var(--s6))}
 .room-pager__nav span{transform:translateY(-1px)}
+/* Subtle teaser naming the room each arrow leads to. Sits outside the
+   round button (not inline with the glyph) so the button itself stays a
+   plain icon; empty when a direction has no target (see updateButtons()
+   in room-pager.js), and hidden along with the button when :disabled. */
+.room-pager__nav .room-pager__nav-hint{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:max-content;max-width:7rem;text-align:center;line-height:1.3;
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ash);pointer-events:none;text-shadow:0 1px 3px rgba(10,10,11,.85);
+}
+.room-pager__nav--prev .room-pager__nav-hint,
+.room-pager__nav--next .room-pager__nav-hint,
+.room-pager__nav--up .room-pager__nav-hint{top:calc(100% + .6em)}
+.room-pager__nav--down .room-pager__nav-hint{bottom:calc(100% + .6em);top:auto}
+/* Floor up/down -- the room-to-room arrows page within a floor; these jump
+   between floors, same as the corner nav-panel (see .nav-panel), just one
+   floor at a time. Universal at every breakpoint. */
+.room-pager__nav--up,.room-pager__nav--down{display:grid;left:50%;top:auto;transform:translateX(-50%)}
+/* Clears .worldnav (fixed, ~4.2rem tall with its own padding) rather than
+   sitting under it. */
+.room-pager__nav--up{top:4.6rem}
+.room-pager__nav--down{bottom:clamp(var(--s4),3vw,var(--s6))}
 /* Don't compete with an open artifact drawer for attention */
 .room-pager:has(.floor-scene .drawer.is-open) .room-pager__nav{opacity:.28}
 .room-pager:has(.floor-scene .drawer.is-open) .room-pager__nav:hover:not(:disabled){opacity:1}
 @media(max-width:760px){
   .room-pager__nav{width:2.5rem;height:2.5rem;font-size:1.25rem}
 }
-@media(prefers-reduced-motion:reduce){.room-pager__viewport{scroll-snap-type:none}}
+
+/* ---------- 25a-iv. NAV PANEL — corner floor/district jump list, an
+   elevator-panel stand-in for paging one-by-one. Reusable: fed either
+   floors (house.html, the homepage) or City Guide districts, wired up by
+   assets/js/nav-panel.js. Same corner at every breakpoint. ---------- */
+.nav-panel{position:fixed;top:4.6rem;right:clamp(var(--s4),3vw,var(--s6));z-index:45}
+/* The "Floors" panel (house.html + the homepage's #penthouse-nav-panel-grid)
+   is off for now -- the City Guide's "Districts" panel is a different
+   instance of this same component and is untouched. Remove this rule to
+   bring it back. */
+.nav-panel:has(#nav-panel-grid),
+.nav-panel:has(#penthouse-nav-panel-grid){display:none}
+.nav-panel__tab{
+  display:flex;align-items:center;gap:.5em;
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
+  border-radius:999px;padding:.6em 1em;cursor:pointer;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast);
+}
+.nav-panel__tab:hover,.nav-panel__tab:focus-visible,
+.nav-panel.is-open .nav-panel__tab{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
+.nav-panel__grid{
+  position:absolute;top:calc(100% + .6em);right:0;
+  width:min(280px,72vw);max-height:min(70svh,32rem);overflow-y:auto;
+  background:rgba(10,10,11,.94);border:1px solid rgba(201,169,97,.28);border-radius:12px;
+  padding:var(--s3);display:grid;gap:2px;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+/* Same specificity as the UA [hidden] rule, so it wouldn't win on its own
+   against display:grid above -- state this explicitly. */
+.nav-panel__grid[hidden]{display:none}
+.nav-panel__group{
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--brass);padding:.6em .5em .2em;margin-top:.4em;
+}
+.nav-panel__group:first-child{margin-top:0}
+.nav-panel__btn{
+  display:flex;align-items:baseline;gap:var(--s3);width:100%;text-align:left;
+  font-family:var(--font-mono);color:var(--ash);
+  padding:.55em .6em;border-radius:6px;cursor:pointer;min-height:38px;
+  transition:color var(--d-fast),background var(--d-fast);
+}
+.nav-panel__btn:hover,.nav-panel__btn:focus-visible{color:var(--ivory);background:rgba(201,169,97,.12)}
+.nav-panel__btn-lvl{font-family:var(--font-display);font-size:var(--t-label);color:var(--champagne);min-width:2.4em;flex:none}
+.nav-panel__btn-name{font-family:var(--font-sans);font-size:var(--t-label);letter-spacing:0}
 
 /* ---------- 25a. FLOOR SCENE ---------- */
 .floor-scene{
   position:relative;min-height:100svh;
-  display:grid;align-items:center;
+  display:grid;align-items:end;
   overflow:hidden;isolation:isolate;
 }
-.floor-scene__view{position:absolute;inset:0;z-index:-2}
+/* Wraps the photo + TV screen + artifacts as one unit -- on mobile this
+   becomes a fixed-width panel wider than the viewport (see the mobile
+   block below) so dragging/scrolling pans across the full composition
+   instead of the harsh object-fit:cover crop a narrow viewport forces.
+   Desktop is untouched: inset:0, identical to how .floor-scene__view
+   positioned itself before this wrapper existed.
+
+   __surface is the scroll VIEWPORT (mobile only -- see the mobile block);
+   __canvas is the thing that's actually wide and gets scrolled. Keeping
+   these as two separate elements (rather than one) matters: __surface
+   stays a direct child of .floor-scene so .wrap/.floor-scene__scrim/
+   .drawer -- also direct children -- are siblings of it, outside its
+   scrolled subtree, and never move when __canvas pans. If .floor-scene
+   itself were the scroll container instead, those would scroll too,
+   since position:absolute doesn't exempt an element from an ancestor's
+   overflow scrolling -- only being outside that ancestor's subtree does. */
+.floor-scene__surface{
+  position:absolute;inset:0;z-index:-2;
+  overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+}
+/* Wider than the viewport at every breakpoint so there's room to pan --
+   130% gives a comfortable reveal on desktop's wide viewports; narrow
+   phones need a bigger fixed width (see the 760px override below) since
+   130% of ~375px doesn't leave much to actually pan across. */
+.floor-scene__canvas{position:relative;width:130%;height:100%}
+.floor-scene__view{position:absolute;inset:0}
 .floor-scene__view img{
   width:100%;height:100%;object-fit:cover;
   object-position:var(--focus,50% 50%);
-  transform:scale(var(--zoom,1.04));
+  transform:scale(var(--zoom,1));
   will-change:transform;
+  filter:brightness(1.14) contrast(1.02); /* the Penthouse rooms carry no .grade--* class of
+    their own (see build_house.py), so without this base lift they were the
+    only rooms getting no brightness treatment at all -- a graded room can
+    still override this via its own .grade--* filter below. */
 }
 .floor-scene__screen{
   position:absolute;left:var(--x);top:var(--y);
@@ -1274,40 +1538,263 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   font-family:var(--font-display);font-size:.85rem;color:var(--ivory);margin:0;line-height:1.15;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.tv-modal .tv-lowerthird{padding:1.6em 2em 1.2em}
+/* Anchored to the top in fullscreen -- the bottom is now owned by the
+   control bar, and stacking both there caused the title text and buttons
+   to overlap. */
+.tv-modal .tv-lowerthird{
+  top:0;bottom:auto;z-index:2;
+  padding:1.6em 2em 3em;
+  background:linear-gradient(180deg,rgba(6,6,7,.94) 0%,rgba(6,6,7,.6) 55%,rgba(6,6,7,0) 100%);
+}
 .tv-modal .tv-lowerthird__eyebrow{font-size:.7rem;letter-spacing:.2em}
 .tv-modal .tv-lowerthird__title{font-size:1.7rem}
+
+/* Guaranteed fallback for the auto-unmute-on-entry attempt: browsers can
+   silently block a programmatic unmute with no way to detect it, so this
+   sits ready every time alongside that attempt rather than only appearing
+   after a detected failure. Harmless if the auto-unmute worked -- it just
+   fades on its own; a real fix if it didn't. */
+.tv-sound-prompt{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:4;
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(10,10,11,.72);border:1px solid var(--brass);color:var(--bone);
+  padding:.6em 1.1em;border-radius:999px;cursor:pointer;
+  align-items:center;gap:.5em;
+  animation:tvSoundPulse 1.8s ease-in-out infinite;
+}
+.tv-sound-prompt[hidden]{display:none}
+.tv-sound-prompt:not([hidden]){display:flex}
+.tv-sound-prompt:hover{color:var(--brass-lit);border-color:var(--brass-lit)}
+@keyframes tvSoundPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(201,169,97,.35)}
+  50%{box-shadow:0 0 0 8px rgba(201,169,97,0)}
+}
+@media(prefers-reduced-motion:reduce){.tv-sound-prompt{animation:none}}
+/* The physical-remote look: a narrow black body, PWR + wordmark header,
+   a circular CH/VOL d-pad, an RW/FF row, and a standalone Mute button --
+   modeled directly on the hand-drawn "Black TV Remote" reference. */
 .tv-remote{
   position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:.6em;
-  display:none;flex-direction:column;gap:.5em;
-  min-width:9.5rem;padding:.7em .8em;border-radius:8px;
-  background:rgba(10,10,11,.94);border:1px solid var(--hairline);
-  box-shadow:0 10px 30px rgba(0,0,0,.55);z-index:6;
+  display:none;flex-direction:column;align-items:center;gap:.65em;
+  width:9.5rem;padding:.9em .8em 1em;border-radius:16px;
+  background:linear-gradient(180deg,#161616,#0a0a0b);border:1px solid var(--hairline);
+  box-shadow:0 10px 30px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.04);
+  z-index:6;
 }
 .tv-remote.is-open{display:flex}
+.tv-remote__brand{display:flex;align-items:center;justify-content:space-between;width:100%}
+.tv-remote__pwr{
+  font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;
+  background:none;border:1px solid var(--hairline);color:var(--bone);
+  padding:.3em .55em;border-radius:3px;cursor:pointer;line-height:1;
+}
+.tv-remote__pwr:hover,.tv-remote__pwr.is-off{border-color:var(--brass);color:var(--brass-lit)}
+.tv-remote__wordmark{
+  font-family:var(--font-display);font-size:.62rem;font-style:italic;color:var(--ash);
+  letter-spacing:.02em;
+}
 .tv-remote__channel{
   font-family:var(--font-body);font-size:.78rem;color:var(--ivory);
-  text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;
 }
-.tv-remote__row{display:flex;gap:.4em;justify-content:center}
+.tv-remote__pad{
+  position:relative;width:6.6rem;height:6.6rem;border-radius:50%;flex:none;
+  background:radial-gradient(circle,#1c1c1c,#0d0d0e 72%);
+  border:1px solid var(--hairline);
+}
+.tv-remote__pad-hub{
+  position:absolute;top:50%;left:50%;width:1.5rem;height:1.5rem;
+  transform:translate(-50%,-50%);border-radius:50%;
+  background:var(--obsidian);border:1px solid var(--hairline);
+  display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;
+  color:var(--bone);
+}
+.tv-remote__pad-hub:hover{border-color:var(--brass);color:var(--brass-lit)}
+.tv-remote__pad-hub::before{content:'\23F8';font-size:.6rem;line-height:1}
+.tv-remote__pad-hub.is-paused::before{content:'\25B6'}
+.tv-remote__pad-btn{
+  position:absolute;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;
+  background:none;border:0;color:var(--bone);cursor:pointer;line-height:1;
+  width:2.4rem;height:1.7rem;display:flex;align-items:center;justify-content:center;
+}
+.tv-remote__pad-btn:hover{color:var(--brass-lit)}
+.tv-remote__pad-btn--up{top:.15em;left:50%;transform:translateX(-50%)}
+.tv-remote__pad-btn--down{bottom:.15em;left:50%;transform:translateX(-50%)}
+.tv-remote__pad-btn--left{left:.05em;top:50%;transform:translateY(-50%);width:2.1rem}
+.tv-remote__pad-btn--right{right:.05em;top:50%;transform:translateY(-50%);width:2.1rem}
+.tv-remote__row{display:flex;gap:.4em;justify-content:center;width:100%}
 .tv-remote button{
   font-family:var(--font-mono);font-size:.66rem;letter-spacing:.06em;
   background:none;border:1px solid var(--hairline);color:var(--bone);
   padding:.35em .55em;border-radius:4px;cursor:pointer;line-height:1;
 }
 .tv-remote button:hover{border-color:var(--brass);color:var(--brass-lit)}
-.tv-remote__expand{width:100%}
+.tv-remote__row--seek button{flex:1}
+.tv-remote__mute{width:100%;border-radius:14px !important}
+.tv-remote__guide{width:100%;border-radius:14px !important}
+.tv-remote__expand{
+  width:100%;font-size:.6rem !important;color:var(--ash);border-color:transparent !important;
+  padding-top:0 !important;
+}
+.tv-remote__expand:hover{color:var(--brass-lit)}
+.tv-remote.is-power-off .tv-remote__pad-btn,
+.tv-remote.is-power-off .tv-remote__row--seek button,
+.tv-remote.is-power-off .tv-remote__mute,
+.tv-remote.is-power-off .tv-remote__guide{opacity:.35;pointer-events:none}
 
+/* Guide -- same channel-picker idea as the fullscreen modal's, but scoped
+   to this screen's own remote. Overlays the whole remote box (position
+   relative to .tv-remote itself, already absolute/fixed) rather than
+   hiding/showing the pad/seek/mute controls underneath. */
+.tv-remote__guide-panel{
+  position:absolute;inset:0;z-index:2;border-radius:16px;
+  background:linear-gradient(180deg,#161616,#0a0a0b);
+  display:flex;flex-direction:column;gap:.6em;
+  padding:.9em .8em 1em;
+}
+.tv-remote__guide-panel[hidden]{display:none}
+.tv-remote__guide-panel-head{display:flex;align-items:center;justify-content:space-between}
+.tv-remote__guide-panel-eyebrow{
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--brass-lit);margin:0;
+}
+.tv-remote__guide-panel-head button{
+  font-family:var(--font-mono);font-size:.6rem;background:none;border:1px solid var(--hairline);color:var(--bone);
+  padding:.3em .55em;border-radius:4px;cursor:pointer;
+}
+.tv-remote__guide-panel-head button:hover{border-color:var(--brass);color:var(--brass-lit)}
+.tv-remote__guide-panel-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.35em;overflow-y:auto}
+.tv-remote__guide-panel-list button{
+  width:100%;text-align:left;font-family:var(--font-body);font-size:.72rem;
+  background:none;border:1px solid var(--hairline);color:var(--bone);
+  padding:.5em .6em;border-radius:6px;cursor:pointer;
+}
+.tv-remote__guide-panel-list button:hover{border-color:var(--brass);color:var(--brass-lit)}
+.tv-remote__guide-panel-list button.is-active{
+  border-color:var(--brass-lit);color:var(--brass-lit);background:rgba(201,169,97,.08);
+}
+
+/* ---------- Suite Remote (global TV / Music / Cinema panel) ----------
+   One instance, injected once by initSuiteRemote() in tv-remote.js,
+   anchored above the fixed "Remote" pill (itself just .remote-toggle,
+   already styled) rather than parented inside any one room's screen --
+   deliberately narrow (per feedback on the old mobile sheet's edge-to-
+   edge width) at every breakpoint, not just desktop. */
+.suite-remote{
+  position:fixed;right:var(--gutter);bottom:calc(var(--s5) + 3.4rem);z-index:930;
+  display:none;flex-direction:column;gap:.7em;
+  width:min(15.5rem,84vw);max-height:min(70svh,30rem);overflow-y:auto;
+  padding:.9em 1em 1.1em;border-radius:16px;
+  background:linear-gradient(180deg,#161616,#0a0a0b);border:1px solid var(--hairline);
+  box-shadow:0 14px 34px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.suite-remote.is-open{display:flex}
+.suite-remote__head{display:flex;align-items:center;justify-content:space-between;gap:.5em}
+.suite-remote__pwr{
+  font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;
+  background:none;border:1px solid var(--hairline);color:var(--bone);
+  padding:.3em .55em;border-radius:3px;cursor:pointer;line-height:1;
+}
+.suite-remote__pwr:hover,.suite-remote__pwr.is-off{border-color:var(--brass);color:var(--brass-lit)}
+.suite-remote__pwr:disabled{opacity:.3;pointer-events:none}
+.suite-remote__brand{
+  font-family:var(--font-display);font-size:.62rem;font-style:italic;color:var(--ash);
+  letter-spacing:.02em;flex:1;text-align:center;
+}
+.suite-remote__close{
+  background:none;border:0;color:var(--ash);font-size:1rem;line-height:1;cursor:pointer;padding:.1em .2em;
+}
+.suite-remote__close:hover{color:var(--brass-lit)}
+.suite-remote__sources{display:flex;gap:.4em}
+.suite-remote__source{
+  flex:1;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--hairline);color:var(--ash);
+  padding:.5em .3em;border-radius:8px;cursor:pointer;
+}
+.suite-remote__source:hover{border-color:var(--brass);color:var(--brass-lit)}
+.suite-remote__source.is-active{border-color:var(--brass);color:var(--obsidian);background:var(--brass)}
+.suite-remote__title{
+  font-family:var(--font-body);font-size:.78rem;color:var(--ivory);
+  text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;
+}
+.suite-remote__transport{display:flex;align-items:center;justify-content:center;gap:1.1em}
+.suite-remote__seek{
+  font-family:var(--font-mono);font-size:.68rem;background:none;border:1px solid var(--hairline);
+  color:var(--bone);width:2.6rem;height:2.6rem;border-radius:50%;cursor:pointer;
+}
+.suite-remote__seek:hover{border-color:var(--brass);color:var(--brass-lit)}
+.suite-remote__dial{
+  width:3.6rem;height:3.6rem;border-radius:50%;flex:none;cursor:pointer;
+  background:radial-gradient(circle,#1c1c1c,#0d0d0e 72%);border:1px solid var(--hairline);
+  display:flex;align-items:center;justify-content:center;color:var(--bone);
+}
+.suite-remote__dial:hover{border-color:var(--brass);color:var(--brass-lit)}
+.suite-remote__dial::before{content:'\23F8';font-size:1rem;line-height:1}
+.suite-remote__dial.is-paused::before{content:'\25B6'}
+.suite-remote__row{display:flex;gap:.5em}
+.suite-remote__pill{
+  flex:1;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.06em;
+  background:none;border:1px solid var(--hairline);color:var(--bone);
+  padding:.5em .6em;border-radius:14px;cursor:pointer;
+}
+.suite-remote__pill:hover{border-color:var(--brass);color:var(--brass-lit)}
+.suite-remote__fullscreen{
+  width:100%;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;
+  background:none;border:1px solid transparent;color:var(--ash);cursor:pointer;padding:.3em;
+}
+.suite-remote__fullscreen:hover{color:var(--brass-lit)}
+.suite-remote.is-power-off [data-sr-transport]{opacity:.35;pointer-events:none}
+/* The [hidden] attribute alone loses to the class rules above (display:
+   flex beats the UA stylesheet's [hidden]{display:none} on specificity) --
+   spell it out explicitly so hiding these during Music actually hides them. */
+[data-sr-transport][hidden]{display:none}
+.suite-remote__music iframe{display:block;border:0}
+.suite-remote__guide-panel{
+  position:absolute;inset:0;z-index:2;border-radius:16px;
+  background:linear-gradient(180deg,#161616,#0a0a0b);
+  display:flex;flex-direction:column;gap:.6em;
+  padding:.9em 1em 1.1em;
+}
+.suite-remote__guide-panel[hidden]{display:none}
+.suite-remote__guide-head{display:flex;align-items:center;justify-content:space-between}
+.suite-remote__guide-head p{
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--brass-lit);margin:0;
+}
+.suite-remote__guide-head button{
+  font-family:var(--font-mono);font-size:.6rem;background:none;border:1px solid var(--hairline);color:var(--bone);
+  padding:.3em .55em;border-radius:4px;cursor:pointer;
+}
+.suite-remote__guide-head button:hover{border-color:var(--brass);color:var(--brass-lit)}
+.suite-remote [data-sr-guide-list]{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.35em;overflow-y:auto}
+.suite-remote [data-sr-guide-list] button{
+  width:100%;text-align:left;font-family:var(--font-body);font-size:.72rem;
+  background:none;border:1px solid var(--hairline);color:var(--bone);
+  padding:.5em .6em;border-radius:6px;cursor:pointer;
+}
+.suite-remote [data-sr-guide-list] button:hover{border-color:var(--brass);color:var(--brass-lit)}
+.suite-remote [data-sr-guide-list] button.is-active{
+  border-color:var(--brass-lit);color:var(--brass-lit);background:rgba(201,169,97,.08);
+}
+@media(max-width:760px){
+  .suite-remote{
+    right:var(--s4);bottom:calc(var(--s4) + 3.2rem);
+    width:min(13.5rem,72vw);
+  }
+}
+
+/* Truly full-browser: the frame fills the entire viewport edge-to-edge
+   (no letterboxing/backdrop margin) with controls overlaid on top of the
+   video, Netflix/YouTube-style, rather than shrinking the video to make
+   room for a control strip below it. */
 .tv-modal{
   position:fixed;inset:0;z-index:920;display:none;
-  align-items:center;justify-content:center;
-  background:rgba(6,6,7,.92);padding:var(--s6) var(--s5);
+  background:#000;
 }
 .tv-modal.is-open{display:flex}
 .tv-modal__frame{
-  position:relative;width:min(90vw,1120px);aspect-ratio:16/9;
-  background:#000;border-radius:6px;overflow:hidden;
-  box-shadow:0 30px 90px rgba(0,0,0,.65);
+  position:relative;width:100%;height:100%;
+  background:#000;overflow:hidden;
   container-type:size;
 }
 .tv-modal__frame iframe{
@@ -1315,37 +1802,119 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   width:177.78cqh;height:100cqh;min-width:100cqw;min-height:56.25cqw;
 }
 .tv-modal__close{
-  position:absolute;top:-2.6rem;right:0;
+  position:absolute;top:1.2rem;right:1.2rem;z-index:6;
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;text-transform:uppercase;
-  background:none;border:1px solid var(--hairline);color:var(--bone);
+  background:rgba(10,10,11,.72);border:1px solid var(--hairline);color:var(--bone);
   padding:.5em 1em;border-radius:4px;cursor:pointer;
 }
 .tv-modal__close:hover{border-color:var(--brass);color:var(--brass-lit)}
+
+/* Bottom control bar -- a full-width overlay (not a small floating pill)
+   so the three button groups (Guide/Channel, Play transport, Volume) sit
+   with real breathing room instead of overlapping into one crowded row. */
 .tv-modal__controls{
-  position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);z-index:4;
-  display:flex;align-items:center;gap:.6em;
-  background:rgba(10,10,11,.88);border:1px solid var(--hairline);border-radius:8px;
-  padding:.5em .7em;box-shadow:0 10px 24px rgba(0,0,0,.5);
+  position:absolute;left:0;right:0;bottom:0;z-index:5;
+  display:flex;align-items:center;justify-content:space-between;gap:1.4em;
+  padding:1.4em 2em calc(1.4em + env(safe-area-inset-bottom));
+  background:linear-gradient(0deg,rgba(6,6,7,.92) 0%,rgba(6,6,7,.55) 65%,rgba(6,6,7,0) 100%);
 }
-.tv-modal__channel{
-  font-family:var(--font-body);font-size:.85rem;color:var(--ivory);
-  padding:0 .4em;white-space:nowrap;min-width:9rem;text-align:center;
-}
+.tv-modal__group{display:flex;align-items:center;gap:.5em}
+.tv-modal__group--center{gap:.9em}
 .tv-modal__controls button{
   font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;
-  background:none;border:1px solid var(--hairline);color:var(--bone);
-  padding:.4em .65em;border-radius:4px;cursor:pointer;line-height:1;
+  background:rgba(10,10,11,.4);border:1px solid var(--hairline);color:var(--bone);
+  padding:.55em .8em;border-radius:6px;cursor:pointer;line-height:1;
 }
 .tv-modal__controls button:hover{border-color:var(--brass);color:var(--brass-lit)}
-@media(max-width:640px){
-  .tv-modal__channel{min-width:0;font-size:.72rem}
-  .tv-modal__controls{flex-wrap:wrap;justify-content:center;max-width:88vw}
+.tv-modal__playpause{
+  width:2.9rem;height:2.9rem;border-radius:50% !important;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;padding:0 !important;
 }
+@media(max-width:640px){
+  .tv-modal__controls{gap:.7em;padding:1em 1em calc(1em + env(safe-area-inset-bottom));flex-wrap:wrap;justify-content:center}
+  .tv-modal__group{gap:.35em}
+}
+
+/* Guide -- a channel-picker panel over the video, listing every option for
+   the room currently open (shared by both Cinema and the Living Floor TV,
+   since both use this same modal). */
+.tv-guide{
+  position:absolute;inset:0;z-index:7;
+  display:flex;align-items:center;justify-content:flex-end;
+  background:rgba(6,6,7,.55);
+}
+.tv-guide[hidden]{display:none}
+.tv-guide__panel{
+  width:min(360px,86vw);max-height:78vh;overflow-y:auto;
+  margin:0 2em;padding:1.3em 1.2em;border-radius:12px;
+  background:linear-gradient(180deg,#161616,#0a0a0b);border:1px solid var(--hairline);
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+.tv-guide__head{display:flex;align-items:center;justify-content:space-between;margin:0 0 .8em}
+.tv-guide__eyebrow{
+  font-family:var(--font-mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brass-lit);margin:0;
+}
+.tv-guide__close{
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;
+  background:none;border:1px solid var(--hairline);color:var(--bone);
+  padding:.35em .7em;border-radius:4px;cursor:pointer;
+}
+.tv-guide__close:hover{border-color:var(--brass);color:var(--brass-lit)}
+.tv-guide__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.4em}
+.tv-guide__list button{
+  width:100%;text-align:left;background:none;border:1px solid var(--hairline);color:var(--bone);
+  padding:.7em .9em;border-radius:8px;font-family:var(--font-body);font-size:.85rem;cursor:pointer;
+}
+.tv-guide__list button:hover{border-color:var(--brass);color:var(--brass-lit)}
+.tv-guide__list button.is-active{
+  border-color:var(--brass-lit);color:var(--brass-lit);background:rgba(201,169,97,.08);
+}
+@media(max-width:640px){
+  .tv-guide{align-items:flex-end;justify-content:center}
+  .tv-guide__panel{width:100%;margin:0;max-height:70vh;border-radius:16px 16px 0 0}
+}
+
+/* Rotate-device nudge -- shown only on a narrow+portrait phone, so the
+   full-bleed video actually gets to be full-bleed. Dismisses itself the
+   moment the device is turned landscape (see updateRotatePrompt), or by
+   hand via the "Continue anyway" button. */
+.tv-modal__rotate{
+  position:absolute;inset:0;z-index:9;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.3em;
+  background:rgba(6,6,7,.94);text-align:center;padding:2em;
+}
+.tv-modal__rotate[hidden]{display:none}
+.tv-modal__rotate-icon{
+  width:42px;height:72px;border:3px solid var(--bone);border-radius:10px;position:relative;
+  animation:tvRotatePhone 2.4s ease-in-out infinite;
+}
+.tv-modal__rotate-icon::after{
+  content:'';position:absolute;bottom:9px;left:50%;width:14px;height:3px;
+  transform:translateX(-50%);border-radius:2px;background:var(--bone);
+}
+@keyframes tvRotatePhone{
+  0%,18%{transform:rotate(0deg)}
+  45%,73%{transform:rotate(-90deg)}
+  100%{transform:rotate(0deg)}
+}
+@media(prefers-reduced-motion:reduce){.tv-modal__rotate-icon{animation:none}}
+.tv-modal__rotate-text{
+  font-family:var(--font-body);font-size:1rem;color:var(--ivory);margin:0;max-width:22em;line-height:1.4;
+}
+.tv-modal__rotate-dismiss{
+  font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--hairline);color:var(--ash);
+  padding:.6em 1.2em;border-radius:999px;cursor:pointer;
+}
+.tv-modal__rotate-dismiss:hover{border-color:var(--brass);color:var(--brass-lit)}
+
 .floor-scene__scrim{
-  position:absolute;inset:0;z-index:-1;
+  position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:
-    linear-gradient(180deg,rgba(10,10,11,.74) 0%,rgba(10,10,11,.08) 34%,rgba(10,10,11,.14) 62%,rgba(10,10,11,.86) 100%),
-    linear-gradient(96deg,rgba(10,10,11,.88) 0%,rgba(10,10,11,.56) 30%,rgba(10,10,11,.06) 58%,rgba(10,10,11,0) 76%);
+    linear-gradient(180deg,rgba(10,10,11,.46) 0%,rgba(10,10,11,.05) 34%,rgba(10,10,11,.09) 62%,rgba(10,10,11,.56) 100%),
+    linear-gradient(96deg,rgba(10,10,11,.56) 0%,rgba(10,10,11,.34) 30%,rgba(10,10,11,.04) 58%,rgba(10,10,11,0) 76%);
 }
 /* the plate always wins over whatever is behind it */
 .floor-plate__name,.floor-plate__note,.floor-plate__level{text-shadow:0 1px 18px rgba(10,10,11,.9)}
@@ -1365,26 +1934,25 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 }
 
 /* ---------- 25b. FLOOR PLATE HEADER ---------- */
+/* .wrap is a generic, normally-clickable layout utility used all over
+   the site -- but scoped to a direct child of .floor-scene, this is
+   specifically the floor-plate's own wrapper, which needs the same
+   click-through as .floor-plate itself (see the pointer-events:none
+   below): without it, .wrap's own box -- unstyled, so it just sits there
+   at full width and .floor-plate's full padded height -- silently ate
+   clicks on any artifact hotspot positioned low enough in the room photo
+   to fall inside that box (the Piano and the Journal, both close to the
+   bottom edge, were the two actually in range). */
+.floor-scene > .wrap{pointer-events:none}
 .floor-plate{
   position:relative;z-index:4;
-  display:grid;gap:var(--s4);
-  padding-block:clamp(6rem,14vh,9rem);
-  max-width:620px;
+  display:grid;gap:var(--s1);
+  max-width:none;
+  padding:0 var(--gutter) clamp(5.5rem,15vh,7.5rem);
   pointer-events:none;
 }
 /* A local wash behind the plate, so bright rooms stay bright
    everywhere except directly under the type. */
-.floor-plate::before{
-  content:"";position:absolute;z-index:-1;pointer-events:none;
-  top:clamp(3rem,9vh,6rem);bottom:clamp(3rem,9vh,6rem);
-  left:calc(var(--gutter) * -1);right:-14%;
-  background:linear-gradient(96deg,
-    rgba(10,10,11,.93) 0%,
-    rgba(10,10,11,.86) 44%,
-    rgba(10,10,11,.55) 72%,
-    rgba(10,10,11,0) 100%);
-  filter:blur(2px);
-}
 .floor-plate > *{pointer-events:auto}
 .floor-plate__level{
   display:flex;align-items:baseline;gap:var(--s4);
@@ -1395,13 +1963,10 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   font-family:var(--font-display);font-size:var(--t-h3);
   font-weight:400;letter-spacing:-.02em;color:var(--champagne);
 }
-.floor-plate__name{font-family:var(--font-display);font-size:var(--t-h1);line-height:.95;letter-spacing:-.022em}
-.floor-plate__note{color:var(--bone);max-width:44ch;font-size:var(--t-lede);line-height:1.5;font-weight:300}
-.floor-plate__count{
-  font-family:var(--font-mono);font-size:var(--t-micro);
-  letter-spacing:.2em;text-transform:uppercase;color:var(--ash);
-  display:flex;align-items:center;gap:var(--s3);
-}
+.floor-plate__name{font-family:var(--font-display);font-size:var(--t-h3);line-height:.95;letter-spacing:-.022em;margin-top:.2em}
+/* The photo does the work; a room's own artifacts/drawer are the way to
+   actually learn more, at every breakpoint -- not just on a phone. */
+.floor-plate__note,.floor-plate__count{display:none}
 .floor-plate__count i{display:block;width:26px;height:1px;background:var(--brass)}
 
 /* ---------- 25c. ARTIFACTS (hotspots) ---------- */
@@ -1410,13 +1975,14 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   position:absolute;left:var(--x);top:var(--y);
   transform:translate(-50%,-50%);
   display:grid;justify-items:center;gap:var(--s2);
-  padding:var(--s3);
+  padding:var(--s4);
+  min-width:44px;min-height:44px;place-items:center;
   cursor:pointer;
   pointer-events:auto;
 }
 .artifact__dot{
   position:relative;display:block;
-  width:9px;height:9px;border-radius:50%;
+  width:11px;height:11px;border-radius:50%;
   background:var(--champagne);
   box-shadow:0 0 0 1px rgba(10,10,11,.6),0 0 14px rgba(201,169,97,.7);
   transition:transform var(--d-med) var(--ease-out),background var(--d-fast);
@@ -1432,8 +1998,8 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   100%{transform:scale(2.1);opacity:0}
 }
 .artifact__label{
-  font-family:var(--font-mono);font-size:var(--t-micro);
-  letter-spacing:.2em;text-transform:uppercase;color:var(--ivory);
+  font-family:var(--font-mono);font-size:9px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ivory);
   white-space:nowrap;
   padding:.35em .7em;
   background:rgba(10,10,11,.72);
@@ -1527,6 +2093,31 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .drawer__spec div{border-top:1px solid var(--rule);padding-top:var(--s2)}
 .drawer__spec dt{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin-bottom:.35em}
 .drawer__spec dd{margin:0;color:var(--bone);font-size:var(--t-label)}
+.pent__open{pointer-events:auto;justify-self:start;margin-top:var(--s3)}
+
+/* The Monogram's drawer -- the one artifact that introduces the man behind
+   the mark rather than an object in the room. Portrait, mission line, bio,
+   and the site's own social row (lifted from index.html, see SITE_SOCIAL in
+   build_house.py / socialHTML() in penthouse.js). */
+.bio{
+  display:grid;gap:var(--s4);margin-top:var(--s5);
+  padding-top:var(--s5);border-top:1px solid var(--rule);
+}
+.bio__portrait{
+  width:100%;max-width:22rem;justify-self:start;
+  aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;
+  border:1px solid var(--hairline);border-radius:4px;
+  filter:saturate(.9) contrast(1.04);
+}
+.bio__mission{
+  font-family:var(--font-display);font-size:var(--t-h4,1.35rem);line-height:1.24;
+  color:var(--ivory);margin:0;max-width:32ch;
+}
+.bio .social{margin-top:var(--s2);pointer-events:auto}
+/* Deliberately always stacked. A side-by-side portrait/text split has to
+   key off THIS block's own width, not the viewport's -- .bio lives inside
+   .drawer__body, which is only ~430px wide on a 960px screen, so a
+   viewport-width media query put the text in a 160px column. */
 .hf-unlock,.unlock{margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--rule)}
 .hf-unlock__eyebrow,.unlock__eyebrow{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.18em;
   text-transform:uppercase;color:var(--brass-lit);margin:0 0 var(--s4)}
@@ -1554,7 +2145,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 }
 .piano-player__nav button:hover{border-color:var(--brass);color:var(--brass-lit)}
 .piano-player__frame{
-  border:1px solid var(--hairline);border-radius:10px;overflow:hidden;
+  min-height:352px;border:1px solid var(--hairline);border-radius:10px;overflow:hidden;
   box-shadow:0 20px 50px rgba(0,0,0,.45);background:#0a0a0b;
 }
 .piano-player__frame iframe{display:block;width:100%;border:0}
@@ -1629,151 +2220,6 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   transition:color var(--d-fast);
 }
 .drawer__close:hover{color:var(--champagne)}
-
-/* ---------- 25e. DIRECTORY ---------- */
-.directory{display:grid;border-top:1px solid var(--rule)}
-.directory__row{
-  display:grid;grid-template-columns:5.5rem 1fr auto;
-  gap:var(--s5);align-items:baseline;
-  padding-block:var(--s4);border-bottom:1px solid var(--rule);
-  transition:padding-left var(--d-med) var(--ease-out),background var(--d-med) var(--ease-out);
-}
-.directory__row:hover{padding-left:var(--s4);background:linear-gradient(90deg,rgba(168,135,78,.07),transparent 60%)}
-.directory__lvl{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;color:var(--brass)}
-.directory__name{font-family:var(--font-display);font-size:var(--t-h3);line-height:1.1}
-.directory__state{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--ash);white-space:nowrap}
-.directory__state[data-state="restricted"]{color:#B4566A}
-.directory__state[data-state="members"]{color:var(--brass-lit)}
-.directory__state[data-state="public"]{color:#6FA187}
-@media(max-width:720px){
-  .directory__row{grid-template-columns:4rem 1fr;row-gap:var(--s2)}
-  .directory__state{grid-column:2}
-}
-
-/* ============================================================
-   25b. THE PENTHOUSE NAVIGATOR
-   A two-storey grid you move through: left/right along a floor,
-   up/down between them.
-   ============================================================ */
-.pent{position:relative;display:grid;gap:var(--s5)}
-.pent__stage{position:relative;overflow:hidden;aspect-ratio:16/9;background:var(--charcoal);
-  border:1px solid var(--rule);touch-action:pan-y}
-.pent__track{position:absolute;inset:0;
-  transform:translate(calc(var(--col,1) * -100%),calc(var(--row,1) * -100%));
-  transition:transform 900ms var(--ease-in-out);will-change:transform}
-.pent__room{position:absolute;inset:0;
-  transform:translate(calc(var(--c) * 100%),calc(var(--r) * 100%))}
-.pent__room img{width:100%;height:100%;object-fit:cover;
-  filter:saturate(.9) contrast(1.05) brightness(1.08)}
-.pent__room::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(10,10,11,.5) 0%,rgba(10,10,11,0) 26%,rgba(10,10,11,0) 54%,rgba(10,10,11,.82) 100%)}
-
-.pent__plate{position:absolute;left:0;right:0;bottom:0;z-index:3;
-  padding:clamp(var(--s5),3vw,var(--s7));display:grid;gap:var(--s2);pointer-events:none}
-.pent__lvl{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.24em;
-  text-transform:uppercase;color:var(--brass)}
-.pent__name{font-family:var(--font-display);font-size:var(--t-h2);line-height:1;letter-spacing:-.02em}
-.pent__note{color:var(--bone);max-width:46ch;font-size:var(--t-label);line-height:1.6}
-.pent__open{pointer-events:auto;justify-self:start;margin-top:var(--s3)}
-
-/* directional pad */
-.pent__pad{position:absolute;right:clamp(var(--s5),3vw,var(--s7));
-  bottom:clamp(var(--s5),3vw,var(--s7));z-index:4;
-  display:grid;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:4px}
-.pent__btn{display:grid;place-items:center;border:1px solid var(--hairline);
-  background:rgba(10,10,11,.66);color:var(--bone);font-size:15px;line-height:1;
-  transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast)}
-.pent__btn:hover:not(:disabled){color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
-.pent__btn:disabled{opacity:.22;cursor:default}
-.pent__btn--u{grid-area:1/2}.pent__btn--l{grid-area:2/1}
-.pent__btn--r{grid-area:2/3}.pent__btn--d{grid-area:3/2}
-.pent__pad i{grid-area:2/2;display:grid;place-items:center;
-  font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--graphite);font-style:normal}
-
-/* floor plan minimap */
-.pent__map{display:grid;gap:var(--s3);justify-items:start}
-.pent__floor{display:flex;align-items:center;gap:var(--s3)}
-.pent__floor b{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
-  color:var(--brass);width:2.4rem;font-weight:400}
-.pent__cell{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.16em;
-  text-transform:uppercase;color:var(--ash);border:1px solid var(--hairline);
-  padding:.5em .8em;transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast)}
-.pent__cell:hover{color:var(--bone);border-color:var(--graphite)}
-.pent__cell.is-here{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
-
-/* artifacts, reusing the .artifact/.drawer__* system from the floors --
-   the drawer here covers the whole stage (it's a small card, not a full
-   viewport scene) rather than sliding up from the bottom */
-.pent__room .artifacts{position:absolute;inset:0;z-index:5}
-.pent__drawer{position:absolute;inset:0;z-index:9;
-  background:linear-gradient(180deg,rgba(10,10,11,.93),rgba(10,10,11,.99));
-  border-top:1px solid var(--brass);
-  opacity:0;transform:translateY(3%);pointer-events:none;
-  transition:opacity var(--d-med) var(--ease-in-out),transform var(--d-med) var(--ease-in-out);
-  overflow-y:auto}
-.pent__drawer.is-open{opacity:1;transform:none;pointer-events:auto}
-.pent__drawer .drawer__inner{padding:clamp(var(--s6),4vw,var(--s7))}
-.pent__drawer .drawer__close{position:absolute;top:var(--s4);right:var(--s5)}
-
-@media(max-width:720px){
-  .pent__stage{aspect-ratio:4/5}
-  .pent__pad{grid-template-columns:repeat(3,40px);grid-template-rows:repeat(3,40px)}
-  .pent__name{font-size:var(--t-h3)}
-  .pent__note{display:none}
-}
-@media(prefers-reduced-motion:reduce){.pent__track{transition:none}}
-
-/* ---------- 25c. THE ELEVATOR — every floor, locked or not ---------- */
-.pent-elevator{max-height:30rem;overflow-y:auto;border-top:1px solid var(--rule)}
-.pent-elevator .directory__row{
-  width:100%;text-align:left;background:none;color:inherit;font:inherit;
-  border:0;border-bottom:1px solid var(--rule);cursor:pointer;
-}
-.pent-elevator div.directory__row{cursor:default}
-.pent-elevator div.directory__row:hover{padding-left:0;background:none}
-.pent-elevator .directory__row[aria-disabled="true"]{opacity:.4}
-.pent-elevator .directory__state[data-state="locked"]{color:var(--graphite)}
-.pent-elevator .directory__row--open{grid-template-columns:5.5rem 1fr auto}
-.pent-elevator .directory__go{
-  font-size:1.1rem;color:var(--brass);opacity:0;
-  transform:translateX(-.4em);
-  transition:opacity var(--d-fast),transform var(--d-fast);
-}
-.pent-elevator .directory__row--open:hover .directory__go,
-.pent-elevator .directory__row--open:focus-visible .directory__go{opacity:1;transform:translateX(0)}
-
-/* ---------- 25c-iii. POPUP ELEVATOR — floor buttons inside the room popup ---------- */
-.popup-elevator{
-  position:absolute;top:var(--s5);left:var(--s5);z-index:55;
-  display:flex;flex-wrap:wrap;gap:.4em;max-width:min(70vw,26rem);
-}
-.popup-elevator__btn{
-  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.06em;
-  min-width:2.4em;padding:.5em .6em;border-radius:4px;text-align:center;
-  background:rgba(10,10,11,.6);border:1px solid var(--hairline);color:var(--bone);
-  cursor:pointer;transition:border-color var(--d-fast),color var(--d-fast),background var(--d-fast);
-}
-.popup-elevator__btn:hover:not(:disabled),
-.popup-elevator__btn:focus-visible:not(:disabled){border-color:var(--brass);color:var(--brass-lit);background:rgba(10,10,11,.85)}
-.popup-elevator__btn:disabled{color:var(--graphite);cursor:default;opacity:.45}
-@media(max-width:720px){
-  .popup-elevator{top:auto;bottom:var(--s5);left:var(--s5);right:var(--s5);max-width:none;justify-content:center}
-}
-
-/* ---------- 25c-ii. ROOM POPUP — the full-bleed pager, as an overlay ---------- */
-.room-popup{
-  position:fixed;inset:0;z-index:910;display:none;
-  background:var(--obsidian);isolation:isolate;
-}
-.room-popup.is-open{display:block}
-.room-popup__close{
-  position:absolute;top:var(--s5);right:var(--s5);z-index:60;
-  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;text-transform:uppercase;
-  background:rgba(10,10,11,.6);border:1px solid var(--hairline);color:var(--bone);
-  padding:.6em 1em;border-radius:4px;cursor:pointer;
-  transition:border-color var(--d-fast),color var(--d-fast);
-}
-.room-popup__close:hover{border-color:var(--brass);color:var(--brass-lit)}
 
 /* ============================================================
    25d. THE STUDIO WALL — brands pinned as case files
@@ -2053,7 +2499,23 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 /* ============================================================
    26. THE CITYSCAPE — Charlotte as an interactive map surface
    ============================================================ */
-.cityscape{position:relative;background:var(--obsidian);padding-block:clamp(5rem,11vh,8rem);overflow:hidden}
+.cityscape{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  background:var(--obsidian);padding-block:clamp(5rem,11vh,8rem);overflow:hidden}
+/* The section's own content (intro text + map + info panel) usually runs
+   taller than one screen, so it grows past 100svh -- position:fixed here
+   (rather than .room-pager__nav's own position:absolute, which would
+   center within the whole grown section and drift out of view) keeps
+   these anchored to the actual viewport regardless. Shown/hidden via
+   .is-in-view (city.js, IntersectionObserver) so they don't float over
+   the rest of the page once #map has scrolled out of view. */
+.cityscape .room-pager__nav{
+  position:fixed;opacity:0;pointer-events:none;
+  transition:opacity var(--d-fast) var(--ease-out),color var(--d-fast),border-color var(--d-fast),background var(--d-fast);
+}
+.cityscape .room-pager__nav.is-in-view{opacity:1;pointer-events:auto}
+.cityscape .room-pager__nav.is-in-view:disabled{opacity:0;pointer-events:none}
+.cityscape .nav-panel{opacity:0;pointer-events:none;transition:opacity var(--d-fast) var(--ease-out)}
+.cityscape .nav-panel.is-in-view{opacity:1;pointer-events:auto}
 .cityscape__head{position:relative;z-index:4;max-width:var(--maxw);margin-inline:auto;
   padding-inline:var(--gutter);margin-bottom:var(--s6)}
 
@@ -2220,7 +2682,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .vfilter__label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
   text-transform:uppercase;color:var(--graphite);width:4.4rem;flex:none}
 .vfilter button{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;
-  text-transform:uppercase;color:var(--ash);padding:.55em .85em;border:1px solid transparent;
+  text-transform:uppercase;color:var(--ash);padding:.55em .85em;border:1px solid transparent;border-radius:999px;
   transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast)}
 .vfilter button:hover{color:var(--bone);border-color:var(--hairline)}
 .vfilter button.is-on{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
@@ -2233,6 +2695,47 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 
 .vhood{padding-block:clamp(4rem,8vh,6rem);border-top:1px solid var(--rule)}
 .vhood:nth-of-type(odd){background:var(--ink)}
+
+/* ---------- District switcher ----------
+   Only present once city-districts.js has run (it adds
+   .has-district-switcher itself) -- without it every .vhood stays
+   visible and works as the plain stack of <details> accordions it
+   is in the markup. */
+.districts{
+  position:sticky;top:0;z-index:60;
+  padding:var(--s4) 0;
+  background:linear-gradient(180deg,var(--obsidian) 72%,rgba(10,10,11,0));
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.districts__row{
+  display:flex;gap:var(--s2);
+  max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);
+  overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+}
+.districts__row::-webkit-scrollbar{display:none}
+.districts__chip{
+  flex:0 0 auto;display:flex;align-items:baseline;gap:.5em;
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ash);background:rgba(10,10,11,.6);border:1px solid var(--hairline);
+  border-radius:999px;padding:.7em 1.1em;cursor:pointer;white-space:nowrap;
+  transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast);
+}
+.districts__chip-count{font-size:.85em;opacity:.6}
+.districts__chip:hover{color:var(--bone);border-color:var(--brass)}
+.districts__chip.is-active{
+  color:var(--obsidian);background:var(--brass);border-color:var(--brass);
+}
+.districts__chip.is-active .districts__chip-count{opacity:.75}
+.has-district-switcher .vhood{display:none;background:none;border-top:0}
+.has-district-switcher .vhood.is-active{display:block}
+/* The chip row is the toggle now -- the panel's own header stops
+   pretending to be one (its click is prevented in JS to match). */
+.has-district-switcher .vhood__head{cursor:default;padding-right:0}
+.has-district-switcher .vhood__head:hover{opacity:1}
+.has-district-switcher .vhood__toggle{display:none}
+@media(max-width:760px){
+  .districts__chip{padding:.65em .9em;letter-spacing:.1em}
+}
 .vhood__acc{max-width:none}
 .vhood__head{
   max-width:78ch;position:relative;cursor:pointer;list-style:none;
@@ -2386,7 +2889,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   background:repeating-linear-gradient(45deg,var(--charcoal),var(--charcoal) 10px,var(--ink) 10px,var(--ink) 20px);
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--graphite)}
 
-/* ---------- penthouse room nav ---------- */
+/* ---------- homepage city-preview link ---------- */
 .rooms{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s5)}
 .room-btn{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
   color:var(--ash);border:1px solid var(--hairline);padding:.7em 1em;
@@ -2431,18 +2934,59 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   /* Journal entries */
   .entry__title{max-width:none}
 
-  /* Sound control out of the content's way */
-  .sound{bottom:var(--s4);right:var(--s4)}
+  /* Play/Pause/Remote/Footer/Guide Info controls out of the content's way */
+  .playpause-toggle{bottom:var(--s4);right:var(--s4)}
+  .remote-toggle{bottom:var(--s4);right:calc(var(--s4) + 5.2rem)}
+  .footer-toggle{bottom:var(--s4);left:var(--s4)}
+  .guide-info-toggle{bottom:var(--s4);right:var(--s4)}
 
-  /* Building: artifacts get bigger targets, plate flows */
+  /* Building: one screen, minimal text -- the photo does the work, and
+     the room's own artifacts/drawer are the way to actually learn more.
+     This is now the treatment at every breakpoint (see the base
+     .floor-scene/.floor-plate/.artifact/.room-pager__viewport rules above);
+     what's left here is genuinely phone-only sizing. */
   .floor-scene{min-height:92svh}
-  .floor-plate{max-width:none;padding-block:clamp(5rem,12vh,7rem)}
-  .floor-plate__name{font-size:var(--t-h2)}
-  .artifact{padding:var(--s4)}
-  .artifact__dot{width:11px;height:11px}
-  .artifact__label{font-size:9px;letter-spacing:.14em}
+  /* 130% (the base pan width) doesn't leave much to actually pan across
+     on a narrow phone -- a bigger fixed width reads better here. */
+  .floor-scene__canvas{width:860px}
   .drawer{max-height:74svh}
   .drawer__inner{padding:var(--s6) var(--gutter) var(--s8)}
+
+  /* The TV remote becomes a true bottom sheet -- fixed to the real viewport
+     (re-parented out of .floor-scene__screen's transformed box, see
+     applySheetMode in tv-remote.js), full-width, with thumb-sized controls
+     instead of the small desktop-anchored panel's mouse-precision sizing. */
+  .tv-remote.is-sheet{
+    position:fixed;left:0;right:0;bottom:0;top:auto;margin-top:0;
+    width:100%;max-width:none;border-radius:20px 20px 0 0;
+    padding:.9em 1.1em calc(1.1em + env(safe-area-inset-bottom));
+    display:flex;visibility:hidden;pointer-events:none;z-index:911;
+    transform:translateY(100%);
+    transition:transform var(--d-med) var(--ease-out),visibility var(--d-med);
+  }
+  .tv-remote.is-sheet.is-open{visibility:visible;pointer-events:auto;transform:none}
+  .tv-remote.is-sheet .tv-remote__pad{width:8.5rem;height:8.5rem}
+  .tv-remote.is-sheet .tv-remote__pad-btn{width:3rem;height:2.75rem;font-size:.72rem}
+  .tv-remote.is-sheet button{min-height:44px;padding:.6em .9em;font-size:.78rem}
+  .tv-remote.is-sheet .tv-remote__mute{min-height:48px}
+  .tv-remote.is-sheet .tv-remote__guide{min-height:48px}
+  .tv-remote.is-sheet .tv-remote__guide-panel{
+    border-radius:20px 20px 0 0;padding:.9em 1.1em calc(1.1em + env(safe-area-inset-bottom));
+  }
+  .tv-remote__sheet-close{
+    align-self:flex-end;min-width:44px;min-height:44px;
+    font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;
+    background:none;border:1px solid var(--hairline);color:var(--ash);
+    border-radius:6px;cursor:pointer;
+  }
+  .tv-remote__sheet-close:hover{border-color:var(--brass);color:var(--brass-lit)}
+
+  .tv-sheet-scrim{
+    position:fixed;inset:0;z-index:910;background:rgba(6,6,7,.6);
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity var(--d-med) var(--ease-out),visibility var(--d-med);
+  }
+  .tv-sheet-scrim.is-open{opacity:1;visibility:visible;pointer-events:auto}
 }
 
 /* ---------- 23. REDUCED MOTION ---------- */

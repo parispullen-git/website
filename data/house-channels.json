@@ -27,8 +27,20 @@
   ],
   "cinema": [
     {
-      "id": "w7fuOkF74Zw",
-      "label": "Power — First Look"
+      "id": "gnm4HgIAVmU",
+      "label": "The Thomas Crown Affair — Official Teaser Trailer"
+    },
+    {
+      "id": "01IeKpHvgvM",
+      "label": "The Gentlemen: Season 2 — Official Trailer"
+    },
+    {
+      "id": "VvYl1a1Px5Y",
+      "label": "MobLand: Season 2 — Official Trailer"
+    },
+    {
+      "id": "fvnyrBnUx4E",
+      "label": "By Any Means — Official Trailer"
     }
   ]
 }

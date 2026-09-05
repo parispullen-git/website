@@ -28,6 +28,7 @@ const COLLECTIONS = {
   'charlotte-locations': { file: 'charlotte-locations.json', rebuild: 'build_charlotte.py', page: 'charlotte.html' },
   'house-music': { file: 'house-music.json', rebuild: 'build_house.py', page: 'house.html' },
   'house-channels': { file: 'house-channels.json', rebuild: null, page: 'house.html' },
+  'dispatch-briefs': { file: 'dispatch-briefs.json', rebuild: null, page: null },
 };
 
 const MIME = {

@@ -87,7 +87,7 @@
     <h1 class="display display--h2">Operator Console</h1>
     <div class="op__banner">
       <span class="badge badge--brass">LOCAL</span>
-      <p class="body">Edits write to <code>data/*.json</code> on this machine, then regenerate the real static page via the existing <code>build_*.py</code> script. Nothing here touches the live site until you deploy the regenerated file yourself.</p>
+      <p class="body">Edits write to <code>data/*.json</code> on this machine, then regenerate the real static page via the existing <code>build_*.py</code> script. Nothing here touches the live site until you deploy the regenerated file yourself. &#183; <a class="link-under" href="dispatch-brief.html">Open The Dispatch Brief &#8594;</a> to submit new Journal material, or use the <b>Dispatch Briefs</b> tab below to view, use, or edit anything already sent.</p>
     </div>
 
     <nav class="op__tabs" id="tabs"></nav>
@@ -173,6 +173,22 @@
         {key:'type', label:'Type', type:'select', options:['playlist','album']},
         {key:'id', label:'Spotify ID', type:'text', required:true},
         {key:'label', label:'Label', type:'text', required:true},
+      ]
+    },
+    'dispatch-briefs': {
+      label: 'Dispatch Briefs', idField: 'id',
+      summary: function(r){ return (r.category||'Uncategorized') + ' — ' + (r.moment ? r.moment.slice(0,48) + (r.moment.length>48?'…':'') : 'Untitled') + '  [' + (r.status||'new') + ']'; },
+      fields: [
+        {key:'id', label:'ID (auto)', type:'text', required:true},
+        {key:'created', label:'Submitted', type:'text'},
+        {key:'category', label:'Category', type:'select', options:['film','music','tech','gaming','automotive','travel','venue','laws','news']},
+        {key:'status', label:'Status', type:'select', options:['new','drafted','published']},
+        {key:'moment', label:'The one moment', type:'textarea', required:true},
+        {key:'personal', label:'Why it landed on you', type:'textarea'},
+        {key:'quote', label:'Exact quote', type:'textarea'},
+        {key:'media', label:'Media provided', type:'textarea'},
+        {key:'law', label:'Law it echoes', type:'text'},
+        {key:'details', label:'Category-specific answers — raw JSON object', type:'json'},
       ]
     },
   };
@@ -455,9 +471,10 @@
   }
 
   // ---------------- boot ----------------
-  var NAMES = ['wardrobe', 'journal', 'casefiles', 'charlotte-locations', 'house-music', 'house-channels'];
+  var NAMES = ['wardrobe', 'journal', 'casefiles', 'charlotte-locations', 'house-music', 'house-channels', 'dispatch-briefs'];
   var LABELS = { wardrobe:'Wardrobe', journal:'Journal', casefiles:'Case Files',
-    'charlotte-locations':'Charlotte Map', 'house-music':'House Music', 'house-channels':'House Channels' };
+    'charlotte-locations':'Charlotte Map', 'house-music':'House Music', 'house-channels':'House Channels',
+    'dispatch-briefs':'Dispatch Briefs' };
 
   var tabs = document.getElementById('tabs');
   var panels = document.getElementById('panels');

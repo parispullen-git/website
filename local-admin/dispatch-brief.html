@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Dispatch Brief — Operator Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/world.css">
+<style>
+  body{padding-bottom:4rem}
+  .db{max-width:920px;margin-inline:auto;padding-top:clamp(2.5rem,6vh,4rem)}
+  .db__banner{border:1px solid var(--brass);background:rgba(198,161,91,.08);padding:var(--s4) var(--s5);
+    display:flex;gap:var(--s3);align-items:baseline;margin-bottom:var(--s7);flex-wrap:wrap}
+  .db__banner b{color:var(--brass-lit)}
+  .db__banner a{color:var(--brass-lit)}
+
+  .masthead__tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--brass);display:flex;gap:.6em;align-items:center;margin-bottom:22px}
+  .masthead__tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--brass);
+    box-shadow:0 0 8px var(--brass-lit)}
+  .db h1{font-family:var(--font-display);font-weight:500;font-size:clamp(2.1rem,4.6vw,3.2rem);
+    line-height:1.04;letter-spacing:-.01em;max-width:16ch;margin:0}
+  .db > p.lede{font-size:1.02rem;color:var(--graphite);max-width:58ch;margin-top:18px;font-weight:300}
+
+  .thesis{padding:32px 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);margin-top:32px}
+  .thesis p{font-family:var(--font-display);font-style:italic;font-size:clamp(1.05rem,2vw,1.3rem);
+    color:var(--bone);line-height:1.5;max-width:62ch;margin:0}
+  .thesis p b{color:var(--brass-lit);font-weight:500;font-style:normal}
+
+  .section-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--brass);display:flex;align-items:center;gap:14px;margin:44px 0 8px}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--hairline)}
+  .section-sub{color:var(--graphite);font-size:.92rem;max-width:62ch;margin:0 0 22px;font-weight:300}
+
+  .core-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hairline);
+    border:1px solid var(--hairline)}
+  .core-item{background:#111113;padding:20px 22px}
+  .core-item:nth-child(5){grid-column:1/-1}
+  .core-num{font-family:var(--font-mono);font-size:11px;color:var(--brass);letter-spacing:.1em}
+  .core-q{font-family:var(--font-display);font-size:1.08rem;margin:.4em 0 .5em;line-height:1.3}
+  .core-hint{color:var(--graphite);font-size:.85rem;line-height:1.5}
+  .core-item input,.core-item textarea{width:100%;margin-top:10px;background:#0A0A0B;border:1px solid var(--hairline);
+    color:var(--ivory);font-family:var(--font-body);font-size:.9rem;padding:9px 11px;border-radius:2px}
+  .core-item textarea{min-height:56px;resize:vertical;line-height:1.5}
+  .core-item input:focus,.core-item textarea:focus{outline:none;border-color:var(--brass)}
+  @media(max-width:640px){.core-grid{grid-template-columns:1fr}.core-item:nth-child(5){grid-column:1}}
+
+  .tabbar{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--hairline)}
+  .tab{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    background:none;border:1px solid var(--hairline);border-bottom:none;color:var(--graphite);
+    padding:10px 15px;cursor:pointer;border-radius:3px 3px 0 0;position:relative;top:1px}
+  .tab:hover{color:var(--bone)}
+  .tab.is-on{color:var(--ink,#0A0A0B);background:var(--brass);border-color:var(--brass);font-weight:600}
+  .panel{display:none;background:#111113;border:1px solid var(--hairline);border-radius:0 2px 2px 2px;
+    padding:clamp(20px,4vw,32px)}
+  .panel.is-on{display:block}
+  .panel__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+  .panel__head h3{font-family:var(--font-display);font-size:1.35rem;margin:0}
+  .panel__voice{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--brass-lit);white-space:nowrap}
+  .panel__why{color:var(--graphite);font-size:.88rem;max-width:64ch;margin:8px 0 24px;font-weight:300}
+
+  .field{margin-bottom:18px}
+  .field label{display:block;font-family:var(--font-display);font-size:.98rem;color:var(--bone);margin-bottom:4px}
+  .field .hint{display:block;font-size:.8rem;color:var(--graphite);margin-bottom:7px;font-weight:300}
+  .field input[type=text],.field textarea{width:100%;background:#0A0A0B;border:1px solid var(--hairline);
+    border-radius:2px;color:var(--ivory);font-family:var(--font-body);font-size:.9rem;padding:9px 11px;resize:vertical}
+  .field textarea{min-height:58px;line-height:1.5}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--brass)}
+
+  .panel__foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+    margin-top:8px;padding-top:20px;border-top:1px solid var(--hairline)}
+  .submit-btn{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    background:var(--brass);color:#0A0A0B;border:1px solid var(--brass);padding:11px 22px;border-radius:2px;
+    cursor:pointer;font-weight:600}
+  .submit-btn:hover{background:var(--brass-lit);border-color:var(--brass-lit)}
+  .submit-btn:disabled{opacity:.5;cursor:default}
+  .clear-btn{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    background:none;border:none;color:var(--graphite);cursor:pointer;text-decoration:underline}
+  .clear-btn:hover{color:var(--bone)}
+  .panel__status{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;color:var(--graphite);min-height:1.4em}
+  .panel__status.ok{color:#7fae8e}
+  .panel__status.err{color:#c17d6a}
+
+  .media-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;
+    background:var(--hairline);border:1px solid var(--hairline)}
+  .media-item{background:#111113;padding:20px}
+  .media-item h4{font-family:var(--font-display);font-size:1rem;display:flex;align-items:center;gap:.5em;margin:0}
+  .media-item h4 .yes{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;color:#0A0A0B;
+    background:var(--brass-lit);padding:2px 7px;border-radius:20px;font-weight:600}
+  .media-item p{color:var(--graphite);font-size:.84rem;margin-top:9px;line-height:1.55;font-weight:300}
+  .media-item p b{color:var(--bone);font-weight:500}
+
+  .quick-box{border:1px solid var(--brass);border-radius:2px;padding:clamp(20px,4vw,30px);
+    background:linear-gradient(180deg,rgba(168,135,78,.06),transparent 60%)}
+  .quick-box textarea{width:100%;min-height:140px;background:#0A0A0B;border:1px solid var(--hairline);
+    border-radius:2px;color:var(--ivory);font-family:var(--font-mono);font-size:.83rem;line-height:1.7;
+    padding:14px;resize:vertical}
+  .quick-box textarea:focus{outline:none;border-color:var(--brass)}
+  .quick-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:10px}
+  .copy-btn{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    background:none;border:1px solid var(--brass);color:var(--brass-lit);padding:8px 16px;border-radius:2px;cursor:pointer}
+  .copy-btn:hover{background:var(--brass);color:#0A0A0B}
+</style>
+</head>
+<body>
+<div class="wrap db">
+  <div class="db__banner">
+    <span class="badge badge--brass">LOCAL</span>
+    <p class="body">Submissions archive to <code>data/dispatch-briefs.json</code> on this machine. <a href="console.html">&#8592; Back to the Operator Console</a> to view, use, or edit anything you've sent.</p>
+  </div>
+
+  <p class="masthead__tag">Internal &#183; Editorial Ops</p>
+  <h1>The Dispatch Brief</h1>
+  <p class="lede">A worksheet, not a form. Fill in the sheet that fits, hit send &#8212; it lands in the archive, ready to become a Journal entry.</p>
+
+  <div class="thesis">
+    <p>The difference between a magazine article and a blog post is <b>specificity</b>. Not &#8220;I watched a good film&#8221; &#8212; the exact ten seconds of it that made you sit forward. Give me the detail only you noticed, and the piece gets built around it.</p>
+  </div>
+
+  <p class="section-label">Every Entry, Regardless of Category</p>
+  <p class="section-sub">Five questions, shared across every category tab below.</p>
+  <div class="core-grid" id="coreGrid"></div>
+
+  <p class="section-label">By Category</p>
+  <p class="section-sub">Pick the tab that fits, answer what you can, then submit &#8212; it archives with the core brief above attached.</p>
+  <div class="tabbar" id="tabbar" role="tablist"></div>
+  <div id="panels"></div>
+
+  <p class="section-label">On Photos, Video &amp; Quotes</p>
+  <p class="section-sub">Yes, send them. Here's what's usable and why.</p>
+  <div class="media-grid">
+    <div class="media-item"><h4>Your Own Photos <span class="yes">Always yes</span></h4>
+      <p>Always usable, always preferred over anything sourced elsewhere.</p></div>
+    <div class="media-item"><h4>Official Art <span class="yes">Real subjects only</span></h4>
+      <p>Send the official poster / cover / press-kit link. Verified before use.</p></div>
+    <div class="media-item"><h4>Video <span class="yes">Link only</span></h4>
+      <p>Only a real, verifiable official upload. Never guessed.</p></div>
+    <div class="media-item"><h4>Quotes <span class="yes">Exact wording</span></h4>
+      <p>Word-for-word, plus who said it. Used briefly, never at length.</p></div>
+  </div>
+
+  <p class="section-label">Quick-Send Version</p>
+  <p class="section-sub">No time for the full sheet &#8212; five lines, still archivable.</p>
+  <div class="quick-box">
+    <textarea id="quickText" placeholder="CATEGORY:
+SUBJECT:
+THE MOMENT:
+WHY IT LANDED:
+QUOTE (exact, if any):
+MEDIA:
+LAW IT ECHOES:"></textarea>
+    <div class="quick-foot">
+      <span class="panel__status" id="quickStatus"></span>
+      <div style="display:flex;gap:10px">
+        <button class="copy-btn" id="copyBtn" type="button">Copy Template</button>
+        <button class="submit-btn" id="quickSubmit" type="button">Submit to Archive</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var CORE_FIELDS = [
+    { k:'moment', q:'What’s the one moment?', hint:'Not the general topic — the specific ten seconds, line, or detail.', long:true },
+    { k:'personal', q:'Why did it land on you, specifically?', hint:'What in your week, your history, your taste made this hit the way it did.', long:true },
+    { k:'quote', q:'Any exact quote?', hint:'Verbatim wording, and who said it.', long:true },
+    { k:'media', q:'What am I working with visually?', hint:'Your own photo, an official press image, a real link.', long:true },
+    { k:'law', q:'Does this echo one of your Laws?', hint:'Optional. Name it if it does.', long:false },
+  ];
+
+  var CATS = [
+    { id:'film', label:'Film / TV', voice:'Scene, not synopsis', why:'A recap is a Wikipedia summary. What gets written is what one specific moment revealed.', fields:[
+      { k:'title', label:'Title, and where/when you watched it', hint:'Living Floor screen, a theater, a flight.' },
+      { k:'scene', label:'The standout scene', hint:'What happens, in your words — not the plot.' },
+      { k:'character', label:'A character whose personality resonated', hint:'Name the specific trait.' },
+      { k:'quote2', label:'One exact line of dialogue', hint:'Verbatim, short.' },
+      { k:'wardrobe', label:'A wardrobe or style moment, if any', hint:'Optional.' },
+      { k:'art', label:'Official poster or stills you want used', hint:'Link or file, official only.' },
+    ]},
+    { id:'music', label:'Music', voice:'The room it plays in', why:'Not a review — the moment a song stopped being background.', fields:[
+      { k:'track', label:'Artist / Album / Track', hint:'' },
+      { k:'context', label:'Where you were the first time it really landed', hint:'' },
+      { k:'moment2', label:'The specific lyric or musical moment', hint:'Describe it, don’t transcribe it.' },
+      { k:'mood', label:'What mood or scene it now belongs to', hint:'' },
+      { k:'art', label:'Cover art or press photo', hint:'Official only.' },
+      { k:'rotation', label:'Add to the Piano’s rotation?', hint:'Yes / no.' },
+    ]},
+    { id:'tech', label:'A.I. / Tech', voice:'What it changed, not what it does', why:'The specific moment a tool impressed or unsettled you.', fields:[
+      { k:'tool', label:'The tool or product, and what you were trying to do', hint:'' },
+      { k:'moment2', label:'The specific interaction that impressed or unsettled you', hint:'' },
+      { k:'proof', label:'Screenshot or real output', hint:'' },
+      { k:'angle', label:'The bigger-picture read', hint:'Business, culture, how it changes things — your take.' },
+    ]},
+    { id:'gaming', label:'Gaming', voice:'Anticipation is the story', why:'Most of what’s worth covering hasn’t shipped yet.', fields:[
+      { k:'title', label:'Title, and what stage it’s in', hint:'Announced, trailer, released, playing now.' },
+      { k:'hook', label:'What actually hooked you', hint:'' },
+      { k:'proof', label:'Official trailer link or screenshot', hint:'Verified source only.' },
+      { k:'angle', label:'Culture/anticipation, or hands-on?', hint:'' },
+    ]},
+    { id:'automotive', label:'Automotive', voice:'The detail, not the spec sheet', why:'The design decision that tells you who this car thinks its owner is.', fields:[
+      { k:'vehicle', label:'Make / model / trim', hint:'' },
+      { k:'detail', label:'The design detail that got you', hint:'' },
+      { k:'photos', label:'Your own photos, or official press images', hint:'' },
+      { k:'driven', label:'Aspirational, or actually driven?', hint:'' },
+      { k:'buyer', label:'Who buys this — the character sketch', hint:'' },
+    ]},
+    { id:'travel', label:'Travel', voice:'One place, one sense', why:'The single moment a photo alone couldn’t carry.', fields:[
+      { k:'where', label:'Where, and the trip context', hint:'' },
+      { k:'moment2', label:'The one moment that stuck', hint:'' },
+      { k:'photos', label:'Your own photos', hint:'' },
+      { k:'missed', label:'A detail most visitors miss', hint:'' },
+      { k:'sense', label:'One sensory note', hint:'Heat, sound, smell.' },
+    ]},
+    { id:'venue', label:'City Guide Venue', voice:'Honest, not promotional', why:'Real price, real atmosphere, no sponsored-post gloss.', fields:[
+      { k:'venue', label:'Venue name, and what you ordered or did', hint:'' },
+      { k:'detail', label:'A staff or atmosphere detail', hint:'' },
+      { k:'price', label:'Honest price note', hint:'' },
+      { k:'photos', label:'Your own photos', hint:'' },
+      { k:'special', label:'Any happy hour or special worth flagging', hint:'' },
+    ]},
+    { id:'laws', label:'Daily Laws', voice:'Earned, not aphoristic', why:'The real moment that taught it to you — not just a clever line.', fields:[
+      { k:'lawtext', label:'The principle, in one sentence', hint:'' },
+      { k:'origin', label:'The real moment that taught you this', hint:'' },
+      { k:'applies', label:'Where it actually applies', hint:'' },
+    ]},
+    { id:'news', label:'News', voice:'The take, not the report', why:'Your actual opinion on news everyone already saw.', fields:[
+      { k:'story', label:'The story, and a source link', hint:'' },
+      { k:'why', label:'Why it matters beyond the headline', hint:'' },
+      { k:'factcheck', label:'Anything to verify before publishing', hint:'' },
+    ]},
+  ];
+
+  function esc(s){ return String(s||'').replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function ls(key){ try { return localStorage.getItem(key); } catch(e){ return null; } }
+  function setLs(key,val){ try { localStorage.setItem(key,val); } catch(e){} }
+
+  // ---------- core brief ----------
+  var coreGrid = document.getElementById('coreGrid');
+  CORE_FIELDS.forEach(function(f, i){
+    var storeKey = 'dispatch-brief:core:' + f.k;
+    var div = document.createElement('div');
+    div.className = 'core-item';
+    div.innerHTML = '<span class="core-num">0' + (i+1) + '</span>' +
+      '<p class="core-q">' + esc(f.q) + '</p>' +
+      '<p class="core-hint">' + esc(f.hint) + '</p>' +
+      (f.long ? '<textarea data-core="' + f.k + '"></textarea>' : '<input type="text" data-core="' + f.k + '">');
+    coreGrid.appendChild(div);
+  });
+  function wireCore(){
+    document.querySelectorAll('[data-core]').forEach(function(el){
+      var key = 'dispatch-brief:core:' + el.getAttribute('data-core');
+      var saved = ls(key); if (saved) el.value = saved;
+      el.addEventListener('input', function(){ setLs(key, el.value); });
+    });
+  }
+  function coreValues(){
+    // Reads the live DOM value, not localStorage -- localStorage is
+    // best-effort draft persistence only, and must never be the thing
+    // that decides whether a filled-in field counts as filled in.
+    var out = {};
+    CORE_FIELDS.forEach(function(f){
+      var el = document.querySelector('[data-core="' + f.k + '"]');
+      out[f.k] = el ? el.value : '';
+    });
+    return out;
+  }
+  function clearCore(){
+    CORE_FIELDS.forEach(function(f){
+      var key = 'dispatch-brief:core:' + f.k;
+      try { localStorage.removeItem(key); } catch(e){}
+      var el = document.querySelector('[data-core="' + f.k + '"]');
+      if (el) el.value = '';
+    });
+  }
+
+  // ---------- category tabs ----------
+  var tabbar = document.getElementById('tabbar');
+  var panels = document.getElementById('panels');
+
+  CATS.forEach(function(cat, i){
+    var tab = document.createElement('button');
+    tab.className = 'tab' + (i === 0 ? ' is-on' : '');
+    tab.textContent = cat.label;
+    tab.setAttribute('data-cat', cat.id);
+    tab.addEventListener('click', function(){ selectCat(cat.id); });
+    tabbar.appendChild(tab);
+
+    var panel = document.createElement('div');
+    panel.className = 'panel' + (i === 0 ? ' is-on' : '');
+    panel.id = 'panel-' + cat.id;
+
+    var fieldsHtml = cat.fields.map(function(f){
+      var storeKey = 'dispatch-brief:' + cat.id + ':' + f.k;
+      return '<div class="field">' +
+        '<label>' + esc(f.label) + '</label>' +
+        (f.hint ? '<span class="hint">' + esc(f.hint) + '</span>' : '') +
+        '<textarea data-store="' + storeKey + '"></textarea>' +
+        '</div>';
+    }).join('');
+
+    panel.innerHTML =
+      '<div class="panel__head"><h3>' + esc(cat.label) + '</h3><span class="panel__voice">' + esc(cat.voice) + '</span></div>' +
+      '<p class="panel__why">' + esc(cat.why) + '</p>' +
+      fieldsHtml +
+      '<div class="panel__foot">' +
+        '<button type="button" class="clear-btn" data-clear="' + cat.id + '">Clear this sheet</button>' +
+        '<div style="display:flex;align-items:center;gap:14px">' +
+          '<span class="panel__status" id="status-' + cat.id + '"></span>' +
+          '<button type="button" class="submit-btn" data-submit="' + cat.id + '">Submit to Archive</button>' +
+        '</div>' +
+      '</div>';
+
+    panels.appendChild(panel);
+  });
+
+  function selectCat(id){
+    Array.prototype.forEach.call(tabbar.children, function(t){ t.classList.toggle('is-on', t.getAttribute('data-cat') === id); });
+    Array.prototype.forEach.call(panels.children, function(p){ p.classList.toggle('is-on', p.id === 'panel-' + id); });
+  }
+
+  function wirePanelStorage(){
+    document.querySelectorAll('[data-store]').forEach(function(el){
+      var key = el.getAttribute('data-store');
+      var saved = ls(key); if (saved) el.value = saved;
+      el.addEventListener('input', function(){ setLs(key, el.value); });
+    });
+  }
+
+  function catValues(catId){
+    // Live DOM values, not localStorage -- see coreValues() above.
+    var cat = CATS.filter(function(c){ return c.id === catId; })[0];
+    var out = {};
+    cat.fields.forEach(function(f){
+      var el = document.querySelector('[data-store="dispatch-brief:' + catId + ':' + f.k + '"]');
+      out[f.k] = el ? el.value : '';
+    });
+    return out;
+  }
+  function clearCat(catId){
+    var cat = CATS.filter(function(c){ return c.id === catId; })[0];
+    cat.fields.forEach(function(f){
+      var key = 'dispatch-brief:' + catId + ':' + f.k;
+      try { localStorage.removeItem(key); } catch(e){}
+      var el = document.querySelector('[data-store="' + key + '"]');
+      if (el) el.value = '';
+    });
+  }
+
+  wireCore();
+  wirePanelStorage();
+
+  // ---------- archive API ----------
+  function api(path, opts){
+    return fetch('/api/' + path, opts).then(function(r){
+      return r.json().then(function(d){ return { ok: r.ok, data: d }; });
+    });
+  }
+  function newId(prefix){
+    return prefix + '-' + new Date().toISOString().replace(/[:.]/g,'-');
+  }
+  function archiveRecord(record, statusEl){
+    statusEl.textContent = 'Saving…';
+    statusEl.className = 'panel__status';
+    return api('collection/dispatch-briefs').then(function(res){
+      if (!res.ok) throw new Error(res.data.error || 'Could not read archive');
+      var list = res.data;
+      list.push(record);
+      return api('collection/dispatch-briefs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(list),
+      });
+    }).then(function(res){
+      if (!res.ok) throw new Error(res.data.error || 'Save failed');
+      statusEl.textContent = 'Archived. View it in the Operator Console → Dispatch Briefs.';
+      statusEl.className = 'panel__status ok';
+    }).catch(function(err){
+      statusEl.textContent = 'Error: ' + err.message;
+      statusEl.className = 'panel__status err';
+    });
+  }
+
+  panels.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-submit]');
+    if (!btn) return;
+    var catId = btn.getAttribute('data-submit');
+    var statusEl = document.getElementById('status-' + catId);
+    var core = coreValues();
+    if (!core.moment) {
+      statusEl.textContent = 'Fill in "What’s the one moment?" at the top before submitting.';
+      statusEl.className = 'panel__status err';
+      return;
+    }
+    var record = {
+      id: newId(catId),
+      created: new Date().toISOString(),
+      category: catId,
+      status: 'new',
+      moment: core.moment,
+      personal: core.personal,
+      quote: core.quote,
+      media: core.media,
+      law: core.law,
+      details: catValues(catId),
+    };
+    archiveRecord(record, statusEl).then(function(){
+      clearCat(catId);
+      clearCore();
+    });
+  });
+
+  panels.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-clear]');
+    if (!btn) return;
+    if (!confirm('Clear this sheet? This does not affect anything already submitted.')) return;
+    clearCat(btn.getAttribute('data-clear'));
+  });
+
+  // ---------- quick-send ----------
+  var quick = document.getElementById('quickText');
+  var QUICK_KEY = 'dispatch-brief:quick';
+  var savedQuick = ls(QUICK_KEY); if (savedQuick) quick.value = savedQuick;
+  quick.addEventListener('input', function(){ setLs(QUICK_KEY, quick.value); });
+
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var btn = this;
+    var text = quick.value || quick.placeholder;
+    var done = function(){ var was = btn.textContent; btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = was; }, 1300); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function(){ quick.select(); document.execCommand('copy'); done(); });
+    } else { quick.select(); document.execCommand('copy'); done(); }
+  });
+
+  document.getElementById('quickSubmit').addEventListener('click', function(){
+    var statusEl = document.getElementById('quickStatus');
+    var text = quick.value.trim();
+    if (!text) { statusEl.textContent = 'Nothing to submit yet.'; statusEl.className = 'panel__status err'; return; }
+    var record = {
+      id: newId('quick'),
+      created: new Date().toISOString(),
+      category: 'quick',
+      status: 'new',
+      moment: text,
+      personal: '', quote: '', media: '', law: '',
+      details: {},
+    };
+    archiveRecord(record, statusEl).then(function(){
+      setLs(QUICK_KEY, ''); quick.value = '';
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -19,6 +19,7 @@ LABEL = {"draft":"Draft","sent":"Sent","viewed":"Viewed","won":"Won","passed":"P
 money = lambda n: f"${n:,}"
 
 HEAD = """<meta charset="utf-8">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
 <meta name="referrer" content="no-referrer">

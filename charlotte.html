@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Charlotte: A Gentleman's Guide &#8212; Paris Pullen</title>
 <meta name="description" content="A real, verified guide to Charlotte, North Carolina &#8212; 75 restaurants, bars, cigar lounges, clubs and coffee counters across seven districts, sourced and checked, not invented.">
 <meta name="theme-color" content="#0A0A0B">
@@ -17,21 +18,38 @@
 
 <header class="worldnav">
   <a class="worldnav__mark" href="/"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
-  <button class="worldnav__toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu">
-    <span class="worldnav__label">Menu</span>
-    <span class="worldnav__bars" aria-hidden="true"><i></i><i></i></span>
-  </button>
+  <div class="worldnav__actions">
+    <a class="worldnav__city" href="index.html#penthouse" aria-label="Return to the Penthouse">
+      <span class="worldnav__label">Penthouse</span>
+    </a>
+    <button class="worldnav__toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu">
+      <span class="worldnav__label">Menu</span>
+      <span class="worldnav__bars" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
 </header>
 
 <nav class="menu" id="menu" aria-label="World navigation">
   <ul class="menu__list">
-    <li><a href="index.html"><span class="idx">01</span>The World</a></li>
-    <li><a href="urwelcome.html"><span class="idx">02</span>The Fragrance</a></li>
-    <li><a href="charlotte.html"><span class="idx">03</span>The City</a></li>
-    <li><a href="casefiles.html"><span class="idx">04</span>The Firm</a></li>
-    <li><a href="journal.html"><span class="idx">05</span>The Journal</a></li>
-    <li><a href="index.html#penthouse"><span class="idx">06</span>The Compliment</a></li>
+    <li><a href="index.html#penthouse"><span class="idx">01</span>The Penthouse</a></li>
+    <li><a href="charlotte.html"><span class="idx">02</span>The City</a></li>
+    <li><a href="journal.html"><span class="idx">03</span>The Journal</a></li>
+    <li><a href="wardrobe.html"><span class="idx">04</span>The Wardrobe</a></li>
+    <li><a href="urwelcome.html"><span class="idx">05</span>The Fragrance</a></li>
+    <li><a href="about.html"><span class="idx">06</span>The Man</a></li>
   </ul>
+  <div class="menu__explore">
+    <p class="menu__explore-label">Explore the Floors</p>
+    <div class="menu__explore-grid">
+    <a class="menu__explore-link" href="house.html#penthouse-living">27 · The Living Floor</a>
+    <a class="menu__explore-link" href="house.html#bedroom">28 · The Bedroom</a>
+    <a class="menu__explore-link" href="house.html#bath">28 · The Bathroom</a>
+    <a class="menu__explore-link" href="house.html#closet">28 · The Closet</a>
+    <a class="menu__explore-link" href="house.html#kitchen">27 · The Kitchen</a>
+    <a class="menu__explore-link" href="house.html#study">28 · The Study</a>
+    <a class="menu__explore-link" href="house.html#cinema">27 · The Cinema</a>
+    </div>
+  </div>
   <div class="menu__foot">
     <div class="social">
       <span class="social__label">@parispullen</span>
@@ -63,28 +81,12 @@
 
 <main>
 
-<!-- ============ HERO ============ -->
-<section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,13rem);padding-bottom:clamp(3rem,6vh,5rem)">
-  <div class="wrap">
-    <header class="split reveal" style="align-items:end">
-      <div class="stack stack--tight">
-        <p class="eyebrow">Charlotte, North Carolina</p>
-        <h1 class="display display--mega">A Gentleman&#8217;s<br>Guide</h1>
-      </div>
-      <div class="stack">
-        <p class="lede">A banking city that dresses conservatively and negotiates hard. Quiet money, loud weekends. This is a working guide, not a mood board &#8212; 75 real, current listings across seven districts, every address and access rule checked before it went on the page.</p>
-        <p class="classified">75 verified listings &#183; Seven districts &#183; Sourced and checked, not invented</p>
-      </div>
-    </header>
-  </div>
-</section>
-
 <!-- ============ THE MAP ============ -->
 <section class="cityscape" id="map">
   <div class="cityscape__head reveal">
-    <p class="eyebrow">The Map</p>
-    <h2 class="display display--h2" style="margin-block:var(--s3)">Seven districts.</h2>
-    <p class="lede">Each with its own hours, its own dress code and its own reason to go. Select a district and its venues surface as hotspots on the map itself &#8212; select a venue, and it opens right here.</p>
+    <p class="eyebrow">Charlotte, North Carolina</p>
+    <h1 class="display display--h2" style="margin-block:var(--s3)">A Gentleman&#8217;s Guide</h1>
+    <p class="classified">75 verified listings &#183; Seven districts &#183; Sourced and checked, not invented</p>
   </div>
 
   <div class="cityscape__surface reveal reveal-d1">
@@ -105,6 +107,15 @@
   <div class="cityhud reveal reveal-d2">
     <div class="cityread" id="cityread"></div>
     <p class="classified" style="margin-top:var(--s4)">Hover or tab across the city &#183; select a venue to open it &#183; full listings below by district</p>
+  </div>
+
+  <button type="button" class="room-pager__nav room-pager__nav--prev" data-cityscape-prev aria-label="Previous district"><span aria-hidden="true">&#8249;</span></button>
+  <button type="button" class="room-pager__nav room-pager__nav--next" data-cityscape-next aria-label="Next district"><span aria-hidden="true">&#8250;</span></button>
+  <div class="nav-panel" data-nav-panel>
+    <button type="button" class="nav-panel__tab" data-nav-panel-toggle aria-expanded="false" aria-controls="cityscape-nav-panel-grid">
+      <span class="nav-panel__tab-label">Districts</span>
+    </button>
+    <div class="nav-panel__grid" id="cityscape-nav-panel-grid" data-nav-panel-grid hidden><!-- rows injected by city.js --></div>
   </div>
 </section>
 
@@ -1908,7 +1919,9 @@
 
 <script src="assets/js/charlotte-guide.js" defer></script>
 <script src="assets/js/city-explorer.js" defer></script>
+<script src="assets/js/nav-panel.js" defer></script>
 <script src="assets/js/city.js" defer></script>
+<script src="assets/js/city-districts.js" defer></script>
 <script src="assets/js/world.js" defer></script>
 </body>
 </html>

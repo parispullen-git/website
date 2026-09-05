@@ -16,20 +16,37 @@
 <div class="vignette" aria-hidden="true"></div>
 <header class="worldnav">
   <a class="worldnav__mark" href="/"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
-  <button class="worldnav__toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu">
-    <span class="worldnav__label">Menu</span>
-    <span class="worldnav__bars" aria-hidden="true"><i></i><i></i></span>
-  </button>
+  <div class="worldnav__actions">
+    <a class="worldnav__city" href="charlotte.html" aria-label="City Guide">
+      <span class="worldnav__label">City</span>
+    </a>
+    <button class="worldnav__toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu">
+      <span class="worldnav__label">Menu</span>
+      <span class="worldnav__bars" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
 </header>
 <nav class="menu" id="menu" aria-label="World navigation">
   <ul class="menu__list">
-    <li><a href="index.html"><span class="idx">01</span>The World</a></li>
-    <li><a href="urwelcome.html"><span class="idx">02</span>The Fragrance</a></li>
-    <li><a href="charlotte.html"><span class="idx">03</span>The City</a></li>
-    <li><a href="casefiles.html"><span class="idx">04</span>The Firm</a></li>
-    <li><a href="journal.html"><span class="idx">05</span>The Journal</a></li>
-    <li><a href="index.html#penthouse"><span class="idx">06</span>The Compliment</a></li>
+    <li><a href="index.html#penthouse"><span class="idx">01</span>The Penthouse</a></li>
+    <li><a href="charlotte.html"><span class="idx">02</span>The City</a></li>
+    <li><a href="journal.html"><span class="idx">03</span>The Journal</a></li>
+    <li><a href="wardrobe.html"><span class="idx">04</span>The Wardrobe</a></li>
+    <li><a href="urwelcome.html"><span class="idx">05</span>The Fragrance</a></li>
+    <li><a href="about.html"><span class="idx">06</span>The Man</a></li>
   </ul>
+  <div class="menu__explore">
+    <p class="menu__explore-label">Explore the Floors</p>
+    <div class="menu__explore-grid">
+    <a class="menu__explore-link" href="house.html#penthouse-living">27 · The Living Floor</a>
+    <a class="menu__explore-link" href="house.html#bedroom">28 · The Bedroom</a>
+    <a class="menu__explore-link" href="house.html#bath">28 · The Bathroom</a>
+    <a class="menu__explore-link" href="house.html#closet">28 · The Closet</a>
+    <a class="menu__explore-link" href="house.html#kitchen">27 · The Kitchen</a>
+    <a class="menu__explore-link" href="house.html#study">28 · The Study</a>
+    <a class="menu__explore-link" href="house.html#cinema">27 · The Cinema</a>
+    </div>
+  </div>
   <div class="menu__foot">
     <div class="social">
       <span class="social__label">@parispullen</span>
@@ -53,201 +70,142 @@
   </div>
 </nav>
 <main>
-<section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,14rem)">
+  <section class="jhero" id="jhero" aria-label="Featured stories">
+    <div class="jhero__slide is-on" data-jhero-slide>
+      <img src="assets/img/charlotte.jpg" srcset="assets/img/charlotte@sm.jpg 960w, assets/img/charlotte.jpg 2000w" sizes="100vw" alt="Charlotte, North Carolina" loading="eager">
+      <div class="jhero__scrim"></div>
+      <div class="jhero__inner">
+        <div class="wrap">
+          <a class="jhero__link" href="journal-gents-agenda-september-full-month.html">
+            <p class="jhero__cat">Charlotte</p>
+            <h2 class="jhero__title">The Gent's Agenda: All of September, One List</h2>
+            <p class="jhero__stand">Four weeks of the city's calendar, collapsed into a single schedule. Everything that made the cut, nothing that didn't, one scan instead of four.</p>
+            <p class="jhero__by">By Paris Pullen &#183; 4 min read</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="jhero__slide" data-jhero-slide>
+      <img src="assets/img/press-drake-iceman.jpg" srcset="assets/img/press-drake-iceman@sm.jpg 960w, assets/img/press-drake-iceman.jpg 2000w" sizes="100vw" alt="Official cover art for Drake's album Iceman" loading="lazy">
+      <div class="jhero__scrim"></div>
+      <div class="jhero__inner">
+        <div class="wrap">
+          <a class="jhero__link" href="journal-still-listening-to-iceman.html">
+            <p class="jhero__cat">Music</p>
+            <h2 class="jhero__title">Still Listening to Iceman</h2>
+            <p class="jhero__stand">Some albums get a week. This one got moved into the rotation permanently, and nobody in the room has asked to change it since.</p>
+            <p class="jhero__by">By Paris Pullen &#183; 3 min read</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="jhero__slide" data-jhero-slide>
+      <img src="assets/img/press-gta6.jpg" srcset="assets/img/press-gta6@sm.jpg 960w, assets/img/press-gta6.jpg 2000w" sizes="100vw" alt="Official box art for Grand Theft Auto VI" loading="lazy">
+      <div class="jhero__scrim"></div>
+      <div class="jhero__inner">
+        <div class="wrap">
+          <a class="jhero__link" href="journal-gta-6-anticipation.html">
+            <p class="jhero__cat">Gaming</p>
+            <h2 class="jhero__title">What Twelve Years of Waiting for GTA 6 Says About Attention</h2>
+            <p class="jhero__stand">Nobody has played it. Everybody has an opinion about it. That gap is the most valuable real estate in entertainment right now, and almost nothing else on earth can hold it for twelve years.</p>
+            <p class="jhero__by">By Paris Pullen &#183; 5 min read</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="jhero__dots">
+      <button type="button" class="jhero__dot is-on" data-jhero-dot="0" aria-label="Story 1"></button>
+      <button type="button" class="jhero__dot" data-jhero-dot="1" aria-label="Story 2"></button>
+      <button type="button" class="jhero__dot" data-jhero-dot="2" aria-label="Story 3"></button>
+    </div>
+  </section>
+<section class="scene scene--pad" style="padding-top:clamp(3rem,7vh,5rem)">
   <div class="wrap">
-    <header class="split reveal" style="align-items:end;margin-bottom:var(--s8)">
+    <header class="split reveal" style="align-items:end;margin-bottom:var(--s6)">
       <div class="stack stack--tight">
         <p class="eyebrow">The Gentleman&#8217;s Journal</p>
-        <h1 class="display display--mega">The<br>Journal</h1>
+        <h1 class="display display--h2">The Journal</h1>
       </div>
       <div class="stack">
-        <p class="lede">Ten categories. No filler. Each entry earns its place by being useful to a man building something.</p>
+        <p class="lede">No filler. Each entry earns its place by being useful to a man building something.</p>
       </div>
     </header>
 
     <nav class="jfilter reveal" aria-label="Filter by category">
       <button type="button" class="is-on" data-cat="all">All</button>
-      <button type="button" data-cat="strategy">Strategy</button>
-      <button type="button" data-cat="style">Style</button>
-      <button type="button" data-cat="charlotte">Charlotte</button>
-      <button type="button" data-cat="philosophy">Philosophy</button>
-      <button type="button" data-cat="fragrance">Fragrance</button>
-      <button type="button" data-cat="business">Business</button>
-      <button type="button" data-cat="culture">Culture</button>
-      <button type="button" data-cat="music">Music</button>
-      <button type="button" data-cat="life">Life</button>
       <button type="button" data-cat="automotive">Automotive</button>
+      <button type="button" data-cat="style">Style</button>
+      <button type="button" data-cat="business">Business</button>
+      <button type="button" data-cat="tech">Tech</button>
+      <button type="button" data-cat="music">Music</button>
+      <button type="button" data-cat="film">Film</button>
+      <button type="button" data-cat="gaming">Gaming</button>
+      <button type="button" data-cat="charlotte">Charlotte</button>
     </nav>
 
-    <a class="jlead reveal" href="journal-charlotte-decisions.html" data-cat="charlotte">
-      <div class="jlead__media">
-        <img src="assets/img/citymap-plate@sm.jpg" srcset="assets/img/citymap-plate@sm.jpg 960w, assets/img/citymap-plate.jpg 2000w" sizes="(max-width:900px) 100vw, 60vw" alt="" loading="eager">
-        <span class="jlead__tag">Charlotte &#183; Vol. 03</span>
-      </div>
-      <div class="stack">
-        <h2 class="jlead__title">Where the City Actually Makes Its Decisions</h2>
-        <p class="jcard__stand">It is not in the room with the best view. It is not on the agenda. Three tables decide more than the council chamber, and two of them do not have a sign on the door.</p>
-        <p class="jcard__meta"><span>Featured</span><span>7 min read</span></p>
-      </div>
-    </a>
+    <div class="jsection reveal" style="margin-top:var(--s8)">
+      <span class="jsection__label">Latest Stories</span>
+    </div>
 
     <div class="jgrid reveal reveal-d1" id="jgrid">
-      <a class="jcard" data-cat="strategy" href="journal-access-currency.html">
-        <div class="jcard__media"><img src="assets/img/env-network@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Strategy</p>
-        <h3 class="jcard__title">Access Is a Currency. Here Is the Exchange Rate.</h3>
-        <p class="jcard__stand">The room does not open because you knocked well. It opens because someone in it already owes the person who let you in.</p>
-        <p class="jcard__meta"><span>Vol. 01</span><span>5 min read</span></p>
+      <a class="jcard" data-cat="film" data-slug="watchlist-september-2026" href="journal-watchlist-september-2026.html">
+        <div class="jcard__media"><img src="assets/img/press-gentlemen-s2@sm.jpg" alt="" loading="lazy"></div>
+        <h3 class="jcard__title jcard__title--lead">September's Watch List 2026</h3>
+        <p class="jcard__cat">Film</p>
       </a>
-      <a class="jcard" data-cat="style" href="journal-suit-system.html">
-        <div class="jcard__media"><img src="assets/img/paris-bespoke@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Style</p>
-        <h3 class="jcard__title">The Suit Is a System, Not an Outfit</h3>
-        <p class="jcard__stand">Buy the jacket for the shoulders and the trouser for the break. Everything else is alteration, and alteration is where the money actually goes.</p>
-        <p class="jcard__meta"><span>Vol. 02</span><span>4 min read</span></p>
-      </a>
-      <a class="jcard" data-cat="philosophy" href="journal-finishing-what-you-start.html">
-        <div class="jcard__media"><img src="assets/img/paris-rooftop@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Philosophy</p>
-        <h3 class="jcard__title">On Finishing What You Start</h3>
-        <p class="jcard__stand">Most men do not fail at the hard part. They fail at the boring part, three weeks after the hard part stopped being exciting.</p>
-        <p class="jcard__meta"><span>Vol. 04</span><span>6 min read</span></p>
-      </a>
-      <a class="jcard jcard--wide" data-cat="fragrance" href="journal-oil-beats-alcohol.html">
-        <div class="jcard__media"><img src="assets/img/env-atelier@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Fragrance</p>
-        <h3 class="jcard__title">Why Oil Beats Alcohol, and Why Nobody Tells You</h3>
-        <p class="jcard__stand">Alcohol announces itself and leaves. Oil sits on the skin and finishes the sentence four hours later, quietly, to someone standing closer than a room usually allows.</p>
-        <p class="jcard__meta"><span>Vol. 05</span><span>5 min read</span></p>
-      </a>
-      <a class="jcard jcard--wide" data-cat="business" href="journal-day-job-compromise.html">
-        <div class="jcard__media"><img src="assets/img/env-opsroom@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Business</p>
-        <h3 class="jcard__title">The Day Job Is Not the Compromise You Think It Is</h3>
-        <p class="jcard__stand">The steady paycheck bought the years the brand needed to be built without needing to be profitable yet. That is not a consolation. That is the strategy.</p>
-        <p class="jcard__meta"><span>Vol. 06</span><span>6 min read</span></p>
-      </a>
-      <a class="jcard" data-cat="culture" href="journal-only-one-in-the-room.html">
-        <div class="jcard__media"><img src="assets/img/env-gala@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Culture</p>
-        <h3 class="jcard__title">Being the Only One in the Room, Then Changing the Room</h3>
-        <p class="jcard__stand">You do not fix the room by complaining about it from outside. You fix it by staying long enough that the room starts to look like you belong.</p>
-        <p class="jcard__meta"><span>Vol. 07</span><span>5 min read</span></p>
-      </a>
-      <a class="jcard" data-cat="music" href="journal-seven-years-trumpet.html">
-        <div class="jcard__media"><img src="assets/img/env-bar@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Music</p>
-        <h3 class="jcard__title">Seven Years of Trumpet and What It Taught About Rooms</h3>
-        <p class="jcard__stand">A band learns a room in eight bars. Read the size of it, the mood of it, who is listening and who is only waiting to talk. The skill transfers.</p>
-        <p class="jcard__meta"><span>Vol. 08</span><span>4 min read</span></p>
-      </a>
-      <a class="jcard" data-cat="life" href="journal-people-who-can-hurt-you.html">
-        <div class="jcard__media"><img src="assets/img/paris-hero@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Life</p>
-        <h3 class="jcard__title">The People Who Can Still Hurt You</h3>
-        <p class="jcard__stand">Keep the list short. Everyone on it earned the position before any of this started, and no amount of it will add a name.</p>
-        <p class="jcard__meta"><span>Vol. 09</span><span>5 min read</span></p>
-      </a>
-      <a class="jcard" data-cat="automotive" href="journal-karma-automotive.html">
-        <div class="jcard__media"><img src="assets/img/press-karma@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Automotive</p>
-        <h3 class="jcard__title">Karma Automotive, and the Case for a Badge Nobody Recognizes</h3>
-        <p class="jcard__stand">Nobody at the valet stand knows the name. That is the point — the car is explaining something to the one person in the room who does.</p>
-        <p class="jcard__meta"><span>Vol. 11</span><span>4 min read</span></p>
-      </a>
-      <a class="jcard" data-cat="culture" href="journal-the-gentlemen.html">
-        <div class="jcard__media"><img src="assets/img/press-the-gentlemen@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Culture</p>
-        <h3 class="jcard__title">On Being Underestimated: Notes on The Gentlemen</h3>
-        <p class="jcard__stand">Every man in that film is underestimated by someone in the first ten minutes and finishes the movie having made them regret it. That is the whole genre, done properly.</p>
-        <p class="jcard__meta"><span>Vol. 12</span><span>5 min read</span></p>
-      </a>
-      <a class="jcard jcard--wide" data-cat="charlotte" href="journal-september-in-charlotte.html">
+      <a class="jcard" data-cat="charlotte" data-slug="gents-agenda-september-full-month" href="journal-gents-agenda-september-full-month.html">
         <div class="jcard__media"><img src="assets/img/charlotte@sm.jpg" alt="" loading="lazy"></div>
+        <h3 class="jcard__title jcard__title--lead">The Gent's Agenda: All of September, One List</h3>
         <p class="jcard__cat">Charlotte</p>
-        <h3 class="jcard__title">September: Things to Do in Charlotte</h3>
-        <p class="jcard__stand">August leaves quietly and nobody throws it a party. September is when the city remembers it has a personality, and it only lasts about six weeks.</p>
-        <p class="jcard__meta"><span>Vol. 13</span><span>6 min read</span></p>
       </a>
-      <a class="jcard" data-cat="business" href="journal-gta-6-anticipation.html">
-        <div class="jcard__media"><img src="assets/img/press-gta6@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Business</p>
-        <h3 class="jcard__title">What Twelve Years of Waiting for GTA 6 Says About Attention</h3>
-        <p class="jcard__stand">Nobody has played it. Everybody has an opinion about it. That gap is the most valuable real estate in entertainment right now, and almost nothing else on earth can hold it for twelve years.</p>
-        <p class="jcard__meta"><span>Vol. 14</span><span>5 min read</span></p>
-      </a>
-      <a class="jcard" data-cat="music" href="journal-the-room-playlist.html">
-        <div class="jcard__media"><img src="assets/img/room-living@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Music</p>
-        <h3 class="jcard__title">The Philosophy of a Room That Has Its Own Playlist</h3>
-        <p class="jcard__stand">Nobody has ever asked what's playing and not gotten an answer. That is the only metric that matters, and it has nothing to do with the number of songs on the list.</p>
-        <p class="jcard__meta"><span>Vol. 15</span><span>4 min read</span></p>
-      </a>
-      <a class="jcard jcard--wide" data-cat="automotive" href="journal-mercedes-concept.html">
-        <div class="jcard__media"><img src="assets/img/press-mercedes-concept@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Automotive</p>
-        <h3 class="jcard__title">What a Concept Car Is Actually For</h3>
-        <p class="jcard__stand">It will never be built the way it stands on that stage, and that was never the assignment. The assignment was to tell you what the badge believes before the accountants get a vote.</p>
-        <p class="jcard__meta"><span>Vol. 16</span><span>4 min read</span></p>
-      </a>
-      <a class="jcard" data-cat="philosophy" href="journal-the-odyssey.html">
-        <div class="jcard__media"><img src="assets/img/room-study@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Philosophy</p>
-        <h3 class="jcard__title">The Odyssey, and the Case for the Long Way Home</h3>
-        <p class="jcard__stand">He spends ten years getting home and roughly none of them are wasted. Every detour is doing something the straight line couldn't.</p>
-        <p class="jcard__meta"><span>Vol. 17</span><span>6 min read</span></p>
-      </a>
-      <a class="jcard" data-cat="culture" href="journal-troy.html">
-        <div class="jcard__media"><img src="assets/img/env-chamber@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Culture</p>
-        <h3 class="jcard__title">Troy, and What Ten Years Outside the Walls Actually Proves</h3>
-        <p class="jcard__stand">Ten years to take one city, and the thing that finally works is not the army. It is patience wearing a disguise.</p>
-        <p class="jcard__meta"><span>Vol. 18</span><span>5 min read</span></p>
-      </a>
-      <a class="jcard" data-cat="music" href="journal-still-listening-to-iceman.html">
+      <a class="jcard" data-cat="music" data-slug="still-listening-to-iceman" href="journal-still-listening-to-iceman.html">
         <div class="jcard__media"><img src="assets/img/press-drake-iceman@sm.jpg" alt="" loading="lazy"></div>
+        <h3 class="jcard__title jcard__title--lead">Still Listening to Iceman</h3>
         <p class="jcard__cat">Music</p>
-        <h3 class="jcard__title">Still Listening to Iceman</h3>
-        <p class="jcard__stand">Some albums get a week. This one got moved into the rotation permanently, and nobody in the room has asked to change it since.</p>
-        <p class="jcard__meta"><span>Vol. 19</span><span>3 min read</span></p>
       </a>
-      <a class="jcard" data-cat="music" href="journal-new-drake-album.html">
-        <div class="jcard__media"><img src="assets/img/press-drake-maidofhonour@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Music</p>
-        <h3 class="jcard__title">On the First Listen, Before Anyone Else's Opinion Gets There First</h3>
-        <p class="jcard__stand">The first play happens once. Everything after that is memory pretending to be a first impression.</p>
-        <p class="jcard__meta"><span>Vol. 20</span><span>4 min read</span></p>
+      <a class="jcard" data-cat="gaming" data-slug="gta-6-anticipation" href="journal-gta-6-anticipation.html">
+        <div class="jcard__media"><img src="assets/img/press-gta6@sm.jpg" alt="" loading="lazy"></div>
+        <h3 class="jcard__title jcard__title--lead">What Twelve Years of Waiting for GTA 6 Says About Attention</h3>
+        <p class="jcard__cat">Gaming</p>
       </a>
-      <a class="jcard jcard--wide" data-cat="business" href="journal-unlabel.html">
-        <div class="jcard__media"><img src="assets/img/press-unlabel@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Business</p>
-        <h3 class="jcard__title">Unlabel, and the Gap Between the Man and the Brand</h3>
-        <p class="jcard__stand">The brand that survives contact with the man behind it was never a costume to begin with. That is a harder thing to build than it sounds, and most people give up around year two.</p>
-        <p class="jcard__meta"><span>Vol. 21</span><span>5 min read</span></p>
+      <a class="jcard" data-cat="film" data-slug="the-gentlemen" href="journal-the-gentlemen.html">
+        <div class="jcard__media"><img src="assets/img/press-the-gentlemen@sm.jpg" alt="" loading="lazy"></div>
+        <h3 class="jcard__title jcard__title--lead">On Being Underestimated: Notes on The Gentlemen</h3>
+        <p class="jcard__cat">Film</p>
       </a>
-      <a class="jcard" data-cat="philosophy" href="journal-laws.html">
-        <div class="jcard__media"><img src="assets/img/env-editorial@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Philosophy</p>
-        <h3 class="jcard__title">Laws</h3>
-        <p class="jcard__stand">Most of the rules a man actually lives by were never written down, which is exactly why they keep getting broken. Write them down.</p>
-        <p class="jcard__meta"><span>Vol. 22</span><span>5 min read</span></p>
+      <a class="jcard" data-cat="automotive" data-slug="karma-automotive" href="journal-karma-automotive.html">
+        <div class="jcard__media"><img src="assets/img/press-karma@sm.jpg" alt="" loading="lazy"></div>
+        <h3 class="jcard__title jcard__title--lead">Karma Automotive, and the Case for a Badge Nobody Recognizes</h3>
+        <p class="jcard__cat">Automotive</p>
       </a>
-      <a class="jcard jcard--wide" data-cat="business" href="journal-jobs-vs-steve-jobs.html">
-        <div class="jcard__media"><img src="assets/img/hero-boardroom@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Business</p>
-        <h3 class="jcard__title">Jobs vs. Steve Jobs</h3>
-        <p class="jcard__stand">One of those is something you have. The other is something you build so thoroughly that eventually it forgets it needed you at all.</p>
-        <p class="jcard__meta"><span>Vol. 23</span><span>6 min read</span></p>
+      <a class="jcard" data-cat="style" data-slug="suit-system" href="journal-suit-system.html">
+        <div class="jcard__media"><img src="assets/img/paris-bespoke@sm.jpg" alt="" loading="lazy"></div>
+        <h3 class="jcard__title jcard__title--lead">The Suit Is a System, Not an Outfit</h3>
+        <p class="jcard__cat">Style</p>
       </a>
       <a class="jcard" data-cat="life" href="pantry.html">
         <div class="jcard__media"><img src="assets/img/room-kitchen@sm.jpg" alt="" loading="lazy"></div>
-        <p class="jcard__cat">Life</p>
-        <h3 class="jcard__title">The Only Standing Order in the Apartment</h3>
-        <p class="jcard__stand">Everything else here was chosen once and left alone. This is the one thing that renews itself weekly, without being asked, and he has never once thought to change it.</p>
-        <p class="jcard__meta"><span>Vol. 10</span><span>3 min read</span><span>HelloFresh &#215; Paris Pullen</span></p>
+        <h3 class="jcard__title jcard__title--lead">The Only Standing Order in the Apartment</h3>
+        <p class="jcard__cat">Life &#183; HelloFresh &#215; Paris Pullen</p>
       </a>
     </div>
     <p class="jempty" id="jempty" hidden>No entries in this category yet.</p>
+
+    <div class="jsection reveal" style="margin-top:var(--s10)">
+      <span class="jsection__label">Editor&#8217;s Pick</span>
+    </div>
+    <a class="jpick reveal" href="journal-watchlist-september-2026.html">
+      <div class="jpick__media">
+        <img src="assets/img/press-gentlemen-s2@sm.jpg" srcset="assets/img/press-gentlemen-s2@sm.jpg 960w, assets/img/press-gentlemen-s2.jpg 2000w" sizes="(max-width:820px) 100vw, 50vw" alt="" loading="lazy">
+      </div>
+      <div>
+        <p class="jpick__cat">Film</p>
+        <h2 class="jpick__title">September's Watch List 2026</h2>
+        <p class="jpick__stand">Two Guy Ritchie properties, a brewery dynasty, a reunion two decades in the making, and a horror reboot from someone who's earned the trust. What's actually worth the remote this month.</p>
+        <p class="jpick__foot"><span>By Paris Pullen</span><span>Vol. 25</span><span>6 min read</span></p>
+        <p class="jpick__cta">Read the full story <span aria-hidden="true">&#8594;</span></p>
+      </div>
+    </a>
 
     <div class="split reveal" style="margin-top:var(--s10);border-top:1px solid var(--rule);padding-top:var(--s7)">
       <p class="pullquote">You don&#8217;t need to be the loudest man in the room.</p>

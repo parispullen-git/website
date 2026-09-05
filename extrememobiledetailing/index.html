@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extreme Mobile Detailing | Mobile Auto Detailing in Charlotte, NC</title>
+<meta name="description" content="Self-contained mobile detailing that comes to you, anywhere in Charlotte, NC. Interior, exterior, paint correction & more. Call (704) 363-6601.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0C10; --black-2:#141620; --black-3:#1D202C;
+  --lime:#C6FF3D; --lime-dk:#7FA30E; --lime-soft:rgba(198,255,61,.12);
+  --magenta:#FF3E9A; --magenta-dk:#B01E68; --magenta-soft:rgba(255,62,154,.12);
+  --bone:#EDEFF2; --bone-dim:rgba(237,239,242,.62); --bone-faint:rgba(237,239,242,.4);
+  --line:rgba(237,239,242,.12); --line-hard:rgba(237,239,242,.22);
+  --disp:"Rajdhani", "Arial Narrow", sans-serif;
+  --body:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:"Fira Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--black);color:var(--bone);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{text-wrap:balance;margin:0;font-family:var(--disp)}
+p{margin:0 0 1em}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:3px;font-weight:700;font-size:15.5px;letter-spacing:.02em;border:2px solid transparent;cursor:pointer;transition:transform .15s ease, background .15s ease;font-family:var(--disp);text-transform:uppercase;font-size:17px}
+.btn-lime{background:var(--lime);color:var(--black);}
+.btn-lime:hover{transform:translateY(-1px);background:#D6FF6B}
+.btn-outline{border-color:var(--line-hard);color:var(--bone)}
+.btn-outline:hover{border-color:var(--bone);background:rgba(255,255,255,.06)}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(11,12,16,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;color:var(--bone)}
+.brand .mark{width:34px;height:34px;border:2px solid var(--lime);border-radius:6px;display:grid;place-items:center;color:var(--lime);font-family:var(--disp);font-size:17px;font-weight:700}
+.brand .word{font-family:var(--disp);font-size:18px;letter-spacing:.02em;line-height:1.1;font-weight:700;text-transform:uppercase}
+.brand .word span{display:block;font-family:var(--body);font-weight:500;font-size:10.5px;letter-spacing:.14em;color:var(--lime);text-transform:uppercase;margin-top:2px}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{color:var(--bone-dim);font-size:14.5px;font-weight:500}
+.nav-links a:hover{color:var(--bone)}
+.nav-cta{display:flex;align-items:center;gap:18px}
+.nav-phone{color:var(--bone);font-weight:700;font-family:var(--mono);font-size:15px;display:flex;align-items:center;gap:7px}
+.burger{display:none;background:none;border:0;color:var(--bone);font-size:24px;cursor:pointer}
+@media (max-width:860px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-phone{font-size:13px;white-space:nowrap}
+  .nav-phone span.lbl{display:none}
+}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:90px 0 100px;background:radial-gradient(900px 460px at 80% -10%, rgba(198,255,61,.08), transparent 60%), var(--black)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.5;background-image:linear-gradient(115deg, transparent 40%, rgba(255,62,154,.05) 50%, transparent 60%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime);background:var(--lime-soft);border:1px solid rgba(198,255,61,.35);padding:6px 12px;border-radius:100px;margin-bottom:22px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--magenta);box-shadow:0 0 0 3px rgba(255,62,154,.25)}
+h1.headline{font-family:var(--disp);font-weight:700;font-size:clamp(34px,5vw,58px);line-height:1.02;letter-spacing:-.01em;text-transform:uppercase}
+h1.headline em{font-style:normal;color:var(--lime)}
+.hero-sub{font-size:18px;color:var(--bone-dim);max-width:50ch;margin:20px 0 30px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.trust-strip{display:flex;flex-wrap:wrap;gap:22px 28px;padding-top:26px;border-top:1px solid var(--line)}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--bone-dim)}
+.trust-item b{color:var(--bone);font-family:var(--mono);font-size:15px}
+.trust-ico{width:20px;height:20px;flex:none;color:var(--lime)}
+
+.hero-card{background:var(--black-2);border:1px solid var(--line-hard);border-radius:10px;padding:22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.hero-card .imgph{aspect-ratio:4/3;border-radius:8px;background:linear-gradient(160deg, #1D202C 0%, #0B0C10 100%);position:relative;overflow:hidden;display:grid;place-items:center;margin-bottom:14px}
+.hero-card .imgph::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg, rgba(198,255,61,.06) 0 2px, transparent 2px 14px)}
+.ph-label{position:relative;z-index:1;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--bone-faint);border:1px dashed var(--line-hard);padding:8px 14px;border-radius:100px}
+.hero-card .quote{font-size:14.5px;color:var(--bone-dim);line-height:1.55}
+.hero-card .quote b{color:var(--magenta)}
+
+/* sections */
+section{padding:84px 0}
+.section-head{max-width:640px;margin:0 0 46px}
+.kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--magenta);margin-bottom:10px;display:block}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(28px,3.6vw,42px);letter-spacing:-.005em;text-transform:uppercase}
+.section-sub{color:var(--bone-dim);font-size:16.5px;margin-top:12px}
+
+/* services */
+.services{background:var(--black-2)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.svc{background:var(--black-2);padding:30px 26px}
+.svc-ico{width:42px;height:42px;color:var(--black);background:var(--lime);border-radius:9px;display:grid;place-items:center;margin-bottom:18px}
+.svc-ico svg{width:22px;height:22px}
+.svc h3{font-family:var(--body);font-size:18px;font-weight:800;margin-bottom:8px;text-transform:none}
+.svc p{color:var(--bone-dim);font-size:14.5px;margin:0}
+@media (max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.svc-grid{grid-template-columns:1fr}}
+
+/* before/after split cards */
+.transform{background:var(--black)}
+.split-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.split-card{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line-hard);display:grid;grid-template-columns:1fr 1fr;min-height:220px}
+.split-half{position:relative;display:grid;place-items:center;padding:20px}
+.split-half.before{background:linear-gradient(160deg,#23262f,#101218)}
+.split-half.after{background:linear-gradient(160deg,#1a2a1f,#0b1410)}
+.split-half .tag2{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:100px}
+.split-half.before .tag2{background:rgba(255,62,154,.15);color:var(--magenta);border:1px solid rgba(255,62,154,.4)}
+.split-half.after .tag2{background:rgba(198,255,61,.15);color:var(--lime);border:1px solid rgba(198,255,61,.4)}
+.split-half .ph-label{font-size:10px;padding:6px 10px}
+.split-div{position:absolute;top:0;bottom:0;left:50%;width:2px;background:linear-gradient(180deg,var(--magenta),var(--lime));transform:translateX(-1px)}
+.split-cap{padding:16px 18px;border-top:1px solid var(--line);font-size:14.5px;color:var(--bone-dim)}
+.split-cap b{color:var(--bone)}
+@media (max-width:760px){.split-grid{grid-template-columns:1fr}}
+
+/* how it works (mobile process) */
+.how{background:var(--black-2)}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.how-card{background:var(--black-3);border:1px solid var(--line-hard);border-radius:10px;padding:26px}
+.how-num{font-family:var(--disp);font-weight:700;font-size:34px;color:var(--magenta);margin-bottom:10px}
+.how-card h3{font-family:var(--body);font-size:17px;font-weight:800;margin-bottom:8px;text-transform:none}
+.how-card p{color:var(--bone-dim);font-size:14.5px;margin:0}
+@media (max-width:820px){.how-grid{grid-template-columns:1fr}}
+
+/* reviews */
+.reviews{background:var(--black)}
+.rev-top{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:38px}
+.stars{color:var(--lime);font-size:22px;letter-spacing:2px}
+.rev-score{font-family:var(--disp);font-weight:700;font-size:34px}
+.rev-count{color:var(--bone-dim);font-size:14.5px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev-card{background:var(--black-2);border:1px solid var(--line-hard);border-radius:10px;padding:24px}
+.rev-card .stars{font-size:15px;margin-bottom:12px;display:block}
+.rev-card p{font-size:15px;color:var(--bone);margin:0 0 14px;font-style:italic}
+.rev-src{font-family:var(--mono);font-size:12px;color:var(--bone-faint);text-transform:uppercase;letter-spacing:.06em}
+@media (max-width:820px){.rev-grid{grid-template-columns:1fr}}
+
+/* area */
+.area{background:var(--black-2)}
+.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.area-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tag{font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:100px;background:var(--magenta-soft);color:var(--magenta);border:1px solid rgba(255,62,154,.35)}
+.map-ph{aspect-ratio:4/3;border-radius:10px;background:
+  linear-gradient(0deg, var(--black-2) 24px, transparent 24px),
+  linear-gradient(90deg, var(--black-2) 24px, transparent 24px), var(--black-3);
+  background-size:100% 25px, 25px 100%;
+  border:1px solid var(--line-hard);position:relative;display:grid;place-items:center}
+.map-pin{width:44px;height:44px;background:var(--lime);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;box-shadow:0 8px 20px -6px rgba(0,0,0,.5)}
+.map-pin span{transform:rotate(45deg);color:var(--black);font-size:18px}
+
+/* cta band */
+.cta-band{background:linear-gradient(120deg, var(--black-3), var(--black));color:var(--bone);text-align:center}
+.cta-band h2{margin-bottom:14px}
+.cta-band p{color:var(--bone-dim);max-width:52ch;margin:0 auto 30px}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* contact / footer */
+.contact{background:var(--black)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.contact-list{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.contact-list li{display:flex;gap:14px;align-items:flex-start}
+.c-ico{width:38px;height:38px;border-radius:8px;background:var(--black-2);border:1px solid var(--line-hard);display:grid;place-items:center;flex:none;color:var(--lime)}
+.contact-list b{display:block;font-size:15.5px;margin-bottom:2px}
+.contact-list span{color:var(--bone-dim);font-size:14.5px}
+.hours-card{background:var(--black-2);border:1px solid var(--line-hard);border-radius:10px;padding:26px}
+.hours-card h3{font-family:var(--body);font-size:16px;margin-bottom:16px;font-weight:800;text-transform:none}
+.hours-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.hours-row:last-child{border-bottom:none}
+.hours-row span:first-child{color:var(--bone-dim)}
+.hours-row span:last-child{font-family:var(--mono);font-weight:600}
+
+footer{background:var(--black-2);color:var(--bone-faint);padding:38px 0;border-top:1px solid var(--line)}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13.5px}
+.foot-brand{color:var(--bone);font-family:var(--disp);font-weight:700;font-size:15px;text-transform:uppercase}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
+  .area-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark">X</span>
+      <span class="word">EXTREME DETAILING<span>Mobile · Comes To You</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#transform">Results</a>
+      <a href="#how">How It Works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:17043636601" class="nav-phone"><span class="lbl">Call now:</span> (704) 363-6601</a>
+      <button class="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Self-contained rig — we bring the water &amp; power</span>
+      <h1 class="headline">We show up. <em>Your car shows off.</em></h1>
+      <p class="hero-sub">Extreme Mobile Detailing brings a full interior and exterior detail straight to your driveway, office lot, or apartment complex — anywhere in Charlotte. No trailer trips, no waiting rooms.</p>
+      <div class="hero-ctas">
+        <a href="tel:17043636601" class="btn btn-lime">Call (704) 363-6601</a>
+        <a href="#contact" class="btn btn-outline">Book a Detail</a>
+      </div>
+      <div class="trust-strip">
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2v20"/><circle cx="12" cy="12" r="9"/></svg>
+          <div>Fully <b>Mobile</b></div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><b>6+ years</b> detailing experience</div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          <div>Book via <b>Facebook</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="imgph"><span class="ph-label">Photo: freshly detailed sedan, driveway, glossy paint</span></div>
+      <p class="quote">"<b>Self-contained</b> means no hose, no outlet, no problem — we roll up with everything the job needs." — how Extreme Mobile Detailing runs every job</p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What we detail</span>
+      <h2>Interior, exterior, and everything between</h2>
+      <p class="section-sub">Pick a full detail or just the piece that's bothering you — we do both.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="18" height="10" rx="2"/><circle cx="6" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg></div>
+        <h3>Full Interior Detail</h3>
+        <p>Seat shampoo, carpets, panels, and every cupholder you forgot about.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
+        <h3>Full Exterior Detail</h3>
+        <p>Hand wash, clay bar, wheels, and a finish that actually holds up.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5v2a5 5 0 0 0-2 4v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2a5 5 0 0 0-2-4V7a5 5 0 0 0-5-5z"/></svg></div>
+        <h3>Paint Correction</h3>
+        <p>Swirl marks and light scratches buffed out for a true showroom finish.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></div>
+        <h3>Headlight Restoration</h3>
+        <p>Cloudy, yellowed lenses restored clear — safer at night, better looking always.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></div>
+        <h3>Engine Bay Detail</h3>
+        <p>Degreased and dressed — because a clean engine bay says something too.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V8a2 2 0 0 1 2-2h5l2-2 2 2h3a2 2 0 0 1 2 2v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3>Decal &amp; Tint Removal</h3>
+        <p>Old stickers, window tint, and adhesive residue — gone clean.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="transform" id="transform">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The transformation</span>
+      <h2>Same car. Different car.</h2>
+      <p class="section-sub">This is the part of the job that speaks for itself.</p>
+    </div>
+    <div class="split-grid">
+      <div class="split-card">
+        <div class="split-half before"><span class="tag2">Before</span><span class="ph-label">Dusty interior, stained seats</span></div>
+        <div class="split-half after"><span class="tag2">After</span><span class="ph-label">Shampooed, vacuumed, dressed</span></div>
+        <div class="split-div"></div>
+      </div>
+      <div class="split-card">
+        <div class="split-half before"><span class="tag2">Before</span><span class="ph-label">Swirled, dull paint</span></div>
+        <div class="split-half after"><span class="tag2">After</span><span class="ph-label">Corrected, glossy finish</span></div>
+        <div class="split-div"></div>
+      </div>
+    </div>
+    <div class="split-cap" style="border:1px solid var(--line-hard);border-radius:10px;margin-top:22px;background:var(--black-2)"><b>Every job</b> gets before-and-after photos sent straight to your phone.</div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>You park it. We handle the rest.</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <h3>Message or Call to Book</h3>
+        <p>Tell us your vehicle and what it needs — we'll quote it fast over the phone or Facebook.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <h3>We Roll Up, Fully Equipped</h3>
+        <p>Self-contained rig means no hose or outlet needed — home, office, or apartment lot.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <h3>You Come Back to a Different Car</h3>
+        <p>Interior and exterior handled while you work, relax, or run errands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="rev-top">
+      <span class="stars">★★★★★</span>
+      <span class="rev-score">5.0</span>
+      <span class="rev-count">Reviews across Yelp, Nextdoor &amp; Facebook</span>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <span class="stars">★★★★★</span>
+        <p>"Came right to my apartment and the car looked brand new. Didn't have to lift a finger."</p>
+        <div class="rev-src">Facebook · Charlotte</div>
+      </div>
+      <div class="rev-card">
+        <span class="stars">★★★★★</span>
+        <p>"Paint correction took out scratches I thought were permanent. Genuinely shocked."</p>
+        <div class="rev-src">Nextdoor · Charlotte</div>
+      </div>
+      <div class="rev-card">
+        <span class="stars">★★★★★</span>
+        <p>"Fully self-contained — showed up with everything, didn't need my water or outlet."</p>
+        <div class="rev-src">Yelp · Charlotte</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="area" id="area">
+  <div class="wrap area-grid">
+    <div>
+      <span class="kicker">Where we roll</span>
+      <h2>Mobile across Charlotte &amp; nearby</h2>
+      <p class="section-sub">No shop, no address to drive to — we come to wherever your car already is.</p>
+      <div class="area-tags">
+        <span class="tag">Charlotte</span>
+        <span class="tag">South End</span>
+        <span class="tag">NoDa</span>
+        <span class="tag">Ballantyne</span>
+        <span class="tag">Matthews</span>
+        <span class="tag">Concord</span>
+      </div>
+    </div>
+    <div class="map-ph">
+      <div class="map-pin"><span>🚗</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Ready for the glow-up?</h2>
+    <p>Message us on Facebook or call direct — we'll get you on the schedule this week.</p>
+    <div class="cta-actions">
+      <a href="tel:17043636601" class="btn btn-lime">Call (704) 363-6601</a>
+      <a href="#contact" class="btn btn-outline">Book a Detail</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="kicker">Get in touch</span>
+      <h2 style="margin-bottom:24px">Let's get it done</h2>
+      <ul class="contact-list">
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><b>(704) 363-6601</b><span>Call or text to book</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><b>Charlotte, NC</b><span>Mobile — we come to you</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></div>
+          <div><b>facebook.com/carolinaautodetailing704</b><span>DM for quotes &amp; availability</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="hours-card">
+      <h3>Hours</h3>
+      <div class="hours-row"><span>Monday – Saturday</span><span>8:00 AM – 6:00 PM</span></div>
+      <div class="hours-row"><span>Sunday</span><span>By appointment</span></div>
+      <div class="hours-row"><span>Service area</span><span>Charlotte metro</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="foot-brand">EXTREME MOBILE DETAILING</span>
+    <span>(704) 363-6601 · Mobile Service · Charlotte, NC</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.burger').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  links.style.display = open ? 'none' : 'flex';
+  links.style.cssText += open ? '' : 'flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#0B0C10;padding:20px 24px;gap:16px;';
+});
+</script>
+</body>
+</html>

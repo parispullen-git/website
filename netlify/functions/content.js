@@ -1,11 +1,20 @@
 /* Generic CRUD for the site's editable content collections.
    Public GET (list) so the live pages can render it; authed POST/DELETE
    so only the dashboard can change it.
-   Collections: vault-reserve, vault-links, journal, casefiles, wardrobe */
+   Collections: vault-reserve, vault-links, journal, casefiles, wardrobe,
+   curations (personalized wardrobe lookbooks, see dashboard.html's Lookbook
+   tab and lookbook.html), playlists (the Piano's Spotify rotation -- see
+   assets/js/piano-player.js, house.html, assets/js/penthouse.js), channels
+   (TV/Cinema room channel lists, one record per room-set keyed by id --
+   see assets/js/tv-remote.js), pitches (internal brand-pitch tracker,
+   dashboard-only, nothing on the live site reads it). */
 
 const { listRecords, getRecord, putRecord, deleteRecord, newId, checkAuth, json } = require('./lib/store');
 
-const ALLOWED = new Set(['vault-reserve', 'vault-links', 'journal', 'casefiles', 'wardrobe']);
+const ALLOWED = new Set([
+  'vault-reserve', 'vault-links', 'journal', 'casefiles', 'wardrobe', 'curations',
+  'playlists', 'channels', 'pitches', 'dispatch-briefs',
+]);
 
 exports.handler = async function (event) {
   const params = event.queryStringParameters || {};

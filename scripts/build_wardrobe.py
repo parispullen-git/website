@@ -65,6 +65,7 @@ CAT_LABEL = {
     "three-piece": "Three-Piece",
     "double-breasted": "Double-Breasted",
     "tuxedo": "Tuxedo &amp; Formal",
+    "coats": "Coats",
 }
 
 # Primary color family each specific shade rolls up under, for the two-level
@@ -123,7 +124,7 @@ def main():
         print(f"FAILED (no main image): {failed}")
 
     colors = sorted(set(it["color"] for it in WARDROBE))
-    cats = ["two-piece", "three-piece", "double-breasted", "tuxedo"]
+    cats = ["two-piece", "three-piece", "double-breasted", "tuxedo", "coats"]
 
     filter_cats = "".join(
         f'<button type="button" data-cat="{c}">{CAT_LABEL[c]}</button>\n' for c in cats

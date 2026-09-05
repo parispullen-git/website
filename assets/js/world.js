@@ -148,6 +148,13 @@
   function navHide() {
     var nav = $('.worldnav');
     if (!nav) return;
+    // Written for the old vertical-scroll room pages. house.html's rooms
+    // are one-screen-each now (room-pager.js), navigated horizontally --
+    // the one vertical scroll that still happens is scrollIntoView landing
+    // the room-pager section in view, which used to permanently hide the
+    // nav (crossed the 260px threshold once, then nothing ever scrolled it
+    // back). Simplest correct fix: this page keeps the nav pinned instead.
+    if (document.querySelector('.room-pager')) return;
     var last = 0;
     window.addEventListener('scroll', function () {
       var y = window.pageYOffset;
@@ -263,7 +270,14 @@
     if (!scenes.length) return;
 
     scenes.forEach(function (scene) {
-      var spots  = $$('.artifact', scene);
+      // Scoped to data-artifact specifically -- .artifact alone also
+      // matches non-drawer markers that share the same visual treatment
+      // (the Remote toggle, The City link): those have no matching
+      // .drawer__panel anyway, but this handler was still calling
+      // e.preventDefault() unconditionally on every click, which is a
+      // harmless no-op for a <button> with no default action but
+      // silently killed a real <a href> link's navigation outright.
+      var spots  = $$('.artifact[data-artifact]', scene);
       var drawer = $('.drawer', scene);
       if (!spots.length || !drawer) return;
 
@@ -360,28 +374,81 @@
     });
   }
 
-  /* ---------- 10. SOUND (opt-in, default off) ---------- */
-  function sound() {
-    var btn = $('#sound');
-    if (!btn) return;
-    var audio = $('#ambience');
-    var on = false;
+  /* ---------- 10b. TOGGLEABLE OVERLAYS ----------
+     Shared by any section that's better reached as an on-demand full-
+     screen panel than sitting in normal page flow -- a fixed button
+     toggles it open, closed via its own close button, clicking outside
+     .wrap, or Escape. Used for the footer (sitemap, contact, copyright --
+     used to mean scrolling past a full-screen room on the room-pager
+     pages) and the City Guide's legend/methodology block (used to mean
+     scrolling past it to reach... nothing, since it's the last thing on
+     the page -- but at 75-listings length, still real height to shed). */
+  function makeToggleableOverlay(el, opts) {
+    el.classList.add('is-toggleable');
+    el.setAttribute('aria-hidden', 'true');
 
-    btn.addEventListener('click', function () {
-      on = !on;
-      btn.classList.toggle('is-on', on);
-      btn.setAttribute('aria-pressed', String(on));
-      var label = $('.sound__label', btn);
-      if (label) label.textContent = on ? 'Sound on' : 'Sound off';
-      if (!audio) return;
-      if (on) {
-        audio.volume = 0.18;
-        var p = audio.play();
-        if (p && p.catch) p.catch(function () {});
-      } else {
-        audio.pause();
-      }
+    var wrap = el.querySelector('.wrap');
+    var closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'overlay-close';
+    closeBtn.textContent = 'Close ×';
+    // Inside .wrap (the popup's own content column), not pinned to the
+    // raw viewport corner -- fixed-to-viewport put it directly on top of
+    // the persistent site header's Menu button instead of reading as
+    // part of this panel.
+    if (wrap) wrap.insertBefore(closeBtn, wrap.firstChild);
+    else el.insertBefore(closeBtn, el.firstChild);
+
+    var toggleBtn = document.createElement('button');
+    toggleBtn.type = 'button';
+    toggleBtn.className = opts.toggleClass;
+    toggleBtn.textContent = opts.toggleLabel;
+    document.body.appendChild(toggleBtn);
+
+    function setOpen(open) {
+      el.classList.toggle('is-open', open);
+      el.setAttribute('aria-hidden', String(!open));
+    }
+    toggleBtn.addEventListener('click', function () { setOpen(!el.classList.contains('is-open')); });
+    closeBtn.addEventListener('click', function () { setOpen(false); });
+    el.addEventListener('click', function (e) {
+      if (e.target === el) setOpen(false); // the backdrop itself, not .wrap's content
     });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && el.classList.contains('is-open')) setOpen(false);
+    });
+
+    return { toggleBtn: toggleBtn, setOpen: setOpen };
+  }
+
+  function footerOverlay() {
+    var foot = $('.foot--film');
+    if (!foot) return;
+    var ctrl = makeToggleableOverlay(foot, { toggleClass: 'footer-toggle', toggleLabel: 'Footer' });
+
+    // The Cinema room's own content (a large TV plus its lower-third/
+    // guide-panel/remote overlays) was throwing off the page's scroll when
+    // the footer -- unrelated content living way down the page -- was
+    // reachable from there too. Simplest fix: the Footer button (and so
+    // the overlay it opens) just isn't offered while Cinema is the room
+    // on screen; it force-closes on the way in, in case it was left open.
+    document.addEventListener('pp:room-change', function (e) {
+      var inCinema = e.detail && e.detail.id === 'cinema';
+      ctrl.toggleBtn.hidden = inCinema;
+      if (inCinema) ctrl.setOpen(false);
+    });
+  }
+
+  // The City Guide's "Verified, not invented" methodology note, the
+  // price/access legend, and the image-sourcing/upload policy note were
+  // all static page-flow content at the very bottom of an already very
+  // long page. None of it is something a visitor browsing listings needs
+  // in front of them by default -- moved into the same on-demand-overlay
+  // pattern as the footer, reachable from its own corner button instead.
+  function guideInfoOverlay() {
+    var legend = $('#legend');
+    if (!legend) return;
+    makeToggleableOverlay(legend, { toggleClass: 'guide-info-toggle', toggleLabel: 'Guide Info' });
   }
 
   /* ---------- 11. LAZY VIDEO ---------- */
@@ -423,7 +490,7 @@
   /* ---------- BOOT ---------- */
   function boot() {
     gate(); menu(); reveal(); parallax(); tracker(); navHide();
-    accordions(); redactions(); network(); doors(); artifacts(); beforeAfter(); sound(); lazyVideo(); year();
+    accordions(); redactions(); network(); doors(); artifacts(); beforeAfter(); footerOverlay(); guideInfoOverlay(); lazyVideo(); year();
   }
 
   if (document.readyState === 'loading') {

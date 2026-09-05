@@ -226,5 +226,86 @@ window.CHARLOTTE = {
     });
   });
 
-  paint(C.districts[0]);
+  // .cityscape__surface is wider than a narrow viewport (see world.css)
+  // and starts scrolled to its left edge by default. Pan it to center on
+  // a district's own (lx,ly) map point instead of a generic midpoint --
+  // same percent-space conversion as tv-remote.js's positionScreen(), just
+  // against the map's own 2000x1125 viewBox rather than a room photo.
+  var surface = document.querySelector('.cityscape__surface');
+  function centerOn(d) {
+    if (!surface) return;
+    var max = surface.scrollWidth - surface.clientWidth;
+    if (max <= 0) return;
+    var fx = d.lx / C.view.w;
+    surface.scrollLeft = Math.max(0, Math.min(max, fx * surface.scrollWidth - surface.clientWidth / 2));
+  }
+
+  var current = 0;
+  function go(i) {
+    current = Math.max(0, Math.min(C.districts.length - 1, i));
+    var d = C.districts[current];
+    select(d);
+    centerOn(d);
+    updateArrows();
+  }
+
+  var prevBtn = document.querySelector('[data-cityscape-prev]');
+  var nextBtn = document.querySelector('[data-cityscape-next]');
+  function updateArrows() {
+    if (prevBtn) prevBtn.disabled = current <= 0;
+    if (nextBtn) nextBtn.disabled = current >= C.districts.length - 1;
+  }
+  if (prevBtn) prevBtn.addEventListener('click', function () { go(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { go(current + 1); });
+
+  // The arrows/nav-panel are position:fixed (see world.css) since #map
+  // usually runs taller than one screen -- only show them while the map
+  // itself (not necessarily the whole, oversized #map section) is
+  // actually on screen, so they don't float over the rest of the page
+  // (the .vhood listings, etc.) once scrolled past it.
+  var cityscapeNavPanel = document.querySelector('.cityscape [data-nav-panel]');
+  if (surface && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (prevBtn) prevBtn.classList.toggle('is-in-view', entry.isIntersecting);
+        if (nextBtn) nextBtn.classList.toggle('is-in-view', entry.isIntersecting);
+        if (cityscapeNavPanel) cityscapeNavPanel.classList.toggle('is-in-view', entry.isIntersecting);
+      });
+    }, { threshold: 0.15 }).observe(surface);
+  }
+
+  // Clicking/focusing a zone directly (see the loop above) should also
+  // keep the arrows and the pan in sync with whatever got selected.
+  var _select = select;
+  select = function (d) {
+    var idx = C.districts.indexOf(d);
+    if (idx >= 0) current = idx;
+    _select(d);
+    updateArrows();
+  };
+
+  // scrollWidth/clientWidth aren't reliably settled on a cold load: they
+  // can both still read 0 for a bit even once the map image reports
+  // complete=true (layout hasn't caught up yet), so a single rAF attempt
+  // can silently no-op. Retry across a bounded run of frames instead of
+  // guessing which single signal (image load, one rAF, etc.) is late.
+  (function initialCenter(tries) {
+    var max = surface ? surface.scrollWidth - surface.clientWidth : 0;
+    if (max > 0 || tries >= 60) { go(0); return; } // ~1s ceiling at 60fps
+    requestAnimationFrame(function () { initialCenter(tries + 1); });
+  })(0);
+
+  // The corner nav-panel -- every district, jump straight to any of them.
+  var navPanelRoot = document.querySelector('[data-nav-panel]');
+  var navGrid = navPanelRoot ? navPanelRoot.querySelector('[data-nav-panel-grid]') : null;
+  if (navPanelRoot && navGrid && window.PPNavPanel) {
+    navGrid.innerHTML = C.districts.map(function (d) {
+      return '<button type="button" class="nav-panel__btn" data-nav-panel-go="' + d.id + '">' +
+        '<span class="nav-panel__btn-name">' + esc(d.name) + '</span></button>';
+    }).join('');
+    window.PPNavPanel(navPanelRoot, function (id) {
+      var idx = C.districts.map(function (d) { return d.id; }).indexOf(id);
+      if (idx >= 0) go(idx);
+    });
+  }
 })();

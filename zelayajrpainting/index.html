@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zelaya Jr Painting | Interior &amp; Exterior Painters in Charlotte, NC</title>
+<meta name="description" content="Interior and exterior painting in Charlotte, NC since 2000. Drywall, carpentry, power washing & more. 20% off for first-time customers. Call (704) 634-6916.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --terracotta:#D96C4A; --terracotta-dk:#A6472A; --terracotta-soft:#FBE3D6;
+  --teal:#1F6E66; --teal-dk:#134943; --teal-soft:#DCEEEB;
+  --mustard:#E8A93D; --mustard-dk:#9C6C16;
+  --cream:#FBF3E7; --card:#FFFFFF; --ink:#2A2118; --ink-2:#6B5D4E; --steel:#8C7F6C;
+  --line:#EFE2CE; --line-hard:#DCC9A8;
+  --shadow:0 1px 2px rgba(42,33,24,.08), 0 16px 32px -18px rgba(42,33,24,.3);
+  --disp:"Baloo 2", "Arial Rounded MT Bold", sans-serif;
+  --body:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0 0 1em}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:10px;font-weight:700;font-size:15.5px;border:2px solid transparent;cursor:pointer;transition:transform .15s ease, background .15s ease;font-family:var(--disp)}
+.btn-terracotta{background:var(--terracotta);color:#fff}
+.btn-terracotta:hover{transform:translateY(-1px);background:#E27E5F}
+.btn-outline{border-color:rgba(255,255,255,.4);color:#fff}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.btn-dark{background:var(--teal);color:#fff}
+
+/* color strip — signature motif */
+.strip{display:flex;height:6px}
+.strip span{flex:1}
+.strip .c1{background:var(--terracotta)}
+.strip .c2{background:var(--mustard)}
+.strip .c3{background:var(--teal)}
+.strip .c4{background:var(--teal-dk)}
+
+/* promo bar */
+.promo{background:var(--mustard);color:var(--ink);font-family:var(--disp);font-weight:600;font-size:14.5px;text-align:center;padding:10px 0}
+.promo b{color:var(--terracotta-dk)}
+
+header{position:sticky;top:6px;z-index:50;background:rgba(31,110,102,.97);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:15px 0}
+.brand{display:flex;align-items:center;gap:11px;color:#fff}
+.brand .mark{width:38px;height:38px;background:var(--terracotta);border-radius:10px;display:grid;place-items:center;color:#fff}
+.brand .mark svg{width:20px;height:20px}
+.brand .word{font-family:var(--disp);font-weight:700;font-size:16.5px;letter-spacing:.005em;line-height:1.1}
+.brand .word span{display:block;font-family:var(--mono);font-weight:500;font-size:10px;letter-spacing:.07em;color:var(--mustard);text-transform:uppercase;margin-top:4px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.82);font-size:14.5px;font-weight:500}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:flex;align-items:center;gap:18px}
+.nav-phone{color:#fff;font-weight:700;font-family:var(--mono);font-size:14.5px}
+.burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+@media (max-width:860px){.nav-links{display:none}.burger{display:block}.nav-phone{font-size:13px;white-space:nowrap}.nav-phone span.lbl{display:none}}
+
+/* hero */
+.hero{position:relative;background:linear-gradient(155deg, var(--teal-dk) 0%, var(--teal) 70%);color:#fff;overflow:hidden;padding:70px 0 90px}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mustard);background:rgba(232,169,61,.14);border:1px solid rgba(232,169,61,.4);padding:7px 14px;border-radius:100px;margin-bottom:22px}
+h1.headline{font-family:var(--disp);font-weight:700;font-size:clamp(32px,4.8vw,52px);line-height:1.1}
+h1.headline em{font-style:normal;color:var(--terracotta-soft)}
+.hero-sub{font-size:18px;color:rgba(255,255,255,.82);max-width:50ch;margin:20px 0 30px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.trust-strip{display:flex;flex-wrap:wrap;gap:24px 30px;padding-top:26px;border-top:1px solid rgba(255,255,255,.16)}
+.trust-item{font-size:14px;color:rgba(255,255,255,.85)}
+.trust-item b{display:block;color:var(--mustard);font-family:var(--disp);font-weight:700;font-size:24px}
+
+.hero-blocks{position:relative;aspect-ratio:4/5}
+.blk{position:absolute;border-radius:20px;box-shadow:0 20px 40px -16px rgba(0,0,0,.4)}
+.blk1{width:70%;height:55%;top:0;left:0;background:linear-gradient(150deg,var(--terracotta),var(--terracotta-dk))}
+.blk2{width:60%;height:44%;bottom:0;right:0;background:linear-gradient(150deg,var(--mustard),#B47C1F)}
+.blk3{width:44%;height:34%;top:30%;left:30%;background:linear-gradient(150deg,#FBF3E7,#DCC9A8);display:grid;place-items:center}
+.blk3 svg{width:34%;color:var(--teal-dk)}
+.hb-label{position:absolute;bottom:-14px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+
+section{padding:84px 0}
+.section-head{max-width:640px;margin:0 0 46px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--terracotta-dk);margin-bottom:10px;display:block}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(28px,3.5vw,40px)}
+.section-sub{color:var(--ink-2);font-size:16.5px;margin-top:12px}
+
+/* services */
+.services{background:var(--card)}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.svc{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:24px 20px}
+.svc-ico{width:42px;height:42px;color:#fff;border-radius:10px;display:grid;place-items:center;margin-bottom:14px}
+.svc-ico svg{width:21px;height:21px}
+.svc:nth-child(4n+1) .svc-ico{background:var(--terracotta)}
+.svc:nth-child(4n+2) .svc-ico{background:var(--teal)}
+.svc:nth-child(4n+3) .svc-ico{background:var(--mustard-dk)}
+.svc:nth-child(4n+4) .svc-ico{background:var(--terracotta-dk)}
+.svc h3{font-family:var(--disp);font-size:16px;font-weight:600;margin-bottom:6px}
+.svc p{color:var(--ink-2);font-size:13.5px;margin:0}
+@media (max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.svc-grid{grid-template-columns:1fr}}
+
+/* process */
+.process{background:var(--cream)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.proc{background:var(--card);border-radius:16px;padding:28px 22px;box-shadow:var(--shadow)}
+.proc .n{font-family:var(--disp);font-weight:800;font-size:34px;color:var(--terracotta);margin-bottom:12px}
+.proc h3{font-family:var(--disp);font-size:16.5px;font-weight:700;margin-bottom:8px}
+.proc p{color:var(--ink-2);font-size:14px;margin:0}
+@media (max-width:900px){.proc-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.proc-grid{grid-template-columns:1fr}}
+
+/* rating */
+.rating{background:var(--teal);color:#fff}
+.rate-grid{display:grid;grid-template-columns:.6fr 1fr;gap:50px;align-items:center}
+.rate-big{text-align:center}
+.rate-big .num{font-family:var(--disp);font-weight:800;font-size:64px;color:var(--mustard)}
+.rate-big .stars{color:var(--mustard);font-size:22px;letter-spacing:3px;margin:6px 0}
+.rate-big .cnt{font-size:13.5px;color:rgba(255,255,255,.7)}
+.rate-text p{font-size:17px;color:rgba(255,255,255,.9);margin:0 0 14px}
+.rate-text .fine{font-size:13.5px;color:rgba(255,255,255,.6)}
+@media (max-width:760px){.rate-grid{grid-template-columns:1fr;text-align:center}}
+
+/* discount cta */
+.discount{background:linear-gradient(120deg,var(--terracotta-dk),var(--terracotta));color:#fff;text-align:center}
+.discount .big{font-family:var(--disp);font-weight:800;font-size:clamp(36px,6vw,64px);color:var(--mustard);line-height:1}
+.discount h2{margin:10px 0 14px}
+.discount p{color:rgba(255,255,255,.85);max-width:52ch;margin:0 auto 30px}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* area */
+.area{background:var(--card)}
+.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.area-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tag{font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:100px;background:var(--terracotta-soft);color:var(--terracotta-dk);border:1px solid #F0C4AC}
+.map-ph{aspect-ratio:4/3;border-radius:16px;background:
+  linear-gradient(0deg, var(--cream) 24px, transparent 24px),
+  linear-gradient(90deg, var(--cream) 24px, transparent 24px), var(--line-hard);
+  background-size:100% 25px, 25px 100%;
+  border:1px solid var(--line-hard);position:relative;display:grid;place-items:center}
+.map-pin{width:44px;height:44px;background:var(--teal);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;box-shadow:0 8px 20px -6px rgba(19,73,67,.5)}
+.map-pin span{transform:rotate(45deg);color:var(--mustard);font-size:18px}
+
+/* contact */
+.contact{background:var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.contact-list{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.contact-list li{display:flex;gap:14px;align-items:flex-start}
+.c-ico{width:38px;height:38px;border-radius:10px;background:var(--card);border:1px solid var(--line-hard);display:grid;place-items:center;flex:none;color:var(--teal)}
+.contact-list b{display:block;font-size:15.5px;margin-bottom:2px}
+.contact-list span{color:var(--ink-2);font-size:14.5px}
+.quote-card{background:var(--card);border:1px solid var(--line-hard);border-radius:16px;padding:26px}
+.quote-card h3{font-family:var(--disp);font-size:17px;margin-bottom:12px;font-weight:700}
+.quote-card p{color:var(--ink-2);font-size:14.5px;margin:0 0 16px}
+.quote-card .step{display:flex;gap:10px;align-items:baseline;font-size:14px;margin-bottom:8px}
+.quote-card .step b{font-family:var(--mono);color:var(--terracotta-dk)}
+
+footer{background:var(--teal-dk);color:rgba(255,255,255,.6);padding:36px 0}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13.5px}
+.foot-brand{color:#fff;font-family:var(--disp);font-weight:700;font-size:16px}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-blocks{order:-1;max-width:340px;margin:0 auto 20px}
+  .area-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="strip"><span class="c1"></span><span class="c2"></span><span class="c3"></span><span class="c4"></span></div>
+<div class="promo">🎉 First time calling? <b>Get 20% off</b> your first painting job with Zelaya Jr Painting.</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11V6a3 3 0 0 1 6 0v5"/><rect x="5" y="11" width="14" height="6" rx="1"/><path d="M9 17v4M15 17v4"/></svg></span>
+      <span class="word">ZELAYA JR PAINTING<span>Since 2000 · Charlotte NC</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:17046346916" class="nav-phone"><span class="lbl">Call:</span> (704) 634-6916</a>
+      <button class="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">22+ years painting Charlotte</span>
+      <h1 class="headline">A fresh coat, done right the <em>first time.</em></h1>
+      <p class="hero-sub">Interior and exterior painting, drywall repair, carpentry, and power washing — Zelaya Jr Painting has been working on Charlotte homes since 2000. Clean lines, fair pricing, no half-finished jobs.</p>
+      <div class="hero-ctas">
+        <a href="tel:17046346916" class="btn btn-terracotta">Call (704) 634-6916</a>
+        <a href="#contact" class="btn btn-outline">Get a Free Estimate</a>
+      </div>
+      <div class="trust-strip">
+        <div class="trust-item"><b>22+</b>Years in business</div>
+        <div class="trust-item"><b>4.5★</b>Average rating</div>
+        <div class="trust-item"><b>20%</b>Off for new customers</div>
+      </div>
+    </div>
+    <div class="hero-blocks">
+      <div class="blk blk1"></div>
+      <div class="blk blk2"></div>
+      <div class="blk blk3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11V6a3 3 0 0 1 6 0v5"/><rect x="5" y="11" width="14" height="6" rx="1"/><path d="M9 17v4M15 17v4"/></svg></div>
+      <span class="hb-label">Photo: freshly painted exterior trim</span>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What we do</span>
+      <h2>Painting, and everything around it</h2>
+      <p class="section-sub">Most jobs need more than a roller — we handle the prep work too.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11V6a3 3 0 0 1 6 0v5"/><rect x="5" y="11" width="14" height="6" rx="1"/><path d="M9 17v4M15 17v4"/></svg></div><h3>Interior Painting</h3><p>Walls, ceilings, and trim — clean cut lines, minimal disruption.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg></div><h3>Exterior Painting</h3><p>Siding, trim, and doors painted to hold up against Carolina weather.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 12h16"/></svg></div><h3>Drywall Repair</h3><p>Holes, cracks, and water damage patched invisibly before paint goes on.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2 4 12l3 3L17 5z"/><path d="m18 6-9 9-4-4"/></svg></div><h3>Carpentry Repair</h3><p>Rotted trim and siding sections replaced before they get painted over.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div><h3>Popcorn Texture Removal</h3><p>Ceilings scraped smooth and refinished, ready for a modern paint job.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c-2 4-6 6-6 11a6 6 0 0 0 12 0c0-5-4-7-6-11z"/></svg></div><h3>Power Washing</h3><p>Surfaces cleaned before painting so the finish actually sticks.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg></div><h3>Wallpaper Removal</h3><p>Old wallpaper and adhesive stripped clean before a fresh coat goes up.</p></div>
+      <div class="svc"><div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div><h3>Commercial Painting</h3><p>Offices and small commercial spaces painted around your operating hours.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>From estimate to final walkthrough</h2>
+    </div>
+    <div class="proc-grid">
+      <div class="proc"><div class="n">01</div><h3>Free Walkthrough</h3><p>We look at the space, talk color and finish, and give you a real number.</p></div>
+      <div class="proc"><div class="n">02</div><h3>Prep &amp; Protect</h3><p>Furniture covered, surfaces patched and sanded before a drop of paint opens.</p></div>
+      <div class="proc"><div class="n">03</div><h3>Paint</h3><p>Clean lines, even coats, and the finish you actually asked for.</p></div>
+      <div class="proc"><div class="n">04</div><h3>Final Walkthrough</h3><p>We walk it with you before calling the job done — not before.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="rating" id="reviews">
+  <div class="wrap rate-grid">
+    <div class="rate-big">
+      <div class="num">4.5</div>
+      <div class="stars">★★★★★</div>
+      <div class="cnt">Average rating · 17 reviews on Yelp</div>
+    </div>
+    <div class="rate-text">
+      <p>Reviews consistently point to the same things: professional work, a quick turnaround, and fair pricing — across Yelp, HomeAdvisor, and Zillow.</p>
+      <p class="fine">Been painting Charlotte homes since 2000 — 22+ years of the same crew showing up and finishing the job.</p>
+    </div>
+  </div>
+</section>
+
+<section class="discount">
+  <div class="wrap">
+    <div class="big">20% OFF</div>
+    <h2>Your first job with us</h2>
+    <p>New customers get 20% off — mention it when you call to lock in the discount on your estimate.</p>
+    <div class="cta-actions">
+      <a href="tel:17046346916" class="btn btn-terracotta" style="background:#fff;color:var(--terracotta-dk)">Call (704) 634-6916</a>
+    </div>
+  </div>
+</section>
+
+<section class="area" id="area">
+  <div class="wrap area-grid">
+    <div>
+      <span class="kicker">Service area</span>
+      <h2>Serving Charlotte &amp; nearby towns</h2>
+      <p class="section-sub">No fixed shop — we come to the job, wherever it is in the Charlotte area.</p>
+      <div class="area-tags">
+        <span class="tag">Charlotte</span>
+        <span class="tag">Matthews</span>
+        <span class="tag">Concord</span>
+        <span class="tag">Huntersville</span>
+        <span class="tag">Pineville</span>
+        <span class="tag">Mint Hill</span>
+      </div>
+    </div>
+    <div class="map-ph"><div class="map-pin"><span>🖌</span></div></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="kicker">Get in touch</span>
+      <h2 style="margin-bottom:24px">Let's talk color and coverage</h2>
+      <ul class="contact-list">
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><b>(704) 634-6916</b><span>Call for a free estimate</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><b>Charlotte, NC &amp; surrounding area</b><span>Mobile crew — we come to you</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 3 6.5 7 .9-5.2 5 1.3 7-6.1-3.4-6.1 3.4 1.3-7-5.2-5 7-.9z"/></svg></div>
+          <div><b>4.5★ on Yelp</b><span>22+ years serving Charlotte since 2000</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="quote-card">
+      <h3>Getting an estimate</h3>
+      <p>Estimates are free and scheduled around your calendar, not ours:</p>
+      <div class="step"><b>01</b> Call and describe the job — rooms, square footage, interior or exterior</div>
+      <div class="step"><b>02</b> We walk the space and give you a written number</div>
+      <div class="step"><b>03</b> First-time customers get 20% off before the estimate is finalized</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="foot-brand">ZELAYA JR PAINTING</span>
+    <span>(704) 634-6916 · Charlotte, NC · Since 2000</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.burger').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  links.style.display = open ? 'none' : 'flex';
+  links.style.cssText += open ? '' : 'flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#1F6E66;padding:20px 24px;gap:16px;';
+});
+</script>
+</body>
+</html>

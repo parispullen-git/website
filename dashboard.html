@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Dashboard — Paris Pullen</title>
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="theme-color" content="#0A0A0B">
@@ -18,13 +19,37 @@
   .dash__gate .cta{margin-top:var(--s4);width:100%;justify-content:center}
   .dash__err{color:#C0555A;margin-top:var(--s4)}
 
-  .dash__tabs{display:flex;gap:var(--s3);flex-wrap:wrap;border-bottom:1px solid var(--rule);
-    margin-top:var(--s6);padding-bottom:var(--s4)}
-  .dash__tab{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
-    color:var(--graphite);background:none;border:1px solid var(--hairline);padding:.6em 1.1em;cursor:pointer}
-  .dash__tab.is-active{color:var(--brass-lit);border-color:var(--brass)}
-  .dash__panel{display:none;margin-top:var(--s7)}
+  .dashwrap{display:grid;grid-template-columns:200px 1fr;gap:var(--s7);align-items:start;
+    margin-top:var(--s6)}
+  .dashnav{position:sticky;top:var(--s5);display:flex;flex-direction:column;gap:.15em;
+    border-right:1px solid var(--rule);padding-right:var(--s5);padding-bottom:var(--s5)}
+  .dashnav__item{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;
+    text-transform:uppercase;color:var(--graphite);background:none;border:none;
+    border-left:2px solid transparent;text-align:left;padding:.65em .9em;cursor:pointer;
+    transition:color var(--d-fast),border-color var(--d-fast)}
+  .dashnav__item:hover{color:var(--bone)}
+  .dashnav__item.is-active{color:var(--brass-lit);border-left-color:var(--brass)}
+  .dashmain{min-width:0}
+  .dash__panel{display:none}
   .dash__panel.is-active{display:block}
+  @media(max-width:860px){
+    .dashwrap{grid-template-columns:1fr}
+    .dashnav{position:static;flex-direction:row;flex-wrap:wrap;gap:.3em;
+      border-right:none;border-bottom:1px solid var(--rule);
+      padding-right:0;padding-bottom:var(--s4);margin-bottom:var(--s2)}
+    .dashnav__item{border-left:none;border-bottom:2px solid transparent;padding:.5em .7em}
+    .dashnav__item.is-active{border-left-color:transparent;border-bottom-color:var(--brass)}
+  }
+
+  .sitecard{border:1px solid var(--hairline);padding:var(--s5);margin-top:var(--s4);
+    display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);flex-wrap:wrap}
+  .sitecard__name{font-family:var(--font-display);font-size:1.1rem;color:var(--ivory)}
+  .sitecard__meta{font-family:var(--font-mono);font-size:.78rem;color:var(--graphite);
+    margin-top:.35em;line-height:1.7}
+  .sitecard__meta code{color:var(--bone)}
+  .notebox{border:1px solid var(--hairline);background:#111;padding:var(--s4);margin-top:var(--s5);
+    color:var(--bone);font-size:.85rem;line-height:1.6}
+  .reorder{display:inline-flex;gap:.3em}
 
   .dash__row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);flex-wrap:wrap}
   .dash__loading,.dash__empty{color:var(--graphite);font-family:var(--font-mono);font-size:var(--t-micro);
@@ -52,12 +77,30 @@
     background:none;border:1px solid var(--hairline);color:var(--bone);padding:.5em 1em;cursor:pointer}
   .btn-sm:hover{border-color:var(--brass);color:var(--brass-lit)}
   .btn-sm:disabled{opacity:.4;cursor:default}
+  .btn-sm.is-on{color:var(--brass-lit);border-color:var(--brass)}
 
   .newform{border:1px solid var(--rule);padding:var(--s5);margin-top:var(--s5);display:grid;gap:var(--s4)}
   .newform .grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
   @media(max-width:640px){.newform .grid2{grid-template-columns:1fr}}
   .msgbox{background:#111;border:1px solid var(--hairline);padding:var(--s4);margin-top:var(--s3);
     font-size:.9rem;line-height:1.6;color:var(--bone);white-space:pre-wrap}
+
+  .curpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--s4);
+    margin-top:var(--s3);max-height:26rem;overflow-y:auto;padding-right:.3em}
+  .curpick:empty{display:none}
+  .curcard{display:grid;gap:.5em;align-content:start}
+  .curcard__media{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--charcoal)}
+  .curcard__media img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+  .curcard__select{position:absolute;top:.4em;right:.4em;z-index:2;
+    width:28px;height:28px;display:grid;place-items:center;padding:0;cursor:pointer;
+    background:rgba(10,10,11,.55);border:1px solid rgba(237,231,218,.3);color:var(--bone);
+    transition:background var(--d-fast),border-color var(--d-fast),color var(--d-fast)}
+  .curcard__select:hover{border-color:var(--brass-lit);color:var(--brass-lit)}
+  .curcard__select svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2}
+  .curcard__select.is-selected{background:var(--brass);border-color:var(--brass);color:var(--obsidian)}
+  .curcard__select.is-selected svg{fill:currentColor}
+  .curcard__name{color:var(--ivory);font-size:.78rem;line-height:1.25}
+  .curcard__meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.04em;color:var(--graphite)}
 </style>
 </head>
 <body>
@@ -92,14 +135,23 @@
       <a class="link-under" href="atelier.html">+ New Invoice &#8594;</a>
     </div>
 
-    <nav class="dash__tabs">
-      <button class="dash__tab is-active" data-tab="orders">Orders</button>
-      <button class="dash__tab" data-tab="invoices">Invoices</button>
-      <button class="dash__tab" data-tab="proposals">Proposals</button>
-      <button class="dash__tab" data-tab="inquiries">Inquiries</button>
-      <button class="dash__tab" data-tab="clients">Clients</button>
-      <button class="dash__tab" data-tab="content">Content</button>
+    <div class="dashwrap">
+    <nav class="dashnav" aria-label="Dashboard sections">
+      <button class="dashnav__item is-active" data-tab="orders">Orders</button>
+      <button class="dashnav__item" data-tab="invoices">Invoices</button>
+      <button class="dashnav__item" data-tab="proposals">Proposals</button>
+      <button class="dashnav__item" data-tab="inquiries">Inquiries</button>
+      <button class="dashnav__item" data-tab="clients">Clients</button>
+      <button class="dashnav__item" data-tab="lookbook">Lookbook</button>
+      <button class="dashnav__item" data-tab="journal">Journal</button>
+      <button class="dashnav__item" data-tab="dispatch">Dispatch Briefs</button>
+      <button class="dashnav__item" data-tab="music">Music</button>
+      <button class="dashnav__item" data-tab="video">Video</button>
+      <button class="dashnav__item" data-tab="pitches">Pitches</button>
+      <button class="dashnav__item" data-tab="websites">Websites</button>
+      <button class="dashnav__item" data-tab="content">Content</button>
     </nav>
+    <div class="dashmain">
 
     <!-- ORDERS -->
     <div class="dash__panel is-active" id="panel-orders">
@@ -187,13 +239,232 @@
       <div id="clients-list"></div>
     </div>
 
+    <!-- LOOKBOOK -->
+    <div class="dash__panel" id="panel-lookbook">
+      <p class="body">Pull pieces for a specific client and send them a private, personalized lookbook — a link and a ready-to-copy text, nothing more to it on their end.</p>
+
+      <div class="newform">
+        <p class="eyebrow">New Lookbook</p>
+        <div class="grid2">
+          <div class="fld"><label>Client First Name</label><input id="cur-name" placeholder="e.g. Marcus"></div>
+          <div class="fld"><label>Client Phone (for your reference only)</label><input id="cur-phone" placeholder="Optional"></div>
+        </div>
+        <div class="fld"><label>Personal Note (shown on the page)</label><textarea id="cur-note" placeholder="e.g. Pulled these with the gala in mind — the navy speaks for itself."></textarea></div>
+
+        <div class="fld" style="margin-top:var(--s4)">
+          <label>Search the Wardrobe</label>
+          <input id="cur-search" placeholder="Search by name, category, or color&#8230;">
+        </div>
+        <div class="card__row" id="cur-catfilter" style="margin-top:var(--s3)"></div>
+        <p class="card__meta" id="cur-results-count" style="margin-top:var(--s3)"></p>
+        <div id="cur-results" class="curpick"></div>
+
+        <div class="card__row" style="margin-top:var(--s4);align-items:baseline">
+          <p class="eyebrow" style="margin:0">Selected (<span id="cur-count">0</span>)</p>
+        </div>
+        <div id="cur-selected" class="curpick curpick--selected"></div>
+
+        <div class="card__row"><button type="button" class="btn-sm" id="cur-save">Create Lookbook</button></div>
+        <p class="dash__err" id="cur-err" hidden></p>
+
+        <div class="card" id="cur-result" hidden style="margin-top:var(--s5)">
+          <p class="card__title">Ready to send</p>
+          <div class="fld" style="margin-top:var(--s4)"><label>Link</label>
+            <div class="card__row" style="margin-top:0">
+              <input id="cur-result-link" readonly style="flex:1;min-width:14rem">
+              <button type="button" class="btn-sm" id="cur-copy-link">Copy Link</button>
+            </div>
+          </div>
+          <div class="fld" style="margin-top:var(--s4)"><label>Text Message</label>
+            <div class="msgbox" id="cur-result-sms"></div>
+            <div class="card__row"><button type="button" class="btn-sm" id="cur-copy-sms">Copy Message</button></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="dash__loading" id="curations-loading">Loading&#8230;</p>
+      <div id="curations-list"></div>
+    </div>
+
+    <!-- JOURNAL -->
+    <div class="dash__panel" id="panel-journal">
+      <p class="body">New entries posted here go live on <a class="link-under" href="journal.html" target="_blank" rel="noopener">the Journal</a> immediately — no rebuild. They're fetched at runtime by journal.html and appended into the grid alongside the site's existing baked-in posts, and read at <code>journal-post.html?slug=&#8230;</code>. The five original entries (Suit System, Karma Automotive, The Gentlemen, GTA 6, Iceman) are untouched static pages and aren't editable here.</p>
+
+      <div class="newform" id="jour-newform">
+        <p class="eyebrow">New Journal Entry</p>
+        <div class="grid2">
+          <div class="fld"><label>Title</label><input id="jour-title" placeholder="e.g. Why the Watch Comes Off First"></div>
+          <div class="fld"><label>Slug (used in the URL)</label><input id="jour-slug" placeholder="auto-generated from title"></div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label>Category</label>
+            <select id="jour-cat">
+              <option value="automotive">Automotive</option>
+              <option value="style" selected>Style</option>
+              <option value="business">Business</option>
+              <option value="tech">Tech</option>
+              <option value="music">Music</option>
+              <option value="film">Film</option>
+              <option value="gaming">Gaming</option>
+              <option value="life">Life</option>
+            </select>
+          </div>
+          <div class="fld"><label>Read Time</label><input id="jour-read" placeholder="e.g. 3 min read" value="3 min read"></div>
+        </div>
+        <div class="fld"><label>Standfirst (shown on the card)</label><textarea id="jour-stand" placeholder="One or two sentences that summarize the piece."></textarea></div>
+        <div class="grid2">
+          <div class="fld"><label>Hero Image URL</label><input id="jour-heroimg" placeholder="https://&#8230;"></div>
+          <div class="fld"><label>Hero Image Alt Text</label><input id="jour-heroalt"></div>
+        </div>
+        <div class="fld"><label>Body (paragraphs, separated by a blank line — a line starting with PQ:: renders as a pull-quote)</label>
+          <textarea id="jour-body" style="min-height:12rem" placeholder="First paragraph.&#10;&#10;Second paragraph.&#10;&#10;PQ::A short pull-quote.&#10;&#10;Closing paragraph."></textarea>
+        </div>
+        <div class="card__row"><button type="button" class="btn-sm" id="jour-save">Save Entry</button></div>
+        <p class="dash__err" id="jour-err" hidden></p>
+      </div>
+
+      <p class="dash__loading" id="journal-loading">Loading&#8230;</p>
+      <div id="journal-list"></div>
+    </div>
+
+    <!-- DISPATCH BRIEFS -->
+    <div class="dash__panel" id="panel-dispatch">
+      <p class="body">A worksheet for handing Agent Foxx the specific details a Journal entry needs to feel lived-in rather than assigned &#8212; the one moment that stuck, why it landed on you, an exact quote, what media you're sending. Submissions archive here; nothing gets published until it's turned into an actual Journal entry.</p>
+
+      <div class="newform" id="disp-newform">
+        <p class="eyebrow" id="disp-formtitle">New Dispatch Brief</p>
+        <div class="grid2">
+          <div class="fld"><label>Category</label>
+            <select id="disp-cat">
+              <option value="film">Film / TV</option>
+              <option value="music">Music</option>
+              <option value="tech">A.I. / Tech</option>
+              <option value="gaming">Gaming</option>
+              <option value="automotive">Automotive</option>
+              <option value="travel">Travel</option>
+              <option value="venue">City Guide Venue</option>
+              <option value="laws">Daily Laws</option>
+              <option value="news">News</option>
+            </select>
+          </div>
+          <div class="fld"><label>Status</label>
+            <select id="disp-status">
+              <option value="new">New</option>
+              <option value="drafted">Drafted</option>
+              <option value="published">Published</option>
+            </select>
+          </div>
+        </div>
+        <div class="fld"><label>What's the one moment?</label><span class="hint">Not the general topic &#8212; the specific ten seconds, line, or detail.</span>
+          <textarea id="disp-moment" placeholder="What actually happened, specifically."></textarea></div>
+        <div class="fld"><label>Why did it land on you, specifically?</label>
+          <textarea id="disp-personal" placeholder="What in your week, your history, your taste made this hit the way it did."></textarea></div>
+        <div class="grid2">
+          <div class="fld"><label>Exact quote, if any</label><textarea id="disp-quote" placeholder="Verbatim, plus who said it."></textarea></div>
+          <div class="fld"><label>Media you're providing</label><textarea id="disp-media" placeholder="Your own photo, an official press image, a real link."></textarea></div>
+        </div>
+        <div class="fld"><label>Law it echoes (optional)</label><input id="disp-law" placeholder="One of your own Daily Laws, if this connects to one."></div>
+        <div class="fld"><label id="disp-detailslabel">Category-specific details</label><span class="hint" id="disp-detailshint"></span>
+          <textarea id="disp-details" style="min-height:8rem"></textarea>
+        </div>
+        <div class="card__row"><button type="button" class="btn-sm" id="disp-save">Submit to Archive</button></div>
+        <p class="dash__err" id="disp-err" hidden></p>
+      </div>
+
+      <p class="dash__loading" id="dispatch-loading">Loading&#8230;</p>
+      <div id="dispatch-list"></div>
+    </div>
+
+    <!-- MUSIC -->
+    <div class="dash__panel" id="panel-music">
+      <p class="body">The Piano's Spotify rotation, in the House and on the homepage. Edits here take effect immediately — <code>assets/js/piano-player.js</code> fetches this list at runtime on every page load, falling back to the site's built-in rotation if this collection is ever empty or unreachable.</p>
+
+      <div class="newform" id="music-newform">
+        <p class="eyebrow">Add Track / Playlist / Album</p>
+        <div class="grid2">
+          <div class="fld"><label>Type</label>
+            <select id="music-type"><option value="playlist">Playlist</option><option value="album">Album</option></select>
+          </div>
+          <div class="fld"><label>Spotify ID or URL</label><input id="music-id" placeholder="Paste a spotify.com link or just the ID"></div>
+        </div>
+        <div class="fld"><label>Label</label><input id="music-label" placeholder="e.g. Nothing Was The Same"></div>
+        <div class="card__row"><button type="button" class="btn-sm" id="music-save">Add to Rotation</button></div>
+        <p class="dash__err" id="music-err" hidden></p>
+      </div>
+
+      <p class="dash__loading" id="music-loading">Loading&#8230;</p>
+      <div id="music-list"></div>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="dash__panel" id="panel-video">
+      <p class="body">TV/Cinema channel lists for the House's screens. Edits here take effect immediately — <code>assets/js/tv-remote.js</code> fetches this record at runtime on every page load, falling back to <code>data/house-channels.json</code> if it's ever empty or unreachable.</p>
+
+      <div id="video-rooms"></div>
+
+      <div class="newform" id="video-newform">
+        <p class="eyebrow">Add Channel</p>
+        <div class="grid2">
+          <div class="fld"><label>Room</label>
+            <select id="video-room"><option value="living">Living Room</option><option value="cinema">Cinema</option></select>
+          </div>
+          <div class="fld"><label>YouTube Video ID or URL</label><input id="video-id" placeholder="Paste a youtube.com link or just the ID"></div>
+        </div>
+        <div class="fld"><label>Label</label><input id="video-label" placeholder="e.g. The Gentlemen"></div>
+        <div class="card__row"><button type="button" class="btn-sm" id="video-save">Add Channel</button></div>
+        <p class="dash__err" id="video-err" hidden></p>
+      </div>
+      <p class="dash__loading" id="video-loading">Loading&#8230;</p>
+    </div>
+
+    <!-- PITCHES -->
+    <div class="dash__panel" id="panel-pitches">
+      <p class="body">Internal tracker for brand-pitch concept decks — collaborations, sponsorships, investor decks. Separate from Proposals, which is for client quotes and invoicing.</p>
+
+      <div class="newform" id="pitch-newform">
+        <p class="eyebrow">New Pitch</p>
+        <div class="grid2">
+          <div class="fld"><label>Brand / Client</label><input id="pitch-brand" placeholder="e.g. HelloFresh"></div>
+          <div class="fld"><label>Status</label>
+            <select id="pitch-status">
+              <option value="draft">Draft</option>
+              <option value="sent">Sent</option>
+              <option value="discussion">In Discussion</option>
+              <option value="won">Won</option>
+              <option value="passed">Passed</option>
+            </select>
+          </div>
+        </div>
+        <div class="fld"><label>Pitch Type / One-Line Concept</label><input id="pitch-concept" placeholder="e.g. Weekly pantry collaboration"></div>
+        <div class="grid2">
+          <div class="fld"><label>Link (deck, outline, slides)</label><input id="pitch-link" placeholder="https://&#8230;"></div>
+          <div class="fld"><label>Date</label><input id="pitch-date" type="date"></div>
+        </div>
+        <div class="fld"><label>Notes</label><textarea id="pitch-notes" placeholder="Where this stands, who to follow up with, etc."></textarea></div>
+        <div class="card__row"><button type="button" class="btn-sm" id="pitch-save">Save Pitch</button></div>
+        <p class="dash__err" id="pitch-err" hidden></p>
+      </div>
+
+      <p class="dash__loading" id="pitches-loading">Loading&#8230;</p>
+      <div id="pitches-list"></div>
+    </div>
+
+    <!-- WEBSITES -->
+    <div class="dash__panel" id="panel-websites">
+      <p class="body">Every site managed under this operation — a static reference, nothing here is editable.</p>
+      <div id="websites-list"></div>
+    </div>
+
     <!-- CONTENT -->
     <div class="dash__panel" id="panel-content">
-      <p class="body">Wardrobe, Journal, Case Files, the Charlotte guide, and House music/TV/cinema are edited through the local Operator Console (run locally — it needs filesystem and build-script access this public dashboard can never have). This panel used to write to a Blobs store nothing on the live site actually read; it's been retired rather than left pointing at dead data.</p>
+      <p class="body">Wardrobe (Lookbook tab), Journal, Music, and Video are now genuinely live-editable from this dashboard — no rebuild step. Case Files and the Charlotte guide are still edited through the local Operator Console (run locally — it needs filesystem and build-script access this public dashboard can never have).</p>
       <div class="card" style="margin-top:var(--s5)">
         <p class="card__title">Local Operator Console</p>
         <p class="card__body">On your machine: <code>node local-admin/server.js</code>, then open <code>local-admin/console.html</code>. Edits regenerate the real static pages via the existing <code>build_*.py</code> scripts — review the result, then deploy as usual.</p>
       </div>
+    </div>
+
+    </div>
     </div>
   </div>
 </section>
@@ -261,14 +532,39 @@
     catch(e){ return ''; }
   }
 
+  // Two-click inline confirm for a delete button, in place of a native
+  // confirm() dialog (unreliable in some embedded/automated contexts, and
+  // a jarring native popup regardless). First click arms it (label flips
+  // to "Confirm?" for 3s, then reverts); a second click on the SAME
+  // already-armed button returns true and proceeds with the delete.
+  function armDelete(btn){
+    if (btn.dataset.armed === '1') {
+      btn.dataset.armed = '';
+      clearTimeout(btn._armTimer);
+      btn.textContent = btn.dataset.origLabel || 'Delete';
+      btn.classList.remove('is-on');
+      return true;
+    }
+    btn.dataset.armed = '1';
+    btn.dataset.origLabel = btn.dataset.origLabel || btn.textContent;
+    btn.textContent = 'Confirm?';
+    btn.classList.add('is-on');
+    btn._armTimer = setTimeout(function(){
+      btn.dataset.armed = '';
+      btn.textContent = btn.dataset.origLabel;
+      btn.classList.remove('is-on');
+    }, 3000);
+    return false;
+  }
+
   var dashboardInited = false;
 
   function initDashboard(){
     if (dashboardInited) return;
     dashboardInited = true;
 
-    // tabs
-    var tabs = Array.prototype.slice.call(document.querySelectorAll('.dash__tab'));
+    // nav
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.dashnav__item'));
     var panels = {};
     tabs.forEach(function(t){ panels[t.dataset.tab] = document.getElementById('panel-' + t.dataset.tab); });
     tabs.forEach(function(t){
@@ -285,6 +581,14 @@
     loadProposals();
     loadInquiries();
     loadClients();
+    loadCurations();
+    curWardrobeReady().then(function(){ curRenderCatFilter(); curRenderResults(''); });
+    loadJournalDash();
+    loadDispatchDash();
+    loadMusicDash();
+    loadVideoDash();
+    loadPitchesDash();
+    renderWebsitesDash();
   }
 
   // ---------- ORDERS ----------
@@ -344,7 +648,7 @@
     }
     var delBtn = e.target.closest('[data-delete-order]');
     if (delBtn) {
-      if (!confirm('Delete this order permanently?')) return;
+      if (!armDelete(delBtn)) return;
       var invoiceId = delBtn.getAttribute('data-delete-order');
       fetch('/.netlify/functions/orders?invoiceId=' + encodeURIComponent(invoiceId) + '&passphraseHash=' + encodeURIComponent(storedHash), {
         method: 'DELETE'
@@ -567,6 +871,868 @@
         }).join('');
       })
       .catch(function(){ loading.textContent = 'Could not load clients.'; });
+  }
+
+  // ---------- CURATE (personalized wardrobe lookbooks) ----------
+  var curWardrobe = null; // lazy-loaded full item catalog
+  var curSelected = {};   // id -> item
+
+  function curWardrobeReady(){
+    if (curWardrobe) return Promise.resolve(curWardrobe);
+    return fetch('/data/wardrobe.json').then(function(r){ return r.json(); }).then(function(items){
+      curWardrobe = items || [];
+      return curWardrobe;
+    }).catch(function(){ curWardrobe = []; return curWardrobe; });
+  }
+
+  var CUR_HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.5 8 2 4.5 5.5 4c2-.3 3.8.6 5 2.3.9-1.4 2.9-2.6 5-2.3C19 4.5 20.5 8 19 11.8 16.5 16.4 12 21 12 21Z"/></svg>';
+
+  function curCardHTML(it, selected){
+    return '<div class="curcard">' +
+      '<div class="curcard__media">' +
+        '<button type="button" class="curcard__select' + (selected ? ' is-selected' : '') + '" ' +
+          'data-cur-toggle="' + esc(it.id) + '" aria-pressed="' + (selected ? 'true' : 'false') + '" ' +
+          'aria-label="' + (selected ? 'Remove' : 'Add') + ' ' + esc(it.name) + '">' + CUR_HEART + '</button>' +
+        '<img src="' + esc(it.img || '') + '" alt="' + esc(it.name || '') + '" loading="lazy">' +
+      '</div>' +
+      '<div class="curcard__name">' + esc(it.name) + '</div>' +
+      '<div class="curcard__meta">' + esc(it.cat || '') + (it.color ? ' &#183; ' + esc(it.color) : '') + (it.price ? ' &#183; $' + money(it.price) : '') + '</div>' +
+    '</div>';
+  }
+
+  var CUR_CATS = [['all','All'],['two-piece','Two-Piece'],['three-piece','Three-Piece'],
+    ['double-breasted','Double-Breasted'],['tuxedo','Tuxedo &amp; Formal'],['coats','Coats']];
+  var curCat = 'all';
+
+  function curRenderCatFilter(){
+    var host = document.getElementById('cur-catfilter');
+    var present = {};
+    curWardrobe.forEach(function(it){ present[it.cat] = true; });
+    host.innerHTML = CUR_CATS.filter(function(c){ return c[0] === 'all' || present[c[0]]; }).map(function(c){
+      return '<button type="button" class="btn-sm' + (curCat === c[0] ? ' is-on' : '') + '" data-cur-cat="' + c[0] + '">' + c[1] + '</button>';
+    }).join('');
+  }
+
+  // No cap — every matching item renders (the list scrolls within its own
+  // fixed-height box), so nothing is silently hidden from the operator.
+  function curRenderResults(query){
+    var host = document.getElementById('cur-results');
+    var countEl = document.getElementById('cur-results-count');
+    if (!curWardrobe) { host.innerHTML = '<p class="dash__empty">Loading&#8230;</p>'; countEl.textContent = ''; return; }
+    var q = (query || '').toLowerCase();
+    var matches = curWardrobe.filter(function(it){
+      if (curCat !== 'all' && it.cat !== curCat) return false;
+      if (!q) return true;
+      return (
+        (it.name || '').toLowerCase().indexOf(q) !== -1 ||
+        (it.cat || '').toLowerCase().indexOf(q) !== -1 ||
+        (it.color || '').toLowerCase().indexOf(q) !== -1
+      );
+    });
+    countEl.textContent = 'Showing ' + matches.length + ' of ' + curWardrobe.length + ' pieces';
+    host.innerHTML = matches.map(function(it){ return curCardHTML(it, !!curSelected[it.id]); }).join('')
+      || '<p class="dash__empty">No matches.</p>';
+  }
+
+  document.getElementById('cur-catfilter').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-cur-cat]');
+    if (!btn) return;
+    curCat = btn.getAttribute('data-cur-cat');
+    curRenderCatFilter();
+    curRenderResults(curSearchInput.value.trim());
+  });
+
+  function curRenderSelected(){
+    var host = document.getElementById('cur-selected');
+    var ids = Object.keys(curSelected);
+    document.getElementById('cur-count').textContent = ids.length;
+    host.innerHTML = ids.map(function(id){ return curCardHTML(curSelected[id], true); }).join('');
+  }
+
+  function curToggle(id){
+    if (curSelected[id]) {
+      delete curSelected[id];
+    } else {
+      var it = curWardrobe.filter(function(x){ return x.id === id; })[0];
+      if (!it) return;
+      curSelected[id] = it;
+    }
+    curRenderSelected();
+    curRenderResults(curSearchInput.value.trim());
+  }
+
+  var curSearchInput = document.getElementById('cur-search');
+  curSearchInput.addEventListener('input', function(){
+    var q = curSearchInput.value.trim();
+    curWardrobeReady().then(function(){ curRenderResults(q); });
+  });
+
+  document.getElementById('cur-results').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-cur-toggle]');
+    if (!btn) return;
+    curToggle(btn.getAttribute('data-cur-toggle'));
+  });
+
+  document.getElementById('cur-selected').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-cur-toggle]');
+    if (!btn) return;
+    curToggle(btn.getAttribute('data-cur-toggle'));
+  });
+
+  function curBuildSMS(name, link){
+    var greet = name ? 'Hi ' + name : 'Hi';
+    return greet + ' — Paris here. I pulled a few pieces I think you’ll love, just for you: ' + link;
+  }
+
+  document.getElementById('cur-save').addEventListener('click', function(){
+    var err = document.getElementById('cur-err');
+    err.hidden = true;
+    var name = document.getElementById('cur-name').value.trim();
+    var items = Object.keys(curSelected).map(function(id){ return curSelected[id]; });
+    if (!name || !items.length) {
+      err.textContent = 'Add the client’s name and at least one item first.';
+      err.hidden = false;
+      return;
+    }
+    var btn = document.getElementById('cur-save');
+    btn.disabled = true; btn.textContent = 'Creating…';
+    fetch('/.netlify/functions/content?collection=curations', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        passphraseHash: storedHash,
+        data: {
+          clientName: name,
+          clientPhone: document.getElementById('cur-phone').value.trim(),
+          note: document.getElementById('cur-note').value.trim(),
+          items: items
+        }
+      })
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        btn.disabled = false; btn.textContent = 'Create Lookbook';
+        if (!data.record) { err.textContent = 'Something went wrong saving this.'; err.hidden = false; return; }
+        var link = window.location.origin + '/lookbook.html?id=' + encodeURIComponent(data.record.id);
+        document.getElementById('cur-result-link').value = link;
+        document.getElementById('cur-result-sms').textContent = curBuildSMS(name, link);
+        document.getElementById('cur-result').hidden = false;
+        document.getElementById('cur-result').scrollIntoView({behavior:'smooth', block:'center'});
+        // reset the picker for the next client, keep the result visible
+        curSelected = {};
+        curRenderSelected();
+        document.getElementById('cur-name').value = '';
+        document.getElementById('cur-phone').value = '';
+        document.getElementById('cur-note').value = '';
+        curSearchInput.value = '';
+        curRenderResults('');
+        loadCurations();
+      })
+      .catch(function(){
+        btn.disabled = false; btn.textContent = 'Create Lookbook';
+        err.textContent = 'Could not reach the server.'; err.hidden = false;
+      });
+  });
+
+  document.getElementById('cur-copy-link').addEventListener('click', function(){
+    var val = document.getElementById('cur-result-link').value;
+    navigator.clipboard.writeText(val).then(function(){
+      var btn = document.getElementById('cur-copy-link');
+      var prev = btn.textContent; btn.textContent = 'Copied';
+      setTimeout(function(){ btn.textContent = prev; }, 1500);
+    });
+  });
+  document.getElementById('cur-copy-sms').addEventListener('click', function(){
+    var val = document.getElementById('cur-result-sms').textContent;
+    navigator.clipboard.writeText(val).then(function(){
+      var btn = document.getElementById('cur-copy-sms');
+      var prev = btn.textContent; btn.textContent = 'Copied';
+      setTimeout(function(){ btn.textContent = prev; }, 1500);
+    });
+  });
+
+  function loadCurations(){
+    var loading = document.getElementById('curations-loading');
+    var list = document.getElementById('curations-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/content?collection=curations')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var records = data.records || [];
+        if (!records.length) { list.innerHTML = '<p class="dash__empty">No lookbooks sent yet.</p>'; return; }
+        list.innerHTML = records.map(function(c){
+          var link = window.location.origin + '/lookbook.html?id=' + encodeURIComponent(c.id);
+          var sms = curBuildSMS(c.clientName, link);
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(c.clientName || 'Unnamed') + '</span>' +
+              '<span class="badge">' + (c.items||[]).length + ' item(s)</span>' +
+            '</div>' +
+            '<p class="card__meta">' + esc(c.clientPhone || '') + ' &#183; ' + fmtDate(c.createdAt) + '</p>' +
+            (c.note ? '<div class="card__body">' + esc(c.note) + '</div>' : '') +
+            '<div class="card__row">' +
+              '<button type="button" class="btn-sm" data-copy-cur-link="' + esc(link) + '">Copy Link</button>' +
+              '<button type="button" class="btn-sm" data-copy-msg="' + encodeURIComponent(sms) + '">Copy Message</button>' +
+              '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(link) + '" target="_blank" rel="noopener">Preview</a>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load lookbooks.'; });
+  }
+
+  document.getElementById('curations-list').addEventListener('click', function(e){
+    var linkBtn = e.target.closest('[data-copy-cur-link]');
+    if (linkBtn) {
+      navigator.clipboard.writeText(linkBtn.getAttribute('data-copy-cur-link')).then(function(){
+        var prev = linkBtn.textContent; linkBtn.textContent = 'Copied';
+        setTimeout(function(){ linkBtn.textContent = prev; }, 1500);
+      });
+      return;
+    }
+    var msgBtn = e.target.closest('[data-copy-msg]');
+    if (msgBtn) {
+      navigator.clipboard.writeText(decodeURIComponent(msgBtn.getAttribute('data-copy-msg'))).then(function(){
+        var prev = msgBtn.textContent; msgBtn.textContent = 'Copied';
+        setTimeout(function(){ msgBtn.textContent = prev; }, 1500);
+      });
+    }
+  });
+
+  // ---------- shared helpers for the new live-editable sections ----------
+  function slugify(s){
+    return (s || '').toLowerCase().trim()
+      .replace(/['"]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 60);
+  }
+  function authedFetch(url, opts){
+    opts = opts || {};
+    var headers = Object.assign({'Content-Type': 'application/json'}, opts.headers || {});
+    return fetch(url, Object.assign({}, opts, {headers: headers}))
+      .then(function(r){ return r.json().then(function(d){ return {ok: r.ok, status: r.status, data: d}; }); });
+  }
+
+  // ================= JOURNAL =================
+  var JOUR_CATS = {automotive:'Automotive', style:'Style', business:'Business', tech:'Tech', music:'Music', film:'Film', gaming:'Gaming', life:'Life'};
+  var JOUR_RESERVED_SLUGS = {'suit-system':1,'karma-automotive':1,'the-gentlemen':1,'gta-6-anticipation':1,'still-listening-to-iceman':1};
+  var jourEditingId = null;
+  var jourSlugManual = false;
+
+  document.getElementById('jour-title').addEventListener('input', function(){
+    if (jourSlugManual) return;
+    document.getElementById('jour-slug').value = slugify(this.value);
+  });
+  document.getElementById('jour-slug').addEventListener('input', function(){ jourSlugManual = true; });
+
+  function jourResetForm(){
+    jourEditingId = null; jourSlugManual = false;
+    ['jour-title','jour-slug','jour-stand','jour-heroimg','jour-heroalt','jour-body'].forEach(function(id){ document.getElementById(id).value = ''; });
+    document.getElementById('jour-cat').value = 'style';
+    document.getElementById('jour-read').value = '3 min read';
+    document.getElementById('jour-save').textContent = 'Save Entry';
+  }
+
+  function loadJournalDash(){
+    var loading = document.getElementById('journal-loading');
+    var list = document.getElementById('journal-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/content?collection=journal')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var posts = (data.records || []).sort(function(a,b){ return (b.createdAt||0) - (a.createdAt||0); });
+        if (!posts.length) { list.innerHTML = '<p class="dash__empty">No dashboard-authored entries yet. The five original posts are static and aren’t managed here.</p>'; return; }
+        list.innerHTML = posts.map(function(p){
+          var link = 'journal-post.html?slug=' + encodeURIComponent(p.slug || '');
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(p.title || 'Untitled') + '</span>' +
+              '<span class="badge badge--brass">' + esc(JOUR_CATS[p.cat] || p.cat || '') + '</span>' +
+            '</div>' +
+            '<p class="card__meta">/' + esc(p.slug || '') + ' &#183; ' + esc(p.read || '') + ' &#183; ' + fmtDate(p.createdAt) + '</p>' +
+            '<div class="card__body">' + esc(p.stand || '') + '</div>' +
+            '<div class="card__row">' +
+              '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(link) + '" target="_blank" rel="noopener">View Live</a>' +
+              '<button type="button" class="btn-sm" data-edit-jour="' + esc(p.id) + '">Edit</button>' +
+              '<button type="button" class="btn-sm" data-delete-jour="' + esc(p.id) + '">Delete</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+        list.dataset.records = JSON.stringify(posts);
+      })
+      .catch(function(){ loading.textContent = 'Could not load journal entries.'; });
+  }
+
+  document.getElementById('journal-list').addEventListener('click', function(e){
+    var editBtn = e.target.closest('[data-edit-jour]');
+    if (editBtn) {
+      var records = JSON.parse(document.getElementById('journal-list').dataset.records || '[]');
+      var p = records.filter(function(r){ return r.id === editBtn.getAttribute('data-edit-jour'); })[0];
+      if (!p) return;
+      jourEditingId = p.id; jourSlugManual = true;
+      document.getElementById('jour-title').value = p.title || '';
+      document.getElementById('jour-slug').value = p.slug || '';
+      document.getElementById('jour-cat').value = p.cat || 'style';
+      document.getElementById('jour-read').value = p.read || '';
+      document.getElementById('jour-stand').value = p.stand || '';
+      document.getElementById('jour-heroimg').value = (p.hero && p.hero.url) || '';
+      document.getElementById('jour-heroalt').value = (p.hero && p.hero.alt) || '';
+      document.getElementById('jour-body').value = (p.body || []).join('\n\n');
+      document.getElementById('jour-save').textContent = 'Update Entry';
+      document.getElementById('jour-newform').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    var delBtn = e.target.closest('[data-delete-jour]');
+    if (delBtn) {
+      if (!armDelete(delBtn)) return;
+      fetch('/.netlify/functions/content?collection=journal&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-jour')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+        .then(function(){ loadJournalDash(); });
+    }
+  });
+
+  document.getElementById('jour-save').addEventListener('click', function(){
+    var err = document.getElementById('jour-err');
+    err.hidden = true;
+    var title = document.getElementById('jour-title').value.trim();
+    var slug = slugify(document.getElementById('jour-slug').value);
+    var bodyRaw = document.getElementById('jour-body').value.trim();
+    if (!title || !slug || !bodyRaw) { err.textContent = 'Title, slug, and body are required.'; err.hidden = false; return; }
+    if (JOUR_RESERVED_SLUGS[slug] && !jourEditingId) { err.textContent = 'That slug belongs to one of the five original entries — pick another.'; err.hidden = false; return; }
+    var cat = document.getElementById('jour-cat').value;
+    var body = bodyRaw.split(/\n\s*\n/).map(function(p){ return p.trim(); }).filter(Boolean);
+    var payload = {
+      passphraseHash: storedHash,
+      id: jourEditingId || undefined,
+      data: {
+        slug: slug,
+        cat: cat,
+        catlabel: JOUR_CATS[cat] || cat,
+        read: document.getElementById('jour-read').value.trim() || '3 min read',
+        title: title,
+        stand: document.getElementById('jour-stand').value.trim(),
+        hero: { url: document.getElementById('jour-heroimg').value.trim(), alt: document.getElementById('jour-heroalt').value.trim() },
+        body: body,
+      }
+    };
+    var btn = document.getElementById('jour-save');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    authedFetch('/.netlify/functions/content?collection=journal', {method:'POST', body: JSON.stringify(payload)})
+      .then(function(res){
+        btn.disabled = false;
+        if (!res.ok) { btn.textContent = jourEditingId ? 'Update Entry' : 'Save Entry'; err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
+        jourResetForm();
+        loadJournalDash();
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = jourEditingId ? 'Update Entry' : 'Save Entry'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  });
+
+  // ================= DISPATCH BRIEFS =================
+  var DISP_CATS = {film:'Film / TV', music:'Music', tech:'A.I. / Tech', gaming:'Gaming',
+    automotive:'Automotive', travel:'Travel', venue:'City Guide Venue', laws:'Daily Laws', news:'News'};
+  var DISP_HINTS = {
+    film: 'Title & where/when watched · The standout scene · A character whose personality resonated · One exact line of dialogue · Wardrobe/style moment · Official poster or stills wanted',
+    music: 'Artist / Album / Track · Where you were the first time it landed · The specific lyric or moment (describe, don’t transcribe) · What mood it now belongs to · Cover art · Add to the Piano’s rotation?',
+    tech: 'The tool & what you were trying to do · The specific interaction that impressed or unsettled you · Screenshot or real output · The bigger-picture read',
+    gaming: 'Title & what stage it’s in · What actually hooked you · Official trailer link or screenshot · Culture/anticipation, or hands-on?',
+    automotive: 'Make / model / trim · The design detail that got you · Your own or official photos · Aspirational or actually driven? · Who buys this',
+    travel: 'Where & trip context · The one moment that stuck · Your own photos · A detail most visitors miss · One sensory note',
+    venue: 'Venue & what you ordered/did · A staff or atmosphere detail · Honest price note · Your own photos · Any happy hour worth flagging',
+    laws: 'The principle, one sentence · The real moment that taught you this · Where it actually applies',
+    news: 'The story & source link · Why it matters beyond the headline · Anything to fact-check',
+  };
+  var dispEditingId = null;
+
+  function dispUpdateHint(){
+    var cat = document.getElementById('disp-cat').value;
+    document.getElementById('disp-detailslabel').textContent = 'Category-specific details — ' + (DISP_CATS[cat] || '');
+    document.getElementById('disp-detailshint').textContent = DISP_HINTS[cat] || '';
+  }
+  document.getElementById('disp-cat').addEventListener('change', dispUpdateHint);
+  dispUpdateHint();
+
+  function dispResetForm(){
+    dispEditingId = null;
+    ['disp-moment','disp-personal','disp-quote','disp-media','disp-law','disp-details'].forEach(function(id){
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('disp-cat').value = 'film';
+    document.getElementById('disp-status').value = 'new';
+    dispUpdateHint();
+    document.getElementById('disp-save').textContent = 'Submit to Archive';
+    document.getElementById('disp-formtitle').textContent = 'New Dispatch Brief';
+  }
+
+  function loadDispatchDash(){
+    var loading = document.getElementById('dispatch-loading');
+    var list = document.getElementById('dispatch-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/content?collection=dispatch-briefs')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var briefs = (data.records || []).sort(function(a,b){ return (b.createdAt||0) - (a.createdAt||0); });
+        if (!briefs.length) { list.innerHTML = '<p class="dash__empty">No briefs submitted yet.</p>'; return; }
+        list.innerHTML = briefs.map(function(r){
+          var moment = (r.moment || '').slice(0, 90) + ((r.moment || '').length > 90 ? '…' : '');
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(DISP_CATS[r.cat] || r.cat || '') + '</span>' +
+              '<span class="badge' + (r.status === 'published' ? ' badge--brass' : '') + '">' + esc(r.status || 'new') + '</span>' +
+            '</div>' +
+            '<p class="card__meta">' + fmtDate(r.createdAt) + '</p>' +
+            '<div class="card__body">' + esc(moment) + '</div>' +
+            '<div class="card__row">' +
+              '<button type="button" class="btn-sm" data-edit-disp="' + esc(r.id) + '">Edit</button>' +
+              '<button type="button" class="btn-sm" data-delete-disp="' + esc(r.id) + '">Delete</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+        list.dataset.records = JSON.stringify(briefs);
+      })
+      .catch(function(){ loading.hidden = false; loading.textContent = 'Could not load dispatch briefs.'; });
+  }
+
+  document.getElementById('dispatch-list').addEventListener('click', function(e){
+    var editBtn = e.target.closest('[data-edit-disp]');
+    if (editBtn) {
+      var records = JSON.parse(document.getElementById('dispatch-list').dataset.records || '[]');
+      var r = records.filter(function(x){ return x.id === editBtn.getAttribute('data-edit-disp'); })[0];
+      if (!r) return;
+      dispEditingId = r.id;
+      document.getElementById('disp-cat').value = r.cat || 'film';
+      document.getElementById('disp-status').value = r.status || 'new';
+      document.getElementById('disp-moment').value = r.moment || '';
+      document.getElementById('disp-personal').value = r.personal || '';
+      document.getElementById('disp-quote').value = r.quote || '';
+      document.getElementById('disp-media').value = r.media || '';
+      document.getElementById('disp-law').value = r.law || '';
+      document.getElementById('disp-details').value = r.details || '';
+      dispUpdateHint();
+      document.getElementById('disp-save').textContent = 'Update Brief';
+      document.getElementById('disp-formtitle').textContent = 'Editing Brief';
+      document.getElementById('disp-newform').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    var delBtn = e.target.closest('[data-delete-disp]');
+    if (delBtn) {
+      if (!armDelete(delBtn)) return;
+      fetch('/.netlify/functions/content?collection=dispatch-briefs&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-disp')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+        .then(function(){ loadDispatchDash(); });
+    }
+  });
+
+  document.getElementById('disp-save').addEventListener('click', function(){
+    var err = document.getElementById('disp-err');
+    err.hidden = true;
+    var moment = document.getElementById('disp-moment').value.trim();
+    if (!moment) { err.textContent = '"What\'s the one moment?" is required.'; err.hidden = false; return; }
+    var payload = {
+      passphraseHash: storedHash,
+      id: dispEditingId || undefined,
+      data: {
+        cat: document.getElementById('disp-cat').value,
+        status: document.getElementById('disp-status').value,
+        moment: moment,
+        personal: document.getElementById('disp-personal').value.trim(),
+        quote: document.getElementById('disp-quote').value.trim(),
+        media: document.getElementById('disp-media').value.trim(),
+        law: document.getElementById('disp-law').value.trim(),
+        details: document.getElementById('disp-details').value.trim(),
+      }
+    };
+    var btn = document.getElementById('disp-save');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    authedFetch('/.netlify/functions/content?collection=dispatch-briefs', {method:'POST', body: JSON.stringify(payload)})
+      .then(function(res){
+        btn.disabled = false;
+        if (!res.ok) { btn.textContent = dispEditingId ? 'Update Brief' : 'Submit to Archive'; err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
+        dispResetForm();
+        loadDispatchDash();
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = dispEditingId ? 'Update Brief' : 'Submit to Archive'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  });
+
+  // ================= MUSIC (Piano playlists) =================
+  function extractSpotifyId(input){
+    input = (input || '').trim();
+    var m = input.match(/spotify\.com\/(?:embed\/)?(playlist|album)\/([A-Za-z0-9]+)/i);
+    if (m) return { id: m[2], type: m[1].toLowerCase() };
+    return { id: input.split('?')[0].split('/').filter(Boolean).pop() || '', type: null };
+  }
+
+  var musicRecords = [];
+  var MUSIC_SEED_NOTE = '<p class="dash__empty">Not yet edited from the dashboard — the Piano is currently using its built-in rotation (data/house-music.json). Add a track below to start managing it live.</p>';
+
+  function musicCard(r, i, total){
+    return '<div class="card">' +
+      '<div class="card__top">' +
+        '<span class="card__title">' + esc(r.label || r.spotifyId) + '</span>' +
+        '<span class="badge">' + esc(r.type || '') + '</span>' +
+      '</div>' +
+      '<p class="card__meta">' + esc(r.spotifyId || '') + '</p>' +
+      '<div class="card__row">' +
+        '<span class="reorder">' +
+          '<button type="button" class="btn-sm" data-music-up="' + esc(r.id) + '"' + (i === 0 ? ' disabled' : '') + '>&#8593;</button>' +
+          '<button type="button" class="btn-sm" data-music-down="' + esc(r.id) + '"' + (i === total - 1 ? ' disabled' : '') + '>&#8595;</button>' +
+        '</span>' +
+        '<button type="button" class="btn-sm" data-delete-music="' + esc(r.id) + '">Delete</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function loadMusicDash(){
+    var loading = document.getElementById('music-loading');
+    var list = document.getElementById('music-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/content?collection=playlists')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        musicRecords = (data.records || []).sort(function(a,b){
+          if (typeof a.order === 'number' && typeof b.order === 'number') return a.order - b.order;
+          return (a.createdAt||0) - (b.createdAt||0);
+        });
+        if (!musicRecords.length) { list.innerHTML = MUSIC_SEED_NOTE; return; }
+        list.innerHTML = musicRecords.map(function(r,i){ return musicCard(r, i, musicRecords.length); }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load the rotation.'; });
+  }
+
+  function musicSaveRecord(id, data){
+    return authedFetch('/.netlify/functions/content?collection=playlists', {method:'POST', body: JSON.stringify({passphraseHash: storedHash, id: id, data: data})});
+  }
+
+  document.getElementById('music-list').addEventListener('click', function(e){
+    var delBtn = e.target.closest('[data-delete-music]');
+    if (delBtn) {
+      if (!armDelete(delBtn)) return;
+      fetch('/.netlify/functions/content?collection=playlists&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-music')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+        .then(function(){ loadMusicDash(); });
+      return;
+    }
+    var upBtn = e.target.closest('[data-music-up]');
+    var downBtn = e.target.closest('[data-music-down]');
+    var btn = upBtn || downBtn;
+    if (!btn) return;
+    var id = btn.getAttribute(upBtn ? 'data-music-up' : 'data-music-down');
+    var idx = musicRecords.findIndex(function(r){ return r.id === id; });
+    var swapIdx = idx + (upBtn ? -1 : 1);
+    if (idx < 0 || swapIdx < 0 || swapIdx >= musicRecords.length) return;
+    var a = musicRecords[idx], b = musicRecords[swapIdx];
+    var aOrder = typeof a.order === 'number' ? a.order : idx;
+    var bOrder = typeof b.order === 'number' ? b.order : swapIdx;
+    Promise.all([
+      musicSaveRecord(a.id, Object.assign({}, a, {order: bOrder})),
+      musicSaveRecord(b.id, Object.assign({}, b, {order: aOrder})),
+    ]).then(function(){ loadMusicDash(); });
+  });
+
+  document.getElementById('music-save').addEventListener('click', function(){
+    var err = document.getElementById('music-err');
+    err.hidden = true;
+    var raw = document.getElementById('music-id').value.trim();
+    var label = document.getElementById('music-label').value.trim();
+    if (!raw || !label) { err.textContent = 'A Spotify ID/URL and a label are required.'; err.hidden = false; return; }
+    var parsed = extractSpotifyId(raw);
+    var type = parsed.type || document.getElementById('music-type').value;
+    var nextOrder = musicRecords.length ? Math.max.apply(null, musicRecords.map(function(r){ return typeof r.order === 'number' ? r.order : 0; })) + 1 : 0;
+    var btn = document.getElementById('music-save');
+    btn.disabled = true; btn.textContent = 'Adding…';
+    authedFetch('/.netlify/functions/content?collection=playlists', {method:'POST', body: JSON.stringify({
+      passphraseHash: storedHash,
+      data: { type: type, spotifyId: parsed.id, label: label, order: nextOrder }
+    })}).then(function(res){
+      btn.disabled = false; btn.textContent = 'Add to Rotation';
+      if (!res.ok) { err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
+      document.getElementById('music-id').value = '';
+      document.getElementById('music-label').value = '';
+      loadMusicDash();
+    }).catch(function(){ btn.disabled = false; btn.textContent = 'Add to Rotation'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  });
+
+  // ================= VIDEO (TV/Cinema channels) =================
+  var ROOM_LABEL = { living: 'Living Room', cinema: 'Cinema' };
+  var videoData = null;     // {living:[...], cinema:[...]}
+  var videoIsLive = false;  // true once it's actually stored in the 'channels' collection
+
+  function extractYouTubeId(input){
+    input = (input || '').trim();
+    var m = input.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([A-Za-z0-9_-]{6,})/);
+    if (m) return m[1].split(/[&?]/)[0];
+    return input.split(/[&?]/)[0];
+  }
+
+  var pendingDeleteKey = null; // "room:i" armed by a first Delete click; a second click on the SAME
+                                // button confirms it. Avoids a native confirm() dialog, which browser
+                                // automation/some embedded contexts can't reliably answer.
+
+  function renderVideoRooms(){
+    var host = document.getElementById('video-rooms');
+    if (!videoData) { host.innerHTML = ''; return; }
+    var note = videoIsLive ? '' : '<p class="dash__empty">Not yet edited from the dashboard — showing the site’s built-in defaults (data/house-channels.json). Add a channel below to start managing this live.</p>';
+    var rooms = Object.keys(videoData).filter(function(k){ return Array.isArray(videoData[k]); });
+    host.innerHTML = note + rooms.map(function(room){
+      var chans = videoData[room] || [];
+      return '<p class="eyebrow" style="margin-top:var(--s5)">' + esc(ROOM_LABEL[room] || room) + '</p>' +
+        (chans.length ? chans.map(function(c, i){
+          var key = room + ':' + i;
+          var armed = pendingDeleteKey === key;
+          return '<div class="card">' +
+            '<div class="card__top"><span class="card__title">' + esc(c.label || c.id) + '</span></div>' +
+            '<p class="card__meta">' + esc(c.id || '') + '</p>' +
+            '<div class="card__row">' +
+              '<span class="reorder">' +
+                '<button type="button" class="btn-sm" data-video-up="' + key + '"' + (i === 0 ? ' disabled' : '') + '>&#8593;</button>' +
+                '<button type="button" class="btn-sm" data-video-down="' + key + '"' + (i === chans.length - 1 ? ' disabled' : '') + '>&#8595;</button>' +
+              '</span>' +
+              '<button type="button" class="btn-sm' + (armed ? ' is-on' : '') + '" data-delete-video="' + key + '">' + (armed ? 'Confirm?' : 'Delete') + '</button>' +
+            '</div>' +
+          '</div>';
+        }).join('') : '<p class="dash__empty">No channels in this room yet.</p>');
+    }).join('');
+  }
+
+  function loadVideoDash(){
+    var loading = document.getElementById('video-loading');
+    loading.hidden = false;
+    fetch('/.netlify/functions/content?collection=channels&id=main')
+      .then(function(r){ if (!r.ok) throw new Error('not found'); return r.json(); })
+      .then(function(data){
+        var hasAny = data && Object.keys(data).some(function(k){ return Array.isArray(data[k]) && data[k].length; });
+        if (!hasAny) throw new Error('empty');
+        videoData = data; videoIsLive = true;
+        loading.hidden = true;
+        renderVideoRooms();
+      })
+      .catch(function(){
+        fetch('data/house-channels.json').then(function(r){ return r.json(); }).then(function(data){
+          videoData = data || {living:[], cinema:[]}; videoIsLive = false;
+          loading.hidden = true;
+          renderVideoRooms();
+        }).catch(function(){ loading.textContent = 'Could not load channel lists.'; });
+      });
+  }
+
+  function videoPersist(){
+    return authedFetch('/.netlify/functions/content?collection=channels', {method:'POST', body: JSON.stringify({
+      passphraseHash: storedHash, id: 'main', data: videoData
+    })}).then(function(res){
+      if (res.ok) videoIsLive = true;
+      return res;
+    });
+  }
+
+  document.getElementById('video-rooms').addEventListener('click', function(e){
+    var delBtn = e.target.closest('[data-delete-video]');
+    var upBtn = e.target.closest('[data-video-up]');
+    var downBtn = e.target.closest('[data-video-down]');
+    var btn = delBtn || upBtn || downBtn;
+    if (!btn || !videoData) return;
+    var key = btn.getAttribute(delBtn ? 'data-delete-video' : (upBtn ? 'data-video-up' : 'data-video-down'));
+    var parts = key.split(':');
+    var room = parts[0], i = parseInt(parts[1], 10);
+    if (!videoData[room]) return;
+    if (delBtn) {
+      if (pendingDeleteKey !== key) {
+        pendingDeleteKey = key;
+        renderVideoRooms();
+        return;
+      }
+      pendingDeleteKey = null;
+      videoData[room].splice(i, 1);
+    } else {
+      pendingDeleteKey = null;
+      var swapIdx = i + (upBtn ? -1 : 1);
+      if (swapIdx < 0 || swapIdx >= videoData[room].length) return;
+      var tmp = videoData[room][i]; videoData[room][i] = videoData[room][swapIdx]; videoData[room][swapIdx] = tmp;
+    }
+    videoPersist().then(function(){ renderVideoRooms(); });
+  });
+
+  document.getElementById('video-save').addEventListener('click', function(){
+    var err = document.getElementById('video-err');
+    err.hidden = true;
+    var room = document.getElementById('video-room').value;
+    var raw = document.getElementById('video-id').value.trim();
+    var label = document.getElementById('video-label').value.trim();
+    if (!raw || !label) { err.textContent = 'A YouTube ID/URL and a label are required.'; err.hidden = false; return; }
+    if (!videoData) { err.textContent = 'Still loading — try again in a moment.'; err.hidden = false; return; }
+    var id = extractYouTubeId(raw);
+    if (!videoData[room]) videoData[room] = [];
+    videoData[room].push({ id: id, label: label });
+    var btn = document.getElementById('video-save');
+    btn.disabled = true; btn.textContent = 'Adding…';
+    videoPersist().then(function(res){
+      btn.disabled = false; btn.textContent = 'Add Channel';
+      if (!res.ok) { err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
+      document.getElementById('video-id').value = '';
+      document.getElementById('video-label').value = '';
+      renderVideoRooms();
+    }).catch(function(){ btn.disabled = false; btn.textContent = 'Add Channel'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  });
+
+  // ================= PITCHES =================
+  var PITCH_STATUS = { draft:'Draft', sent:'Sent', discussion:'In Discussion', won:'Won', passed:'Passed' };
+  var pitchEditingId = null;
+
+  function pitchResetForm(){
+    pitchEditingId = null;
+    ['pitch-brand','pitch-concept','pitch-link','pitch-date','pitch-notes'].forEach(function(id){ document.getElementById(id).value = ''; });
+    document.getElementById('pitch-status').value = 'draft';
+    document.getElementById('pitch-save').textContent = 'Save Pitch';
+  }
+
+  function loadPitchesDash(){
+    var loading = document.getElementById('pitches-loading');
+    var list = document.getElementById('pitches-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/.netlify/functions/content?collection=pitches')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var pitches = (data.records || []).sort(function(a,b){ return (b.createdAt||0) - (a.createdAt||0); });
+        if (!pitches.length) { list.innerHTML = '<p class="dash__empty">No pitches tracked yet.</p>'; return; }
+        list.dataset.records = JSON.stringify(pitches);
+        list.innerHTML = pitches.map(function(p){
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(p.brand || 'Untitled') + '</span>' +
+              '<span class="badge' + (p.status === 'won' ? ' badge--brass' : '') + '">' + esc(PITCH_STATUS[p.status] || p.status || '') + '</span>' +
+            '</div>' +
+            '<p class="card__meta">' + esc(p.concept || '') + (p.date ? ' &#183; ' + esc(p.date) : '') + '</p>' +
+            (p.notes ? '<div class="card__body">' + esc(p.notes) + '</div>' : '') +
+            '<div class="card__row">' +
+              (p.link ? '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(p.link) + '" target="_blank" rel="noopener">Open Link</a>' : '') +
+              '<button type="button" class="btn-sm" data-edit-pitch="' + esc(p.id) + '">Edit</button>' +
+              '<button type="button" class="btn-sm" data-delete-pitch="' + esc(p.id) + '">Delete</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load pitches.'; });
+  }
+
+  document.getElementById('pitches-list').addEventListener('click', function(e){
+    var editBtn = e.target.closest('[data-edit-pitch]');
+    if (editBtn) {
+      var records = JSON.parse(document.getElementById('pitches-list').dataset.records || '[]');
+      var p = records.filter(function(r){ return r.id === editBtn.getAttribute('data-edit-pitch'); })[0];
+      if (!p) return;
+      pitchEditingId = p.id;
+      document.getElementById('pitch-brand').value = p.brand || '';
+      document.getElementById('pitch-status').value = p.status || 'draft';
+      document.getElementById('pitch-concept').value = p.concept || '';
+      document.getElementById('pitch-link').value = p.link || '';
+      document.getElementById('pitch-date').value = p.date || '';
+      document.getElementById('pitch-notes').value = p.notes || '';
+      document.getElementById('pitch-save').textContent = 'Update Pitch';
+      document.getElementById('pitch-newform').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    var delBtn = e.target.closest('[data-delete-pitch]');
+    if (delBtn) {
+      if (!armDelete(delBtn)) return;
+      fetch('/.netlify/functions/content?collection=pitches&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-pitch')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+        .then(function(){ loadPitchesDash(); });
+    }
+  });
+
+  document.getElementById('pitch-save').addEventListener('click', function(){
+    var err = document.getElementById('pitch-err');
+    err.hidden = true;
+    var brand = document.getElementById('pitch-brand').value.trim();
+    if (!brand) { err.textContent = 'Brand / client name is required.'; err.hidden = false; return; }
+    var payload = {
+      passphraseHash: storedHash,
+      id: pitchEditingId || undefined,
+      data: {
+        brand: brand,
+        status: document.getElementById('pitch-status').value,
+        concept: document.getElementById('pitch-concept').value.trim(),
+        link: document.getElementById('pitch-link').value.trim(),
+        date: document.getElementById('pitch-date').value,
+        notes: document.getElementById('pitch-notes').value.trim(),
+      }
+    };
+    var btn = document.getElementById('pitch-save');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    authedFetch('/.netlify/functions/content?collection=pitches', {method:'POST', body: JSON.stringify(payload)})
+      .then(function(res){
+        btn.disabled = false;
+        if (!res.ok) { btn.textContent = pitchEditingId ? 'Update Pitch' : 'Save Pitch'; err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
+        pitchResetForm();
+        loadPitchesDash();
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = pitchEditingId ? 'Update Pitch' : 'Save Pitch'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  });
+
+  // ================= WEBSITES =================
+  // Source of truth: scripts/build_brands.py's BRANDS list + _redirects.
+  // Subdomain routing is mapped in _redirects but -- per that file's own
+  // comment -- "not active until DNS + Netlify domain aliases are set up",
+  // so the real live URL for each brand today is its path under this domain.
+  //
+  // SITES is declared *inside* renderWebsitesDash (not as an outer var)
+  // deliberately: this function is called synchronously from initDashboard(),
+  // which itself can run synchronously off the tryRestore() session-restore
+  // path (no awaits in that IIFE) on a page load that starts already
+  // unlocked -- i.e. before the rest of this script has finished its own
+  // top-to-bottom pass. An outer `var SITES = [...]` declared further down
+  // the file would still be `undefined` at that point (var declarations
+  // hoist, assignments don't) even though renderWebsitesDash itself, as a
+  // hoisted function declaration, is already callable. Keeping SITES local
+  // sidesteps that ordering trap entirely.
+  function renderWebsitesDash(){
+    var SITES = [
+      { name: 'Paris Pullen', pathSlug: '', subdomain: null },
+      { name: 'Dante Simpson', pathSlug: 'dantesimpson', subdomain: 'dante' },
+      { name: 'Burns Brims', pathSlug: 'burnsbrims', subdomain: 'burnsbrims' },
+      { name: 'Harvey Cummings', pathSlug: 'harveycummings', subdomain: 'harvey' },
+      { name: 'Your New Nail Tech', pathSlug: 'yournewnailtech', subdomain: 'ynnt' },
+      { name: 'Goodwill Grooming', pathSlug: 'goodwillgrooming', subdomain: 'goodwill' },
+      { name: 'El Lambert', pathSlug: 'ellambert', subdomain: 'el' },
+      { name: 'Three Piece Entertainment', pathSlug: 'threepieceentertainment', subdomain: 'threepiece' },
+      // --- The Firm: Charlotte client-pitch demo sites (no planned subdomain) ---
+      { name: "Nate's Electrical Services", pathSlug: 'nateselectrical', subdomain: null },
+      { name: 'Rise & Grind Stump Removal', pathSlug: 'riseandgrindstump', subdomain: null },
+      { name: 'J&B Garage Door Repair', pathSlug: 'jbgaragedoor', subdomain: null },
+      { name: 'All Concrete Contractors', pathSlug: 'allconcrete', subdomain: null },
+      { name: 'Loyal Mobile Mechanic', pathSlug: 'loyalmobilemechanic', subdomain: null },
+      { name: 'White Raven Mobile Mechanic', pathSlug: 'whiteraven', subdomain: null },
+      { name: 'South Charlotte Pressure Washing', pathSlug: 'southcharlottepressurewashing', subdomain: null },
+      { name: 'Zelaya Jr Painting', pathSlug: 'zelayajrpainting', subdomain: null },
+      { name: 'The Best Movers', pathSlug: 'thebestmovers', subdomain: null },
+      { name: 'Extreme Mobile Detailing', pathSlug: 'extrememobiledetailing', subdomain: null },
+      { name: 'Performance Auto Collision Center', pathSlug: 'performanceautocollision', subdomain: null },
+      { name: 'Charlotte Barber & Beard', pathSlug: 'charlottebarberandbeard', subdomain: null },
+      { name: 'Papi Ricko Latin Kitchen & Lounge', pathSlug: 'papiricko', subdomain: null },
+      { name: 'Taqueria Chonita', pathSlug: 'taqueriachonita', subdomain: null },
+      { name: 'Señor Taco Mexican Grill', pathSlug: 'senortaco', subdomain: null },
+      { name: 'Sunset Soulfood', pathSlug: 'sunsetsoulfood', subdomain: null },
+      { name: "Wings n' Tings", pathSlug: 'wingsntings', subdomain: null },
+      { name: 'Soul Bistro', pathSlug: 'soulbistro', subdomain: null },
+    ];
+    var host = document.getElementById('websites-list');
+    var origin = window.location.origin;
+    host.innerHTML =
+      '<div class="notebox">Brand subdomains (e.g. dante.parispullen.com) are mapped in <code>_redirects</code> but are <b>not active yet</b> — DNS and the Netlify domain aliases haven’t been set up. Until then, every brand site listed below is genuinely live at the path shown, not the subdomain.</div>' +
+      SITES.map(function(s){
+        var liveUrl = origin + '/' + s.pathSlug;
+        var localPath = 'paris-pullen/' + s.pathSlug;
+        return '<div class="sitecard">' +
+          '<div>' +
+            '<div class="sitecard__name">' + esc(s.name) + '</div>' +
+            '<div class="sitecard__meta">' +
+              'Local: <code>' + esc(localPath) + '</code>' +
+              (s.subdomain ? '<br>Planned subdomain (not active): <code>' + esc(s.subdomain) + '.parispullen.com</code>' : '') +
+            '</div>' +
+          '</div>' +
+          '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(liveUrl) + '" target="_blank" rel="noopener">Open Live &#8594;</a>' +
+        '</div>';
+      }).join('');
   }
 
 })();

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>The Journal — Paris Pullen</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+<style>
+  .jp__state{max-width:420px;margin-inline:auto;text-align:center;padding-top:clamp(8rem,22vh,14rem)}
+  .jp{max-width:var(--measure);margin-inline:auto;padding-top:clamp(8rem,20vh,14rem);padding-bottom:var(--s10)}
+  .jp-byline{display:flex;flex-wrap:wrap;gap:.55em;align-items:baseline}
+  .jp-byline b{color:var(--bone);font-weight:400}
+  .jp-hero{position:relative;overflow:hidden;border-radius:2px;margin-top:var(--s7);background:var(--charcoal)}
+  .jp-hero img{width:100%;height:clamp(260px,42vw,480px);object-fit:cover;display:block;filter:brightness(.82)}
+  .jp-body{margin-top:var(--s8);display:grid;gap:var(--s5)}
+  .jp-body .pullquote{margin:var(--s3) 0}
+  .jp-nav{margin-top:var(--s10);border-top:1px solid var(--rule);padding-top:var(--s7)}
+  .jp-nav a{color:var(--bone)}
+  .jp__err{color:#C0555A}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="worldnav">
+  <a class="worldnav__mark" href="index.html"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
+</header>
+
+<main>
+<section class="scene scene--pad" id="jpLoading">
+  <div class="wrap jp__state">
+    <p class="eyebrow">The Journal</p>
+    <p class="body" style="margin-top:var(--s3)">Loading&#8230;</p>
+  </div>
+</section>
+
+<section class="scene scene--pad" id="jpMissing" hidden>
+  <div class="wrap jp__state">
+    <p class="eyebrow">The Journal</p>
+    <h1 class="display display--h2">Not Found</h1>
+    <p class="body jp__err" style="margin-top:var(--s3)">This entry isn&#8217;t there, or it&#8217;s been taken down.</p>
+    <div style="margin-top:var(--s6)">
+      <a class="cta" href="journal.html"><span>Back to the Journal</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="scene scene--pad" id="jpContent" hidden>
+  <div class="wrap jp">
+    <header class="stack stack--tight reveal">
+      <p class="eyebrow jp-byline">By <b>Paris Pullen</b> &#183; <span id="jp-cat"></span> &#183; <span id="jp-read"></span></p>
+      <h1 class="display display--h1" id="jp-title">&#8212;</h1>
+      <p class="lede" id="jp-stand"></p>
+    </header>
+
+    <div class="jp-hero" id="jp-hero" hidden><img id="jp-hero-img" src="" alt=""></div>
+
+    <div class="jp-body" id="jp-body"></div>
+
+    <nav class="jp-nav reveal">
+      <a class="link-under" href="journal.html">&#8592; Back to the Journal</a>
+    </nav>
+  </div>
+</section>
+</main>
+</body>
+<script>
+(function(){
+  'use strict';
+
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  var loadingEl = document.getElementById('jpLoading');
+  var missingEl = document.getElementById('jpMissing');
+  var contentEl = document.getElementById('jpContent');
+
+  function show(el){
+    [loadingEl, missingEl, contentEl].forEach(function(e){ e.hidden = (e !== el); });
+  }
+
+  var slug = new URLSearchParams(window.location.search).get('slug');
+  if (!slug) { show(missingEl); return; }
+
+  fetch('/.netlify/functions/content?collection=journal')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var posts = (data && data.records) || [];
+      var p = posts.filter(function(x){ return x && x.slug === slug; })[0];
+      if (!p) throw new Error('not found');
+
+      document.title = (p.title || 'The Journal') + ' — Paris Pullen';
+      document.getElementById('jp-cat').textContent = p.catlabel || p.cat || '';
+      document.getElementById('jp-read').textContent = p.read || '';
+      document.getElementById('jp-title').textContent = p.title || '';
+      document.getElementById('jp-stand').textContent = p.stand || '';
+
+      var heroUrl = p.hero && p.hero.url;
+      if (heroUrl) {
+        document.getElementById('jp-hero-img').src = heroUrl;
+        document.getElementById('jp-hero-img').alt = (p.hero && p.hero.alt) || '';
+        document.getElementById('jp-hero').hidden = false;
+      }
+
+      var body = p.body || [];
+      document.getElementById('jp-body').innerHTML = body.map(function(para){
+        if (typeof para !== 'string') return '';
+        if (para.indexOf('PQ::') === 0) return '<p class="pullquote">' + esc(para.slice(4)) + '</p>';
+        return '<p class="body">' + esc(para) + '</p>';
+      }).join('') || '<p class="body">Nothing here yet.</p>';
+
+      show(contentEl);
+    })
+    .catch(function(){
+      show(missingEl);
+    });
+})();
+</script>
+</html>

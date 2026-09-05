@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 208" fill-rule="evenodd">
+  <!-- The interlocking double P: a serif P and its mirror, sharing a centre
+       stem, as the brass monogram mounted in the Study. Flat solid shapes
+       with no colour of its own, so it works both ways: tinted through a CSS
+       mask (the header wordmark paints it via its foxx-color variable), and
+       filled directly (the favicon). -->
+  <g fill="#000">
+    <!-- right hand P: stem, then bowl with its counter punched out -->
+    <path d="M121 18h14v150h-14z"/>
+    <path d="M135 18h15c46 0 64 22 64 49s-18 49-64 49h-15zm0 15h15c34 0 46 14 46 34s-12 34-46 34h-15z"/>
+    <!-- left hand P: the same two shapes mirrored about the centre line -->
+    <g transform="translate(240,0) scale(-1,1)">
+      <path d="M121 18h14v150h-14z"/>
+      <path d="M135 18h15c46 0 64 22 64 49s-18 49-64 49h-15zm0 15h15c34 0 46 14 46 34s-12 34-46 34h-15z"/>
+    </g>
+    <!-- one shared bracketed serif foot across both stems -->
+    <path d="M88 190c12 0 17-7 17-18v-6h30v6c0 11 5 18 17 18v12H88z"/>
+  </g>
+</svg>

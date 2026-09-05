@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>A Selection — Paris Pullen</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/world.css">
+<style>
+  .lb__state{max-width:420px;margin-inline:auto;text-align:center;padding-top:clamp(8rem,22vh,14rem)}
+  .lb{max-width:900px;margin-inline:auto;padding-top:clamp(6rem,16vh,9rem);padding-bottom:var(--s10)}
+  .lb__eyebrow{display:flex;align-items:center;gap:.6em}
+  .lb__eyebrow::before{content:'';width:2em;height:1px;background:var(--brass)}
+  .lb__name{margin-top:var(--s3)}
+  .lb__note{
+    margin-top:var(--s6);max-width:56ch;color:var(--bone);font-size:1.05rem;line-height:1.75;
+    font-family:var(--font-display);font-style:italic;
+    padding-left:var(--s5);border-left:1px solid var(--brass);
+  }
+  .lb__meta{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;color:var(--graphite);margin-top:var(--s5)}
+  .lb__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--s6);margin-top:var(--s8)}
+  .lb__card{display:block}
+  .lb__media{position:relative;aspect-ratio:3/4;overflow:hidden;background:#111;border:1px solid var(--hairline)}
+  .lb__media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 600ms var(--ease-out)}
+  .lb__card:hover .lb__media img{transform:scale(1.04)}
+  .lb__cat{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.16em;text-transform:uppercase;
+    color:var(--brass);margin-top:var(--s4)}
+  .lb__itemname{font-family:var(--font-display);font-size:1.15rem;line-height:1.2;margin-top:.4em;color:var(--ivory)}
+  .lb__itemnote{color:var(--graphite);font-size:.85rem;line-height:1.5;margin-top:.4em}
+  .lb__price{font-family:var(--font-mono);font-size:.85rem;color:var(--bone);margin-top:.5em}
+  .lb__cta{
+    margin-top:var(--s9);padding-top:var(--s7);border-top:1px solid var(--rule);
+    display:flex;justify-content:space-between;align-items:center;gap:var(--s5);flex-wrap:wrap;
+  }
+  .lb__cta p{max-width:38ch;color:var(--bone)}
+  .lb__err{color:#C0555A}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="worldnav">
+  <a class="worldnav__mark" href="index.html"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
+</header>
+
+<main>
+<section class="scene scene--pad" id="lbLoading">
+  <div class="wrap lb__state">
+    <p class="eyebrow">A Selection</p>
+    <p class="body" style="margin-top:var(--s3)">Loading&#8230;</p>
+  </div>
+</section>
+
+<section class="scene scene--pad" id="lbMissing" hidden>
+  <div class="wrap lb__state">
+    <p class="eyebrow">A Selection</p>
+    <h1 class="display display--h2">Not Found</h1>
+    <p class="body lb__err" style="margin-top:var(--s3)" id="lbMissingReason">This link isn&#8217;t valid, or the selection has been removed.</p>
+    <p class="body" style="margin-top:var(--s5)">If you believe this is a mistake, reach out and it&#8217;ll be sent again.</p>
+    <div style="margin-top:var(--s6)">
+      <a class="cta" href="mailto:hello@parispullen.com"><span>Email Paris Pullen</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="scene scene--pad" id="lbContent" hidden>
+  <div class="wrap lb">
+    <p class="eyebrow lb__eyebrow">Curated, Privately</p>
+    <h1 class="display display--h2 lb__name" id="lb-name">A Selection For You</h1>
+    <div class="lb__note" id="lb-note" hidden></div>
+    <p class="lb__meta" id="lb-meta"></p>
+
+    <div class="lb__grid" id="lb-grid"></div>
+
+    <div class="lb__cta">
+      <p>Questions about fit, availability, or timing — just reply to the text this came with.</p>
+      <a class="cta cta--ghost" id="lb-contact" href="mailto:hello@parispullen.com"><span>Get in Touch</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+  'use strict';
+
+  function money(v){
+    var n = Number(v || 0);
+    return n.toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0});
+  }
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function fmtDate(ts){
+    if (!ts) return '';
+    try { return new Date(ts).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}); }
+    catch(e){ return ''; }
+  }
+
+  var loadingEl = document.getElementById('lbLoading');
+  var missingEl = document.getElementById('lbMissing');
+  var contentEl = document.getElementById('lbContent');
+
+  function show(el){
+    [loadingEl, missingEl, contentEl].forEach(function(e){ e.hidden = (e !== el); });
+  }
+
+  var id = new URLSearchParams(window.location.search).get('id');
+  if (!id) {
+    document.getElementById('lbMissingReason').textContent = 'No selection was specified in this link.';
+    show(missingEl);
+    return;
+  }
+
+  fetch('/.netlify/functions/content?collection=curations&id=' + encodeURIComponent(id))
+    .then(function(r){
+      if (!r.ok) throw new Error('not found');
+      return r.json();
+    })
+    .then(function(c){
+      var first = (c.clientName || '').trim().split(/\s+/)[0];
+      document.getElementById('lb-name').textContent = first ? 'For ' + first : 'A Selection For You';
+      document.title = (first ? first + '’s Selection' : 'A Selection') + ' — Paris Pullen';
+
+      if (c.note) {
+        var noteEl = document.getElementById('lb-note');
+        noteEl.textContent = c.note;
+        noteEl.hidden = false;
+      }
+
+      var items = c.items || [];
+      document.getElementById('lb-meta').innerHTML = items.length + ' piece' + (items.length === 1 ? '' : 's') + ' &#183; pulled ' + fmtDate(c.createdAt);
+
+      document.getElementById('lb-grid').innerHTML = items.map(function(it){
+        return '<article class="lb__card">' +
+          '<div class="lb__media"><img src="' + esc(it.img || '') + '" alt="' + esc(it.name || '') + '" loading="lazy"></div>' +
+          '<p class="lb__cat">' + esc(it.cat || '') + (it.color ? ' &#183; ' + esc(it.color) : '') + '</p>' +
+          '<h3 class="lb__itemname">' + esc(it.name || '') + '</h3>' +
+          (it.note ? '<p class="lb__itemnote">' + esc(it.note) + '</p>' : '') +
+          (it.price ? '<p class="lb__price">$' + money(it.price) + '</p>' : '') +
+        '</article>';
+      }).join('') || '<p class="body">Nothing pulled yet.</p>';
+
+      var subject = encodeURIComponent('Following up on my selection' + (first ? ' — ' + first : ''));
+      var body = encodeURIComponent('Hi Paris,\n\nI took a look at the pieces you pulled for me and had a question.\n\n');
+      document.getElementById('lb-contact').href = 'mailto:hello@parispullen.com?subject=' + subject + '&body=' + body;
+
+      show(contentEl);
+    })
+    .catch(function(){
+      document.getElementById('lbMissingReason').textContent = 'This link isn’t valid, or the selection has been removed.';
+      show(missingEl);
+    });
+})();
+</script>
+</body>
+</html>

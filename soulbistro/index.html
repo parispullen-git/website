@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soul Bistro | Food Truck &amp; Catering, Charlotte NC</title>
+<meta name="description" content="Smoked BBQ, fried chicken and fish, and Southern soul food — book Soul Bistro for catering or find the truck around Charlotte, NC. Call (704) 724-4557.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Staatliches&family=Nunito:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --charcoal:#1A1512; --charcoal-2:#252019;
+  --magenta:#C81D5B; --magenta-dk:#95123F;
+  --mustard:#E8A33D; --mustard-dk:#B87A22;
+  --cream:#F5EDE1; --paper:#FAF4EA; --card:#FFFFFF;
+  --ink:#211A14; --ink-2:#5B4F42; --line:#EEE2CC; --line-hard:#E0CBA0;
+  --shadow:0 1px 2px rgba(33,26,20,.08), 0 18px 34px -20px rgba(33,26,20,.32);
+  --disp:"Staatliches", "Arial Narrow", sans-serif;
+  --body:"Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:"Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{text-wrap:balance;margin:0;font-family:var(--disp);font-weight:400;letter-spacing:.02em}
+p{margin:0 0 1em}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:8px;font-weight:800;font-size:15.5px;letter-spacing:.03em;border:2px solid transparent;cursor:pointer;transition:transform .15s ease, background .15s ease;text-transform:uppercase;font-family:var(--body)}
+.btn-magenta{background:var(--magenta);color:#fff}
+.btn-magenta:hover{transform:translateY(-1px);background:#DE2A6C}
+.btn-mustard{background:var(--mustard);color:var(--charcoal)}
+.btn-mustard:hover{transform:translateY(-1px);background:#F0B457}
+.btn-outline{border-color:rgba(255,255,255,.4);color:#fff}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+header{position:sticky;top:0;z-index:50;background:rgba(26,21,18,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;color:#fff}
+.brand .mark{width:40px;height:40px;background:var(--magenta);border-radius:8px;display:grid;place-items:center;color:#fff;font-family:var(--disp);font-size:15px}
+.brand .word{font-family:var(--disp);font-size:20px;line-height:1.1}
+.brand .word span{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.12em;color:var(--mustard);text-transform:uppercase;margin-top:4px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.82);font-size:14px;font-weight:600}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:flex;align-items:center;gap:18px}
+.nav-phone{color:#fff;font-weight:700;font-family:var(--mono);font-size:14px;display:flex;align-items:center;gap:7px}
+.burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+@media (max-width:900px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-phone{font-size:12px;white-space:nowrap}
+  .nav-phone span.lbl{display:none}
+}
+
+/* hero: two-CTA booking-forward, not a menu/dine-in shape */
+.hero{position:relative;background:var(--charcoal);color:#fff;overflow:hidden;padding:76px 0 0}
+.hero::before{content:"";position:absolute;inset:0;opacity:.5;background-image:radial-gradient(1.5px 1.5px at 15% 25%, var(--mustard), transparent),radial-gradient(1.5px 1.5px at 70% 60%, var(--magenta), transparent),radial-gradient(1px 1px at 40% 80%, var(--mustard), transparent)}
+.hero-inner{position:relative;text-align:center;max-width:760px;margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mustard);background:rgba(232,163,61,.14);border:1px solid rgba(232,163,61,.4);padding:7px 14px;border-radius:100px;margin-bottom:22px}
+h1.headline{font-size:clamp(36px,6vw,64px);line-height:1.05;color:#fff}
+h1.headline em{font-style:normal;color:var(--magenta)}
+.hero-sub{font-size:17.5px;color:rgba(255,255,255,.78);max-width:52ch;margin:22px auto 0}
+
+/* two-lane CTA — the core structural device */
+.lanes{position:relative;margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:0}
+.lane{padding:44px 34px;position:relative}
+.lane.catering{background:linear-gradient(155deg, var(--magenta-dk), var(--magenta));}
+.lane.truck{background:linear-gradient(155deg, #2B2419, var(--charcoal-2));}
+.lane-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:100px;margin-bottom:16px;background:rgba(255,255,255,.14);color:#fff}
+.lane h2{font-size:30px;color:#fff;margin-bottom:10px}
+.lane p{color:rgba(255,255,255,.82);font-size:15px;margin-bottom:22px}
+@media (max-width:760px){.lanes{grid-template-columns:1fr}}
+
+/* sections */
+section{padding:80px 0}
+.section-head{max-width:640px;margin:0 auto 44px;text-align:center}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--magenta-dk);margin-bottom:10px;display:inline-block;font-weight:700}
+h2.h-section{font-size:clamp(28px,3.6vw,42px)}
+.section-sub{color:var(--ink-2);font-size:16.5px;margin-top:12px}
+
+/* what's cooking — menu lines, not sit-down menu */
+.cooking{background:var(--card)}
+.cook-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.cook-card{background:var(--paper);border:1px solid var(--line-hard);border-radius:12px;padding:26px}
+.cook-ico{width:42px;height:42px;color:var(--magenta);background:var(--cream);border-radius:50%;display:grid;place-items:center;margin-bottom:14px}
+.cook-card h3{font-size:19px;margin-bottom:8px;font-family:var(--body);font-weight:800}
+.cook-card p{color:var(--ink-2);font-size:14.5px}
+@media (max-width:900px){.cook-grid{grid-template-columns:1fr}}
+
+/* story */
+.story{background:var(--charcoal);color:#fff}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.story h2{color:#fff}
+.story p{color:rgba(255,255,255,.78);font-size:16px}
+.imgph{aspect-ratio:4/3;border-radius:10px;background:linear-gradient(155deg, var(--mustard) 0%, var(--mustard-dk) 100%);position:relative;overflow:hidden;display:grid;place-items:center}
+.imgph::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg, rgba(0,0,0,.08) 0 2px, transparent 2px 14px)}
+.ph-label{position:relative;z-index:1;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:rgba(0,0,0,.6);border:1px dashed rgba(0,0,0,.35);padding:8px 14px;border-radius:100px;text-align:center}
+
+/* event types — booking framing instead of hours/location */
+.events{background:var(--paper)}
+.event-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.event-chip{background:var(--card);border:1px solid var(--line-hard);border-radius:100px;padding:14px 18px;text-align:center;font-weight:700;font-size:14px;color:var(--ink)}
+@media (max-width:820px){.event-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* reviews */
+.reviews{background:var(--card)}
+.rev-top{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:36px;justify-content:center}
+.stars{color:var(--magenta);font-size:20px;letter-spacing:2px}
+.rev-count{color:var(--ink-2);font-size:14.5px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev-card{background:var(--paper);border:1px solid var(--line-hard);border-radius:12px;padding:24px}
+.rev-card .stars{font-size:14.5px;margin-bottom:12px;display:block}
+.rev-card p{font-size:14.5px;color:var(--ink);margin:0 0 14px;font-style:italic}
+.rev-src{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);text-transform:uppercase}
+@media (max-width:820px){.rev-grid{grid-template-columns:1fr}}
+
+/* final booking CTA — no address/hours section, this is the closer */
+.book{background:linear-gradient(120deg, var(--magenta-dk), var(--magenta));color:#fff;text-align:center}
+.book h2{margin-bottom:14px;color:#fff;font-size:clamp(28px,4vw,44px)}
+.book p{color:rgba(255,255,255,.85);max-width:54ch;margin:0 auto 30px}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.book-meta{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,.2)}
+.book-meta div{font-family:var(--mono);font-size:12.5px;color:rgba(255,255,255,.8);text-transform:uppercase;letter-spacing:.04em}
+.book-meta b{display:block;color:#fff;font-family:var(--body);font-size:15px;text-transform:none;letter-spacing:0;margin-bottom:4px}
+
+footer{background:var(--charcoal);color:rgba(255,255,255,.5);padding:32px 0}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13.5px}
+.foot-brand{color:#fff;font-family:var(--disp);font-size:17px}
+
+@media (max-width:900px){
+  .story-grid{grid-template-columns:1fr}
+  .story-grid .imgph{order:-1}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark">SB</span>
+      <span class="word">Soul Bistro<span>Food Truck &amp; Catering</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#catering">Catering</a>
+      <a href="#truck">Find the Truck</a>
+      <a href="#cooking">What We Cook</a>
+      <a href="#reviews">Reviews</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:17047244557" class="nav-phone"><span class="lbl">Call:</span> (704) 724-4557</a>
+      <button class="burger" aria-label="Menu">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Mobile kitchen &middot; Serving Charlotte, NC</span>
+    <h1 class="headline">No storefront. <em>Just really good food</em>, wherever we park.</h1>
+    <p class="hero-sub">Soul Bistro is a Charlotte food truck and catering operation — smoked BBQ, fried chicken and fish, and Southern soul food sides. Book us for your event, or catch the truck out around the city.</p>
+  </div>
+  <div class="lanes">
+    <div class="lane catering" id="catering">
+      <span class="lane-tag">Book an event</span>
+      <h2>Catering</h2>
+      <p>Private parties, tailgates, office lunches, weddings — we bring the smoker and the full menu to you.</p>
+      <a href="tel:17047244557" class="btn btn-mustard">Book Catering: (704) 724-4557</a>
+    </div>
+    <div class="lane truck" id="truck">
+      <span class="lane-tag">Find us today</span>
+      <h2>The Truck</h2>
+      <p>Rolling around Charlotte on a rotating schedule. Follow along to catch us at your neighborhood or event.</p>
+      <a href="https://www.facebook.com/p/Soul-Bistro-100064873155980/" class="btn btn-outline" target="_blank" rel="noopener">Check Facebook for Location</a>
+    </div>
+  </div>
+</section>
+
+<section class="cooking" id="cooking">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What we cook</span>
+      <h2 class="h-section">Smoked, fried, and seasoned right</h2>
+      <p class="section-sub">The same menu shows up whether you're catching the truck or booking us for your event.</p>
+    </div>
+    <div class="cook-grid">
+      <div class="cook-card">
+        <div class="cook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></div>
+        <h3>Smoked BBQ</h3>
+        <p>Ribs and brisket, smoked low and slow until it falls apart.</p>
+      </div>
+      <div class="cook-card">
+        <div class="cook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.46-3.44 6-7 6-3.56 0-7.56-2.54-8.5-6z"/><path d="M6.5 12 2 9v6z"/></svg></div>
+        <h3>Fried Chicken &amp; Fish</h3>
+        <p>Crispy fried chicken and fish, plus pulled pork and smoked turkey legs.</p>
+      </div>
+      <div class="cook-card">
+        <div class="cook-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
+        <h3>Southern Sides</h3>
+        <p>Mac and cheese and baked beans round out every plate and every tray.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="wrap story-grid">
+    <div class="imgph"><span class="ph-label">Photo: food truck smoker vented, plates being served window-side</span></div>
+    <div>
+      <span class="kicker" style="color:var(--mustard)">The story</span>
+      <h2 class="h-section">Started by someone who left a desk job to cook</h2>
+      <p>Soul Bistro launched in 2021, started by a retired telecom professional who traded a desk for a smoker. What began as a single food trailer has grown into a full catering operation — same Southern comfort food, now serving private parties and tailgates across Charlotte alongside the truck's regular stops.</p>
+      <a href="tel:17047244557" class="btn btn-magenta">Call (704) 724-4557</a>
+    </div>
+  </div>
+</section>
+
+<section class="events">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Book us for</span>
+      <h2 class="h-section">Any event that needs real food</h2>
+    </div>
+    <div class="event-grid">
+      <div class="event-chip">Private Parties</div>
+      <div class="event-chip">Tailgates</div>
+      <div class="event-chip">Office Lunches</div>
+      <div class="event-chip">Weddings &amp; Gatherings</div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="rev-top">
+      <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="rev-count">Reviewed on Yelp &amp; food truck directories</span>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>"Booked them for a tailgate and the brisket disappeared in twenty minutes."</p>
+        <div class="rev-src">Review &middot; Charlotte</div>
+      </div>
+      <div class="rev-card">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>"Caught the truck downtown on a whim. Fried fish was better than most sit-down spots."</p>
+        <div class="rev-src">Review &middot; Charlotte</div>
+      </div>
+      <div class="rev-card">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>"Hired them for our office lunch and it was the best catering we've had, hands down."</p>
+        <div class="rev-src">Review &middot; Charlotte</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="book">
+  <div class="wrap">
+    <h2>Ready to book, or just want to know where we'll be?</h2>
+    <p>Catering inquiries and truck-schedule questions both start with one call.</p>
+    <div class="cta-actions">
+      <a href="tel:17047244557" class="btn btn-mustard">Call (704) 724-4557</a>
+      <a href="https://www.facebook.com/p/Soul-Bistro-100064873155980/" class="btn btn-outline" target="_blank" rel="noopener">Follow on Facebook</a>
+    </div>
+    <div class="book-meta">
+      <div><b>Serving</b>Charlotte, NC &amp; surrounding areas</div>
+      <div><b>Booking</b>Catering &amp; private events</div>
+      <div><b>Truck Schedule</b>Posted on Facebook</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="foot-brand">Soul Bistro</span>
+    <span>(704) 724-4557 &middot; Food Truck &amp; Catering, Charlotte NC</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.burger').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  links.style.display = open ? 'none' : 'flex';
+  links.style.cssText += open ? '' : 'flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#1A1512;padding:20px 24px;gap:16px;';
+});
+</script>
+</body>
+</html>

@@ -17,6 +17,9 @@ _index_src = open("index.html", encoding="utf-8").read()
 SITE_HEADER = re.search(r'<header class="worldnav">.*?</header>', _index_src, re.S).group(0)
 SITE_MENU = re.search(r'<nav class="menu".*?</nav>', _index_src, re.S).group(0)
 SITE_FOOT = re.search(r'<footer class="foot foot--film">.*?</footer>', _index_src, re.S).group(0)
+# The social row is lifted from index.html too rather than re-typed here, so
+# the icon set and handles can never drift from the rest of the site.
+SITE_SOCIAL = re.search(r'<div class="social">.*?</a>\s*</div>', _index_src, re.S).group(0)
 
 FLOORS = [
  dict(id="skyline", lvl="29", name="The Skyline Club", state="members",
@@ -34,7 +37,6 @@ FLOORS = [
    note="Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.",
    arts=[
     ("journal","The Journal","28%","91%","Left face-down and open, which he knows ruins a spine. Everything written in it eventually turns up here, several drafts later — dispatches, not diary entries.",[("Position","Face-down"),("Draft or final","Several drafts later"),("Read it","The Journal")]),
-    ("cocktail","The Nightcap","62.92%","51.89%","One glass, poured before anyone else arrives and topped up for no one after. A short, exact list of what's in it and how — a sponsor will eventually put their name on this page.",[("Poured","Before company"),("Recipe list","Coming")]),
     ("piano","The Piano","72%","88%","He played trumpet for seven years, first chair, and cannot play this at all. It is here because a room with a piano in it behaves differently from a room without one — and because it's wired to whatever he's actually listening to.",[("Played by him","No"),("Actual instrument","Trumpet"),("Function","Atmosphere & the speakers")]),
     ("vault","The Vault","91%","70%","Brass wheel, black steel, set into the wall beside the piano and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.",[("Concealed","No"),("Contents","UR Welcome"),("Combination","One person")]),
     ("candle","The Candle","74.58%","36.17%","Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome — coming soon.",[("Status","Coming soon"),("Lit","Not yet")]),
@@ -45,8 +47,7 @@ FLOORS = [
    img="room-bedroom", grade="", focus="50% 52%",
    note="Blackout to the glass, and a bed that faces away from the view on purpose.",
    arts=[
-    ("bed","The Bed","46%","62%","Faces away from the window. A view that good will keep a man up, and he decided some years ago that he would rather sleep.",[("Orientation","Away from the glass"),("Wake","5:40, unaided"),("Phone","Charges across the room")]),
-    ("window","The Glass","20%","46%","Floor to ceiling, blackout-lined. The city is thirty floors down and completely silent from here, which takes most people a night to get used to.",[("Glazing","Acoustic"),("Blinds","Blackout"),("Sound at night","None")]),
+    ("artwork","The Artwork","67%","36%","Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.",[("Acquired","Early, badly timed"),("Subject","Unexplained"),("Moved with him","Every time")]),
     ("chair","The Lounge Chair","10%","72%","Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.",[("Faces","The city"),("Television","None"),("Hours logged","Considerable")]),
     ("door","The Closet Door","93%","54%","Left open more often than not. What is behind it is arranged by occasion, not by colour \u2014 see the Closet.",[("Kept","Open"),("Ordered by","Occasion")]),
    ]),
@@ -54,12 +55,7 @@ FLOORS = [
  dict(id="bath", lvl="28", name="The Bathroom", state="restricted",
    img="room-bath", grade="", focus="50% 50%",
    note="Stone, brass and steam, with the whole city on the other side of the glass.",
-   arts=[
-    ("tub","The Tub","47%","64%","Freestanding, deep, set square to the window. Filled perhaps twice a month and always at the end of a long one.",[("Position","Facing the glass"),("Used","Rarely, deliberately")]),
-    ("vanity","The Vanity","16%","62%","Double basins, unlacquered brass gone dark at the handles. The mirror is lit from the sides so a man sees his face rather than his shadow.",[("Brass","Unlacquered"),("Lighting","Side-lit, never overhead")]),
-    ("shower","The Shower","74%","50%","Marble on three sides, glass on the fourth. The bench is not decorative; it is where the day gets thought about before it starts.",[("Enclosure","Stone and glass"),("Bench","Used")]),
-    ("robe","The Robe","31%","44%","Hung where it is reachable from the tub. Heavy waffle cotton, no monogram, replaced every year without discussion.",[("Cloth","Waffle cotton"),("Monogram","None"),("Replaced","Annually")]),
-   ]),
+   arts=[]),
 
  dict(id="closet", lvl="28", name="The Closet", state="restricted",
    img="room-closet", grade="", focus="50% 52%",
@@ -77,16 +73,15 @@ FLOORS = [
     ("hellofresh","The Delivery","53%","60%","It arrived before he did. No note, no ceremony — just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.",[]),
    ]),
 
- dict(id="study", lvl="27", name="The Study", state="restricted",
+ dict(id="study", lvl="28", name="The Study", state="restricted",
    img="room-study", grade="", focus="50% 52%",
    note="The room where the answer is usually no, and where it gets said politely.",
    arts=[
     ("monogram","The Monogram","57%","30%","Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.",[("Material","Brass"),("Other branding here","None"),("Self-aware","Entirely")]),
-    ("desk","The Desk","52%","62%","Walnut, faces the door rather than the window. A man who sits with his back to a room is not paying attention to it.",[("Faces","The door"),("Wood","Walnut"),("Rule","Never back to the room")]),
+    ("pullenlaws","The Pullen Laws","38%","37%","Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.",[("Count","Fourteen"),("Written over","Eleven years"),("Read aloud","Thirteen of them")]),
+    ("journal","The Journal","57%","57%","This week's pages, face-up on the blotter for once, marked in pencil rather than ink so that nothing is decided yet. What survives the pencil goes out as a dispatch. Most of it does not survive the pencil.",[("State","Draft"),("Marked in","Pencil"),("Survival rate","Low")]),
+    ("cocktails","The Cocktail Guide","75%","37%","Six drinks, written on a card and kept behind the bottles, because a man looking up an Old Fashioned in front of guests has already lost the evening. Six is the entire list. There has never been a seventh.",[("Drinks","Six"),("Kept","Behind the bottles"),("Consulted in company","Never")]),
     ("map","The Map","91%","44%","Brass inlay on black. Cities he has worked, not cities he has visited \u2014 a distinction he will make if you ask.",[("Marks","Cities worked"),("Not","Cities visited")]),
-    ("bottles","The Shelf","83%","50%","The whiskey is at eye level and the books are above it, which several visitors have pointed out is the wrong way round.",[("Whiskey","Eye level"),("Books","Higher"),("Observed by guests","Frequently")]),
-    ("chairs","The Two Chairs","44%","76%","Placed on the guest side, close enough together that two people arriving must sit as a pair. Negotiations go differently when nobody can flank.",[("Count","Two"),("Spacing","Deliberate"),("Effect","No flanking")]),
-    ("standingorder","The Standing Order","35%","55%","A card, handwritten, tucked under the desk blotter where he will actually see it: Tuesday. HelloFresh. Don’t cancel it again. The assistant stopped asking permission to reorder it two years ago.",[("Day","Tuesday"),("Cancelled","Never twice"),("Standing since","Two years")]),
    ]),
 
  dict(id="cinema", lvl="27", name="The Cinema", state="restricted",
@@ -224,6 +219,93 @@ FLOORS = [
 def esc(t):
     return t.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#8217;")
 
+# Only Levels 27-28 (The Penthouse) are open to the public right now --
+# every other floor in FLOORS is real, authored content kept around as
+# source material, but not built into the site. Restricting the actual
+# room-pager to this subset, rather than deleting the rest of FLOORS,
+# keeps that content available to re-open later with a one-line change.
+#
+# Order here (not FLOORS' own narrative authoring order) is what the
+# room-pager's slide direction is actually built from -- it pages by
+# array index (translateX(-i*100%)), so a "left" move needs to land on a
+# lower index and a "right" move a higher one, or the slide visually
+# runs backwards from what the arrow/swipe implied. The two rows below
+# are independent left-right chains (ROOM_ADJACENCY has no left/right
+# link between them), so only the order *within* each row matters:
+#   Kitchen -> Living Floor -> Cinema            (Level 27)
+#   Study -> Bedroom -> Closet -> Bathroom        (Level 28)
+_PENTHOUSE_ORDER = ["kitchen", "penthouse-living", "cinema", "study", "bedroom", "closet", "bath"]
+_penthouse_by_id = {f["id"]: f for f in FLOORS if f["lvl"] in ("27", "28")}
+PENTHOUSE_FLOORS = [_penthouse_by_id[_id] for _id in _PENTHOUSE_ORDER]
+START_ROOM = "penthouse-living"  # data-start-room below; also which screen (if any) autoplays on load
+
+# Room-to-room navigation is a real 2D layout, not a linear sequence:
+#   Level 28:  Study <-> Bedroom <-> Closet <-> Bathroom
+#                            |
+#   Level 27:  Kitchen <-> Living Floor <-> Cinema
+# Left/right/up/down each name an explicit neighbor id (or are absent at an
+# edge) -- room-pager.js reads these directly rather than paging by array
+# index, so DOM order no longer needs to match traversal order.
+ROOM_ADJACENCY = {
+    "penthouse-living": {"left": "kitchen", "right": "cinema", "up": "bedroom"},
+    "kitchen":           {"right": "penthouse-living"},
+    "cinema":             {"left": "penthouse-living"},
+    "bedroom":            {"left": "study", "right": "closet", "down": "penthouse-living"},
+    "study":              {"right": "bedroom"},
+    "closet":             {"left": "bedroom", "right": "bath"},
+    "bath":               {"left": "closet"},
+}
+
+# Room-to-room nav (ROOM_ADJACENCY, above) is fully explicit now, but the
+# (currently hidden, see .nav-panel:has(...) in world.css) corner "Floors"
+# panel still lists every open level by its own entry room, which needs
+# levels sorted top-to-bottom. Levels aren't plain integers ("G", "B1",
+# "B2", "12M" all appear), and FLOORS' own file order groups same-level
+# rooms together for narrative reasons rather than strict building order,
+# so it can't be used directly for floor ordering -- level_key() gives
+# every level a real, comparable number.
+def level_key(lvl):
+    if lvl == "G":
+        return 0.0
+    if lvl.startswith("B"):
+        return -float(lvl[1:])
+    if lvl.endswith("M"):
+        return float(lvl[:-1]) - 0.5  # a mezzanine sits just below its numbered floor
+    return float(lvl)
+
+_level_entry_room = {}  # level string -> id of that level's first room in file order
+for _f in PENTHOUSE_FLOORS:
+    _level_entry_room.setdefault(_f["lvl"], _f["id"])
+_levels_desc = sorted(_level_entry_room, key=level_key, reverse=True)
+
+# The corner nav-panel's button list (assets/js/nav-panel.js) -- one button
+# per open floor, going to that floor's entry room.
+def _nav_panel_rows(floors_index):
+    rows = []
+    for lvl in _levels_desc:
+        room = floors_index[_level_entry_room[lvl]]
+        rows.append(
+            f'<button type="button" class="nav-panel__btn" data-nav-panel-go="{room["id"]}">'
+            f'<span class="nav-panel__btn-lvl">{lvl}</span>'
+            f'<span class="nav-panel__btn-name">{esc(room["name"])}</span></button>'
+        )
+    return "\n    ".join(rows)
+
+# The mobile menu's Explore section (index.html's <nav class="menu">, hand-
+# authored, not generated) is meant to list every open room -- warn rather
+# than fail if someone adds/removes/renames one here and forgets to update
+# that hand-typed list, since drift there is silent otherwise.
+_menu_room_ids = set(re.findall(r'href="house\.html#([\w-]+)"', SITE_MENU))
+_floor_ids = set(f["id"] for f in PENTHOUSE_FLOORS)
+if _menu_room_ids != _floor_ids:
+    import sys
+    _missing = _floor_ids - _menu_room_ids
+    _stale = _menu_room_ids - _floor_ids
+    if _missing:
+        print(f"WARNING: index.html's menu Explore list is missing floors: {sorted(_missing)}", file=sys.stderr)
+    if _stale:
+        print(f"WARNING: index.html's menu Explore list has floors no longer open: {sorted(_stale)}", file=sys.stderr)
+
 # Rooms with a playable screen — id/label must match the matching entry in
 # CHANNEL_SETS[channel_set][0] in assets/js/tv-remote.js.
 TV_SCREENS = {
@@ -235,8 +317,33 @@ TV_SCREENS = {
     "cinema": dict(
         x="50%", y="37.6%", w="27.9%", h="29.3%",
         box="0.3604,0.2296,0.6396,0.5222",
-        channel_set="cinema", id="w7fuOkF74Zw", label="Power — First Look",
+        channel_set="cinema", id="gnm4HgIAVmU", label="The Thomas Crown Affair — Official Teaser Trailer",
     ),
+}
+
+# Physical "open the remote" artifact-style marker in the room photo, for
+# rooms where it's worth one -- reachable without clicking the screen
+# itself, or (for the Living Floor, sitting mid-room where it just got in
+# the way of the coffee table) the always-visible fixed Remote pill.
+# Cinema sits at the foot of the screen (derived from its box above --
+# y + h/2, the bottom edge).
+REMOTE_NODE_POS = {
+    "cinema": ("50%", "53%"),
+}
+
+# "The City" marker -- a real link to charlotte.html, styled exactly like an
+# artifact dot but NOT a drawer (no data-artifact attribute, so world.js's
+# drawer delegate never claims the click and the <a> navigates normally).
+# Same shape as REMOTE_NODE_POS above: any room that has glass worth
+# walking through gets an entry here, positioned on that room's own view.
+# Keep every position clear of the fixed left/right nav arrows -- those are
+# pinned to the viewport edges and vertically centred, so stay past x=14%
+# on the left and off mid-height at the far right.
+CITY_NODE_POS = {
+    "penthouse-living": ("17%", "62%"),   # left-hand window wall, mid-height, clear of the Kitchen arrow
+    "bedroom":          ("20%", "46%"),   # the floor-to-ceiling glass left of the bed
+    "bath":             ("50%", "50%"),   # the city behind the tub, centred on the glass
+    "kitchen":          ("93%", "25%"),   # the right-hand window, high enough to clear the next-room arrow
 }
 
 KITCHEN_HELLOFRESH_UNLOCK = '''<div class="hf-unlock">
@@ -254,18 +361,24 @@ KITCHEN_HELLOFRESH_UNLOCK = '''<div class="hf-unlock">
 JOURNAL_CTA = ('<a class="cta pent__open" href="journal.html" style="margin-top:var(--s2)">'
     '<span>Read the Journal</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
 
+# The Monogram is the one branded object in the apartment, so its drawer is
+# where the man behind the mark actually introduces himself -- portrait,
+# short bio, the mission line, and the real social accounts. SITE_SOCIAL is
+# lifted from index.html at build time (above) so the handles and icon set
+# can't drift from the rest of the site.
+MONOGRAM_BIO = f'''<div class="bio">
+                  <img class="bio__portrait" src="assets/img/paris-hero.jpg"
+                       srcset="assets/img/paris-hero@sm.jpg 900w, assets/img/paris-hero.jpg 1800w"
+                       sizes="(max-width:760px) 88vw, 30vw" alt="Paris Pullen" loading="lazy">
+                  <p class="bio__mission">The city thinks he&#8217;s selling luxury. The people who matter know he&#8217;s selling access.</p>
+                  <p class="body">Charlotte, by way of three schools, seven years of trumpet and a backpack business printing t-shirts for his own classmates. A cold email nobody asked for turned into brand activation work; that turned into a nightlife partnership that made a 600-capacity room the best Friday in the city; that turned into hosting, then building rooms of his own.</p>
+                  <p class="body">Menswear, hospitality, automotive culture and fragrance &#8212; run as one practice rather than four hobbies. The through-line is the same every time: put a mark on a thing, and make the right people want to be in the room with it.</p>
+                  {SITE_SOCIAL}
+                  <a class="cta pent__open" href="about.html" style="margin-top:var(--s2)"><span>The Man</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+                </div>'''
+
 VAULT_CTA = ('<a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)">'
     '<span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
-
-COCKTAIL_UNLOCK = '''<div class="unlock">
-                  <p class="unlock__eyebrow">Unlocked &#183; The Gentleman's Nightcap</p>
-                  <ul class="unlock-list">
-                    <li><span class="unlock-list__name">The Old Fashioned</span><span class="unlock-list__note">Rye, sugar, bitters, one large cube.</span></li>
-                    <li><span class="unlock-list__name">The Sazerac</span><span class="unlock-list__note">Rinsed glass, absinthe, nothing wasted.</span></li>
-                    <li><span class="unlock-list__name">The Penicillin</span><span class="unlock-list__note">Scotch, honey-ginger, a float of peat.</span></li>
-                  </ul>
-                  <p class="unlock__eyebrow" style="margin-top:var(--s4)">Sponsor to be announced</p>
-                </div>'''
 
 PIANO_PLAYLISTS = json.loads((Path(__file__).resolve().parent / "data" / "house-music.json").read_text(encoding="utf-8"))
 _piano_first = PIANO_PLAYLISTS[0]
@@ -275,15 +388,11 @@ PIANO_PLAYER = f'''<div class="piano-player" data-piano-player data-playlists="{
                     <p class="piano-player__eyebrow">Now Playing &#183; <span data-piano-label>{esc(_piano_first["label"])}</span></p>
                     <div class="piano-player__nav">
                       <button type="button" data-piano-prev aria-label="Previous">&#8249;</button>
+                      <button type="button" data-piano-play aria-label="Play">&#9654;</button>
                       <button type="button" data-piano-next aria-label="Next">&#8250;</button>
                     </div>
                   </div>
-                  <div class="piano-player__frame">
-                    <iframe data-piano-frame src="https://open.spotify.com/embed/{_piano_first["type"]}/{_piano_first["id"]}?utm_source=generator&amp;theme=0"
-                            width="100%" height="352" frameborder="0" allowfullscreen=""
-                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                            loading="lazy"></iframe>
-                  </div>
+                  <div class="piano-player__frame"><div data-piano-frame></div></div>
                 </div>'''
 
 CANDLE_COMING_SOON = '''<div class="coming-soon">
@@ -294,7 +403,7 @@ GUIDE_PORTAL_CTA = ('<button type="button" class="cta pent__open" data-guide-por
     '<span>Explore the City Guide</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>')
 
 def floor_html(f):
-    zoom = f.get("zoom","1.04")
+    zoom = f.get("zoom","1")
     grade = (" "+f["grade"]) if f.get("grade") else ""
     arts, panels = [], []
     for key,name,x,y,body,specs in f["arts"]:
@@ -318,12 +427,14 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
             tag = f'Level {f["lvl"]} &#183; Artifact &#183; HelloFresh &#215; Paris Pullen'
         elif key == "window":
             wardrobe_cta = GUIDE_PORTAL_CTA
-        elif f["id"] == "penthouse-living" and key == "journal":
+        elif key == "journal":
+            # Both the Living Floor's face-down journal and the Study's
+            # pencil-marked draft point at the same published dispatches.
             wardrobe_cta = JOURNAL_CTA
+        elif key == "monogram":
+            wardrobe_cta = MONOGRAM_BIO
         elif f["id"] == "penthouse-living" and key == "vault":
             wardrobe_cta = VAULT_CTA
-        elif f["id"] == "penthouse-living" and key == "cocktail":
-            wardrobe_cta = COCKTAIL_UNLOCK
         elif f["id"] == "penthouse-living" and key == "piano":
             wardrobe_cta = PIANO_PLAYER
         elif f["id"] == "penthouse-living" and key == "candle":
@@ -351,51 +462,115 @@ f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
     tv = ''
     ts = TV_SCREENS.get(f["id"])
     if ts:
+        # Only the start room's own screen autoplays straight from the baked
+        # HTML -- every other screen (Cinema included) starts with no src at
+        # all, so nothing plays or makes sound until a visitor actually pages
+        # into that room for the first time. tv-remote.js's IntersectionObserver
+        # (see the "entering" branch in initScreen) lazily assigns the real,
+        # muted src at that point -- see loadChannel there.
+        #
+        # mute=1, not the optimistic mute=0 this used to request: unmuted
+        # autoplay in a cross-origin iframe is reliably blocked on mobile
+        # regardless of the allow policy below, and unlike desktop (where
+        # YouTube's player quietly falls back to muted-and-playing),
+        # mobile browsers were sometimes just refusing to autoplay AT ALL
+        # rather than falling back -- so the video never started moving.
+        # Guaranteed-muted autoplay is the one mode every browser actually
+        # honors; getting real sound on is entirely the job of the
+        # postMessage 'unMute' attempt + guaranteed Tap-for-Sound fallback
+        # in tv-remote.js's enter-room logic, same as every other screen.
+        iframe_src = (
+            f'https://www.youtube.com/embed/{ts["id"]}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1'
+            if f["id"] == START_ROOM else ''
+        )
         tv = f'''  <div class="floor-scene__screen" style="--x:{ts["x"]};--y:{ts["y"]};--w:{ts["w"]};--h:{ts["h"]}" data-tv data-channel-set="{ts["channel_set"]}" data-box="{ts["box"]}">
     <div class="floor-scene__screen-frame">
-      <iframe src="https://www.youtube.com/embed/{ts["id"]}?autoplay=1&mute=1&loop=1&playlist={ts["id"]}&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1"
+      <iframe src="{iframe_src}"
               title="" allow="autoplay; encrypted-media" loading="lazy"></iframe>
     </div>
     <div class="tv-lowerthird" data-tv-lowerthird>
       <p class="tv-lowerthird__eyebrow">Paris Pullen &#183; Now Screening</p>
       <p class="tv-lowerthird__title" data-tv-lowerthird-title>{ts["label"]}</p>
     </div>
+    <button type="button" class="tv-sound-prompt" data-tv-sound-prompt hidden>&#128264; Tap for Sound</button>
     <div class="tv-remote" data-tv-remote>
+      <div class="tv-remote__brand">
+        <button type="button" class="tv-remote__pwr" data-tv-action="power">PWR</button>
+        <span class="tv-remote__wordmark">The Compliment</span>
+      </div>
       <p class="tv-remote__channel" data-tv-channel-label>{ts["label"]}</p>
-      <div class="tv-remote__row">
-        <button type="button" data-tv-action="ch-prev">&#9664; Ch</button>
-        <button type="button" data-tv-action="ch-next">Ch &#9654;</button>
+      <div class="tv-remote__pad">
+        <button type="button" class="tv-remote__pad-hub" data-tv-action="playpause" aria-label="Play or pause"></button>
+        <button type="button" class="tv-remote__pad-btn tv-remote__pad-btn--up" data-tv-action="ch-next" aria-label="Channel up">CH</button>
+        <button type="button" class="tv-remote__pad-btn tv-remote__pad-btn--down" data-tv-action="ch-prev" aria-label="Channel down">CH</button>
+        <button type="button" class="tv-remote__pad-btn tv-remote__pad-btn--left" data-tv-action="vol-down" aria-label="Volume down">VOL</button>
+        <button type="button" class="tv-remote__pad-btn tv-remote__pad-btn--right" data-tv-action="vol-up" aria-label="Volume up">VOL</button>
       </div>
-      <div class="tv-remote__row">
-        <button type="button" data-tv-action="vol-down">Vol &#8722;</button>
-        <button type="button" data-tv-action="mute">Mute</button>
-        <button type="button" data-tv-action="vol-up">Vol &#43;</button>
+      <div class="tv-remote__row tv-remote__row--seek">
+        <button type="button" data-tv-action="rw">&#9664;&#9664;</button>
+        <button type="button" data-tv-action="ff">&#9654;&#9654;</button>
       </div>
+      <button type="button" class="tv-remote__mute" data-tv-action="mute">Mute</button>
+      <button type="button" class="tv-remote__guide" data-tv-action="guide">Guide</button>
       <button type="button" class="tv-remote__expand" data-tv-action="expand">Watch Full Screen</button>
+      <div class="tv-remote__guide-panel" data-tv-guide-panel hidden>
+        <div class="tv-remote__guide-panel-head">
+          <p class="tv-remote__guide-panel-eyebrow">Guide</p>
+          <button type="button" data-tv-action="guide-close" aria-label="Close guide">Close &#215;</button>
+        </div>
+        <ul class="tv-remote__guide-panel-list" data-tv-guide-list></ul>
+      </div>
     </div>
   </div>
 '''
 
-    return f'''<section class="floor-scene{grade}" id="{f["id"]}" tabindex="-1" aria-label="Level {f["lvl"]} — {esc(f["name"])}">
-  <div class="floor-scene__view">
-    <img src="assets/img/{f["img"]}.jpg"
-         srcset="assets/img/{f["img"]}@sm.jpg 1200w, assets/img/{f["img"]}.jpg 2400w"
-         sizes="100vw" alt="{esc(f["name"])}" loading="lazy"
-         style="--focus:{f["focus"]};--zoom:{zoom}" width="2400" height="1340">
+    remote_node = ''
+    if ts and f["id"] in REMOTE_NODE_POS:
+        rx, ry = REMOTE_NODE_POS[f["id"]]
+        remote_node = f'''        <button type="button" class="artifact artifact--remote" style="--x:{rx};--y:{ry}" data-tv-remote-toggle="{ts["channel_set"]}" aria-label="Open the remote">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Remote</span>
+        </button>'''
+
+    # A real link, not a drawer -- styled exactly like any other artifact
+    # marker, but tapping it leaves the room entirely rather than opening
+    # a panel. Deliberately carries no data-artifact attribute, so world.js's
+    # drawer handler ignores it and the <a> is allowed to navigate.
+    # Positions live in CITY_NODE_POS above.
+    city_link_node = ''
+    if f["id"] in CITY_NODE_POS:
+        cx, cy = CITY_NODE_POS[f["id"]]
+        city_link_node = f'''        <a href="charlotte.html" class="artifact artifact--remote" style="--x:{cx};--y:{cy}">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The City</span>
+        </a>'''
+
+    adj = ROOM_ADJACENCY.get(f["id"], {})
+    dir_attrs = "".join(f' data-{d}="{adj[d]}"' for d in ("left", "right", "up", "down") if adj.get(d))
+
+    return f'''<section class="floor-scene{grade}" id="{f["id"]}" tabindex="-1" aria-label="Level {f["lvl"]} — {esc(f["name"])}"{dir_attrs}>
+  <div class="floor-scene__surface">
+    <div class="floor-scene__canvas">
+      <div class="floor-scene__view">
+        <img src="assets/img/{f["img"]}.jpg"
+             srcset="assets/img/{f["img"]}@sm.jpg 1200w, assets/img/{f["img"]}.jpg 2400w"
+             sizes="100vw" alt="{esc(f["name"])}" loading="lazy"
+             style="--focus:{f["focus"]};--zoom:{zoom}" width="2400" height="1340">
+      </div>
+{tv}      <div class="artifacts">
+{chr(10).join(arts)}{chr(10) + remote_node if remote_node else ''}{chr(10) + city_link_node if city_link_node else ''}
+      </div>
+    </div>
   </div>
-{tv}  <div class="floor-scene__scrim"></div>
+  <div class="floor-scene__scrim"></div>
 
   <div class="wrap">
     <div class="floor-plate reveal">
-      <p class="floor-plate__level"><b>{f["lvl"]}</b> <span>{esc(f["name"])}</span></p>
       <h2 class="floor-plate__name">{esc(f["name"])}</h2>
+      <p class="floor-plate__level"><b>{f["lvl"]}</b> <span>The Penthouse</span></p>
       <p class="floor-plate__note">{esc(f["note"])}</p>
       <p class="floor-plate__count"><i></i>{len(f["arts"])} artifact{'s' if len(f["arts"]) != 1 else ''} on this floor</p>
     </div>
-  </div>
-
-  <div class="artifacts">
-{chr(10).join(arts)}
   </div>
 
   <div class="drawer" id="drawer-{f["id"]}" aria-hidden="true">
@@ -405,25 +580,16 @@ f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
 </section>
 '''
 
-directory = "".join(
-f'''      <a class="directory__row" href="#{f["id"]}">
-        <span class="directory__lvl">{f["lvl"]}</span>
-        <span class="directory__name">{esc(f["name"])}</span>
-        <span class="directory__state" data-state="{f["state"]}">{f["state"]}</span>
-      </a>
-''' for f in FLOORS)
-
-elevator = "".join(
-f'''  <a class="elevator__stop" href="#{f["id"]}" data-track="{f["id"]}"><i></i>{f["lvl"]}</a>
-''' for f in FLOORS)
+NAV_PANEL_ROWS = _nav_panel_rows({f["id"]: f for f in PENTHOUSE_FLOORS})
 
 html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The House — Paris Pullen</title>
-<meta name="description" content="Fifteen floors of The Compliment, from the inventory to the skyline club. Every floor a room you have just walked into.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>The Penthouse — Paris Pullen</title>
+<meta name="description" content="Inside the Penthouse at The Compliment. Every room a room you have just walked into.">
 <meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -438,37 +604,36 @@ html = f'''<!DOCTYPE html>
 
 {SITE_MENU}
 
-<nav class="elevator" aria-label="Floors">
-{elevator}</nav>
-
 <main>
 
-<section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,13rem)">
-  <div class="wrap">
-    <header class="stack reveal" style="max-width:900px">
-      <p class="eyebrow">The Compliment &#183; Charlotte</p>
-      <h1 class="display display--mega">The<br>House</h1>
-      <p class="lede">Fifteen floors, stacked in the order he built them. Every one of them is a room you have just walked into, and every one of them has things in it worth picking up.</p>
-      <p class="classified">Select any artifact &#183; Esc closes</p>
-    </header>
-
-    <div class="directory reveal reveal-d1" style="margin-top:var(--s8)">
-{directory}    </div>
-  </div>
-</section>
-
-<section class="room-pager" id="room-pager" aria-label="The rooms, in sequence" data-room-pager>
+<section class="room-pager" id="room-pager" aria-label="The rooms, in sequence" data-room-pager data-start-room="{START_ROOM}">
   <div class="room-pager__viewport" data-room-pager-viewport>
-{"".join(floor_html(f) for f in FLOORS)}  </div>
-  <button type="button" class="room-pager__nav room-pager__nav--prev" data-room-pager-prev aria-label="Previous room"><span aria-hidden="true">&#8249;</span></button>
-  <button type="button" class="room-pager__nav room-pager__nav--next" data-room-pager-next aria-label="Next room"><span aria-hidden="true">&#8250;</span></button>
+{"".join(floor_html(f) for f in PENTHOUSE_FLOORS)}  </div>
+  <button type="button" class="room-pager__nav room-pager__nav--prev" data-room-pager-prev aria-label="Previous room"><span aria-hidden="true">&#8249;</span><span class="room-pager__nav-hint" data-room-pager-hint aria-hidden="true"></span></button>
+  <button type="button" class="room-pager__nav room-pager__nav--next" data-room-pager-next aria-label="Next room"><span aria-hidden="true">&#8250;</span><span class="room-pager__nav-hint" data-room-pager-hint aria-hidden="true"></span></button>
+  <button type="button" class="room-pager__nav room-pager__nav--up" data-room-pager-up aria-label="Floor up"><span aria-hidden="true">&#9650;</span><span class="room-pager__nav-hint" data-room-pager-hint aria-hidden="true"></span></button>
+  <button type="button" class="room-pager__nav room-pager__nav--down" data-room-pager-down aria-label="Floor down"><span aria-hidden="true">&#9660;</span><span class="room-pager__nav-hint" data-room-pager-hint aria-hidden="true"></span></button>
+  <div class="nav-panel" data-nav-panel>
+    <button type="button" class="nav-panel__tab" data-nav-panel-toggle aria-expanded="false" aria-controls="nav-panel-grid">
+      <span class="nav-panel__tab-label">Floors</span>
+    </button>
+    <div class="nav-panel__grid" id="nav-panel-grid" data-nav-panel-grid hidden>
+    {NAV_PANEL_ROWS}
+    </div>
+  </div>
 </section>
 
 </main>
 
 {SITE_FOOT}
 
+<!-- The Play/Pause toggle (playpause-toggle), the Suite Remote (TV /
+     Music / Cinema in one), and its fixed toggle pill are all injected by
+     tv-remote.js's initSuiteRemote() -- one instance regardless of how
+     many rooms have a screen. -->
+
 <script src="assets/js/room-pager.js" defer></script>
+<script src="assets/js/nav-panel.js" defer></script>
 <script src="assets/js/world.js" defer></script>
 <script src="assets/js/tv-remote.js" defer></script>
 <script src="assets/js/guide-portal.js" defer></script>
@@ -479,4 +644,4 @@ html = f'''<!DOCTYPE html>
 '''
 
 open("house.html","w",encoding="utf-8").write(html)
-print(f"house.html written — {len(FLOORS)} floors, {sum(len(f['arts']) for f in FLOORS)} artifacts")
+print(f"house.html written — {len(PENTHOUSE_FLOORS)} floors open ({len(FLOORS)} authored), {sum(len(f['arts']) for f in PENTHOUSE_FLOORS)} artifacts")

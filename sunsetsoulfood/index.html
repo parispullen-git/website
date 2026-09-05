@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunset Soulfood | Beatties Ford Rd, Charlotte NC</title>
+<meta name="description" content="Soul food and seafood on Beatties Ford Rd. Fish, shrimp, collards, mac and cheese, and Sunday-dinner plates in West Charlotte. Call (704) 919-1701.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Mulish:wght@400;500;600;700;800&family=Cutive+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brown:#3B2417; --brown-dk:#241713; --brown-lt:#5C3B27;
+  --amber:#C98A3B; --amber-dk:#8F5E22;
+  --rose:#C97B84; --rose-dk:#9A5560;
+  --cream:#F7ECE0; --paper:#FBF4EA; --card:#FFFFFF;
+  --ink:#241713; --ink-2:#5E4A3E; --line:#EEE0CE; --line-hard:#E1C8A9;
+  --shadow:0 1px 2px rgba(36,23,19,.08), 0 18px 36px -20px rgba(36,23,19,.32);
+  --disp:"Abril Fatface", Georgia, serif;
+  --body:"Mulish", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:"Cutive Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{text-wrap:balance;margin:0;font-family:var(--disp);font-weight:400}
+p{margin:0 0 1em}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:100px;font-weight:700;font-size:15.5px;letter-spacing:.02em;border:2px solid transparent;cursor:pointer;transition:transform .15s ease, background .15s ease;font-family:var(--body)}
+.btn-amber{background:var(--amber);color:#fff}
+.btn-amber:hover{transform:translateY(-1px);background:#D69A4E}
+.btn-rose{background:var(--rose);color:#fff}
+.btn-rose:hover{transform:translateY(-1px);background:#D68B94}
+.btn-outline{border-color:rgba(255,255,255,.4);color:#fff}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+header{position:sticky;top:0;z-index:50;background:rgba(36,23,19,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.brand{display:flex;align-items:center;gap:10px;color:#fff}
+.brand .mark{width:40px;height:40px;border:2px solid var(--amber);border-radius:50%;display:grid;place-items:center;color:var(--amber);font-family:var(--disp);font-size:16px}
+.brand .word{font-family:var(--disp);font-size:19px;line-height:1.15}
+.brand .word span{display:block;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.12em;color:var(--rose);text-transform:uppercase;margin-top:4px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.82);font-size:14px;font-weight:500}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:flex;align-items:center;gap:18px}
+.nav-phone{color:#fff;font-weight:700;font-family:var(--mono);font-size:14.5px;display:flex;align-items:center;gap:7px}
+.burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+@media (max-width:900px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-phone{font-size:12.5px;white-space:nowrap}
+  .nav-phone span.lbl{display:none}
+}
+
+/* hero — warm dusk gradient, unhurried */
+.hero{position:relative;background:linear-gradient(175deg, var(--brown) 0%, var(--brown-dk) 60%);color:#fff;overflow:hidden;padding:92px 0 96px}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(201,123,132,.16) 0%, rgba(201,138,59,.1) 45%, transparent 80%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);background:rgba(201,138,59,.14);border:1px solid rgba(201,138,59,.4);padding:6px 14px;border-radius:100px;margin-bottom:24px}
+h1.headline{font-size:clamp(34px,5vw,56px);line-height:1.12}
+h1.headline em{font-style:normal;color:var(--amber)}
+.hero-sub{font-size:18px;color:rgba(255,255,255,.82);max-width:50ch;margin:22px 0 32px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+.trust-strip{display:flex;flex-wrap:wrap;gap:22px 30px;padding-top:28px;border-top:1px solid rgba(255,255,255,.14)}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.85)}
+.trust-item b{color:#fff;font-family:var(--mono);font-size:14.5px}
+.trust-ico{width:20px;height:20px;flex:none;color:var(--amber)}
+.hero-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:22px}
+.imgph{aspect-ratio:4/3;border-radius:12px;background:linear-gradient(155deg, var(--rose) 0%, var(--amber-dk) 55%, var(--brown-dk) 100%);position:relative;overflow:hidden;display:grid;place-items:center;margin-bottom:14px}
+.imgph::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 2px, transparent 2px 14px)}
+.ph-label{position:relative;z-index:1;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.75);border:1px dashed rgba(255,255,255,.35);padding:8px 14px;border-radius:100px;text-align:center}
+.hero-card .quote{font-size:14.5px;color:rgba(255,255,255,.85);line-height:1.6;font-style:italic}
+
+/* sections */
+section{padding:88px 0}
+.section-head{max-width:640px;margin:0 auto 48px;text-align:center}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-dk);margin-bottom:12px;display:inline-block}
+h2{font-size:clamp(28px,3.6vw,42px)}
+.section-sub{color:var(--ink-2);font-size:16.5px;margin-top:14px}
+
+/* heritage story — corridor context */
+.heritage{background:var(--card)}
+.heritage-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:center}
+.heritage .imgph{aspect-ratio:5/4;background:linear-gradient(155deg, var(--amber) 0%, var(--rose-dk) 100%)}
+.heritage-text .kicker{text-align:left}
+.heritage h2{text-align:left}
+.heritage p{color:var(--ink-2);font-size:16.5px}
+
+/* menu — plates & sides, sit-down framing */
+.menu{background:var(--paper)}
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.menu-card{background:var(--card);border:1px solid var(--line-hard);border-radius:14px;padding:30px;box-shadow:var(--shadow)}
+.menu-ico{width:46px;height:46px;color:var(--amber-dk);background:var(--cream);border-radius:50%;display:grid;place-items:center;margin-bottom:16px}
+.menu-card h3{font-size:22px;margin-bottom:10px;font-family:var(--disp)}
+.menu-card p{color:var(--ink-2);font-size:15px;margin-bottom:14px}
+.menu-tags{display:flex;flex-wrap:wrap;gap:6px}
+.menu-tags span{font-family:var(--mono);font-size:11.5px;background:var(--paper);border:1px solid var(--line-hard);padding:5px 10px;border-radius:100px;color:var(--ink-2)}
+@media (max-width:820px){.menu-grid{grid-template-columns:1fr}}
+
+/* sunday dinner CTA band */
+.gathering{background:linear-gradient(120deg, var(--rose-dk), var(--brown));color:#fff;text-align:center}
+.gathering h2{margin-bottom:14px;color:#fff}
+.gathering p{color:rgba(255,255,255,.78);max-width:56ch;margin:0 auto 30px}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* reviews */
+.reviews{background:var(--card)}
+.rev-top{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:38px;justify-content:center}
+.stars{color:var(--amber-dk);font-size:22px;letter-spacing:2px}
+.rev-count{color:var(--ink-2);font-size:14.5px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev-card{background:var(--paper);border:1px solid var(--line-hard);border-radius:14px;padding:26px}
+.rev-card .stars{font-size:15px;margin-bottom:12px;display:block}
+.rev-card p{font-size:15px;color:var(--ink);margin:0 0 14px;font-style:italic}
+.rev-src{font-family:var(--mono);font-size:12px;color:var(--ink-2);text-transform:uppercase}
+@media (max-width:820px){.rev-grid{grid-template-columns:1fr}}
+
+.contact{background:var(--paper)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.contact-list{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.contact-list li{display:flex;gap:14px;align-items:flex-start}
+.c-ico{width:38px;height:38px;border-radius:8px;background:var(--card);border:1px solid var(--line-hard);display:grid;place-items:center;flex:none;color:var(--amber-dk)}
+.contact-list b{display:block;font-size:15.5px;margin-bottom:2px;font-weight:700}
+.contact-list span{color:var(--ink-2);font-size:14.5px}
+.hours-card{background:var(--card);border:1px solid var(--line-hard);border-radius:14px;padding:28px}
+.hours-card h3{font-size:17px;margin-bottom:18px;font-family:var(--disp)}
+.hours-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.hours-row:last-child{border-bottom:none}
+.hours-row span:first-child{color:var(--ink-2)}
+.hours-row span:last-child{font-family:var(--mono);font-weight:600;color:var(--amber-dk)}
+
+footer{background:var(--brown-dk);color:rgba(255,255,255,.55);padding:38px 0}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13.5px}
+.foot-brand{color:#fff;font-family:var(--disp);font-size:17px}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .heritage-grid{grid-template-columns:1fr}
+  .heritage-grid .imgph{order:-1}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark">SS</span>
+      <span class="word">Sunset Soulfood<span>Beatties Ford Rd</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#heritage">Our Corner</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Hours &amp; Location</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:17049191701" class="nav-phone"><span class="lbl">Call:</span> (704) 919-1701</a>
+      <button class="burger" aria-label="Menu">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Beatties Ford Rd &middot; West Charlotte</span>
+      <h1 class="headline">Soul food that feels like <em>Sunday dinner</em>, any day of the week.</h1>
+      <p class="hero-sub">Fish and shrimp paired with mac and cheese, collard greens, yams, and potato salad — the kind of plate that's meant to be eaten slow, at a table, with people you like.</p>
+      <div class="hero-ctas">
+        <a href="tel:17049191701" class="btn btn-amber">Call (704) 919-1701</a>
+        <a href="#menu" class="btn btn-rose">See the Menu</a>
+      </div>
+      <div class="trust-strip">
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+          <div>Find us on <b>Facebook</b></div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><b>Beatties Ford Rd</b> corridor</div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <div>Closed <b>Mondays</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="imgph"><span class="ph-label">Photo: fried fish plate with mac and cheese and collards, warm dusk light</span></div>
+      <p class="quote">"Every plate comes with a choice of sides and bread — this is a meal, not a snack."</p>
+    </div>
+  </div>
+</section>
+
+<section class="heritage" id="heritage">
+  <div class="wrap heritage-grid">
+    <div class="imgph"><span class="ph-label">Photo: Beatties Ford Rd storefront at golden hour</span></div>
+    <div class="heritage-text">
+      <span class="kicker">On Beatties Ford Rd</span>
+      <h2>Part of a corner with deep roots</h2>
+      <p>Beatties Ford Rd has been the heartbeat of West Charlotte's Black community for generations — churches, barbershops, and family kitchens that have fed this neighborhood for decades. Sunset Soulfood belongs to that same corner and that same tradition: home-style cooking, made the way it's always been made, for the people who live here.</p>
+      <p>No frills, no gimmicks — just a kitchen that takes Sunday dinner seriously, seven days a week except Monday.</p>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">On the menu</span>
+      <h2>Seafood and soul food, plated to share</h2>
+      <p class="section-sub">Every dinner comes with a choice of one or two sides and bread — built for a table, not a rush.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.46-3.44 6-7 6-3.56 0-7.56-2.54-8.5-6z"/><path d="M6.5 12 2 9v6z"/></svg></div>
+        <h3>Seafood</h3>
+        <p>Fried and grilled fish, shrimp, and combos — Sunset's most-ordered plates.</p>
+        <div class="menu-tags"><span>Fish</span><span>Shrimp</span><span>Seafood Combos</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V8a2 2 0 0 1 2-2h5l2-2 2 2h3a2 2 0 0 1 2 2v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3>Chicken &amp; Turkey</h3>
+        <p>Home-style chicken and turkey plates alongside the combo boards.</p>
+        <div class="menu-tags"><span>Chicken</span><span>Turkey</span><span>Combos</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
+        <h3>Sides</h3>
+        <p>Mac and cheese, collard greens, yams, and potato salad — the reason people come back.</p>
+        <div class="menu-tags"><span>Mac &amp; Cheese</span><span>Collard Greens</span><span>Yams</span><span>Potato Salad</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7z"/></svg></div>
+        <h3>Sunset Specials &amp; Desserts</h3>
+        <p>Weekly specials and a dessert menu to close out the meal right.</p>
+        <div class="menu-tags"><span>Weekly Specials</span><span>Desserts</span><span>Kids Menu</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gathering">
+  <div class="wrap">
+    <h2>Bring the whole table</h2>
+    <p>Family plates, weekly specials, and a kitchen that treats every day like it deserves a real meal.</p>
+    <div class="cta-actions">
+      <a href="tel:17049191701" class="btn btn-amber">Call (704) 919-1701</a>
+      <a href="#contact" class="btn btn-outline">Hours &amp; Directions</a>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="rev-top">
+      <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="rev-count">Loved on Yelp &amp; Google across West Charlotte</span>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>"Fried fish and mac and cheese taste like somebody's grandmother made it. Because it does."</p>
+        <div class="rev-src">Yelp &middot; Charlotte</div>
+      </div>
+      <div class="rev-card">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>"Portions are generous and the collards are seasoned right. My Sunday spot even on a Tuesday."</p>
+        <div class="rev-src">Google &middot; Charlotte</div>
+      </div>
+      <div class="rev-card">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>"A staple on Beatties Ford. Consistent, warm, and worth the wait."</p>
+        <div class="rev-src">Yelp &middot; Charlotte</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="kicker">Find us</span>
+      <h2 style="margin-bottom:24px">On Beatties Ford Rd</h2>
+      <ul class="contact-list">
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><b>(704) 919-1701</b><span>Call ahead or come by</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><b>5009 Beatties Ford Rd</b><span>Charlotte, NC</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg></div>
+          <div><b>Facebook</b><span>Search "Sunset Soulfood" for updates</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="hours-card">
+      <h3>Hours</h3>
+      <div class="hours-row"><span>Tuesday &ndash; Saturday</span><span>11AM &ndash; 8PM</span></div>
+      <div class="hours-row"><span>Sunday</span><span>11:30AM &ndash; 7PM</span></div>
+      <div class="hours-row"><span>Monday</span><span>Closed</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="foot-brand">Sunset Soulfood</span>
+    <span>(704) 919-1701 &middot; 5009 Beatties Ford Rd, Charlotte, NC</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.burger').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  links.style.display = open ? 'none' : 'flex';
+  links.style.cssText += open ? '' : 'flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#241713;padding:20px 24px;gap:16px;';
+});
+</script>
+</body>
+</html>

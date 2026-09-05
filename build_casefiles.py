@@ -84,6 +84,7 @@ html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Case Files — Paris Pullen</title>
 <meta name="description" content="Brand development case files from Paris Pullen LLC. The brief, the move, what was built, and where it stands.">

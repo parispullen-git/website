@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J&amp;B Garage Door Repair | Charlotte &amp; Concord, NC</title>
+<meta name="description" content="Garage door repair, spring replacement, opener install and full door replacement in Charlotte & Concord, NC. Call (704) 761-3100.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --steel:#132330; --steel-2:#1B3244; --steel-3:#24435B;
+  --safety:#E8622C; --safety-dk:#9C3D14; --safety-soft:#FCE3D6;
+  --paper:#F3F5F6; --card:#FFFFFF; --ink:#12191F; --ink-2:#48545E; --gray:#6B7680;
+  --line:#DFE4E7; --line-hard:#C4CCD1;
+  --ok:#1F7A4D; --ok-soft:#E2F3E9;
+  --shadow:0 1px 2px rgba(19,35,48,.07), 0 14px 30px -16px rgba(19,35,48,.28);
+  --disp:"Barlow Condensed", "Arial Narrow", sans-serif;
+  --body:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0 0 1em}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:4px;font-weight:700;font-size:15.5px;border:2px solid transparent;cursor:pointer;transition:transform .15s ease}
+.btn-safety{background:var(--safety);color:#fff}
+.btn-safety:hover{transform:translateY(-1px);background:#F17539}
+.btn-outline{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-dark{background:var(--steel);color:#fff}
+
+/* emergency bar */
+.ebar{background:var(--safety);color:#fff;font-family:var(--mono);font-size:13px;letter-spacing:.03em;text-align:center;padding:8px 0}
+.ebar b{font-weight:700}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(19,35,48,.97);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:15px 0}
+.brand{display:flex;align-items:center;gap:11px;color:#fff}
+.brand .mark{width:38px;height:38px;border:2px solid var(--safety);border-radius:6px;display:grid;place-items:center;color:var(--safety);font-family:var(--disp);font-weight:700;font-size:16px}
+.brand .word{font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:.01em;line-height:1}
+.brand .word span{display:block;font-family:var(--body);font-weight:500;font-size:10.5px;letter-spacing:.14em;color:var(--safety);text-transform:uppercase;margin-top:4px}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.82);font-size:14.5px;font-weight:500}
+.nav-links a:hover{color:#fff}
+.nav-cta{display:flex;align-items:center;gap:18px}
+.nav-phone{color:#fff;font-weight:700;font-family:var(--mono);font-size:15px}
+.burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+@media (max-width:860px){.nav-links{display:none}.burger{display:block}.nav-phone{font-size:13px;white-space:nowrap}.nav-phone span.lbl{display:none}}
+
+/* hero */
+.hero{position:relative;background:linear-gradient(150deg, var(--steel-2) 0%, var(--steel) 60%);color:#fff;overflow:hidden;padding:76px 0 90px}
+.hero::before{content:"";position:absolute;right:-6%;top:-8%;width:56%;height:130%;
+  background:repeating-linear-gradient(0deg, rgba(232,98,44,.12) 0 10px, transparent 10px 20px);
+  mask-image:linear-gradient(120deg, black, transparent 70%);}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--safety);background:rgba(232,98,44,.12);border:1px solid rgba(232,98,44,.4);padding:6px 12px;border-radius:4px;margin-bottom:22px}
+h1.headline{font-family:var(--disp);font-weight:800;font-size:clamp(34px,5vw,58px);line-height:1.02;letter-spacing:.005em}
+h1.headline em{font-style:normal;color:var(--safety)}
+.hero-sub{font-size:18px;color:rgba(255,255,255,.78);max-width:50ch;margin:20px 0 30px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.trust-strip{display:flex;flex-wrap:wrap;gap:22px 30px;padding-top:26px;border-top:1px solid rgba(255,255,255,.14)}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.85)}
+.trust-item b{color:#fff;font-family:var(--mono);font-size:15px}
+.trust-ico{width:20px;height:20px;flex:none;color:var(--safety)}
+
+.hero-card{background:var(--steel-3);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:24px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.imgph{aspect-ratio:4/3;border-radius:8px;position:relative;overflow:hidden;display:grid;place-items:center;margin-bottom:16px;
+  background:linear-gradient(160deg,#2A4A63 0%,#122230 100%)}
+.imgph::after{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(0deg, rgba(232,98,44,.08) 0 6px, transparent 6px 34px)}
+.ph-label{position:relative;z-index:1;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);border:1px dashed rgba(255,255,255,.3);padding:8px 14px;border-radius:100px}
+.door-ico{width:48px;height:48px;color:var(--safety);position:relative;z-index:1;margin-bottom:10px}
+.hero-card .quote{font-size:14.5px;color:rgba(255,255,255,.85);line-height:1.55;margin:0}
+
+section{padding:82px 0}
+.section-head{max-width:640px;margin:0 0 44px}
+.kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--safety-dk);margin-bottom:10px;display:block}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(28px,3.6vw,42px);letter-spacing:.005em}
+.section-sub{color:var(--ink-2);font-size:16.5px;margin-top:12px}
+
+/* services */
+.services{background:var(--card)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.svc{background:var(--card);padding:30px 26px}
+.svc-ico{width:42px;height:42px;color:var(--steel);background:var(--safety-soft);border-radius:9px;display:grid;place-items:center;margin-bottom:18px}
+.svc-ico svg{width:22px;height:22px}
+.svc h3{font-size:18px;font-weight:800;margin-bottom:8px}
+.svc p{color:var(--ink-2);font-size:14.5px;margin:0}
+@media (max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.svc-grid{grid-template-columns:1fr}}
+
+/* process timeline */
+.process{background:var(--paper)}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.timeline::before{content:"";position:absolute;top:19px;left:6%;right:6%;height:2px;background:var(--line-hard)}
+.tstep{position:relative;text-align:center;padding:0 14px}
+.tstep .dot{width:38px;height:38px;border-radius:50%;background:var(--steel);color:var(--safety);display:grid;place-items:center;margin:0 auto 16px;font-family:var(--mono);font-weight:700;position:relative;z-index:1}
+.tstep h4{font-size:15.5px;font-weight:800;margin-bottom:6px}
+.tstep p{font-size:13.5px;color:var(--ink-2);margin:0}
+@media (max-width:760px){.timeline{grid-template-columns:1fr 1fr;row-gap:32px}.timeline::before{display:none}}
+
+/* why / trust */
+.why{background:var(--card)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.why-list{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.why-list li{display:flex;gap:14px;align-items:flex-start}
+.why-ico{width:36px;height:36px;border-radius:8px;background:var(--safety-soft);color:var(--safety-dk);display:grid;place-items:center;flex:none}
+.why-list h4{margin:0 0 4px;font-size:16.5px;font-weight:800}
+.why-list p{margin:0;color:var(--ink-2);font-size:14.5px}
+.why-photo{aspect-ratio:4/3;border-radius:10px;background:linear-gradient(150deg,var(--steel-3),var(--steel));position:relative;overflow:hidden;display:grid;place-items:center;box-shadow:var(--shadow)}
+.why-photo::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg, rgba(232,98,44,.07) 0 6px, transparent 6px 34px)}
+
+/* reviews */
+.reviews{background:var(--steel);color:#fff}
+.rev-top{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:38px}
+.stars{color:var(--safety);font-size:22px;letter-spacing:2px}
+.rev-score{font-family:var(--disp);font-weight:800;font-size:32px}
+.rev-count{color:rgba(255,255,255,.6);font-size:14.5px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev-card{background:var(--steel-3);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:24px}
+.rev-card .stars{font-size:15px;margin-bottom:12px;display:block}
+.rev-card p{font-size:15px;color:rgba(255,255,255,.88);margin:0;font-style:italic}
+@media (max-width:820px){.rev-grid{grid-template-columns:1fr}}
+
+/* area */
+.area{background:var(--paper)}
+.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.area-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tag{font-size:13.5px;font-weight:700;padding:8px 14px;border-radius:100px;background:var(--safety-soft);color:var(--safety-dk);border:1px solid #F3C1A6}
+.map-ph{aspect-ratio:4/3;border-radius:10px;background:
+  linear-gradient(0deg, var(--paper) 24px, transparent 24px),
+  linear-gradient(90deg, var(--paper) 24px, transparent 24px), var(--line-hard);
+  background-size:100% 25px, 25px 100%;
+  border:1px solid var(--line-hard);position:relative;display:grid;place-items:center}
+.map-pin{width:44px;height:44px;background:var(--steel);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;box-shadow:0 8px 20px -6px rgba(19,35,48,.5)}
+.map-pin span{transform:rotate(45deg);color:var(--safety);font-size:18px}
+
+/* cta */
+.cta-band{background:linear-gradient(120deg,var(--steel-2),var(--steel));color:#fff;text-align:center}
+.cta-band h2{margin-bottom:14px}
+.cta-band p{color:rgba(255,255,255,.75);max-width:52ch;margin:0 auto 30px}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* contact */
+.contact{background:var(--card)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.contact-list{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.contact-list li{display:flex;gap:14px;align-items:flex-start}
+.c-ico{width:38px;height:38px;border-radius:8px;background:var(--paper);border:1px solid var(--line-hard);display:grid;place-items:center;flex:none;color:var(--steel)}
+.contact-list b{display:block;font-size:15.5px;margin-bottom:2px}
+.contact-list span{color:var(--ink-2);font-size:14.5px}
+.hours-card{background:var(--paper);border:1px solid var(--line-hard);border-radius:10px;padding:26px}
+.hours-card h3{font-size:16px;margin-bottom:16px;font-weight:800}
+.hours-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.hours-row:last-child{border-bottom:none}
+.hours-row span:first-child{color:var(--ink-2)}
+.hours-row span:last-child{font-family:var(--mono);font-weight:600}
+.hours-row.hot span:last-child{color:var(--safety-dk)}
+
+footer{background:var(--steel);color:rgba(255,255,255,.6);padding:36px 0}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13.5px}
+.foot-brand{color:#fff;font-family:var(--disp);font-weight:700;font-size:16px}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .why-photo{order:-1}
+  .area-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="ebar">🚨 Door stuck or off track? <b>Same-day emergency service available</b> — call (704) 761-3100</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark">J&amp;B</span>
+      <span class="word">GARAGE DOOR REPAIR<span>Charlotte &amp; Concord, NC</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">How It Works</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:17047613100" class="nav-phone"><span class="lbl">Call:</span> (704) 761-3100</a>
+      <button class="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">● Same-day service available</span>
+      <h1 class="headline">Garage door stuck? <em>We'll have it moving today.</em></h1>
+      <p class="hero-sub">Springs, openers, panels, full replacements — J&amp;B fixes it right the first time, with honest pricing and no runaround. Serving Charlotte and Concord.</p>
+      <div class="hero-ctas">
+        <a href="tel:17047613100" class="btn btn-safety">Call (704) 761-3100</a>
+        <a href="#contact" class="btn btn-outline">Get a Free Quote</a>
+      </div>
+      <div class="trust-strip">
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div>Same-day <b>emergency calls</b></div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          <div><b>Honest</b> upfront pricing</div>
+        </div>
+        <div class="trust-item">
+          <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg>
+          <div><b>Repair or replace</b> — all makes</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="imgph">
+        <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmdnoMLSoT2Ji9qtEafqQqY5BefpbnLSacaJnVxP0VWrC2ledi5nQnwTzJpbq9727G38b2PVKRBM6NCJvLQ_W68GX-zlTu8mKhTkXTkO5TFzbdRiuV3uN__T6lr6VLdBvvaKw9j_OrXU5I=w1000" alt="Modern black garage doors — real J&amp;B install" style="position:relative;z-index:1;width:100%;height:100%;object-fit:cover" loading="lazy">
+      </div>
+      <p class="quote">"Great professionalism, punctuality, and honest pricing" — a common thread in J&amp;B's customer feedback</p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What we fix</span>
+      <h2>Every garage door problem, handled</h2>
+      <p class="section-sub">From a noisy opener to a full door replacement — one call covers it.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2v10l6 6"/></svg></div>
+        <h3>Spring Replacement</h3>
+        <p>Broken torsion or extension springs replaced same-day — the #1 emergency call we get.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg></div>
+        <h3>Opener Repair &amp; Install</h3>
+        <p>Noisy, unresponsive, or dead openers diagnosed and fixed — or replaced with a quiet new unit.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="12" x2="21" y2="12"/></svg></div>
+        <h3>Panel Replacement</h3>
+        <p>Dented or cracked panels swapped out to match — no need to replace the whole door.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V8a2 2 0 0 1 2-2h5l2-2 2 2h3a2 2 0 0 1 2 2v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3>Full Door Replacement</h3>
+        <p>New doors installed when repair isn't worth it — sized and styled to your home.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <h3>Off-Track Realignment</h3>
+        <p>Door jumped the track? We get it back in alignment and running smooth — same visit.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
+        <h3>Cables, Rollers &amp; Tracks</h3>
+        <p>Worn hardware replaced before it fails — the maintenance visit that prevents the emergency call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>Call to fixed, same day</h2>
+    </div>
+    <div class="timeline">
+      <div class="tstep"><div class="dot">1</div><h4>You call</h4><p>Describe the problem — we give you a real time window, not a guess.</p></div>
+      <div class="tstep"><div class="dot">2</div><h4>We diagnose</h4><p>On-site inspection and an upfront price before any work starts.</p></div>
+      <div class="tstep"><div class="dot">3</div><h4>We fix it</h4><p>Most repairs completed in one visit — parts on the truck.</p></div>
+      <div class="tstep"><div class="dot">4</div><h4>You're covered</h4><p>Workmanship guaranteed on every repair we make.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="why">
+  <div class="wrap why-grid">
+    <ul class="why-list">
+      <li><div class="why-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><h4>Same-day availability</h4><p>A jammed door doesn't wait for a slow week. Most calls handled same-day.</p></div></li>
+      <li><div class="why-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div><div><h4>Upfront, honest pricing</h4><p>You get a number before we start — no surprise charges after the fact.</p></div></li>
+      <li><div class="why-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg></div><div><h4>All makes &amp; models</h4><p>Chamberlain, LiftMaster, Genie, Craftsman — we carry parts for the doors Charlotte actually has.</p></div></li>
+      <li><div class="why-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div><h4>Relationships, not one-off jobs</h4><p>Our goal is the call you make next time too — that means doing it right the first time.</p></div></li>
+    </ul>
+    <div class="why-photo"><span class="ph-label">Photo: J&amp;B service van</span></div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="rev-top">
+      <span class="stars">★★★★★</span>
+      <span class="rev-score">Trusted</span>
+      <span class="rev-count">Charlotte &amp; Concord customer feedback</span>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card"><span class="stars">★★★★★</span><p>"Great professionalism and punctuality. Fixed our spring the same afternoon I called."</p></div>
+      <div class="rev-card"><span class="stars">★★★★★</span><p>"Honest pricing, no upsell. Told me exactly what needed fixing and what didn't."</p></div>
+      <div class="rev-card"><span class="stars">★★★★★</span><p>"Experienced techs — you can tell they've seen every opener problem there is."</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="area" id="area">
+  <div class="wrap area-grid">
+    <div>
+      <span class="kicker">Service area</span>
+      <h2>Charlotte &amp; Concord, covered</h2>
+      <p class="section-sub">Based between Charlotte and Concord, J&amp;B runs calls across the northern metro daily.</p>
+      <div class="area-tags">
+        <span class="tag">Charlotte</span>
+        <span class="tag">Concord</span>
+        <span class="tag">Huntersville</span>
+        <span class="tag">Kannapolis</span>
+        <span class="tag">Harrisburg</span>
+        <span class="tag">Cornelius</span>
+      </div>
+    </div>
+    <div class="map-ph"><div class="map-pin"><span>🚪</span></div></div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Don't fight with a broken door all weekend</h2>
+    <p>Call now — most jobs quoted on the spot and fixed the same day.</p>
+    <div class="cta-actions">
+      <a href="tel:17047613100" class="btn btn-safety">Call (704) 761-3100</a>
+      <a href="#contact" class="btn btn-outline">Request a Quote</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="kicker">Get in touch</span>
+      <h2 style="margin-bottom:24px">Let's get your door moving</h2>
+      <ul class="contact-list">
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><b>(704) 761-3100</b><span>Call for same-day service</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><b>Charlotte &amp; Concord, NC</b><span>Mobile service — we come to you</span></div>
+        </li>
+        <li>
+          <div class="c-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <div><b>Workmanship guaranteed</b><span>On every repair we make</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="hours-card">
+      <h3>Hours</h3>
+      <div class="hours-row"><span>Monday – Friday</span><span>7:00 AM – 7:00 PM</span></div>
+      <div class="hours-row"><span>Saturday</span><span>8:00 AM – 4:00 PM</span></div>
+      <div class="hours-row hot"><span>Emergency calls</span><span>7 Days</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="foot-brand">J&amp;B GARAGE DOOR REPAIR, LLC</span>
+    <span>(704) 761-3100 · Charlotte &amp; Concord, NC</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.burger').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  links.style.display = open ? 'none' : 'flex';
+  links.style.cssText += open ? '' : 'flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#132330;padding:20px 24px;gap:16px;';
+});
+</script>
+</body>
+</html>

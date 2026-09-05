@@ -1,0 +1,199 @@
+[
+  {
+    "slug": "suit-system",
+    "cat": "style",
+    "catlabel": "Style",
+    "vol": "02",
+    "read": "4 min read",
+    "title": "The Suit Is a System, Not an Outfit",
+    "stand": "Buy the jacket for the shoulders and the trouser for the break. Everything else is alteration, and alteration is where the money actually goes.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "paris-bespoke",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "A bespoke suit jacket mid-fitting, chalk marks visible on the shoulder seam"
+    },
+    "body": [
+      "A suit is not a single purchase. It behaves like one at the register and like a system everywhere after, which is the first thing that confuses a man buying his first genuinely good one — he expects the jacket to fit the way it looked on the hanger, and it never does, because the hanger was not built like him.",
+      "Shoulders are the one structural element a tailor cannot meaningfully change after the fact. Everything below the collarbone can be taken in, let out, shortened, reshaped. The shoulder seam is closer to permanent, which is why it is the only measurement worth obsessing over before the fabric is even cut.",
+      "The trouser earns the same obsession for a different reason — the break. Too much fabric pooling at the ankle reads as inherited, not chosen. Too little reads as outgrown. The correct break is a narrow window, and it is the detail a well-trained eye clocks before it registers the fabric, the cut, or the color.",
+      "PQ::Everything else is alteration, and alteration is where the money actually goes.",
+      "This is the part nobody explains at the point of sale. The suit on the rack was never meant to be worn as sold. It is a starting position, a rough draft in cloth, and the real cost of owning it well is not the tag price but the three or four visits to a tailor afterward — taking in the waist, softening the sleeve, moving a button half an inch, because half an inch is the entire difference between a suit that fits and one that merely covers.",
+      "Men who skip this step are easy to spot in any room, and not for a reason they'd want pointed out. The fabric can be extraordinary and the fit can still be wrong, and a wrong fit on expensive cloth reads worse than a right fit on modest cloth — it announces money spent without judgment applied.",
+      "The system extends past the suit itself. A shirt collar that doesn't sit correctly against a jacket lapel undoes both. A shoe that fights the trouser break undoes the whole line from the knee down. None of these pieces were designed in isolation, and buying them that way is how a closet fills with expensive items that never once look like they belong to the same wardrobe.",
+      "Treat the first good suit as tuition, not a purchase. What it teaches — shoulder first, break second, alteration budget built in from day one — is the only part of the transaction that pays dividends on every suit bought after it."
+    ]
+  },
+  {
+    "slug": "karma-automotive",
+    "cat": "automotive",
+    "catlabel": "Automotive",
+    "vol": "11",
+    "read": "4 min read",
+    "title": "Karma Automotive, and the Case for a Badge Nobody Recognizes",
+    "stand": "Nobody at the valet stand knows the name. That is the point — the car is explaining something to the one person in the room who does.",
+    "featured": true,
+    "wide": false,
+    "hero": {
+      "img": "press-karma",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "A Karma Automotive coupe on an auto-show floor",
+      "srcset": true
+    },
+    "body": [
+      "Karma Automotive builds cars that most valet attendants will misidentify on sight, and the company seems entirely at peace with that. It is not chasing the three-pointed star or the prancing animal, the badges that do half the talking before a driver ever gets out. It is betting that a smaller, more particular kind of recognition is worth more.",
+      "That bet says something specific about who the car is built for. A man who buys for the badge is buying an argument he expects to win before anyone examines the details — a shortcut through the whole conversation about taste. A man who buys a car almost nobody recognizes is making a different claim entirely: that he doesn't need the shortcut, and would rather the details do the convincing.",
+      "PQ::The car is explaining something to the one person in the room who does.",
+      "The extended-range electric architecture Karma has built its recent lineup around is itself a kind of quiet confidence — neither fully conceding to the range anxiety that scares buyers away from pure electric, nor pretending the internal combustion era isn't ending. It solves a real problem without making a spectacle of solving it, which is the same instinct visible in the design language: doors that open upward instead of a wing that announces itself from a block away, a silhouette that reveals itself slowly instead of all at once.",
+      "IMG::0",
+      "IMG::1",
+      "This is a harder sell than a recognizable badge, and Karma clearly knows it. The company is not competing for the buyer who wants applause at the valet stand. It's competing for the buyer who has already had that applause, decided it wasn't the point, and started looking for a car that agrees with him instead of performing for everyone else in the lot.",
+      "There is a risk in building for that buyer exclusively — a smaller audience, a slower path to the kind of scale that funds the next generation of the car. But it also means every unit on the road is doing something a mass-market badge cannot: it is starting a conversation instead of ending one, because the only way anyone learns what it is happens to be by asking the man standing next to it.",
+      "That's the actual value proposition, once you strip away the horsepower figures and the carbon fiber. Karma isn't selling a badge that does the explaining for you. It's selling the specific, quieter confidence required to own a car you'll have to explain yourself — and betting that the right buyer would rather have that conversation than skip it."
+    ],
+    "images": [
+      {
+        "img": "press-karma-kaveya-open",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The Kaveya concept, shown with its dihedral doors open.",
+        "alt": "The Karma Kaveya concept car with its butterfly doors open in a studio setting"
+      },
+      {
+        "img": "press-karma-kaveya-interior",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Interior detail: a superellipse steering yoke framing the driver display.",
+        "alt": "Close-up of the Karma Kaveya's superellipse steering yoke and instrument display"
+      }
+    ]
+  },
+  {
+    "slug": "the-gentlemen",
+    "cat": "film",
+    "catlabel": "Film",
+    "vol": "12",
+    "read": "5 min read",
+    "title": "On Being Underestimated: Notes on The Gentlemen",
+    "stand": "Every man in that film is underestimated by someone in the first ten minutes and finishes the movie having made them regret it. That is the whole genre, done properly.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-the-gentlemen",
+      "ext": "jpg",
+      "mode": "contain",
+      "srcset": false,
+      "alt": "Official poster for Guy Ritchie's The Gentlemen (2019)"
+    },
+    "body": [
+      "There's a genre of British crime film that lives or dies on one specific trick — letting every character look, for the first several minutes, like exactly what a lazier film would have made them permanently. The stoner looks disposable. The posh one looks soft. The retired gangster looks retired. Guy Ritchie's The Gentlemen spends its whole runtime proving that first impression was the joke, not the plot.",
+      "What makes it worth revisiting past the plot mechanics is the class commentary sitting quietly underneath the caper — old aristocracy and new money circling the same territory, each side certain the other doesn't understand how things are really done, both occasionally right. The film never explains this directly. It just keeps putting men who misjudge each other's competence in the same room and letting the misjudgment cost someone something.",
+      "PQ::Every man in that film is underestimated by someone in the first ten minutes and finishes the movie having made them regret it.",
+      "That structure — the quiet man mistaken for harmless, correcting the record without raising his voice to do it — is the entire appeal of the genre when it's done well, and most attempts at it get the tone wrong in one direction or the other. Too much menace and it stops being fun. Too little and there's nothing at stake when the correction finally lands.",
+      "IMG::0",
+      "Ritchie's version threads that needle mostly by refusing to let anyone stay underestimated for long. The moment a character's real capability surfaces, the film moves on immediately instead of lingering on the reveal, which is a more confident choice than it sounds — it trusts the audience to have been paying attention instead of needing the point explained twice.",
+      "It plays on a screen here in a room built for exactly this kind of thing, the sort of space where a film gets watched at low volume with a drink in hand and half the room's attention, and it holds up fine under those conditions, which not every prestige crime picture manages. Some films need the theater's silence to work. This one is comfortable being the background to a good night, and comes forward when it earns it.",
+      "What sticks longest isn't any single twist. It's the reminder that being underestimated is not a weakness a man has to correct loudly — the correction can just as easily be a quiet accumulation of results, delivered so calmly the other party doesn't notice they've lost the argument until it's already over."
+    ],
+    "images": [
+      {
+        "img": "press-the-gentlemen-still",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "full",
+        "caption": "A tense beat from The Gentlemen (2019) — the moment the ‘harmless’ read stops holding.",
+        "alt": "A still from Guy Ritchie's The Gentlemen showing a suited man drawing a gun"
+      }
+    ]
+  },
+  {
+    "slug": "gta-6-anticipation",
+    "cat": "gaming",
+    "catlabel": "Gaming",
+    "vol": "14",
+    "read": "5 min read",
+    "title": "What Twelve Years of Waiting for GTA 6 Says About Attention",
+    "stand": "Nobody has played it. Everybody has an opinion about it. That gap is the most valuable real estate in entertainment right now, and almost nothing else on earth can hold it for twelve years.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-gta6",
+      "ext": "jpg",
+      "mode": "contain",
+      "srcset": true,
+      "alt": "Official box art for Grand Theft Auto VI"
+    },
+    "body": [
+      "There is exactly one entertainment property on earth that can go over a decade between major releases and still command the room every time it so much as clears its throat. Grand Theft Auto VI has been the subject of theory, leaked footage, box-art forensics and fan debate for years now, and none of that required a single person outside the studio to have actually played it.",
+      "That is not luck. It is a specific kind of business discipline that almost no other entertainment company on earth has the patience, or the market position, to attempt — the willingness to let anticipation compound for years instead of monetizing it early with a rushed release that would have ended the conversation.",
+      "IMG::0",
+      "IMG::1",
+      "PQ::That gap is the most valuable real estate in entertainment right now, and almost nothing else on earth can hold it for twelve years.",
+      "Most companies treat attention as a resource that decays the moment it isn't actively fed, which is why the entertainment calendar is so crowded with sequels, trailers, and content designed mainly to keep a property in the conversation between real releases. Rockstar has done the opposite, on purpose, betting that scarcity itself is the marketing — that silence, held long enough, becomes its own kind of noise.",
+      "It is a bet that only works from a position most competitors don't have. A studio without an existing, obsessive fanbase cannot simply go quiet for years and expect the anticipation to survive the silence; it would just be forgotten. Rockstar can, because the previous entry in the series became close to a cultural institution rather than a product, and institutions get remembered without needing to be reminded.",
+      "What's actually being sold in the years before release isn't the game. It's the anticipation itself — the box-art breakdowns, the trailer frame-by-frame analysis, the arguments over a single detail in a screenshot. All of that has commercial value independent of the eventual release, and Rockstar has been remarkably disciplined about not rushing to convert it into a product before the product was actually ready.",
+      "VIDEO::",
+      "Whether the game itself lives up to twelve years of theorizing is a separate question, and an honest one, because expectation this large has broken plenty of releases before it. But as a case study in what patience can do to the value of attention, it's already a masterclass — proof that in an industry addicted to constant content, the rarest and most valuable move left is simply not showing up until you mean it."
+    ],
+    "images": [
+      {
+        "img": "press-gta6-trailer-1",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "A frame from Rockstar's first GTA VI trailer.",
+        "alt": "A still from the official Grand Theft Auto VI trailer showing a car chase through a city street"
+      },
+      {
+        "img": "press-gta6-trailer-2",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Another frame from the same trailer drop — the in-game world doing part of the marketing on its own.",
+        "alt": "A still from the official Grand Theft Auto VI trailer showing a sports car on a highway"
+      }
+    ],
+    "video": {
+      "youtube_id": "QdBZY2fkU-0",
+      "title": "Grand Theft Auto VI — Trailer 1 (Rockstar Games)"
+    }
+  },
+  {
+    "slug": "still-listening-to-iceman",
+    "cat": "music",
+    "catlabel": "Music",
+    "vol": "19",
+    "read": "3 min read",
+    "title": "Still Listening to Iceman",
+    "stand": "Some albums get a week. This one got moved into the rotation permanently, and nobody in the room has asked to change it since.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-drake-iceman",
+      "ext": "jpg",
+      "mode": "contain",
+      "srcset": false,
+      "alt": "Official cover art for Drake's album Iceman"
+    },
+    "body": [
+      "Most albums, even good ones, get roughly two weeks of genuine attention before they quietly slide into the back catalog — played occasionally, referenced fondly, but no longer the thing actually queued up on a given night. Iceman didn't follow that pattern here, and it's worth asking honestly why, instead of just noting that it happened.",
+      "Part of it is pacing. An album built for genuine repeat listening has to reward attention on the fifth pass the same way it rewarded it on the first, which is a much harder trick than making a strong first impression. Most records front-load their best material and let the back half coast; this one keeps giving the listener a reason to stay through the whole runtime, which is the actual test of whether something belongs in permanent rotation or just a good first week.",
+      "PQ::Some albums get a week. This one got moved into the rotation permanently.",
+      "There's also something to be said for an album that holds up as background and as foreground equally well — playing during a working afternoon without demanding attention, and holding up just as well at higher volume with actual focus on it later that night. That range is rarer than it should be, and it's the difference between an album you like and an album you live with.",
+      "It plays on repeat in a specific room here, alongside a certain British crime picture that never seems to leave the rotation either — two very different things sharing screen and speaker time simply because neither one has worn out its welcome yet, months in. That's a higher bar than most culture clears, and most of what clears it does so quietly, without campaign.",
+      "None of this is a lyric-by-lyric breakdown, on purpose — the specifics of what's actually being said belong to the person who wrote it, and repeating them here would miss the point of what actually makes an album worth this kind of loyalty anyway. It isn't any single line. It's the cumulative effect of an album built to survive familiarity instead of relying on novelty to carry it.",
+      "Most music gets judged in its first week and forgotten by its third. The real test — the only one that actually matters months later — is whether it's still getting chosen on a night when literally anything else in the catalog was available instead. This one keeps getting chosen, and at some point that stops being a coincidence and starts being the whole review."
+    ]
+  }
+]
