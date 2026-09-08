@@ -480,6 +480,7 @@
       <p class="dash__loading" id="dn-loading">Loading&#8230;</p>
       <p class="dash__err" id="dn-loaderr" hidden></p>
       <p class="dash__hint" id="dn-updated"></p>
+      <div class="card__row" id="dn-filter" style="flex-wrap:wrap"></div>
       <div id="dn-list" class="card-grid"></div>
     </div>
 
@@ -3622,20 +3623,11 @@
   // search queries. Seeded with a real starting list drawn from what the
   // Journal already covers, the first time this loads with nothing saved
   // yet; editing and saving here writes the real record from then on.
+  // Only Drake is tracked right now, by explicit request -- every other
+  // category starts empty until entries are added back here. Mirrors
+  // scripts/fetch_daily_news.py's own TB_SEED exactly.
   var TB_SEED = {
-    automotive: ['Ferrari','Porsche','Karma Automotive','Singer Vehicle Design','Louis Vuitton','Aston Martin','Maserati','Bugatti'],
-    style: ['Kith','Ralph Lauren','Tom Ford','Zegna','Brunello Cucinelli','adidas'],
-    timepiece: ['A. Lange & Söhne','Piaget','Vacheron Constantin','Parmigiani Fleurier','Berneron','Patek Philippe','Rolex','Audemars Piguet'],
-    business: ['Apple','Nike','LVMH','Tim Cook','HelloFresh'],
-    tech: ['Apple','Tesla','OpenAI','Meta'],
-    music: ['Drake','OVO Sound','Kendrick Lamar','Jay-Z'],
-    news: ['GQ','Rolling Stone','Complex','Hypebeast','Robb Report','Highsnobiety'],
-    film: ['Guy Ritchie','A24','Netflix','Christopher Nolan','Warner Bros'],
-    gaming: ['Rockstar Games','PlayStation','Xbox'],
-    art: ['Daniel Arsham','KAWS','Takashi Murakami'],
-    sports: ['Roger Federer','Stephen Curry','Michael Jordan','LeBron James'],
-    travel: ['TRUNK Hotel','NOT A HOTEL','Aman Resorts','Four Seasons'],
-    charlotte: ['Charlotte Observer','Axios Charlotte','Queen City News'],
+    music: ['Drake'],
   };
   var TB_CAT_LABEL = {automotive:'Motors', style:'Style', timepiece:'Timepiece', business:'Business', tech:'Tech',
     music:'Music', news:'News', film:'Film', gaming:'Gaming', art:'Art', sports:'Sports', travel:'Travel', charlotte:'Charlotte'};
@@ -3671,7 +3663,7 @@
 
   function tbRender(){
     var wrap = document.getElementById('tb-cats');
-    var order = Object.keys(TB_CAT_LABEL).filter(function(c){ return tbData[c]; }).concat(Object.keys(tbData).filter(function(c){ return !TB_CAT_LABEL[c]; }));
+    var order = Object.keys(TB_CAT_LABEL).concat(Object.keys(tbData).filter(function(c){ return !TB_CAT_LABEL[c]; }));
     wrap.innerHTML = order.map(function(cat){
       return '<div class="card" data-cat="' + esc(cat) + '" style="margin-top:var(--s5)">' +
         '<div class="card__top"><span class="card__title">' + esc(TB_CAT_LABEL[cat] || cat) + '</span></div>' +
@@ -3727,6 +3719,43 @@
   });
 
   // ================= DAILY NEWS (read-only) =================
+  var dnActiveCat = 'all';
+  var dnItems = [];
+
+  function dnRenderFilter(){
+    var bar = document.getElementById('dn-filter');
+    var counts = {};
+    dnItems.forEach(function(it){ if (it.category) counts[it.category] = (counts[it.category]||0) + 1; });
+    var present = Object.keys(TB_CAT_LABEL).filter(function(c){ return counts[c]; });
+    if (present.length < 1) { bar.hidden = true; bar.innerHTML = ''; return; }
+    bar.hidden = false;
+    bar.innerHTML = '<button type="button" class="btn-sm' + (dnActiveCat==='all'?' is-on':'') + '" data-dn-filter="all">All (' + dnItems.length + ')</button>' +
+      present.map(function(c){ return '<button type="button" class="btn-sm' + (dnActiveCat===c?' is-on':'') + '" data-dn-filter="' + c + '">' + esc(TB_CAT_LABEL[c]) + ' (' + counts[c] + ')</button>'; }).join('');
+  }
+  document.getElementById('dn-filter').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-dn-filter]');
+    if (!btn) return;
+    dnActiveCat = btn.getAttribute('data-dn-filter');
+    dnRenderFilter();
+    dnRenderList();
+  });
+
+  function dnRenderList(){
+    var list = document.getElementById('dn-list');
+    var visible = dnActiveCat === 'all' ? dnItems : dnItems.filter(function(it){ return it.category === dnActiveCat; });
+    if (!visible.length) { list.innerHTML = '<p class="dash__empty">' + (dnItems.length ? 'Nothing in this category.' : 'Nothing yet.') + '</p>'; return; }
+    list.innerHTML = visible.map(function(it){
+      return '<div class="card">' +
+        (it.thumbnail ? '<img class="card__thumb" src="' + esc(it.thumbnail) + '" alt="" loading="lazy">' : '') +
+        '<div class="card__top"><span class="card__title">' + esc(it.title || 'Untitled') + '</span>' +
+          (it.matched ? '<span class="badge badge--brass">' + esc(it.matched) + '</span>' : '') +
+          (it.category ? '<span class="badge">' + esc(TB_CAT_LABEL[it.category] || it.category) + '</span>' : '') + '</div>' +
+        '<p class="card__meta">' + esc(it.source || '') + (it.published ? ' &#183; ' + esc(it.published) : '') + '</p>' +
+        '<div class="card__row"><a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(it.link || '#') + '" target="_blank" rel="noopener">Read &#8594;</a></div>' +
+      '</div>';
+    }).join('');
+  }
+
   function dnLoad(){
     var loading = document.getElementById('dn-loading');
     var err = document.getElementById('dn-loaderr');
@@ -3735,20 +3764,13 @@
       .then(function(r){ return r.status === 404 ? null : r.json(); })
       .then(function(data){
         loading.hidden = true;
-        var items = (data && data.items) || [];
+        dnItems = (data && data.items) || [];
         document.getElementById('dn-updated').textContent = data && data.updatedAt
           ? 'Last updated ' + fmtDate(data.updatedAt)
           : 'No run yet — the daily pipeline hasn\'t published anything here.';
-        var list = document.getElementById('dn-list');
-        if (!items.length) { list.innerHTML = '<p class="dash__empty">Nothing yet.</p>'; return; }
-        list.innerHTML = items.map(function(it){
-          return '<div class="card">' +
-            '<div class="card__top"><span class="card__title">' + esc(it.title || 'Untitled') + '</span>' +
-              (it.matched ? '<span class="badge badge--brass">' + esc(it.matched) + '</span>' : '') + '</div>' +
-            '<p class="card__meta">' + esc(it.source || '') + (it.published ? ' &#183; ' + esc(it.published) : '') + '</p>' +
-            '<div class="card__row"><a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(it.link || '#') + '" target="_blank" rel="noopener">Read &#8594;</a></div>' +
-          '</div>';
-        }).join('');
+        if (dnActiveCat !== 'all' && !dnItems.some(function(it){ return it.category === dnActiveCat; })) dnActiveCat = 'all';
+        dnRenderFilter();
+        dnRenderList();
       })
       .catch(function(){ loading.hidden = true; err.textContent = 'Could not load.'; err.hidden = false; });
   }

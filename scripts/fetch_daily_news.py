@@ -49,20 +49,12 @@ CURATED_FEEDS = [
     # below since it's in TB_SEED's news category.
 ]
 
+# Only Drake is tracked right now, by explicit request -- every other
+# category sits empty until entries are added back via the dashboard's
+# Tracked Brands tab (or this seed, which only matters as a fallback for
+# whenever tracked-brands hasn't been saved there yet at all).
 TB_SEED = {
-    "automotive": ["Ferrari", "Porsche", "Karma Automotive", "Singer Vehicle Design", "Louis Vuitton", "Aston Martin", "Maserati", "Bugatti"],
-    "style": ["Kith", "Ralph Lauren", "Tom Ford", "Zegna", "Brunello Cucinelli", "adidas"],
-    "timepiece": ["A. Lange & Söhne", "Piaget", "Vacheron Constantin", "Parmigiani Fleurier", "Berneron", "Patek Philippe", "Rolex", "Audemars Piguet"],
-    "business": ["Apple", "Nike", "LVMH", "Tim Cook", "HelloFresh"],
-    "tech": ["Apple", "Tesla", "OpenAI", "Meta"],
-    "music": ["Drake", "OVO Sound", "Kendrick Lamar", "Jay-Z"],
-    "news": ["GQ", "Rolling Stone", "Complex", "Hypebeast", "Robb Report", "Highsnobiety"],
-    "film": ["Guy Ritchie", "A24", "Netflix", "Christopher Nolan", "Warner Bros"],
-    "gaming": ["Rockstar Games", "PlayStation", "Xbox"],
-    "art": ["Daniel Arsham", "KAWS", "Takashi Murakami"],
-    "sports": ["Roger Federer", "Stephen Curry", "Michael Jordan", "LeBron James"],
-    "travel": ["TRUNK Hotel", "NOT A HOTEL", "Aman Resorts", "Four Seasons"],
-    "charlotte": ["Charlotte Observer", "Axios Charlotte", "Queen City News"],
+    "music": ["Drake"],
 }
 
 
@@ -73,24 +65,38 @@ def fetch(url, timeout=15):
 
 
 def get_tracked_terms():
-    """Active names from the dashboard's Tracked Brands tab, falling back
-    to the same seed list the dashboard itself seeds a first-time-empty
-    list with, so this works even before anyone's saved that tab once."""
+    """(term, category) pairs for every active entry in the dashboard's
+    Tracked Brands tab, falling back to the same seed list the dashboard
+    itself seeds a first-time-empty list with, so this works even before
+    anyone's saved that tab once. Category rides along so each resulting
+    news item can be filtered by it on the Daily News tab; a term saved
+    under more than one category (possible, if someone adds the same name
+    twice) is only searched once but keeps its first category."""
     try:
         raw = fetch(f"{SITE}/api/content?collection=tracked-brands&id=main")
         data = json.loads(raw)
         categories = data.get("categories") or {}
         if categories:
-            terms = []
-            for entries in categories.values():
+            pairs = []
+            seen_names = set()
+            for cat, entries in categories.items():
                 for e in entries:
-                    if e.get("active") and e.get("name"):
-                        terms.append(e["name"])
-            if terms:
-                return sorted(set(terms))
+                    name = e.get("name")
+                    if e.get("active") and name and name not in seen_names:
+                        seen_names.add(name)
+                        pairs.append((name, cat))
+            if pairs:
+                return sorted(pairs)
     except Exception as e:
         print(f"  (tracked-brands fetch failed, using seed list: {e})", file=sys.stderr)
-    return sorted({name for names in TB_SEED.values() for name in names})
+    seen_names = set()
+    pairs = []
+    for cat, names in TB_SEED.items():
+        for name in names:
+            if name not in seen_names:
+                seen_names.add(name)
+                pairs.append((name, cat))
+    return sorted(pairs)
 
 
 def parse_pubdate(text):
@@ -108,7 +114,34 @@ def parse_pubdate(text):
     return None
 
 
-def parse_rss(xml_bytes, source_label, matched_label=None):
+MEDIA_NS = "{http://search.yahoo.com/mrss/}"
+IMG_TAG_RE = re.compile(r'<img[^>]+src=["\']([^"\']+)["\']', re.I)
+
+
+def find_thumbnail(item):
+    """Best-effort image extraction -- most feeds use one of these three
+    shapes; Google News RSS items use none of them, so those items simply
+    end up with no thumbnail (there's no reliable image field on Google
+    News' own RSS to take one from)."""
+    media = item.find(f"{MEDIA_NS}thumbnail")
+    if media is not None and media.get("url"):
+        return media.get("url")
+    media = item.find(f"{MEDIA_NS}content")
+    if media is not None and media.get("url") and (media.get("medium") == "image" or "image" in (media.get("type") or "")):
+        return media.get("url")
+    enclosure = item.find("enclosure")
+    if enclosure is not None and enclosure.get("url") and "image" in (enclosure.get("type") or ""):
+        return enclosure.get("url")
+    for tag in ("{http://purl.org/rss/1.0/modules/content/}encoded", "description", "summary"):
+        el = item.find(tag)
+        if el is not None and el.text:
+            m = IMG_TAG_RE.search(el.text)
+            if m:
+                return m.group(1)
+    return None
+
+
+def parse_rss(xml_bytes, source_label, matched_label=None, category=None):
     items = []
     try:
         root = ET.fromstring(xml_bytes)
@@ -138,14 +171,25 @@ def parse_rss(xml_bytes, source_label, matched_label=None):
             "link": link,
             "source": source_label,
             "matched": matched_label,
+            "category": category,
+            "thumbnail": find_thumbnail(item),
             "_published": published,
         })
     return items
 
 
-def google_news_rss(term):
-    q = urllib.parse.quote(f'"{term}"')
-    return f"https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en"
+# Extra unquoted words appended to an exact-phrase search to steer a
+# common/ambiguous name toward the right category -- "Drake" alone pulls
+# in a lot of the NFL quarterback Drake Maye, "Drake" music does not.
+CATEGORY_QUERY_HINT = {"music": "music"}
+
+
+def google_news_rss(term, category=None):
+    q = f'"{term}"'
+    hint = CATEGORY_QUERY_HINT.get(category)
+    if hint:
+        q += " " + hint
+    return f"https://news.google.com/rss/search?q={urllib.parse.quote(q)}&hl=en-US&gl=US&ceid=US:en"
 
 
 def main():
@@ -161,14 +205,14 @@ def main():
             print(f"  {label}: FAILED ({e})", file=sys.stderr)
         time.sleep(0.3)
 
-    terms = get_tracked_terms()
-    print(f"Tracking {len(terms)} term(s): {', '.join(terms)}")
-    for term in terms:
+    pairs = get_tracked_terms()
+    print(f"Tracking {len(pairs)} term(s): {', '.join(t for t, c in pairs)}")
+    for term, category in pairs:
         try:
-            raw = fetch(google_news_rss(term))
-            found = parse_rss(raw, "Google News", matched_label=term)
+            raw = fetch(google_news_rss(term, category))
+            found = parse_rss(raw, "Google News", matched_label=term, category=category)
             all_items.extend(found)
-            print(f"  \"{term}\": {len(found)} item(s)")
+            print(f"  \"{term}\" ({category}): {len(found)} item(s)")
         except Exception as e:
             print(f"  \"{term}\": FAILED ({e})", file=sys.stderr)
         time.sleep(0.3)
@@ -192,6 +236,8 @@ def main():
         "link": it["link"],
         "source": it["source"],
         "matched": it["matched"],
+        "category": it["category"],
+        "thumbnail": it["thumbnail"],
         "published": it["_published"].strftime("%Y-%m-%d %H:%M UTC") if it["_published"] else None,
     } for it in fresh]
 
