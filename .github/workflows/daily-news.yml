@@ -1,0 +1,25 @@
+name: Daily News
+
+# Runs once a day, independent of any code change -- pulls fresh RSS/Google
+# News results for whatever's checked in the dashboard's Tracked Brands tab
+# and writes them straight to the dashboard's KV content store (POST
+# /api/content?collection=daily-news), the same live endpoint the
+# dashboard itself reads. No rebuild, no deploy -- see
+# scripts/fetch_daily_news.py's own header for why.
+on:
+  schedule:
+    - cron: '0 12 * * *'  # 12:00 UTC daily (8am ET / 7am CT)
+  workflow_dispatch: {}  # manual "Run workflow" button, for testing this without waiting for the schedule
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch and publish daily news
+        env:
+          DASHBOARD_PASSPHRASE_HASH: ${{ secrets.DASHBOARD_PASSPHRASE_HASH }}
+        run: python3 scripts/fetch_daily_news.py

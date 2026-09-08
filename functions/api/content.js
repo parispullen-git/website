@@ -7,7 +7,13 @@
    assets/js/piano-player.js, house.html, assets/js/penthouse.js), channels
    (TV/Cinema room channel lists, one record per room-set keyed by id --
    see assets/js/tv-remote.js), pitches (internal brand-pitch tracker,
-   dashboard-only, nothing on the live site reads it).
+   dashboard-only, nothing on the live site reads it), goals (project/pitch
+   targets, dashboard-only), social-analytics (manual per-platform post and
+   follower-count log, dashboard-only), newsletter (per-send stats,
+   dashboard-only), tracked-brands (the checklist of brands/people/outlets
+   the daily news pipeline searches for -- see scripts/fetch_daily_news.py),
+   daily-news (that pipeline's output, written by
+   .github/workflows/daily-news.yml, read-only from the dashboard).
 
    Cloudflare Pages Functions port of netlify/functions/content.js -- see
    _lib/http.js's toEvent() for why the body below reads like the original. */
@@ -17,7 +23,8 @@ const { toEvent } = require('./_lib/http');
 
 const ALLOWED = new Set([
   'vault-reserve', 'vault-links', 'journal', 'journal-categories', 'casefiles', 'wardrobe', 'curations',
-  'playlists', 'channels', 'pitches', 'dispatch-briefs',
+  'playlists', 'channels', 'pitches', 'dispatch-briefs', 'goals', 'social-analytics', 'newsletter',
+  'tracked-brands', 'daily-news',
 ]);
 
 export async function onRequest(context) {

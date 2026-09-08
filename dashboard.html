@@ -41,6 +41,7 @@
   .chrow{display:grid;grid-template-columns:10rem 1fr auto;gap:var(--s3);align-items:center}
   .chrow input{background:#0A0A0B;border:1px solid var(--hairline);color:var(--ivory,var(--bone));padding:.5em .7em;
     font-family:var(--font-body);font-size:.85rem}
+  .chrow input[type="checkbox"]{width:auto;background:none;border:none;padding:0}
   .dashmain{min-width:0}
   .dash__panel{display:none}
   .dash__panel.is-active{display:block}
@@ -185,13 +186,17 @@
       <button class="dashnav__item" data-tab="dispatch">Dispatch Briefs</button>
       <button class="dashnav__item" data-tab="music">Music</button>
       <button class="dashnav__item" data-tab="video">Video</button>
-      <button class="dashnav__item" data-tab="pitches">Pitches</button>
+      <button class="dashnav__item" data-tab="pitches">Pitches &amp; Goals</button>
       <button class="dashnav__item" data-tab="network">Network</button>
       <button class="dashnav__item" data-tab="websites">Websites</button>
       <button class="dashnav__item" data-tab="casefiles">Case Files</button>
       <button class="dashnav__item" data-tab="charlottemap">Charlotte Map</button>
       <button class="dashnav__item" data-tab="housemusic">House Music</button>
       <button class="dashnav__item" data-tab="housechannels">House Channels</button>
+      <button class="dashnav__item" data-tab="trackedbrands">Tracked Brands</button>
+      <button class="dashnav__item" data-tab="dailynews">Daily News</button>
+      <button class="dashnav__item" data-tab="social">Social Analytics</button>
+      <button class="dashnav__item" data-tab="newsletter">Newsletter</button>
       <button class="dashnav__item" data-tab="content">Content</button>
       <div class="dashnav__deploy">
         <button type="button" class="dashnav__deploybtn" id="deploy-live-btn">Deploy Live</button>
@@ -459,6 +464,97 @@
       </div>
     </div>
 
+    <!-- TRACKED BRANDS -->
+    <div class="dash__panel" id="panel-trackedbrands">
+      <p class="body">The brands, people, and outlets the Daily News pipeline searches for, one list per category. Uncheck one to stop tracking it without losing it; remove it outright with &#215;; add your own at the bottom of each category. Saved changes take effect on the next scheduled run — <code>.github/workflows/daily-news.yml</code>, once a day.</p>
+      <p class="dash__loading" id="tb-loading">Loading&#8230;</p>
+      <p class="dash__err" id="tb-loaderr" hidden></p>
+      <div id="tb-cats"></div>
+      <div class="card__row" style="margin-top:var(--s5)"><button type="button" class="btn-sm" id="tb-save">Save Tracked Brands</button></div>
+      <div id="tb-save-msg"></div>
+    </div>
+
+    <!-- DAILY NEWS -->
+    <div class="dash__panel" id="panel-dailynews">
+      <p class="body">Auto-refreshed once a day from the outlets and search terms in Tracked Brands — real RSS feeds, no manual entry. Read-only here; edit what it looks for on the Tracked Brands tab.</p>
+      <p class="dash__loading" id="dn-loading">Loading&#8230;</p>
+      <p class="dash__err" id="dn-loaderr" hidden></p>
+      <p class="dash__hint" id="dn-updated"></p>
+      <div id="dn-list" class="card-grid"></div>
+    </div>
+
+    <!-- SOCIAL ANALYTICS -->
+    <div class="dash__panel" id="panel-social">
+      <p class="body">Manual log — platform APIs need developer credentials we don't have yet. Log a snapshot (overall follower count) or a single post's numbers whenever you check.</p>
+      <div class="newform" id="social-newform">
+        <p class="eyebrow">New Entry</p>
+        <div class="grid2">
+          <div class="fld"><label>Platform</label>
+            <select id="social-platform">
+              <option value="instagram">Instagram</option>
+              <option value="tiktok">TikTok</option>
+              <option value="threads">Threads</option>
+              <option value="youtube">YouTube</option>
+              <option value="linkedin">LinkedIn</option>
+            </select>
+          </div>
+          <div class="fld"><label>Type</label>
+            <select id="social-kind">
+              <option value="snapshot">Account Snapshot</option>
+              <option value="post">Individual Post</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label>Date</label><input id="social-date" type="date"></div>
+          <div class="fld"><label>Title / Caption (for a post)</label><input id="social-title" placeholder="e.g. Penthouse walkthrough Reel"></div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label>Followers (snapshot)</label><input id="social-followers" type="number"></div>
+          <div class="fld"><label>Views / Impressions</label><input id="social-views" type="number"></div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label>Likes</label><input id="social-likes" type="number"></div>
+          <div class="fld"><label>Comments</label><input id="social-comments" type="number"></div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label>Shares / Reposts</label><input id="social-shares" type="number"></div>
+          <div class="fld"><label>Link</label><input id="social-link" placeholder="https://&#8230;"></div>
+        </div>
+        <div class="fld"><label>Notes</label><textarea id="social-notes"></textarea></div>
+        <div class="card__row"><button type="button" class="btn-sm" id="social-save">Save Entry</button></div>
+        <p class="dash__err" id="social-err" hidden></p>
+      </div>
+      <p class="dash__loading" id="social-loading">Loading&#8230;</p>
+      <div class="card__row" id="social-filter" style="flex-wrap:wrap"></div>
+      <div id="social-list" class="card-grid"></div>
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="dash__panel" id="panel-newsletter">
+      <p class="body">Per-send tracker — subject, recipients, opens, clicks.</p>
+      <div class="newform" id="nl-newform">
+        <p class="eyebrow">New Send</p>
+        <div class="grid2">
+          <div class="fld"><label>Subject</label><input id="nl-subject" placeholder="e.g. The Journal, week of Sept 7"></div>
+          <div class="fld"><label>Send Date</label><input id="nl-date" type="date"></div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label>Recipients</label><input id="nl-recipients" type="number"></div>
+          <div class="fld"><label>Open Rate (%)</label><input id="nl-openrate" type="number" step="0.1"></div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label>Click Rate (%)</label><input id="nl-clickrate" type="number" step="0.1"></div>
+          <div class="fld"><label>Archive Link</label><input id="nl-link" placeholder="https://&#8230;"></div>
+        </div>
+        <div class="fld"><label>Notes</label><textarea id="nl-notes"></textarea></div>
+        <div class="card__row"><button type="button" class="btn-sm" id="nl-save">Save Send</button></div>
+        <p class="dash__err" id="nl-err" hidden></p>
+      </div>
+      <p class="dash__loading" id="nl-loading">Loading&#8230;</p>
+      <div id="nl-list" class="card-grid"></div>
+    </div>
+
     <!-- DISPATCH BRIEFS -->
     <div class="dash__panel" id="panel-dispatch">
       <p class="body">A worksheet for handing Agent Foxx the specific details a Journal entry needs to feel lived-in rather than assigned &#8212; the one moment that stuck, why it landed on you, an exact quote, what media you're sending. Submissions archive here; nothing gets published until it's turned into an actual Journal entry.</p>
@@ -579,6 +675,42 @@
 
       <p class="dash__loading" id="pitches-loading">Loading&#8230;</p>
       <div id="pitches-list"></div>
+
+      <div class="newform" id="goal-newform" style="margin-top:var(--s7);border-top:2px solid var(--brass);padding-top:var(--s6)">
+        <p class="eyebrow">New Goal</p>
+        <div class="grid2">
+          <div class="fld"><label>Goal</label><input id="goal-title" placeholder="e.g. 50K Instagram followers"></div>
+          <div class="fld"><label>Category</label>
+            <select id="goal-category">
+              <option value="pitch">Pitch / Partnership</option>
+              <option value="content">Content / Journal</option>
+              <option value="social">Social Growth</option>
+              <option value="revenue">Revenue</option>
+              <option value="brand">Brand / PR</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="fld"><label>Target</label><input id="goal-target" placeholder="e.g. 50,000 followers, or $10K MRR"></div>
+          <div class="fld"><label>Target Date</label><input id="goal-date" type="date"></div>
+        </div>
+        <div class="fld"><label>Status</label>
+          <select id="goal-status">
+            <option value="on-track">On Track</option>
+            <option value="at-risk">At Risk</option>
+            <option value="done">Done</option>
+            <option value="dropped">Dropped</option>
+          </select>
+        </div>
+        <div class="fld"><label>Progress Notes</label><textarea id="goal-notes" placeholder="Where this actually stands right now."></textarea></div>
+        <div class="card__row"><button type="button" class="btn-sm" id="goal-save">Save Goal</button></div>
+        <p class="dash__err" id="goal-err" hidden></p>
+      </div>
+
+      <p class="eyebrow" style="margin-top:var(--s6)">Goals</p>
+      <p class="dash__loading" id="goals-loading">Loading&#8230;</p>
+      <div id="goals-list" class="card-grid"></div>
     </div>
 
     <!-- NETWORK -->
@@ -800,6 +932,7 @@
     loadMusicDash();
     loadVideoDash();
     loadPitchesDash();
+    loadGoalsDash();
     loadNetworkDash();
     renderWebsitesDash();
   }
@@ -3150,6 +3283,480 @@
       })
       .catch(function(){ btn.disabled = false; btn.textContent = pitchEditingId ? 'Update Pitch' : 'Save Pitch'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
   });
+
+  // ================= GOALS (lives inside the Pitches & Goals tab) =================
+  var GOAL_CAT_LABEL = {pitch:'Pitch / Partnership', content:'Content / Journal', social:'Social Growth', revenue:'Revenue', brand:'Brand / PR', other:'Other'};
+  var GOAL_STATUS_LABEL = {'on-track':'On Track', 'at-risk':'At Risk', done:'Done', dropped:'Dropped'};
+  var goalEditingId = null;
+
+  function goalResetForm(){
+    goalEditingId = null;
+    ['goal-title','goal-target','goal-date','goal-notes'].forEach(function(id){ document.getElementById(id).value = ''; });
+    document.getElementById('goal-category').value = 'pitch';
+    document.getElementById('goal-status').value = 'on-track';
+    document.getElementById('goal-save').textContent = 'Save Goal';
+  }
+
+  function loadGoalsDash(){
+    var loading = document.getElementById('goals-loading');
+    var list = document.getElementById('goals-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/api/content?collection=goals')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var goals = (data.records || []).sort(function(a,b){ return (b.createdAt||0) - (a.createdAt||0); });
+        if (!goals.length) { list.innerHTML = '<p class="dash__empty">No goals tracked yet.</p>'; return; }
+        list.dataset.records = JSON.stringify(goals);
+        list.innerHTML = goals.map(function(g){
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(g.title || 'Untitled') + '</span>' +
+              '<span class="badge' + (g.status === 'done' ? ' badge--brass' : '') + '">' + esc(GOAL_STATUS_LABEL[g.status] || g.status || '') + '</span>' +
+              '<span class="badge badge--brass">' + esc(GOAL_CAT_LABEL[g.category] || g.category || '') + '</span>' +
+            '</div>' +
+            '<p class="card__meta">' + esc(g.target || '') + (g.date ? ' &#183; by ' + esc(g.date) : '') + '</p>' +
+            (g.notes ? '<div class="card__body">' + esc(g.notes) + '</div>' : '') +
+            '<div class="card__row">' +
+              '<button type="button" class="btn-sm" data-edit-goal="' + esc(g.id) + '">Edit</button>' +
+              '<button type="button" class="btn-sm" data-delete-goal="' + esc(g.id) + '">Delete</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load goals.'; });
+  }
+
+  document.getElementById('goals-list').addEventListener('click', function(e){
+    var editBtn = e.target.closest('[data-edit-goal]');
+    if (editBtn) {
+      var records = JSON.parse(document.getElementById('goals-list').dataset.records || '[]');
+      var g = records.filter(function(r){ return r.id === editBtn.getAttribute('data-edit-goal'); })[0];
+      if (!g) return;
+      goalEditingId = g.id;
+      document.getElementById('goal-title').value = g.title || '';
+      document.getElementById('goal-category').value = g.category || 'pitch';
+      document.getElementById('goal-target').value = g.target || '';
+      document.getElementById('goal-date').value = g.date || '';
+      document.getElementById('goal-status').value = g.status || 'on-track';
+      document.getElementById('goal-notes').value = g.notes || '';
+      document.getElementById('goal-save').textContent = 'Update Goal';
+      document.getElementById('goal-newform').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    var delBtn = e.target.closest('[data-delete-goal]');
+    if (delBtn) {
+      if (!armDelete(delBtn)) return;
+      fetch('/api/content?collection=goals&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-goal')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+        .then(function(){ loadGoalsDash(); });
+    }
+  });
+
+  document.getElementById('goal-save').addEventListener('click', function(){
+    var err = document.getElementById('goal-err');
+    err.hidden = true;
+    var title = document.getElementById('goal-title').value.trim();
+    if (!title) { err.textContent = 'Goal title is required.'; err.hidden = false; return; }
+    var payload = {
+      passphraseHash: storedHash,
+      id: goalEditingId || undefined,
+      data: {
+        title: title,
+        category: document.getElementById('goal-category').value,
+        target: document.getElementById('goal-target').value.trim(),
+        date: document.getElementById('goal-date').value,
+        status: document.getElementById('goal-status').value,
+        notes: document.getElementById('goal-notes').value.trim(),
+      }
+    };
+    var btn = document.getElementById('goal-save');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    authedFetch('/api/content?collection=goals', {method:'POST', body: JSON.stringify(payload)})
+      .then(function(res){
+        btn.disabled = false;
+        if (!res.ok) { btn.textContent = goalEditingId ? 'Update Goal' : 'Save Goal'; err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
+        goalResetForm();
+        loadGoalsDash();
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = goalEditingId ? 'Update Goal' : 'Save Goal'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  });
+
+  // ================= SOCIAL ANALYTICS =================
+  var SOCIAL_PLATFORM_LABEL = {instagram:'Instagram', tiktok:'TikTok', threads:'Threads', youtube:'YouTube', linkedin:'LinkedIn'};
+  var socialActivePlatform = 'all';
+  var socialEditingId = null;
+
+  function socialResetForm(){
+    socialEditingId = null;
+    ['social-date','social-title','social-followers','social-views','social-likes','social-comments','social-shares','social-link','social-notes'].forEach(function(id){ document.getElementById(id).value = ''; });
+    document.getElementById('social-platform').value = 'instagram';
+    document.getElementById('social-kind').value = 'snapshot';
+    document.getElementById('social-save').textContent = 'Save Entry';
+  }
+
+  function renderSocialFilter(records){
+    var bar = document.getElementById('social-filter');
+    var counts = {};
+    records.forEach(function(r){ counts[r.platform] = (counts[r.platform]||0) + 1; });
+    var present = Object.keys(SOCIAL_PLATFORM_LABEL).filter(function(p){ return counts[p]; });
+    if (present.length <= 1) { bar.hidden = true; bar.innerHTML = ''; return; }
+    bar.hidden = false;
+    bar.innerHTML = '<button type="button" class="btn-sm' + (socialActivePlatform==='all'?' is-on':'') + '" data-social-filter="all">All (' + records.length + ')</button>' +
+      present.map(function(p){ return '<button type="button" class="btn-sm' + (socialActivePlatform===p?' is-on':'') + '" data-social-filter="' + p + '">' + SOCIAL_PLATFORM_LABEL[p] + ' (' + counts[p] + ')</button>'; }).join('');
+  }
+  document.getElementById('social-filter').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-social-filter]');
+    if (!btn) return;
+    socialActivePlatform = btn.getAttribute('data-social-filter');
+    var records = JSON.parse(document.getElementById('social-list').dataset.records || '[]');
+    renderSocialFilter(records);
+    renderSocialList(records);
+  });
+
+  function renderSocialList(records){
+    var list = document.getElementById('social-list');
+    var visible = socialActivePlatform === 'all' ? records : records.filter(function(r){ return r.platform === socialActivePlatform; });
+    if (!visible.length) { list.innerHTML = '<p class="dash__empty">Nothing logged yet.</p>'; return; }
+    list.innerHTML = visible.map(function(r){
+      var stats = [];
+      if (r.followers != null && r.followers !== '') stats.push(r.followers + ' followers');
+      if (r.views != null && r.views !== '') stats.push(r.views + ' views');
+      if (r.likes != null && r.likes !== '') stats.push(r.likes + ' likes');
+      if (r.comments != null && r.comments !== '') stats.push(r.comments + ' comments');
+      if (r.shares != null && r.shares !== '') stats.push(r.shares + ' shares');
+      return '<div class="card">' +
+        '<div class="card__top">' +
+          '<span class="card__title">' + esc(r.title || (r.kind === 'snapshot' ? 'Snapshot' : 'Post')) + '</span>' +
+          '<span class="badge badge--brass">' + esc(SOCIAL_PLATFORM_LABEL[r.platform] || r.platform || '') + '</span>' +
+        '</div>' +
+        '<p class="card__meta">' + esc(r.date || '') + (stats.length ? ' &#183; ' + esc(stats.join(', ')) : '') + '</p>' +
+        (r.notes ? '<div class="card__body">' + esc(r.notes) + '</div>' : '') +
+        '<div class="card__row">' +
+          (r.link ? '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(r.link) + '" target="_blank" rel="noopener">Open</a>' : '') +
+          '<button type="button" class="btn-sm" data-edit-social="' + esc(r.id) + '">Edit</button>' +
+          '<button type="button" class="btn-sm" data-delete-social="' + esc(r.id) + '">Delete</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function loadSocialDash(){
+    var loading = document.getElementById('social-loading');
+    var list = document.getElementById('social-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/api/content?collection=social-analytics')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var records = (data.records || []).sort(function(a,b){ return (b.date||'').localeCompare(a.date||'') || (b.createdAt||0)-(a.createdAt||0); });
+        list.dataset.records = JSON.stringify(records);
+        renderSocialFilter(records);
+        renderSocialList(records);
+      })
+      .catch(function(){ loading.textContent = 'Could not load.'; });
+  }
+
+  document.getElementById('social-list').addEventListener('click', function(e){
+    var editBtn = e.target.closest('[data-edit-social]');
+    if (editBtn) {
+      var records = JSON.parse(document.getElementById('social-list').dataset.records || '[]');
+      var r = records.filter(function(x){ return x.id === editBtn.getAttribute('data-edit-social'); })[0];
+      if (!r) return;
+      socialEditingId = r.id;
+      document.getElementById('social-platform').value = r.platform || 'instagram';
+      document.getElementById('social-kind').value = r.kind || 'snapshot';
+      document.getElementById('social-date').value = r.date || '';
+      document.getElementById('social-title').value = r.title || '';
+      document.getElementById('social-followers').value = r.followers != null ? r.followers : '';
+      document.getElementById('social-views').value = r.views != null ? r.views : '';
+      document.getElementById('social-likes').value = r.likes != null ? r.likes : '';
+      document.getElementById('social-comments').value = r.comments != null ? r.comments : '';
+      document.getElementById('social-shares').value = r.shares != null ? r.shares : '';
+      document.getElementById('social-link').value = r.link || '';
+      document.getElementById('social-notes').value = r.notes || '';
+      document.getElementById('social-save').textContent = 'Update Entry';
+      document.getElementById('social-newform').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    var delBtn = e.target.closest('[data-delete-social]');
+    if (delBtn) {
+      if (!armDelete(delBtn)) return;
+      fetch('/api/content?collection=social-analytics&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-social')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+        .then(function(){ loadSocialDash(); });
+    }
+  });
+
+  document.getElementById('social-save').addEventListener('click', function(){
+    var err = document.getElementById('social-err');
+    err.hidden = true;
+    var numOrNull = function(id){ var v = document.getElementById(id).value; return v === '' ? null : Number(v); };
+    var payload = {
+      passphraseHash: storedHash,
+      id: socialEditingId || undefined,
+      data: {
+        platform: document.getElementById('social-platform').value,
+        kind: document.getElementById('social-kind').value,
+        date: document.getElementById('social-date').value,
+        title: document.getElementById('social-title').value.trim(),
+        followers: numOrNull('social-followers'),
+        views: numOrNull('social-views'),
+        likes: numOrNull('social-likes'),
+        comments: numOrNull('social-comments'),
+        shares: numOrNull('social-shares'),
+        link: document.getElementById('social-link').value.trim(),
+        notes: document.getElementById('social-notes').value.trim(),
+      }
+    };
+    var btn = document.getElementById('social-save');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    authedFetch('/api/content?collection=social-analytics', {method:'POST', body: JSON.stringify(payload)})
+      .then(function(res){
+        btn.disabled = false;
+        if (!res.ok) { btn.textContent = socialEditingId ? 'Update Entry' : 'Save Entry'; err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
+        socialResetForm();
+        loadSocialDash();
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = socialEditingId ? 'Update Entry' : 'Save Entry'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  });
+
+  // ================= NEWSLETTER =================
+  var nlEditingId = null;
+
+  function nlResetForm(){
+    nlEditingId = null;
+    ['nl-subject','nl-date','nl-recipients','nl-openrate','nl-clickrate','nl-link','nl-notes'].forEach(function(id){ document.getElementById(id).value = ''; });
+    document.getElementById('nl-save').textContent = 'Save Send';
+  }
+
+  function loadNewsletterDash(){
+    var loading = document.getElementById('nl-loading');
+    var list = document.getElementById('nl-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/api/content?collection=newsletter')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var records = (data.records || []).sort(function(a,b){ return (b.date||'').localeCompare(a.date||'') || (b.createdAt||0)-(a.createdAt||0); });
+        if (!records.length) { list.innerHTML = '<p class="dash__empty">No sends logged yet.</p>'; return; }
+        list.dataset.records = JSON.stringify(records);
+        list.innerHTML = records.map(function(r){
+          var stats = [];
+          if (r.recipients != null && r.recipients !== '') stats.push(r.recipients + ' sent');
+          if (r.openrate != null && r.openrate !== '') stats.push(r.openrate + '% open');
+          if (r.clickrate != null && r.clickrate !== '') stats.push(r.clickrate + '% click');
+          return '<div class="card">' +
+            '<div class="card__top"><span class="card__title">' + esc(r.subject || 'Untitled') + '</span></div>' +
+            '<p class="card__meta">' + esc(r.date || '') + (stats.length ? ' &#183; ' + esc(stats.join(', ')) : '') + '</p>' +
+            (r.notes ? '<div class="card__body">' + esc(r.notes) + '</div>' : '') +
+            '<div class="card__row">' +
+              (r.link ? '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(r.link) + '" target="_blank" rel="noopener">Open</a>' : '') +
+              '<button type="button" class="btn-sm" data-edit-nl="' + esc(r.id) + '">Edit</button>' +
+              '<button type="button" class="btn-sm" data-delete-nl="' + esc(r.id) + '">Delete</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load.'; });
+  }
+
+  document.getElementById('nl-list').addEventListener('click', function(e){
+    var editBtn = e.target.closest('[data-edit-nl]');
+    if (editBtn) {
+      var records = JSON.parse(document.getElementById('nl-list').dataset.records || '[]');
+      var r = records.filter(function(x){ return x.id === editBtn.getAttribute('data-edit-nl'); })[0];
+      if (!r) return;
+      nlEditingId = r.id;
+      document.getElementById('nl-subject').value = r.subject || '';
+      document.getElementById('nl-date').value = r.date || '';
+      document.getElementById('nl-recipients').value = r.recipients != null ? r.recipients : '';
+      document.getElementById('nl-openrate').value = r.openrate != null ? r.openrate : '';
+      document.getElementById('nl-clickrate').value = r.clickrate != null ? r.clickrate : '';
+      document.getElementById('nl-link').value = r.link || '';
+      document.getElementById('nl-notes').value = r.notes || '';
+      document.getElementById('nl-save').textContent = 'Update Send';
+      document.getElementById('nl-newform').scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    var delBtn = e.target.closest('[data-delete-nl]');
+    if (delBtn) {
+      if (!armDelete(delBtn)) return;
+      fetch('/api/content?collection=newsletter&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-nl')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+        .then(function(){ loadNewsletterDash(); });
+    }
+  });
+
+  document.getElementById('nl-save').addEventListener('click', function(){
+    var err = document.getElementById('nl-err');
+    err.hidden = true;
+    var subject = document.getElementById('nl-subject').value.trim();
+    if (!subject) { err.textContent = 'Subject is required.'; err.hidden = false; return; }
+    var numOrNull = function(id){ var v = document.getElementById(id).value; return v === '' ? null : Number(v); };
+    var payload = {
+      passphraseHash: storedHash,
+      id: nlEditingId || undefined,
+      data: {
+        subject: subject,
+        date: document.getElementById('nl-date').value,
+        recipients: numOrNull('nl-recipients'),
+        openrate: numOrNull('nl-openrate'),
+        clickrate: numOrNull('nl-clickrate'),
+        link: document.getElementById('nl-link').value.trim(),
+        notes: document.getElementById('nl-notes').value.trim(),
+      }
+    };
+    var btn = document.getElementById('nl-save');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    authedFetch('/api/content?collection=newsletter', {method:'POST', body: JSON.stringify(payload)})
+      .then(function(res){
+        btn.disabled = false;
+        if (!res.ok) { btn.textContent = nlEditingId ? 'Update Send' : 'Save Send'; err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
+        nlResetForm();
+        loadNewsletterDash();
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = nlEditingId ? 'Update Send' : 'Save Send'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  });
+
+  // ================= TRACKED BRANDS =================
+  // One KV record (id 'main') holding {catSlug: [{name, active}, ...]} --
+  // this list is what scripts/fetch_daily_news.py reads to build its
+  // search queries. Seeded with a real starting list drawn from what the
+  // Journal already covers, the first time this loads with nothing saved
+  // yet; editing and saving here writes the real record from then on.
+  var TB_SEED = {
+    automotive: ['Ferrari','Porsche','Karma Automotive','Singer Vehicle Design','Louis Vuitton','Aston Martin','Maserati','Bugatti'],
+    style: ['Kith','Ralph Lauren','Tom Ford','Zegna','Brunello Cucinelli','adidas'],
+    timepiece: ['A. Lange & Söhne','Piaget','Vacheron Constantin','Parmigiani Fleurier','Berneron','Patek Philippe','Rolex','Audemars Piguet'],
+    business: ['Apple','Nike','LVMH','Tim Cook','HelloFresh'],
+    tech: ['Apple','Tesla','OpenAI','Meta'],
+    music: ['Drake','OVO Sound','Kendrick Lamar','Jay-Z'],
+    news: ['GQ','Rolling Stone','Complex','Hypebeast','Robb Report','Highsnobiety'],
+    film: ['Guy Ritchie','A24','Netflix','Christopher Nolan','Warner Bros'],
+    gaming: ['Rockstar Games','PlayStation','Xbox'],
+    art: ['Daniel Arsham','KAWS','Takashi Murakami'],
+    sports: ['Roger Federer','Stephen Curry','Michael Jordan','LeBron James'],
+    travel: ['TRUNK Hotel','NOT A HOTEL','Aman Resorts','Four Seasons'],
+    charlotte: ['Charlotte Observer','Axios Charlotte','Queen City News'],
+  };
+  var TB_CAT_LABEL = {automotive:'Motors', style:'Style', timepiece:'Timepiece', business:'Business', tech:'Tech',
+    music:'Music', news:'News', film:'Film', gaming:'Gaming', art:'Art', sports:'Sports', travel:'Travel', charlotte:'Charlotte'};
+  var tbData = null;
+
+  function tbSeedToActive(seed){
+    var out = {};
+    Object.keys(seed).forEach(function(cat){ out[cat] = seed[cat].map(function(name){ return {name: name, active: true}; }); });
+    return out;
+  }
+
+  function tbLoad(){
+    var loading = document.getElementById('tb-loading');
+    var err = document.getElementById('tb-loaderr');
+    loading.hidden = false; err.hidden = true;
+    fetch('/api/content?collection=tracked-brands&id=main')
+      .then(function(r){ return r.status === 404 ? null : r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        tbData = (data && data.categories) ? data.categories : tbSeedToActive(TB_SEED);
+        tbRender();
+      })
+      .catch(function(){ loading.hidden = true; err.textContent = 'Could not load.'; err.hidden = false; });
+  }
+
+  function tbRow(cat, entry, i){
+    return '<div class="chrow" data-cat="' + esc(cat) + '" data-i="' + i + '" style="grid-template-columns:auto 1fr auto">' +
+      '<input type="checkbox" data-role="active"' + (entry.active ? ' checked' : '') + '>' +
+      '<span>' + esc(entry.name) + '</span>' +
+      '<button type="button" class="btn-sm" data-tb-remove>&#215;</button>' +
+    '</div>';
+  }
+
+  function tbRender(){
+    var wrap = document.getElementById('tb-cats');
+    var order = Object.keys(TB_CAT_LABEL).filter(function(c){ return tbData[c]; }).concat(Object.keys(tbData).filter(function(c){ return !TB_CAT_LABEL[c]; }));
+    wrap.innerHTML = order.map(function(cat){
+      return '<div class="card" data-cat="' + esc(cat) + '" style="margin-top:var(--s5)">' +
+        '<div class="card__top"><span class="card__title">' + esc(TB_CAT_LABEL[cat] || cat) + '</span></div>' +
+        '<div class="chset__rows">' + (tbData[cat]||[]).map(function(e,i){ return tbRow(cat, e, i); }).join('') + '</div>' +
+        '<div class="card__row" style="margin-top:var(--s4)">' +
+          '<input type="text" data-tb-newname placeholder="Add a name&#8230;" style="flex:1 1 auto">' +
+          '<button type="button" class="btn-sm" data-tb-add="' + esc(cat) + '">+ Add</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('tb-cats').addEventListener('click', function(e){
+    var addBtn = e.target.closest('[data-tb-add]');
+    if (addBtn) {
+      var cat = addBtn.getAttribute('data-tb-add');
+      var input = addBtn.closest('.card').querySelector('[data-tb-newname]');
+      var name = input.value.trim();
+      if (!name) return;
+      tbData[cat] = tbData[cat] || [];
+      tbData[cat].push({name: name, active: true});
+      tbRender();
+      return;
+    }
+    var removeBtn = e.target.closest('[data-tb-remove]');
+    if (removeBtn) {
+      var rowEl = removeBtn.closest('[data-cat]');
+      var cat2 = rowEl.getAttribute('data-cat');
+      tbData[cat2].splice(Number(rowEl.getAttribute('data-i')), 1);
+      tbRender();
+    }
+  });
+  document.getElementById('tb-cats').addEventListener('change', function(e){
+    var cb = e.target.closest('[data-role="active"]');
+    if (!cb) return;
+    var rowEl = cb.closest('[data-cat]');
+    tbData[rowEl.getAttribute('data-cat')][Number(rowEl.getAttribute('data-i'))].active = cb.checked;
+  });
+
+  document.getElementById('tb-save').addEventListener('click', function(){
+    var btn = this;
+    var msg = document.getElementById('tb-save-msg');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    authedFetch('/api/content?collection=tracked-brands', {method:'POST', body: JSON.stringify({
+      passphraseHash: storedHash, id: 'main', data: {categories: tbData},
+    })})
+      .then(function(res){
+        btn.disabled = false; btn.textContent = 'Save Tracked Brands';
+        if (!res.ok) { msg.innerHTML = '<p class="dash__err">' + esc(res.data.error || 'Save failed.') + '</p>'; return; }
+        msg.innerHTML = '<p style="color:var(--brass-lit);margin-top:var(--s4)">Saved — the next scheduled Daily News run will use this list.</p>';
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = 'Save Tracked Brands'; msg.innerHTML = '<p class="dash__err">Could not reach the server.</p>'; });
+  });
+
+  // ================= DAILY NEWS (read-only) =================
+  function dnLoad(){
+    var loading = document.getElementById('dn-loading');
+    var err = document.getElementById('dn-loaderr');
+    loading.hidden = false; err.hidden = true;
+    fetch('/api/content?collection=daily-news&id=main')
+      .then(function(r){ return r.status === 404 ? null : r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var items = (data && data.items) || [];
+        document.getElementById('dn-updated').textContent = data && data.updatedAt
+          ? 'Last updated ' + fmtDate(data.updatedAt)
+          : 'No run yet — the daily pipeline hasn\'t published anything here.';
+        var list = document.getElementById('dn-list');
+        if (!items.length) { list.innerHTML = '<p class="dash__empty">Nothing yet.</p>'; return; }
+        list.innerHTML = items.map(function(it){
+          return '<div class="card">' +
+            '<div class="card__top"><span class="card__title">' + esc(it.title || 'Untitled') + '</span>' +
+              (it.matched ? '<span class="badge badge--brass">' + esc(it.matched) + '</span>' : '') + '</div>' +
+            '<p class="card__meta">' + esc(it.source || '') + (it.published ? ' &#183; ' + esc(it.published) : '') + '</p>' +
+            '<div class="card__row"><a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(it.link || '#') + '" target="_blank" rel="noopener">Read &#8594;</a></div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.hidden = true; err.textContent = 'Could not load.'; err.hidden = false; });
+  }
+
+  document.querySelector('[data-tab="trackedbrands"]').addEventListener('click', function(){ tbLoad(); }, {once:true});
+  document.querySelector('[data-tab="dailynews"]').addEventListener('click', function(){ dnLoad(); }, {once:true});
+  document.querySelector('[data-tab="social"]').addEventListener('click', function(){ loadSocialDash(); }, {once:true});
+  document.querySelector('[data-tab="newsletter"]').addEventListener('click', function(){ loadNewsletterDash(); }, {once:true});
 
   // ================= NETWORK =================
   // Read-only: records come in through the public, unauthenticated POST on
