@@ -1,0 +1,42 @@
+name: Build and Deploy
+
+# Manual only -- triggered by the dashboard's "Deploy Live" button (via
+# functions/api/deploy.js, which calls this workflow's dispatch API using
+# GITHUB_TOKEN) or by a person clicking "Run workflow" on this repo's
+# Actions tab. Deliberately NOT wired to push -- a commit landing on main
+# (from the dashboard's Journal editor, or anything else) should never by
+# itself put anything live; going live is still its own explicit step.
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Regenerates every static page from its data/*.json source, so the
+      # deployed site always matches whatever was last saved -- from the
+      # dashboard, the local Operator Console, or a direct file edit.
+      # Deliberately excludes build_drafting.py (reads uncommitted local
+      # client data) and scripts/build_brands.py (copies from sibling
+      # project directories that don't exist in this checkout) -- both
+      # stay local-only, manual operations.
+      - name: Rebuild generated pages
+        run: |
+          python3 build_journal.py
+          python3 build_house.py
+          python3 build_casefiles.py
+          python3 build_charlotte.py
+          python3 scripts/build_wardrobe.py
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy . --project-name=parispullen --commit-dirty=true

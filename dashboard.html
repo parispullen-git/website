@@ -149,6 +149,7 @@
       <button class="dashnav__item" data-tab="clients">Clients</button>
       <button class="dashnav__item" data-tab="lookbook">Lookbook</button>
       <button class="dashnav__item" data-tab="journal">Journal</button>
+      <button class="dashnav__item" data-tab="journal-live">Journal (Live)</button>
       <button class="dashnav__item" data-tab="dispatch">Dispatch Briefs</button>
       <button class="dashnav__item" data-tab="music">Music</button>
       <button class="dashnav__item" data-tab="video">Video</button>
@@ -351,6 +352,34 @@
       <p class="dash__loading" id="journal-loading">Loading&#8230;</p>
       <div class="card__row" id="journal-filter" style="flex-wrap:wrap" hidden></div>
       <div id="journal-list"></div>
+    </div>
+
+    <!-- JOURNAL (LIVE) -- edits the real entries in data/journal.json on GitHub -->
+    <div class="dash__panel" id="panel-journal-live">
+      <p class="body">This edits the <b>real</b> Journal entries — the ones <code>build_journal.py</code> bakes into <a class="link-under" href="journal.html" target="_blank" rel="noopener">journal.html</a> and its own page per entry. Saving here commits the change to <code>data/journal.json</code> on GitHub (<code>parispullen-git/website</code>) — it does <b>not</b> touch the live site by itself. Use <b>Deploy Live</b> below when you're ready to actually publish everything currently committed.</p>
+
+      <div class="newform" id="jl-deploy">
+        <p class="eyebrow">Deploy</p>
+        <p class="body">Rebuilds every generated page from its current data and publishes the result to parispullen.com. This deploys the <b>whole site</b> as it stands on GitHub right now — not just Journal edits — so double-check anything else pending before you click it.</p>
+        <div class="card__row">
+          <button type="button" class="btn-sm" id="jl-deploy-btn" style="border-color:var(--brass);color:var(--brass-lit)">Deploy Live</button>
+        </div>
+        <div id="jl-deploy-msg"></div>
+      </div>
+
+      <div class="newform">
+        <p class="eyebrow">Entries</p>
+        <div class="card__row">
+          <input type="text" id="jl-search" placeholder="Search by title or slug&#8230;" style="flex:1 1 auto">
+          <button type="button" class="btn-sm" id="jl-new">+ New Entry</button>
+        </div>
+        <p class="dash__loading" id="jl-loading">Loading&#8230;</p>
+        <p class="dash__err" id="jl-loaderr" hidden></p>
+        <div class="card__row" id="jl-filter" style="flex-wrap:wrap" hidden></div>
+        <div id="jl-list"></div>
+      </div>
+
+      <div class="newform" id="jl-editor" hidden></div>
     </div>
 
     <!-- DISPATCH BRIEFS -->
@@ -624,6 +653,7 @@
     loadCurations();
     curWardrobeReady().then(function(){ curRenderCatFilter(); curRenderResults(''); });
     loadJourCategories().then(loadJournalDash);
+    jlLoad();
     loadDispatchDash();
     loadMusicDash();
     loadVideoDash();
@@ -1549,6 +1579,301 @@
         loadJournalDash();
       })
       .catch(function(){ btn.disabled = false; btn.textContent = jourEditingId ? 'Update Entry' : 'Save Entry'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  });
+
+  // ================= JOURNAL (LIVE) =================
+  // Edits the REAL entries in data/journal.json, via /api/journal-live's
+  // GitHub-backed read/write (see that function's own header for why a
+  // save here still needs a manual pull + rebuild + deploy to go live).
+  var JL_CATS = [
+    ['automotive','Motors'], ['style','Style'], ['timepiece','Timepiece'], ['business','Business'],
+    ['tech','Tech'], ['music','Music'], ['news','News'], ['film','Film'], ['gaming','Gaming'],
+    ['art','Art'], ['sports','Sports'], ['travel','Travel'], ['charlotte','Charlotte'],
+  ];
+
+  var JL_FIELDS = [
+    {key:'slug', label:'Slug (unique)', type:'text', required:true},
+    {key:'status', label:'Status', type:'select', options:['draft','published'], default:'draft', emptyValue:'published'},
+    {key:'cat', label:'Category', type:'catselect'},
+    {key:'vol', label:'Volume', type:'text'},
+    {key:'read', label:'Read time', type:'text', default:'4 min read'},
+    {key:'title', label:'Title', type:'text', required:true},
+    {key:'stand', label:'Standfirst', type:'textarea'},
+    {key:'meta_description', label:'Meta description (SEO — falls back to Standfirst if left blank)', type:'textarea'},
+    {key:'featured', label:'Featured', type:'checkbox'},
+    {key:'wide', label:'Wide layout', type:'checkbox'},
+    {key:'hero_img', label:'Hero image (filename, no extension)', type:'text', heroKey:'img'},
+    {key:'hero_ext', label:'Hero image extension', type:'text', heroKey:'ext', default:'jpg'},
+    {key:'hero_mode', label:'Hero fit', type:'select', options:['cover','contain'], heroKey:'mode'},
+    {key:'hero_alt', label:'Hero alt text', type:'textarea', heroKey:'alt'},
+    {key:'hero_srcset', label:'Hero has @sm srcset', type:'checkbox', heroKey:'srcset', default:true},
+    {key:'images', label:'In-body images — raw JSON array. Each: {"img":"filename, no extension","ext":"jpg","mode":"cover|contain","srcset":true,"layout":"pair (optional — sits two side by side)","caption":"...","alt":"..."}. Reference one from Body by position: first is IMG::0, second IMG::1, and so on.', type:'json'},
+    {key:'video', label:'Single video embed — raw JSON {"youtube_id":"...","title":"..."}, or null if none. Reference it from Body with a line reading exactly VIDEO::', type:'json', jsonEmpty:null},
+    {key:'videos', label:'Multiple video embeds — raw JSON array of {"youtube_id":"...","title":"..."}. Reference one from Body by position: VIDEO::0, VIDEO::1, and so on.', type:'json'},
+    {key:'body', label:'Body — one block per line. Plain text is a paragraph. PQ::text (pull-quote) — PQA::text||Name||Title (attributed quote) — IMG::i (drop in images[i]) — VIDEO:: or VIDEO::i — AGENDA::date||name||venue||note||price||link (consecutive lines group into one schedule list) — FORMULA::text (one big centered line) — SPEC::{"model":"...","rows":[["Label","Value"]],"cta_label":"","cta_url":"","cta_title":"","image":null} (raw JSON after the ::) — TABLE::{"title":"...","headers":["Col A","Col B"],"rows":[["...","..."]]} (raw JSON after the ::)', type:'lines'},
+  ];
+
+  var jlPosts = [];
+  var jlSha = null;
+  var jlEditingSlug = null; // the ORIGINAL slug being edited; null = new/unsaved
+  var jlActiveCat = 'all';
+
+  function jlThumb(p){
+    if (!p.hero || !p.hero.img || !p.hero.ext) return '';
+    return 'assets/img/' + p.hero.img + '@sm.' + p.hero.ext;
+  }
+  function jlSummary(p, max){
+    var s = (p.stand || '').trim();
+    if (!s) return '';
+    return s.length > max ? s.slice(0, max).replace(/\s+\S*$/, '') + '&#8230;' : esc(s);
+  }
+  function jlCatLabel(cat){
+    return (JL_CATS.filter(function(c){ return c[0] === cat; })[0] || [])[1] || cat || 'Uncategorized';
+  }
+
+  function jlRenderFilter(){
+    var bar = document.getElementById('jl-filter');
+    if (jlPosts.length <= 1) { bar.hidden = true; bar.innerHTML = ''; return; }
+    var counts = {};
+    jlPosts.forEach(function(p){ var c = p.cat || ''; counts[c] = (counts[c] || 0) + 1; });
+    var present = JL_CATS.filter(function(c){ return counts[c[0]]; });
+    if (present.length <= 1) { bar.hidden = true; bar.innerHTML = ''; return; }
+    bar.hidden = false;
+    bar.innerHTML = '<button type="button" class="btn-sm' + (jlActiveCat === 'all' ? ' is-on' : '') + '" data-jl-filter="all">All (' + jlPosts.length + ')</button>' +
+      present.map(function(c){
+        return '<button type="button" class="btn-sm' + (jlActiveCat === c[0] ? ' is-on' : '') + '" data-jl-filter="' + esc(c[0]) + '">' + esc(c[1]) + ' (' + counts[c[0]] + ')</button>';
+      }).join('');
+  }
+  document.getElementById('jl-filter').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-jl-filter]');
+    if (!btn) return;
+    jlActiveCat = btn.getAttribute('data-jl-filter');
+    jlRenderFilter();
+    jlRenderList();
+  });
+
+  function jlLoad(){
+    var loading = document.getElementById('jl-loading');
+    var err = document.getElementById('jl-loaderr');
+    loading.hidden = false; err.hidden = true;
+    fetch('/api/journal-live')
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        loading.hidden = true;
+        if (!res.ok) { err.textContent = res.data.error || 'Could not load entries.'; err.hidden = false; return; }
+        jlPosts = res.data.posts;
+        jlSha = res.data.sha;
+        if (jlActiveCat !== 'all' && !jlPosts.some(function(p){ return p.cat === jlActiveCat; })) jlActiveCat = 'all';
+        jlRenderFilter();
+        jlRenderList();
+      })
+      .catch(function(){ loading.hidden = true; err.textContent = 'Could not reach GitHub.'; err.hidden = false; });
+  }
+
+  function jlRenderList(){
+    var list = document.getElementById('jl-list');
+    var q = (document.getElementById('jl-search').value || '').toLowerCase().trim();
+    var rows = jlPosts.filter(function(p){
+      if (jlActiveCat !== 'all' && p.cat !== jlActiveCat) return false;
+      return !q || (p.title||'').toLowerCase().indexOf(q) !== -1 || (p.slug||'').toLowerCase().indexOf(q) !== -1;
+    });
+    if (!rows.length) { list.innerHTML = '<p class="dash__empty">No entries match.</p>'; return; }
+    list.innerHTML = rows.map(function(p){
+      var isDraft = p.status === 'draft';
+      var thumb = jlThumb(p);
+      var summary = jlSummary(p, 140);
+      return '<div class="card">' +
+        (thumb ? '<img class="card__thumb" src="' + esc(thumb) + '" alt="" loading="lazy">' : '') +
+        '<div class="card__top">' +
+          '<span class="card__title">' + esc(p.title || 'Untitled') + '</span>' +
+          '<span class="badge' + (isDraft ? '' : ' badge--brass') + '">' + (isDraft ? 'Draft' : 'Published') + '</span>' +
+          '<span class="badge badge--brass">' + esc(jlCatLabel(p.cat)) + '</span>' +
+        '</div>' +
+        (summary ? '<p class="card__body">' + summary + '</p>' : '') +
+        '<p class="card__meta">/' + esc(p.slug || '') + ' &#183; Vol. ' + esc(p.vol || '?') + (p.read ? ' &#183; ' + esc(p.read) : '') + '</p>' +
+        '<div class="card__row"><button type="button" class="btn-sm" data-jl-edit="' + esc(p.slug) + '">Edit</button></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('jl-search').addEventListener('input', jlRenderList);
+  document.getElementById('jl-new').addEventListener('click', function(){ jlEdit(null); });
+  document.getElementById('jl-list').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-jl-edit]');
+    if (!btn) return;
+    var p = jlPosts.filter(function(x){ return x.slug === btn.getAttribute('data-jl-edit'); })[0];
+    if (p) jlEdit(p);
+  });
+
+  function jlFieldId(key){ return 'jlf-' + key; }
+
+  function jlFieldInput(f, value){
+    var id = jlFieldId(f.key);
+    if (f.type === 'select') {
+      return '<select id="' + id + '">' + f.options.map(function(o){
+        return '<option value="' + esc(o) + '"' + (o === value ? ' selected' : '') + '>' + esc(o) + '</option>';
+      }).join('') + '</select>';
+    }
+    if (f.type === 'catselect') {
+      return '<select id="' + id + '">' + JL_CATS.map(function(pair){
+        return '<option value="' + esc(pair[0]) + '"' + (pair[0] === value ? ' selected' : '') + '>' + esc(pair[1]) + '</option>';
+      }).join('') + '</select>';
+    }
+    if (f.type === 'checkbox') {
+      return '<input type="checkbox" id="' + id + '"' + (value ? ' checked' : '') + '>';
+    }
+    if (f.type === 'textarea') {
+      return '<textarea id="' + id + '">' + esc(value || '') + '</textarea>';
+    }
+    if (f.type === 'lines') {
+      var lines = Array.isArray(value) ? value.join('\n') : '';
+      return '<textarea id="' + id + '" style="min-height:12rem">' + esc(lines) + '</textarea>';
+    }
+    if (f.type === 'json') {
+      var jv = value !== undefined ? value : (f.jsonEmpty !== undefined ? f.jsonEmpty : []);
+      return '<textarea id="' + id + '" style="min-height:9rem;font-family:var(--font-mono);font-size:.8rem">' + esc(JSON.stringify(jv, null, 2)) + '</textarea>';
+    }
+    return '<input type="text" id="' + id + '" value="' + esc(value || '') + '">';
+  }
+
+  function jlEdit(record){
+    var isNew = !record;
+    jlEditingSlug = isNew ? null : record.slug;
+    var editor = document.getElementById('jl-editor');
+    editor.hidden = false;
+    editor.innerHTML =
+      '<p class="eyebrow">' + (isNew ? 'New Entry' : 'Editing') + '</p>' +
+      JL_FIELDS.map(function(f){
+        var v = f.heroKey ? (record && record.hero ? record.hero[f.heroKey] : undefined) : (record ? record[f.key] : undefined);
+        if (v === undefined) {
+          if (isNew && f.default !== undefined) v = f.default;
+          else if (!isNew && f.emptyValue !== undefined) v = f.emptyValue;
+        }
+        if (f.type === 'checkbox') {
+          return '<div class="fld" style="flex-direction:row;align-items:center;gap:.6em">' + jlFieldInput(f, v) + '<label style="margin:0">' + esc(f.label) + '</label></div>';
+        }
+        return '<div class="fld"><label>' + esc(f.label) + '</label>' + jlFieldInput(f, v) + '</div>';
+      }).join('') +
+      '<div class="card__row">' +
+        '<button type="button" class="btn-sm" id="jl-save-btn">' + (isNew ? 'Create Entry' : 'Save Changes') + '</button>' +
+        (isNew ? '' : '<button type="button" class="btn-sm" id="jl-delete-btn">Delete</button>') +
+      '</div>' +
+      '<p class="dash__err" id="jl-save-err" hidden></p>' +
+      '<div id="jl-save-msg"></div>';
+
+    document.getElementById('jl-save-btn').addEventListener('click', jlSave);
+    if (!isNew) document.getElementById('jl-delete-btn').addEventListener('click', jlDelete);
+    editor.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function jlReadForm(){
+    var out = {};
+    var heroOut = {};
+    JL_FIELDS.forEach(function(f){
+      var el = document.getElementById(jlFieldId(f.key));
+      var val;
+      if (f.type === 'checkbox') val = el.checked;
+      else if (f.type === 'lines') val = el.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+      else if (f.type === 'json') {
+        var fallback = JSON.stringify(f.jsonEmpty !== undefined ? f.jsonEmpty : []);
+        try { val = JSON.parse(el.value || fallback); } catch (e) { throw new Error('Invalid JSON in "' + f.label + '": ' + e.message); }
+      }
+      else val = el.value;
+      if (f.heroKey) heroOut[f.heroKey] = val;
+      else out[f.key] = val;
+    });
+    out.hero = heroOut;
+    var catPair = JL_CATS.filter(function(p){ return p[0] === out.cat; })[0];
+    out.catlabel = catPair ? catPair[1] : out.cat;
+    return out;
+  }
+
+  function jlSave(){
+    var err = document.getElementById('jl-save-err');
+    var msg = document.getElementById('jl-save-msg');
+    err.hidden = true; msg.innerHTML = '';
+    var updated;
+    try { updated = jlReadForm(); } catch (e) { err.textContent = e.message; err.hidden = false; return; }
+    if (!updated.slug || !updated.title) { err.textContent = 'Slug and title are required.'; err.hidden = false; return; }
+
+    var newPosts = jlPosts.slice();
+    if (jlEditingSlug) {
+      var idx = newPosts.findIndex(function(p){ return p.slug === jlEditingSlug; });
+      if (idx === -1) { err.textContent = 'That entry no longer exists on GitHub — someone else may have removed it. Reload the tab.'; err.hidden = false; return; }
+      newPosts[idx] = updated;
+    } else {
+      if (newPosts.some(function(p){ return p.slug === updated.slug; })) { err.textContent = 'A post with that slug already exists.'; err.hidden = false; return; }
+      newPosts.push(updated);
+    }
+
+    var btn = document.getElementById('jl-save-btn');
+    btn.disabled = true; btn.textContent = 'Saving to GitHub…';
+    authedFetch('/api/journal-live', {method:'POST', body: JSON.stringify({
+      passphraseHash: storedHash,
+      posts: newPosts,
+      commitMessage: 'Dashboard: ' + (jlEditingSlug ? 'update' : 'add') + ' "' + updated.title + '"',
+    })})
+      .then(function(res){
+        btn.disabled = false;
+        btn.textContent = jlEditingSlug ? 'Save Changes' : 'Create Entry';
+        if (!res.ok) { err.textContent = res.data.error || 'Save failed.'; err.hidden = false; return; }
+        jlPosts = newPosts;
+        jlEditingSlug = updated.slug;
+        jlRenderFilter();
+        jlRenderList();
+        msg.innerHTML = '<p style="color:var(--brass-lit);margin-top:var(--s4)">Committed to GitHub' +
+          (res.data.commitUrl ? ' — <a class="link-under" href="' + esc(res.data.commitUrl) + '" target="_blank" rel="noopener">view commit &#8594;</a>' : '') +
+          '. This is <b>not live yet</b> — ask Claude to pull, rebuild, and deploy when you\'re ready to publish.</p>';
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = jlEditingSlug ? 'Save Changes' : 'Create Entry'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  }
+
+  function jlDelete(){
+    if (!jlEditingSlug) return;
+    if (!confirm('Permanently remove "' + jlEditingSlug + '" from data/journal.json on GitHub? This cannot be undone from here.')) return;
+    var newPosts = jlPosts.filter(function(p){ return p.slug !== jlEditingSlug; });
+    authedFetch('/api/journal-live', {method:'POST', body: JSON.stringify({
+      passphraseHash: storedHash,
+      posts: newPosts,
+      commitMessage: 'Dashboard: delete "' + jlEditingSlug + '"',
+    })})
+      .then(function(res){
+        if (!res.ok) { alert(res.data.error || 'Delete failed.'); return; }
+        jlPosts = newPosts;
+        jlEditingSlug = null;
+        document.getElementById('jl-editor').hidden = true;
+        jlRenderFilter();
+        jlRenderList();
+      });
+  }
+
+  // Deploy Live -- triggers .github/workflows/deploy.yml (rebuild every
+  // generated page, then wrangler pages deploy) via functions/api/deploy.js.
+  // Two-click armDelete confirm since this publishes the whole site, not
+  // just Journal edits.
+  document.getElementById('jl-deploy-btn').addEventListener('click', function(){
+    var btn = this;
+    if (!armDelete(btn)) return;
+    var msg = document.getElementById('jl-deploy-msg');
+    btn.disabled = true;
+    btn.textContent = 'Starting deploy…';
+    authedFetch('/api/deploy', {method:'POST', body: JSON.stringify({passphraseHash: storedHash})})
+      .then(function(res){
+        btn.disabled = false;
+        btn.textContent = 'Deploy Live';
+        if (!res.ok) {
+          msg.innerHTML = '<p class="dash__err">' + esc(res.data.error || 'Could not start the deploy.') + '</p>';
+          return;
+        }
+        msg.innerHTML = '<p style="color:var(--brass-lit);margin-top:var(--s4)">Deploy started. ' +
+          '<a class="link-under" href="' + esc(res.data.actionsUrl) + '" target="_blank" rel="noopener">Watch progress on GitHub &#8594;</a> ' +
+          '— takes a couple of minutes.</p>';
+      })
+      .catch(function(){
+        btn.disabled = false;
+        btn.textContent = 'Deploy Live';
+        msg.innerHTML = '<p class="dash__err">Could not reach the server.</p>';
+      });
   });
 
   // ================= DISPATCH BRIEFS =================
