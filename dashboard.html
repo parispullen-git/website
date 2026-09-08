@@ -93,6 +93,8 @@
   .curpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--s4);
     margin-top:var(--s3);max-height:26rem;overflow-y:auto;padding-right:.3em}
   .curpick:empty{display:none}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--s4)}
+  .card-grid .card{margin-top:0}
   .curcard{display:grid;gap:.5em;align-content:start}
   .curcard__media{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--charcoal)}
   .curcard__media img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
@@ -378,7 +380,7 @@
         <p class="dash__err" id="jl-loaderr" hidden></p>
         <div class="card__row" id="jl-status-filter" style="flex-wrap:wrap"></div>
         <div class="card__row" id="jl-filter" style="flex-wrap:wrap" hidden></div>
-        <div id="jl-list"></div>
+        <div id="jl-list" class="card-grid"></div>
       </div>
 
       <div class="newform" id="jl-editor" hidden></div>
@@ -397,8 +399,12 @@
         <p class="dash__loading" id="bq-loading">Loading&#8230;</p>
         <p class="dash__err" id="bq-loaderr" hidden></p>
         <div class="card__row" id="bq-filter" style="flex-wrap:wrap"></div>
+        <div class="grid2">
+          <div class="fld"><label>Filter by Color</label><select id="bq-color-filter"><option value="all">All colors</option></select></div>
+          <div class="fld"><label>Filter by Style (Suit Name)</label><select id="bq-name-filter"><option value="all">All styles</option></select></div>
+        </div>
         <p class="dash__hint" id="bq-count"></p>
-        <div id="bq-list"></div>
+        <div id="bq-list" class="card-grid"></div>
       </div>
 
       <div class="newform" id="bq-editor" hidden></div>
@@ -2002,12 +2008,22 @@
     ['two-piece', 'Two-Piece'], ['three-piece', 'Three-Piece'],
     ['double-breasted', 'Double-Breasted'], ['tuxedo', 'Tuxedo & Formal'], ['coats', 'Coats'],
   ];
+  // Every color and base style name currently in the catalog, snapshotted
+  // for the editor's dropdown suggestions and the list's filter selects.
+  // Both fields stay free-typeable (a genuinely new color or a new style
+  // name is a normal "New Suit" case) -- these just suggest what already
+  // exists so naming stays consistent instead of drifting ("Navy" vs
+  // "navy" vs "Dark Navy") across 560 items.
+  var BQ_COLORS = ['Black','Black/Gold','Black/White','Blue','Blue/Green','Blush','Brown','Burgundy','Camel','Charcoal','Charcoal/Gold','Chartreuse','Copper','Coral','Dark Green','Dark Teal','Denim','Emerald','Gold','Green','Grey','Ivory','Lavender','Magenta','Mauve','Mint','Navy','Navy/Gold','Olive','Orange','Peach','Pink','Plum','Powder Blue','Purple','Red','Red/Green','Rose Gold','Royal Blue','Rust','Sage','Silver','Sky Blue','Slate Blue','Tan','Teal','Turquoise','White','White/Black','Yellow'];
+  var BQ_NAMES = ['The Abernathy','The Adam','The Andre','The Ari','The Ashcombe','The Ashford','The Ashworth','The Astor','The Axelrod','The Barksdale','The Beaumont','The Blackwood','The Blake','The Blofeld','The Bond','The Branson','The Brantley','The Buchanan','The Callahan','The Cameron','The Campbell','The Carraway','The Carrington','The Carson','The Cavendish','The Chalky','The Chalmers','The Cooper','The Corleone','The Covington','The Crawley','The Crown','The Dashwood','The Delacroix','The Drama','The Draper','The Eggsy','The Ellison','The Ellsworth','The Everhart','The Fairweather','The Fitzgerald','The Fleming','The Gatsby','The Grantham','The Griggs','The Grosvenor','The Hakeem','The Harrington','The Hart','The Harvey','The Hastings','The Hollingsworth','The Huntington','The Ivanhoe','The Jack','The Jimmy','The Julian','The Kane','The Kendall','The Kensington','The Kevin','The Kingsley','The Kingston','The Lancaster','The Langford','The Leiter','The Litt','The Lockhart','The Logan','The Louis','The Lucious','The Malone','The Marchetti','The Marlowe','The Matthew','The Merlin','The Merriweather','The Mickey','The Montgomery','The Norwood','The Nucky','The Osgood','The Owen','The Pearson','The Pemberton','The Pendleton','The Pierce','The Prescott','The Q','The Radcliffe','The Randall','The Rhoades','The Robert','The Rockefeller','The Roger','The Rothstein','The Roy','The Sanford','The Sheffield','The Sinclair','The Slade','The Specter','The St. Patrick','The Stark','The Sterling','The Steven','The Stringer','The Talbot','The Thomas','The Thornton','The Vance','The Vanderbilt','The Vincent','The Wags','The Wayne','The Weatherby','The Wellington','The Whitfield','The Whitlock','The Whitmore','The Windermere','The Windsor','The Winslow','The Zane'];
+  var BQ_PATTERNS = ['', 'Solid', 'Check', 'Stripe', 'Windowpane', 'Herringbone', 'Plaid', 'Houndstooth', 'Pinstripe', 'Other'];
   var BQ_FIELDS = [
     {key:'id', label:'ID (slug, unique)', type:'text', required:true},
     {key:'handle', label:'Handle', type:'text'},
-    {key:'name', label:'Name', type:'text', required:true},
+    {key:'name', label:'Name', type:'datalist', options:BQ_NAMES, required:true},
     {key:'cat', label:'Category', type:'catselect'},
-    {key:'color', label:'Color', type:'text'},
+    {key:'color', label:'Color', type:'datalist', options:BQ_COLORS},
+    {key:'pattern', label:'Pattern', type:'select', options:BQ_PATTERNS},
     {key:'price', label:'Price (USD)', type:'number'},
     {key:'img', label:'Primary image URL', type:'text'},
     {key:'gallery', label:'Gallery — one image URL per line', type:'lines'},
@@ -2019,6 +2035,17 @@
   var bqSha = null;
   var bqEditingId = null; // the ORIGINAL id being edited; null = new/unsaved
   var bqActiveCat = 'all';
+  var bqActiveColor = 'all';
+  var bqActiveName = 'all';
+
+  (function bqInitFilterSelects(){
+    var colorSel = document.getElementById('bq-color-filter');
+    BQ_COLORS.forEach(function(c){ colorSel.add(new Option(c, c)); });
+    colorSel.addEventListener('change', function(){ bqActiveColor = colorSel.value; bqRenderList(); });
+    var nameSel = document.getElementById('bq-name-filter');
+    BQ_NAMES.forEach(function(n){ nameSel.add(new Option(n, n)); });
+    nameSel.addEventListener('change', function(){ bqActiveName = nameSel.value; bqRenderList(); });
+  })();
 
   function bqLoad(){
     var loading = document.getElementById('bq-loading');
@@ -2067,6 +2094,8 @@
     var q = (document.getElementById('bq-search').value || '').toLowerCase().trim();
     var matches = bqItems.filter(function(it){
       if (bqActiveCat !== 'all' && it.cat !== bqActiveCat) return false;
+      if (bqActiveColor !== 'all' && it.color !== bqActiveColor) return false;
+      if (bqActiveName !== 'all' && (it.name || '').indexOf(bqActiveName) !== 0) return false;
       return !q || (it.name||'').toLowerCase().indexOf(q) !== -1 || (it.color||'').toLowerCase().indexOf(q) !== -1 || (it.id||'').toLowerCase().indexOf(q) !== -1;
     });
     if (!matches.length) { countNote.textContent = ''; list.innerHTML = '<p class="dash__empty">No suits match.</p>'; return; }
@@ -2103,6 +2132,16 @@
       return '<select id="' + id + '">' + BQ_CATS.map(function(pair){
         return '<option value="' + esc(pair[0]) + '"' + (pair[0] === value ? ' selected' : '') + '>' + esc(pair[1]) + '</option>';
       }).join('') + '</select>';
+    }
+    if (f.type === 'select') {
+      return '<select id="' + id + '">' + f.options.map(function(o){
+        return '<option value="' + esc(o) + '"' + (o === value ? ' selected' : '') + '>' + esc(o || '—') + '</option>';
+      }).join('') + '</select>';
+    }
+    if (f.type === 'datalist') {
+      var listId = id + '-dl';
+      return '<input type="text" id="' + id + '" list="' + listId + '" value="' + esc(value || '') + '" autocomplete="off">' +
+        '<datalist id="' + listId + '">' + f.options.map(function(o){ return '<option value="' + esc(o) + '">'; }).join('') + '</datalist>';
     }
     if (f.type === 'number') {
       return '<input type="number" id="' + id + '" value="' + (value == null ? '' : esc(value)) + '">';
