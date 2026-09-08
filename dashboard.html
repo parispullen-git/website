@@ -29,6 +29,14 @@
     transition:color var(--d-fast),border-color var(--d-fast)}
   .dashnav__item:hover{color:var(--bone)}
   .dashnav__item.is-active{color:var(--brass-lit);border-left-color:var(--brass)}
+  .dashnav__deploy{margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--rule)}
+  .dashnav__deploybtn{width:100%;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;
+    text-transform:uppercase;color:var(--brass-lit);background:none;border:1px solid var(--brass);
+    padding:.7em .9em;cursor:pointer;transition:background var(--d-fast)}
+  .dashnav__deploybtn:hover{background:rgba(198,161,91,.08)}
+  .dashnav__deploybtn.is-on{background:rgba(198,161,91,.14)}
+  #deploy-live-msg{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.03em;margin:.6em 0 0;line-height:1.5}
+  #deploy-live-msg a{color:var(--brass-lit)}
   .dashmain{min-width:0}
   .dash__panel{display:none}
   .dash__panel.is-active{display:block}
@@ -39,6 +47,7 @@
       padding-right:0;padding-bottom:var(--s4);margin-bottom:var(--s2)}
     .dashnav__item{border-left:none;border-bottom:2px solid transparent;padding:.5em .7em}
     .dashnav__item.is-active{border-left-color:transparent;border-bottom-color:var(--brass)}
+    .dashnav__deploy{flex-basis:100%;margin-top:var(--s3);padding-top:var(--s3)}
   }
 
   .sitecard{border:1px solid var(--hairline);padding:var(--s5);margin-top:var(--s4);
@@ -176,6 +185,10 @@
       <button class="dashnav__item" data-tab="network">Network</button>
       <button class="dashnav__item" data-tab="websites">Websites</button>
       <button class="dashnav__item" data-tab="content">Content</button>
+      <div class="dashnav__deploy">
+        <button type="button" class="dashnav__deploybtn" id="deploy-live-btn">Deploy Live</button>
+        <p id="deploy-live-msg"></p>
+      </div>
     </nav>
     <div class="dashmain">
 
@@ -2006,32 +2019,37 @@
 
   // Deploy Live -- triggers .github/workflows/deploy.yml (rebuild every
   // generated page, then wrangler pages deploy) via functions/api/deploy.js.
-  // Two-click armDelete confirm since this publishes the whole site, not
-  // just Journal edits.
-  document.getElementById('jl-deploy-btn').addEventListener('click', function(){
-    var btn = this;
+  // Two buttons trigger the same deploy: the sidebar one (always reachable,
+  // any tab) and the one inside the Journal (Live) panel. Two-click
+  // armDelete confirm on whichever was clicked, since this publishes the
+  // whole site, not just one tab's edits -- status is echoed to both
+  // message areas either way so it's visible regardless of which tab is
+  // open when it finishes.
+  function runDeploy(btn){
     if (!armDelete(btn)) return;
-    var msg = document.getElementById('jl-deploy-msg');
+    var msgEls = [document.getElementById('jl-deploy-msg'), document.getElementById('deploy-live-msg')].filter(Boolean);
+    function setMsg(html){ msgEls.forEach(function(el){ el.innerHTML = html; }); }
+    var origLabel = btn.dataset.origLabel || btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Starting deploy…';
     authedFetch('/api/deploy', {method:'POST', body: JSON.stringify({passphraseHash: storedHash})})
       .then(function(res){
         btn.disabled = false;
-        btn.textContent = 'Deploy Live';
+        btn.textContent = origLabel;
         if (!res.ok) {
-          msg.innerHTML = '<p class="dash__err">' + esc(res.data.error || 'Could not start the deploy.') + '</p>';
+          setMsg('<span class="dash__err">' + esc(res.data.error || 'Could not start the deploy.') + '</span>');
           return;
         }
-        msg.innerHTML = '<p style="color:var(--brass-lit);margin-top:var(--s4)">Deploy started. ' +
-          '<a class="link-under" href="' + esc(res.data.actionsUrl) + '" target="_blank" rel="noopener">Watch progress on GitHub &#8594;</a> ' +
-          '— takes a couple of minutes.</p>';
+        setMsg('Deploy started. <a href="' + esc(res.data.actionsUrl) + '" target="_blank" rel="noopener">Watch on GitHub &#8594;</a> — a couple of minutes.');
       })
       .catch(function(){
         btn.disabled = false;
-        btn.textContent = 'Deploy Live';
-        msg.innerHTML = '<p class="dash__err">Could not reach the server.</p>';
+        btn.textContent = origLabel;
+        setMsg('<span class="dash__err">Could not reach the server.</span>');
       });
-  });
+  }
+  document.getElementById('jl-deploy-btn').addEventListener('click', function(){ runDeploy(this); });
+  document.getElementById('deploy-live-btn').addEventListener('click', function(){ runDeploy(this); });
 
   // ================= BOUTIQUE (live Wardrobe) =================
   // Edits the real data/wardrobe.json, via /api/wardrobe-live's GitHub-
