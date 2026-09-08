@@ -103,11 +103,12 @@
     "note": "Warm-weather neutral. Works from a Tuesday lunch to a Saturday wedding."
   },
   {
-    "id": "henye-burgundy",
+    "id": "henye-red-black",
     "handle": "henye-5",
-    "name": "The Sterling — Burgundy",
+    "name": "The Sterling — Red/Black",
     "cat": "two-piece",
-    "color": "Burgundy",
+    "color": "Red/Black",
+    "pattern": "Stripe",
     "price": 945,
     "img": "https://cdn.shopify.com/s/files/1/0315/6502/1324/products/01a6574f-657d-4ca0-8320-4445b9437f67.jpg?v=1627759312",
     "gallery": [
