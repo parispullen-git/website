@@ -823,11 +823,12 @@
     "note": "A gold double-breasted silhouette. Wide lapels, real shoulder, the kind of suit that photographs before you finish walking in."
   },
   {
-    "id": "bell-grey",
+    "id": "bell-orange",
     "handle": "bell-9-flared-leg-trouser",
-    "name": "The Crown — Grey",
+    "name": "The Crown — Orange",
     "cat": "double-breasted",
-    "color": "Grey",
+    "color": "Orange",
+    "pattern": "",
     "price": 1110,
     "img": "https://cdn.shopify.com/s/files/1/0315/6502/1324/files/7beda18f-a5da-4577-8cba-186005d21b72.jpg?v=1781506490",
     "gallery": [
