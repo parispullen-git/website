@@ -69,6 +69,8 @@
   .op__output{margin-top:var(--s3);white-space:pre-wrap;font-family:var(--font-mono);font-size:.72rem;
     color:var(--graphite);max-height:12rem;overflow-y:auto;background:#0A0A0B;padding:var(--s3);border:1px solid var(--hairline)}
   .op__hint{color:var(--graphite);font-size:.78rem;margin-top:-.6em;margin-bottom:var(--s4)}
+  .op__publish{border:1px solid var(--brass);background:rgba(198,161,91,.06);padding:var(--s4) var(--s5);margin-bottom:var(--s6)}
+  .op__publish #publish-btn{border-color:var(--brass);color:var(--brass-lit)}
 
   /* house-channels special panel */
   .chset{border:1px solid var(--hairline);padding:var(--s4);margin-bottom:var(--s4)}
@@ -93,7 +95,14 @@
     <h1 class="display display--h2">Operator Console</h1>
     <div class="op__banner">
       <span class="badge badge--brass">LOCAL</span>
-      <p class="body">Edits write to <code>data/*.json</code> on this machine, then regenerate the real static page via the existing <code>build_*.py</code> script. Nothing here touches the live site until you deploy the regenerated file yourself. &#183; <a class="link-under" href="dispatch-brief.html">Open The Dispatch Brief &#8594;</a> to submit new Journal material, or use the <b>Dispatch Briefs</b> tab below to view, use, or edit anything already sent.</p>
+      <p class="body">Edits write to <code>data/*.json</code> on this machine, then regenerate the real static page via the existing <code>build_*.py</code> script. Nothing reaches the live site until you click <b>Publish Live</b> below. &#183; <a class="link-under" href="dispatch-brief.html">Open The Dispatch Brief &#8594;</a> to submit new Journal material, or use the <b>Dispatch Briefs</b> tab below to view, use, or edit anything already sent.</p>
+    </div>
+
+    <div class="op__publish">
+      <button type="button" class="btn-sm" id="publish-btn">Publish Live</button>
+      <p class="op__hint" style="margin:.6em 0 0">Rebuilds every generated page, commits and pushes to GitHub, then deploys to Cloudflare Pages — everything currently saved, not just one tab's edits. Takes a minute or two.</p>
+      <div id="publish-msg"></div>
+      <pre class="op__output" id="publish-output" hidden></pre>
     </div>
 
     <nav class="op__tabs" id="tabs"></nav>
@@ -227,6 +236,41 @@
       return r.json().then(function(d){ return {ok: r.ok, data: d}; });
     });
   }
+
+  // Publish Live -- runs the same rebuild-everything -> commit -> push ->
+  // wrangler deploy pipeline the dashboard's own Deploy Live button
+  // triggers on GitHub Actions, except right here on this machine, so it
+  // works even with no network path to GitHub Actions or to Claude at all
+  // (the only real dependency is this Mac having git and wrangler already
+  // signed in, same as every deploy run manually this session).
+  document.getElementById('publish-btn').addEventListener('click', function(){
+    if (!confirm('Publish everything currently saved live to parispullen.com?')) return;
+    var btn = this;
+    var msg = document.getElementById('publish-msg');
+    var out = document.getElementById('publish-output');
+    btn.disabled = true;
+    btn.textContent = 'Publishing… (this can take a minute or two)';
+    msg.innerHTML = '';
+    out.hidden = true;
+    api('publish', {method:'POST'})
+      .then(function(res){
+        btn.disabled = false;
+        btn.textContent = 'Publish Live';
+        out.hidden = false;
+        out.textContent = res.data.output || '';
+        out.scrollTop = out.scrollHeight;
+        if (!res.ok || !res.data.ok) {
+          msg.innerHTML = '<div class="op__msg op__msg--err">' + esc(res.data.error || 'Publish failed.') + ' See the output below for which step.</div>';
+          return;
+        }
+        msg.innerHTML = '<div class="op__msg op__msg--ok">Live on parispullen.com.</div>';
+      })
+      .catch(function(){
+        btn.disabled = false;
+        btn.textContent = 'Publish Live';
+        msg.innerHTML = '<div class="op__msg op__msg--err">Could not reach the local server. Is it still running?</div>';
+      });
+  });
 
   // ---------------- generic schema-driven panels ----------------
   // Builds the panel shell once (list + editor containers side by side).

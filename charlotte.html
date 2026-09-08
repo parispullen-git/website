@@ -3,23 +3,10 @@
 <head>
 <meta charset="utf-8">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Charlotte: A Gentleman's Guide &#8212; Paris Pullen</title>
 <meta name="description" content="A real, verified guide to Charlotte, North Carolina &#8212; 75 restaurants, bars, cigar lounges, clubs and coffee counters across seven districts, sourced and checked, not invented.">
 <meta name="theme-color" content="#0A0A0B">
-<link rel="canonical" href="https://parispullen.com/charlotte.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Charlotte: A Gentleman's Guide — Paris Pullen">
-<meta property="og:description" content="A real, verified guide to Charlotte, North Carolina &#8212; 75 restaurants, bars, cigar lounges, clubs and coffee counters across seven districts, sourced and checked, not invented.">
-<meta property="og:image" content="https://parispullen.com/assets/img/citymap-plate.jpg">
-<meta property="og:url" content="https://parispullen.com/charlotte.html">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Charlotte: A Gentleman's Guide — Paris Pullen">
-<meta name="twitter:description" content="A real, verified guide to Charlotte, North Carolina &#8212; 75 restaurants, bars, cigar lounges, clubs and coffee counters across seven districts, sourced and checked, not invented.">
-<meta name="twitter:image" content="https://parispullen.com/assets/img/citymap-plate.jpg">
-<script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Charlotte: A Gentleman's Guide — Paris Pullen", "description": "A real, verified guide to Charlotte, North Carolina &#8212; 75 restaurants, bars, cigar lounges, clubs and coffee counters across seven districts, sourced and checked, not invented.", "url": "https://parispullen.com/charlotte.html", "about": {"@type": "City", "name": "Charlotte", "containedInPlace": {"@type": "State", "name": "North Carolina"}}, "author": {"@type": "Person", "name": "Paris Pullen", "alternateName": "Agent Foxx", "url": "https://parispullen.com/"}, "isPartOf": {"@type": "WebSite", "name": "Paris Pullen", "url": "https://parispullen.com/"}}
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -32,9 +19,6 @@
 <header class="worldnav">
   <a class="worldnav__mark" href="/"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
   <div class="worldnav__actions">
-    <a class="worldnav__city" href="index.html#penthouse" aria-label="Return to the Penthouse">
-      <span class="worldnav__label">Penthouse</span>
-    </a>
     <a class="worldnav__city" href="journal.html" aria-label="The Journal">
       <span class="worldnav__label">Journal</span>
     </a>
@@ -97,12 +81,28 @@
 
 <main>
 
+<!-- ============ HERO ============ -->
+<section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,13rem);padding-bottom:clamp(3rem,6vh,5rem)">
+  <div class="wrap">
+    <header class="split reveal" style="align-items:end">
+      <div class="stack stack--tight">
+        <p class="eyebrow">Charlotte, North Carolina</p>
+        <h1 class="display display--mega">A Gentleman&#8217;s<br>Guide</h1>
+      </div>
+      <div class="stack">
+        <p class="lede">A banking city that dresses conservatively and negotiates hard. Quiet money, loud weekends. This is a working guide, not a mood board &#8212; 75 real, current listings across seven districts, every address and access rule checked before it went on the page.</p>
+        <p class="classified">75 verified listings &#183; Seven districts &#183; Sourced and checked, not invented</p>
+      </div>
+    </header>
+  </div>
+</section>
+
 <!-- ============ THE MAP ============ -->
 <section class="cityscape" id="map">
   <div class="cityscape__head reveal">
-    <p class="eyebrow">Charlotte, North Carolina</p>
-    <h1 class="display display--h2" style="margin-block:var(--s3)">A Gentleman&#8217;s Guide</h1>
-    <p class="classified">75 verified listings &#183; Seven districts &#183; Sourced and checked, not invented</p>
+    <p class="eyebrow">The Map</p>
+    <h2 class="display display--h2" style="margin-block:var(--s3)">Seven districts.</h2>
+    <p class="lede">Each with its own hours, its own dress code and its own reason to go. Select a district and its venues surface as hotspots on the map itself &#8212; select a venue, and it opens right here.</p>
   </div>
 
   <div class="cityscape__surface reveal reveal-d1">
@@ -123,15 +123,6 @@
   <div class="cityhud reveal reveal-d2">
     <div class="cityread" id="cityread"></div>
     <p class="classified" style="margin-top:var(--s4)">Hover or tab across the city &#183; select a venue to open it &#183; full listings below by district</p>
-  </div>
-
-  <button type="button" class="room-pager__nav room-pager__nav--prev" data-cityscape-prev aria-label="Previous district"><span aria-hidden="true">&#8249;</span></button>
-  <button type="button" class="room-pager__nav room-pager__nav--next" data-cityscape-next aria-label="Next district"><span aria-hidden="true">&#8250;</span></button>
-  <div class="nav-panel" data-nav-panel>
-    <button type="button" class="nav-panel__tab" data-nav-panel-toggle aria-expanded="false" aria-controls="cityscape-nav-panel-grid">
-      <span class="nav-panel__tab-label">Districts</span>
-    </button>
-    <div class="nav-panel__grid" id="cityscape-nav-panel-grid" data-nav-panel-grid hidden><!-- rows injected by city.js --></div>
   </div>
 </section>
 
@@ -1935,9 +1926,7 @@
 
 <script src="assets/js/charlotte-guide.js" defer></script>
 <script src="assets/js/city-explorer.js" defer></script>
-<script src="assets/js/nav-panel.js" defer></script>
 <script src="assets/js/city.js" defer></script>
-<script src="assets/js/city-districts.js" defer></script>
 <script src="assets/js/world.js" defer></script>
 </body>
 </html>

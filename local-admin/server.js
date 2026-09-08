@@ -14,10 +14,25 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { execFile } = require('child_process');
+const util = require('util');
+
+const execFileP = util.promisify(execFile);
 
 const ROOT = path.resolve(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
 const PORT = process.env.PORT || 5175;
+
+// Every self-contained build script Publish Live reruns before deploying,
+// so whatever's live always matches whatever's currently saved -- run in
+// this order regardless of which one(s) actually changed, same set
+// .github/workflows/deploy.yml reruns for a dashboard-triggered deploy.
+// build_drafting.py (private, uncommitted client data) and
+// scripts/build_brands.py (copies from sibling project directories outside
+// this repo) are deliberately excluded -- both stay manual, local-only.
+const BUILD_SCRIPTS = [
+  'build_journal.py', 'build_house.py', 'build_casefiles.py',
+  'build_charlotte.py', 'scripts/build_wardrobe.py',
+];
 
 // Collection name -> { file, rebuild } where rebuild is the build script to
 // re-run after a save, or null if the page reads the JSON live (no build step).
@@ -54,9 +69,74 @@ function readBody(req) {
   });
 }
 
+// One log line per step, so a failure partway through (a build script
+// erroring, a rejected push, an expired wrangler login) is obvious which
+// step it happened at rather than one opaque combined blob.
+async function publishPipeline(onStep) {
+  const log = [];
+  function step(label) { onStep(label); log.push('\n=== ' + label + ' ===\n'); }
+  async function run(cmd, args) {
+    try {
+      const { stdout, stderr } = await execFileP(cmd, args, { cwd: ROOT, timeout: 600000, maxBuffer: 50 * 1024 * 1024 });
+      log.push(stdout, stderr);
+    } catch (e) {
+      log.push(e.stdout || '', e.stderr || '', e.message);
+      throw new Error(log.join(''));
+    }
+  }
+
+  step('Cleaning up macOS AppleDouble junk files');
+  // These sneak onto network volumes as shadow files (._foo.js next to
+  // foo.js) and break wrangler's function bundler if left in place -- same
+  // failure hit mid-session; scrubbed here so Publish Live never repeats it.
+  const junk = [];
+  (function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name === '.git' || entry.name === 'node_modules') continue;
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name.startsWith('._')) junk.push(full);
+    }
+  })(ROOT);
+  junk.forEach((f) => fs.unlinkSync(f));
+  log.push(`Removed ${junk.length} junk file(s).\n`);
+
+  step('Rebuilding generated pages');
+  for (const script of BUILD_SCRIPTS) {
+    await run('python3', [script]);
+  }
+
+  step('Committing to git');
+  const { stdout: statusOut } = await execFileP('git', ['status', '--porcelain'], { cwd: ROOT });
+  if (statusOut.trim()) {
+    await run('git', ['add', '-A']);
+    await run('git', ['commit', '-m', 'Publish from Operator Console']);
+  } else {
+    log.push('Nothing to commit -- working tree already matches last commit.\n');
+  }
+
+  step('Pushing to GitHub');
+  await run('git', ['push', 'origin', 'main']);
+
+  step('Deploying to Cloudflare Pages');
+  await run('npx', ['wrangler', 'pages', 'deploy', '.', '--project-name=parispullen', '--commit-dirty=true']);
+
+  return log.join('');
+}
+
 async function handleApi(req, res, url) {
   const parts = url.pathname.split('/').filter(Boolean); // ['api', 'collection', 'wardrobe']
-  const kind = parts[1]; // 'collection' | 'rebuild'
+  const kind = parts[1]; // 'collection' | 'rebuild' | 'publish'
+
+  if (kind === 'publish' && req.method === 'POST') {
+    try {
+      const output = await publishPipeline(() => {});
+      return sendJson(res, 200, { ok: true, output });
+    } catch (e) {
+      return sendJson(res, 500, { ok: false, error: 'Publish failed -- see output for which step.', output: e.message });
+    }
+  }
+
   const name = parts[2];
   const collection = COLLECTIONS[name];
 
