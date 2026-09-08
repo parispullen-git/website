@@ -764,11 +764,12 @@
     "note": "A black double-breasted silhouette. Wide lapels, real shoulder, the kind of suit that photographs before you finish walking in."
   },
   {
-    "id": "bell-burgundy",
+    "id": "bell-green",
     "handle": "bell-14-flared-leg-trouser-copy",
-    "name": "The Crown — Burgundy",
+    "name": "The Crown — Green",
     "cat": "double-breasted",
-    "color": "Burgundy",
+    "color": "Green",
+    "pattern": "",
     "price": 1095,
     "img": "https://cdn.shopify.com/s/files/1/0315/6502/1324/files/4ee06f4b-5011-4d9c-a66c-0b1c9acb46b2.jpg?v=1784508686",
     "gallery": [
