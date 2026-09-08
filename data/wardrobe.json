@@ -808,11 +808,12 @@
     "note": "Blush on a structured double-breasted cut — built for the entrance, not just the meeting."
   },
   {
-    "id": "bell-gold",
+    "id": "bell-green",
     "handle": "bell-11-flared-leg-trouser",
-    "name": "The Crown — Gold",
+    "name": "The Crown — Green",
     "cat": "double-breasted",
-    "color": "Gold",
+    "color": "Green",
+    "pattern": "",
     "price": 1080,
     "img": "https://cdn.shopify.com/s/files/1/0315/6502/1324/files/0ff93b0d-3fea-4384-80f5-6e49bea5ab92.jpg?v=1781507148",
     "gallery": [
