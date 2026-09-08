@@ -390,9 +390,10 @@
   {
     "id": "halle-orange",
     "handle": "halle-54",
-    "name": "The Pearson — Rust",
+    "name": "The Pearson — Orange",
     "cat": "double-breasted",
-    "color": "Rust",
+    "color": "Orange",
+    "pattern": "",
     "price": 1095,
     "img": "https://cdn.shopify.com/s/files/1/0315/6502/1324/products/e9f01e3c-d805-4166-b638-de0e8de14668.jpg?v=1665725626",
     "gallery": [
