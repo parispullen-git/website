@@ -1690,10 +1690,29 @@
       .catch(function(){ loading.hidden = true; err.textContent = 'Could not reach GitHub.'; err.hidden = false; });
   }
 
+  // vol drives real display order everywhere on the live site: descending
+  // vol is the grid order in journal.html, and the hero carousel is simply
+  // the top 3 by this same order (minus whichever post is Featured) -- see
+  // build_journal.py's vol_key()/by_recency. So reordering here (via
+  // Move Up/Down, which swaps vol between neighbors) reorders both at once;
+  // there's no separate "hero order" to manage independently of it.
+  function jlVolOf(p){ var n = parseInt(p.vol, 10); return isNaN(n) ? 0 : n; }
+  function jlOrdered(){ return jlPosts.slice().sort(function(a,b){ return jlVolOf(b) - jlVolOf(a); }); }
+
+  function jlSaveReorder(newPosts, commitMessage){
+    jlPosts = newPosts;
+    return authedFetch('/api/journal-live', {method:'POST', body: JSON.stringify({
+      passphraseHash: storedHash,
+      posts: newPosts,
+      commitMessage: commitMessage,
+    })});
+  }
+
   function jlRenderList(){
     var list = document.getElementById('jl-list');
     var q = (document.getElementById('jl-search').value || '').toLowerCase().trim();
-    var rows = jlPosts.filter(function(p){
+    var ordered = jlOrdered(); // full site order -- Move Up/Down and its disabled state key off position in THIS, never the filtered view below
+    var rows = ordered.filter(function(p){
       if (jlActiveCat !== 'all' && p.cat !== jlActiveCat) return false;
       if (jlActiveStatus === 'draft' && p.status !== 'draft') return false;
       if (jlActiveStatus === 'published' && p.status === 'draft') return false;
@@ -1702,18 +1721,26 @@
     if (!rows.length) { list.innerHTML = '<p class="dash__empty">No entries match.</p>'; return; }
     list.innerHTML = rows.map(function(p){
       var isDraft = p.status === 'draft';
+      var isFeatured = !!p.featured;
       var thumb = jlThumb(p);
       var summary = jlSummary(p, 140);
+      var i = ordered.indexOf(p); // position in the FULL order, regardless of the filter above
       return '<div class="card">' +
         (thumb ? '<img class="card__thumb" src="' + esc(thumb) + '" alt="" loading="lazy">' : '') +
         '<div class="card__top">' +
           '<span class="card__title">' + esc(p.title || 'Untitled') + '</span>' +
           '<span class="badge' + (isDraft ? '' : ' badge--brass') + '">' + (isDraft ? 'Draft' : 'Published') + '</span>' +
           '<span class="badge badge--brass">' + esc(jlCatLabel(p.cat)) + '</span>' +
+          (isFeatured ? '<span class="badge" style="border-color:var(--brass);color:var(--brass-lit)">&#9733; Featured</span>' : '') +
         '</div>' +
         (summary ? '<p class="card__body">' + summary + '</p>' : '') +
         '<p class="card__meta">/' + esc(p.slug || '') + ' &#183; Vol. ' + esc(p.vol || '?') + (p.read ? ' &#183; ' + esc(p.read) : '') + '</p>' +
-        '<div class="card__row"><button type="button" class="btn-sm" data-jl-edit="' + esc(p.slug) + '">Edit</button></div>' +
+        '<div class="card__row">' +
+          '<button type="button" class="btn-sm" data-jl-move="up" data-jl-slug="' + esc(p.slug) + '"' + (i === 0 ? ' disabled' : '') + '>&#8593; Move Up</button>' +
+          '<button type="button" class="btn-sm" data-jl-move="down" data-jl-slug="' + esc(p.slug) + '"' + (i === ordered.length - 1 ? ' disabled' : '') + '>&#8595; Move Down</button>' +
+          (isFeatured ? '' : '<button type="button" class="btn-sm" data-jl-feature="' + esc(p.slug) + '">Set as Featured</button>') +
+          '<button type="button" class="btn-sm" data-jl-edit="' + esc(p.slug) + '">Edit</button>' +
+        '</div>' +
       '</div>';
     }).join('');
   }
@@ -1721,6 +1748,51 @@
   document.getElementById('jl-search').addEventListener('input', jlRenderList);
   document.getElementById('jl-new').addEventListener('click', function(){ jlEdit(null); });
   document.getElementById('jl-list').addEventListener('click', function(e){
+    var moveBtn = e.target.closest('[data-jl-move]');
+    if (moveBtn) {
+      moveBtn.disabled = true;
+      var ordered = jlOrdered();
+      var slug = moveBtn.getAttribute('data-jl-slug');
+      var i = ordered.findIndex(function(p){ return p.slug === slug; });
+      var j = moveBtn.getAttribute('data-jl-move') === 'up' ? i - 1 : i + 1;
+      if (i < 0 || j < 0 || j >= ordered.length) return;
+      var a = ordered[i], b = ordered[j];
+      var aVol = jlVolOf(a), bVol = jlVolOf(b);
+      // Swapping just their vol values is enough to flip their positions
+      // everywhere that reads it -- this grid, the hero carousel, and
+      // build_journal.py's own vol_key() sort -- on the next rebuild.
+      var newPosts = jlPosts.map(function(p){
+        if (p.slug === a.slug) return Object.assign({}, p, {vol: String(bVol)});
+        if (p.slug === b.slug) return Object.assign({}, p, {vol: String(aVol)});
+        return p;
+      });
+      jlSaveReorder(newPosts, 'Dashboard: reorder ("' + (a.title||a.slug) + '" ↔ "' + (b.title||b.slug) + '")')
+        .then(function(res){
+          if (!res.ok) { alert(res.data.error || 'Reorder failed.'); }
+          jlRenderList();
+        })
+        .catch(function(){ alert('Could not reach the server.'); jlRenderList(); });
+      return;
+    }
+
+    var featureBtn = e.target.closest('[data-jl-feature]');
+    if (featureBtn) {
+      featureBtn.disabled = true;
+      var fSlug = featureBtn.getAttribute('data-jl-feature');
+      var fPost = jlPosts.filter(function(p){ return p.slug === fSlug; })[0];
+      var newFeatured = jlPosts.map(function(p){
+        return Object.assign({}, p, {featured: p.slug === fSlug});
+      });
+      jlSaveReorder(newFeatured, 'Dashboard: feature "' + (fPost ? fPost.title : fSlug) + '"')
+        .then(function(res){
+          if (!res.ok) { alert(res.data.error || 'Could not set as featured.'); }
+          jlRenderFilter();
+          jlRenderList();
+        })
+        .catch(function(){ alert('Could not reach the server.'); jlRenderList(); });
+      return;
+    }
+
     var btn = e.target.closest('[data-jl-edit]');
     if (!btn) return;
     var p = jlPosts.filter(function(x){ return x.slug === btn.getAttribute('data-jl-edit'); })[0];
