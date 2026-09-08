@@ -885,11 +885,12 @@
     "note": "A navy double-breasted silhouette. Wide lapels, real shoulder, the kind of suit that photographs before you finish walking in."
   },
   {
-    "id": "riley-teal",
+    "id": "riley-burgundy",
     "handle": "riley-4",
-    "name": "The Sinclair — Teal",
+    "name": "The Sinclair — Burgundy",
     "cat": "double-breasted",
-    "color": "Teal",
+    "color": "Burgundy",
+    "pattern": "",
     "price": 1095,
     "img": "https://cdn.shopify.com/s/files/1/0315/6502/1324/files/d742c14e-2fc1-4016-ae70-1fae2cb07e54.jpg?v=1777515589",
     "gallery": [
