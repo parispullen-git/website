@@ -748,11 +748,12 @@
     "note": "Navy with the architecture to back it up — this cut was built to be looked at."
   },
   {
-    "id": "bell-black",
+    "id": "bell-blue",
     "handle": "bell-16-flared-leg-trouser",
-    "name": "The Crown — Black",
+    "name": "The Crown — Blue",
     "cat": "double-breasted",
-    "color": "Black",
+    "color": "Blue",
+    "pattern": "",
     "price": 1080,
     "img": "https://cdn.shopify.com/s/files/1/0315/6502/1324/files/fd059231-44ec-4f8f-8ccf-f53c561c13b7.jpg?v=1784508812",
     "gallery": [
