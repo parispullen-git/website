@@ -95,6 +95,22 @@
   .curpick:empty{display:none}
   .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--s4)}
   .card-grid .card{margin-top:0}
+
+  /* Edit popup -- keeps the item's own image on screen (inside the panel
+     itself, so it's guaranteed visible regardless of viewport) instead of
+     scrolling the grid out of view to reach a form appended at the bottom
+     of the page. */
+  .dash-modal{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-start;
+    justify-content:center;padding:4vh var(--s5);overflow-y:auto}
+  .dash-modal[hidden]{display:none}
+  .dash-modal__backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72)}
+  .dash-modal__panel{position:relative;background:var(--ink);border:1px solid var(--rule);
+    max-width:640px;width:100%;padding:var(--s6);display:grid;gap:var(--s4);margin:auto 0}
+  .dash-modal__close{position:absolute;top:var(--s4);right:var(--s4);background:none;border:none;
+    color:var(--graphite);font-size:1.4rem;line-height:1;cursor:pointer;padding:.2em .4em}
+  .dash-modal__close:hover{color:var(--bone)}
+  .dash-modal__thumb{width:100%;max-height:22rem;object-fit:contain;background:#000;
+    border:1px solid var(--hairline);border-radius:3px}
   .curcard{display:grid;gap:.5em;align-content:start}
   .curcard__media{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--charcoal)}
   .curcard__media img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
@@ -383,7 +399,13 @@
         <div id="jl-list" class="card-grid"></div>
       </div>
 
-      <div class="newform" id="jl-editor" hidden></div>
+      <div class="dash-modal" id="jl-editor" hidden>
+        <div class="dash-modal__backdrop" data-jl-modal-close></div>
+        <div class="dash-modal__panel">
+          <button type="button" class="dash-modal__close" data-jl-modal-close aria-label="Close">&#215;</button>
+          <div id="jl-editor-body"></div>
+        </div>
+      </div>
     </div>
 
     <!-- BOUTIQUE -- edits the real Wardrobe catalog in data/wardrobe.json on GitHub -->
@@ -407,7 +429,13 @@
         <div id="bq-list" class="card-grid"></div>
       </div>
 
-      <div class="newform" id="bq-editor" hidden></div>
+      <div class="dash-modal" id="bq-editor" hidden>
+        <div class="dash-modal__backdrop" data-bq-modal-close></div>
+        <div class="dash-modal__panel">
+          <button type="button" class="dash-modal__close" data-bq-modal-close aria-label="Close">&#215;</button>
+          <div id="bq-editor-body"></div>
+        </div>
+      </div>
     </div>
 
     <!-- DISPATCH BRIEFS -->
@@ -1858,13 +1886,21 @@
     return '<input type="text" id="' + id + '" value="' + esc(value || '') + '">';
   }
 
+  function jlOpenModal(){ document.getElementById('jl-editor').hidden = false; }
+  function jlCloseModal(){ document.getElementById('jl-editor').hidden = true; }
+  document.getElementById('jl-editor').addEventListener('click', function(e){
+    if (e.target.closest('[data-jl-modal-close]')) jlCloseModal();
+  });
+
   function jlEdit(record){
     var isNew = !record;
     jlEditingSlug = isNew ? null : record.slug;
-    var editor = document.getElementById('jl-editor');
-    editor.hidden = false;
-    editor.innerHTML =
+    var body = document.getElementById('jl-editor-body');
+    jlOpenModal();
+    var thumb = record ? jlThumb(record) : '';
+    body.innerHTML =
       '<p class="eyebrow">' + (isNew ? 'New Entry' : 'Editing') + '</p>' +
+      (thumb ? '<img class="dash-modal__thumb" src="' + esc(thumb) + '" alt="">' : '') +
       JL_FIELDS.map(function(f){
         var v = f.heroKey ? (record && record.hero ? record.hero[f.heroKey] : undefined) : (record ? record[f.key] : undefined);
         if (v === undefined) {
@@ -1885,7 +1921,6 @@
 
     document.getElementById('jl-save-btn').addEventListener('click', jlSave);
     if (!isNew) document.getElementById('jl-delete-btn').addEventListener('click', jlDelete);
-    editor.scrollIntoView({behavior:'smooth', block:'start'});
   }
 
   function jlReadForm(){
@@ -2156,13 +2191,26 @@
     return '<input type="text" id="' + id + '" value="' + esc(value || '') + '">';
   }
 
+  function bqOpenModal(){ document.getElementById('bq-editor').hidden = false; }
+  function bqCloseModal(){ document.getElementById('bq-editor').hidden = true; }
+  document.getElementById('bq-editor').addEventListener('click', function(e){
+    if (e.target.closest('[data-bq-modal-close]')) bqCloseModal();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape') return;
+    if (!document.getElementById('jl-editor').hidden) jlCloseModal();
+    if (!document.getElementById('bq-editor').hidden) bqCloseModal();
+  });
+
   function bqEdit(item){
     var isNew = !item;
     bqEditingId = isNew ? null : item.id;
-    var editor = document.getElementById('bq-editor');
-    editor.hidden = false;
-    editor.innerHTML =
+    var body = document.getElementById('bq-editor-body');
+    bqOpenModal();
+    body.innerHTML =
       '<p class="eyebrow">' + (isNew ? 'New Suit' : 'Editing') + '</p>' +
+      (item && item.img ? '<img class="dash-modal__thumb" src="' + esc(item.img) + '" alt="">' : '') +
       BQ_FIELDS.map(function(f){
         var v = item ? item[f.key] : undefined;
         return '<div class="fld"><label>' + esc(f.label) + '</label>' + bqFieldInput(f, v) + '</div>';
@@ -2176,7 +2224,6 @@
 
     document.getElementById('bq-save-btn').addEventListener('click', bqSave);
     if (!isNew) document.getElementById('bq-delete-btn').addEventListener('click', bqDelete);
-    editor.scrollIntoView({behavior:'smooth', block:'start'});
   }
 
   function bqReadForm(){
