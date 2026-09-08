@@ -150,6 +150,7 @@
       <button class="dashnav__item" data-tab="lookbook">Lookbook</button>
       <button class="dashnav__item" data-tab="journal">Journal</button>
       <button class="dashnav__item" data-tab="journal-live">Journal (Live)</button>
+      <button class="dashnav__item" data-tab="boutique">Boutique</button>
       <button class="dashnav__item" data-tab="dispatch">Dispatch Briefs</button>
       <button class="dashnav__item" data-tab="music">Music</button>
       <button class="dashnav__item" data-tab="video">Video</button>
@@ -381,6 +382,26 @@
       </div>
 
       <div class="newform" id="jl-editor" hidden></div>
+    </div>
+
+    <!-- BOUTIQUE -- edits the real Wardrobe catalog in data/wardrobe.json on GitHub -->
+    <div class="dash__panel" id="panel-boutique">
+      <p class="body">Edits the real Wardrobe catalog — <code>data/wardrobe.json</code>, which <code>scripts/build_wardrobe.py</code> bakes into <a class="link-under" href="wardrobe.html" target="_blank" rel="noopener">wardrobe.html</a>. Saving here commits straight to GitHub, same as the Journal editor — it does <b>not</b> touch the live site until you hit <b>Deploy Live</b> on the Journal (Live) tab (that same deploy rebuilds the Wardrobe too). <b>560 suits in the catalog</b> — search or pick a category below rather than scrolling everything at once.</p>
+
+      <div class="newform">
+        <p class="eyebrow">Suits</p>
+        <div class="card__row">
+          <input type="text" id="bq-search" placeholder="Search by name, color, or id&#8230;" style="flex:1 1 auto">
+          <button type="button" class="btn-sm" id="bq-new">+ New Suit</button>
+        </div>
+        <p class="dash__loading" id="bq-loading">Loading&#8230;</p>
+        <p class="dash__err" id="bq-loaderr" hidden></p>
+        <div class="card__row" id="bq-filter" style="flex-wrap:wrap"></div>
+        <p class="dash__hint" id="bq-count"></p>
+        <div id="bq-list"></div>
+      </div>
+
+      <div class="newform" id="bq-editor" hidden></div>
     </div>
 
     <!-- DISPATCH BRIEFS -->
@@ -655,6 +676,7 @@
     curWardrobeReady().then(function(){ curRenderCatFilter(); curRenderResults(''); });
     loadJourCategories().then(loadJournalDash);
     jlLoad();
+    bqLoad();
     loadDispatchDash();
     loadMusicDash();
     loadVideoDash();
@@ -1969,6 +1991,225 @@
         msg.innerHTML = '<p class="dash__err">Could not reach the server.</p>';
       });
   });
+
+  // ================= BOUTIQUE (live Wardrobe) =================
+  // Edits the real data/wardrobe.json, via /api/wardrobe-live's GitHub-
+  // backed read/write (mirrors journal-live.js exactly -- see that
+  // function's header for why a save here still needs Deploy Live to
+  // actually publish). 560 items, so the list only ever renders a capped,
+  // filtered slice -- never the whole catalog at once.
+  var BQ_CATS = [
+    ['two-piece', 'Two-Piece'], ['three-piece', 'Three-Piece'],
+    ['double-breasted', 'Double-Breasted'], ['tuxedo', 'Tuxedo & Formal'], ['coats', 'Coats'],
+  ];
+  var BQ_FIELDS = [
+    {key:'id', label:'ID (slug, unique)', type:'text', required:true},
+    {key:'handle', label:'Handle', type:'text'},
+    {key:'name', label:'Name', type:'text', required:true},
+    {key:'cat', label:'Category', type:'catselect'},
+    {key:'color', label:'Color', type:'text'},
+    {key:'price', label:'Price (USD)', type:'number'},
+    {key:'img', label:'Primary image URL', type:'text'},
+    {key:'gallery', label:'Gallery — one image URL per line', type:'lines'},
+    {key:'note', label:'Description', type:'textarea'},
+  ];
+  var BQ_LIST_CAP = 60;
+
+  var bqItems = [];
+  var bqSha = null;
+  var bqEditingId = null; // the ORIGINAL id being edited; null = new/unsaved
+  var bqActiveCat = 'all';
+
+  function bqLoad(){
+    var loading = document.getElementById('bq-loading');
+    var err = document.getElementById('bq-loaderr');
+    loading.hidden = false; err.hidden = true;
+    fetch('/api/wardrobe-live')
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        loading.hidden = true;
+        if (!res.ok) { err.textContent = res.data.error || 'Could not load the catalog.'; err.hidden = false; return; }
+        bqItems = res.data.items;
+        bqSha = res.data.sha;
+        bqRenderFilter();
+        bqRenderList();
+      })
+      .catch(function(){ loading.hidden = true; err.textContent = 'Could not reach GitHub.'; err.hidden = false; });
+  }
+
+  function bqCatLabel(cat){
+    return (BQ_CATS.filter(function(c){ return c[0] === cat; })[0] || [])[1] || cat || 'Uncategorized';
+  }
+
+  function bqRenderFilter(){
+    var bar = document.getElementById('bq-filter');
+    var counts = {};
+    bqItems.forEach(function(it){ var c = it.cat || ''; counts[c] = (counts[c] || 0) + 1; });
+    var present = BQ_CATS.filter(function(c){ return counts[c[0]]; });
+    bar.innerHTML = '<button type="button" class="btn-sm' + (bqActiveCat === 'all' ? ' is-on' : '') + '" data-bq-filter="all">All (' + bqItems.length + ')</button>' +
+      present.map(function(c){
+        return '<button type="button" class="btn-sm' + (bqActiveCat === c[0] ? ' is-on' : '') + '" data-bq-filter="' + esc(c[0]) + '">' + esc(c[1]) + ' (' + counts[c[0]] + ')</button>';
+      }).join('');
+  }
+  document.getElementById('bq-filter').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-bq-filter]');
+    if (!btn) return;
+    bqActiveCat = btn.getAttribute('data-bq-filter');
+    bqRenderFilter();
+    bqRenderList();
+  });
+  document.getElementById('bq-search').addEventListener('input', bqRenderList);
+  document.getElementById('bq-new').addEventListener('click', function(){ bqEdit(null); });
+
+  function bqRenderList(){
+    var list = document.getElementById('bq-list');
+    var countNote = document.getElementById('bq-count');
+    var q = (document.getElementById('bq-search').value || '').toLowerCase().trim();
+    var matches = bqItems.filter(function(it){
+      if (bqActiveCat !== 'all' && it.cat !== bqActiveCat) return false;
+      return !q || (it.name||'').toLowerCase().indexOf(q) !== -1 || (it.color||'').toLowerCase().indexOf(q) !== -1 || (it.id||'').toLowerCase().indexOf(q) !== -1;
+    });
+    if (!matches.length) { countNote.textContent = ''; list.innerHTML = '<p class="dash__empty">No suits match.</p>'; return; }
+    var shown = matches.slice(0, BQ_LIST_CAP);
+    countNote.textContent = 'Showing ' + shown.length + ' of ' + matches.length + ' match' + (matches.length === 1 ? '' : 'es') +
+      (matches.length > BQ_LIST_CAP ? ' — narrow your search to see more specific ones' : '');
+    list.innerHTML = shown.map(function(it){
+      return '<div class="card">' +
+        (it.img ? '<img class="card__thumb" src="' + esc(it.img) + '" alt="" loading="lazy">' : '') +
+        '<div class="card__top">' +
+          '<span class="card__title">' + esc(it.name || 'Untitled') + '</span>' +
+          '<span class="badge badge--brass">' + esc(bqCatLabel(it.cat)) + '</span>' +
+          (it.color ? '<span class="badge">' + esc(it.color) + '</span>' : '') +
+        '</div>' +
+        (it.note ? '<p class="card__body">' + esc((it.note.length > 140 ? it.note.slice(0,140).replace(/\s+\S*$/,'') + '&#8230;' : it.note)) + '</p>' : '') +
+        '<p class="card__meta">/' + esc(it.id || '') + (it.price != null ? ' &#183; $' + esc(it.price) : '') + '</p>' +
+        '<div class="card__row"><button type="button" class="btn-sm" data-bq-edit="' + esc(it.id) + '">Edit</button></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('bq-list').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-bq-edit]');
+    if (!btn) return;
+    var it = bqItems.filter(function(x){ return x.id === btn.getAttribute('data-bq-edit'); })[0];
+    if (it) bqEdit(it);
+  });
+
+  function bqFieldId(key){ return 'bqf-' + key; }
+
+  function bqFieldInput(f, value){
+    var id = bqFieldId(f.key);
+    if (f.type === 'catselect') {
+      return '<select id="' + id + '">' + BQ_CATS.map(function(pair){
+        return '<option value="' + esc(pair[0]) + '"' + (pair[0] === value ? ' selected' : '') + '>' + esc(pair[1]) + '</option>';
+      }).join('') + '</select>';
+    }
+    if (f.type === 'number') {
+      return '<input type="number" id="' + id + '" value="' + (value == null ? '' : esc(value)) + '">';
+    }
+    if (f.type === 'textarea') {
+      return '<textarea id="' + id + '">' + esc(value || '') + '</textarea>';
+    }
+    if (f.type === 'lines') {
+      var lines = Array.isArray(value) ? value.join('\n') : '';
+      return '<textarea id="' + id + '" style="min-height:8rem">' + esc(lines) + '</textarea>';
+    }
+    return '<input type="text" id="' + id + '" value="' + esc(value || '') + '">';
+  }
+
+  function bqEdit(item){
+    var isNew = !item;
+    bqEditingId = isNew ? null : item.id;
+    var editor = document.getElementById('bq-editor');
+    editor.hidden = false;
+    editor.innerHTML =
+      '<p class="eyebrow">' + (isNew ? 'New Suit' : 'Editing') + '</p>' +
+      BQ_FIELDS.map(function(f){
+        var v = item ? item[f.key] : undefined;
+        return '<div class="fld"><label>' + esc(f.label) + '</label>' + bqFieldInput(f, v) + '</div>';
+      }).join('') +
+      '<div class="card__row">' +
+        '<button type="button" class="btn-sm" id="bq-save-btn">' + (isNew ? 'Create Suit' : 'Save Changes') + '</button>' +
+        (isNew ? '' : '<button type="button" class="btn-sm" id="bq-delete-btn">Delete</button>') +
+      '</div>' +
+      '<p class="dash__err" id="bq-save-err" hidden></p>' +
+      '<div id="bq-save-msg"></div>';
+
+    document.getElementById('bq-save-btn').addEventListener('click', bqSave);
+    if (!isNew) document.getElementById('bq-delete-btn').addEventListener('click', bqDelete);
+    editor.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function bqReadForm(){
+    var out = {};
+    BQ_FIELDS.forEach(function(f){
+      var el = document.getElementById(bqFieldId(f.key));
+      var val;
+      if (f.type === 'number') val = el.value === '' ? null : Number(el.value);
+      else if (f.type === 'lines') val = el.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+      else val = el.value;
+      out[f.key] = val;
+    });
+    return out;
+  }
+
+  function bqSave(){
+    var err = document.getElementById('bq-save-err');
+    var msg = document.getElementById('bq-save-msg');
+    err.hidden = true; msg.innerHTML = '';
+    var updated = bqReadForm();
+    if (!updated.id || !updated.name) { err.textContent = 'ID and name are required.'; err.hidden = false; return; }
+
+    var newItems = bqItems.slice();
+    if (bqEditingId) {
+      var idx = newItems.findIndex(function(it){ return it.id === bqEditingId; });
+      if (idx === -1) { err.textContent = 'That suit no longer exists on GitHub — someone else may have removed it. Reload the tab.'; err.hidden = false; return; }
+      newItems[idx] = updated;
+    } else {
+      if (newItems.some(function(it){ return it.id === updated.id; })) { err.textContent = 'A suit with that ID already exists.'; err.hidden = false; return; }
+      newItems.push(updated);
+    }
+
+    var btn = document.getElementById('bq-save-btn');
+    btn.disabled = true; btn.textContent = 'Saving to GitHub…';
+    authedFetch('/api/wardrobe-live', {method:'POST', body: JSON.stringify({
+      passphraseHash: storedHash,
+      items: newItems,
+      commitMessage: 'Dashboard: ' + (bqEditingId ? 'update' : 'add') + ' "' + updated.name + '"',
+    })})
+      .then(function(res){
+        btn.disabled = false;
+        btn.textContent = bqEditingId ? 'Save Changes' : 'Create Suit';
+        if (!res.ok) { err.textContent = res.data.error || 'Save failed.'; err.hidden = false; return; }
+        bqItems = newItems;
+        bqEditingId = updated.id;
+        bqRenderFilter();
+        bqRenderList();
+        msg.innerHTML = '<p style="color:var(--brass-lit);margin-top:var(--s4)">Committed to GitHub' +
+          (res.data.commitUrl ? ' — <a class="link-under" href="' + esc(res.data.commitUrl) + '" target="_blank" rel="noopener">view commit &#8594;</a>' : '') +
+          '. This is <b>not live yet</b> — use Deploy Live on the Journal (Live) tab when you\'re ready to publish.</p>';
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = bqEditingId ? 'Save Changes' : 'Create Suit'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  }
+
+  function bqDelete(){
+    if (!bqEditingId) return;
+    if (!confirm('Permanently remove "' + bqEditingId + '" from data/wardrobe.json on GitHub? This cannot be undone from here.')) return;
+    var newItems = bqItems.filter(function(it){ return it.id !== bqEditingId; });
+    authedFetch('/api/wardrobe-live', {method:'POST', body: JSON.stringify({
+      passphraseHash: storedHash,
+      items: newItems,
+      commitMessage: 'Dashboard: delete "' + bqEditingId + '"',
+    })})
+      .then(function(res){
+        if (!res.ok) { alert(res.data.error || 'Delete failed.'); return; }
+        bqItems = newItems;
+        bqEditingId = null;
+        document.getElementById('bq-editor').hidden = true;
+        bqRenderFilter();
+        bqRenderList();
+      });
+  }
 
   // ================= DISPATCH BRIEFS =================
   var DISP_CATS = {film:'Film / TV', music:'Music', tech:'A.I. / Tech', gaming:'Gaming',
