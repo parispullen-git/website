@@ -375,6 +375,7 @@
         </div>
         <p class="dash__loading" id="jl-loading">Loading&#8230;</p>
         <p class="dash__err" id="jl-loaderr" hidden></p>
+        <div class="card__row" id="jl-status-filter" style="flex-wrap:wrap"></div>
         <div class="card__row" id="jl-filter" style="flex-wrap:wrap" hidden></div>
         <div id="jl-list"></div>
       </div>
@@ -1617,6 +1618,7 @@
   var jlSha = null;
   var jlEditingSlug = null; // the ORIGINAL slug being edited; null = new/unsaved
   var jlActiveCat = 'all';
+  var jlActiveStatus = 'all'; // 'all' | 'published' | 'draft'
 
   function jlThumb(p){
     if (!p.hero || !p.hero.img || !p.hero.ext) return '';
@@ -1631,7 +1633,25 @@
     return (JL_CATS.filter(function(c){ return c[0] === cat; })[0] || [])[1] || cat || 'Uncategorized';
   }
 
+  function jlRenderStatusFilter(){
+    var bar = document.getElementById('jl-status-filter');
+    var publishedCount = jlPosts.filter(function(p){ return p.status !== 'draft'; }).length;
+    var draftCount = jlPosts.length - publishedCount;
+    var opts = [['all', 'All', jlPosts.length], ['published', 'Published', publishedCount], ['draft', 'Draft', draftCount]];
+    bar.innerHTML = opts.map(function(o){
+      return '<button type="button" class="btn-sm' + (jlActiveStatus === o[0] ? ' is-on' : '') + '" data-jl-status="' + o[0] + '">' + o[1] + ' (' + o[2] + ')</button>';
+    }).join('');
+  }
+  document.getElementById('jl-status-filter').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-jl-status]');
+    if (!btn) return;
+    jlActiveStatus = btn.getAttribute('data-jl-status');
+    jlRenderStatusFilter();
+    jlRenderList();
+  });
+
   function jlRenderFilter(){
+    jlRenderStatusFilter();
     var bar = document.getElementById('jl-filter');
     if (jlPosts.length <= 1) { bar.hidden = true; bar.innerHTML = ''; return; }
     var counts = {};
@@ -1675,6 +1695,8 @@
     var q = (document.getElementById('jl-search').value || '').toLowerCase().trim();
     var rows = jlPosts.filter(function(p){
       if (jlActiveCat !== 'all' && p.cat !== jlActiveCat) return false;
+      if (jlActiveStatus === 'draft' && p.status !== 'draft') return false;
+      if (jlActiveStatus === 'published' && p.status === 'draft') return false;
       return !q || (p.title||'').toLowerCase().indexOf(q) !== -1 || (p.slug||'').toLowerCase().indexOf(q) !== -1;
     });
     if (!rows.length) { list.innerHTML = '<p class="dash__empty">No entries match.</p>'; return; }
