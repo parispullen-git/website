@@ -37,6 +37,10 @@
   .dashnav__deploybtn.is-on{background:rgba(198,161,91,.14)}
   #deploy-live-msg{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.03em;margin:.6em 0 0;line-height:1.5}
   #deploy-live-msg a{color:var(--brass-lit)}
+  .chset__rows{display:grid;gap:var(--s3);margin-top:var(--s3)}
+  .chrow{display:grid;grid-template-columns:10rem 1fr auto;gap:var(--s3);align-items:center}
+  .chrow input{background:#0A0A0B;border:1px solid var(--hairline);color:var(--ivory,var(--bone));padding:.5em .7em;
+    font-family:var(--font-body);font-size:.85rem}
   .dashmain{min-width:0}
   .dash__panel{display:none}
   .dash__panel.is-active{display:block}
@@ -184,6 +188,10 @@
       <button class="dashnav__item" data-tab="pitches">Pitches</button>
       <button class="dashnav__item" data-tab="network">Network</button>
       <button class="dashnav__item" data-tab="websites">Websites</button>
+      <button class="dashnav__item" data-tab="casefiles">Case Files</button>
+      <button class="dashnav__item" data-tab="charlottemap">Charlotte Map</button>
+      <button class="dashnav__item" data-tab="housemusic">House Music</button>
+      <button class="dashnav__item" data-tab="housechannels">House Channels</button>
       <button class="dashnav__item" data-tab="content">Content</button>
       <div class="dashnav__deploy">
         <button type="button" class="dashnav__deploybtn" id="deploy-live-btn">Deploy Live</button>
@@ -586,9 +594,73 @@
       <div id="websites-list"></div>
     </div>
 
+    <!-- CASE FILES (live) -->
+    <div class="dash__panel" id="panel-casefiles">
+      <p class="body">Edits the real Case Files — <code>data/casefiles.json</code>, which <code>build_casefiles.py</code> bakes into <a class="link-under" href="casefiles.html" target="_blank" rel="noopener">casefiles.html</a>. Commits straight to GitHub; use <b>Deploy Live</b> in the sidebar to publish.</p>
+      <div class="newform">
+        <p class="eyebrow">Case Files</p>
+        <div class="card__row">
+          <input type="text" id="cf-search" placeholder="Search by client or ID&#8230;" style="flex:1 1 auto">
+          <button type="button" class="btn-sm" id="cf-new">+ New Case File</button>
+        </div>
+        <p class="dash__loading" id="cf-loading">Loading&#8230;</p>
+        <p class="dash__err" id="cf-loaderr" hidden></p>
+        <div id="cf-list" class="card-grid"></div>
+      </div>
+      <div class="dash-modal" id="cf-editor" hidden>
+        <div class="dash-modal__backdrop" data-cf-modal-close></div>
+        <div class="dash-modal__panel"><button type="button" class="dash-modal__close" data-cf-modal-close aria-label="Close">&#215;</button><div id="cf-editor-body"></div></div>
+      </div>
+    </div>
+
+    <!-- CHARLOTTE MAP (live) -->
+    <div class="dash__panel" id="panel-charlottemap">
+      <p class="body">Edits the real Charlotte Map — <code>data/charlotte-locations.json</code>, which <code>build_charlotte.py</code> bakes into <a class="link-under" href="charlotte.html" target="_blank" rel="noopener">charlotte.html</a>. Commits straight to GitHub; use <b>Deploy Live</b> in the sidebar to publish.</p>
+      <div class="newform">
+        <p class="eyebrow">Districts</p>
+        <div class="card__row">
+          <input type="text" id="cm-search" placeholder="Search by district name&#8230;" style="flex:1 1 auto">
+          <button type="button" class="btn-sm" id="cm-new">+ New District</button>
+        </div>
+        <p class="dash__loading" id="cm-loading">Loading&#8230;</p>
+        <p class="dash__err" id="cm-loaderr" hidden></p>
+        <div id="cm-list" class="card-grid"></div>
+      </div>
+      <div class="dash-modal" id="cm-editor" hidden>
+        <div class="dash-modal__backdrop" data-cm-modal-close></div>
+        <div class="dash-modal__panel"><button type="button" class="dash-modal__close" data-cm-modal-close aria-label="Close">&#215;</button><div id="cm-editor-body"></div></div>
+      </div>
+    </div>
+
+    <!-- HOUSE MUSIC (live) -->
+    <div class="dash__panel" id="panel-housemusic">
+      <p class="body">Edits the real House Music list — <code>data/house-music.json</code>. <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> fetches this live at runtime, so a save here reaches the site as soon as it's committed — <b>no Deploy Live needed</b> for this one.</p>
+      <div class="newform">
+        <p class="eyebrow">Playlists &amp; Albums</p>
+        <div class="card__row"><button type="button" class="btn-sm" id="hm-new">+ New Entry</button></div>
+        <p class="dash__loading" id="hm-loading">Loading&#8230;</p>
+        <p class="dash__err" id="hm-loaderr" hidden></p>
+        <div id="hm-list" class="card-grid"></div>
+      </div>
+      <div class="dash-modal" id="hm-editor" hidden>
+        <div class="dash-modal__backdrop" data-hm-modal-close></div>
+        <div class="dash-modal__panel"><button type="button" class="dash-modal__close" data-hm-modal-close aria-label="Close">&#215;</button><div id="hm-editor-body"></div></div>
+      </div>
+    </div>
+
+    <!-- HOUSE CHANNELS (live) -->
+    <div class="dash__panel" id="panel-housechannels">
+      <p class="body">Edits the real House TV/Cinema channel lists — <code>data/house-channels.json</code>. <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> fetches this live at runtime — <b>no Deploy Live needed</b> for this one either.</p>
+      <p class="dash__loading" id="hc-loading">Loading&#8230;</p>
+      <p class="dash__err" id="hc-loaderr" hidden></p>
+      <div id="hc-sets"></div>
+      <div class="card__row" style="margin-top:var(--s5)"><button type="button" class="btn-sm" id="hc-save">Save Channels</button></div>
+      <div id="hc-save-msg"></div>
+    </div>
+
     <!-- CONTENT -->
     <div class="dash__panel" id="panel-content">
-      <p class="body">Boutique (Lookbook tab), Journal, Music, and Video are now genuinely live-editable from this dashboard — no rebuild step. Case Files and the Charlotte guide are still edited through the local Operator Console (run locally — it needs filesystem and build-script access this public dashboard can never have).</p>
+      <p class="body">Journal (Live), Boutique, Case Files, Charlotte Map, House Music, and House Channels are all genuinely live-editable from this dashboard — commits straight to GitHub, then <b>Deploy Live</b> in the sidebar publishes everything at once. The local Operator Console still exists for local-only convenience (and as a backup publish path independent of GitHub Actions), but this dashboard is the one place that houses everything.</p>
       <div class="card" style="margin-top:var(--s5)">
         <p class="card__title">Local Operator Console</p>
         <p class="card__body">On your machine: <code>node local-admin/server.js</code>, then open <code>local-admin/console.html</code>. Edits regenerate the real static pages via the existing <code>build_*.py</code> scripts — review the result, then deploy as usual.</p>
@@ -2314,6 +2386,330 @@
         bqRenderList();
       });
   }
+
+  // ================= GENERIC LIVE-EDITED COLLECTION (Case Files, Charlotte Map, House Music) =================
+  // One factory instead of three hand-copied editors -- each of these is a
+  // plain array in a data/*.json file, GitHub-backed exactly like Journal
+  // and Boutique, just smaller and without their extra behavior (reorder,
+  // featured, category filtering). Editing addresses items by their
+  // position in the CURRENT filtered-out `items` array (not a stable id --
+  // House Music has no unique field to key off of at all), which is safe
+  // here because, unlike Journal's Move Up/Down, nothing reorders this
+  // list out from under an open edit.
+  function makeLiveList(cfg){
+    var items = [];
+    var editingIdx = null; // index into `items`; null = new/unsaved
+
+    function fieldId(k){ return cfg.key + 'f-' + k; }
+
+    function load(){
+      var loading = document.getElementById(cfg.key + '-loading');
+      var err = document.getElementById(cfg.key + '-loaderr');
+      loading.hidden = false; err.hidden = true;
+      fetch(cfg.apiPath)
+        .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+        .then(function(res){
+          loading.hidden = true;
+          if (!res.ok) { err.textContent = res.data.error || 'Could not load.'; err.hidden = false; return; }
+          items = res.data.items;
+          renderList();
+        })
+        .catch(function(){ loading.hidden = true; err.textContent = 'Could not reach GitHub.'; err.hidden = false; });
+    }
+
+    function renderList(){
+      var list = document.getElementById(cfg.key + '-list');
+      var searchEl = document.getElementById(cfg.key + '-search');
+      var q = searchEl ? (searchEl.value || '').toLowerCase().trim() : '';
+      if (!items.length) { list.innerHTML = '<p class="dash__empty">Nothing yet.</p>'; return; }
+      var visible = !q ? items.map(function(it,i){ return i; }) : items
+        .map(function(it,i){ return i; })
+        .filter(function(i){ return cfg.searchFields.some(function(f){ return String(items[i][f]||'').toLowerCase().indexOf(q) !== -1; }); });
+      if (!visible.length) { list.innerHTML = '<p class="dash__empty">No entries match.</p>'; return; }
+      list.innerHTML = visible.map(function(i){
+        var it = items[i];
+        return '<div class="card">' +
+          (cfg.thumb && cfg.thumb(it) ? '<img class="card__thumb" src="' + esc(cfg.thumb(it)) + '" alt="" loading="lazy">' : '') +
+          '<div class="card__top"><span class="card__title">' + esc(cfg.summary(it)) + '</span></div>' +
+          (cfg.subSummary && cfg.subSummary(it) ? '<p class="card__meta">' + esc(cfg.subSummary(it)) + '</p>' : '') +
+          '<div class="card__row"><button type="button" class="btn-sm" data-' + cfg.key + '-edit="' + i + '">Edit</button></div>' +
+        '</div>';
+      }).join('');
+    }
+    var searchEl = document.getElementById(cfg.key + '-search');
+    if (searchEl) searchEl.addEventListener('input', renderList);
+    document.getElementById(cfg.key + '-new').addEventListener('click', function(){ edit(null); });
+    document.getElementById(cfg.key + '-list').addEventListener('click', function(e){
+      var btn = e.target.closest('[data-' + cfg.key + '-edit]');
+      if (!btn) return;
+      edit(Number(btn.getAttribute('data-' + cfg.key + '-edit')));
+    });
+
+    function openModal(){ document.getElementById(cfg.key + '-editor').hidden = false; }
+    function closeModal(){ document.getElementById(cfg.key + '-editor').hidden = true; }
+    document.getElementById(cfg.key + '-editor').addEventListener('click', function(e){
+      if (e.target.closest('[data-' + cfg.key + '-modal-close]')) closeModal();
+    });
+
+    function fieldInput(f, value){
+      var id = fieldId(f.key);
+      if (f.type === 'select') {
+        return '<select id="' + id + '">' + f.options.map(function(o){
+          return '<option value="' + esc(o) + '"' + (o === value ? ' selected' : '') + '>' + esc(o) + '</option>';
+        }).join('') + '</select>';
+      }
+      if (f.type === 'textarea') return '<textarea id="' + id + '">' + esc(value || '') + '</textarea>';
+      if (f.type === 'lines') {
+        var lines = Array.isArray(value) ? value.join('\n') : '';
+        return '<textarea id="' + id + '" style="min-height:8rem">' + esc(lines) + '</textarea>';
+      }
+      if (f.type === 'json') {
+        var jv = value !== undefined ? value : (f.jsonEmpty !== undefined ? f.jsonEmpty : []);
+        return '<textarea id="' + id + '" style="min-height:9rem;font-family:var(--font-mono);font-size:.8rem">' + esc(JSON.stringify(jv, null, 2)) + '</textarea>';
+      }
+      return '<input type="text" id="' + id + '" value="' + esc(value || '') + '">';
+    }
+
+    function edit(idx){
+      var isNew = idx == null;
+      editingIdx = isNew ? null : idx;
+      var record = isNew ? null : items[idx];
+      var body = document.getElementById(cfg.key + '-editor-body');
+      openModal();
+      body.innerHTML =
+        '<p class="eyebrow">' + (isNew ? cfg.newLabel : 'Editing') + '</p>' +
+        (cfg.thumb && record && cfg.thumb(record) ? '<img class="dash-modal__thumb" src="' + esc(cfg.thumb(record)) + '" alt="">' : '') +
+        cfg.fields.map(function(f){
+          var v = record ? record[f.key] : undefined;
+          return '<div class="fld"><label>' + esc(f.label) + '</label>' + fieldInput(f, v) + '</div>';
+        }).join('') +
+        '<div class="card__row">' +
+          '<button type="button" class="btn-sm" id="' + cfg.key + '-save-btn">' + (isNew ? 'Create' : 'Save Changes') + '</button>' +
+          (isNew ? '' : '<button type="button" class="btn-sm" id="' + cfg.key + '-delete-btn">Delete</button>') +
+        '</div>' +
+        '<p class="dash__err" id="' + cfg.key + '-save-err" hidden></p>' +
+        '<div id="' + cfg.key + '-save-msg"></div>';
+
+      document.getElementById(cfg.key + '-save-btn').addEventListener('click', save);
+      if (!isNew) document.getElementById(cfg.key + '-delete-btn').addEventListener('click', del);
+    }
+
+    function readForm(){
+      var out = {};
+      cfg.fields.forEach(function(f){
+        var el = document.getElementById(fieldId(f.key));
+        var val;
+        if (f.type === 'lines') val = el.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+        else if (f.type === 'json') {
+          var fallback = JSON.stringify(f.jsonEmpty !== undefined ? f.jsonEmpty : []);
+          try { val = JSON.parse(el.value || fallback); } catch (e) { throw new Error('Invalid JSON in "' + f.label + '": ' + e.message); }
+        }
+        else val = el.value;
+        out[f.key] = val;
+      });
+      return out;
+    }
+
+    function save(){
+      var err = document.getElementById(cfg.key + '-save-err');
+      var msg = document.getElementById(cfg.key + '-save-msg');
+      err.hidden = true; msg.innerHTML = '';
+      var updated;
+      try { updated = readForm(); } catch (e) { err.textContent = e.message; err.hidden = false; return; }
+      if (cfg.required && cfg.required.some(function(k){ return !updated[k]; })) {
+        err.textContent = cfg.requiredMsg || 'Required fields are missing.'; err.hidden = false; return;
+      }
+
+      var newItems = items.slice();
+      if (editingIdx != null) {
+        newItems[editingIdx] = updated;
+      } else {
+        if (cfg.idField && newItems.some(function(it){ return it[cfg.idField] === updated[cfg.idField]; })) {
+          err.textContent = 'An entry with that ' + cfg.idField + ' already exists.'; err.hidden = false; return;
+        }
+        newItems.push(updated);
+      }
+
+      var btn = document.getElementById(cfg.key + '-save-btn');
+      btn.disabled = true; btn.textContent = 'Saving to GitHub…';
+      authedFetch(cfg.apiPath, {method:'POST', body: JSON.stringify({
+        passphraseHash: storedHash,
+        items: newItems,
+        commitMessage: 'Dashboard: ' + (editingIdx != null ? 'update' : 'add') + ' ' + cfg.label + ' "' + cfg.summary(updated) + '"',
+      })})
+        .then(function(res){
+          btn.disabled = false;
+          btn.textContent = editingIdx != null ? 'Save Changes' : 'Create';
+          if (!res.ok) { err.textContent = res.data.error || 'Save failed.'; err.hidden = false; return; }
+          items = newItems;
+          editingIdx = newItems.indexOf(updated);
+          renderList();
+          msg.innerHTML = '<p style="color:var(--brass-lit);margin-top:var(--s4)">Committed to GitHub' +
+            (res.data.commitUrl ? ' — <a class="link-under" href="' + esc(res.data.commitUrl) + '" target="_blank" rel="noopener">view commit &#8594;</a>' : '') +
+            (cfg.livePage ? '.</p>' : '. This is <b>not live yet</b> — use Deploy Live in the sidebar when you\'re ready to publish.</p>');
+        })
+        .catch(function(){ btn.disabled = false; btn.textContent = editingIdx != null ? 'Save Changes' : 'Create'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+    }
+
+    function del(){
+      if (editingIdx == null) return;
+      if (!confirm('Permanently remove "' + cfg.summary(items[editingIdx]) + '" from GitHub? This cannot be undone from here.')) return;
+      var newItems = items.slice();
+      newItems.splice(editingIdx, 1);
+      authedFetch(cfg.apiPath, {method:'POST', body: JSON.stringify({
+        passphraseHash: storedHash,
+        items: newItems,
+        commitMessage: 'Dashboard: delete ' + cfg.label + ' entry',
+      })})
+        .then(function(res){
+          if (!res.ok) { alert(res.data.error || 'Delete failed.'); return; }
+          items = newItems;
+          editingIdx = null;
+          closeModal();
+          renderList();
+        });
+    }
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && !document.getElementById(cfg.key + '-editor').hidden) closeModal();
+    });
+
+    return { load: load };
+  }
+
+  var cfEditor = makeLiveList({
+    key: 'cf', label: 'Case File', apiPath: '/api/casefiles-live', idField: 'id',
+    newLabel: 'New Case File', required: ['id', 'client'], requiredMsg: 'ID and client are required.',
+    summary: function(r){ return r.client || 'Untitled'; },
+    subSummary: function(r){ return '/' + (r.id||'') + (r.status ? ' · ' + r.status : ''); },
+    searchFields: ['client', 'id', 'kind', 'status'],
+    fields: [
+      {key:'id', label:'ID (slug, unique)', type:'text'},
+      {key:'no', label:'Number', type:'text'},
+      {key:'client', label:'Client', type:'text'},
+      {key:'kind', label:'Kind', type:'text'},
+      {key:'status', label:'Status', type:'text'},
+      {key:'thumb', label:'Thumbnail key', type:'text'},
+      {key:'site', label:'Site URL', type:'text'},
+      {key:'line', label:'One-liner', type:'text'},
+      {key:'brief', label:'Brief', type:'textarea'},
+      {key:'move', label:'The Move', type:'textarea'},
+      {key:'built', label:'Built — one bullet per line', type:'lines'},
+      {key:'result', label:'Result', type:'textarea'},
+    ],
+  });
+
+  var cmEditor = makeLiveList({
+    key: 'cm', label: 'District', apiPath: '/api/charlotte-live', idField: 'id',
+    newLabel: 'New District', required: ['id', 'name'], requiredMsg: 'ID and district name are required.',
+    summary: function(r){ return r.name || 'Untitled'; },
+    subSummary: function(r){ return '/' + (r.id||'') + ' · ' + ((r.venues||[]).length) + ' venues'; },
+    searchFields: ['name', 'id'],
+    fields: [
+      {key:'id', label:'ID (slug, unique)', type:'text'},
+      {key:'order', label:'Order', type:'text'},
+      {key:'name', label:'District name', type:'text'},
+      {key:'blurb', label:'Blurb', type:'textarea'},
+      {key:'venues', label:'Venues — raw JSON array. Each: {"name","cat","addr","price","access","desc","best":[...],"spec":[...],"mapq","site","filters":[...]}', type:'json'},
+    ],
+  });
+
+  var hmEditor = makeLiveList({
+    key: 'hm', label: 'House Music entry', apiPath: '/api/house-music-live', idField: null, livePage: true,
+    newLabel: 'New Entry', required: ['id', 'label'], requiredMsg: 'Spotify ID and label are required.',
+    summary: function(r){ return (r.label || 'Untitled') + ' (' + (r.type || '') + ')'; },
+    subSummary: function(r){ return r.id || ''; },
+    searchFields: ['label', 'id', 'type'],
+    fields: [
+      {key:'type', label:'Type', type:'select', options:['playlist','album']},
+      {key:'id', label:'Spotify ID', type:'text'},
+      {key:'label', label:'Label', type:'text'},
+    ],
+  });
+
+  document.querySelector('[data-tab="casefiles"]').addEventListener('click', function(){ cfEditor.load(); }, {once:true});
+  document.querySelector('[data-tab="charlottemap"]').addEventListener('click', function(){ cmEditor.load(); }, {once:true});
+  document.querySelector('[data-tab="housemusic"]').addEventListener('click', function(){ hmEditor.load(); }, {once:true});
+
+  // ================= HOUSE CHANNELS (live, dict-of-lists) =================
+  // Not a plain array like the collections above -- data/house-channels.json
+  // is {roomSetId: [{id, label}, ...]}, so this gets its own small editor
+  // instead of going through makeLiveList. Mirrors local-admin/console.html's
+  // renderChannelsPanel() exactly, just GitHub-backed instead of local-file.
+  var hcData = null;
+
+  function hcLoad(){
+    var loading = document.getElementById('hc-loading');
+    var err = document.getElementById('hc-loaderr');
+    loading.hidden = false; err.hidden = true;
+    fetch('/api/house-channels-live')
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        loading.hidden = true;
+        if (!res.ok) { err.textContent = res.data.error || 'Could not load.'; err.hidden = false; return; }
+        hcData = res.data.data;
+        hcRender();
+      })
+      .catch(function(){ loading.hidden = true; err.textContent = 'Could not reach GitHub.'; err.hidden = false; });
+  }
+
+  function hcRow(setName, entry, i){
+    return '<div class="chrow" data-set="' + esc(setName) + '" data-i="' + i + '">' +
+      '<input type="text" data-role="id" placeholder="YouTube video ID" value="' + esc(entry.id) + '">' +
+      '<input type="text" data-role="label" placeholder="Label" value="' + esc(entry.label) + '">' +
+      '<button type="button" class="btn-sm" data-hc-remove>&#215;</button>' +
+    '</div>';
+  }
+
+  function hcRender(){
+    var wrap = document.getElementById('hc-sets');
+    wrap.innerHTML = Object.keys(hcData).map(function(setName){
+      return '<div class="card" data-set="' + esc(setName) + '">' +
+        '<div class="card__top"><span class="card__title">' + esc(setName) + '</span>' +
+        '<button type="button" class="btn-sm" data-hc-add="' + esc(setName) + '">+ Add Video</button></div>' +
+        '<div class="chset__rows">' + hcData[setName].map(function(e,i){ return hcRow(setName, e, i); }).join('') + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('hc-sets').addEventListener('click', function(e){
+    var add = e.target.closest('[data-hc-add]');
+    if (add) { hcData[add.getAttribute('data-hc-add')].push({id:'', label:''}); hcRender(); return; }
+    var remove = e.target.closest('[data-hc-remove]');
+    if (remove) {
+      var rowEl = remove.closest('[data-set]');
+      hcData[rowEl.getAttribute('data-set')].splice(Number(rowEl.getAttribute('data-i')), 1);
+      hcRender();
+    }
+  });
+
+  document.getElementById('hc-save').addEventListener('click', function(){
+    document.querySelectorAll('#hc-sets > [data-set]').forEach(function(setEl){
+      var setName = setEl.getAttribute('data-set');
+      var entries = [];
+      setEl.querySelectorAll('.chrow').forEach(function(rowEl){
+        entries.push({
+          id: rowEl.querySelector('[data-role="id"]').value.trim(),
+          label: rowEl.querySelector('[data-role="label"]').value.trim(),
+        });
+      });
+      hcData[setName] = entries;
+    });
+    var msg = document.getElementById('hc-save-msg');
+    var btn = this;
+    btn.disabled = true; btn.textContent = 'Saving to GitHub…';
+    authedFetch('/api/house-channels-live', {method:'POST', body: JSON.stringify({
+      passphraseHash: storedHash, data: hcData, commitMessage: 'Dashboard: update House Channels',
+    })})
+      .then(function(res){
+        btn.disabled = false; btn.textContent = 'Save Channels';
+        if (!res.ok) { msg.innerHTML = '<p class="dash__err">' + esc(res.data.error || 'Save failed.') + '</p>'; return; }
+        msg.innerHTML = '<p style="color:var(--brass-lit);margin-top:var(--s4)">Committed to GitHub — live immediately, no rebuild needed.</p>';
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = 'Save Channels'; msg.innerHTML = '<p class="dash__err">Could not reach the server.</p>'; });
+  });
+
+  document.querySelector('[data-tab="housechannels"]').addEventListener('click', function(){ hcLoad(); }, {once:true});
 
   // ================= DISPATCH BRIEFS =================
   var DISP_CATS = {film:'Film / TV', music:'Music', tech:'A.I. / Tech', gaming:'Gaming',
