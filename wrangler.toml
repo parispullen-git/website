@@ -1,0 +1,16 @@
+# Cloudflare Pages project config -- replaces netlify.toml.
+# The static site itself is the whole repo root (matches Netlify's
+# `publish = "."`); functions/ holds the Pages Functions that replace
+# netlify/functions/ (kept in the repo for reference, no longer deployed).
+name = "parispullen"
+pages_build_output_dir = "."
+compatibility_date = "2026-01-01"
+# stripe-webhook.js's signature check uses Node's real crypto
+# (createHmac/timingSafeEqual) rather than a Web Crypto rewrite -- see
+# that file's own header comment for why. This flag is what makes
+# require('crypto') resolve to a working shim instead of failing.
+compatibility_flags = ["nodejs_compat"]
+
+[[kv_namespaces]]
+binding = "PP_DATA"
+id = "c8eef3e8e342423e9b2b923087854ab6"

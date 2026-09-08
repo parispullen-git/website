@@ -54,6 +54,11 @@
   .dash__row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);flex-wrap:wrap}
   .dash__loading,.dash__empty{color:var(--graphite);font-family:var(--font-mono);font-size:var(--t-micro);
     letter-spacing:.08em;margin-top:var(--s5)}
+  .dash__hint{color:var(--graphite);font-size:.82rem;line-height:1.6;margin:.35em 0}
+  .dash__hint code{font-family:var(--font-mono);font-size:.78em;color:var(--brass-lit);
+    background:rgba(201,169,97,.08);padding:.15em .4em;border-radius:3px}
+  .card__thumb{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:3px;margin-bottom:var(--s3);
+    background:var(--charcoal);display:block}
 
   .card{border:1px solid var(--hairline);padding:var(--s5);margin-top:var(--s4)}
   .card__top{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;align-items:baseline}
@@ -148,6 +153,7 @@
       <button class="dashnav__item" data-tab="music">Music</button>
       <button class="dashnav__item" data-tab="video">Video</button>
       <button class="dashnav__item" data-tab="pitches">Pitches</button>
+      <button class="dashnav__item" data-tab="network">Network</button>
       <button class="dashnav__item" data-tab="websites">Websites</button>
       <button class="dashnav__item" data-tab="content">Content</button>
     </nav>
@@ -227,7 +233,7 @@
 
     <!-- INQUIRIES -->
     <div class="dash__panel" id="panel-inquiries">
-      <p class="body">Wardrobe inquiry submissions.</p>
+      <p class="body">Boutique inquiry submissions.</p>
       <p class="dash__loading" id="inquiries-loading">Loading&#8230;</p>
       <div id="inquiries-list"></div>
     </div>
@@ -252,7 +258,7 @@
         <div class="fld"><label>Personal Note (shown on the page)</label><textarea id="cur-note" placeholder="e.g. Pulled these with the gala in mind — the navy speaks for itself."></textarea></div>
 
         <div class="fld" style="margin-top:var(--s4)">
-          <label>Search the Wardrobe</label>
+          <label>Search the Boutique</label>
           <input id="cur-search" placeholder="Search by name, category, or color&#8230;">
         </div>
         <div class="card__row" id="cur-catfilter" style="margin-top:var(--s3)"></div>
@@ -288,7 +294,18 @@
 
     <!-- JOURNAL -->
     <div class="dash__panel" id="panel-journal">
-      <p class="body">New entries posted here go live on <a class="link-under" href="journal.html" target="_blank" rel="noopener">the Journal</a> immediately — no rebuild. They're fetched at runtime by journal.html and appended into the grid alongside the site's existing baked-in posts, and read at <code>journal-post.html?slug=&#8230;</code>. The five original entries (Suit System, Karma Automotive, The Gentlemen, GTA 6, Iceman) are untouched static pages and aren't editable here.</p>
+      <p class="body">Entries saved as <b>Published</b> here go live on <a class="link-under" href="journal.html" target="_blank" rel="noopener">the Journal</a> immediately — no rebuild. <b>Draft</b> entries are saved but stay off the live site (and off its direct link) until switched to Published. Live entries are fetched at runtime by journal.html and appended into the grid alongside the site's existing baked-in posts, and read at <code>journal-post.html?slug=&#8230;</code>. Move Up/Down sets where a dashboard-authored entry falls relative to the others. The original static entries (Suit System, Karma Automotive, The Gentlemen, and the rest built by <code>build_journal.py</code>) aren't editable here.</p>
+
+      <div class="newform" id="jour-cats">
+        <p class="eyebrow">Categories</p>
+        <p class="body">The thirteen built into the site (Motors, Style, Timepiece, Business, Tech, Music, News, Film, Gaming, Art, Sports, Travel, Charlotte) plus anything added here — this is also what fills the Journal's filter bar and the Category field below. Renaming or deleting one of the thirteen doesn't touch <code>build_journal.py</code>; it just overrides how that filter button shows up, everywhere, immediately.</p>
+        <div id="jour-cats-list"></div>
+        <div class="card__row">
+          <input type="text" id="jour-cats-new" placeholder="New category name" style="flex:1 1 auto">
+          <button type="button" class="btn-sm" id="jour-cats-add">+ Add Category</button>
+        </div>
+        <p class="dash__err" id="jour-cats-err" hidden></p>
+      </div>
 
       <div class="newform" id="jour-newform">
         <p class="eyebrow">New Journal Entry</p>
@@ -298,32 +315,41 @@
         </div>
         <div class="grid2">
           <div class="fld"><label>Category</label>
-            <select id="jour-cat">
-              <option value="automotive">Automotive</option>
-              <option value="style" selected>Style</option>
-              <option value="business">Business</option>
-              <option value="tech">Tech</option>
-              <option value="music">Music</option>
-              <option value="film">Film</option>
-              <option value="gaming">Gaming</option>
-              <option value="life">Life</option>
-            </select>
+            <select id="jour-cat"></select>
           </div>
           <div class="fld"><label>Read Time</label><input id="jour-read" placeholder="e.g. 3 min read" value="3 min read"></div>
+        </div>
+        <div class="fld"><label>Status</label>
+          <select id="jour-status">
+            <option value="draft" selected>Draft — not visible on the live Journal</option>
+            <option value="published">Published — live now</option>
+          </select>
         </div>
         <div class="fld"><label>Standfirst (shown on the card)</label><textarea id="jour-stand" placeholder="One or two sentences that summarize the piece."></textarea></div>
         <div class="grid2">
           <div class="fld"><label>Hero Image URL</label><input id="jour-heroimg" placeholder="https://&#8230;"></div>
           <div class="fld"><label>Hero Image Alt Text</label><input id="jour-heroalt"></div>
         </div>
-        <div class="fld"><label>Body (paragraphs, separated by a blank line — a line starting with PQ:: renders as a pull-quote)</label>
-          <textarea id="jour-body" style="min-height:12rem" placeholder="First paragraph.&#10;&#10;Second paragraph.&#10;&#10;PQ::A short pull-quote.&#10;&#10;Closing paragraph."></textarea>
+        <img id="jour-hero-preview" alt="" hidden style="width:100%;max-width:22rem;border-radius:4px;margin-top:.5em;display:block;border:1px solid var(--hairline)">
+        <div class="fld">
+          <label>Body</label>
+          <p class="dash__hint">Paragraphs, separated by a blank line. A line can also be one of these block types instead of plain text:</p>
+          <p class="dash__hint"><code>PQ::A short pull-quote.</code> &#8212; a pull-quote<br>
+          <code>IMG::https://image-url|Alt text|Optional caption</code> &#8212; a full-width image in the body<br>
+          <code>VIDEO::dQw4w9WgXcQ</code> &#8212; a responsive YouTube embed (paste just the video ID, or a full youtube.com/watch or youtu.be link)</p>
+          <div class="card__row" style="margin-bottom:.5em">
+            <button type="button" class="btn-sm" id="jour-insert-img">+ Insert Image</button>
+            <button type="button" class="btn-sm" id="jour-insert-video">+ Insert Video</button>
+            <button type="button" class="btn-sm" id="jour-insert-pq">+ Insert Pull-quote</button>
+          </div>
+          <textarea id="jour-body" style="min-height:12rem" placeholder="First paragraph.&#10;&#10;Second paragraph.&#10;&#10;PQ::A short pull-quote.&#10;&#10;IMG::https://&#8230;|Alt text|Optional caption&#10;&#10;Closing paragraph."></textarea>
         </div>
         <div class="card__row"><button type="button" class="btn-sm" id="jour-save">Save Entry</button></div>
         <p class="dash__err" id="jour-err" hidden></p>
       </div>
 
       <p class="dash__loading" id="journal-loading">Loading&#8230;</p>
+      <div class="card__row" id="journal-filter" style="flex-wrap:wrap" hidden></div>
       <div id="journal-list"></div>
     </div>
 
@@ -449,6 +475,13 @@
       <div id="pitches-list"></div>
     </div>
 
+    <!-- NETWORK -->
+    <div class="dash__panel" id="panel-network">
+      <p class="body">People met in person &#8212; a city, an event, a venue &#8212; who submitted the Join the Network form on links.parispullen.com. Read-only here; the form itself is public and unauthenticated by design.</p>
+      <p class="dash__loading" id="network-loading">Loading&#8230;</p>
+      <div id="network-list"></div>
+    </div>
+
     <!-- WEBSITES -->
     <div class="dash__panel" id="panel-websites">
       <p class="body">Every site managed under this operation — a static reference, nothing here is editable.</p>
@@ -457,10 +490,17 @@
 
     <!-- CONTENT -->
     <div class="dash__panel" id="panel-content">
-      <p class="body">Wardrobe (Lookbook tab), Journal, Music, and Video are now genuinely live-editable from this dashboard — no rebuild step. Case Files and the Charlotte guide are still edited through the local Operator Console (run locally — it needs filesystem and build-script access this public dashboard can never have).</p>
+      <p class="body">Boutique (Lookbook tab), Journal, Music, and Video are now genuinely live-editable from this dashboard — no rebuild step. Case Files and the Charlotte guide are still edited through the local Operator Console (run locally — it needs filesystem and build-script access this public dashboard can never have).</p>
       <div class="card" style="margin-top:var(--s5)">
         <p class="card__title">Local Operator Console</p>
         <p class="card__body">On your machine: <code>node local-admin/server.js</code>, then open <code>local-admin/console.html</code>. Edits regenerate the real static pages via the existing <code>build_*.py</code> scripts — review the result, then deploy as usual.</p>
+      </div>
+      <div class="card" style="margin-top:var(--s5)">
+        <p class="card__title">Resources</p>
+        <p class="card__body">Reference docs and reports built alongside the site — not part of the codebase, just linked here so they're easy to find again.</p>
+        <ul style="margin:var(--s4) 0 0;padding:0;list-style:none;display:grid;gap:var(--s3)">
+          <li><a class="link-under" href="https://claude.ai/code/artifact/b1d9be71-9c45-458e-8cc3-4dfce932aee9" target="_blank" rel="noopener">The 50K Ledger</a> — Instagram growth system (30.9K&#8594;50K) &amp; The Journal channel plan</li>
+        </ul>
       </div>
     </div>
 
@@ -583,11 +623,12 @@
     loadClients();
     loadCurations();
     curWardrobeReady().then(function(){ curRenderCatFilter(); curRenderResults(''); });
-    loadJournalDash();
+    loadJourCategories().then(loadJournalDash);
     loadDispatchDash();
     loadMusicDash();
     loadVideoDash();
     loadPitchesDash();
+    loadNetworkDash();
     renderWebsitesDash();
   }
 
@@ -598,7 +639,7 @@
     var loading = document.getElementById('orders-loading');
     var list = document.getElementById('orders-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/orders?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/orders?passphraseHash=' + encodeURIComponent(storedHash))
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -650,7 +691,7 @@
     if (delBtn) {
       if (!armDelete(delBtn)) return;
       var invoiceId = delBtn.getAttribute('data-delete-order');
-      fetch('/.netlify/functions/orders?invoiceId=' + encodeURIComponent(invoiceId) + '&passphraseHash=' + encodeURIComponent(storedHash), {
+      fetch('/api/orders?invoiceId=' + encodeURIComponent(invoiceId) + '&passphraseHash=' + encodeURIComponent(storedHash), {
         method: 'DELETE'
       }).then(function(){ loadOrders(); });
     }
@@ -673,7 +714,7 @@
     };
     var btn = document.getElementById('ord-save');
     btn.disabled = true; btn.textContent = 'Saving…';
-    fetch('/.netlify/functions/orders', {
+    fetch('/api/orders', {
       method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
     }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
       .then(function(res){
@@ -698,7 +739,7 @@
     var loading = document.getElementById('invoices-loading');
     var list = document.getElementById('invoices-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/invoices?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/invoices?passphraseHash=' + encodeURIComponent(storedHash))
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -737,7 +778,7 @@
     var loading = document.getElementById('proposals-loading');
     var list = document.getElementById('proposals-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/proposals?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/proposals?passphraseHash=' + encodeURIComponent(storedHash))
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -800,7 +841,7 @@
     };
     var btn = document.getElementById('prop-save');
     btn.disabled = true; btn.textContent = 'Saving…';
-    fetch('/.netlify/functions/proposals', {
+    fetch('/api/proposals', {
       method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
     }).then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
       .then(function(res){
@@ -827,7 +868,7 @@
     var loading = document.getElementById('inquiries-loading');
     var list = document.getElementById('inquiries-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/inquiries?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/inquiries?passphraseHash=' + encodeURIComponent(storedHash))
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -853,7 +894,7 @@
     var loading = document.getElementById('clients-loading');
     var list = document.getElementById('clients-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/clients?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/clients?passphraseHash=' + encodeURIComponent(storedHash))
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -996,7 +1037,7 @@
     }
     var btn = document.getElementById('cur-save');
     btn.disabled = true; btn.textContent = 'Creating…';
-    fetch('/.netlify/functions/content?collection=curations', {
+    fetch('/api/content?collection=curations', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -1055,7 +1096,7 @@
     var loading = document.getElementById('curations-loading');
     var list = document.getElementById('curations-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/content?collection=curations')
+    fetch('/api/content?collection=curations')
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -1116,9 +1157,21 @@
   }
 
   // ================= JOURNAL =================
-  var JOUR_CATS = {automotive:'Automotive', style:'Style', business:'Business', tech:'Tech', music:'Music', film:'Film', gaming:'Gaming', life:'Life'};
+  // The ten categories build_journal.py bakes into every generated page's
+  // filter bar (see CATS there) -- the starting point every dashboard
+  // session merges 'journal-categories' overrides on top of. Kept in sync
+  // by hand with that Python list; nothing here changes the baked HTML
+  // itself, only what these two JS-driven surfaces show.
+  var JOUR_CATS_BASE = [
+    ['automotive','Motors'], ['style','Style'], ['timepiece','Timepiece'], ['business','Business'], ['tech','Tech'],
+    ['music','Music'], ['news','News'], ['film','Film'], ['gaming','Gaming'], ['art','Art'], ['sports','Sports'],
+    ['travel','Travel'], ['charlotte','Charlotte'],
+  ];
+  var JOUR_CATS = {}; // slug -> effective label (base, minus tombstones, plus overrides/additions) -- populated by loadJourCategories()
+  var JOUR_CAT_RECORDS = []; // raw journal-categories records, keyed by slug via jourCatOverride() below
   var JOUR_RESERVED_SLUGS = {'suit-system':1,'karma-automotive':1,'the-gentlemen':1,'gta-6-anticipation':1,'still-listening-to-iceman':1};
   var jourEditingId = null;
+  var jourEditingOrder = null; // preserves an existing entry's position across an edit; null = assign fresh (new entry, or a legacy one that never had one)
   var jourSlugManual = false;
 
   document.getElementById('jour-title').addEventListener('input', function(){
@@ -1128,59 +1181,326 @@
   document.getElementById('jour-slug').addEventListener('input', function(){ jourSlugManual = true; });
 
   function jourResetForm(){
-    jourEditingId = null; jourSlugManual = false;
+    jourEditingId = null; jourEditingOrder = null; jourSlugManual = false;
     ['jour-title','jour-slug','jour-stand','jour-heroimg','jour-heroalt','jour-body'].forEach(function(id){ document.getElementById(id).value = ''; });
     document.getElementById('jour-cat').value = 'style';
     document.getElementById('jour-read').value = '3 min read';
+    document.getElementById('jour-status').value = 'draft';
     document.getElementById('jour-save').textContent = 'Save Entry';
+    jourUpdateHeroPreview();
   }
+  function jourUpdateHeroPreview(){
+    var url = document.getElementById('jour-heroimg').value.trim();
+    var img = document.getElementById('jour-hero-preview');
+    if (url) { img.src = url; img.hidden = false; } else { img.hidden = true; img.src = ''; }
+  }
+  document.getElementById('jour-heroimg').addEventListener('input', jourUpdateHeroPreview);
+  document.getElementById('jour-hero-preview').addEventListener('error', function(){ this.hidden = true; });
+
+  // Insert-block helpers: prompt for the piece(s) that block type needs,
+  // then insert its shorthand at the textarea's current cursor position
+  // (falling back to the end if nothing's focused there), padded with
+  // blank lines so it always lands as its own paragraph regardless of
+  // what's typed around it.
+  function jourInsertAtCursor(text){
+    var ta = document.getElementById('jour-body');
+    var start = ta.selectionStart != null ? ta.selectionStart : ta.value.length;
+    var end = ta.selectionEnd != null ? ta.selectionEnd : ta.value.length;
+    var before = ta.value.slice(0, start);
+    var after = ta.value.slice(end);
+    var prefix = (before && !/\n\n$/.test(before)) ? (before.endsWith('\n') ? '\n' : '\n\n') : '';
+    var suffix = (after && !/^\n\n/.test(after)) ? (after.startsWith('\n') ? '\n' : '\n\n') : '';
+    var insert = prefix + text + suffix;
+    ta.value = before + insert + after;
+    var caret = (before + insert).length;
+    ta.focus();
+    ta.setSelectionRange(caret, caret);
+  }
+  document.getElementById('jour-insert-img').addEventListener('click', function(){
+    var url = window.prompt('Image URL:');
+    if (!url) return;
+    var alt = window.prompt('Alt text (describes the image):') || '';
+    var caption = window.prompt('Caption (optional, shown under the image):') || '';
+    jourInsertAtCursor('IMG::' + url.trim() + '|' + alt.trim() + '|' + caption.trim());
+  });
+  document.getElementById('jour-insert-video').addEventListener('click', function(){
+    var v = window.prompt('YouTube video ID, or a full youtube.com/watch or youtu.be link:');
+    if (!v) return;
+    var m = v.match(/(?:youtu\.be\/|watch\?v=|embed\/)([\w-]{6,})/);
+    jourInsertAtCursor('VIDEO::' + (m ? m[1] : v.trim()));
+  });
+  document.getElementById('jour-insert-pq').addEventListener('click', function(){
+    var q = window.prompt('Pull-quote text:');
+    if (!q) return;
+    jourInsertAtCursor('PQ::' + q.trim());
+  });
+  function jourOrderOf(p){ return p && p.order != null ? p.order : (p && p.createdAt) || 0; }
+
+  function jourCatOverride(slug){ return JOUR_CAT_RECORDS.filter(function(r){ return r && r.slug === slug; })[0]; }
+
+  function renderJourCatSelect(order){
+    var sel = document.getElementById('jour-cat');
+    var prev = sel.value;
+    sel.innerHTML = order.map(function(o){ return '<option value="' + esc(o.slug) + '">' + esc(o.label) + '</option>'; }).join('');
+    if (order.some(function(o){ return o.slug === prev; })) sel.value = prev;
+  }
+
+  function renderJourCatsList(order){
+    var list = document.getElementById('jour-cats-list');
+    list.innerHTML = order.map(function(o){
+      var rowId = 'jourcat-' + o.slug.replace(/[^a-z0-9]/gi, '');
+      return '<div class="card__row" style="align-items:center">' +
+        '<input type="text" id="' + rowId + '" value="' + esc(o.label) + '" data-slug="' + esc(o.slug) + '" data-base="' + (o.base ? '1' : '0') + '" style="flex:1 1 auto">' +
+        '<button type="button" class="btn-sm" data-cat-save="' + rowId + '">Save</button>' +
+        '<button type="button" class="btn-sm" data-cat-delete="' + rowId + '">Delete</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  // Rebuilds JOUR_CATS (the effective, currently-in-force slug->label map
+  // used everywhere else in this panel) from JOUR_CATS_BASE plus whatever's
+  // in the 'journal-categories' collection, then re-renders both surfaces
+  // that depend on it -- the manager list below and the New Entry form's
+  // Category <select>. Mirrors journal.js's own merge exactly, so a base
+  // category's override/tombstone here is what visitors see there too.
+  function loadJourCategories(){
+    return fetch('/api/content?collection=journal-categories')
+      .then(function(r){ return r.json(); })
+      .catch(function(){ return { records: [] }; }) // API unreachable (e.g. local static preview with no Functions runtime) -- fall back to just the base ten rather than leaving the form empty
+      .then(function(data){
+        JOUR_CAT_RECORDS = (data && data.records) || [];
+        var bySlug = {};
+        JOUR_CAT_RECORDS.forEach(function(o){ if (o && o.slug) bySlug[o.slug] = o; });
+
+        JOUR_CATS = {};
+        var order = [];
+        JOUR_CATS_BASE.forEach(function(pair){
+          var slug = pair[0], label = pair[1];
+          var o = bySlug[slug];
+          if (o && o.deleted) return;
+          if (o && o.label) label = o.label;
+          JOUR_CATS[slug] = label;
+          order.push({slug: slug, label: label, base: true});
+        });
+        JOUR_CAT_RECORDS.forEach(function(o){
+          if (!o || !o.slug || o.deleted || JOUR_CATS[o.slug] !== undefined) return;
+          JOUR_CATS[o.slug] = o.label || o.slug;
+          order.push({slug: o.slug, label: o.label || o.slug, base: false});
+        });
+
+        renderJourCatsList(order);
+        renderJourCatSelect(order);
+      });
+  }
+
+  document.getElementById('jour-cats-list').addEventListener('click', function(e){
+    var err = document.getElementById('jour-cats-err');
+    err.hidden = true;
+    var saveBtn = e.target.closest('[data-cat-save]');
+    if (saveBtn) {
+      var input = document.getElementById(saveBtn.getAttribute('data-cat-save'));
+      var slug = input.dataset.slug, label = input.value.trim();
+      if (!label) return;
+      var existing = jourCatOverride(slug);
+      authedFetch('/api/content?collection=journal-categories', {method:'POST', body: JSON.stringify({
+        passphraseHash: storedHash, id: existing ? existing.id : undefined,
+        data: {slug: slug, label: label},
+      })}).then(function(res){
+        if (!res.ok) { err.textContent = res.data.error || 'Could not save.'; err.hidden = false; return; }
+        loadJourCategories();
+      });
+      return;
+    }
+    var delBtn = e.target.closest('[data-cat-delete]');
+    if (delBtn) {
+      var input2 = document.getElementById(delBtn.getAttribute('data-cat-delete'));
+      if (!armDelete(delBtn)) return;
+      var slug2 = input2.dataset.slug, isBase = input2.dataset.base === '1';
+      var existing2 = jourCatOverride(slug2);
+      if (isBase) {
+        // A build_journal.py-baked category can't be un-baked -- write a
+        // tombstone override instead; journal.js (and the merge above)
+        // both know to hide any slug marked deleted:true.
+        authedFetch('/api/content?collection=journal-categories', {method:'POST', body: JSON.stringify({
+          passphraseHash: storedHash, id: existing2 ? existing2.id : undefined,
+          data: {slug: slug2, deleted: true},
+        })}).then(function(){ loadJourCategories(); });
+      } else if (existing2) {
+        fetch('/api/content?collection=journal-categories&id=' + encodeURIComponent(existing2.id) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+          .then(function(){ loadJourCategories(); });
+      }
+    }
+  });
+
+  document.getElementById('jour-cats-add').addEventListener('click', function(){
+    var input = document.getElementById('jour-cats-new');
+    var err = document.getElementById('jour-cats-err');
+    err.hidden = true;
+    var label = input.value.trim();
+    if (!label) return;
+    var slug = slugify(label);
+    if (JOUR_CATS[slug] !== undefined) { err.textContent = 'A category with that name already exists.'; err.hidden = false; return; }
+    authedFetch('/api/content?collection=journal-categories', {method:'POST', body: JSON.stringify({
+      passphraseHash: storedHash, data: {slug: slug, label: label},
+    })}).then(function(res){
+      if (!res.ok) { err.textContent = res.data.error || 'Could not add.'; err.hidden = false; return; }
+      input.value = '';
+      loadJourCategories();
+    });
+  });
+
+  var jourActiveCat = 'all'; // 'all' or a category slug -- which filter button is selected
 
   function loadJournalDash(){
     var loading = document.getElementById('journal-loading');
     var list = document.getElementById('journal-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/content?collection=journal')
+    fetch('/api/content?collection=journal')
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
-        var posts = (data.records || []).sort(function(a,b){ return (b.createdAt||0) - (a.createdAt||0); });
-        if (!posts.length) { list.innerHTML = '<p class="dash__empty">No dashboard-authored entries yet. The five original posts are static and aren’t managed here.</p>'; return; }
-        list.innerHTML = posts.map(function(p){
-          var link = 'journal-post.html?slug=' + encodeURIComponent(p.slug || '');
-          return '<div class="card">' +
-            '<div class="card__top">' +
-              '<span class="card__title">' + esc(p.title || 'Untitled') + '</span>' +
-              '<span class="badge badge--brass">' + esc(JOUR_CATS[p.cat] || p.cat || '') + '</span>' +
-            '</div>' +
-            '<p class="card__meta">/' + esc(p.slug || '') + ' &#183; ' + esc(p.read || '') + ' &#183; ' + fmtDate(p.createdAt) + '</p>' +
-            '<div class="card__body">' + esc(p.stand || '') + '</div>' +
-            '<div class="card__row">' +
-              '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(link) + '" target="_blank" rel="noopener">View Live</a>' +
-              '<button type="button" class="btn-sm" data-edit-jour="' + esc(p.id) + '">Edit</button>' +
-              '<button type="button" class="btn-sm" data-delete-jour="' + esc(p.id) + '">Delete</button>' +
-            '</div>' +
-          '</div>';
-        }).join('');
+        // Highest order (or, for a legacy record that predates the order
+        // field, createdAt) first -- this is also the order the public
+        // Journal renders these in (see assets/js/journal.js), so what's
+        // on top here is what's on top there. This full, globally-ordered
+        // list is what Move Up/Down always operates on, regardless of
+        // which category filter is currently selected below.
+        var posts = (data.records || []).sort(function(a,b){ return jourOrderOf(b) - jourOrderOf(a); });
         list.dataset.records = JSON.stringify(posts);
+        if (jourActiveCat !== 'all' && !posts.some(function(p){ return p.cat === jourActiveCat; })) jourActiveCat = 'all';
+        renderJourFilter(posts);
+        renderJournalList(posts);
       })
       .catch(function(){ loading.textContent = 'Could not load journal entries.'; });
   }
 
+  // Builds the "All (N) / Automotive (3) / Style (5) / ..." filter row above
+  // the list, in the same category order the site's own filter bar uses
+  // (JOUR_CATS_BASE order, then any custom categories), skipping categories
+  // with zero dashboard-authored entries so the row doesn't fill up with
+  // buttons that would just show an empty list.
+  function renderJourFilter(posts){
+    var bar = document.getElementById('journal-filter');
+    if (posts.length <= 1) { bar.hidden = true; bar.innerHTML = ''; return; }
+    var counts = {};
+    posts.forEach(function(p){ var c = p.cat || ''; counts[c] = (counts[c] || 0) + 1; });
+    var slugs = Object.keys(counts);
+    if (slugs.length <= 1) { bar.hidden = true; bar.innerHTML = ''; return; }
+    var known = JOUR_CATS_BASE.map(function(pair){ return pair[0]; }).filter(function(s){ return counts[s]; });
+    var extra = slugs.filter(function(s){ return known.indexOf(s) === -1; }).sort();
+    var ordered = known.concat(extra);
+    bar.hidden = false;
+    bar.innerHTML = '<button type="button" class="btn-sm' + (jourActiveCat === 'all' ? ' is-on' : '') + '" data-jour-filter="all">All (' + posts.length + ')</button>' +
+      ordered.map(function(slug){
+        var label = JOUR_CATS[slug] || slug;
+        return '<button type="button" class="btn-sm' + (jourActiveCat === slug ? ' is-on' : '') + '" data-jour-filter="' + esc(slug) + '">' +
+          esc(label) + ' (' + counts[slug] + ')</button>';
+      }).join('');
+  }
+
+  // Renders the (possibly filtered) card list. `posts` is always the full,
+  // globally order-sorted array -- Move Up/Down's enabled/disabled state
+  // and swap logic are computed against each card's position in that full
+  // list, not its position within the current category filter, so a move
+  // always reflects (and never fights) the same order the public Journal
+  // renders these entries in.
+  function renderJournalList(posts){
+    var list = document.getElementById('journal-list');
+    if (!posts.length) { list.innerHTML = '<p class="dash__empty">No dashboard-authored entries yet. The five original posts are static and aren’t managed here.</p>'; return; }
+    var visible = jourActiveCat === 'all' ? posts : posts.filter(function(p){ return p.cat === jourActiveCat; });
+    if (!visible.length) { list.innerHTML = '<p class="dash__empty">No entries in this category yet.</p>'; return; }
+    var showHeaders = jourActiveCat === 'all';
+    var html = [];
+    var lastCat = null;
+    visible.forEach(function(p){
+      if (showHeaders && p.cat !== lastCat) {
+        lastCat = p.cat;
+        html.push('<p class="eyebrow" style="margin-top:var(--s6)">' + esc(JOUR_CATS[p.cat] || p.cat || 'Uncategorized') + '</p>');
+      }
+      var i = posts.indexOf(p); // position in the full, globally-ordered list
+      var link = 'journal-post.html?slug=' + encodeURIComponent(p.slug || '');
+      var isDraft = p.status === 'draft';
+      var heroUrl = p.hero && p.hero.url;
+      var bodyArr = Array.isArray(p.body) ? p.body : [];
+      var imgCount = bodyArr.filter(function(b){ return typeof b === 'string' && b.indexOf('IMG::') === 0; }).length;
+      var vidCount = bodyArr.filter(function(b){ return typeof b === 'string' && b.indexOf('VIDEO::') === 0; }).length;
+      var mediaBits = [];
+      if (heroUrl) mediaBits.push('1 hero');
+      if (imgCount) mediaBits.push(imgCount + ' image' + (imgCount === 1 ? '' : 's'));
+      if (vidCount) mediaBits.push(vidCount + ' video' + (vidCount === 1 ? '' : 's'));
+      html.push('<div class="card">' +
+        (heroUrl ? '<img class="card__thumb" src="' + esc(heroUrl) + '" alt="" loading="lazy">' : '') +
+        '<div class="card__top">' +
+          '<span class="card__title">' + esc(p.title || 'Untitled') + '</span>' +
+          '<span class="badge' + (isDraft ? '' : ' badge--brass') + '">' + (isDraft ? 'Draft' : 'Published') + '</span>' +
+          '<span class="badge badge--brass">' + esc(JOUR_CATS[p.cat] || p.cat || '') + '</span>' +
+        '</div>' +
+        '<p class="card__meta">/' + esc(p.slug || '') + ' &#183; ' + esc(p.read || '') + ' &#183; ' + fmtDate(p.createdAt) +
+          (mediaBits.length ? ' &#183; ' + esc(mediaBits.join(', ')) : ' &#183; no media yet') + '</p>' +
+        '<div class="card__body">' + esc(p.stand || '') + '</div>' +
+        '<div class="card__row">' +
+          '<button type="button" class="btn-sm" data-move-jour="up" data-jour-id="' + esc(p.id) + '"' + (i === 0 ? ' disabled' : '') + '>&#8593; Move Up</button>' +
+          '<button type="button" class="btn-sm" data-move-jour="down" data-jour-id="' + esc(p.id) + '"' + (i === posts.length - 1 ? ' disabled' : '') + '>&#8595; Move Down</button>' +
+          '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="' + esc(link) + '" target="_blank" rel="noopener">View Live</a>' +
+          '<button type="button" class="btn-sm" data-edit-jour="' + esc(p.id) + '">Edit</button>' +
+          '<button type="button" class="btn-sm" data-delete-jour="' + esc(p.id) + '">Delete</button>' +
+        '</div>' +
+      '</div>');
+    });
+    list.innerHTML = html.join('');
+  }
+
+  document.getElementById('journal-filter').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-jour-filter]');
+    if (!btn) return;
+    jourActiveCat = btn.getAttribute('data-jour-filter');
+    var posts = JSON.parse(document.getElementById('journal-list').dataset.records || '[]');
+    renderJourFilter(posts);
+    renderJournalList(posts);
+  });
+
+  // Persists one record's current field set as-is (content.js's POST fully
+  // replaces the stored record with payload.data, so this always sends the
+  // complete object it was handed -- never a partial patch).
+  function jourSaveRecord(p){
+    return authedFetch('/api/content?collection=journal', {method:'POST', body: JSON.stringify({passphraseHash: storedHash, id: p.id, data: p})});
+  }
+
   document.getElementById('journal-list').addEventListener('click', function(e){
+    var moveBtn = e.target.closest('[data-move-jour]');
+    if (moveBtn) {
+      moveBtn.disabled = true;
+      var records = JSON.parse(document.getElementById('journal-list').dataset.records || '[]'); // already order-sorted by loadJournalDash
+      var id = moveBtn.getAttribute('data-jour-id');
+      var i = records.findIndex(function(r){ return r.id === id; });
+      var j = moveBtn.getAttribute('data-move-jour') === 'up' ? i - 1 : i + 1;
+      if (i < 0 || j < 0 || j >= records.length) return;
+      var a = records[i], b = records[j];
+      // Swapping their order values is enough to flip their positions on
+      // the next load/render -- and, since every record here gets a
+      // concrete value from jourOrderOf either way, this also quietly
+      // promotes a legacy (order-less) record the first time it's touched.
+      var aOrder = jourOrderOf(a), bOrder = jourOrderOf(b);
+      a.order = bOrder; b.order = aOrder;
+      Promise.all([jourSaveRecord(a), jourSaveRecord(b)]).then(function(){ loadJournalDash(); });
+      return;
+    }
     var editBtn = e.target.closest('[data-edit-jour]');
     if (editBtn) {
       var records = JSON.parse(document.getElementById('journal-list').dataset.records || '[]');
       var p = records.filter(function(r){ return r.id === editBtn.getAttribute('data-edit-jour'); })[0];
       if (!p) return;
-      jourEditingId = p.id; jourSlugManual = true;
+      jourEditingId = p.id; jourEditingOrder = p.order != null ? p.order : null; jourSlugManual = true;
       document.getElementById('jour-title').value = p.title || '';
       document.getElementById('jour-slug').value = p.slug || '';
       document.getElementById('jour-cat').value = p.cat || 'style';
       document.getElementById('jour-read').value = p.read || '';
+      document.getElementById('jour-status').value = p.status === 'draft' ? 'draft' : 'published';
       document.getElementById('jour-stand').value = p.stand || '';
       document.getElementById('jour-heroimg').value = (p.hero && p.hero.url) || '';
       document.getElementById('jour-heroalt').value = (p.hero && p.hero.alt) || '';
       document.getElementById('jour-body').value = (p.body || []).join('\n\n');
+      jourUpdateHeroPreview();
       document.getElementById('jour-save').textContent = 'Update Entry';
       document.getElementById('jour-newform').scrollIntoView({behavior:'smooth', block:'center'});
       return;
@@ -1188,7 +1508,7 @@
     var delBtn = e.target.closest('[data-delete-jour]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/.netlify/functions/content?collection=journal&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-jour')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=journal&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-jour')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
         .then(function(){ loadJournalDash(); });
     }
   });
@@ -1211,6 +1531,8 @@
         cat: cat,
         catlabel: JOUR_CATS[cat] || cat,
         read: document.getElementById('jour-read').value.trim() || '3 min read',
+        status: document.getElementById('jour-status').value,
+        order: jourEditingOrder != null ? jourEditingOrder : Date.now(),
         title: title,
         stand: document.getElementById('jour-stand').value.trim(),
         hero: { url: document.getElementById('jour-heroimg').value.trim(), alt: document.getElementById('jour-heroalt').value.trim() },
@@ -1219,7 +1541,7 @@
     };
     var btn = document.getElementById('jour-save');
     btn.disabled = true; btn.textContent = 'Saving…';
-    authedFetch('/.netlify/functions/content?collection=journal', {method:'POST', body: JSON.stringify(payload)})
+    authedFetch('/api/content?collection=journal', {method:'POST', body: JSON.stringify(payload)})
       .then(function(res){
         btn.disabled = false;
         if (!res.ok) { btn.textContent = jourEditingId ? 'Update Entry' : 'Save Entry'; err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
@@ -1269,7 +1591,7 @@
     var loading = document.getElementById('dispatch-loading');
     var list = document.getElementById('dispatch-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/content?collection=dispatch-briefs')
+    fetch('/api/content?collection=dispatch-briefs')
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -1319,7 +1641,7 @@
     var delBtn = e.target.closest('[data-delete-disp]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/.netlify/functions/content?collection=dispatch-briefs&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-disp')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=dispatch-briefs&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-disp')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
         .then(function(){ loadDispatchDash(); });
     }
   });
@@ -1345,7 +1667,7 @@
     };
     var btn = document.getElementById('disp-save');
     btn.disabled = true; btn.textContent = 'Saving…';
-    authedFetch('/.netlify/functions/content?collection=dispatch-briefs', {method:'POST', body: JSON.stringify(payload)})
+    authedFetch('/api/content?collection=dispatch-briefs', {method:'POST', body: JSON.stringify(payload)})
       .then(function(res){
         btn.disabled = false;
         if (!res.ok) { btn.textContent = dispEditingId ? 'Update Brief' : 'Submit to Archive'; err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
@@ -1387,7 +1709,7 @@
     var loading = document.getElementById('music-loading');
     var list = document.getElementById('music-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/content?collection=playlists')
+    fetch('/api/content?collection=playlists')
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -1402,14 +1724,14 @@
   }
 
   function musicSaveRecord(id, data){
-    return authedFetch('/.netlify/functions/content?collection=playlists', {method:'POST', body: JSON.stringify({passphraseHash: storedHash, id: id, data: data})});
+    return authedFetch('/api/content?collection=playlists', {method:'POST', body: JSON.stringify({passphraseHash: storedHash, id: id, data: data})});
   }
 
   document.getElementById('music-list').addEventListener('click', function(e){
     var delBtn = e.target.closest('[data-delete-music]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/.netlify/functions/content?collection=playlists&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-music')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=playlists&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-music')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
         .then(function(){ loadMusicDash(); });
       return;
     }
@@ -1441,7 +1763,7 @@
     var nextOrder = musicRecords.length ? Math.max.apply(null, musicRecords.map(function(r){ return typeof r.order === 'number' ? r.order : 0; })) + 1 : 0;
     var btn = document.getElementById('music-save');
     btn.disabled = true; btn.textContent = 'Adding…';
-    authedFetch('/.netlify/functions/content?collection=playlists', {method:'POST', body: JSON.stringify({
+    authedFetch('/api/content?collection=playlists', {method:'POST', body: JSON.stringify({
       passphraseHash: storedHash,
       data: { type: type, spotifyId: parsed.id, label: label, order: nextOrder }
     })}).then(function(res){
@@ -1498,7 +1820,7 @@
   function loadVideoDash(){
     var loading = document.getElementById('video-loading');
     loading.hidden = false;
-    fetch('/.netlify/functions/content?collection=channels&id=main')
+    fetch('/api/content?collection=channels&id=main')
       .then(function(r){ if (!r.ok) throw new Error('not found'); return r.json(); })
       .then(function(data){
         var hasAny = data && Object.keys(data).some(function(k){ return Array.isArray(data[k]) && data[k].length; });
@@ -1517,7 +1839,7 @@
   }
 
   function videoPersist(){
-    return authedFetch('/.netlify/functions/content?collection=channels', {method:'POST', body: JSON.stringify({
+    return authedFetch('/api/content?collection=channels', {method:'POST', body: JSON.stringify({
       passphraseHash: storedHash, id: 'main', data: videoData
     })}).then(function(res){
       if (res.ok) videoIsLive = true;
@@ -1589,7 +1911,7 @@
     var loading = document.getElementById('pitches-loading');
     var list = document.getElementById('pitches-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/.netlify/functions/content?collection=pitches')
+    fetch('/api/content?collection=pitches')
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -1635,7 +1957,7 @@
     var delBtn = e.target.closest('[data-delete-pitch]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/.netlify/functions/content?collection=pitches&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-pitch')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=pitches&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-pitch')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
         .then(function(){ loadPitchesDash(); });
     }
   });
@@ -1659,7 +1981,7 @@
     };
     var btn = document.getElementById('pitch-save');
     btn.disabled = true; btn.textContent = 'Saving…';
-    authedFetch('/.netlify/functions/content?collection=pitches', {method:'POST', body: JSON.stringify(payload)})
+    authedFetch('/api/content?collection=pitches', {method:'POST', body: JSON.stringify(payload)})
       .then(function(res){
         btn.disabled = false;
         if (!res.ok) { btn.textContent = pitchEditingId ? 'Update Pitch' : 'Save Pitch'; err.textContent = res.data.error || 'Failed to save.'; err.hidden = false; return; }
@@ -1667,6 +1989,47 @@
         loadPitchesDash();
       })
       .catch(function(){ btn.disabled = false; btn.textContent = pitchEditingId ? 'Update Pitch' : 'Save Pitch'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
+  });
+
+  // ================= NETWORK =================
+  // Read-only: records come in through the public, unauthenticated POST on
+  // /api/network (the Join the Network form on links.parispullen.com) --
+  // this dashboard only ever lists and deletes, it never writes a record.
+  function loadNetworkDash(){
+    var loading = document.getElementById('network-loading');
+    var list = document.getElementById('network-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/api/network?passphraseHash=' + encodeURIComponent(storedHash))
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var records = (data.records || []).sort(function(a,b){ return (b.createdAt||0) - (a.createdAt||0); });
+        if (!records.length) { list.innerHTML = '<p class="dash__empty">No one has joined the network yet.</p>'; return; }
+        list.innerHTML = records.map(function(p){
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(p.firstName || '') + ' ' + esc(p.lastName || '') + '</span>' +
+              '<span class="card__meta">' + fmtDate(p.createdAt) + '</span>' +
+            '</div>' +
+            '<p class="card__meta">' +
+              (p.phone ? esc(p.phone) : '') + (p.phone && p.email ? ' &#183; ' : '') + (p.email ? esc(p.email) : '') +
+              (p.city ? ' &#183; ' + esc(p.city) : '') +
+            '</p>' +
+            '<div class="card__row">' +
+              '<button type="button" class="btn-sm" data-delete-net="' + esc(p.id) + '">Delete</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.hidden = false; loading.textContent = 'Could not load the network.'; });
+  }
+
+  document.getElementById('network-list').addEventListener('click', function(e){
+    var delBtn = e.target.closest('[data-delete-net]');
+    if (!delBtn) return;
+    if (!armDelete(delBtn)) return;
+    fetch('/api/network?id=' + encodeURIComponent(delBtn.getAttribute('data-delete-net')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      .then(function(){ loadNetworkDash(); });
   });
 
   // ================= WEBSITES =================

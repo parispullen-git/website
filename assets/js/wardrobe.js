@@ -1,5 +1,5 @@
 /* ============================================================
-   The Wardrobe — filter, quick view, and the inquiry list.
+   The Boutique — filter, quick view, and the inquiry list.
    Selections persist in localStorage. Sending an inquiry opens a
    pre-filled mailto: to hello@parispullen.com -- there is no backend,
    same pattern as the vault's reserve list.
@@ -158,13 +158,23 @@
     tray.setAttribute('aria-hidden', ids.length > 0 ? 'false' : 'true');
   }
 
-  function setSelected(id, on, size) {
+  // Combined "40R, 34″ waist" label for wherever a selection needs to
+  // read back as one string -- falls back gracefully if only one is set.
+  function sizeLabel(s) {
+    var parts = [];
+    if (s.size) parts.push(s.size);
+    if (s.waist) parts.push(s.waist + ' waist');
+    return parts.join(', ');
+  }
+
+  function setSelected(id, on, size, waist) {
     var card = cardById(id);
     if (on) {
       selected[id] = {
         name: card.dataset.name, color: card.dataset.color,
         price: card.dataset.price, cat: card.dataset.catlabel,
-        size: size || (selected[id] ? selected[id].size : '')
+        size: size || (selected[id] ? selected[id].size : ''),
+        waist: waist || (selected[id] ? selected[id].waist : '')
       };
     } else {
       delete selected[id];
@@ -213,6 +223,7 @@
   var qPrice   = document.getElementById('wquick-price');
   var qNote    = document.getElementById('wquick-note');
   var qSizes   = document.getElementById('wquick-sizes');
+  var qWaist   = document.getElementById('wquick-waist');
   var addBtn   = document.getElementById('wquick-add');
   var quickId  = null;
 
@@ -252,6 +263,10 @@
     Array.prototype.forEach.call(qSizes.querySelectorAll('button'), function (b) {
       b.classList.toggle('is-on', b.dataset.size === picked);
     });
+    var pickedWaist = selected[quickId] ? selected[quickId].waist : '';
+    Array.prototype.forEach.call(qWaist.querySelectorAll('button'), function (b) {
+      b.classList.toggle('is-on', b.dataset.waist === pickedWaist);
+    });
 
     var isSel = !!selected[quickId];
     addBtn.classList.toggle('is-selected', isSel);
@@ -289,10 +304,24 @@
     }
   });
 
+  qWaist.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-waist]');
+    if (!b) return;
+    var on = !b.classList.contains('is-on');
+    Array.prototype.forEach.call(qWaist.querySelectorAll('button'), function (x) {
+      x.classList.toggle('is-on', x === b && on);
+    });
+    if (selected[quickId]) {
+      selected[quickId].waist = on ? b.dataset.waist : '';
+      persist();
+    }
+  });
+
   addBtn.addEventListener('click', function () {
     if (!quickId) return;
     var pickedBtn = qSizes.querySelector('button.is-on');
-    setSelected(quickId, !selected[quickId], pickedBtn ? pickedBtn.dataset.size : '');
+    var pickedWaistBtn = qWaist.querySelector('button.is-on');
+    setSelected(quickId, !selected[quickId], pickedBtn ? pickedBtn.dataset.size : '', pickedWaistBtn ? pickedWaistBtn.dataset.waist : '');
   });
 
   /* ---------- tray actions ---------- */
@@ -328,7 +357,7 @@
         return '<label class="winquiry__item">' +
                  '<input type="checkbox" value="' + id + '" checked>' +
                  '<span><b>' + s.name + '</b><br><small>' + s.color +
-                 (s.size ? ' · ' + s.size : ' · size TBD') + ' · $' +
+                 (sizeLabel(s) ? ' · ' + sizeLabel(s) : ' · size TBD') + ' · $' +
                  Number(s.price).toLocaleString() + '</small></span>' +
                '</label>';
       }).join('');
@@ -383,7 +412,7 @@
 
     var lines = ids.map(function (id) {
       var s = selected[id];
-      return '- ' + s.name + ' (' + s.color + (s.size ? ', size ' + s.size : ', size TBD') +
+      return '- ' + s.name + ' (' + s.color + (sizeLabel(s) ? ', ' + sizeLabel(s) : ', size TBD') +
              ') $' + Number(s.price).toLocaleString();
     });
 
@@ -393,20 +422,20 @@
       (phone ? 'Phone: ' + phone + '\n' : '') +
       '\nPieces of interest:\n' + lines.join('\n') +
       (notes ? '\n\nNotes:\n' + notes : '') +
-      '\n\n(Sent from the Wardrobe on parispullen.com)';
+      '\n\n(Sent from the Boutique on parispullen.com)';
 
-    var subject = encodeURIComponent('The Wardrobe — inquiry (' + ids.length + ' piece' + (ids.length === 1 ? '' : 's') + ')');
+    var subject = encodeURIComponent('The Boutique — inquiry (' + ids.length + ' piece' + (ids.length === 1 ? '' : 's') + ')');
     window.location.href = 'mailto:' + INQUIRY_EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(body);
 
     try {
-      fetch('/.netlify/functions/inquiries', {
+      fetch('/api/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: name, email: email, phone: phone, notes: notes,
           items: ids.map(function (id) {
             var s = selected[id];
-            return { name: s.name, color: s.color, size: s.size || '', price: s.price };
+            return { name: s.name, color: s.color, size: s.size || '', waist: s.waist || '', price: s.price };
           }),
         }),
       }).catch(function () {});
@@ -435,7 +464,7 @@
       var s = selected[id];
       return '<div class="winquiry__item">' +
                '<span><b>' + s.name + '</b><br><small>' + s.color +
-               (s.size ? ' · ' + s.size : ' · size TBD') + ' · $' +
+               (sizeLabel(s) ? ' · ' + sizeLabel(s) : ' · size TBD') + ' · $' +
                Number(s.price).toLocaleString() + '</small></span>' +
              '</div>';
     }).join('');
@@ -476,17 +505,17 @@
 
     var lines = ids.map(function (id) {
       var s = selected[id];
-      return '- ' + s.name + ' (' + s.color + (s.size ? ', size ' + s.size : '') +
+      return '- ' + s.name + ' (' + s.color + (sizeLabel(s) ? ', ' + sizeLabel(s) : '') +
              ') $' + Number(s.price).toLocaleString();
     });
 
     var body =
       (note ? note + '\n\n' : '') +
-      'A few pieces from The Wardrobe:\n\n' + lines.join('\n') +
+      'A few pieces from The Boutique:\n\n' + lines.join('\n') +
       '\n\nBrowse the full lookbook: https://www.parispullen.com/wardrobe.html' +
-      '\n\n' + (fromName ? '— ' + fromName : '— Sent from The Wardrobe on parispullen.com');
+      '\n\n' + (fromName ? '— ' + fromName : '— Sent from The Boutique on parispullen.com');
 
-    var subject = encodeURIComponent('A few pieces from The Wardrobe' + (fromName ? ' — ' + fromName : ''));
+    var subject = encodeURIComponent('A few pieces from The Boutique' + (fromName ? ' — ' + fromName : ''));
     window.location.href = 'mailto:' + toEmail + '?subject=' + subject + '&body=' + encodeURIComponent(body);
 
     shareForm.hidden = true;

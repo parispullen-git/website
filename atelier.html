@@ -344,7 +344,7 @@ var WARDROBE_ITEMS = [{"n":"The Abernathy — Black","p":1150},{"n":"The Abernat
     submitBtn.querySelector('span').textContent = 'Creating…';
 
     try {
-      var res = await fetch('/.netlify/functions/create-invoice', {
+      var res = await fetch('/api/create-invoice', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

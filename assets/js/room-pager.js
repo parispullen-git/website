@@ -104,25 +104,31 @@
       document.dispatchEvent(new CustomEvent('pp:room-change', { detail: { id: rooms[i].id } }));
     }
 
-    // The room's own photo pans wider than the viewport at every
-    // breakpoint (see .floor-scene__canvas in world.css: 130% on desktop,
-    // a fixed 860px on mobile) and starts scrolled to its left edge by
-    // default -- center it instead, so arriving at a room (on load, or
-    // after paging to it) shows the middle of the composition (and
-    // anything positioned near its center, like a TV screen) first rather
-    // than whatever's cropped in at the far left.
+    // The room's own photo pans wider than the viewport (130%, see
+    // .floor-scene__canvas in world.css) and starts scrolled to its left
+    // edge by default -- center it instead, so arriving at a room (on
+    // load, or after paging to it) shows the middle of the composition
+    // first rather than whatever's cropped in at the far left.
+    //
+    // Measures canvas's own rendered width, not surface.scrollWidth: an
+    // absolutely positioned child (the TV screen box, an artifact marker
+    // near a corner) can render slightly past canvas's own right edge,
+    // which inflates scrollWidth without actually being intentional
+    // pannable width -- centering against that instead of canvas's real
+    // width once shifted every room sideways for no visual reason.
     function centerSurface(room) {
       var surface = room && room.querySelector('.floor-scene__surface');
-      if (!surface) return;
+      var canvas = room && room.querySelector('.floor-scene__canvas');
+      if (!surface || !canvas) return;
       // A single rAF ("wait for the next layout pass") isn't reliably
-      // enough on a cold load: scrollWidth/clientWidth can both still read
-      // 0 at that point even once the image itself reports complete=true
-      // (layout hasn't caught up yet), so a single attempt can silently
-      // no-op. Retry across a bounded run of frames instead of guessing
-      // which single signal (image load, one rAF, etc.) is late.
+      // enough on a cold load: widths can still read 0 at that point even
+      // once the image itself reports complete=true (layout hasn't caught
+      // up yet), so a single attempt can silently no-op. Retry across a
+      // bounded run of frames instead of guessing which single signal
+      // (image load, one rAF, etc.) is late.
       var tries = 0;
       (function attempt() {
-        var max = surface.scrollWidth - surface.clientWidth;
+        var max = canvas.getBoundingClientRect().width - surface.clientWidth;
         if (max > 0) { surface.scrollLeft = max / 2; return; }
         if (++tries < 60) requestAnimationFrame(attempt); // ~1s ceiling at 60fps
       })();
@@ -153,6 +159,76 @@
       if (pagerRoot.scrollLeft !== 0) pagerRoot.scrollLeft = 0;
     }, { passive: true });
 
+    // A floor-to-floor move (up/down -- e.g. the Living Room's own ceiling
+    // opening onto the Bedroom above it) reads as climbing a level, not
+    // stepping sideways to the next room, so it gets its own vertical
+    // slide instead of the shared left/right filmstrip's translateX.
+    // Left/right (prev/next, wheel, drag, hash landing, menu links) are
+    // untouched -- they still just call scrollToIndex directly below.
+    function verticalTransition(idx, dir) {
+      var fromRoom = rooms[current];
+      var toRoom = rooms[idx];
+      if (reduced || !fromRoom || !toRoom || fromRoom === toRoom) { scrollToIndex(idx, 'start'); return; }
+
+      // 'up': toRoom is a level above -- it rises in from the bottom edge
+      // while fromRoom exits off the top. 'down' is the mirror.
+      var enterFrom = dir === 'up' ? '100%' : '-100%';
+      var exitTo    = dir === 'up' ? '-100%' : '100%';
+
+      // toRoom sits inside .room-pager__viewport, which is what actually
+      // carries the left/right translateX -- a plain position:fixed on it
+      // would be scoped to that transformed ancestor, not the real screen
+      // (a transformed element becomes the containing block for its fixed
+      // descendants). Reparenting it up to pagerRoot (never transformed)
+      // for the duration of the slide sidesteps that; origNext remembers
+      // its exact slot so it can go back to being a normal filmstrip frame
+      // once the swap below is done.
+      var origNext = toRoom.nextSibling;
+      toRoom.classList.add('room-pager__vslide', 'room-pager__vslide--over');
+      toRoom.style.transform = 'translateY(' + enterFrom + ')';
+      pagerRoot.appendChild(toRoom);
+      void toRoom.offsetHeight; // commit the start position before animating off it
+
+      fromRoom.classList.add('room-pager__vslide');
+
+      var done = false;
+      var fallback = setTimeout(finish, 650);
+      toRoom.addEventListener('transitionend', onEnd);
+
+      function onEnd(e) { if (e.target === toRoom && e.propertyName === 'transform') finish(); }
+
+      function finish() {
+        if (done) return;
+        done = true;
+        clearTimeout(fallback);
+        toRoom.removeEventListener('transitionend', onEnd);
+
+        fromRoom.classList.remove('room-pager__vslide');
+        fromRoom.style.transform = '';
+
+        // toRoom is still covering the whole screen at this instant (the
+        // slide-in just finished), so swapping it back into the filmstrip
+        // and instantly snapping the shared transform to its real index is
+        // invisible -- turn off the viewport's own transition for that one
+        // change so it doesn't also play its normal horizontal slide.
+        viewport.insertBefore(toRoom, origNext);
+        toRoom.classList.remove('room-pager__vslide', 'room-pager__vslide--over');
+        toRoom.style.transform = '';
+        var prevTransition = viewport.style.transition;
+        viewport.style.transition = 'none';
+        scrollToIndex(idx, 'start', false);
+        void viewport.offsetHeight;
+        viewport.style.transition = prevTransition;
+      }
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          toRoom.style.transform = 'translateY(0)';
+          fromRoom.style.transform = 'translateY(' + exitTo + ')';
+        });
+      });
+    }
+
     // Every direction -- prev/next included -- jumps to whatever id the
     // current room names for that direction (a no-op, safely, if it names
     // none: e.g. Kitchen has no data-left, so pressing left there does
@@ -161,7 +237,9 @@
       var room = rooms[current];
       var id = room && room.dataset[attr];
       var idx = id ? indexOfId(id) : -1;
-      if (idx >= 0) scrollToIndex(idx, 'start');
+      if (idx < 0) return;
+      if (attr === 'up' || attr === 'down') { verticalTransition(idx, attr); return; }
+      scrollToIndex(idx, 'start');
     }
     if (prevBtn) prevBtn.addEventListener('click', function () { goDirection('left'); });
     if (nextBtn) nextBtn.addEventListener('click', function () { goDirection('right'); });
@@ -275,11 +353,11 @@
     // Always land on a room explicitly via scrollToIndex -- even the plain
     // "just open on room 0" case -- rather than leaving `current` at its
     // initial value with no call at all. scrollToIndex is also what runs
-    // centerSurface(); skipping it here meant the very first room a visitor
-    // saw was the one room whose photo never got centered on mobile (every
+    // centerSurface(); skipping it here meant the very first room a
+    // visitor saw was the one room whose photo never got centered (every
     // later room got it, since paging always goes through scrollToIndex).
     // data-start-room (e.g. the homepage embeds the same 7 penthouse rooms
-    // house.html has, but should open on the Living Floor, not whichever
+    // house.html has, but should open on the Living Room, not whichever
     // one happens to be first in DOM/building order) picks the index;
     // landOnHash() below still overrides it moments later if the URL
     // actually carries a matching room hash.

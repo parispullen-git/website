@@ -1,5 +1,5 @@
 /* ============================================================
-   Vault Entrance — the Living Floor's Door artifact. Plays a
+   Vault Entrance — the Living Room's Door artifact. Plays a
    full-screen wipe before handing off to urwelcome.html, so
    opening the vault reads as entering it rather than a plain
    link click.

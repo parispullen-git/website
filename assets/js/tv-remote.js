@@ -7,7 +7,7 @@
    'channels' collection, one record with id 'main' holding the whole
    {living:[...], cinema:[...]} object) rather than requiring a rebuild.
    Two-tier fallback:
-     1. /.netlify/functions/content?collection=channels&id=main -- dashboard edits.
+     1. /api/content?collection=channels&id=main -- dashboard edits.
      2. data/house-channels.json -- the static seed file (edit directly, or
         via the local Operator Console), used if the record above doesn't
         exist yet or the fetch fails. This is a plain runtime fetch of a
@@ -23,7 +23,7 @@
     return data && Object.keys(data).some(function (k) { return Array.isArray(data[k]) && data[k].length; });
   }
 
-  var channelsReady = fetch('/.netlify/functions/content?collection=channels&id=main')
+  var channelsReady = fetch('/api/content?collection=channels&id=main')
     .then(function (r) { if (!r.ok) throw new Error('not found'); return r.json(); })
     .then(function (data) {
       if (!hasChannels(data)) throw new Error('empty');
@@ -178,6 +178,13 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(positionAllScreens, 100);
   });
+  // world.js's sizeFloorScenes() can flip a room between showing the full
+  // photo and a cover-cropped fill (a wide/short browser window) on this
+  // same resize -- that changes the image's actual rendered box, which is
+  // exactly what positionScreen() measures, so redo it the instant that
+  // happens rather than trusting the two independently-debounced resize
+  // handlers to land in a safe order on their own.
+  document.addEventListener('pp:scene-resized', positionAllScreens);
 
   /* ---------- mobile bottom-sheet remote ----------
      Below the breakpoint, the small in-page remote becomes a true viewport-
@@ -987,7 +994,7 @@
       if (already) return Promise.resolve(already);
       var ready = window.PP_PIANO_PLAYLISTS_READY;
       if (ready && typeof ready.then === 'function') return ready.then(normalizeMusic);
-      return fetch('/.netlify/functions/content?collection=playlists')
+      return fetch('/api/content?collection=playlists')
         .then(function (r) { if (!r.ok) throw new Error('not found'); return r.json(); })
         .then(function (data) {
           var records = (data && data.records) || [];

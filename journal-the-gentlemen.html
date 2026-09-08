@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>On Being Underestimated: Notes on The Gentlemen &#8212; The Journal &#8212; Paris Pullen</title>
+<title>Guy Ritchie's The Gentlemen Has One Rule Nobody Talks About &#8212; The Journal &#8212; Paris Pullen</title>
 <meta name="description" content="Every man in that film is underestimated by someone in the first ten minutes and finishes the movie having made them regret it. That is the whole genre, done properly.">
+<link rel="canonical" href="https://parispullen.com/journal-the-gentlemen.html">
+<meta property="og:title" content="Guy Ritchie's The Gentlemen Has One Rule Nobody Talks About">
+<meta property="og:description" content="Every man in that film is underestimated by someone in the first ten minutes and finishes the movie having made them regret it. That is the whole genre, done properly.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://parispullen.com/journal-the-gentlemen.html">
+<meta property="og:image" content="https://parispullen.com/assets/img/press-the-gentlemen.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guy Ritchie's The Gentlemen Has One Rule Nobody Talks About">
+<meta name="twitter:description" content="Every man in that film is underestimated by someone in the first ten minutes and finishes the movie having made them regret it. That is the whole genre, done properly.">
+<meta name="twitter:image" content="https://parispullen.com/assets/img/press-the-gentlemen.jpg">
 <meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,8 +47,8 @@
     display:flex;align-items:center;justify-content:center;padding:var(--s6)}
   .jread-media--full.jread-media--contain img{max-height:420px;width:auto;max-width:100%;
     box-shadow:0 30px 80px rgba(0,0,0,.5)}
-  .jread-media--pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
-  .jread-media--pair img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;display:block;
+  .jread-media--pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);align-items:start}
+  .jread-media--pair img{width:100%;height:auto;display:block;
     border-radius:2px;background:var(--charcoal)}
   .jread-caption{margin:.6em 0 0;font-family:var(--font-mono);font-size:var(--t-micro);
     letter-spacing:.03em;color:var(--graphite);line-height:1.4}
@@ -76,7 +87,7 @@
     color:var(--graphite)}
 
   /* Responsive 16:9 YouTube embed. Same container-query technique as the
-     Living Floor / Cinema TV screens (assets/css/world.css .tv-modal__frame,
+     Living Room / Cinema TV screens (assets/css/world.css .tv-modal__frame,
      .floor-scene__screen-frame) -- a container-type:size box holding an
      iframe sized in cqw/cqh -- except this one is a plain fixed aspect-ratio
      box (no oversize-and-crop) since an article embed should never crop
@@ -85,6 +96,55 @@
   .jread-video__frame{position:relative;aspect-ratio:16/9;background:#000;border-radius:2px;
     overflow:hidden;container-type:size}
   .jread-video__frame iframe{position:absolute;inset:0;width:100cqw;height:100cqh;border:0}
+
+  /* Two-column spec-data table (engine/power/0-60/etc.), closed out by a
+     small image+link card -- SPEC(). Mirrors a spec-sheet layout: a dense
+     label/value grid for the buyer who wants the numbers, then one clear
+     way out to learn more. */
+  .jspec{margin-top:var(--s7);max-width:var(--measure);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+  .jspec__model{margin:0;padding:var(--s4) var(--s5);font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.16em;text-transform:uppercase;color:var(--brass);background:var(--charcoal);
+    border-bottom:1px solid var(--rule)}
+  .jspec__table{display:grid}
+  .jspec__row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);padding:var(--s3) var(--s5);
+    border-bottom:1px solid var(--rule)}
+  .jspec__row:nth-child(odd){background:rgba(255,255,255,.02)}
+  .jspec__row:last-child{border-bottom:0}
+  .jspec__label{margin:0;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.08em;
+    text-transform:uppercase;color:var(--graphite)}
+  .jspec__value{margin:0;font-family:var(--font-body);font-size:var(--t-label);color:var(--ivory);text-align:right}
+  .jspec__cta{display:flex;align-items:center;gap:var(--s4);padding:var(--s4) var(--s5);
+    border-top:1px solid var(--rule);color:inherit;text-decoration:none}
+  a.jspec__cta:hover .jspec__cta-btn{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
+  .jspec__cta-media{flex:0 0 auto;width:64px;height:64px;border-radius:2px;overflow:hidden;background:var(--charcoal)}
+  .jspec__cta-media img{width:100%;height:100%;object-fit:cover;display:block}
+  .jspec__cta-body{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s3);flex:1}
+  .jspec__cta-title{margin:0;font-family:var(--font-display);font-size:1.05rem;line-height:1.25}
+  .jspec__cta-btn{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--brass);border:1px solid var(--brass);padding:.5em 1em;border-radius:1px;white-space:nowrap;
+    transition:background .15s,color .15s}
+  @media (max-width:560px){.jspec__row{grid-template-columns:1fr;gap:.2em}.jspec__value{text-align:left}}
+
+  /* Comparison/reference tables (TABLE::) and single-line formula
+     callouts (FORMULA::) -- the two infographic-style beats a
+     concept-heavy piece needs, kept as real text (not an image) so
+     they stay crawlable and legible in both column widths. */
+  .jtable{margin-top:var(--s7)}
+  .jtable__title{margin:0 0 var(--s3);font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.12em;text-transform:uppercase;color:var(--brass-lit)}
+  .jtable__scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:2px}
+  .jtable table{width:100%;border-collapse:collapse;min-width:420px}
+  .jtable th{text-align:left;padding:var(--s3) var(--s4);font-family:var(--font-mono);
+    font-size:var(--t-micro);letter-spacing:.08em;text-transform:uppercase;color:var(--brass);
+    border-bottom:1px solid var(--rule);white-space:nowrap}
+  .jtable td{padding:var(--s3) var(--s4);font-family:var(--font-body);font-size:var(--t-label);
+    color:var(--bone);border-bottom:1px solid var(--rule);vertical-align:top}
+  .jtable tbody tr:last-child td{border-bottom:0}
+  .jtable tbody tr:nth-child(odd){background:rgba(255,255,255,.02)}
+  .jtable td:first-child{color:var(--ivory);font-weight:500;white-space:nowrap}
+  .jformula{margin:var(--s8) 0;padding:var(--s6) var(--s5);text-align:center;
+    font-family:var(--font-display);font-size:clamp(1.25rem,1rem + 1.4vw,2rem);
+    color:var(--champagne);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 </style>
 </head>
 <body>
@@ -93,8 +153,8 @@
 <header class="worldnav">
   <a class="worldnav__mark" href="/"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
   <div class="worldnav__actions">
-    <a class="worldnav__city" href="charlotte.html" aria-label="City Guide">
-      <span class="worldnav__label">City</span>
+    <a class="worldnav__city" href="journal.html" aria-label="The Journal">
+      <span class="worldnav__label">Journal</span>
     </a>
     <button class="worldnav__toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu">
       <span class="worldnav__label">Menu</span>
@@ -107,14 +167,14 @@
     <li><a href="index.html#penthouse"><span class="idx">01</span>The Penthouse</a></li>
     <li><a href="charlotte.html"><span class="idx">02</span>The City</a></li>
     <li><a href="journal.html"><span class="idx">03</span>The Journal</a></li>
-    <li><a href="wardrobe.html"><span class="idx">04</span>The Wardrobe</a></li>
+    <li><a href="wardrobe.html"><span class="idx">04</span>The Boutique</a></li>
     <li><a href="urwelcome.html"><span class="idx">05</span>The Fragrance</a></li>
     <li><a href="about.html"><span class="idx">06</span>The Man</a></li>
   </ul>
   <div class="menu__explore">
     <p class="menu__explore-label">Explore the Floors</p>
     <div class="menu__explore-grid">
-    <a class="menu__explore-link" href="house.html#penthouse-living">27 · The Living Floor</a>
+    <a class="menu__explore-link" href="house.html#penthouse-living">27 · The Living Room</a>
     <a class="menu__explore-link" href="house.html#bedroom">28 · The Bedroom</a>
     <a class="menu__explore-link" href="house.html#bath">28 · The Bathroom</a>
     <a class="menu__explore-link" href="house.html#closet">28 · The Closet</a>
@@ -149,8 +209,8 @@
 <section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,14rem)">
   <div class="wrap wrap--narrow">
     <header class="stack stack--tight reveal">
-      <p class="eyebrow jread-byline">By <b>Paris Pullen</b> &#183; Film &#183; Vol. 12 &#183; 5 min read</p>
-      <h1 class="display display--h1">On Being Underestimated: Notes on The Gentlemen</h1>
+      <p class="eyebrow jread-byline">By <b>Paris Pullen</b> &#183; Film &#183; 5 min read</p>
+      <h1 class="display display--h1">Guy Ritchie's The Gentlemen Has One Rule Nobody Talks About</h1>
       <p class="lede">Every man in that film is underestimated by someone in the first ten minutes and finishes the movie having made them regret it. That is the whole genre, done properly.</p>
     </header>
 
@@ -173,7 +233,7 @@
 
     <nav class="jread-nav reveal">
       <a class="link-under" href="journal.html">&#8592; Back to the Journal</a>
-      <a class="link-under jread-nav__next" href="journal-gta-6-anticipation.html">Next &#8212; What Twelve Years of Waiting for GTA 6 Says About Attention &#8594;</a>
+      <a class="link-under jread-nav__next" href="journal-watchlist-september-2026.html">Next &#8212; September's Watch List 2026: What's Actually Worth Your Time &#8594;</a>
     </nav>
   </div>
 </section>
@@ -211,7 +271,7 @@
         <h4>The World</h4>
         <ul>
           <li><a href="bespoke.html">Foxx Bespoke</a></li>
-          <li><a href="wardrobe.html">The Wardrobe</a></li>
+          <li><a href="wardrobe.html">The Boutique</a></li>
           <li><a href="index.html#penthouse">The Compliment</a></li>
           <li><a href="house.html#motor">Foxx Motor Club</a></li>
           <li><a href="urwelcome.html">UR Welcome</a></li>

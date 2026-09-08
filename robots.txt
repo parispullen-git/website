@@ -1,0 +1,52 @@
+User-agent: *
+Allow: /
+
+# Internal tools and gated pages (already meta noindex; kept crawlable so that tag is seen)
+# vault.html, dashboard.html, proposal.html, lookbook.html, journal-post.html, design-system.html
+
+# Build/infra -- not content
+Disallow: /api/
+Disallow: /netlify/
+Disallow: /functions/
+Disallow: /.netlify/
+Disallow: /.wrangler/
+Disallow: /scripts/
+Disallow: /data/
+Disallow: /node_modules/
+Disallow: /drafting/
+Disallow: /_superseded/
+Disallow: /local-admin/
+Disallow: /.backup/
+Disallow: /.pitch-backups/
+Disallow: /.claude/
+Disallow: /.git/
+
+# Client project sites served on their own subdomains -- not part of the
+# Paris Pullen personal-brand site and shouldn't be indexed under this host
+Disallow: /dantesimpson/
+Disallow: /burnsbrims/
+Disallow: /harveycummings/
+Disallow: /yournewnailtech/
+Disallow: /goodwillgrooming/
+Disallow: /ellambert/
+Disallow: /threepieceentertainment/
+Disallow: /nateselectrical/
+Disallow: /riseandgrindstump/
+Disallow: /jbgaragedoor/
+Disallow: /allconcrete/
+Disallow: /loyalmobilemechanic/
+Disallow: /whiteraven/
+Disallow: /southcharlottepressurewashing/
+Disallow: /thebestmovers/
+Disallow: /zelayajrpainting/
+Disallow: /extrememobiledetailing/
+Disallow: /performanceautocollision/
+Disallow: /charlottebarberandbeard/
+Disallow: /papiricko/
+Disallow: /taqueriachonita/
+Disallow: /senortaco/
+Disallow: /sunsetsoulfood/
+Disallow: /wingsntings/
+Disallow: /soulbistro/
+
+Sitemap: https://parispullen.com/sitemap.xml

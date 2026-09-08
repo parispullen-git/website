@@ -77,6 +77,13 @@
       return;
     }
 
+    // threshold is a fraction of the TARGET's own height, not the
+    // viewport's -- 0.08 needed roughly a full extra viewport of scroll
+    // once a target's own height passed about 12x the viewport (a growing
+    // card grid, say) before that much of it could ever be on screen at
+    // once, which read as the element just never revealing. A small fixed
+    // threshold triggers as soon as any real sliver is visible, so it
+    // scales correctly regardless of how tall a given .reveal target gets.
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -84,7 +91,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.01 });
 
     items.forEach(function (n) { io.observe(n); });
   }
@@ -265,6 +272,116 @@
   }
 
   /* ---------- 9b. ARTIFACTS + DRAWERS ---------- */
+  /* ---------- 8b. FORCE-EAGER LAZY IMAGE ON ROOM CHANGE ----------
+     Every artifact dot's --x/--y is baked (build_house.py/penthouse.js) as
+     a plain percentage of the source photo, and rendered as a child of
+     .floor-scene__view -- the <img>'s own box, sized to exactly the
+     photo's natural aspect ratio at every breakpoint (height:100%;
+     width:auto, never cropped). A plain CSS percentage against that box
+     is already exact, so there is nothing left to correct here at
+     runtime; this used to also recompute --x/--y against
+     .floor-scene__canvas's rect, but canvas carries its own
+     clamp(10px,1.6vw,28px) padding (the frame/mat around the photo) which
+     is NOT part of the photo's own coordinate space -- every dot drifted
+     outward from center by a viewport-dependent amount (worse on wide
+     screens, where the padding clamps to its 28px ceiling), which was
+     exactly the "doesn't stay in place across devices" bug. Removed
+     rather than "fixed to measure the image instead": once there's no
+     actual cropping to correct for, the honest version of this function
+     doesn't touch --x/--y at all.
+     What's left is a real, unrelated fix that lived in the same function:
+     a loading="lazy" image is only supposed to start fetching once it's
+     close to the viewport, and for a transform-slid room-pager room that
+     should be exactly when room-pager.js's pp:room-change fires for it --
+     but a flex-row carousel lays every room out side by side BEFORE the
+     transform shifts the current one into view (room N sits at (N-1)*100%
+     in that untransformed layout), and at least one browser's lazy-load
+     heuristic goes by that untransformed position rather than what's
+     actually painted -- so the room furthest into the sequence could sit
+     far enough out to never be judged "close enough," and its image would
+     just never fetch on its own. Don't wait and hope: the moment a room
+     becomes current is also the one moment this has to be right, so force
+     it to start loading immediately. */
+  function forceEagerImageOnRoomChange() {
+    document.addEventListener('pp:room-change', function (e) {
+      var scene = e.detail && e.detail.id && document.getElementById(e.detail.id);
+      if (!scene || !scene.classList.contains('floor-scene')) return;
+      var img = $('.floor-scene__view img', scene);
+      if (img && !img.complete && img.loading === 'lazy') img.loading = 'eager';
+    });
+  }
+
+  /* ---------- 8c. FLOOR SCENE COVER-FIT SAFETY NET ----------
+     .floor-scene__view img's default height:100%;width:auto shows the
+     whole photo, uncropped, on every viewport EXCEPT one: a browser
+     window proportionally WIDER than the photo itself (a wide, short
+     desktop window -- especially once real browser chrome eats into the
+     available height). There, the height-driven width comes out narrower
+     than the viewport, and unlike the "photo wider than viewport" case
+     (handled by .floor-scene__surface's horizontal pan), there is no
+     panning that can reach content that was never rendered -- the photo
+     just ends, and bare black shows on whichever side isn't covered.
+     Compares each room's real photo aspect ratio against its own
+     viewport's on load/resize/room-change, and adds .is-wide (see
+     world.css) only on the specific rooms/viewports where that
+     comparison actually calls for it -- switching just those to
+     width-driven cover sizing (a small, centered top/bottom crop; the
+     surface's overflow-y:hidden already covers for it) instead of a gap.
+     Every other room/viewport is untouched. */
+  function sizeFloorScenes() {
+    var scenes = $$('.floor-scene');
+    if (!scenes.length) return;
+
+    function sizeOne(scene) {
+      var canvas = $('.floor-scene__canvas', scene);
+      var surface = $('.floor-scene__surface', scene);
+      var img = $('.floor-scene__view img', scene);
+      if (!canvas || !surface || !img || !img.naturalWidth || !img.naturalHeight) return;
+      var rect = surface.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      var viewportAspect = rect.width / rect.height;
+      var imageAspect = img.naturalWidth / img.naturalHeight;
+      var wasWide = canvas.classList.contains('is-wide');
+      var isWide = viewportAspect > imageAspect;
+      canvas.classList.toggle('is-wide', isWide);
+      // The TV screen's own --x/--y/--w/--h get recomputed against the
+      // image's rendered box by tv-remote.js's positionScreen() -- but
+      // only on that image's own load event and on window resize, neither
+      // of which know this class just flipped the image between full-photo
+      // and cover-cropped sizing. Left alone, a resize that crosses the
+      // is-wide threshold can leave the TV positioned for whichever mode
+      // was current when ITS OWN resize handler last ran (a debounce-order
+      // race against this one), silently drifting off where the room photo
+      // actually shows a TV -- most visible as the top of the screen
+      // reading as cropped/cut off. Telling positionScreen() to redo its
+      // math the instant this actually changes closes that race outright,
+      // regardless of either handler's own timing.
+      if (isWide !== wasWide) {
+        document.dispatchEvent(new CustomEvent('pp:scene-resized', { detail: { id: scene.id } }));
+      }
+    }
+
+    function sizeAll() { scenes.forEach(sizeOne); }
+
+    scenes.forEach(function (scene) {
+      var img = $('.floor-scene__view img', scene);
+      if (!img) return;
+      if (img.complete) sizeOne(scene);
+      img.addEventListener('load', function () { sizeOne(scene); });
+    });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(sizeAll, 120);
+    }, { passive: true });
+
+    document.addEventListener('pp:room-change', function (e) {
+      var scene = e.detail && e.detail.id && document.getElementById(e.detail.id);
+      if (scene && scene.classList.contains('floor-scene')) sizeOne(scene);
+    });
+  }
+
   function artifacts() {
     var scenes = $$('.floor-scene');
     if (!scenes.length) return;
@@ -490,7 +607,7 @@
   /* ---------- BOOT ---------- */
   function boot() {
     gate(); menu(); reveal(); parallax(); tracker(); navHide();
-    accordions(); redactions(); network(); doors(); artifacts(); beforeAfter(); footerOverlay(); guideInfoOverlay(); lazyVideo(); year();
+    accordions(); redactions(); network(); doors(); artifacts(); forceEagerImageOnRoomChange(); sizeFloorScenes(); beforeAfter(); footerOverlay(); guideInfoOverlay(); lazyVideo(); year();
   }
 
   if (document.readyState === 'loading') {

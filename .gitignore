@@ -14,3 +14,12 @@ __pycache__/
 
 # Local content-console runtime (Phase 2/3)
 local-admin/node_modules
+
+# Exported Blobs/KV data snapshots -- real customer PII (names, emails,
+# phone numbers, order details). Never publish this; it must never sit
+# inside anything that gets deployed as the public static site.
+backup/
+
+# Dead now that Cloudflare Pages Functions (functions/) replaced this --
+# kept in git history for reference, not deployed anywhere.
+netlify/functions

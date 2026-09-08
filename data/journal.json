@@ -5,16 +5,16 @@
     "catlabel": "Style",
     "vol": "02",
     "read": "4 min read",
-    "title": "The Suit Is a System, Not an Outfit",
+    "title": "Nobody Told You the Suit Was a System. That's Why Yours Doesn't Fit.",
     "stand": "Buy the jacket for the shoulders and the trouser for the break. Everything else is alteration, and alteration is where the money actually goes.",
     "featured": false,
     "wide": false,
     "hero": {
-      "img": "paris-bespoke",
+      "img": "paris-pinstripe",
       "ext": "jpg",
       "mode": "cover",
       "srcset": true,
-      "alt": "A bespoke suit jacket mid-fitting, chalk marks visible on the shoulder seam"
+      "alt": "Paris Pullen in a navy pinstripe double-breasted suit and gold tie"
     },
     "body": [
       "A suit is not a single purchase. It behaves like one at the register and like a system everywhere after, which is the first thing that confuses a man buying his first genuinely good one — he expects the jacket to fit the way it looked on the hanger, and it never does, because the hanger was not built like him.",
@@ -25,16 +25,17 @@
       "Men who skip this step are easy to spot in any room, and not for a reason they'd want pointed out. The fabric can be extraordinary and the fit can still be wrong, and a wrong fit on expensive cloth reads worse than a right fit on modest cloth — it announces money spent without judgment applied.",
       "The system extends past the suit itself. A shirt collar that doesn't sit correctly against a jacket lapel undoes both. A shoe that fights the trouser break undoes the whole line from the knee down. None of these pieces were designed in isolation, and buying them that way is how a closet fills with expensive items that never once look like they belong to the same wardrobe.",
       "Treat the first good suit as tuition, not a purchase. What it teaches — shoulder first, break second, alteration budget built in from day one — is the only part of the transaction that pays dividends on every suit bought after it."
-    ]
+    ],
+    "status": "draft"
   },
   {
     "slug": "karma-automotive",
     "cat": "automotive",
-    "catlabel": "Automotive",
+    "catlabel": "Motors",
     "vol": "11",
-    "read": "4 min read",
-    "title": "Karma Automotive, and the Case for a Badge Nobody Recognizes",
-    "stand": "Nobody at the valet stand knows the name. That is the point — the car is explaining something to the one person in the room who does.",
+    "read": "5 min read",
+    "title": "Karma Automotive's Best-Kept Secret Isn't the Car. It's Who's Running It.",
+    "stand": "There are three Black executives currently running an American car company. I went and found one of them — he'd rather talk to me about torque than the milestone.",
     "featured": false,
     "wide": false,
     "hero": {
@@ -45,15 +46,19 @@
       "srcset": true
     },
     "body": [
-      "Karma Automotive builds cars that most valet attendants will misidentify on sight, and the company seems entirely at peace with that. It is not chasing the three-pointed star or the prancing animal, the badges that do half the talking before a driver ever gets out. It is betting that a smaller, more particular kind of recognition is worth more.",
-      "That bet says something specific about who the car is built for. A man who buys for the badge is buying an argument he expects to win before anyone examines the details — a shortcut through the whole conversation about taste. A man who buys a car almost nobody recognizes is making a different claim entirely: that he doesn't need the shortcut, and would rather the details do the convincing.",
-      "PQ::The car is explaining something to the one person in the room who does.",
-      "The extended-range electric architecture Karma has built its recent lineup around is itself a kind of quiet confidence — neither fully conceding to the range anxiety that scares buyers away from pure electric, nor pretending the internal combustion era isn't ending. It solves a real problem without making a spectacle of solving it, which is the same instinct visible in the design language: doors that open upward instead of a wing that announces itself from a block away, a silhouette that reveals itself slowly instead of all at once.",
+      "I'll level with you: I didn't expect to be writing about Karma. Every valet I've handed one of these to has gotten the badge wrong at least once, and the company doesn't seem bothered by it. Neither, at this point, am I. There's a particular kind of quiet I've come to respect in a car that isn't fishing for a second look.",
+      "Here's the part that doesn't make it into the brochure, and the part I went digging for the second something felt off: Karma exists because a Chinese industrial conglomerate, Wanxiang, bought what was left of Fisker's bankruptcy in 2014 and rebuilt the whole operation out in Southern California. That's just the record, no spin from me. What actually held my attention wasn't the ownership. It was who they handed the keys to.",
+      "The man running it is Marques McCammon — mechanical engineer, NC A&T undergrad, Michigan for grad school, cut his teeth on the Dodge Neon SRT-4 and the Saleen S302 back when those names meant something at a bar, ran Ricardo's entire automotive business across North America, then went and figured out how software should actually run a car over at Intel's Wind River shop. He's also, by most honest counts, one of three Black men currently running an American car company. I had to go find that myself — he doesn't lead with it. His résumé does enough talking on its own.",
+      "PQA::Nobody else does it the way we do.||Marques McCammon||President, Karma Automotive",
+      "His actual pitch to me had nothing to do with any of that, and I think that's deliberate. He's put Karma above the entire EV argument the rest of the industry's stuck having. Not chasing Tesla's numbers, not Rivian's utility angle, not Lucid's range war. He's building for the guy dropping $200K to $500K who wants something closer to bespoke tailoring than a gadget with a battery bolted in. Software-defined on purpose — built around one owner, not averaged out across a hundred thousand of them.",
       "IMG::0",
       "IMG::1",
-      "This is a harder sell than a recognizable badge, and Karma clearly knows it. The company is not competing for the buyer who wants applause at the valet stand. It's competing for the buyer who has already had that applause, decided it wasn't the point, and started looking for a car that agrees with him instead of performing for everyone else in the lot.",
-      "There is a risk in building for that buyer exclusively — a smaller audience, a slower path to the kind of scale that funds the next generation of the car. But it also means every unit on the road is doing something a mass-market badge cannot: it is starting a conversation instead of ending one, because the only way anyone learns what it is happens to be by asking the man standing next to it.",
-      "That's the actual value proposition, once you strip away the horsepower figures and the carbon fiber. Karma isn't selling a badge that does the explaining for you. It's selling the specific, quieter confidence required to own a car you'll have to explain yourself — and betting that the right buyer would rather have that conversation than skip it."
+      "You feel that instinct the second you look at the Kaveya — the super-coupe still making the concept-car rounds. Doors that open like they're unfolding an idea instead of announcing themselves, a steering yoke shaped like nothing else on the road right now. It doesn't photograph aggressive. It photographs like it already knows it doesn't need to try.",
+      "But that's the preview. The one I'd actually tell you to go put a deposit on this week is the Revero GT — anchored this whole brand since the Fisker days, quietly rebuilt around it twice since. I'm not going to just repeat a spec sheet at you here, though I'll give you the numbers below. Guys who've actually driven it keep wanting to keep it. That tells you more than a brochure ever will.",
+      "SPEC::{\"model\": \"KARMA REVERO GT\", \"rows\": [[\"Powertrain\", \"1.5L 3-Cyl. Range Extender + Electric Drive\"], [\"Combined Output\", \"536 HP / 550 LB-FT\"], [\"Battery\", \"28 kWh\"], [\"Electric Range\", \"80 MI\"], [\"Total Range\", \"360 MI\"], [\"0-60 MPH\", \"4.5 SEC\"], [\"Top Speed\", \"125 MPH\"], [\"Kerb Weight\", \"5,062 LBS\"], [\"Length\", \"199.4 IN\"], [\"Starting Price\", \"$124,099\"]], \"cta_label\": \"Find Out More\", \"cta_url\": \"https://karmaautomotive.com/revero/\", \"cta_title\": \"Karma Revero GT\", \"image\": 2}",
+      "None of that changes the math I keep coming back to. Karma was never fighting for the guy who wants applause at the valet stand. It's for the one who already had that applause, decided it wasn't the point, and went looking for a car that agrees with him instead of performing for the room. What's actually changed is who's making that bet pay off — and his name is about as unfamiliar to most buyers as the badge on the hood.",
+      "VIDEO::0",
+      "That might be the most honest way I can put the whole thing to you. Karma isn't selling you a badge that explains itself, and it isn't run by a guy who needs credit for doing the work. It's a bet — car and man both — that the details do more convincing than the name ever could. I'm inclined to agree with it."
     ],
     "images": [
       {
@@ -73,6 +78,19 @@
         "layout": "pair",
         "caption": "Interior detail: a superellipse steering yoke framing the driver display.",
         "alt": "Close-up of the Karma Kaveya's superellipse steering yoke and instrument display"
+      },
+      {
+        "img": "press-karma-revero",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "alt": "The Karma Revero GT extended-range sedan in a studio setting"
+      }
+    ],
+    "videos": [
+      {
+        "youtube_id": "vTu5TMnXImA",
+        "title": "Designing Objects That Do Not Need to Explain Themselves — Karma Automotive"
       }
     ]
   },
@@ -82,7 +100,7 @@
     "catlabel": "Film",
     "vol": "12",
     "read": "5 min read",
-    "title": "On Being Underestimated: Notes on The Gentlemen",
+    "title": "Guy Ritchie's The Gentlemen Has One Rule Nobody Talks About",
     "stand": "Every man in that film is underestimated by someone in the first ten minutes and finishes the movie having made them regret it. That is the whole genre, done properly.",
     "featured": false,
     "wide": false,
@@ -121,53 +139,92 @@
     "catlabel": "Gaming",
     "vol": "14",
     "read": "5 min read",
-    "title": "What Twelve Years of Waiting for GTA 6 Says About Attention",
-    "stand": "Nobody has played it. Everybody has an opinion about it. That gap is the most valuable real estate in entertainment right now, and almost nothing else on earth can hold it for twelve years.",
+    "title": "GTA 6 Netflix Premiere: Why Rockstar Chose Netflix First",
+    "stand": "Twenty-seven minutes of gameplay, TV-MA rated, went to Netflix subscribers before it touched Rockstar's own channels. That isn't a marketing accident — it's a company that knows exactly what its attention is worth.",
     "featured": false,
     "wide": false,
     "hero": {
-      "img": "press-gta6",
+      "img": "press-gta6-jason-lucia",
       "ext": "jpg",
-      "mode": "contain",
+      "mode": "cover",
       "srcset": true,
-      "alt": "Official box art for Grand Theft Auto VI"
+      "alt": "Jason Duval and Lucia Camino leaning against a green sports car in front of a Vice City skyline in Grand Theft Auto VI"
     },
     "body": [
-      "There is exactly one entertainment property on earth that can go over a decade between major releases and still command the room every time it so much as clears its throat. Grand Theft Auto VI has been the subject of theory, leaked footage, box-art forensics and fan debate for years now, and none of that required a single person outside the studio to have actually played it.",
-      "That is not luck. It is a specific kind of business discipline that almost no other entertainment company on earth has the patience, or the market position, to attempt — the willingness to let anticipation compound for years instead of monetizing it early with a rushed release that would have ended the conversation.",
+      "On August 27, the biggest single reveal in Grand Theft Auto VI's entire run-up didn't premiere on Rockstar's YouTube channel, on a livestream, or at a press event. It premiered on Netflix. \"Grand Theft Auto VI: An Extended Look\" — twenty-seven minutes, TV-MA, built entirely from in-game PlayStation 5 footage — went out to Netflix subscribers worldwide first, in thirteen subtitle languages, before it touched any channel Rockstar actually owns.",
       "IMG::0",
       "IMG::1",
-      "PQ::That gap is the most valuable real estate in entertainment right now, and almost nothing else on earth can hold it for twelve years.",
-      "Most companies treat attention as a resource that decays the moment it isn't actively fed, which is why the entertainment calendar is so crowded with sequels, trailers, and content designed mainly to keep a property in the conversation between real releases. Rockstar has done the opposite, on purpose, betting that scarcity itself is the marketing — that silence, held long enough, becomes its own kind of noise.",
-      "It is a bet that only works from a position most competitors don't have. A studio without an existing, obsessive fanbase cannot simply go quiet for years and expect the anticipation to survive the silence; it would just be forgotten. Rockstar can, because the previous entry in the series became close to a cultural institution rather than a product, and institutions get remembered without needing to be reminded.",
-      "What's actually being sold in the years before release isn't the game. It's the anticipation itself — the box-art breakdowns, the trailer frame-by-frame analysis, the arguments over a single detail in a screenshot. All of that has commercial value independent of the eventual release, and Rockstar has been remarkably disciplined about not rushing to convert it into a product before the product was actually ready.",
-      "VIDEO::",
-      "Whether the game itself lives up to twelve years of theorizing is a separate question, and an honest one, because expectation this large has broken plenty of releases before it. But as a case study in what patience can do to the value of attention, it's already a masterclass — proof that in an industry addicted to constant content, the rarest and most valuable move left is simply not showing up until you mean it."
+      "That's not a distribution accident. \"Grand Theft Auto reveals have become cultural moments in their own right,\" said Brandon Riegg, Netflix's VP of Nonfiction Series, on the release. \"The anticipation and fandom around Grand Theft Auto VI is unprecedented, and we're honored that Rockstar Games has partnered with us to debut the next part of the Grand Theft Auto story with Netflix members first.\" Read plainly, that's a streaming platform admitting a video game reveal was a bigger get than most of its own original programming.",
+      "PQ::A studio handed its biggest reveal to a platform that has never shipped a game, because that platform could put it in front of more people on day one than Rockstar's own channels could.",
+      "The footage itself finally puts faces to the story that's been theorized for years: Jason Duval and Lucia Camino, two people who've always known the deck is stacked against them, watch an easy score go wrong and end up on the darkest side of the sunniest place in America — a criminal conspiracy stretching across the fictional state of Leonida. It's Rockstar's first extended, official look at how the world actually plays, after years of frame-by-frame trailer forensics standing in for real information.",
+      "IMG::2",
+      "IMG::3",
+      "There's a tidy piece of symmetry buried in the timing. Grand Theft Auto VI arrives thirteen years after Grand Theft Auto V — almost the exact span Netflix has spent building itself from a DVD-mail service into the company now capable of premiering a game reveal to a bigger simultaneous audience than any platform built for games. Two industries that didn't compete in 2013 are now trading favors over who gets to control the biggest reveal in entertainment.",
+      "VIDEO::0",
+      "None of this changes the actual bet Rockstar has been making for over a decade, which is that scarcity is the marketing. Going quiet for years only works if the silence gets filled by everyone else's theorizing instead of your own content — and the Netflix placement is really the same instinct at a different scale: instead of feeding the anticipation piecemeal across owned channels, hand the single largest piece of it to whoever can put it in front of the most people at once, then let Rockstar's own channels catch up after.",
+      "IMG::4",
+      "A second trailer followed the Netflix debut on Rockstar's own channels, closer to the conventional rollout — proof the studio isn't abandoning its usual playbook, just willing to open with someone else's audience when the moment calls for it.",
+      "VIDEO::1",
+      "Grand Theft Auto VI is set for November 19 on PlayStation 5 and Xbox Series X|S, pre-orders open now. Whether thirteen years of theorizing survives contact with the actual game is a separate, honest question — expectation this large has broken plenty of releases before it. But as a lesson in knowing exactly what your own attention is worth, and refusing to spend it anywhere smaller than necessary, the Netflix debut alone is worth studying."
     ],
     "images": [
       {
-        "img": "press-gta6-trailer-1",
+        "img": "press-gta6-boxart",
         "ext": "jpg",
         "mode": "cover",
         "srcset": true,
         "layout": "pair",
-        "caption": "A frame from Rockstar's first GTA VI trailer.",
-        "alt": "A still from the official Grand Theft Auto VI trailer showing a car chase through a city street"
+        "caption": "Jason and Lucia, mid-robbery, in Rockstar's own key art.",
+        "alt": "Official Grand Theft Auto VI illustration of Jason and Lucia pulling up bandanas at a gas station"
       },
       {
-        "img": "press-gta6-trailer-2",
+        "img": "press-gta6-jason-duval",
         "ext": "jpg",
         "mode": "cover",
         "srcset": true,
         "layout": "pair",
-        "caption": "Another frame from the same trailer drop — the in-game world doing part of the marketing on its own.",
-        "alt": "A still from the official Grand Theft Auto VI trailer showing a sports car on a highway"
+        "caption": "Jason Duval, in-engine, in the extended look's first real close-up.",
+        "alt": "Close-up of Jason Duval behind a chain-link fence with police lights behind him in Grand Theft Auto VI"
+      },
+      {
+        "img": "press-gta6-revolver",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The level of detail the in-game footage is built to show off.",
+        "alt": "Close-up of a scoped revolver held by a character in Grand Theft Auto VI"
+      },
+      {
+        "img": "press-gta6-cheetah",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Leonida's version of Miami, rendered down to the valet stand.",
+        "alt": "A white sports car parked outside the Pegassi Residences South Tower in Grand Theft Auto VI"
+      },
+      {
+        "img": "press-gta6-vice-city",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Vice City at dusk, the skyline the entire twelve-year theory industry has been arguing about.",
+        "alt": "Aerial view of a neon-lit Vice City skyline at dusk with a helicopter overhead in Grand Theft Auto VI"
       }
     ],
-    "video": {
-      "youtube_id": "QdBZY2fkU-0",
-      "title": "Grand Theft Auto VI — Trailer 1 (Rockstar Games)"
-    }
+    "meta_description": "Grand Theft Auto VI's biggest gameplay reveal premiered on Netflix before Rockstar's own channels. What the Netflix debut of 'An Extended Look' says about the economics of anticipation, ahead of the game's November 19, 2026 release.",
+    "videos": [
+      {
+        "youtube_id": "tJbzMqJGH4k",
+        "title": "Grand Theft Auto VI: An Extended Look — Netflix Premiere"
+      },
+      {
+        "youtube_id": "VQRLujxTm3c",
+        "title": "Grand Theft Auto VI — Trailer 2 (Rockstar Games)"
+      }
+    ],
+    "status": "draft"
   },
   {
     "slug": "still-listening-to-iceman",
@@ -175,7 +232,7 @@
     "catlabel": "Music",
     "vol": "19",
     "read": "3 min read",
-    "title": "Still Listening to Iceman",
+    "title": "Why Drake's ICEMAN Album Is Still On Repeat, Months Later",
     "stand": "Some albums get a week. This one got moved into the rotation permanently, and nobody in the room has asked to change it since.",
     "featured": false,
     "wide": false,
@@ -187,14 +244,15 @@
       "alt": "Official cover art for Drake's album Iceman"
     },
     "body": [
-      "Most albums, even good ones, get roughly two weeks of genuine attention before they quietly slide into the back catalog — played occasionally, referenced fondly, but no longer the thing actually queued up on a given night. Iceman didn't follow that pattern here, and it's worth asking honestly why, instead of just noting that it happened.",
+      "Most albums, even good ones, get roughly two weeks of genuine attention before they quietly slide into the back catalog — played occasionally, referenced fondly, but no longer the thing actually queued up on a given night. Drake's Iceman didn't follow that pattern here, and it's worth asking honestly why, instead of just noting that it happened.",
       "Part of it is pacing. An album built for genuine repeat listening has to reward attention on the fifth pass the same way it rewarded it on the first, which is a much harder trick than making a strong first impression. Most records front-load their best material and let the back half coast; this one keeps giving the listener a reason to stay through the whole runtime, which is the actual test of whether something belongs in permanent rotation or just a good first week.",
       "PQ::Some albums get a week. This one got moved into the rotation permanently.",
       "There's also something to be said for an album that holds up as background and as foreground equally well — playing during a working afternoon without demanding attention, and holding up just as well at higher volume with actual focus on it later that night. That range is rarer than it should be, and it's the difference between an album you like and an album you live with.",
       "It plays on repeat in a specific room here, alongside a certain British crime picture that never seems to leave the rotation either — two very different things sharing screen and speaker time simply because neither one has worn out its welcome yet, months in. That's a higher bar than most culture clears, and most of what clears it does so quietly, without campaign.",
       "None of this is a lyric-by-lyric breakdown, on purpose — the specifics of what's actually being said belong to the person who wrote it, and repeating them here would miss the point of what actually makes an album worth this kind of loyalty anyway. It isn't any single line. It's the cumulative effect of an album built to survive familiarity instead of relying on novelty to carry it.",
       "Most music gets judged in its first week and forgotten by its third. The real test — the only one that actually matters months later — is whether it's still getting chosen on a night when literally anything else in the catalog was available instead. This one keeps getting chosen, and at some point that stops being a coincidence and starts being the whole review."
-    ]
+    ],
+    "status": "draft"
   },
   {
     "slug": "gents-agenda-september-full-month",
@@ -202,7 +260,7 @@
     "catlabel": "Charlotte",
     "vol": "24",
     "read": "4 min read",
-    "title": "The Gent's Agenda: All of September, One List",
+    "title": "Charlotte Events, September 2026: The Only List You Need",
     "stand": "Four weeks of the city's calendar, collapsed into a single schedule. Everything that made the cut, nothing that didn't, one scan instead of four.",
     "featured": false,
     "wide": false,
@@ -239,7 +297,8 @@
       "AGENDA::Thu, Sept 25||Crossroads Cinema: Talladega Nights||Camp North End||Free outdoor screening.||Free||",
       "AGENDA::Standing, every Wed||Wednesday Night Live||Bechtler &#183; Mint &#183; Gantt Center||Free 5&#8211;9pm, all year &#8212; not just September.||Free||",
       "Where to go after any of it: Rosemont, Firebirds, Que Onda, CO Sushi, Catalu, Caswells, Catalina, and Eddie V's all run a weekday happy hour worth building a habit around &#8212; the full breakdown is in each week's own entry below."
-    ]
+    ],
+    "status": "draft"
   },
   {
     "slug": "watchlist-september-2026",
@@ -247,7 +306,7 @@
     "catlabel": "Film",
     "vol": "25",
     "read": "6 min read",
-    "title": "September's Watch List 2026",
+    "title": "September's Watch List 2026: What's Actually Worth Your Time",
     "stand": "Two Guy Ritchie properties, a brewery dynasty, a reunion two decades in the making, and a horror reboot from someone who's earned the trust. What's actually worth the remote this month.",
     "featured": true,
     "wide": false,
@@ -326,5 +385,1818 @@
         "title": "Resident Evil (Official Trailer)"
       }
     ]
+  },
+  {
+    "slug": "nike-leaves-sp100",
+    "cat": "business",
+    "catlabel": "Business",
+    "vol": "26",
+    "read": "4 min read",
+    "title": "Why Is Nike Leaving the S&P 100? The Real Reason, Explained",
+    "stand": "It isn't a delisting, and Nike isn't going anywhere. But a company doesn't lose its seat among the hundred biggest names in America without the market saying something about why.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-nike-sp100",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "A Nike storefront sign beside a financial district stock ticker board showing the S&P 100 index, illustrating Nike's removal from the index",
+      "srcset": true
+    },
+    "meta_description": "Nike exits the S&P 100 on September 21, 2026, replaced by Dell, Palo Alto Networks, Arista and SanDisk. What the quarterly index rebalance actually means — and what it doesn't.",
+    "body": [
+      "Before U.S. markets open on September 21, 2026, Nike will lose its seat in the S&P 100. Read quickly, that sentence sounds like the kind of thing that precedes a eulogy. Read correctly, it's an index-membership change — a piece of financial bookkeeping, not a verdict on whether the company survives the decade.",
+      "The mechanics are almost boring, which is the point. S&P Dow Jones Indices announced the change on September 4 as part of its routine quarterly rebalance. Nike exits alongside Honeywell Aerospace, Simon Property Group, and Colgate-Palmolive. Dell Technologies, Palo Alto Networks, Arista Networks, and SanDisk move in. Four consumer-adjacent and industrial names out, four infrastructure-and-security names in — a rotation, not a purge.",
+      "PQ::This is a change to index membership. It is not an announcement that Nike's shares stop trading.",
+      "The S&P 100 exists to track roughly a hundred of the largest, most liquid companies in the country — a narrower cut of the broader S&P 500, rebalanced periodically so the list stays honest about who's actually big right now, not who used to be. That's the entire mechanism. It doesn't ask whether a company is well run, only how much of it the market currently believes exists.",
+      "By that measure, Nike's answer has gotten smaller. The stock has fallen more than three-quarters from its 2021 peak, and the math behind that decline is not abstract — by some estimates it has erased on the order of $230 billion in market value, with shares recently trading near levels the company hasn't seen in roughly twelve years. Losing a seat reserved for the hundred largest companies in America is simply what happens to the math when the number underneath it shrinks that far.",
+      "What it isn't is a delisting. Nike remains a full constituent of the S&P 500, the index most retirement accounts and index funds actually track, and its shares keep trading exactly as they did the day before. A fund built to hold the broad market has no reason to touch its Nike position because of this change alone. The only funds forced to act are the ones built specifically to track the narrower hundred — and even there, the selling is mechanical, timed to the effective date, and over almost as soon as it starts.",
+      "The more honest read is the symbolic one. Nike held its place in the S&P 100 for nearly eighteen years — long enough that an entire generation of investors never saw the index without it. All four names replacing it come from the same direction: chips, cloud infrastructure, cybersecurity. That's not a coincidence so much as a receipt. It's where the market has decided the next decade of American corporate weight is actually sitting, and it isn't sitting in a swoosh.",
+      "None of which makes this nothing. For a company mid-turnaround, getting quietly moved out of the room reserved for the hundred biggest names in the country is the kind of marker that shows up in board memos long before it shows up in a press release. It just isn't the marker most people will assume it is when they see the headline — and the difference between those two readings is usually where the actual information lives."
+    ]
+  },
+  {
+    "slug": "hamilton-ferrari-f40",
+    "cat": "automotive",
+    "catlabel": "Motors",
+    "vol": "27",
+    "read": "5 min read",
+    "title": "Lewis Hamilton's Ferrari F40: The Story Behind His Rarest Car",
+    "stand": "The engine block was stamped 44 before Hamilton ever owned it. He just spent three decades becoming the one man alive for whom that would count as fate.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-hamilton-f40-arrival",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "Lewis Hamilton in a camel overcoat and beret standing beside his Ferrari F40, its yellow UK-style number plate reading 44, surrounded by photographers at the 2026 Italian Grand Prix",
+      "srcset": true
+    },
+    "meta_description": "Lewis Hamilton arrived at the 2026 Italian Grand Prix in a restored, ultra-low-mileage Ferrari F40 — its engine block stamped 44, his own racing number, found by accident during a factory restoration in Maranello.",
+    "body": [
+      "The Ferrari F40 has never needed an introduction, which made it the strangest possible car to arrive somewhere quietly. Lewis Hamilton rolled into Monza for the 2026 Italian Grand Prix behind the wheel of one anyway, in a black pinstripe suit, tie, and beret, a camel overcoat draped over his shoulders in ninety-degree heat, stepping out of a supercar with no air conditioning like the temperature was somebody else's problem. Photographers who arrive expecting a paddock story sometimes leave with a fashion story instead. This was both.",
+      "The car earning that entrance wasn't a showroom pull. It's a European-market F40 whose first and only owner reportedly drove it 69 kilometers from Maranello before parking it for good — the passenger door, by Hamilton's account, never opened again until he owned it. Three decades in storage left the original factory red paint thin enough that the carbon fiber and Kevlar weave underneath still shows through, which is precisely the kind of imperfection a serious collector chases and a casual one paints over.",
+      "IMG::0",
+      "IMG::1",
+      "Hamilton sent it to Ferrari's own Classiche division in Maranello rather than a private restorer — a recommissioning, in his words, not a restomod. The distinction matters more than it sounds: a restomod improves on the original; a recommissioning simply wakes it back up, wiring and fluids and three-decade-old rubber brought current without touching the parts that make the car worth waking up in the first place.",
+      "It was mid-teardown that Ferrari's mechanics found the detail nobody was looking for: the engine block stamped with the number 44. Hamilton's number. Stamped at the factory in the late 1980s, decades before a driver who'd make it his own had been born to a father whose own Vauxhall Cavalier carried that plate while a young Hamilton was still karting. The car had been sitting on that coincidence since before he existed to appreciate it.",
+      "PQA::The engine had 44 on it. I didn't put that there.||Lewis Hamilton||",
+      "IMG::2",
+      "None of which would matter as much if the car underneath the coincidence weren't what it is. The F40 was the last road car Enzo Ferrari personally approved before his death in 1988 — the final word from a man who spent his life deciding what counted as a real Ferrari, delivered as a raw, largely unassisted, twin-turbocharged argument that lightness and power mattered more than comfort ever would.",
+      "SPEC::{\"model\": \"FERRARI F40\", \"rows\": [[\"Engine\", \"2.9L Twin-Turbocharged V8\"], [\"Max Power\", \"471 HP\"], [\"0-60 MPH\", \"3.9 SEC\"], [\"Top Speed\", \"201 MPH\"], [\"Kerb Weight\", \"~2,425 LBS\"], [\"Body\", \"Composite Over Tubular Steel\"], [\"Production\", \"1,311 Units (1987\\u20131992)\"], [\"Approved By\", \"Enzo Ferrari, 1987\"]], \"cta_label\": \"\", \"cta_url\": \"\", \"cta_title\": \"\", \"image\": null}",
+      "Hamilton hasn't said what he paid, and pristine F40 values move on originality and mileage more than on any fixed number — a 1,118-mile example changed hands for &euro;4.3 million in 2026. A 69-kilometer car that spent thirty years with one unopened door sits closer to the top of that range than the middle of it, though the honest answer is that a car this specific doesn't have a clean comparable.",
+      "IMG::3",
+      "IMG::4",
+      "What actually separates this from a celebrity buying a nice old Ferrari is the order of operations. He didn't commission a plate to match his number, or ask a shop to stamp something meaningful onto the block. The car came that way, waited three decades to be found that way, and ended up in the one garage in the world where it would mean something. That's a harder thing to buy than the car was."
+    ],
+    "images": [
+      {
+        "img": "press-hamilton-f40-lean",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Leaning against the open door on a hillside road above Monza.",
+        "alt": "Lewis Hamilton in a tailored black suit leaning against his open-door Ferrari F40 on a hillside road"
+      },
+      {
+        "img": "press-hamilton-f40-stance",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "In beret and sunglasses, beside the car that predates him by a decade.",
+        "alt": "Lewis Hamilton standing beside his red Ferrari F40, wearing a black beret, sunglasses, and pinstripe suit"
+      },
+      {
+        "img": "press-hamilton-f40-plate",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The front plate reads 44 — so does the engine block underneath it.",
+        "alt": "Close view of the Ferrari F40's nose and 44 number plate, with Lewis Hamilton's legs beside the open door"
+      },
+      {
+        "img": "press-hamilton-f40-paddock",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Threading the F40 through Monza's paddock under its own power.",
+        "alt": "Lewis Hamilton driving his Ferrari F40 through the Monza paddock, rear 44 plate visible"
+      },
+      {
+        "img": "press-hamilton-f40-approach",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Walking back to a car that waited three decades to be driven again.",
+        "alt": "Lewis Hamilton walking toward his parked Ferrari F40 on a hillside road, seen from behind"
+      }
+    ]
+  },
+  {
+    "slug": "odyssey-imax-70mm-extended",
+    "cat": "film",
+    "catlabel": "Film",
+    "vol": "28",
+    "read": "4 min read",
+    "title": "Christopher Nolan's New Movie Won't Leave IMAX. Here's Why That Matters.",
+    "stand": "Eleven weeks in, on a format only forty-one screens on Earth can even show, audiences keep choosing the harder way to watch a movie. That's either stubbornness or the entire argument for theaters at all.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-the-odyssey-landing",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "Matt Damon as Odysseus leading armored soldiers off a beached ship in Christopher Nolan's The Odyssey"
+    },
+    "meta_description": "Christopher Nolan's The Odyssey extends its IMAX 70mm run through September 30, 2026 — an 11th week on a format shown in only 41 theaters worldwide, as the film becomes Nolan's highest-grossing release and the top-grossing R-rated movie ever.",
+    "body": [
+      "Homer's Odyssey is a story about a journey that refuses to end on schedule. Every time Odysseus gets close to home, something extends the trip — a god, a storm, an island he can't quite leave. Nolan's version has managed the same trick at the box office. What was supposed to close on September 15 is now booked through September 30, its eleventh week on a format that exists in exactly forty-one theaters worldwide.",
+      "IMG::0",
+      "IMG::1",
+      "That format is the detail worth sitting with. IMAX 70mm is not the same thing as \"IMAX,\" and it is definitely not the same thing as \"IMAX with Laser\" — it is actual 70-millimeter film, threaded through a handful of projectors built for it, in rooms most people will never stand in. Universal and Nolan didn't extend the wide release. They extended the hardest version of this movie to see, because that is the version people kept showing up for.",
+      "PQ::They extended the hardest version of this movie to see, because that's the one people kept showing up for.",
+      "The numbers explain why nobody wanted to be the studio that closed it early. The Odyssey has pulled in $457 million worldwide on IMAX screens alone, a record that doesn't just beat Avatar's decade-old $271 million mark — it beats it by more than the entire theatrical run of most films released this year. The 70mm engagements, all forty-one of them, have generated $66 million on their own: a $1.6 million average per screen, at a $20.58 average ticket, in a pair of months that are now the two highest-grossing in IMAX's history.",
+      "IMG::2",
+      "Zoom out from the premium formats and the film's regular math is just as absurd. $1.55 billion worldwide makes The Odyssey the second-highest-grossing release of the year, Nolan's highest-grossing film ever — ahead of The Dark Knight Rises' $1.1 billion — and the highest-grossing R-rated movie of all time, a record it took from Deadpool & Wolverine's $1.338 billion. It did all of that as a three-hour, R-rated adaptation of a three-thousand-year-old poem, which is not the description of anything a studio's spreadsheet would have bet on.",
+      "The cast carries its own version of the same story. Matt Damon's Odysseus, Anne Hathaway's Penelope, Robert Pattinson, and Samantha Morton's Circe are each posting the highest-grossing release of their careers, which says less about any single performance than about what happens when a director spends two decades convincing audiences that the room matters as much as the screen.",
+      "IMG::3",
+      "That's the actual case being made here, eleven weeks in. A theatrical release competing with a phone in every pocket doesn't win by being merely available — it wins by being worth a specific trip, to a specific room, in a format you have to look for on purpose. Most people asking for \"IMAX tickets\" will end up in a room that isn't running film at all. The ones checking for the words \"70mm\" next to the listing are the ones this extension was for.",
+      "The run ends September 30, assuming nothing extends it again. Given the pattern so far, betting against one more delay would be a very Odyssey mistake to make."
+    ],
+    "images": [
+      {
+        "img": "press-the-odyssey-helmet",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Odysseus, mid-campaign, in the rain.",
+        "alt": "Close-up of Matt Damon as Odysseus wearing a plumed helmet, soldiers behind him in the rain"
+      },
+      {
+        "img": "press-the-odyssey-shore",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Further along the journey, on a different shore.",
+        "alt": "Two figures in pale robes standing on a salt flat in Christopher Nolan's The Odyssey"
+      },
+      {
+        "img": "press-the-odyssey-helmet-detail",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The kind of detail a 70mm print holds onto that a phone screen won't.",
+        "alt": "Close-up rear view of a warrior's helmet with a bone ornament in Christopher Nolan's The Odyssey, embers in the air"
+      },
+      {
+        "img": "press-the-odyssey-ensemble",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Hathaway, Damon, and Pattinson — three of the film's four highest-grossing career releases.",
+        "alt": "Anne Hathaway, Matt Damon, and Robert Pattinson in character for The Odyssey"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "balvenie-arsham-1931-collection",
+    "cat": "art",
+    "catlabel": "Art",
+    "vol": "29",
+    "read": "5 min read",
+    "title": "The Balvenie Waited 88 Years. Daniel Arsham Built the Proof.",
+    "stand": "Cask #239 was filled in 1931 and opened in 2019. Nobody currently on staff at the distillery was alive for either date. Seventeen decanters is what that patience becomes.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-balvenie-arsham-sculpture",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "Daniel Arsham's sculptural vessel for The Balvenie's 88-Year-Old whisky, set into a raked sand spiral forming the number 88"
+    },
+    "meta_description": "Daniel Arsham built a bronze, copper, and oak sculpture to house The Balvenie's 88-Year-Old — the oldest whisky ever released — debuting at Frieze Seoul with an immersive barley-floor performance, 'Dawn Of Our Spirit.'",
+    "body": [
+      "Cask #239 was filled at The Balvenie's Speyside distillery in 1931. It was opened in 2019, eighty-eight years later, by Malt Master Kelsey McKechnie. Nobody currently working at the distillery was alive for either date. What came out was enough for seventeen decanters, and the whole story of what that kind of patience is actually worth.",
+      "IMG::0",
+      "IMG::1",
+      "The Balvenie built its new 1931 Collection around that cask, and rather than launch it like a product, the label handed the debut to Daniel Arsham as a live installation at Frieze Seoul. \"Dawn Of Our Spirit\" puts four dancers inside a circular bed of loose barley at S50 in Seongsu, their choreography — by Sukyung Yoo — echoing the slow, repetitive labor of turning grain on a malting floor by hand. A soundscape recorded inside the actual Speyside distillery plays underneath it, so the room doesn't read as a gallery so much as an abstracted version of the working floor eighty-eight years removed.",
+      "Arsham traces the project back to his first trip to Speyside. \"One of the things that struck me was the handmade quality of everything. It's technical, but very craft in a way, so I pulled out a lot of materials I saw,\" he said, sitting across from a table of early, discarded mockups. \"In the end, the preciousness of that liquid really needs to be considered.\"",
+      "IMG::2",
+      "That consideration shows up as an object built almost entirely out of metaphor. The whisky itself sits in a hand-blown crystal decanter detailed with 18-karat gold, its neck shaped after the \"Balvenie Ball\" — the distillery's distinctively shaped still, and the source of the whisky's honeyed character. Arsham's housing around it splits into three materials, each standing in for a stage of the maturation: eight hand-patinated bronze layers on the front, one for each decade the cask spent waiting; a copper disc at the center, cast from a retired still; and eighty-eight thin layers of oak across the back, one per year, referencing the European sherry butt the spirit first went into.",
+      "IMG::6",
+      "IMG::7",
+      "PQ::It's the whisky when it's moving through time. It's moving through the copper, into the wood, and then into your glass.||Daniel Arsham||",
+      "IMG::3",
+      "1931 wasn't only the year the cask was filled. It's also the year The Balvenie opened its Home Malt Floor, which the distillery still operates today — one of a handful in Scotland stubborn enough to keep hand-turning barley in an industry that automated the process decades ago. The performance isn't really staging something symbolic; it's staging the one part of the process that hasn't changed since the cask it's honoring was filled.",
+      "After the barley settles, the experience moves into a gallery holding Arsham's sculpture alongside guided tastings led by McKechnie herself. \"It's still a very handmade process,\" Arsham said of the decision to build an entire performance around it. \"Sometimes we lose a little bit of that seeing it just on a shelf or having it at home. We tried together to bring some of that into the experience and tell that story.\"",
+      "The fit makes sense once you know Arsham's broader practice. He calls it \"fictional archaeology\" — treating ordinary, often industrial objects as artifacts recovered from some future excavation, carrying centuries of imagined wear. A whisky that spent eighty-eight years becoming what it is barely needed the fiction.",
+      "IMG::4",
+      "\"In whisky, nothing happens overnight,\" McKechnie said. \"The fruits of today's craftspeople might not be tasted for generations. Being able to release an 88-year-old really reaffirms this to everyone at the distillery — that all the hard work we're putting in today is a real testament to persistence and patience. That's something I think Daniel understands beautifully.\"",
+      "The 88-year-old is now the oldest whisky ever released, a record The Balvenie doesn't seem interested in treating quietly. \"At The Balvenie, we are always in charge of our own destiny,\" McKechnie said. \"I love the thought of us doing something that changes the landscape of Scotch whisky. We've done it before. I relish the opportunity to do it again.\"",
+      "IMG::5",
+      "\"Dawn Of Our Spirit\" continues on to New York, Shanghai, and Taipei after Seoul. Seventeen decanters will outlast the tour, the distillery, and most of the people who see the performance — which was more or less the point of filling the cask in 1931 in the first place."
+    ],
+    "images": [
+      {
+        "img": "press-balvenie-arsham-floor-wide",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The Home Malt Floor at Speyside, still hand-turned today.",
+        "alt": "A worker crouches over rows of barley on The Balvenie's traditional Home Malt Floor in Speyside, Scotland"
+      },
+      {
+        "img": "press-balvenie-arsham-floor",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The same gesture the Seoul performance borrows its choreography from.",
+        "alt": "Low-angle view of raked barley waves on The Balvenie's malt floor"
+      },
+      {
+        "img": "press-balvenie-arsham-stills",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The still house at Speyside — the source of the copper Arsham cast into the sculpture's centerpiece.",
+        "alt": "A man examines the spirit safe beside The Balvenie's copper pot stills"
+      },
+      {
+        "img": "press-balvenie-arsham-barley",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Malted barley, the raw material the entire performance is built from.",
+        "alt": "Close-up of malted barley falling through a hand at The Balvenie distillery"
+      },
+      {
+        "img": "press-balvenie-mckechnie",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Malt Master Kelsey McKechnie, who bottled the 88-Year-Old in 2019.",
+        "alt": "Kelsey McKechnie, Malt Master at The Balvenie, holding a dram in front of a Daniel Arsham collaboration sign"
+      },
+      {
+        "img": "press-balvenie-1931-collection",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The full 1931 Collection, with Arsham's sculpture behind the 88-Year-Old.",
+        "alt": "The Balvenie's 1931 Collection: the 88-Year-Old decanter inside Daniel Arsham's sculpture, flanked by the 12- and 15-year expressions"
+      },
+      {
+        "img": "press-balvenie-sculpture-angle",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Bronze on the face, walnut and oak along the edge.",
+        "alt": "Three-quarter view of Daniel Arsham's sculptural vessel for The Balvenie 88-Year-Old, showing its wood-grain side edge"
+      },
+      {
+        "img": "press-balvenie-sculpture-studio",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The finished object, lit like the artifact it's meant to resemble.",
+        "alt": "Daniel Arsham's sculptural vessel for The Balvenie 88-Year-Old, lit dramatically in a dark studio setting"
+      }
+    ]
+  },
+  {
+    "slug": "lange-sohne-1815-triple-split-2026",
+    "cat": "timepiece",
+    "catlabel": "Timepiece",
+    "vol": "30",
+    "read": "5 min read",
+    "title": "A. Lange & Söhne 1815 UP/DOWN (2026): What Actually Changed",
+    "stand": "Anyone can add a color. Only a handful of manufactures on earth can shrink a case by a millimeter and a half without the watch losing an ounce of what made it serious in the first place.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-lange-1815-pair",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "A. Lange & Söhne's new 1815 UP/DOWN in white gold and pink gold, both with deep blue dials, side by side"
+    },
+    "meta_description": "A. Lange & Söhne debuts a smaller, blue-dialed 1815 UP/DOWN and a platinum TRIPLE SPLIT with a rhodié dial at the 2026 Concours of Elegance — what actually changed, and why the size reduction matters more than the color.",
+    "body": [
+      "A. Lange & Söhne used the 2026 Concours of Elegance at Hampton Court Palace to extend two of its most established families, and the headline detail in both press photos is the same: a blue dial, a platinum case, the kind of thing that reads well in a product shot. The actual news is quieter than that, and it's the kind of quiet that only a handful of manufactures on earth can afford to make the whole story.",
+      "IMG::0",
+      "IMG::1",
+      "Start with the 1815 UP/DOWN, because the real change isn't the color. The previous generation of this watch measured 39mm across. The new white-gold and pink-gold editions — references 244.028 and 244.037, 300 pieces each — bring that down to 37.5mm, while holding the case at exactly the same 8.7mm thickness and keeping the identical L051.2 caliber inside it. A millimeter and a half sounds like nothing until you consider what most watchmakers do instead when they want a release to feel new: bigger case, busier dial, a complication nobody asked for. Lange went the other direction, on purpose, and it's a harder trick to pull off than adding anything would have been.",
+      "PQ::Lange didn't modernize this watch with a sportier bracelet or a busier dial. It modernized it by taking something away.",
+      "The dial does its own work, too — a solid dark blue face against argenté-toned sub-dials, blued steel for the power-reserve and seconds hands, gold hands matched to the case for the hours and minutes. It's a sharper, more contemporary read on a design that's stayed close to Ferdinand Adolph Lange's original pocket-watch layout for over a century, and the contrast makes a genuinely classical watch feel intentional rather than simply heritage-coded.",
+      "IMG::2",
+      "The mechanism behind the name is where Lange's actual argument lives. \"UP/DOWN\" refers to the AUF (wound) and AB (unwound) indicator sitting opposite the seconds sub-dial, and rather than bolting a power-reserve module onto an existing movement — the shortcut most of the industry takes — Lange built the indication directly into the L051.2 caliber through a compact planetary-gear system. The movement is hand-wound, assembled twice per Lange's standard practice, and delivers 72 hours on a single wind. The feature is native to the mechanism, not added to it, which is precisely the distinction serious collectors are paying for.",
+      "There's a menswear read here too, if you're the type to think that way. The white gold is the cooler, more architectural version — built for navy tailoring, charcoal flannel, minimalist black eveningwear. The pink gold runs warmer, and does more with brown, tobacco, cream, and olive. Neither is the safer choice. They're just arguing for different rooms.",
+      "IMG::3",
+      "Alongside the 1815, Lange also extended the TRIPLE SPLIT — still, since its 2018 debut, the only mechanical chronograph in the world able to measure comparative and intermediate times across seconds, minutes, and hours simultaneously, up to a combined twelve-hour span. It's a complication built for exactly one problem most people will never have — timing two runners across a marathon, say, without losing either split — solved with a level of mechanical overkill that borders on the theatrical.",
+      "The new platinum edition dresses that complication in a cool rhodié dial against dark grey auxiliary counters, luminous main hands, and blued rattrapante hands that only reveal themselves mid-split. The 43.2mm 950-platinum case is fitted to a dark brown alligator strap on a platinum deployant buckle, and the whole edition is capped at 100 pieces.",
+      "IMG::4",
+      "Turn it over and the case for the price becomes a lot more literal. The hand-wound L132.1 caliber inside is built from 567 finished components — untreated German silver bridges, Glashütte ribbing, a hand-engraved balance cock, five gold chatons — plus a patented disengagement mechanism that eliminates friction loss the instant the rattrapante hands stop. Nobody buying this watch needs to time two marathon splits at once. They're buying the fact that the mechanism exists to do it without compromise, whether or not it's ever asked to.",
+      "IMG::5",
+      "Neither release adds a complication nobody asked for or a size nobody wanted. Both do the harder, less photogenic thing: refine a design that already worked, and let the restraint be the news."
+    ],
+    "images": [
+      {
+        "img": "press-lange-1815-white-gold",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The white-gold 1815 UP/DOWN, ref. 244.028 — 37.5mm, 300 pieces.",
+        "alt": "Close-up of the white-gold A. Lange & Söhne 1815 UP/DOWN with a blue dial and argenté sub-dials"
+      },
+      {
+        "img": "press-lange-1815-pink-gold-macro",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The pink-gold version, ref. 244.037, dial detail.",
+        "alt": "Macro detail of the pink-gold A. Lange & Söhne 1815 UP/DOWN dial with power-reserve sub-dial"
+      },
+      {
+        "img": "press-lange-1815-caseback",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The L051.2 caliber through the caseback, numbered against its 300-piece limit.",
+        "alt": "Sapphire caseback view of the A. Lange & Söhne 1815 UP/DOWN's L051.2 hand-wound movement, marked Limited 000/300"
+      },
+      {
+        "img": "press-lange-triple-split-dial",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The platinum TRIPLE SPLIT, rhodié dial against dark grey counters.",
+        "alt": "Angled view of the A. Lange & Söhne TRIPLE SPLIT in platinum with a rhodié dial and blued rattrapante hands"
+      },
+      {
+        "img": "press-lange-triple-split-caseback",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The platinum caseback, one of 100.",
+        "alt": "Caseback view of the A. Lange & Söhne TRIPLE SPLIT showing the L132.1 movement, marked Limited 000/100"
+      },
+      {
+        "img": "press-lange-triple-split-movement",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The L132.1 caliber in macro: German silver bridges, hand-engraved finishing, gold chatons.",
+        "alt": "Extreme macro of the A. Lange & Söhne L132.1 movement finishing, showing hand-engraved bridges and gold chatons"
+      }
+    ]
+  },
+  {
+    "slug": "jordan-ferrari-550-maranello-auction",
+    "cat": "automotive",
+    "catlabel": "Motors",
+    "vol": "31",
+    "read": "5 min read",
+    "title": "Michael Jordan's Lost Ferrari 550 Maranello Is Going to Auction",
+    "stand": "Michael Jordan drove it out of the United Center the night he won his fifth title. Tinker Hatfield had already put it on a shoe by the time anyone noticed it was gone.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-jordan-ferrari-front",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "Front view of Michael Jordan's customized 1997 Ferrari 550 Maranello with headlights on, heading to auction at JOOPITER"
+    },
+    "meta_description": "Michael Jordan's customized 1997 Ferrari 550 Maranello — the car that inspired the Air Jordan XIV and vanished for 24 years — heads to JOOPITER's first-ever car auction, estimated at $700,000 to $1.3 million.",
+    "body": [
+      "On June 13, 1997, Michael Jordan drove a Ferrari 550 Maranello out of the United Center with an Illinois vanity plate reading \"MJ 5,\" hours after clinching his fifth championship. A year later, Nike's Tinker Hatfield put that same car's bodywork onto a basketball shoe. Then, at the end of 2002, Jordan sold it — and for twenty-four years, nobody outside a private garage knew where it was.",
+      "IMG::0",
+      "IMG::1",
+      "It resurfaced in early 2026, tracked down by the Miami dealer Curated, and it's now heading to auction through JOOPITER — the collectibles platform Pharrell Williams founded — in the company's first-ever car sale. Chassis 108712 goes to online bidding September 15 through 30, with a pre-sale estimate of $700,000 to $1.3 million. Even the low end of that range already exceeds the standing public-auction record for a stock 550 Maranello, which tells you exactly how much of the number is Ferrari and how much of it is Jordan.",
+      "The car itself was never stock. Delivered in May 1997 in Rosso Barchetta over chrome Speedline wheels, it hides a naturally aspirated 485-hp V12 behind a gated manual transmission — the purist's configuration, on a car built for a man who could have specified anything. Ferrari extended the seat rails and slimmed the padding to fit Jordan's 6-foot-6 frame, and at his request, built it without the yellow fender shields every other 550 wore. Everyone else's Ferrari announced itself. His didn't need to.",
+      "IMG::2",
+      "The plate is the part collectors will actually be bidding on. \"MJ 5\" wasn't added for the auction — it was on the car the day he drove it out of the arena, and it's still there. The 550 also turns up rolling out of a January 1998 practice in The Last Dance, which means its screen time predates the documentary that made everyone else's Jordan memorabilia valuable by two decades.",
+      "PQ::Everyone else's Ferrari announced itself. His didn't need to.",
+      "What actually separates this specific car from any other well-provenanced Jordan artifact is that it didn't just witness the era — it designed part of it. Nike's Tinker Hatfield used the 550 as a direct reference for the Air Jordan XIV: the shoe's low, aerodynamic side profile echoes the car's body line, its lateral vents reference the Ferrari's side intakes, and its shield-shaped Jumpman mark was built as a basketball-world answer to the prancing horse on the hood. Even the tread pattern on the outsole reads as a motorsport cue. It's one of the cleanest examples in sneaker history of a personal object becoming a design language, rather than a brand bolting a car reference on after the fact.",
+      "IMG::3",
+      "Jordan debuted the Air Jordan XIV on June 14, 1998 — Game 6 of the Finals against Utah, the night of \"The Last Shot,\" his final basket as a Chicago Bull and the sixth championship. JOOPITER is pairing this sale with Jordan's game jersey from that same series, estimated separately at $10 million to $15 million, under a deliberate \"Driven to Greatness\" framing: the car, the shoe it designed, and the jersey from the game the shoe was designed for.",
+      "None of that required the car to actually be driven much. It shows just under 19,000 miles after twenty-nine years, most of them spent doing nothing more dramatic than sitting somewhere out of view. That's the real shape of the story: an object famous enough to redesign a sneaker and anchor a documentary spent most of its life being invisible, and is about to spend two weeks in September being the most examined car in the country. Preview runs September 15 through 20 at CART Department in New York, for anyone who wants to see the plate in person before the bidding decides what it's actually worth."
+    ],
+    "images": [
+      {
+        "img": "press-jordan-ferrari-profile",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Rosso Barchetta over chrome Speedline wheels, no yellow fender shields.",
+        "alt": "Side profile of Michael Jordan's Ferrari 550 Maranello in Rosso Barchetta red"
+      },
+      {
+        "img": "press-jordan-ferrari-angle",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The tan interior Ferrari re-tailored for a 6-foot-6 owner.",
+        "alt": "Front three-quarter view of Michael Jordan's Ferrari 550 Maranello showing its tan leather interior"
+      },
+      {
+        "img": "press-jordan-ferrari-plate",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The \"MJ 5\" plate, on the car since the night he drove it out of the United Center.",
+        "alt": "Rear view of Michael Jordan's Ferrari 550 Maranello showing its Illinois vanity plate reading MJ 5"
+      },
+      {
+        "img": "press-air-jordan-14",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Air Jordan XIV, built directly off the 550's bodywork.",
+        "alt": "The Ferrari-inspired Air Jordan XIV sneaker in red suede with a yellow Jumpman shield"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "steph-curry-warriors-career",
+    "status": "published",
+    "cat": "business",
+    "catlabel": "Sports",
+    "vol": "32",
+    "read": "5 min read",
+    "title": "Stephen Curry Wants to Retire a Warrior. The NBA's Rulebook Gets a Vote Too.",
+    "stand": "Curry saying he wants to finish his career in Golden State isn't the story — everyone already assumed that. The story is a rule most fans have never heard of, quietly deciding how long that promise can legally be written.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-curry-fans",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "Stephen Curry walking toward cheering fans reaching for autographs and jerseys after a Golden State Warriors game",
+      "srcset": true
+    },
+    "body": [
+      "Stephen Curry telling NBC Sports Bay Area and ABC7 that he expects to finish his career with the Golden State Warriors isn't really news. Nobody watching the Warriors for the last decade seriously entertained another ending. The actual story sitting underneath that headline is a rule almost no fan could name, quietly deciding how long that promise is even allowed to be written down.",
+      "IMG::0",
+      "Curry enters the final year of his current deal in 2026-27 at $62.6 million, which makes him the league's highest-paid player this season on an annual basis, extension or not. He's also eligible right now for a two-year max extension worth up to $136.7 million. Both of those numbers are real. Neither of them is the constraint actually shaping the decision.",
+      "That constraint is the NBA's Over-38 Rule, and it doesn't ask whether the Warriors want to keep Curry or whether he wants to stay — both of those questions are already settled. What it limits is how long a new contract is allowed to run once a player crosses that age threshold: no more than three total years under contract from the point the rule kicks in. It exists to stop teams and players from using long, back-loaded deals in a player's late thirties to quietly shift cap obligations into the future. It was never built to end anyone's career on a timer; it just forces the paperwork into shorter increments.",
+      "IMG::1",
+      "IMG::2",
+      "PQ::The rule doesn't ask whether the Warriors want to keep him. It asks how the contract is allowed to be shaped.",
+      "That leaves Curry two real paths, and both of them still end in Golden State. He can sign the two-year, $136.7 million extension now, which locks in certainty through 2028-29 — his age-40 season — and takes any contract talk off the table before it can distract a team that needs every advantage it can get. Or he can play out this season, hit free agency, and negotiate a fresh contract instead of an extension, reportedly worth as much as $207 to $213 million over three years, stretching into his age-42 season. More total money, more years, and a bet that his body cooperates long enough to collect on it.",
+      "Golden State's front office isn't hedging on which ending it expects. General manager Mike Dunleavy Jr. has said he's \"pretty confident\" Curry finishes his career as a Warrior, and the organization's position is straightforward: he wants to stay, they want him to stay, and the timing gets built around what actually works for him.",
+      "None of this happens in a vacuum of good health. Curry played just 43 games in 2025-26, and Golden State went out in the play-in tournament without ever fielding a fully healthy roster. Whatever ceiling this retooled group — Jimmy Butler, Draymond Green, Kristaps Porziņģis — is actually capable of reaching depends entirely on Curry being available to reach it, extension or not.",
+      "Four championships, two MVPs, eleven All-NBA selections, twelve All-Star appearances, a spot on the NBA's 75th Anniversary Team, and eighteen seasons in one uniform is the kind of résumé that used to be common in this league and is now nearly extinct. The genuinely modern part of the story isn't that Curry wants to be a one-team player. It's that finishing as one now runs through a rule most of the league's own fans have never had to think about — proof that even the most sentimental ending in sports still has to clear a legal department first."
+    ],
+    "images": [
+      {
+        "img": "press-curry-thumbsup",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Highest-paid player in the league this season, extension or not.",
+        "alt": "Stephen Curry looking back over his shoulder giving a thumbs-up during a Golden State Warriors game"
+      },
+      {
+        "img": "press-curry-portrait",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Entering his age-38 season, with the Over-38 Rule now setting the terms.",
+        "alt": "Close-up of Stephen Curry preparing to shoot a free throw"
+      },
+      {
+        "img": "press-curry-crouch",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "43 games played in 2025-26 — the number the Warriors' actual ceiling depends on.",
+        "alt": "Stephen Curry crouching courtside with clenched fists during a Golden State Warriors game"
+      }
+    ]
+  },
+  {
+    "slug": "keffe-d-davis-tupac-shakur-verdict",
+    "cat": "news",
+    "catlabel": "News",
+    "vol": "33",
+    "read": "5 min read",
+    "title": "Tupac Shakur Murder Verdict: Duane \"Keffe D\" Davis Found Guilty, Explained",
+    "stand": "Duane \"Keffe D\" Davis never fired a shot. Nevada law didn't require that he had, and a Las Vegas jury needed less than three hours to agree.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-keffe-d-tupac-verdict",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "Split image of Duane \"Keffe D\" Davis in custody in a Las Vegas courtroom beside an archival photo of Tupac Shakur"
+    },
+    "meta_description": "A Las Vegas jury convicted Duane \"Keffe D\" Davis of first-degree murder in Tupac Shakur's 1996 killing — the first conviction in the case in nearly 30 years, built almost entirely on Davis's own words.",
+    "body": [
+      "A Las Vegas jury needed less than three hours to convict Duane \"Keffe D\" Davis of first-degree murder in the 1996 killing of Tupac Shakur. It is the first conviction of any kind in a case that had gone unresolved for nearly thirty years — and prosecutors never once claimed Davis pulled the trigger.",
+      "That distinction is the legal foundation the entire case was built on. Under Nevada law, a person who helps direct or carry out a murder can be held as criminally responsible as the person who fires the shot. Prosecutors used that principle to present Davis, a 63-year-old former Compton gang figure, as the \"shot caller\" who supplied the weapon and set the retaliation in motion, rather than the man in the back seat who fired it. He is the only person ever charged in Shakur's death.",
+      "The outline of that night is well established. Shakur, 25, was shot in a drive-by attack near the Las Vegas Strip on September 7, 1996, while riding in a car driven by Death Row Records co-founder Marion \"Suge\" Knight; he died of his injuries days later. Prosecutors argued the shooting followed an earlier fight at the MGM Grand, where Shakur and members of his group assaulted Davis's nephew, Orlando Anderson — and that Davis, in response, obtained a gun and helped lead the search for Shakur that night.",
+      "What made the case unusual was what prosecutors didn't have. There was no recovered murder weapon, no recovered vehicle, no surveillance footage of the shooting, and no DNA or forensic evidence tying Davis directly to the scene. Chief Deputy District Attorney Binu Palal built the case almost entirely on Davis's own words — 2008 and 2009 police interviews in which he described being in the car and passing a gun toward the back seat, his 2019 memoir Compton Street Legend, years of podcast and documentary appearances, and jail calls recorded after his 2023 arrest. In those accounts, spread across more than a decade, Davis had described his own role in the killing repeatedly and in detail.",
+      "IMG::0",
+      "The defense's response was that none of it should count as proof. Attorney Michael Sanft argued Davis had spent years exaggerating or fabricating his account to sell books and draw media attention, and called acquittal \"the only verdict that makes sense in this case.\" A retired Las Vegas detective testified he couldn't independently verify parts of Davis's story, including hospital records for Anderson and rental records for the Cadillac Davis described. The jury heard roughly two dozen prosecution witnesses against three for the defense, and was not persuaded — returning a unanimous guilty verdict on a single count of first-degree murder with a deadly weapon.",
+      "PQ::Prosecutors never claimed Davis fired the shots. Nevada law didn't require that he had.",
+      "The courtroom carried the weight of what the verdict actually closed. Shakur's sister, Sekyiwa \"Set\" Shakur, wept as it was read. Davis's son covered his face. Davis himself stood silently through the decision, then raised a fist toward the gallery on his way out. District Judge Carli Kierny ordered him held without bail ahead of an October 13 sentencing, where he faces a maximum of life in prison; his attorneys have said they plan to appeal.",
+      "The case sat, from opening statements to verdict, inside the same East Coast–West Coast mythology that has shaped hip-hop's memory of the mid-1990s for a generation — The Notorious B.I.G.'s name surfaced repeatedly during the trial, a reminder of how inseparable the two deaths remain in the culture's telling of that era. Shakur's killing has been picked over by fans, journalists, and investigators for almost thirty years without a single conviction to show for it. As of Monday, for the first time, there is one."
+    ],
+    "images": [
+      {
+        "img": "press-keffe-d-tupac-verdict",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Duane \"Keffe D\" Davis in a Las Vegas courtroom; Tupac Shakur in 1994.",
+        "alt": "Split image of Duane \"Keffe D\" Davis in custody in a Las Vegas courtroom beside an archival photo of Tupac Shakur"
+      }
+    ]
+  },
+  {
+    "slug": "maserati-the-brothers-teaser-trailer",
+    "cat": "film",
+    "catlabel": "Film",
+    "vol": "34",
+    "read": "4 min read",
+    "title": "Al Pacino & Anthony Hopkins' Maserati Movie: Everything We Know",
+    "stand": "Al Pacino and Anthony Hopkins aren't playing Maseratis in this one. They're playing the money that decided whether the name survived long enough to mean anything.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-maserati-brothers-hero",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "Stylized key art from Maserati: The Brothers showing a vintage racing car speeding through a red-orange haze"
+    },
+    "meta_description": "Maserati: The Brothers, starring Al Pacino and Anthony Hopkins, drops its first teaser — a founding-era racing biopic built around the marque's 1939-40 Indianapolis 500 wins, directed by Bobby Moresco.",
+    "body": [
+      "Every carmaker eventually gets the reverent, present-tense treatment — the glossy heritage film that makes a factory floor look like a cathedral. \"Maserati: The Brothers\" isn't trying to be that. Its teaser, dropped August 31, spends its runtime on dust, narrow roads, and men risking a family business on cars that could kill them, which is a more honest place to start a story about a trident badge than a boardroom.",
+      "IMG::0",
+      "IMG::1",
+      "Director Bobby Moresco — the Oscar winner behind Crash's screenplay — is telling the founding story of Alfieri, Bindo, and Carlo Maserati, three brothers trying to turn an engineering obsession into a company that could survive contact with actual capitalism. The film's spine is the marque's back-to-back Indianapolis 500 wins in 1939 and 1940, driven by Wilbur Shaw in the 8CTF — the car that made Maserati a name worth defending rather than just a name worth trying.",
+      "IMG::2",
+      "The casting is where the film shows its hand. Al Pacino plays Vincenzo Vaccaro, an early investor betting real money on an unproven idea, and Anthony Hopkins plays Luca Antonelli, a financier shaping the business strategy behind the engineering. Neither man is playing a Maserati. Both are playing the kind of quiet, external leverage that decides whether an engineer's obsession becomes a company or just a very good story about a garage. Andy García and Jessica Alba round out the supporting cast, with Michele Morrone leading as Alfieri.",
+      "IMG::3",
+      "It was shot across Italy on purpose — Bologna, where the company was founded; Modena, where it still operates; and Rome's Cinecittà Studios for the rest — the same triangulated authenticity move Moresco already ran on Lamborghini: The Man Behind the Legend, and the same lineage of Italian-automotive biopics that includes Michael Mann's Ferrari. There's an emerging genre here, and this is its third entry in as many marques.",
+      "VIDEO::",
+      "IMG::4",
+      "A theatrical target of October 15, 2026 is circulating out of Italy, though reporting has consistently flagged that date as provisional rather than locked. What's already confirmed is the harder-edged pitch underneath the cast list: this isn't a supercar commercial dressed up as a period piece. It's a story about the years before the badge meant anything, when the only thing separating a great engineer from a bankrupt one was whether his car survived the next race — and whether the men bankrolling him were willing to find out."
+    ],
+    "images": [
+      {
+        "img": "press-maserati-brothers-if-cars",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Prewar racing machines, shot for real risk rather than CGI polish.",
+        "alt": "Two vintage racing cars marked 'IF' racing head-on down a dirt road in Maserati: The Brothers"
+      },
+      {
+        "img": "press-maserati-brothers-chase",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The Indianapolis 500 wins of 1939 and 1940 anchor the film's arc.",
+        "alt": "Vintage race cars kicking up dust on a narrow dirt road in Maserati: The Brothers"
+      },
+      {
+        "img": "press-maserati-brothers-street",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Early motorsport, filmed on narrow European roads rather than a closed circuit.",
+        "alt": "A vintage racing car carrying two drivers speeds down a narrow street in Maserati: The Brothers"
+      },
+      {
+        "img": "press-maserati-brothers-pacino",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Al Pacino as Vincenzo Vaccaro, an early investor in the Maserati enterprise.",
+        "alt": "Al Pacino in period costume and hat as Vincenzo Vaccaro in Maserati: The Brothers"
+      },
+      {
+        "img": "press-maserati-brothers-bts",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "On set in Italy: director Bobby Moresco with lead Michele Morrone.",
+        "alt": "Behind-the-scenes photo of director Bobby Moresco with actor Michele Morrone on the set of Maserati: The Brothers"
+      }
+    ],
+    "video": {
+      "youtube_id": "xm5D-ArgVsg",
+      "title": "Maserati: The Brothers — Official Teaser Trailer"
+    },
+    "status": "draft"
+  },
+  {
+    "slug": "piaget-polo-minute-repeater-2026",
+    "cat": "timepiece",
+    "catlabel": "Timepiece",
+    "vol": "35",
+    "read": "5 min read",
+    "title": "Piaget Polo Minute Repeater (2026): Price, Specs, Why Only 5 Exist",
+    "stand": "There's no stated final number, no \"1 of 25\" on the caseback. Five a year isn't a marketing cap — it's just how long the hand-finishing actually takes.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-piaget-polo-repeater-hero",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "The Piaget Polo Minute Repeater in 18-karat white gold with a blue guilloché dial and blue textile strap"
+    },
+    "meta_description": "Piaget's Polo Minute Repeater folds one of horology's hardest complications into an ultra-thin sport-chic case. Only five pieces are made per year — not a limited edition cap, but the actual limit of 50 hours of hand-finishing per watch.",
+    "body": [
+      "\"Only five pieces this year\" reads like the standard scarcity line every watch brand reaches for eventually — a manufactured number designed to make a buyer move fast. Piaget's version of that sentence is different in a way that actually matters: there is no stated lifetime cap on the Polo Minute Repeater, no \"1 of 25\" waiting on the caseback. Five a year isn't a marketing ceiling. It's just how long the hand-finishing actually takes.",
+      "IMG::0",
+      "The watch itself is Piaget folding one of horology's hardest complications into a case that was never built to hide it. A minute repeater — a mechanism that chimes the time on demand, entirely acoustic, no battery involved — usually lives in a formal dress watch. Piaget put this one in the Polo, its modern sport-chic line, and left the caliber partially exposed through an openworked, guilloché dial instead of covering it up. The complication isn't a secret here. It's the point.",
+      "The case makes the argument for restraint on its own: 18-karat white gold, 48mm across but only 9.3mm thick, which is a genuinely difficult thinness to hit on a watch built to also ring a bell. Inside is the self-winding Caliber 1290P — 430 hand-finished components, entirely conceived, developed, and assembled at Piaget's La Côte-aux-Fées manufacture, spun by a platinum micro-rotor coated in blue PVD.",
+      "IMG::1",
+      "None of that finishing is decorative in the usual sense. A minute repeater lives or dies on acoustics, and Piaget engineered this one to chime the hours at G-sharp and the minutes at A-sharp in the fifth octave, at 64 decibels, triggered by a slide at 9 o'clock rather than a pusher. Every hand-beveled bridge and mirror-polished hammer inside is there to shape a sound most owners will only ever demonstrate to someone else in the room.",
+      "IMG::2",
+      "That's where the real math behind \"five a year\" comes from. The dial alone took over 150 hours to develop. Every individual watch then absorbs another 50 hours of hand-finishing before it's numbered and released. Piaget isn't deciding to make five. Five is what the calendar allows once you refuse to speed up either number.",
+      "IMG::3",
+      "IMG::4",
+      "The same movement gets a second, more ornamental life in a High Jewellery companion piece, reference G0A51017 — a fully openworked dial this time, set inside a bezel of baguette-cut blue sapphires and diamonds. It's the same 430-component argument underneath, just dressed for a different room.",
+      "IMG::5",
+      "The standard reference, G0A51038, is reported to retail around €330,000, available through Piaget boutiques on inquiry rather than a waitlist announcement. The more honest question isn't how many exist right now. It's how many years Piaget is willing to keep making exactly five."
+    ],
+    "images": [
+      {
+        "img": "press-piaget-polo-repeater-exploded",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Caliber 1290P's 430 components, laid out in full.",
+        "alt": "All 430 components of Piaget's Caliber 1290P movement laid out in an exploded view on a blue background"
+      },
+      {
+        "img": "press-piaget-polo-repeater-dial",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The partially openworked guilloché dial, exposing the caliber rather than hiding it.",
+        "alt": "Close-up of the Piaget Polo Minute Repeater's blue guilloché dial with an openworked section revealing the movement"
+      },
+      {
+        "img": "press-piaget-polo-repeater-case",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "A 48mm case at 9.3mm thick — a difficult thinness for a repeater.",
+        "alt": "A hand holding the Piaget Polo Minute Repeater case beside its separated dial, showing the case's thin profile"
+      },
+      {
+        "img": "press-piaget-polo-repeater-caseback",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The caseback, numbered N° 00, engraved Polo Emperador Repeater Minute.",
+        "alt": "Macro view of the Piaget Polo Minute Repeater's engraved sapphire caseback showing the movement and numbering"
+      },
+      {
+        "img": "press-piaget-polo-repeater-assembly",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Fifty hours of hand-finishing per piece, in progress.",
+        "alt": "A watchmaker using tweezers to assemble a component into the Piaget Caliber 1290P movement"
+      },
+      {
+        "img": "press-piaget-polo-repeater-hj",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The High Jewellery companion piece, ref. G0A51017, fully openworked with a baguette-cut sapphire bezel.",
+        "alt": "The Piaget Polo Minute Repeater High Jewellery edition with a fully openworked dial and blue sapphire and diamond bezel"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "roger-federer-hall-of-fame-induction",
+    "cat": "sports",
+    "catlabel": "Sports",
+    "vol": "36",
+    "read": "5 min read",
+    "title": "Roger Federer's Hall of Fame Induction: His Full Speech, Explained",
+    "stand": "Thirty minutes to describe his own career, and he spent most of it in tears over other people's names — his childhood hero, his coach, his wife. That's either deflection or the actual secret to what made him different.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-federer-hof-wimbledon-trophy",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "Roger Federer smiling while holding the Wimbledon trophy"
+    },
+    "meta_description": "Roger Federer was inducted into the International Tennis Hall of Fame on August 29, 2026 — the 271st inductee, and the only player in the Class of 2026 alongside broadcaster Mary Carillo. Inside a speech built almost entirely around everyone but himself.",
+    "body": [
+      "A Hall of Fame induction is structurally built to be about one person. The sport is formally agreeing that your name belongs in its permanent memory, and the entire ceremony exists to say so, at length, to your face. Roger Federer spent almost thirty minutes at Newport on August 29 doing something close to the opposite — turning his own induction speech into an accounting of everyone else's names.",
+      "IMG::0",
+      "He became the International Tennis Hall of Fame's 271st inductee, the sole player honoree in the Class of 2026, with broadcaster Mary Carillo entering alongside him in the contributor category. Mirka Federer introduced her husband, and he opened stripped of his usual composure: \"Oh man. This is very high level and a tough act to follow.\" He admitted he'd been \"a little stressed, to be honest,\" and then let the moment take over anyway.",
+      "What followed wasn't a highlight reel. It was closer to a ledger of debts. He broke down first over Stefan Edberg, the childhood hero whose game had pulled him toward tennis in the first place — what Federer called \"happy tears\" — then again over longtime coach Severin Luthi, and once more over Mirka, the sentence dissolving before he finished it. A man being inducted for what he did with a racket spent most of his speech on the people who taught him how.",
+      "IMG::1",
+      "PQ::A man being inducted for what he did with a racket spent most of his speech on the people who taught him how.",
+      "The record itself doesn't need defending, but it's worth having in one place: the first man to reach 20 Grand Slam singles titles, a record 237 consecutive weeks at world No. 1 out of 310 total, 10 straight major finals with 8 won, 8 Wimbledon titles, 6 Australian Opens, 5 consecutive US Opens from 2004 to 2008, and a lone French Open in 2009 that completed the career Grand Slam — a feat only eight men in the sport's history have managed. In 2006 alone he went 92-5 and won 12 titles, three of them majors, on his way to 23 consecutive Grand Slam semifinals and 36 straight major quarterfinals.",
+      "Rafael Nadal has since reached 22 majors and Novak Djokovic 24, and neither number takes anything from Federer's plaque. Being first to 20 and holding a 237-week unbroken run at No. 1 aren't records that get erased by someone else's later total — they're a different category of achievement entirely, the kind measured in duration and precedence rather than a final tally that anyone could eventually pass.",
+      "IMG::2",
+      "Mary Carillo's induction carried its own weight beside his. Billie Jean King, presenting her in the contributor category, put it plainly: \"She has earned her spot in sports journalism and she has earned her spot in Newport.\" Carillo, 69, already a member of the Sports Broadcasting Hall of Fame, said the company she was joining was almost hard to believe.",
+      "Federer closed by thanking the ball boys who'd worked his matches and telling the next generation of players to push the game further than he had — a strange note to end on for the man being enshrined, and a fitting one for how he'd spent the previous half hour. \"I'm thrilled to have made the journey here,\" he said. \"To immerse yourself in the history of the sport means a lot to me.\" He's said before that fame was never the goal. Thirty minutes of a speech that was supposed to be about him, spent almost entirely on everyone else, is about as convincing as that claim is ever going to get."
+    ],
+    "images": [
+      {
+        "img": "press-federer-hof-emotional",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Federer, mid-speech, pausing over the names that shaped him.",
+        "alt": "Roger Federer wiping his eye, visibly emotional, during his Hall of Fame induction speech"
+      },
+      {
+        "img": "press-federer-hof-award",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Raising his Hall of Fame trophy at Newport.",
+        "alt": "Roger Federer raising a racket-shaped Hall of Fame trophy on stage in a tan suit"
+      },
+      {
+        "img": "press-federer-hof-billboard",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "On the Hall's first red carpet, introduced as the Swiss Maestro.",
+        "alt": "Roger Federer waving in front of a large screen displaying his name and a photo of him playing tennis"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "kith-adidas-samba-denim",
+    "cat": "style",
+    "catlabel": "Style",
+    "vol": "37",
+    "read": "4 min read",
+    "title": "Kith x adidas Samba \"Denim\": Release Info, Price, Details",
+    "stand": "One shoe, two different stripe techniques on two different sides — pony hair on one, chain-stitch embroidery on the other. That mismatch is the actual design, not a flaw someone forgot to fix.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-kith-samba-denim-pair",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "A pair of Kith for adidas Originals Samba 'Denim' sneakers side by side against a grey backdrop"
+    },
+    "meta_description": "Kith and adidas Originals rework the Samba in bleached denim, pony hair, and chain-stitch embroidery — with deliberately mismatched Three Stripes on each side. Released August 31, 2026 at $120.",
+    "body": [
+      "Most Samba collaborations solve the same problem the same way: swap in a premium leather, add a suede overlay, pick a bolder colorway, done. Kith's newest pass at the shoe skips that playbook entirely and treats the Samba like a garment instead of a sneaker — which is how you end up with a shoe whose two sides don't actually match, on purpose.",
+      "IMG::0",
+      "The \"Denim\" drops the usual leather-and-suede formula for bleached white and light-blue denim layered over a canvas base, with pony hair and chain-stitch embroidery doing the rest of the textural work. It released August 31 through Kith's stores, site, and app in New York, London, Paris, and Tokyo simultaneously, at $120 — the kind of release-day choreography that only makes sense once you've seen how much fabrication is actually happening on the upper.",
+      "IMG::1",
+      "IMG::2",
+      "The strongest idea in the shoe is the one detail most collaborations would have corrected: the Three Stripes don't match side to side. The lateral stripes are rendered in raised, luxe pony hair; the medial stripes are chain-stitch embroidery instead — two different techniques on two sides of the same shoe, deliberately mismatched rather than made consistent. It's a garment-design instinct applied to a sneaker: the kind of construction where a jacket might combine two different fabrications on purpose, rather than a shoe leaning on one loud logo or a single high-contrast colorway to make its point.",
+      "PQ::Two different techniques on two sides of the same shoe, deliberately mismatched rather than made consistent.",
+      "IMG::3",
+      "Branding stays quiet by comparison. A gold Kith script replaces the standard lateral \"Samba\" mark, the adidas Trefoil holds its usual place at the tongue, and the co-branding shows up again in smaller type across the tongue tag, heel, and footbed — present, but not fighting the materials for attention.",
+      "IMG::4",
+      "Everything underneath the denim stays exactly where the Samba archive says it should: cream laces, a padded collar, and the dark gum outsole that's been part of the shoe's vocabulary since long before anyone was layering pony hair onto it. That restraint is what keeps the silhouette legible under all the material experimentation — recognizable at ten feet, unfamiliar up close.",
+      "IMG::5",
+      "The styling case is that this isn't a blue sneaker so much as a textural neutral. Ecru denim, faded jeans, or relaxed khaki let the washes blend instead of clash; a navy knit, washed gray tee, cream overshirt, or canvas chore jacket echoes the palette without competing with it. Keep the rest of the fit similarly unbothered — high-saturation, ultra-clean pieces will fight the shoe's whole point, which is a washed, tactile finish that reads as slightly artisanal rather than manufactured. It's one of the more genuinely fashion-conscious Samba collaborations for exactly that reason: it makes an almost-too-familiar silhouette feel unfamiliar again without changing the shape anyone actually recognizes it by."
+    ],
+    "images": [
+      {
+        "img": "press-kith-samba-denim-profile",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Bleached denim and canvas replace the usual leather-and-suede Samba formula.",
+        "alt": "Side profile of a single Kith for adidas Originals Samba 'Denim' sneaker"
+      },
+      {
+        "img": "press-kith-samba-denim-angle",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The gold Kith script sits where the lateral 'Samba' mark usually goes.",
+        "alt": "Angled view of the Kith for adidas Originals Samba 'Denim' sneaker draped over fabric"
+      },
+      {
+        "img": "press-kith-samba-denim-stripe-macro",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Pony hair on the lateral stripes — raised, luxe, and deliberately mismatched with the other side.",
+        "alt": "Macro detail of the pony hair Three Stripes on the Kith for adidas Originals Samba 'Denim'"
+      },
+      {
+        "img": "press-kith-samba-denim-tongue-pair",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The adidas Trefoil holds its place at the tongue, with Kith co-branding underneath.",
+        "alt": "Top-down view of a pair of Kith for adidas Originals Samba 'Denim' sneakers showing the tongue branding"
+      },
+      {
+        "img": "press-kith-samba-denim-tongue-macro",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Co-branded tongue tag detail.",
+        "alt": "Macro detail of the adidas and Kith co-branded tongue tag on the Samba 'Denim'"
+      },
+      {
+        "img": "press-kith-samba-denim-laced",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Cream laces and a padded collar keep the shoe rooted in the original Samba vocabulary.",
+        "alt": "Top-down view of a laced Kith for adidas Originals Samba 'Denim' sneaker on draped fabric"
+      }
+    ]
+  },
+  {
+    "slug": "vacheron-constantin-tribute-animal-kingdom",
+    "cat": "timepiece",
+    "catlabel": "Timepiece",
+    "vol": "38",
+    "read": "6 min read",
+    "title": "Vacheron Constantin Tribute to the Animal Kingdom: Inside the Six Watches",
+    "stand": "Six artists who'd never built anything for a watch were handed a canvas smaller than a coin and about as much depth as a stack of index cards. None of them could just shrink their usual technique to fit.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-vc-animal-kingdom-lineup",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "All six watches from Vacheron Constantin's Metiers d'Art Tribute to the Animal Kingdom collection lined up side by side"
+    },
+    "meta_description": "Vacheron Constantin's Metiers d'Art Tribute to the Animal Kingdom brings six outside artists -- working in feathers, glass, origami, embroidery, paper, and wood -- into a 4-millimeter space between dial and crystal. Here's how each of the six pieces was built.",
+    "body": [
+      "Vacheron Constantin's \"One of Not Many Crafts Programme\" started with a straightforward premise: find six artists whose practices have nothing to do with watchmaking, and ask them to build something for a dial anyway. What made it hard wasn't the craft. Every one of these six people already knew how to work in their material. What none of them had ever done was work in it at a scale where the entire piece has to fit in roughly four millimeters of depth.",
+      "That number is the real subject of the Métiers d'Art Tribute to the Animal Kingdom collection. Each 42mm case — 12.9mm thick, in 18-karat white or 5N pink gold — leaves its six artisans about 3 to 4mm between the dial and the sapphire crystal to build an entire dimensional scene. None of them could simply shrink their studio technique to fit. Each had to invent a version of their craft that had never needed to exist before.",
+      "Julien Vermeulen's Feathersnake is the clearest case of that invention. His serpent is assembled from more than 200 individual pieces of goose feather and seven rare Lophophore feathers, cut and layered onto silk paper over a 3D metal appliqué until the scales catch light the way real iridescent plumage does. It's micro-plumasserie, a discipline built for millinery and costume work, rebuilt from scratch for a canvas smaller than a coin.",
+      "IMG::0",
+      "Simone Crestani's Glassoctopus takes the opposite material problem: instead of building up thin layers, he formed a transparent octopus from glass rods, worked dot by dot with tungsten tools until the creature rises just 3.5mm off a dark blue hand-guilloché gold dial.",
+      "IMG::1",
+      "IMG::2",
+      "Anja Midori's Oraygami solves the same depth problem in paper instead of glass — six manta rays, folded from self-dyed Japanese paper using micro-origami, suspended at different heights above a blue guilloché surface under a moiré-effect crystal so the rays appear to actually be swimming at depth.",
+      "IMG::3",
+      "IMG::4",
+      "PQ::None of them could simply shrink their studio technique to fit. Each had to invent a version of their craft that had never needed to exist before.",
+      "Laura Baverstock's Tigerbroidery embroiders a prowling tiger in 9-karat yellow and white gold thread and ceramic-coated copper wire onto green silk, mounted over a perforated titanium plate.",
+      "IMG::7",
+      "IMG::8",
+      "Marianne Guély's Papercroc goes monochrome entirely — an all-white crocodile in snow-like vegetation, laser-cut and heat-embossed from 250 and 300 gram cotton paper, a relief sculpture that happens to also tell time.",
+      "IMG::5",
+      "IMG::6",
+      "Anna Le Corno's Woodenwings closes the set with a falcon built from twelve wood species — circular background marquetry, sculptural layered marquetry, and a wing assembled feather by feather and cantilevered directly over the dial, the most physically ambitious construction of the six.",
+      "IMG::9",
+      "IMG::10",
+      "The mechanical foundation had to disappear behind all of it, which is its own quiet piece of engineering. Vacheron chose the Calibre 2460 G4 specifically because its four peripheral apertures display the hour, minute, day, and date without a single hand or central marker crossing the artwork — the movement gets out of the way on purpose. Every oscillating weight is hand-engraved in 22-karat gold with tool motifs referencing the specific artisan's own instruments, alongside a 40-hour power reserve and 3 bar of water resistance, with a calfskin strap embossed to echo whatever's happening on the dial above it.",
+      "IMG::11",
+      "None of the six pieces reach for the obvious version of their animal. The snake becomes an iridescent feather surface, the tiger a metallic-thread textile construction, the crocodile a monochrome paper relief, the falcon a study in wood grain, the manta rays a suspended paper choreography, the octopus a piece of transparent sculpture that happens to sit on a wrist. Vacheron's actual contribution here is closer to a gallery's than a manufacturer's — building the frame, choosing the constraint, and getting out of the way of six artists solving a problem none of them had faced before."
+    ],
+    "images": [
+      {
+        "img": "press-vc-feathersnake",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Feathersnake: over 200 pieces of goose and rare Lophophore feather, by Julien Vermeulen.",
+        "alt": "Close-up of the Feathersnake dial by Vacheron Constantin, an iridescent feather serpent"
+      },
+      {
+        "img": "press-vc-glassoctopus-wide",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Glassoctopus: glass rods worked dot-by-dot, rising 3.5mm off the dial, by Simone Crestani.",
+        "alt": "The Glassoctopus watch by Vacheron Constantin, a transparent glass octopus sculpture on a dial"
+      },
+      {
+        "img": "press-vc-glassoctopus-close",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Close detail of the sculpted glass tentacles.",
+        "alt": "Macro detail of the transparent glass octopus sculpture on the Vacheron Constantin Glassoctopus dial"
+      },
+      {
+        "img": "press-vc-oraygami-wide",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Oraygami: six micro-origami manta rays in self-dyed Japanese paper, by Anja Midori.",
+        "alt": "The Oraygami watch by Vacheron Constantin, showing folded paper manta rays suspended above the dial"
+      },
+      {
+        "img": "press-vc-oraygami-close",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The rays mounted at varying heights on fine brass stems.",
+        "alt": "Close detail of the folded paper manta rays on the Vacheron Constantin Oraygami dial"
+      },
+      {
+        "img": "press-vc-papercroc-wide",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Papercroc: laser-cut, heat-embossed cotton paper, by Marianne Guely.",
+        "alt": "The Papercroc watch by Vacheron Constantin, an all-white paper crocodile relief on the dial"
+      },
+      {
+        "img": "press-vc-papercroc-close",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Detail of the layered white paper vegetation.",
+        "alt": "Close detail of the white paper sculpture on the Vacheron Constantin Papercroc dial"
+      },
+      {
+        "img": "press-vc-tigerbroidery-wide",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Tigerbroidery: gold and copper thread embroidery on silk, by Laura Baverstock.",
+        "alt": "The Tigerbroidery watch by Vacheron Constantin, an embroidered tiger face on the dial"
+      },
+      {
+        "img": "press-vc-tigerbroidery-close",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Gold and white-gold thread detail on the tiger's face.",
+        "alt": "Macro detail of the gold thread embroidery on the Vacheron Constantin Tigerbroidery dial"
+      },
+      {
+        "img": "press-vc-woodenwings-wide",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Woodenwings: twelve wood species, by Anna Le Corno.",
+        "alt": "The Woodenwings watch by Vacheron Constantin, a wood marquetry falcon on the dial"
+      },
+      {
+        "img": "press-vc-woodenwings-close",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The falcon's wing, assembled feather by feather and cantilevered over the dial.",
+        "alt": "Close detail of the wood marquetry falcon wing on the Vacheron Constantin Woodenwings dial"
+      },
+      {
+        "img": "press-vc-caseback-rotor",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The 22K gold oscillating weight, hand-engraved with each artisan's own tools.",
+        "alt": "Caseback view of a Vacheron Constantin Tribute to the Animal Kingdom watch showing the hand-engraved gold oscillating weight"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "trunk-hotel-sapporo-opening",
+    "cat": "travel",
+    "catlabel": "Travel",
+    "vol": "39",
+    "read": "6 min read",
+    "title": "TRUNK(HOTEL) SAPPORO: Opening Date, Rooms, What to Know",
+    "stand": "107 rooms, a Michelin sushi counter, live music — and none of it is the actual reason to book. The reason is a 40-meter waterway on the 18th floor that TRUNK has never built before.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-trunk-sapporo-suite",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "A TRUNK(HOTEL) SAPPORO suite at dusk with floor-to-ceiling views over the city"
+    },
+    "meta_description": "TRUNK(HOTEL) SAPPORO opens September 17, 2027 as the brand's first property outside Tokyo -- 107 rooms in a Mid-Century Folklore design, anchored by TRUNK(BATH HOUSE), the brand's first spa, built around a 40-meter waterway and ten sensory bathing zones.",
+    "body": [
+      "TRUNK(HOTEL) SAPPORO will have 107 rooms, a Michelin-recognized sushi counter, a chapel, a private cinema, and a live-music lounge when it opens September 17, 2027. None of that is the actual reason to book it. The reason is on the 18th floor: a 40-meter waterway that TRUNK has never built anything like before, in a spa concept the brand didn't previously have.",
+      "This is TRUNK's first property outside Tokyo — its fourth hotel overall, and by room count its largest — occupying floors 10 through 18 of the Sapporo Daibiru building in the city's central Odori district. The move outside Tokyo is itself the headline for a brand that built its identity there; everything about the property reads like a deliberate answer to the question of what TRUNK looks like somewhere else.",
+      "IMG::0",
+      "That answer is called \"Mid-Century Folklore,\" designed by GENERAL DESIGN CO. with TRUNK Atelier. It isn't retro reproduction — it's mid-century restraint filtered through Hokkaido's own material culture: wood-centric textures, traditional handiwork, and finishes meant to keep a guest aware of the region's forests and climate despite being eighteen floors above a city center. The 89 standard rooms and 18 suites are the vehicle for that idea, not really the point of it.",
+      "IMG::1",
+      "The point is TRUNK(BATH HOUSE), the brand's first dedicated spa, built around an immersive \"water utopia\" rather than a conventional pool or a single public bath. Guests move through ten distinct bathing zones along the waterway, each engineered around a different combination of lighting, sound, and temperature — swimwear-friendly throughout, closer to a social urban bathhouse than a gender-segregated onsen.",
+      "IMG::2",
+      "IMG::3",
+      "PQ::None of that is the actual reason to book it. The reason is a 40-meter waterway TRUNK has never built anything like before.",
+      "The register shifts zone to zone on purpose — a rain-drenched jungle passage in one stretch, disco balls suspended over water in another, high-temperature sauna terracing lit from beneath each step, and quieter leather-lounger rooms built for the pause between the more theatrical spaces. Open-air baths complete the loop. It's designed as a sequence of contrasting conditions to move through, not a single wellness amenity to sit in.",
+      "IMG::4",
+      "IMG::5",
+      "Everything else in the building is genuinely strong and still plays a supporting role. The hotel's 10th-floor counter will be Sushi Saito's first Sapporo location, pairing the Michelin-recognized restaurant's Edo-mae technique with Hokkaido's own seafood, alongside all-day dining and a lounge bar with live music. A chapel opens straight onto forest for ceremonies, and a private studio handles cinema and karaoke on request.",
+      "IMG::6",
+      "IMG::7",
+      "IMG::8",
+      "Nightly rates are projected between ¥60,000 and ¥600,000 — roughly $375 to $3,755 — which places TRUNK(HOTEL) SAPPORO firmly in design-led luxury rather than mass boutique territory. A relatively small key count, a headline spa, and destination-level dining all pointing the same direction suggest TRUNK is building a cultural hub for the city rather than simply a place to sleep between days on the slopes.",
+      "IMG::9",
+      "TRUNK hasn't yet released the waterway's depth or temperature range, specific sauna capacities, whether bathhouse access is included for every room category, or a treatment menu — the kind of operational detail that typically surfaces closer to when reservations actually open. What's already clear is the bet underneath all of it: that a bathhouse, done seriously enough, can be the headline attraction of a hotel the way a view or a restaurant usually is."
+    ],
+    "images": [
+      {
+        "img": "press-trunk-sapporo-dining",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The all-day dining room, built on the same wood-forward restraint as the guest floors.",
+        "alt": "The dining room at TRUNK(HOTEL) SAPPORO with wood paneling and a curved bar"
+      },
+      {
+        "img": "press-trunk-sapporo-waterway",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The 40-meter waterway that anchors TRUNK(BATH HOUSE), the brand's first spa concept.",
+        "alt": "A long, dimly lit water channel with cascading water walls inside TRUNK(BATH HOUSE)"
+      },
+      {
+        "img": "press-trunk-sapporo-rain-zone",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "One of ten bathing zones, each built around a different sensory condition.",
+        "alt": "A rain-like water feature falling through dense greenery inside TRUNK(BATH HOUSE)"
+      },
+      {
+        "img": "press-trunk-sapporo-disco-pool",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Disco balls over water — the bathhouse's more theatrical register.",
+        "alt": "A row of disco balls hanging above a pool at TRUNK(BATH HOUSE)"
+      },
+      {
+        "img": "press-trunk-sapporo-sauna-steps",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "High-temperature sauna terracing, lit from beneath each step.",
+        "alt": "Steaming wood sauna steps lit from below inside TRUNK(BATH HOUSE)"
+      },
+      {
+        "img": "press-trunk-sapporo-loungers",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "A quieter register: leather loungers built for the space between bathing zones.",
+        "alt": "A row of leather chaise loungers in a dim, sunlit room at TRUNK(BATH HOUSE)"
+      },
+      {
+        "img": "press-trunk-sapporo-chapel",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The chapel, opening directly onto Hokkaido forest.",
+        "alt": "A wood-paneled chapel with pews facing an open view of forest at TRUNK(HOTEL) SAPPORO"
+      },
+      {
+        "img": "press-trunk-sapporo-cinema",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The private entertainment studio, built for cinema and karaoke.",
+        "alt": "A private screening room with velvet armchairs at TRUNK(HOTEL) SAPPORO"
+      },
+      {
+        "img": "press-trunk-sapporo-corridor",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Tiled corridor detail, carrying the hotel's warmer, saturated palette.",
+        "alt": "A red-tiled hallway leading to guest rooms at TRUNK(HOTEL) SAPPORO"
+      },
+      {
+        "img": "press-trunk-sapporo-winter-dining",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Outdoor dining domes overlooking central Sapporo in winter.",
+        "alt": "Illuminated geodesic dining domes overlooking snowy Sapporo at night"
+      }
+    ]
+  },
+  {
+    "slug": "parmigiani-fleurier-tonda-pf-skeleton-rose-gold",
+    "cat": "timepiece",
+    "catlabel": "Timepiece",
+    "vol": "40",
+    "read": "5 min read",
+    "title": "Parmigiani Fleurier Tonda PF Skeleton Rose Gold: Price & Details",
+    "stand": "Milano Blue debuted on platinum first, cool and monochrome. Move the same color onto rose gold and it stops being a finish and starts being a contrast.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-pf-tonda-skeleton-wrist",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "The Parmigiani Fleurier Tonda PF Skeleton Rose Gold Milano Blue worn on the wrist"
+    },
+    "meta_description": "Parmigiani Fleurier's 30-piece Tonda PF Skeleton Rose Gold Milano Blue moves an existing platinum colorway onto warm gold -- and changes its entire personality. Case, Calibre PF777 movement, and pricing detailed.",
+    "body": [
+      "Parmigiani Fleurier didn't invent a new color for the Tonda PF Skeleton Rose Gold Milano Blue. Milano Blue already existed — it debuted on a platinum version of the same watch, where it read cool, monochrome, almost austere. Move that identical hue onto rose gold and it stops being a finish and starts being a contrast, which is the actual point of this 30-piece limited edition: proof that a color isn't fixed until you know what it's sitting next to.",
+      "IMG::0",
+      "The case carries the Tonda PF's established codes without needing to prove anything new: 40mm across, an 18-karat rose-gold build just 8.5mm thick, a finely knurled bezel, a screwed-in crown, and 100 meters of water resistance on an integrated rose-gold bracelet with a folding clasp. Sapphire crystals front and back leave nothing hidden.",
+      "IMG::1",
+      "IMG::2",
+      "What's actually hidden is nothing — that's the design premise. Parmigiani's approach to openworking here is architectural rather than technical for its own sake: components are selectively reduced to control proportion, light, and depth, not simply to show off how many parts a movement has. Warm rose gold on the case, hands, and applied indices; deep blue across the skeletonized bridges and dial architecture. The contrast is deliberate enough that it reads closer to navy tailoring paired with warm-toned accessories than to a conventional two-tone watch.",
+      "PQ::A color isn't fixed until you know what it's sitting next to.",
+      "IMG::3",
+      "Inside is the manufacture Calibre PF777 — automatic, 192 components, a 3.9mm profile, 29 jewels, running at 4Hz with a 60-hour power reserve. The satin-finished, hand-beveled bridges do the same architectural work as the case exterior, and the skeletonized 22-karat rose-gold rotor is built to integrate into that structure rather than sit on top of it as an obvious afterthought.",
+      "IMG::4",
+      "IMG::5",
+      "Each of the 30 pieces — reference PFC912-2020004-200182 — is individually numbered on the caseback, priced at CHF 97,000, roughly $117,100, through Parmigiani boutiques and authorized retailers. It's a small production run for what amounts to a genuinely disciplined idea: that the most convincing way to make an existing color feel new isn't to change the color at all, but to change what it's made of.",
+      "IMG::6"
+    ],
+    "images": [
+      {
+        "img": "press-pf-tonda-skeleton-dial",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The knurled rose-gold bezel and Milano Blue openworked dial.",
+        "alt": "Studio shot of the Parmigiani Fleurier Tonda PF Skeleton Rose Gold Milano Blue dial"
+      },
+      {
+        "img": "press-pf-tonda-skeleton-dial-macro",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The architecture is legible before it's mechanical -- proportion first, complexity second.",
+        "alt": "Macro detail of the skeletonized movement on the Tonda PF Skeleton dial"
+      },
+      {
+        "img": "press-pf-tonda-skeleton-angle",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "40mm, 8.5mm thick -- slim enough that the openworking never feels like a stunt.",
+        "alt": "Angled view of the Parmigiani Fleurier Tonda PF Skeleton Rose Gold on its integrated bracelet"
+      },
+      {
+        "img": "press-pf-tonda-skeleton-angle-close",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The same Milano Blue that debuted on platinum -- warmer and more contrasted here.",
+        "alt": "Close angled detail of the blue skeletonized dial on the Tonda PF Skeleton"
+      },
+      {
+        "img": "press-pf-tonda-skeleton-rotor",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The skeletonized 22K rose-gold rotor, integrated into the movement's own architecture.",
+        "alt": "Macro detail of the rose gold oscillating rotor on the Parmigiani Fleurier Calibre PF777"
+      },
+      {
+        "img": "press-pf-tonda-skeleton-profile",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The screwed-in crown and knurled bezel in profile.",
+        "alt": "Side profile of the Parmigiani Fleurier Tonda PF Skeleton case and crown"
+      },
+      {
+        "img": "press-pf-tonda-skeleton-caseback",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Each of the 30 pieces individually numbered, Au 750, engraved on the caseback.",
+        "alt": "Caseback view of the Parmigiani Fleurier Tonda PF Skeleton showing the engraved 1 of 30 limited edition marking"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "tim-cook-apple-ceo-farewell-ternus",
+    "cat": "business",
+    "catlabel": "Business",
+    "vol": "41",
+    "read": "5 min read",
+    "title": "Tim Cook Steps Down as Apple CEO: John Ternus Takes Over, Explained",
+    "stand": "Tim Cook spent fifteen years proving Apple could be run by an operations executive. His last act was handing the company to the opposite kind of leader.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-tim-cook-farewell",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "Tim Cook waving on stage on his last day as Apple CEO"
+    },
+    "meta_description": "Tim Cook's final memo as Apple CEO, and what it actually signals: for the first time since Steve Jobs, an engineer -- John Ternus, 25 years inside Apple's hardware organization -- is running the company.",
+    "body": [
+      "Tim Cook spent fifteen years proving Apple could be run by an operations executive rather than a product visionary. His last act as CEO was handing the company to the opposite kind of leader — and the succession memo he sent on his way out reads less like a corporate transition notice than like a man trying to make sure the point landed before he left the building.",
+      "Cook's final day was August 31, 2026, closing out a run that began when he succeeded Steve Jobs in 2011. The memo he sent staff that day skipped the usual boilerplate almost entirely. \"I love this company and the team behind it,\" he wrote, calling the job \"the privilege of a lifetime\" and crediting employees, not strategy, for whatever the company had achieved: \"The truth is, whatever there is to say about my success, I know it is all because of you.\"",
+      "PQ::As you know, I am not leaving Apple. But I am stepping away from a role that I have loved deeply.",
+      "That distinction matters structurally, not just sentimentally. Cook isn't exiting the company — he moves immediately into the role of Executive Chairman, stays based at Apple Park, and continues representing Apple to governments and policymakers at the board level. What he's actually giving up is the day-to-day operational command he built his entire reputation on.",
+      "He's handing it to John Ternus, who became CEO on September 1 after 25 years inside Apple's product organization — joining in 2001, becoming VP of Hardware Engineering in 2013, and running Apple-wide hardware engineering as SVP since 2021. Ternus is credited with leading the hardware side of the iPad and AirPods lines, overseeing the Mac's transition to Apple silicon, and running the engineering behind multiple generations of iPhone, Apple Watch, and Vision Pro — plus the reliability, recycled-materials, and repairability work threaded through Apple's hardware more broadly. He has a mechanical engineering degree from Penn and came up building virtual-reality hardware before Apple ever hired him.",
+      "IMG::0",
+      "PQ::John Ternus has the mind of an engineer, the soul of an innovator, and the heart to lead with integrity and with honor.",
+      "That's a real inversion of the model Cook spent fifteen years validating. He took over in 2011 specifically because he wasn't Steve Jobs — a supply-chain and operations executive succeeding a product visionary, at a moment when the entire premise of Apple without Jobs was in question. He answered that question about as thoroughly as it's possible to answer it: Apple's market capitalization went from roughly $350 billion to $4 trillion on his watch. Putting an engineer back in charge, for the first time since Jobs, isn't a return to the old model so much as a bet that Apple's next hardest problems — AI, services, whatever the next device category turns out to be — are more product questions than operational ones.",
+      "Cook closed his memo the way he opened it, without much distance between the executive and the person: \"My title changes tomorrow, but the love I have for the Apple community never will.\" Succession letters are usually written to reassure markets. This one reads like it was written to reassure people instead — and whether that distinction actually matters is now Ternus's question to answer, not Cook's."
+    ],
+    "images": [
+      {
+        "img": "press-john-ternus-apple",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "John Ternus, Apple's new CEO as of September 1, 2026.",
+        "alt": "John Ternus speaking on stage in front of an Apple logo"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "not-a-hotel-pokemon-sleep-poke-ball",
+    "cat": "travel",
+    "catlabel": "Travel",
+    "vol": "42",
+    "read": "3 min read",
+    "title": "NOT A HOTEL x Pokémon Sleep: The Real Poké Ball You Can Book",
+    "stand": "NOT A HOTEL and Pokémon Sleep are dropping a real, stayable Poké Ball into the Hokkaido woods this September. The interior stays a secret until the 15th — the invitation doesn't.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-pokemon-sleep-poke-ball-hotel",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": false,
+      "alt": "A red-and-white Poké Ball-shaped guest structure in a Hokkaido forest, illustrated alongside Pikachu, Snorlax, Mew, Jigglypuff, and Cubone"
+    },
+    "meta_description": "NOT A HOTEL and Pokémon Sleep are building a stayable Poké Ball-shaped structure in Hokkaido, Japan, with the full interior reveal and stay-campaign details set for September 15, 2026.",
+    "body": [
+      "Every kid who ever played the games understood the joke instinctively: the inside of a Poké Ball is somehow bigger, softer, and more comfortable than the cramped red-and-white sphere it looks like from the outside. NOT A HOTEL and Pokémon Sleep are about to test whether that joke survives contact with architecture — by building one you can actually walk into and lie down.",
+      "The structure is landing in Hokkaido this September, and for now that's nearly the entire brief. No interior renders, no floor plan, no confirmation of what a night inside it feels like — just a shape everyone already recognizes, and a date, September 15, when the rest gets unveiled.",
+      "The pairing makes more sense the longer it sits with you. Pokémon Sleep isn't a game about catching anything; it's a sleep-tracking app that turns the most unglamorous habit a person has — actually going to bed on time — into something worth logging, with a sleeping Snorlax as the reward for doing it consistently. A Poké Ball built for human rest isn't a mascot stunt bolted onto the concept. It's the concept, at full scale, with a door.",
+      "NOT A HOTEL is the right studio to take that bet seriously. The brand has spent its short life commissioning one-off homes from real architects and running them with hotel-grade service, treating each build as a genuine piece of design rather than a themed room with a bed in it. A sphere in a forest, with nothing inside it confirmed yet, is exactly the kind of high-concept structure that reads as an extension of that instinct rather than a detour from it.",
+      "PQ::A Poké Ball built for human rest isn't a mascot stunt bolted onto the concept. It's the concept, at full scale, with a door.",
+      "The one detail that is confirmed is the part that will actually determine whether anyone gets to try it: this isn't a bookable room. Access runs through a campaign, with a small number of winners getting the stay and everyone else getting to watch. NOT A HOTEL and Pokémon Sleep are publishing the full reveal — interior, capacity, and how to actually enter — on September 15 via Pokémon Sleep's own channels.",
+      "Until then, the only confirmed image is the outside of a ball in the woods, which is either the least or the most any hospitality announcement has ever needed to work."
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "pierre-bourdieu-habitus-explained",
+    "cat": "business",
+    "catlabel": "Business",
+    "vol": "43",
+    "read": "5 min read",
+    "title": "What Is Habitus? Pierre Bourdieu's Theory, Explained Simply",
+    "stand": "Some men read a room and adjust. Others walk in and the room already fits. Pierre Bourdieu spent a career explaining why that difference has almost nothing to do with confidence.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-pierre-bourdieu-portrait",
+      "ext": "jpg",
+      "mode": "contain",
+      "srcset": true,
+      "alt": "Portrait of French sociologist Pierre Bourdieu, 1996"
+    },
+    "meta_description": "A plain-English breakdown of Pierre Bourdieu's habitus, capital, and field — the sociology behind why some people read a room instinctively and others have to learn it, and how the framework applies to fashion, business, and taste.",
+    "body": [
+      "Walk into a boardroom, a gallery opening, and a members' bar in the same week and watch what happens to the same man three times. In one room his shoulders drop half an inch. In another they don't. Nothing about his suit changed between stops — something else did, and the French sociologist Pierre Bourdieu spent a career naming exactly what.",
+      "He called it habitus: the internalized feel for the world a person builds through upbringing, class, education, and every room they've already survived. It isn't a rulebook, and it isn't a personal quirk like a standing coffee order. It's a set of learned instincts — what looks like good taste, what a normal risk looks like, what kind of room a person believes is \"for people like me\" — worn so deep it stops feeling learned at all and starts feeling like common sense.",
+      "That's the trick of it, and also the politics of it. Confidence in a boardroom, an easy read of a wine list, the instinct to negotiate instead of accept the first number — none of it announces itself as background. It presents as personality. Bourdieu's argument is that a great deal of what gets called personality is actually biography, replayed so many times it no longer feels like a memory.",
+      "PQ::A great deal of what gets called personality is actually biography, replayed so many times it no longer feels like a memory.",
+      "Habitus rarely does its work alone. Bourdieu paired it with two other ideas, and the shorthand is worth keeping in a back pocket:",
+      "FORMULA::Practice = Habitus + Capital + Field",
+      "Habitus is the instinct. Capital is what a person actually has to spend — money, yes, but also knowledge, relationships, and reputation. Field is the specific arena those instincts and assets get spent in, because luxury fashion runs on a different exchange rate than a trading floor, and a trading floor runs on a different one than a gallery.",
+      "TABLE::{\"title\": \"The three terms, applied\", \"headers\": [\"Concept\", \"What it means\", \"Where you'd feel it\"], \"rows\": [[\"Habitus\", \"Your learned instincts, taste, and posture\", \"Knowing without thinking how formal a room actually is\"], [\"Capital\", \"The resources you can actually spend\", \"Money, yes \\u2014 but also a name, a network, a credential\"], [\"Field\", \"The arena, with its own unwritten rules\", \"What reads as sharp in menswear reads as try-hard in private equity\"]]}",
+      "Put two equally talented designers in the same room at a luxury trade show and the gap between them is rarely talent. One grew up around galleries and creative circles and already knows how long to hold a handshake, which reference signals taste instead of trend-chasing, how to turn small talk into a follow-up email. The other is just as good and is doing all of that math in real time, consciously, while the first man does it without noticing he's doing it at all.",
+      "None of this makes habitus a life sentence. Bourdieu was careful to call it durable, not permanent — reinforced by daily repetition, but not fixed by birth. A new field, entered consistently enough, rewires the instinct: new vocabulary, new relationships, new sense of what's actually at stake, until the room that used to require translation starts to feel native.",
+      "That's the useful version of this theory for anyone building something rather than inheriting it. The goal was never to erase the habitus a man already has — the taste and instinct formed by wherever he actually came from is real information, not a liability to disguise. The goal is addition: enough new rooms, survived enough times, that a second habitus grows in alongside the first. Not a costume. A second native language."
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "habitus-in-the-gentlemen-guy-ritchie",
+    "cat": "film",
+    "catlabel": "Film",
+    "vol": "44",
+    "read": "6 min read",
+    "title": "Why Mickey Pearson Wins: Reading The Gentlemen Through Pierre Bourdieu",
+    "stand": "Guy Ritchie's title is a joke with a straight face. Nobody in The Gentlemen is measured by whether they're good — only by whether they've learned to look like they belong at the top of the room.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-the-gentlemen-still",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "A tense beat from Guy Ritchie's The Gentlemen (2019) — a suited man drawing a gun"
+    },
+    "meta_description": "How Pierre Bourdieu's theory of habitus, capital, and field explains the class hierarchy in Guy Ritchie's The Gentlemen — why Mickey Pearson's composure outranks Dry Eye's ambition, and what the film's title is really arguing.",
+    "body": [
+      "The title of The Gentlemen is doing more work than it lets on. Nobody in Guy Ritchie's film earns that word through decency. They earn it — or fail to — through composure, tailoring, timing, and the ability to make violence look like the last resort of a reasonable man instead of the whole plan. It's a two-hour argument for a very specific idea: that power is a performance most people never learn the choreography for, and the sociologist Pierre Bourdieu spent a career explaining exactly why.",
+      "Bourdieu's terms map onto this film almost too cleanly. Habitus is the instinct a person carries into a room — taste, posture, the unconscious sense of what's appropriate here. Capital is what they actually have to spend: money, yes, but also reputation, relationships, information. Field is the arena those instincts and assets get spent in, and The Gentlemen's field is a genuinely strange one — British organized crime stitched together with land-rich, cash-poor aristocracy, all of it running on rules nobody states out loud.",
+      "IMG::0",
+      "Mickey Pearson is the film's proof of concept. He's an American outsider with no hereditary claim to any of it, and he wins anyway, because he didn't just accumulate money — he built a habitus to match the field he wanted to dominate. Tailoring instead of tracksuits. Private meetings instead of street corners. Calibrated menace instead of loud threats. He understood something Ritchie keeps returning to: in this particular field, raw violence is low-status. The real flex is making people comply while looking untouchable doing it.",
+      "PQ::Raw violence is low-status here. The real flex is making people comply while looking untouchable doing it.",
+      "That's also why Mickey's exit plan matters beyond the money. Selling the business isn't just a payday — it's an attempt to convert criminal wealth into something more permanent: a recognized, secured position, the kind old money gets handed at birth and Mickey has spent years earning the hard way.",
+      "Dry Eye is the film's clearest counter-argument, and the contrast is really a contrast in habitus, not talent. He has ambition and capital of his own. What he doesn't have is Mickey's patience for the field's unwritten choreography — he wants the crown declared, not quietly assumed.",
+      "TABLE::{\"title\": \"Two versions of new money\", \"headers\": [\"\", \"Mickey Pearson\", \"Dry Eye\"], \"rows\": [[\"Relationship to power\", \"Makes it look effortless, already settled\", \"Needs it seen and acknowledged\"], [\"Style\", \"Restrained, tailored, patient\", \"Provocative, immediate, performative\"], [\"Use of force\", \"Calibrated, delegated, a last resort\", \"Open intimidation, a first move\"], [\"What he's chasing\", \"A permanent, recognized position\", \"The crown, publicly declared\"]]}",
+      "It would be tidy to call this a simple contrast between class and no class, but that's the trap Bourdieu specifically warns against — it isn't that Mickey has better taste in some absolute sense. It's that his particular style matches what this field already rewards: understatement, discretion, force translated into quiet consequence instead of spectacle. Dry Eye's style gets read as vulgar not because it's objectively worse, but because it exposes the scramble for status that Mickey's polish is built to hide.",
+      "Even the film's landed aristocrats make the same point from the opposite direction. They still carry the old symbolic weight — the name, the estate, the bearing that says they belong at the top. What they've lost is the cash to keep any of it running, which is exactly the gap Mickey exploits, trading money for the use of a prestige he could never inherit but can, for the right price, rent.",
+      "Strip the tailoring and the one-liners away and The Gentlemen is making a fairly serious argument about how power actually gets distributed: not to whoever has the most money, and not to whoever is willing to go furthest, but to whoever has learned to make their particular mix of money, violence, and charm look like it was always supposed to be there. Mickey wins because nobody in the room can tell where his performance ends and his authority begins. That, the film keeps insisting, is the whole trick."
+    ],
+    "images": [
+      {
+        "img": "press-gentlemen-s2",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Gentlemen — Season 2: the same class performance, one generation further in.",
+        "alt": "Theo James in a suit in Netflix's The Gentlemen Season 2"
+      }
+    ],
+    "status": "draft"
+  },
+  {
+    "slug": "louis-vuitton-singer-porsche-911",
+    "status": "draft",
+    "cat": "automotive",
+    "catlabel": "Motors",
+    "vol": "45",
+    "read": "6 min read",
+    "title": "Louis Vuitton x Singer Porsche 911: Inside Both One-Off Cars",
+    "stand": "One is a road-trip coupe in archival saffron. The other is a Riviera yacht wearing a windshield. Both came from the same two houses, and neither one is a compromise between them.",
+    "meta_description": "Singer Vehicle Design and Louis Vuitton unveiled two one-off Porsche 911 restomods at Monterey Car Week 2026 -- a road-trip Classic coupe and a Riviera-styled Classic Turbo Cabriolet designed by Nicolas Ghesquière, built around a joint capsule of luggage, watches, and instruments.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-lv-singer-911-pair",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "The saffron Porsche 911 Reimagined by Singer Classic and the white Classic Turbo Cabriolet parked together in a mountain meadow",
+      "srcset": true
+    },
+    "images": [
+      {
+        "img": "press-lv-singer-classic-beach",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The Classic, in saffron, with a bespoke trunk and duffel built to fit the frunk exactly.",
+        "alt": "The Porsche 911 Reimagined by Singer Classic in saffron with the door open and Louis Vuitton luggage on the beach"
+      },
+      {
+        "img": "press-lv-singer-classic-profile",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Built for the road trip it's styled for -- roof rack, surfboard, no ambiguity about the brief.",
+        "alt": "Side profile of the saffron Porsche 911 Reimagined by Singer Classic with a surfboard on the roof rack, parked on a beach"
+      },
+      {
+        "img": "press-lv-singer-turbo-gravel",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The Classic Turbo Cabriolet, in Calcaire Lutétien white -- Nicolas Ghesquière's design.",
+        "alt": "Front three-quarter view of the white Porsche 911 Reimagined by Singer Classic Turbo Cabriolet"
+      },
+      {
+        "img": "press-lv-singer-turbo-lake",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Precious-wood trim and gold-toned hardware, built around a Riviera brief rather than a racetrack one.",
+        "alt": "The white Porsche 911 Reimagined by Singer Classic Turbo Cabriolet parked beside a lake with mountains behind it"
+      },
+      {
+        "img": "press-lv-singer-dashboard",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "\"Louis Vuitton\" engraved directly into the dash -- roughly a year of joint gauge and instrument design sits behind it.",
+        "alt": "Dashboard detail of the Louis Vuitton x Singer Porsche 911 showing the steering wheel and analog gauges"
+      },
+      {
+        "img": "press-lv-singer-gearshift",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The removable Tambour-inspired dashboard clock, from Louis Vuitton's La Fabrique du Temps -- the project's actual starting point.",
+        "alt": "Close-up of the Louis Vuitton dashboard clock and leather-wrapped gear shifter inside the Singer Porsche 911"
+      },
+      {
+        "img": "press-lv-singer-capsule-split",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The capsule extends past the car itself -- a fitted racing helmet and duffel, a surfboard built to match.",
+        "alt": "Split image showing a Louis Vuitton helmet and duffel bag inside the car door, and a wood-veneer surfboard on a beach"
+      },
+      {
+        "img": "press-lv-singer-roofrack",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "A trunk and duffel, strapped to a rack built specifically to hold them.",
+        "alt": "Close-up of Louis Vuitton trunk and duffel luggage strapped to the roof rack of the Singer Porsche 911"
+      },
+      {
+        "img": "press-lv-singer-sketch",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "An early design sketch -- the roof-rack trunk was part of the brief from the start, not an afterthought.",
+        "alt": "Pencil design sketch of the Porsche 911 Reimagined by Singer with a roof-mounted trunk"
+      }
+    ],
+    "video": null,
+    "videos": [],
+    "body": [
+      "Singer Vehicle Design and Louis Vuitton unveiled two one-off Porsche 911 restomods at Monterey Car Week in August 2026, and the easy read is that a fashion house put its name on a very expensive car. The actual project is stranger and more disciplined than that: a single design language pushed through silhouette, color, instruments, luggage, and clothing, on two cars that don't even agree with each other about what a Porsche restomod is for.",
+      "IMG::0",
+      "IMG::1",
+      "The first car, the 911 Reimagined by Singer — Classic, is the more straightforward brief: a grand-touring coupe built around Singer's usual foundation, a 964-generation 911 carrying a 4.0-liter naturally aspirated air-cooled flat-six, a six-speed manual, and carbon-ceramic brakes. Louis Vuitton's treatment is archival rather than decorative — saffron body paint against cobalt-blue and yellow graphics, a natural-leather cabin with yellow stitching, trunk-inspired diamond embossing on the seats, and a roof rack engineered to carry an actual bespoke trunk, a set of skis, or a surfboard. It reads as a road-trip car because every material choice on it argues for one.",
+      "IMG::2",
+      "IMG::3",
+      "The second car makes a completely different argument. The 911 Reimagined by Singer — Classic Turbo is an open-top cabriolet, reportedly running a 3.8-liter twin-turbo flat-six at 510 horsepower, and it was conceived directly by Nicolas Ghesquière, Louis Vuitton's artistic director of women's collections. Finished in Calcaire Lutétien white with precious-wood trim, gold-toned hardware, and nautical rear-deck detailing, it isn't styled like a driver's car so much as a Riviera motor yacht that happens to have four wheels instead of a hull.",
+      "PQ::Two cars that don't even agree with each other about what a Porsche restomod is for.",
+      "IMG::4",
+      "IMG::5",
+      "The whole project reportedly started much smaller than either finished car: a client request for a custom dashboard clock. Louis Vuitton's watchmaking atelier, La Fabrique du Temps, built a removable, mechanical, Tambour-inspired clock that converts into a desk clock when it's out of the car — and from there, the two houses spent roughly a year jointly developing the gauge and instrument design, translating Louis Vuitton's own watchmaking vocabulary directly into a Porsche cockpit rather than bolting a logo onto an existing dial.",
+      "That scope is really the story. This isn't a monogrammed Porsche — it's a coordinated luxury-travel system that extends into fitted luggage, a dedicated racing helmet, keys, roof-rack hardware, and clothing built for the specific owner of each specific car. Singer has called it the first co-branded item in Louis Vuitton's entire history, and an unprecedented collaboration on Singer's side as well. Each car ships with its own capsule of Louis Vuitton pieces built to match it — 17 for the coupe, 22 for the cabriolet — including a dedicated Tambour Automatic watch and custom-fitted trunks built to the exact dimensions of each car's cargo space.",
+      "IMG::6",
+      "IMG::7",
+      "Neither company has published pricing, and these are bespoke, client-commissioned builds rather than anything orderable off a configurator — between the going rate for a Singer commission and the scope of custom Louis Vuitton work involved, a seven-figure proposition is the reasonable assumption rather than a number anyone needs to confirm.",
+      "IMG::8",
+      "Of the two, the Classic is the more coherent piece of design thinking: archival color, travel hardware, and a clear road-trip narrative all pulling in the same direction. The Turbo Cabriolet is more editorial than practical — a 911 reimagined as a yacht is a harder brief to fully resolve than a 911 reimagined as a road-trip car, and it reads that way. But the lesson sitting underneath both cars is the same one either way: the project never once reached for a logo as the shortcut. It carried one creative language through shape, material, instruments, and the imagined life of the owner, all the way down to what's strapped to the roof."
+    ]
+  },
+  {
+    "slug": "berneron-mirage-miroir",
+    "status": "draft",
+    "cat": "timepiece",
+    "catlabel": "Timepiece",
+    "vol": "46",
+    "read": "5 min read",
+    "title": "Berneron Mirage Miroir: Price, Specs, What Makes It Different",
+    "stand": "No hour markers, no subdial, no separate face at all -- the bridges and mainplate are doing every job a dial usually does, in solid gold, because Berneron decided the mechanism was allowed to just be the watch.",
+    "meta_description": "Berneron's Mirage Miroir replaces the dial entirely -- its new Caliber 283 movement is built to be read directly, in solid 18K white or yellow gold. Specs, finishing, pricing (CHF 72,500 / 130,250), and the 36-piece annual Series A run.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-berneron-miroir-pair",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "The Berneron Mirage Miroir in 18K white gold and 18K yellow gold, mirrored flat lay",
+      "srcset": true
+    },
+    "images": [
+      {
+        "img": "press-berneron-miroir-dial-macro",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "No dial underneath this. The bridges and mainplate are doing that job themselves.",
+        "alt": "Macro detail of the Berneron Mirage Miroir's openworked white gold movement acting as the dial"
+      },
+      {
+        "img": "press-berneron-miroir-white-wrist",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "White gold: sharper, closer to industrial jewelry.",
+        "alt": "The white gold Berneron Mirage Miroir worn on the wrist"
+      },
+      {
+        "img": "press-berneron-miroir-yellow-wrist",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "Yellow gold: warmer, more archival, more visibly hand-finished.",
+        "alt": "The yellow gold Berneron Mirage Miroir worn on the wrist with its 18K gold bracelet"
+      },
+      {
+        "img": "press-berneron-miroir-white-flat",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "On the Barenia leather strap -- the more restrained of the two configurations.",
+        "alt": "The white gold Berneron Mirage Miroir on a black leather strap"
+      },
+      {
+        "img": "press-berneron-miroir-yellow-flat",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The same movement, same finishing, entirely different temperature.",
+        "alt": "The yellow gold Berneron Mirage Miroir on a black leather strap"
+      },
+      {
+        "img": "press-berneron-miroir-yellow-angle",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The seven-row solid 18K gold bracelet -- over 150 hours of work on its own, not a token add-on.",
+        "alt": "Angled beauty shot of the yellow gold Berneron Mirage Miroir on its integrated gold bracelet"
+      },
+      {
+        "img": "press-berneron-miroir-yellow-macro",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The asymmetry isn't styling. It's the shape the movement generated on its own.",
+        "alt": "Close angled macro of the yellow gold Berneron Mirage Miroir case and bracelet"
+      }
+    ],
+    "video": null,
+    "videos": [],
+    "body": [
+      "The Berneron Mirage Miroir doesn't have a dial. Not a skeletonized one, not a partially openworked one — there's no separate layer sitting over the movement at all. The bridges and mainplate of the watch's new Caliber 283 are arranged specifically so the mechanics themselves can be read as the time display, which is a genuinely different design problem than skeletonizing an existing watch and calling it done.",
+      "IMG::0",
+      "Berneron calls the approach \"mirrored construction,\" and it's an evolution of the brand's signature asymmetric Mirage rather than a new silhouette. The bridge and mainplate architecture is composed on purpose — organized to guide the eye toward specific points the way a conventional dial's hour markers would, rather than left as an attractive tangle of gears behind glass. There's no seconds subdial anywhere on it. The rotating seconds wheel, normally a supporting component, is left exposed to do that job on its own.",
+      "IMG::1",
+      "IMG::2",
+      "The specs underneath support the idea rather than just filling out a spec sheet. Caliber 283 — Berneron's fourth in-house movement, named for its 2.83mm thickness — runs an inverted hand set with the hour hand on top, a free-sprung balance wheel, and a 72-hour power reserve, built from 135 components and 17 jewels at 21,600 vibrations per hour. Getting a hand-wound movement that thin to also function as its own dial is a considerably harder brief than either goal on its own.",
+      "PQ::There's no dial underneath this. The bridges and mainplate are doing that job themselves.",
+      "The finishing carries the same intent. Guillochage, anglage, laser engraving, colimaçonnage, cerclage, traits tirés, nuagage — Berneron applies essentially the full traditional finishing vocabulary to a movement that's going to be looked at directly, permanently, with nothing covering it up. It's decoration built for scrutiny a hidden movement would never get.",
+      "IMG::3",
+      "IMG::4",
+      "The material commitment matches the mechanical one. Case, hands, mainplate, bridges, pin buckle, even the spring bars — all 18-karat gold, in either white or yellow, inside a 38 x 34 x 7mm case that keeps the Mirage's soft, off-center asymmetry and a 42mm lug-to-lug span. It's the kind of detail that reads as excessive on a spec sheet and reads as the entire point in person: nothing on this watch is gold-plated or gold-adjacent. It's gold or it isn't there.",
+      "IMG::5",
+      "That extends to the strap question. The Barenia leather configuration, at CHF 72,500, keeps the movement as the obvious focal point. The alternative — a seven-row, fully integrated 18-karat gold bracelet with its own micro-adjustment, at CHF 130,250 — reportedly takes over 150 hours of work on its own, which makes it closer to a second complication than an accessory.",
+      "Availability runs on watchmaking's slower clock rather than a typical limited-edition drop: Series A production is planned at 36 pieces per colorway, every year, for ten years, with first deliveries not landing until October 2027. That's a running production line dressed up as scarcity, and also genuinely as scarce as most actual limited editions manage to be.",
+      "IMG::6",
+      "White gold reads sharper here, closer to industrial jewelry than watchmaking. Yellow gold reads warmer and more archival, more willing to show its own hand-finishing. Either way, the asymmetry that's defined every Mirage watch so far stops being a styling decision on the Miroir and becomes something closer to a byproduct — the shape the movement generated for itself once it was finally allowed to be the whole watch."
+    ]
+  },
+  {
+    "slug": "drake-fomo-iceman-trilogy",
+    "cat": "music",
+    "catlabel": "Music",
+    "vol": "47",
+    "read": "8 min read",
+    "title": "Drake Just Broke Jay-Z's Record. Now He's Selling You FOMO.",
+    "stand": "Three albums, a record that took Jay-Z's crown, four straight weeks at No. 1 — all nine days before Drake announced his next move is literally titled 'the fear of missing out.' The math doesn't quite add up, and that gap is the actual story.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "press-drake-fomo-camcorder",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "Drake holding a vintage Sony camcorder up to his face courtside at a basketball game"
+    },
+    "meta_description": "From the May 15 ICEMAN/HABIBTI/MAID OF HONOUR trilogy that broke Jay-Z's Billboard record, through the Don Toliver Toronto cameo and Joe Budden's reaction, to the still-unconfirmed FOMO reveal on September 15 -- the full arc of Drake's biggest rollout in years.",
+    "body": [
+      "Nine days before he announced a project called Fear of Missing Out, Drake proved beyond any statistical argument that nobody was missing out on him. Three albums at once, 687,000 combined first-week units, the first Billboard 200 sweep of the top three slots in chart history, and a record that took the crown off Jay-Z's head. Whatever FOMO turns out to be on September 15, the math around it doesn't quite add up — and that gap is the actual story.",
+      "The setup was the May 15 release of ICEMAN, HABIBTI, and MAID OF HONOUR — three albums, 43 songs, dropped simultaneously after a rollout that had been running since August 2024. They debuted at No. 1, No. 2, and No. 3 on the Billboard 200 in the same week, something no artist had ever done. ICEMAN did the heavy lifting: 463,000 first-week units against 114,000 for HABIBTI and 110,000 for MAID OF HONOUR — roughly two-thirds of the trilogy's total demand concentrated in one release.",
+      "That 463,000 did something specific: it gave Drake his 15th No. 1 album on the Billboard 200, passing Jay-Z's 14 for the most by any rapper, and by extension the most by any solo male artist in the chart's history. He's now tied with Taylor Swift for the most No. 1 albums by a solo artist, period, with only the Beatles' 19 still ahead of him. \"Janice STFU\" backed that up on the singles side — a No. 1 debut on the Hot 100, his 90th career top-10 hit, built on an interpolation of Lykke Li's \"I Follow Rivers\" that gave the whole rollout an unexpected crossover hook.",
+      "PQ::Whatever FOMO turns out to be, the math around it doesn't quite add up — and that gap is the actual story.",
+      "What the streaming numbers actually reveal is how the win was built. Of ICEMAN's 463,000 units, 449,000 were streaming-equivalent and only 13,000 came from pure sales — this was a listening event, not a collector's-edition campaign. It also wasn't a one-week spike: ICEMAN held No. 1 for four straight weeks, still pulling 133,000 units and 135.82 million on-demand streams in week four alone. HABIBTI and MAID OF HONOUR did real business by any normal measure — both landed comfortably in the Top 3 — but next to ICEMAN's numbers, the audience made its preference unmistakable. Drake could flood the market with three albums at once; he couldn't make listeners treat all three the same.",
+      "The rollout that got him there was less a album campaign than a year-long civic production. It started with fragments — a title, an image, a location clue — instead of a date and a cover. By mid-2025 it had become episodic: YouTube \"Iceman\" installments functioning as part trailer, part listening session, part behind-the-scenes footage, previewing songs like \"What Did I Miss?,\" \"Which One,\" and \"DOG HOUSE\" months before release, generating clips that spread on their own across every platform without a single traditional ad buy.",
+      "Toronto itself became the set. The rollout moved through the Don Valley Parkway, City Hall, the Brass Rail, and — on release eve — the CN Tower, lit Iceman blue and carrying a live projection while Drake performed from it, followed by a ten-minute fireworks display over the waterfront. A month earlier, a 25-foot ice block had appeared downtown with the release date sealed inside it; a Twitch streamer named Kishka found and cracked it live, and the attempts to break in got messy enough that Toronto's fire department had to step in and melt it safely. None of that was an accident of planning going wrong — it was a release-date announcement that turned into a citywide scavenger hunt with its own news cycle.",
+      "The release night itself had one more twist built in: fans tuned in expecting ICEMAN and got three hard drives revealed live, HABIBTI and MAID OF HONOUR announced as surprise companions at the very end. It's the moment that turned a normal album drop into something worth immediately telling someone else about — which, not coincidentally, is the entire mechanism FOMO is named after.",
+      "The era kept moving after the numbers came in. On August 31, Drake made a surprise appearance at Don Toliver's Toronto tour stop at Scotiabank Arena, playing a three-song ICEMAN set — \"Shabang,\" \"Burning Bridges,\" \"Janice STFU\" — his first live performances of the album since it dropped. Toliver's shoutout from the stage was unambiguous: \"You know damn well this shit wouldn't be this shit if you ain't do this shit... you inspire all of us.\" Drake returned the praise and called it an incredible year for Toliver. Neither artist confirmed a collaboration, but the timing — mid-rollout, mid-FOMO-teasing — was enough to get people speculating anyway.",
+      "Joe Budden, for his part, called FOMO a \"smart play\" on The Joe Budden Podcast — his read being that a guy who just released three albums naming his next move \"fear of missing out\" is a flex, not an anxiety. He predicted real heat on the songs. But his actual ask had nothing to do with the music itself: \"I don't care what he talking about on that album. We looking for Hov shots.\" Budden wants a Jay-Z record, not another round with Kendrick Lamar — Jay-Z, in his words, has been having \"too smooth of a day.\"",
+      "IMG::0",
+      "What FOMO actually is remains genuinely unconfirmed. Drake posted family photos captioned \"FOMO 2026\" on August 12, followed on August 21 by an Instagram image of a CD jewel case reading \"Fear of Missing Out\" alongside a single film-camera emoji. He's since confirmed only that the project \"reveals itself\" via a YouTube livestream on September 15 at 9 p.m. ET — no format, no tracklist, no confirmation it's even music. Fan theories range from a new album to a visual project, a tour announcement, or a Don Toliver collaboration, and every one of them is speculation built on a CD case and a camera emoji, not a statement from Drake.",
+      "IMG::1",
+      "IMG::2",
+      "That vagueness might be the whole point. The trilogy already proved, with historical, Jay-Z-passing certainty, that nobody was going to miss anything by waiting for Drake's next move. Naming the next chapter after the anxiety of missing out isn't a description of the project — it's a mission statement for the era. He's not really selling songs at this point. He's selling the fear of not being there when it happens, and the marketing has been proving that fear correct for over a year now."
+    ],
+    "images": [
+      {
+        "img": "press-drake-fomo-live",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Drake on stage, mid-performance -- the same restlessness that's carried three albums into a fourth in nine days.",
+        "alt": "Drake performing live on stage, pointing toward the crowd"
+      },
+      {
+        "img": "press-drake-fomo-cdcase",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The August 21 Instagram post: a CD jewel case reading \"Fear of Missing Out,\" no other explanation attached.",
+        "alt": "A CD jewel case with the text FEAR OF MISSING OUT printed on the cover"
+      },
+      {
+        "img": "press-drake-fomo-poster",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "layout": "pair",
+        "caption": "The official FOMO title treatment -- still no album, no tracklist, no confirmed format.",
+        "alt": "Official black and white FEAR OF MISSING OUT title poster"
+      }
+    ]
+  },
+  {
+    "slug": "penthouse-walkthrough",
+    "status": "draft",
+    "cat": "travel",
+    "catlabel": "Travel",
+    "vol": "48",
+    "read": "4 min read",
+    "title": "Welcome to the Penthouse — Here's Where Everything Is",
+    "stand": "Seven rooms, two floors, and a reason I kept every one of them. If you've never actually clicked through, start here.",
+    "meta_description": "A room-by-room walkthrough of the Paris Pullen Penthouse — the Kitchen, Living Room, Cinema, Study, Bedroom, Closet, and Bathroom — and how to move through all seven on the site.",
+    "featured": false,
+    "wide": false,
+    "hero": {
+      "img": "room-living",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "The Penthouse living room at Paris Pullen, two storeys of glass over the skyline",
+      "srcset": true
+    },
+    "images": [
+      {
+        "img": "room-kitchen",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Kitchen, unpacked before I got there.",
+        "alt": "The Penthouse kitchen: black marble counters and brass fixtures, with a HelloFresh delivery box on the counter"
+      },
+      {
+        "img": "room-living",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Living Room. Two storeys of glass, and this is the room the whole site opens into.",
+        "alt": "The Penthouse living room: two storeys of glass over the skyline, a spiral staircase, a fireplace, and a grand piano"
+      },
+      {
+        "img": "room-cinema",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Cinema. Nine seats, one screen, one rule about phones.",
+        "alt": "The Penthouse's private cinema, nine seats facing a single screen lined with framed film posters"
+      },
+      {
+        "img": "room-study",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Study, upstairs. Where the pencil does the actual deciding.",
+        "alt": "The Penthouse study: a brass wall monogram, bookshelves, and a blotter with pages marked in pencil"
+      },
+      {
+        "img": "room-bedroom",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Bedroom. The chair gets more use than the bed.",
+        "alt": "The Penthouse bedroom: a bed facing away from the window, a single framed painting, and a lounge chair angled toward the glass"
+      },
+      {
+        "img": "room-closet",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Closet. Not clothes — decisions already made.",
+        "alt": "The Penthouse closet: suits and tuxedos hung by occasion, with rows of shoes and ties"
+      },
+      {
+        "img": "room-bath",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Bathroom. Not much to say, and that's the point.",
+        "alt": "The Penthouse bathroom in stone and brass, floor-to-ceiling glass overlooking the city"
+      }
+    ],
+    "video": null,
+    "videos": [],
+    "body": [
+      "Most of you land on this site and end up in one room without ever meaning to — the Living Room, twenty-seven floors up, because that's where the front door actually opens now. Nobody's given you the rest of the floor plan. So here it is, once, start to finish: seven rooms, two levels, and a reason I kept every one of them.",
+      "First stop is the smallest one on purpose. The Kitchen — black marble, brass, and this week there's a box on the counter I didn't order and didn't unpack myself. It just shows up, already put away like it always was there. I don't cook every night. When I do, I cook well, and at this point I've stopped asking how the box knows that about me.",
+      "IMG::0",
+      "Move right and you're in the room the site actually starts you in: the Living Room. Two storeys of glass, and if the fireplace is lit it's because someone was sitting here not long before you arrived. The piano in the corner isn't something I can play — I spent seven years on trumpet, first chair, and never touched keys seriously a day in my life. It's wired to whatever I'm actually listening to instead, which is the only honest job a piano in this room could do. See the dot sitting on it? Every room's got a few of those — tap one and a card slides up with the real specs on whatever you're looking at, the same way it just did for the piano.",
+      "PQ::A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.",
+      "The vault by the piano isn't hidden behind anything — brass wheel, black steel, set right into the wall where you'd have to be looking for it not to notice it. What's inside is UR Welcome, and it isn't public yet. There's a candle on the back counter too, unlit, no launch date I'm confirming for you today. Both of them are staying exactly where they are until I'm ready.",
+      "IMG::1",
+      "Keep going right past the piano and you're in the Cinema — nine seats, one screen, and a phone rule that's actually enforced, unlike most of what I've written down for myself upstairs. The posters on the wall are all one register: men in tailoring, making decisions, usually badly. I'll call it research. It's partly research. There's a Remote button in the corner too, and it's not decoration — tap it and you get three real tabs: TV, Music, Cinema. Hit Guide under TV and you'll find the actual channel list — The Gentlemen, Iceman with Drake, Ali Siddiq's Mondays, Steph Curry's Greatest Stories, more below that. Switch to Music and it pulls up whatever's actually loaded on the piano downstairs, UR Welcome Vol. 1, tracklist and all.",
+      "IMG::2",
+      "That's the whole of Level 27. Take the floor toggle up one and the register changes completely — this half of the Penthouse isn't for anyone but me.",
+      "The Study is the first room up there, and it's where the actual paperwork lives. Fourteen Pullen Laws sit on the left shelf, written down over eleven years, because a rule you don't write down is a rule you'll eventually forget. The first one's about arriving early. I'm not reading you the fourteenth. This week's Journal pages are out on the blotter, marked in pencil rather than ink, because nothing in this room counts as decided until it survives the pencil. Most of it doesn't.",
+      "IMG::3",
+      "Down the hall is the Bedroom — blackout glass, no television anywhere in it, and a lounge chair angled at the window instead of the bed, because that's where the actual thinking happens. One painting hangs behind the headboard on purpose, so I only see it when I turn around: a man on a road at dusk, walking away from whatever the artist couldn't be bothered to explain. I bought it before I could afford it, and it's hung on every wall I've had since.",
+      "IMG::4",
+      "Next door is the Closet, and it was never a room of clothes — it's a room of decisions I'd already made. Everything's arranged by occasion, not colour. Two dinner jackets sit front and centre, black-tie and white-tie, pressed and ready before I have to ask for either one. The door stays open more often than it's shut, which tells you how often I actually second-guess what's on those rails.",
+      "IMG::5",
+      "Last stop is the Bathroom — stone, brass, steam, and the whole city sitting on the other side of the glass. I don't have much to tell you about it, and that's sort of the point. Not every room needs a story attached to earn its place.",
+      "IMG::6",
+      "That's the tour — Kitchen to Living Room to Cinema on twenty-seven, then Study to Bedroom to Closet to Bath on twenty-eight. The arrows at either edge move you room to room. Floors, top right, doesn't list all seven — it jumps you straight to whichever level you ask for and drops you in that level's first room, which beats paging through everything just to get upstairs. And every dot you pass along the way opens the same kind of card the piano did — one line, three or four specs, nothing you have to read past. None of it's complicated. I just hadn't walked anyone through it yet, and a floor plan nobody explains might as well not exist."
+    ]
+  },
+  {
+    "slug": "you-live-it-before-you-sell-it",
+    "cat": "business",
+    "catlabel": "Business",
+    "vol": "49",
+    "read": "4 min read",
+    "title": "You Live It Before You Sell It",
+    "stand": "Yes, I'm building the biggest men's lifestyle brand the world has ever seen. No point pretending otherwise. But the brand was never going to be the proof — I was.",
+    "meta_description": "Paris Pullen's manifesto on building a community of men through honest exchange, style, and culture — and why he has to actually live this before any of it sells.",
+    "featured": true,
+    "wide": false,
+    "hero": {
+      "img": "paris-boardroom",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "Paris Pullen seated alone at the head of a long dark boardroom table, single pendant light overhead",
+      "srcset": true
+    },
+    "images": [
+      {
+        "img": "paris-surrounded",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "That's how you actually learn what breaks you.",
+        "alt": "Paris Pullen surrounded on all sides by hands holding guns pointed at his head and chest"
+      }
+    ],
+    "body": [
+      "Everything that lands in this channel is mine. Not a brand voice, not a content calendar someone built for me to sound consistent — my take, my interpretation, the things that actually catch me as I move through the world. I'm still building the best version of myself, and I'm doing it in public, by chasing what's good: culture, style, travel, books, film — the things worth paying real attention to in a life that doesn't need escaping from, just going deeper into.",
+      "I think the world is a genuinely beautiful place if you look at it right. That's the whole engine underneath this — the Journal, this channel, all of it. I'm trying to bring more men into that same view. A better, fuller life, while we're actually here for it, not once we've earned our way into deserving one.",
+      "And parispullen.com was never meant to just be a page you scroll. You're walking into a world I built — rooms, floors, a city, a wardrobe, all of it — and this is still early. What's coming next are real-world activations pulled straight out of that world, experiences nobody's actually built quite like this before. The site was never the whole thing. It's the blueprint.",
+      "Yes, I'm out here trying to build the biggest men's lifestyle brand the world has ever seen. No point pretending otherwise to sound above it. But I have to actually be what I'm pushing — not perform it. That's the only way this doesn't burn me out somewhere around year three, and I know that one personally.",
+      "I've disappeared on people before — dropped off abruptly, right when it mattered, no warning given. Ask the ones on the other side of that. I'm not proud of it, but that's how you actually learn what breaks you, and you don't get to skip that part on the way to mastering it.",
+      "IMG::0",
+      "That's the real reason any of this exists past ego. Not to hand you a highlight reel. Men don't get better in isolation — we get better watching another man make a decision, good or bad, close enough to take something usable from it. Every entry in this Journal is one more attempt to hand you the parts that actually broke me too, so the exchange is real instead of curated.",
+      "This time it's built to last because I built myself to last first.",
+      "PQ::You live it before you sell it, and the brand just becomes the proof.",
+      "I'm genuinely happy with the decisions I've made building this. I'm happier, if I'm honest with you, about the ones I chose not to make — the deal I didn't take, the version of this that would've grown faster and meant less, the room I didn't walk back into once I understood what walking back in would actually cost the people already standing in it.",
+      "That's the whole thing, if you want to call it a manifesto. Not a mission statement written for a pitch deck. Just an honest account of why I'm actually doing this, for the men reading it start to finish instead of skimming for the part with the watch in it. Bring me your own version — the decisions you made, and the ones you chose not to make. That exchange is the actual thing being built here. The brand was always just how I paid for the room."
+    ],
+    "status": "draft"
   }
 ]

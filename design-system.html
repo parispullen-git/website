@@ -41,6 +41,7 @@
 
 <nav class="ds-nav">
   <ul>
+    <li><a href="#positioning">Positioning</a></li>
     <li><a href="#foundations">Foundations</a></li>
     <li><a href="#mark">The Mark</a></li>
     <li><a href="#type">Type</a></li>
@@ -68,6 +69,35 @@
   <p class="lede">Everything on parispullen.com is built from the tokens and components on this page. This document reads the live stylesheet, so it cannot drift from the site &#8212; if a swatch here changes, the site changed.</p>
   <p class="classified" style="margin-top:var(--s5)">Supersedes the previous bundled build &#183; archived at <code>_superseded/old-bundle/</code></p>
 </header>
+
+<!-- POSITIONING -->
+<section class="ds-sec" id="positioning">
+  <p class="ds-label">00</p>
+  <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">Positioning</h2>
+  <p class="body" style="margin-bottom:var(--s6)">This is the standard everything else on this page &#8212; and every page on the site &#8212; gets measured against. Written 2026-09, replacing an unwritten default that had started drifting toward a generic menswear-blog voice.</p>
+
+  <div class="ds-two">
+    <div>
+      <p class="ds-label" style="margin-bottom:var(--s4)">Who Paris is</p>
+      <table class="ds-table">
+        <tr><td><b>Not a detective.</b> A host. Tour guide, concierge, the man who already knows the room.</td></tr>
+        <tr><td><b>Man's Man, Ladies Man, Man About Town.</b> All three, not a ranked hierarchy of them.</td></tr>
+        <tr><td><b>Plays like Catcher Block</b> (<i>Down with Love</i>) &#8212; charming, Editor-in-Chief energy, living his own adventures and reporting back rather than prescribing from a distance.</td></tr>
+        <tr><td><b>Structurally plays like Hugh Hefner</b> &#8212; parispullen.com (The Compliment Hotel) is his Playboy Mansion. The Penthouse + City Guide are the mansion, lived in. The Journal is his Playboy magazine: his opinions, his taste, his byline.</td></tr>
+        <tr><td><b>Agent Foxx, call sign 00</b> &#8212; the creator of this world, not the sixth of several field agents. The investigation/dossier language (File 00, classified, sealed) is atmosphere on top of the host framing, never the primary lens.</td></tr>
+      </table>
+    </div>
+    <div>
+      <p class="ds-label" style="margin-bottom:var(--s4)">The differentiator</p>
+      <p class="body" style="margin-bottom:var(--s5)">Everyone else in this lane &#8212; the Hefner comparison included &#8212; makes great content <i>about</i> a life. We're not selling what to wear or which product to buy. We're describing <b>where, when, and how a man should feel and present himself</b> &#8212; the lived experience a product or an outfit is only ever in service of, inside the house and out in the actual city.</p>
+      <table class="ds-table">
+        <tr><td><b>Fails the standard:</b> "Here are 5 fragrances every man should own."</td></tr>
+        <tr><td><b>Meets it:</b> A specific night, a specific room, what he wore it for and how the room responded &#8212; the product shows up as a supporting detail, not the headline.</td></tr>
+        <tr><td><b>Voice split by context.</b> Persona-driven (cinematic, understated, Gentleman Operator) on the House/world pages. First-person authentic (real opinion, real texture, real numbers) on the Journal, fragrance and bio pages. Both are Paris; neither should read as generic AI-advice voice.</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
 
 <!-- FOUNDATIONS -->
 <section class="ds-sec" id="foundations">
@@ -166,7 +196,7 @@
     <div><p class="ds-label">lede</p><p class="lede">A life built at the intersection of style, strategy, culture and ambition.</p></div>
     <div><p class="ds-label">body</p><p class="body">Most men shop. A few men brief. The difference shows up in the shoulder, the break, and how long a room waits before deciding what you are worth.</p></div>
     <div><p class="ds-label">eyebrow</p><p class="eyebrow">Charlotte / America</p></div>
-    <div><p class="ds-label">classified — mono, classified moments only</p><p class="classified">File 006 &#183; Open</p></div>
+    <div><p class="ds-label">classified — mono, classified moments only</p><p class="classified">File 00 &#183; Open</p></div>
     <div><p class="ds-label">statement</p><p class="statement">Everyone is welcome.<br>Not everyone gets access.</p></div>
     <div><p class="ds-label">pullquote</p><p class="pullquote">Information has a way of finding the right room.</p></div>
   </div>
@@ -189,7 +219,7 @@
     <div class="ds-demo">
       <p class="ds-label">Statistics</p>
       <div class="stats">
-        <div class="stat"><p class="stat__num">006</p><p class="stat__label">Call sign</p></div>
+        <div class="stat"><p class="stat__num">00</p><p class="stat__label">Call sign</p></div>
         <div class="stat"><p class="stat__num">36<sup>+</sup></p><p class="stat__label">Cities hosted</p></div>
       </div>
     </div>
@@ -216,7 +246,7 @@
   <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">Investigation layer</h2>
   <div class="casebar" style="margin-bottom:var(--s6)">
     <div><b>Subject</b><span>Pullen, Paris</span></div>
-    <div><b>Known as</b><span>Agent Foxx &#183; 006</span></div>
+    <div><b>Known as</b><span>Agent Foxx &#183; 00 &#8212; creator, not sixth in a line</span></div>
     <div><b>Status</b><span>Active &#183; expanding</span></div>
   </div>
   <div class="findings" style="margin-bottom:var(--s6)">
@@ -235,7 +265,7 @@
 <section class="ds-sec" id="building">
   <p class="ds-label">06</p>
   <h2 class="display display--h2" style="margin-block:var(--s3) var(--s6)">The building</h2>
-  <p class="body" style="margin-bottom:var(--s6)"><code>house.html</code> is <b>generated</b> from a Python data structure in <code>build_house.py</code>. Never hand-edit it. Sixteen floors, fifty-seven artifacts.</p>
+  <p class="body" style="margin-bottom:var(--s6)"><code>house.html</code> is <b>generated</b> from a Python data structure in <code>build_house.py</code>. Never hand-edit it. Twenty-one floors are authored in the data; seven are currently open and reachable through the room-pager (the Penthouse: Kitchen, Living Room, Cinema, Study, Bedroom, Closet, Bath) &#8212; the other fourteen (Skyline, Corridor, Order, Operations, Lab, Haberdashery, Armoury, Fitting, Restaurant, Bar, Coffee House, Lobby, Motor Club, Inventory) are written but dormant, not yet wired into <code>PENTHOUSE_FLOORS</code>. Re-run <code>python3 build_house.py</code> after any edit &#8212; it prints the current open/authored/artifact counts.</p>
   <p class="ds-code">dict(id="bar", lvl="02", name="The Bar", state="public",
      img="env-bar", grade="", focus="46% 54%",
      note="Low ceiling, low light, low voices…",

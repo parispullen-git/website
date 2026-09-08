@@ -91,6 +91,7 @@ COLOR_FAMILY = {
     "Orange": "Orange & Peach", "Peach": "Orange & Peach",
     "Black/Gold": "Multi-Tone", "Black/White": "Multi-Tone", "White/Black": "Multi-Tone",
     "Charcoal/Gold": "Multi-Tone", "Navy/Gold": "Multi-Tone", "Red/Green": "Multi-Tone",
+    "Blue/Green": "Multi-Tone",
 }
 FAMILY_ORDER = [
     "Black", "White & Ivory", "Grey & Silver", "Blue", "Green & Teal",

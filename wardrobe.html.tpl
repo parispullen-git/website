@@ -2,10 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Wardrobe — Paris Pullen</title>
-<meta name="description" content="The Wardrobe. Forty-seven pieces across two-piece, three-piece, double-breasted and formal, filterable by style and color. A lookbook, not a store.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>The Boutique — Paris Pullen</title>
+<meta name="description" content="The Boutique. {{COUNT}} pieces across two-piece, three-piece, double-breasted, tuxedo and coats, filterable by style and color. A lookbook, not a store.">
 <meta name="theme-color" content="#0A0A0B">
+<link rel="canonical" href="https://parispullen.com/wardrobe.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Boutique — Paris Pullen">
+<meta property="og:description" content="The Boutique. {{COUNT}} pieces across two-piece, three-piece, double-breasted, tuxedo and coats, filterable by style and color. A lookbook, not a store.">
+<meta property="og:image" content="https://parispullen.com/assets/img/paris-pinstripe.jpg">
+<meta property="og:url" content="https://parispullen.com/wardrobe.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Boutique — Paris Pullen">
+<meta name="twitter:description" content="The Boutique. {{COUNT}} pieces across two-piece, three-piece, double-breasted, tuxedo and coats, filterable by style and color. A lookbook, not a store.">
+<meta name="twitter:image" content="https://parispullen.com/assets/img/paris-pinstripe.jpg">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "WebPage", "name": "The Boutique — Paris Pullen", "description": "The Boutique. {{COUNT}} pieces across two-piece, three-piece, double-breasted, tuxedo and coats, filterable by style and color. A lookbook, not a store.", "url": "https://parispullen.com/wardrobe.html", "author": {"@type": "Person", "name": "Paris Pullen", "alternateName": "Agent Foxx", "url": "https://parispullen.com/"}, "isPartOf": {"@type": "WebSite", "name": "Paris Pullen", "url": "https://parispullen.com/"}}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -25,13 +39,25 @@
 
 <nav class="menu" id="menu" aria-label="World navigation">
   <ul class="menu__list">
-    <li><a href="index.html"><span class="idx">01</span>The World</a></li>
-    <li><a href="urwelcome.html"><span class="idx">02</span>The Fragrance</a></li>
-    <li><a href="charlotte.html"><span class="idx">03</span>The City</a></li>
-    <li><a href="casefiles.html"><span class="idx">04</span>The Firm</a></li>
-    <li><a href="journal.html"><span class="idx">05</span>The Journal</a></li>
-    <li><a href="house.html"><span class="idx">06</span>The Compliment</a></li>
+    <li><a href="index.html#penthouse"><span class="idx">01</span>The Penthouse</a></li>
+    <li><a href="charlotte.html"><span class="idx">02</span>The City</a></li>
+    <li><a href="journal.html"><span class="idx">03</span>The Journal</a></li>
+    <li><a href="wardrobe.html"><span class="idx">04</span>The Boutique</a></li>
+    <li><a href="urwelcome.html"><span class="idx">05</span>The Fragrance</a></li>
+    <li><a href="about.html"><span class="idx">06</span>The Man</a></li>
   </ul>
+  <div class="menu__explore">
+    <p class="menu__explore-label">Explore the Floors</p>
+    <div class="menu__explore-grid">
+    <a class="menu__explore-link" href="house.html#penthouse-living">27 &#183; The Living Room</a>
+    <a class="menu__explore-link" href="house.html#bedroom">28 &#183; The Bedroom</a>
+    <a class="menu__explore-link" href="house.html#bath">28 &#183; The Bathroom</a>
+    <a class="menu__explore-link" href="house.html#closet">28 &#183; The Closet</a>
+    <a class="menu__explore-link" href="house.html#kitchen">27 &#183; The Kitchen</a>
+    <a class="menu__explore-link" href="house.html#study">28 &#183; The Study</a>
+    <a class="menu__explore-link" href="house.html#cinema">27 &#183; The Cinema</a>
+    </div>
+  </div>
   <div class="menu__foot">
     <div class="social">
       <span class="social__label">@parispullen</span>
@@ -56,19 +82,28 @@
 </nav>
 
 <main>
-<section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,14rem)">
+<section class="scene scene--full">
+  <div class="scene__media">
+    <img src="assets/img/paris-pinstripe.jpg" srcset="assets/img/paris-pinstripe@sm.jpg 562w, assets/img/paris-pinstripe.jpg 1125w" sizes="100vw" alt="Paris Pullen in a navy pinstripe double-breasted suit and gold tie" data-parallax="0.10" fetchpriority="high" width="1125" height="2000" style="object-position:50% 14%">
+  </div>
+  <div class="scene__scrim scene__scrim--left"></div>
+  <p class="scene__index">THE BOUTIQUE / {{COUNT}} PIECES</p>
   <div class="wrap">
-    <header class="split reveal" style="align-items:end;margin-bottom:var(--s8)">
-      <div class="stack stack--tight">
-        <p class="eyebrow">Foxx Bespoke</p>
-        <h1 class="display display--mega">The<br>Wardrobe</h1>
+    <div class="stack reveal" style="max-width:720px">
+      <p class="eyebrow">Foxx Bespoke</p>
+      <h1 class="display display--mega">The<br>Boutique</h1>
+      <p class="lede">{{COUNT}} pieces, cut across four silhouettes. Filter by style and color, save what you want, send us the names.</p>
+      <p class="classified">A lookbook, not a store &#8212; every piece here is made to order. Talk to us before you commit to a size.</p>
+      <div class="split" style="gap:var(--s4);margin-top:var(--s5);justify-content:flex-start">
+        <a class="cta" href="index.html#penthouse"><span>Enter the Penthouse</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="cta" href="charlotte.html"><span>Enter the City</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
       </div>
-      <div class="stack">
-        <p class="lede">{{COUNT}} pieces, cut across four silhouettes. Filter by style and color, save what you want, send us the names.</p>
-        <p class="classified">A lookbook, not a store &#8212; every piece here is made to order. Talk to us before you commit to a size.</p>
-      </div>
-    </header>
+    </div>
+  </div>
+</section>
 
+<section class="scene scene--pad" style="padding-top:clamp(3rem,8vh,6rem)">
+  <div class="wrap">
     <nav class="wfilter reveal" aria-label="Filter the wardrobe">
       <div class="wfilter__row">
         <span class="wfilter__label">Style</span>
@@ -100,7 +135,7 @@
       <div class="stack">
         <p class="body">Everything here is made to order through our tailoring partner &#8212; nothing is held in stock, so lead times run 4&#8211;6 business days per piece.</p>
         <p class="body">Sizing runs European cut, which sits smaller than most American suiting. If your usual size is 42 or above, we&#8217;ll walk you through it before anything is cut.</p>
-        <a class="link-under" href="mailto:hello@parispullen.com?subject=The%20Wardrobe">Ask about a piece &#8594;</a>
+        <a class="link-under" href="mailto:hello@parispullen.com?subject=The%20Boutique">Ask about a piece &#8594;</a>
       </div>
     </div>
   </div>
@@ -125,17 +160,33 @@
         <div><dt>Trouser</dt><dd>Drop 6 &#8212; waist runs 6&#8221; under the jacket size</dd></div>
       </dl>
       <div>
-        <p class="wquick__sizelabel">Jacket Size</p>
+        <p class="wquick__sizelabel">Jacket Size <span class="wquick__sizelabel-note">US &#8212; EU runs US&#8202;+&#8202;10</span></p>
         <div class="wquick__sizes" id="wquick-sizes">
-          <button type="button" data-size="36R">36R</button>
-          <button type="button" data-size="38R">38R</button>
-          <button type="button" data-size="40R">40R</button>
-          <button type="button" data-size="42R">42R</button>
-          <button type="button" data-size="44R">44R</button>
-          <button type="button" data-size="46R">46R</button>
-          <button type="button" data-size="48R">48R</button>
-          <button type="button" data-size="50R">50R</button>
-          <button type="button" data-size="52R">52R</button>
+          <button type="button" data-size="36R">36R<span class="wquick__size-eu">EU 46</span></button>
+          <button type="button" data-size="38R">38R<span class="wquick__size-eu">EU 48</span></button>
+          <button type="button" data-size="40R">40R<span class="wquick__size-eu">EU 50</span></button>
+          <button type="button" data-size="42R">42R<span class="wquick__size-eu">EU 52</span></button>
+          <button type="button" data-size="44R">44R<span class="wquick__size-eu">EU 54</span></button>
+          <button type="button" data-size="46R">46R<span class="wquick__size-eu">EU 56</span></button>
+          <button type="button" data-size="48R">48R<span class="wquick__size-eu">EU 58</span></button>
+          <button type="button" data-size="50R">50R<span class="wquick__size-eu">EU 60</span></button>
+          <button type="button" data-size="52R">52R<span class="wquick__size-eu">EU 62</span></button>
+          <button type="button" data-size="54R">54R<span class="wquick__size-eu">EU 64</span></button>
+        </div>
+      </div>
+      <div>
+        <p class="wquick__sizelabel">Trouser Waist <span class="wquick__sizelabel-note">drop 6 from jacket, adjust if you know your own</span></p>
+        <div class="wquick__sizes" id="wquick-waist">
+          <button type="button" data-waist="30&#8243;">30&#8243;</button>
+          <button type="button" data-waist="32&#8243;">32&#8243;</button>
+          <button type="button" data-waist="34&#8243;">34&#8243;</button>
+          <button type="button" data-waist="36&#8243;">36&#8243;</button>
+          <button type="button" data-waist="38&#8243;">38&#8243;</button>
+          <button type="button" data-waist="40&#8243;">40&#8243;</button>
+          <button type="button" data-waist="42&#8243;">42&#8243;</button>
+          <button type="button" data-waist="44&#8243;">44&#8243;</button>
+          <button type="button" data-waist="46&#8243;">46&#8243;</button>
+          <button type="button" data-waist="48&#8243;">48&#8243;</button>
         </div>
       </div>
       <button type="button" class="cta wquick__add" id="wquick-add"><span>Add to Inquiry</span></button>
@@ -157,7 +208,7 @@
   <div class="winquiry__panel" role="dialog" aria-modal="true" aria-label="Send inquiry">
     <button class="winquiry__close" data-winquiry-close>Close &#215;</button>
     <div class="stack stack--tight">
-      <p class="eyebrow">The Wardrobe</p>
+      <p class="eyebrow">The Boutique</p>
       <h2 class="display display--h3">Send the Inquiry</h2>
       <p class="body">These pieces, your sizes if you picked them, straight to Paris for a follow-up consultation.</p>
     </div>
@@ -191,7 +242,7 @@
   <div class="winquiry__panel" role="dialog" aria-modal="true" aria-label="Share this list">
     <button class="winquiry__close" data-wshare-close>Close &#215;</button>
     <div class="stack stack--tight">
-      <p class="eyebrow">The Wardrobe</p>
+      <p class="eyebrow">The Boutique</p>
       <h2 class="display display--h3">Share This List</h2>
       <p class="body">Send these pieces to a client or friend &#8212; straight from your mail app, to any email you choose.</p>
     </div>
@@ -249,7 +300,7 @@
         <h4>The World</h4>
         <ul>
           <li><a href="bespoke.html">Foxx Bespoke</a></li>
-          <li><a href="wardrobe.html">The Wardrobe</a></li>
+          <li><a href="wardrobe.html">The Boutique</a></li>
           <li><a href="house.html">The Compliment</a></li>
           <li><a href="house.html#motor">Foxx Motor Club</a></li>
           <li><a href="urwelcome.html">UR Welcome</a></li>

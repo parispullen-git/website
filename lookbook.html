@@ -120,7 +120,7 @@
     return;
   }
 
-  fetch('/.netlify/functions/content?collection=curations&id=' + encodeURIComponent(id))
+  fetch('/api/content?collection=curations&id=' + encodeURIComponent(id))
     .then(function(r){
       if (!r.ok) throw new Error('not found');
       return r.json();

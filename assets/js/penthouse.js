@@ -2,7 +2,7 @@
    The Penthouse — the homepage's own full-screen room-pager, the
    same .floor-scene/.room-pager machinery house.html uses (built here
    via buildFloorSceneHTML, mounted straight into #penthouse,
-   opening on the Living Floor). Artifacts, drawers, and TV screens
+   opening on the Living Room). Artifacts, drawers, and TV screens
    are wired up generically by world.js/tv-remote.js once this content
    exists in the DOM -- nothing page-specific needed for those.
 
@@ -22,12 +22,12 @@
   // runs backwards from what the arrow/swipe implied. The two rows are
   // independent left-right chains (ROOM_ADJACENCY, below, has no left/
   // right link between them), so only the order *within* each row matters:
-  //   Kitchen -> Living Floor -> Cinema            (Level 27)
+  //   Kitchen -> Living Room -> Cinema            (Level 27)
   //   Study -> Bedroom -> Closet -> Bathroom        (Level 28)
   var ROOMS = [
     { id:'kitchen', lvl:'Level 27', name:'The Kitchen',
       note:'Black marble, brass and a range that has seen more entertaining than cooking.', img:'room-kitchen' },
-    { id:'penthouse-living', lvl:'Level 27', name:'The Living Floor',
+    { id:'penthouse-living', lvl:'Level 27', name:'The Living Room',
       note:'Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.', img:'room-living' },
     { id:'cinema',  lvl:'Level 27', name:'The Cinema',
       note:'Nine seats, one screen, and a rule about phones that is actually enforced.', img:'room-cinema' },
@@ -45,7 +45,7 @@
   // (mirrors build_house.py's ROOM_ADJACENCY exactly):
   //   Level 28:  Study <-> Bedroom <-> Closet <-> Bathroom
   //                            |
-  //   Level 27:  Kitchen <-> Living Floor <-> Cinema
+  //   Level 27:  Kitchen <-> Living Room <-> Cinema
   var ROOM_ADJACENCY = {
     'penthouse-living': { left:'kitchen', right:'cinema', up:'bedroom' },
     'kitchen':          { right:'penthouse-living' },
@@ -62,7 +62,7 @@
       { key:'piano', name:'The Piano', x:'72%', y:'88%', body:'He played trumpet for seven years, first chair, and cannot play this at all. It is here because a room with a piano in it behaves differently from a room without one &#8212; and because it\'s wired to whatever he\'s actually listening to.', specs:[['Played by him', 'No'], ['Actual instrument', 'Trumpet'], ['Function', 'Atmosphere &amp; the speakers']] },
       { key:'vault', name:'The Vault', x:'91%', y:'70%', body:"Brass wheel, black steel, set into the wall beside the piano and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.", specs:[['Concealed', 'No'], ['Contents', 'UR Welcome'], ['Combination', 'One person']] },
       { key:'candle', name:'The Candle', x:'74.58%', y:'36.17%', body:'Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome &#8212; coming soon.', specs:[['Status', 'Coming soon'], ['Lit', 'Not yet']] },
-      { key:'jacket', name:'The Jacket', x:'39.2%', y:'67.5%', body:"Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion &#8212; see the Wardrobe.", specs:[['Hung', 'No'], ['Ordered elsewhere', 'By occasion'], ['See also', 'The Wardrobe']] },
+      { key:'jacket', name:'The Jacket', x:'39.2%', y:'67.5%', body:"Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion &#8212; see the Boutique.", specs:[['Hung', 'No'], ['Ordered elsewhere', 'By occasion'], ['See also', 'The Boutique']] },
     ],
     'bedroom': [
       { key:'artwork', name:'The Artwork', x:'67%', y:'36%', body:'Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.', specs:[['Acquired', 'Early, badly timed'], ['Subject', 'Unexplained'], ['Moved with him', 'Every time']] },
@@ -104,7 +104,7 @@
 
   // Physical "open the remote" artifact-style marker in the room photo,
   // for rooms where it's worth one -- mirrors build_house.py's
-  // REMOTE_NODE_POS exactly. Living Floor's sat mid-room, in the way of
+  // REMOTE_NODE_POS exactly. Living Room's sat mid-room, in the way of
   // the coffee table -- removed in favor of the always-visible fixed
   // Remote pill. Cinema sits at the foot of the screen.
   var REMOTE_NODE_POS = {
@@ -218,7 +218,7 @@
 
   /* Special-case artifact content -- feeds the pre-rendered drawer panels
      buildFloorSceneHTML() writes for each artifact further down. */
-  var SUITS_CTA = '<a class="cta pent__open" href="wardrobe.html" style="margin-top:var(--s2)"><span>Enter the Wardrobe</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
+  var SUITS_CTA = '<a class="cta pent__open" href="wardrobe.html" style="margin-top:var(--s2)"><span>Enter the Boutique</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   var HELLOFRESH_UNLOCK = '<div class="hf-unlock">' +
       '<p class="hf-unlock__eyebrow">Unlocked &#183; 5 Recipes Every Man Should Own</p>' +
       '<ul class="hf-recipe-list">' +
@@ -302,7 +302,7 @@
     }
     if (key === 'window') wardrobeCta = GUIDE_PORTAL_CTA;
     if (key === 'monogram') wardrobeCta = buildMonogramBio();
-    // Both the Living Floor's face-down journal and the Study's pencil-marked
+    // Both the Living Room's face-down journal and the Study's pencil-marked
     // draft point at the same published dispatches.
     if (key === 'journal') wardrobeCta = JOURNAL_CTA;
     if (roomId === 'penthouse-living' && key === 'vault') wardrobeCta = VAULT_CTA;
@@ -314,27 +314,34 @@
 
   /* ============================================================
      THE NAV PANEL — only Levels 27-28 (The Penthouse) are open right
-     now; every other floor is restricted, so the panel only ever
-     lists these two, each jumping straight to that floor's entry room.
+     now, so the panel only ever lists these two -- but every ROOM on
+     each, not just one "entry" room per level (28 alone is Study/
+     Bedroom/Closet/Bath -- picking just one as that level's entry
+     silently made the rest unreachable except by paging prev/next one
+     room at a time), grouped under a small level heading. Mirrors
+     build_house.py's own _nav_panel_rows() exactly.
      ============================================================ */
-  var FLOOR_LEVELS = [
-    { lvl:'28', name:'Upper Floor', firstRoom:'bedroom' },
-    { lvl:'27', name:'Main Floor',  firstRoom:'penthouse-living' }
-  ];
-
   function roomById(id) { return ROOMS.filter(function (r) { return r.id === id; })[0]; }
 
-  // One row per physical floor (mirrors build_house.py's nav-panel rows) --
-  // Levels 27-28 jump in-page (data-nav-panel-go, handled by nav-panel.js);
-  // everything else links straight to its room on house.html, since that's
-  // the only place those rooms' content actually exists.
   function navPanelRows() {
-    return FLOOR_LEVELS.map(function (f) {
-      var r = roomById(f.firstRoom);
-      return '<button type="button" class="nav-panel__btn" data-nav-panel-go="' + f.firstRoom + '">' +
-        '<span class="nav-panel__btn-lvl">' + esc(f.lvl) + '</span>' +
-        '<span class="nav-panel__btn-name">' + esc(r ? r.name : f.name) + '</span></button>';
-    }).join('\n');
+    var byLevel = {}, order = [];
+    ROOMS.forEach(function (r) {
+      if (!byLevel[r.lvl]) { byLevel[r.lvl] = []; order.push(r.lvl); }
+      byLevel[r.lvl].push(r);
+    });
+    order.sort(function (a, b) { return b.localeCompare(a, undefined, { numeric: true }); });
+    var rows = [];
+    order.forEach(function (lvl) {
+      rows.push('<p class="nav-panel__group">' + esc(lvl) + '</p>');
+      byLevel[lvl].forEach(function (r) {
+        rows.push(
+          '<button type="button" class="nav-panel__btn" data-nav-panel-go="' + r.id + '">' +
+          '<span class="nav-panel__btn-lvl">' + esc(lvl.replace(/^Level\s+/, '')) + '</span>' +
+          '<span class="nav-panel__btn-name">' + esc(r.name) + '</span></button>'
+        );
+      });
+    });
+    return rows.join('\n');
   }
 
   /* Builds one .floor-scene section — the same shape build_house.py's
@@ -387,9 +394,9 @@
             '<img src="assets/img/' + room.img + '.jpg" ' +
             'srcset="assets/img/' + room.img + '@sm.jpg 1200w, assets/img/' + room.img + '.jpg 2400w" ' +
             'sizes="100vw" alt="' + esc(room.name) + '" loading="lazy" width="2400" height="1350">' +
+            buildTVHTML(TV_SCREENS[room.id], room.id) +
+            '<div class="artifacts">' + artsHTML + remoteNodeHTML(room.id) + cityLinkHTML(room.id) + '</div>' +
           '</div>' +
-          buildTVHTML(TV_SCREENS[room.id], room.id) +
-          '<div class="artifacts">' + artsHTML + remoteNodeHTML(room.id) + cityLinkHTML(room.id) + '</div>' +
         '</div>' +
       '</div>' +
       '<div class="floor-scene__scrim"></div>' +

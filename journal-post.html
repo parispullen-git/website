@@ -20,6 +20,14 @@
   .jp-hero img{width:100%;height:clamp(260px,42vw,480px);object-fit:cover;display:block;filter:brightness(.82)}
   .jp-body{margin-top:var(--s8);display:grid;gap:var(--s5)}
   .jp-body .pullquote{margin:var(--s3) 0}
+  .jread-media{margin-top:var(--s2);max-width:var(--measure)}
+  .jread-media img{width:100%;height:auto;display:block;border-radius:2px;background:var(--charcoal)}
+  .jread-caption{margin:.6em 0 0;font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.03em;color:var(--graphite);line-height:1.4}
+  .jread-video{margin-top:var(--s2);max-width:var(--measure)}
+  .jread-video__frame{position:relative;aspect-ratio:16/9;background:#000;border-radius:2px;
+    overflow:hidden;container-type:size}
+  .jread-video__frame iframe{position:absolute;inset:0;width:100cqw;height:100cqh;border:0}
   .jp-nav{margin-top:var(--s10);border-top:1px solid var(--rule);padding-top:var(--s7)}
   .jp-nav a{color:var(--bone)}
   .jp__err{color:#C0555A}
@@ -92,11 +100,11 @@
   var slug = new URLSearchParams(window.location.search).get('slug');
   if (!slug) { show(missingEl); return; }
 
-  fetch('/.netlify/functions/content?collection=journal')
+  fetch('/api/content?collection=journal')
     .then(function(r){ return r.json(); })
     .then(function(data){
       var posts = (data && data.records) || [];
-      var p = posts.filter(function(x){ return x && x.slug === slug; })[0];
+      var p = posts.filter(function(x){ return x && x.slug === slug && x.status !== 'draft'; })[0];
       if (!p) throw new Error('not found');
 
       document.title = (p.title || 'The Journal') + ' — Paris Pullen';
@@ -112,10 +120,32 @@
         document.getElementById('jp-hero').hidden = false;
       }
 
+      // Body is an array of plain paragraph strings, or a string carrying
+      // one of a few shorthand prefixes for richer blocks -- PQ:: (a
+      // pull-quote), IMG::url|alt|caption (a full-width image, alt and
+      // caption both optional), VIDEO::id (a responsive YouTube embed, the
+      // dashboard already resolves a pasted watch/youtu.be link down to
+      // just the ID before this is ever saved). Mirrors, in miniature, the
+      // richer block set build_journal.py's static articles support.
       var body = p.body || [];
       document.getElementById('jp-body').innerHTML = body.map(function(para){
-        if (typeof para !== 'string') return '';
-        if (para.indexOf('PQ::') === 0) return '<p class="pullquote">' + esc(para.slice(4)) + '</p>';
+        if (typeof para !== 'string' || !para) return '';
+        if (para.indexOf('PQ::') === 0) {
+          return '<p class="pullquote">' + esc(para.slice(4)) + '</p>';
+        }
+        if (para.indexOf('IMG::') === 0) {
+          var parts = para.slice(5).split('|');
+          var url = (parts[0] || '').trim(), alt = (parts[1] || '').trim(), cap = (parts[2] || '').trim();
+          if (!url) return '';
+          return '<figure class="jread-media"><img src="' + esc(url) + '" alt="' + esc(alt) + '" loading="lazy">' +
+            (cap ? '<figcaption class="jread-caption">' + esc(cap) + '</figcaption>' : '') + '</figure>';
+        }
+        if (para.indexOf('VIDEO::') === 0) {
+          var id = para.slice(7).trim();
+          if (!id) return '';
+          return '<div class="jread-video"><div class="jread-video__frame"><iframe src="https://www.youtube.com/embed/' + esc(id) + '" ' +
+            'title="" allow="autoplay; encrypted-media; picture-in-picture" loading="lazy" allowfullscreen></iframe></div></div>';
+        }
         return '<p class="body">' + esc(para) + '</p>';
       }).join('') || '<p class="body">Nothing here yet.</p>';
 

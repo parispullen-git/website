@@ -26,10 +26,16 @@
   .op__search{width:100%;background:#0A0A0B;border:none;border-bottom:1px solid var(--hairline);
     color:var(--ivory);padding:.75em .9em;font-family:var(--font-body);font-size:.9rem;position:sticky;top:0}
   .op__search:focus{outline:none}
-  .op__row{display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--hairline);
+  .op__row{display:block;width:100%;text-align:left;background:none;border:none;
     color:var(--bone);padding:.7em .9em;font-size:.85rem;cursor:pointer;font-family:var(--font-body)}
   .op__row:hover{background:#151310}
   .op__row.is-active{background:rgba(198,161,91,.1);color:var(--brass-lit)}
+  .op__rowwrap{display:flex;align-items:stretch;border-bottom:1px solid var(--hairline)}
+  .op__rowwrap .op__row{flex:1 1 auto;min-width:0}
+  .op__move{flex:0 0 auto;width:1.7em;background:none;border:none;border-right:1px solid var(--hairline);
+    color:var(--ash);cursor:pointer;font-size:.75rem;padding:0}
+  .op__move:hover:not(:disabled){background:rgba(198,161,91,.08);color:var(--brass-lit)}
+  .op__move:disabled{opacity:.25;cursor:default}
   .op__newbtn{width:100%;padding:.8em;background:none;border:none;border-bottom:1px solid var(--hairline);
     color:var(--brass);font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;
     text-transform:uppercase;cursor:pointer}
@@ -102,7 +108,7 @@
 
   var SCHEMAS = {
     wardrobe: {
-      label: 'Wardrobe', idField: 'id',
+      label: 'Boutique', idField: 'id',
       summary: function(r){ return (r.name||'Untitled') + ' — $' + (r.price||0); },
       fields: [
         {key:'id', label:'ID (slug, unique)', type:'text', required:true},
@@ -118,15 +124,18 @@
     },
     journal: {
       label: 'Journal', idField: 'slug',
-      summary: function(r){ return (r.title||'Untitled') + ' — Vol.' + (r.vol||'?'); },
+      summary: function(r){ return (r.title||'Untitled') + ' — Vol.' + (r.vol||'?') + (r.status==='draft' ? '  [Draft]' : ''); },
+      orderable: true, orderField: 'vol', orderDesc: true, // higher vol = shown first on journal.html (see vol_key() in build_journal.py) -- Move Up/Down swaps vol between adjacent posts
       fields: [
         {key:'slug', label:'Slug (unique)', type:'text', required:true},
+        {key:'status', label:'Status', type:'select', options:['draft','published'], default:'draft', emptyValue:'published'}, // build_journal.py treats a MISSING status field as already published (predates the draft/published distinction) -- emptyValue mirrors that for existing records so this dropdown never falsely shows "Draft" for a live post
         {key:'cat', label:'Category key', type:'text'},
         {key:'catlabel', label:'Category label', type:'text'},
         {key:'vol', label:'Volume', type:'text'},
         {key:'read', label:'Read time', type:'text'},
         {key:'title', label:'Title', type:'text', required:true},
         {key:'stand', label:'Standfirst', type:'textarea'},
+        {key:'meta_description', label:'Meta description (SEO — falls back to Standfirst if left blank)', type:'textarea'},
         {key:'featured', label:'Featured', type:'checkbox'},
         {key:'wide', label:'Wide layout', type:'checkbox'},
         {key:'hero.img', label:'Hero image (filename, no extension)', type:'text'},
@@ -134,7 +143,10 @@
         {key:'hero.mode', label:'Hero fit', type:'select', options:['cover','contain']},
         {key:'hero.alt', label:'Hero alt text', type:'textarea'},
         {key:'hero.srcset', label:'Hero has @sm srcset', type:'checkbox'},
-        {key:'body', label:'Body — one paragraph per line. Prefix a line with PQ:: to render it as a pull-quote.', type:'lines'},
+        {key:'images', label:'In-body images — raw JSON array. Each: {"img":"filename, no extension","ext":"jpg","mode":"cover|contain","srcset":true,"layout":"pair (to sit two side by side) or omit","caption":"...","alt":"..."}. Reference an entry from the Body below by its position: the first is IMG::0, second IMG::1, and so on.', type:'json'},
+        {key:'video', label:'Single video embed — raw JSON object {"youtube_id":"...","title":"..."}, or null if none. Reference it from Body with a line reading exactly VIDEO::', type:'json', jsonEmpty:null},
+        {key:'videos', label:'Multiple video embeds — raw JSON array of {"youtube_id":"...","title":"..."}. Reference one from Body by position: VIDEO::0, VIDEO::1, and so on.', type:'json'},
+        {key:'body', label:'Body — one block per line. Plain text is a paragraph. Prefixes for everything else: PQ::text (pull-quote) — PQA::text||Name||Title (attributed quote) — IMG::i (drop in images[i]; two consecutive "pair"-layout IMG:: lines sit side by side) — VIDEO:: or VIDEO::i (embed the video/videos[i] field above) — AGENDA::date||name||venue||note||price||link (consecutive AGENDA:: lines group into one schedule list) — FORMULA::text (one big centered line) — SPEC::{"model":"...","rows":[["Label","Value"]],"cta_label":"","cta_url":"","cta_title":"","image":null} (raw JSON after the ::) — TABLE::{"title":"...","headers":["Col A","Col B"],"rows":[["...","..."]]} (raw JSON after the ::)', type:'lines'},
       ]
     },
     casefiles: {
@@ -232,14 +244,37 @@
       '</div>' +
       '<div class="op__editor is-empty" id="editor-' + name + '">Select a record, or start a new one.</div>';
 
+    // Orderable schemas (journal's vol) display sorted by that field rather
+    // than raw storage order -- this is also the order the live page
+    // renders them in, so what's on top here matches what's on top there.
+    // data-idx on every row is still the record's REAL index in
+    // state[name].records regardless of this display order: selection,
+    // editing, and persist() below all key off that real index.
+    function orderVal(r){ return Number(r[schema.orderField]) || 0; }
+    function displayOrder(){
+      var records = state[name].records;
+      var idxs = records.map(function(r,i){ return i; });
+      if (!schema.orderable) return idxs;
+      idxs.sort(function(a,b){ return schema.orderDesc ? orderVal(records[b])-orderVal(records[a]) : orderVal(records[a])-orderVal(records[b]); });
+      return idxs;
+    }
+
     function renderRows(filter){
       var rows = document.getElementById('rows-' + name);
       var records = state[name].records;
       var q = (filter||'').toLowerCase();
-      rows.innerHTML = records.map(function(r, i){
+      var order = displayOrder();
+      rows.innerHTML = order.map(function(i, pos){
+        var r = records[i];
         var s = schema.summary(r);
         if (q && s.toLowerCase().indexOf(q) === -1) return '';
-        return '<button type="button" class="op__row' + (state[name].selected===i?' is-active':'') + '" data-idx="' + i + '">' + esc(s) + '</button>';
+        var move = schema.orderable
+          ? '<button type="button" class="op__move" data-move="up" data-idx="' + i + '"' + (pos===0?' disabled':'') + ' title="Move up">&#8593;</button>' +
+            '<button type="button" class="op__move" data-move="down" data-idx="' + i + '"' + (pos===order.length-1?' disabled':'') + ' title="Move down">&#8595;</button>'
+          : '';
+        return '<div class="op__rowwrap">' + move +
+          '<button type="button" class="op__row' + (state[name].selected===i?' is-active':'') + '" data-idx="' + i + '">' + esc(s) + '</button>' +
+        '</div>';
       }).join('');
     }
     state[name].refreshRows = function(){ renderRows(document.getElementById('search-' + name).value); };
@@ -251,6 +286,24 @@
       renderEditor(name, {});
     });
     document.getElementById('rows-' + name).addEventListener('click', function(e){
+      var moveBtn = e.target.closest('[data-move]');
+      if (moveBtn) {
+        var records = state[name].records;
+        var order = displayOrder();
+        var i = Number(moveBtn.dataset.idx);
+        var pos = order.indexOf(i);
+        var j = order[moveBtn.dataset.move === 'up' ? pos - 1 : pos + 1];
+        if (j === undefined) return;
+        // Swapping just the order field between these two adjacent (in
+        // display order) records flips their positions without touching
+        // anyone else's.
+        var vi = orderVal(records[i]), vj = orderVal(records[j]);
+        records[i][schema.orderField] = String(vj);
+        records[j][schema.orderField] = String(vi);
+        api('collection/' + name, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(records)})
+          .then(function(){ renderRows(document.getElementById('search-' + name).value); });
+        return;
+      }
       var btn = e.target.closest('[data-idx]');
       if (!btn) return;
       var idx = Number(btn.dataset.idx);
@@ -280,7 +333,8 @@
       return '<textarea id="' + id + '">' + esc(lines) + '</textarea>';
     }
     if (f.type === 'json') {
-      return '<textarea id="' + id + '" style="min-height:14rem">' + esc(JSON.stringify(value||[], null, 2)) + '</textarea>';
+      var jsonVal = value !== undefined ? value : (f.jsonEmpty !== undefined ? f.jsonEmpty : []);
+      return '<textarea id="' + id + '" style="min-height:14rem">' + esc(JSON.stringify(jsonVal, null, 2)) + '</textarea>';
     }
     if (f.type === 'number') {
       return '<input type="number" id="' + id + '" value="' + (value==null?'':esc(value)) + '">';
@@ -297,6 +351,10 @@
       (isNew ? '<p class="eyebrow">New Record</p>' : '<p class="eyebrow">Editing</p>') +
       schema.fields.map(function(f){
         var v = getNested(record, f.key);
+        if (v === undefined) {
+          if (isNew && f.default !== undefined) v = f.default;
+          else if (!isNew && f.emptyValue !== undefined) v = f.emptyValue;
+        }
         var checkClass = f.type === 'checkbox' ? ' fld--check' : '';
         var order = f.type === 'checkbox'
           ? fieldInput(name, f, v) + '<label>' + esc(f.label) + '</label>'
@@ -319,7 +377,7 @@
         if (f.type === 'checkbox') val = el.checked;
         else if (f.type === 'number') val = el.value === '' ? null : Number(el.value);
         else if (f.type === 'lines') val = el.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
-        else if (f.type === 'json') { try { val = JSON.parse(el.value || '[]'); } catch(e) { throw new Error('Invalid JSON in "' + f.label + '": ' + e.message); } }
+        else if (f.type === 'json') { var jsonFallback = JSON.stringify(f.jsonEmpty !== undefined ? f.jsonEmpty : []); try { val = JSON.parse(el.value || jsonFallback); } catch(e) { throw new Error('Invalid JSON in "' + f.label + '": ' + e.message); } }
         else val = el.value;
         setNested(out, f.key, val);
       });
@@ -472,7 +530,7 @@
 
   // ---------------- boot ----------------
   var NAMES = ['wardrobe', 'journal', 'casefiles', 'charlotte-locations', 'house-music', 'house-channels', 'dispatch-briefs'];
-  var LABELS = { wardrobe:'Wardrobe', journal:'Journal', casefiles:'Case Files',
+  var LABELS = { wardrobe:'Boutique', journal:'Journal', casefiles:'Case Files',
     'charlotte-locations':'Charlotte Map', 'house-music':'House Music', 'house-channels':'House Channels',
     'dispatch-briefs':'Dispatch Briefs' };
 

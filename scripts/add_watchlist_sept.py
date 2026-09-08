@@ -14,10 +14,10 @@ def item(title, meta, watch, body):
             f'{body}')
 
 BODY = [
-    "Summer's over, the Living Floor screen has opinions about it, and the month ahead is stacked enough that a shortlist is doing you a favor. Two Guy Ritchie properties come back in the same three weeks, a brewery dynasty gets the Steven Knight treatment, and a horror franchise starts over with a director who's earned the trust. Here's what's actually worth the remote.",
+    "Summer's over, the Living Room screen has opinions about it, and the month ahead is stacked enough that a shortlist is doing you a favor. Two Guy Ritchie properties come back in the same three weeks, a brewery dynasty gets the Steven Knight treatment, and a horror franchise starts over with a director who's earned the trust. Here's what's actually worth the remote.",
     item("The Gentlemen &#8212; Season 2", "Netflix, Sept 3",
          "https://youtu.be/01IeKpHvgvM",
-         "Theo James and Kaya Scodelario are a year further into the family business, which means the problems have gotten bigger along with the ambition. This is the show already living on the Living Floor screen for good reason &#8212; the tone hasn't softened and a third season is already locked, so there's no reason to wait on this one."),
+         "Theo James and Kaya Scodelario are a year further into the family business, which means the problems have gotten bigger along with the ambition. This is the show already living on the Living Room screen for good reason &#8212; the tone hasn't softened and a third season is already locked, so there's no reason to wait on this one."),
     "IMG::0",
     item("The Death of Robin Hood", "In theaters",
          "https://youtu.be/tlSDDuWxO_0",

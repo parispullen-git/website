@@ -39,7 +39,8 @@ SITE_FOOT = re.search(r'<footer class="foot foot--film">.*?</footer>', _index_sr
 def esc(t):
     if t is None:
         return ""
-    return str(t).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    return (str(t).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            .replace('"', "&quot;"))
 
 # ----------------------------------------------------------------------
 # Category filter list -- trimmed (2026-09-01) to the 7-category system:
@@ -54,13 +55,18 @@ def esc(t):
 # own category rather than being force-fit under Style or Business.
 # ----------------------------------------------------------------------
 CATS = [
-    ("automotive", "Automotive"),
+    ("automotive", "Motors"),
     ("style", "Style"),
+    ("timepiece", "Timepiece"),
     ("business", "Business"),
     ("tech", "Tech"),
     ("music", "Music"),
+    ("news", "News"),
     ("film", "Film"),
     ("gaming", "Gaming"),
+    ("art", "Art"),
+    ("sports", "Sports"),
+    ("travel", "Travel"),
     ("charlotte", "Charlotte"),
 ]
 
@@ -98,6 +104,30 @@ def AGENDA(date, name, venue, note="", price="", link=""):
     only -- leave blank rather than guess one."""
     return "AGENDA::" + "||".join([date, name, venue, note, price, link])
 
+def SPEC(model, rows, cta_label="", cta_url="", cta_title="", image=None):
+    """Two-column spec-data table (engine/power/0-60/etc.), closed out by
+    a small image + link card -- mirrors the Bentley-style spec-sheet
+    layout. `rows` is a list of (label, value) pairs. `image` indexes
+    into the post's images[] for the closing card; leave it None (and
+    cta_label blank) to render the table alone with no card."""
+    return "SPEC::" + json.dumps({
+        "model": model, "rows": rows, "cta_label": cta_label,
+        "cta_url": cta_url, "cta_title": cta_title, "image": image,
+    })
+
+def TABLE(title, headers, rows):
+    """A real (crawlable, no image involved) comparison/reference table --
+    for a concept breakdown, a head-to-head, anything with more than two
+    columns SPEC()'s label/value rows can't hold. `headers` is a list of
+    column labels; `rows` is a list of same-length lists."""
+    return "TABLE::" + json.dumps({"title": title, "headers": headers, "rows": rows})
+
+def FORMULA(text):
+    """A single short equation/maxim, set big and centered as its own
+    full-width beat -- for the one line in a piece meant to be looked at
+    rather than read past."""
+    return "FORMULA::" + text
+
 # ----------------------------------------------------------------------
 # Posts, in reading/vol order. Each dict:
 #   slug, cat, catlabel, vol, read, title, stand, featured, wide,
@@ -105,6 +135,11 @@ def AGENDA(date, name, venue, note="", price="", link=""):
 #   body=[ ...paragraphs, PQ("...") for the pullquote... ]
 # ----------------------------------------------------------------------
 JOURNAL_POSTS = json.loads((Path(__file__).resolve().parent / "data" / "journal.json").read_text(encoding="utf-8"))
+# A post with no "status" field predates the draft/published distinction --
+# treat it as already published rather than yanking existing content off
+# the site. Only an explicit status:"draft" (set from the Operator Console)
+# holds a post back from both the index and its own article page.
+PUBLISHED_POSTS = [p for p in JOURNAL_POSTS if p.get("status", "published") != "draft"]
 
 # ----------------------------------------------------------------------
 # The Vol. 10 pantry card is intentionally left untouched (see docstring).
@@ -142,8 +177,8 @@ ARTICLE_CSS = '''<style>
     display:flex;align-items:center;justify-content:center;padding:var(--s6)}
   .jread-media--full.jread-media--contain img{max-height:420px;width:auto;max-width:100%;
     box-shadow:0 30px 80px rgba(0,0,0,.5)}
-  .jread-media--pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4)}
-  .jread-media--pair img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;display:block;
+  .jread-media--pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);align-items:start}
+  .jread-media--pair img{width:100%;height:auto;display:block;
     border-radius:2px;background:var(--charcoal)}
   .jread-caption{margin:.6em 0 0;font-family:var(--font-mono);font-size:var(--t-micro);
     letter-spacing:.03em;color:var(--graphite);line-height:1.4}
@@ -182,7 +217,7 @@ ARTICLE_CSS = '''<style>
     color:var(--graphite)}
 
   /* Responsive 16:9 YouTube embed. Same container-query technique as the
-     Living Floor / Cinema TV screens (assets/css/world.css .tv-modal__frame,
+     Living Room / Cinema TV screens (assets/css/world.css .tv-modal__frame,
      .floor-scene__screen-frame) -- a container-type:size box holding an
      iframe sized in cqw/cqh -- except this one is a plain fixed aspect-ratio
      box (no oversize-and-crop) since an article embed should never crop
@@ -191,6 +226,55 @@ ARTICLE_CSS = '''<style>
   .jread-video__frame{position:relative;aspect-ratio:16/9;background:#000;border-radius:2px;
     overflow:hidden;container-type:size}
   .jread-video__frame iframe{position:absolute;inset:0;width:100cqw;height:100cqh;border:0}
+
+  /* Two-column spec-data table (engine/power/0-60/etc.), closed out by a
+     small image+link card -- SPEC(). Mirrors a spec-sheet layout: a dense
+     label/value grid for the buyer who wants the numbers, then one clear
+     way out to learn more. */
+  .jspec{margin-top:var(--s7);max-width:var(--measure);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+  .jspec__model{margin:0;padding:var(--s4) var(--s5);font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.16em;text-transform:uppercase;color:var(--brass);background:var(--charcoal);
+    border-bottom:1px solid var(--rule)}
+  .jspec__table{display:grid}
+  .jspec__row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);padding:var(--s3) var(--s5);
+    border-bottom:1px solid var(--rule)}
+  .jspec__row:nth-child(odd){background:rgba(255,255,255,.02)}
+  .jspec__row:last-child{border-bottom:0}
+  .jspec__label{margin:0;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.08em;
+    text-transform:uppercase;color:var(--graphite)}
+  .jspec__value{margin:0;font-family:var(--font-body);font-size:var(--t-label);color:var(--ivory);text-align:right}
+  .jspec__cta{display:flex;align-items:center;gap:var(--s4);padding:var(--s4) var(--s5);
+    border-top:1px solid var(--rule);color:inherit;text-decoration:none}
+  a.jspec__cta:hover .jspec__cta-btn{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
+  .jspec__cta-media{flex:0 0 auto;width:64px;height:64px;border-radius:2px;overflow:hidden;background:var(--charcoal)}
+  .jspec__cta-media img{width:100%;height:100%;object-fit:cover;display:block}
+  .jspec__cta-body{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s3);flex:1}
+  .jspec__cta-title{margin:0;font-family:var(--font-display);font-size:1.05rem;line-height:1.25}
+  .jspec__cta-btn{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--brass);border:1px solid var(--brass);padding:.5em 1em;border-radius:1px;white-space:nowrap;
+    transition:background .15s,color .15s}
+  @media (max-width:560px){.jspec__row{grid-template-columns:1fr;gap:.2em}.jspec__value{text-align:left}}
+
+  /* Comparison/reference tables (TABLE::) and single-line formula
+     callouts (FORMULA::) -- the two infographic-style beats a
+     concept-heavy piece needs, kept as real text (not an image) so
+     they stay crawlable and legible in both column widths. */
+  .jtable{margin-top:var(--s7)}
+  .jtable__title{margin:0 0 var(--s3);font-family:var(--font-mono);font-size:var(--t-micro);
+    letter-spacing:.12em;text-transform:uppercase;color:var(--brass-lit)}
+  .jtable__scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:2px}
+  .jtable table{width:100%;border-collapse:collapse;min-width:420px}
+  .jtable th{text-align:left;padding:var(--s3) var(--s4);font-family:var(--font-mono);
+    font-size:var(--t-micro);letter-spacing:.08em;text-transform:uppercase;color:var(--brass);
+    border-bottom:1px solid var(--rule);white-space:nowrap}
+  .jtable td{padding:var(--s3) var(--s4);font-family:var(--font-body);font-size:var(--t-label);
+    color:var(--bone);border-bottom:1px solid var(--rule);vertical-align:top}
+  .jtable tbody tr:last-child td{border-bottom:0}
+  .jtable tbody tr:nth-child(odd){background:rgba(255,255,255,.02)}
+  .jtable td:first-child{color:var(--ivory);font-weight:500;white-space:nowrap}
+  .jformula{margin:var(--s8) 0;padding:var(--s6) var(--s5);text-align:center;
+    font-family:var(--font-display);font-size:clamp(1.25rem,1rem + 1.4vw,2rem);
+    color:var(--champagne);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 </style>'''
 
 def hero_html(post, forpage=False):
@@ -244,6 +328,45 @@ def agenda_list_html(items):
             f'</div>'
         )
     return f'<div class="jagenda">{"".join(rows)}</div>'
+
+def spec_table_html(data, imgs):
+    rows_html = "".join(
+        f'<div class="jspec__row"><p class="jspec__label">{esc(label)}</p>'
+        f'<p class="jspec__value">{esc(value)}</p></div>'
+        for label, value in data["rows"]
+    )
+    cta_html = ""
+    if data.get("cta_label"):
+        img_html = ""
+        if data.get("image") is not None:
+            im = imgs[data["image"]]
+            img_html = f'<div class="jspec__cta-media">{_sized_img_tag(im, sizes="120px")}</div>'
+        has_link = bool(data.get("cta_url"))
+        tag = "a" if has_link else "div"
+        link_attr = f' href="{esc(data["cta_url"])}" target="_blank" rel="noopener"' if has_link else ""
+        cta_html = (
+            f'<{tag} class="jspec__cta"{link_attr}>{img_html}'
+            f'<div class="jspec__cta-body">'
+            f'<p class="jspec__cta-title">{esc(data.get("cta_title") or data["model"])}</p>'
+            f'<span class="jspec__cta-btn">{esc(data["cta_label"])}</span>'
+            f'</div></{tag}>'
+        )
+    return (f'<div class="jspec"><p class="jspec__model">{esc(data["model"])}</p>'
+            f'<div class="jspec__table">{rows_html}</div>{cta_html}</div>')
+
+def table_html(data):
+    head_html = "".join(f'<th>{esc(h)}</th>' for h in data["headers"])
+    body_rows = "".join(
+        '<tr>' + "".join(f'<td>{esc(cell)}</td>' for cell in row) + '</tr>'
+        for row in data["rows"]
+    )
+    title_html = f'<p class="jtable__title">{esc(data["title"])}</p>' if data.get("title") else ""
+    return (f'<div class="jtable">{title_html}<div class="jtable__scroll"><table>'
+            f'<thead><tr>{head_html}</tr></thead><tbody>{body_rows}</tbody>'
+            f'</table></div></div>')
+
+def formula_html(text):
+    return f'<p class="jformula">{text}</p>'
 
 def pullquote_html(text):
     return f'<p class="pullquote">{text}</p>'
@@ -323,6 +446,20 @@ def body_html(post):
                 items.append(body[i][8:].split("||"))
                 i += 1
             segments.append(("media", agenda_list_html(items)))
+        elif para.startswith("SPEC::"):
+            flush()
+            data = json.loads(para[6:])
+            segments.append(("media", spec_table_html(data, imgs)))
+            i += 1
+        elif para.startswith("TABLE::"):
+            flush()
+            data = json.loads(para[7:])
+            segments.append(("media", table_html(data)))
+            i += 1
+        elif para.startswith("FORMULA::"):
+            flush()
+            segments.append(("media", formula_html(para[9:])))
+            i += 1
         else:
             current.append(f'<p class="body">{para}</p>')
             i += 1
@@ -395,7 +532,7 @@ def render_jpick(post):
         <p class="jpick__cat">{post['catlabel']}</p>
         <h2 class="jpick__title">{esc(post['title'])}</h2>
         <p class="jpick__stand">{post['stand']}</p>
-        <p class="jpick__foot"><span>By Paris Pullen</span><span>Vol. {post['vol']}</span><span>{post['read']}</span></p>
+        <p class="jpick__foot"><span>By Paris Pullen</span><span>{post['read']}</span></p>
         <p class="jpick__cta">Read the full story <span aria-hidden="true">&#8594;</span></p>
       </div>
     </a>'''
@@ -404,7 +541,11 @@ def render_jpick(post):
 # journal.html
 # ----------------------------------------------------------------------
 def build_journal_index():
-    featured = [p for p in JOURNAL_POSTS if p.get("featured")][0]
+    featured_candidates = [p for p in PUBLISHED_POSTS if p.get("featured")]
+    # A featured post that gets drafted (or the featured flag never set on
+    # any published post) shouldn't crash the build -- fall back to
+    # whatever's currently newest.
+    featured = featured_candidates[0] if featured_candidates else PUBLISHED_POSTS[0]
 
     def vol_key(p):
         try:
@@ -416,7 +557,7 @@ def build_journal_index():
     # pick, so the top of the page never shows the same story twice. The
     # grid below still carries everything, including both -- it's the
     # filterable index, and category filtering has to be complete.
-    by_recency = sorted(JOURNAL_POSTS, key=vol_key, reverse=True)
+    by_recency = sorted(PUBLISHED_POSTS, key=vol_key, reverse=True)
     hero_posts = [p for p in by_recency if p is not featured][:3]
     grid_posts = by_recency
 
@@ -468,7 +609,7 @@ def build_journal_index():
       <span class="jsection__label">Latest Stories</span>
     </div>
 
-    <div class="jgrid reveal reveal-d1" id="jgrid">
+    <div class="jgrid" id="jgrid">
 {grid_html}
     </div>
     <p class="jempty" id="jempty" hidden>No entries in this category yet.</p>
@@ -503,7 +644,7 @@ def build_journal_index():
 # journal-<slug>.html article pages
 # ----------------------------------------------------------------------
 def build_article_pages():
-    posts = JOURNAL_POSTS
+    posts = PUBLISHED_POSTS
     n = len(posts)
     for i, post in enumerate(posts):
         prev_post = posts[i - 1]
@@ -515,7 +656,17 @@ def build_article_pages():
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(post['title'])} &#8212; The Journal &#8212; Paris Pullen</title>
-<meta name="description" content="{esc(post['stand'])}">
+<meta name="description" content="{esc(post.get('meta_description', post['stand']))}">
+<link rel="canonical" href="https://parispullen.com/{article_url(post)}">
+<meta property="og:title" content="{esc(post['title'])}">
+<meta property="og:description" content="{esc(post.get('meta_description', post['stand']))}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://parispullen.com/{article_url(post)}">
+<meta property="og:image" content="https://parispullen.com/assets/img/{post['hero']['img']}.{post['hero']['ext']}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(post['title'])}">
+<meta name="twitter:description" content="{esc(post.get('meta_description', post['stand']))}">
+<meta name="twitter:image" content="https://parispullen.com/assets/img/{post['hero']['img']}.{post['hero']['ext']}">
 <meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -532,7 +683,7 @@ def build_article_pages():
 <section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,14rem)">
   <div class="wrap wrap--narrow">
     <header class="stack stack--tight reveal">
-      <p class="eyebrow jread-byline">By <b>Paris Pullen</b> &#183; {post['catlabel']} &#183; Vol. {post['vol']} &#183; {post['read']}</p>
+      <p class="eyebrow jread-byline">By <b>Paris Pullen</b> &#183; {post['catlabel']} &#183; {post['read']}</p>
       <h1 class="display display--h1">{esc(post['title'])}</h1>
       <p class="lede">{post['stand']}</p>
     </header>
@@ -556,7 +707,20 @@ def build_article_pages():
         fname = article_url(post)
         with open(fname, "w", encoding="utf-8") as f:
             f.write(html)
-    print(f"wrote {n} article pages")
+
+    # A post that gets drafted (or deleted) after having been published once
+    # already has a page sitting on disk -- unlinked from the index, but
+    # still a live, fetchable URL until its file is actually removed.
+    # journal-post.html itself is a generic ?slug=-driven template for the
+    # separate dashboard.html/journal.js runtime posting system, not one of
+    # this script's own per-slug pages -- never sweep it up here.
+    live_urls = {article_url(p) for p in posts} | {"journal-post.html"}
+    removed = 0
+    for existing in Path(__file__).resolve().parent.glob("journal-*.html"):
+        if existing.name not in live_urls:
+            existing.unlink()
+            removed += 1
+    print(f"wrote {n} article pages" + (f", removed {removed} stale one(s)" if removed else ""))
 
 if __name__ == "__main__":
     build_journal_index()

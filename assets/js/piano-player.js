@@ -9,7 +9,7 @@
    The rotation itself is editable live from the dashboard's Music
    panel (the 'playlists' collection) rather than requiring a
    rebuild. Same three-tier fallback tv-remote.js uses for channels:
-     1. /.netlify/functions/content?collection=playlists -- dashboard edits.
+     1. /api/content?collection=playlists -- dashboard edits.
      2. data/house-music.json -- the static seed file build_house.py
         also reads, used if the collection is empty or unreachable.
      3. the data-playlists JSON already baked into each element's markup
@@ -33,7 +33,7 @@
     return out.length ? out : null;
   }
 
-  var playlistsReady = fetch('/.netlify/functions/content?collection=playlists')
+  var playlistsReady = fetch('/api/content?collection=playlists')
     .then(function (r) { return r.json(); })
     .then(function (data) {
       var records = (data && data.records) || [];

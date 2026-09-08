@@ -32,7 +32,7 @@ FLOORS = [
     ("booth","The Corner Booth","44%","78%","Faces the door, backs to the wall, worst view in the building. Held permanently. If you are sitting in it you were invited to sit in it.",[("View","Deliberately poor"),("Sightline","The lift"),("Held","Permanently")]),
    ]),
 
- dict(id="penthouse-living", lvl="27", name="The Living Floor", state="restricted",
+ dict(id="penthouse-living", lvl="27", name="The Living Room", state="restricted",
    img="room-living", grade="", focus="50% 50%",
    note="Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.",
    arts=[
@@ -40,7 +40,7 @@ FLOORS = [
     ("piano","The Piano","72%","88%","He played trumpet for seven years, first chair, and cannot play this at all. It is here because a room with a piano in it behaves differently from a room without one — and because it's wired to whatever he's actually listening to.",[("Played by him","No"),("Actual instrument","Trumpet"),("Function","Atmosphere & the speakers")]),
     ("vault","The Vault","91%","70%","Brass wheel, black steel, set into the wall beside the piano and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.",[("Concealed","No"),("Contents","UR Welcome"),("Combination","One person")]),
     ("candle","The Candle","74.58%","36.17%","Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome — coming soon.",[("Status","Coming soon"),("Lit","Not yet")]),
-    ("jacket","The Jacket","39.2%","67.5%","Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion — see the Wardrobe.",[("Hung","No"),("Ordered elsewhere","By occasion"),("See also","The Wardrobe")]),
+    ("jacket","The Jacket","39.2%","67.5%","Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion — see the Boutique.",[("Hung","No"),("Ordered elsewhere","By occasion"),("See also","The Boutique")]),
    ]),
 
  dict(id="bedroom", lvl="28", name="The Bedroom", state="restricted",
@@ -92,7 +92,7 @@ FLOORS = [
    ]),
 
  dict(id="corridor", lvl="26", name="The Corridor", state="restricted",
-   img="env-network", grade="grade--cold", focus="40% 56%", zoom="1.16",
+   img="env-network", grade="grade--cold", focus="40% 56%",
    note="No numbers on these doors. The carpet is thicker here, which is not a decorating choice.",
    arts=[
     ("door","The Unmarked Door","30%","48%","There is no handle on this side. It opens from within, or it does not open. Staff are instructed never to knock on it, and never to mention it to a guest who has not mentioned it first.",[("Handle","Interior only"),("Knocking","Prohibited"),("Mentioned first by","The guest")]),
@@ -140,7 +140,7 @@ FLOORS = [
    ]),
 
  dict(id="armoury", lvl="12M", name="The Armoury", state="restricted",
-   img="env-bespoke", grade="grade--noir", focus="86% 58%", zoom="1.3",
+   img="env-bespoke", grade="grade--noir", focus="86% 58%",
    note="A gentleman's defensive kit, in the Savile Row tradition. Nothing in here fires anything.",
    arts=[
     ("umbrellas","The Umbrellas","32%","46%","Storm-rated, reinforced along the spine, weighted correctly for the hand. It rains a great deal in this state and a man should not be caught holding something flimsy.",[("Frame","Reinforced"),("Weight","Hand-balanced"),("Fires","Nothing")]),
@@ -150,7 +150,7 @@ FLOORS = [
    ]),
 
  dict(id="fitting", lvl="11", name="The Fitting Floor", state="members",
-   img="paris-bespoke", grade="grade--warm", focus="50% 42%", zoom="1.08",
+   img="paris-bespoke", grade="grade--warm", focus="50% 42%",
    note="Three mirrors, angled so you cannot avoid yourself. Somebody is mid-fitting. He does not stop.",
    arts=[
     ("mirrors","The Three Mirrors","24%","36%","Set so that you see your own back. Most men have never seen how they actually stand, and the first fitting is largely about surviving that information.",[("Angles","Three"),("Shows","Your back"),("First reaction","Silence")]),
@@ -178,7 +178,7 @@ FLOORS = [
    ]),
 
  dict(id="coffee", lvl="01", name="The Coffee House", state="public",
-   img="env-bar", grade="grade--dawn", focus="30% 60%", zoom="1.2",
+   img="env-bar", grade="grade--dawn", focus="30% 60%",
    note="The same marble counter, twelve hours earlier. Different room entirely.",
    arts=[
     ("counter","The Counter","34%","62%","This is the bar. At six in the morning the bottles are shuttered, the lights come up, and the same stone serves espresso to people who have no idea what happens here after dark.",[("Same stone","Yes"),("Shuttered","The back bar"),("Overlap","Two hours")]),
@@ -187,7 +187,7 @@ FLOORS = [
    ]),
 
  dict(id="lobby", lvl="G", name="The Lobby", state="public",
-   img="env-lobby", grade="grade--jewel", focus="50% 52%", zoom="1.05",
+   img="env-lobby", grade="grade--jewel", focus="50% 52%",
    note="The doors give, the noise of the street stops, and the building tells you everything about itself in about four seconds.",
    arts=[
     ("doors","The Doors","80%","50%","Brass, and heavier than they need to be. The weight is the point \u2014 you have to commit to opening them, and by the time you are through you have already made a small decision about being here.",[("Material","Solid brass"),("Weight","Deliberate"),("Held for you","Only sometimes")]),
@@ -207,7 +207,7 @@ FLOORS = [
    ]),
 
  dict(id="inventory", lvl="B2", name="The Inventory", state="restricted",
-   img="env-motorclub", grade="grade--noir", focus="18% 62%", zoom="1.34",
+   img="env-motorclub", grade="grade--noir", focus="18% 62%",
    note="Below the club. Colder, darker, and considerably more interesting.",
    arts=[
     ("racks","The Racks","30%","48%","Parts, panels and things that no longer exist anywhere else. When a car upstairs needs something unobtainable, it is obtained from down here.",[("Contents","Unobtainable"),("Catalogue","Handwritten"),("Insured","Separately")]),
@@ -232,7 +232,7 @@ def esc(t):
 # runs backwards from what the arrow/swipe implied. The two rows below
 # are independent left-right chains (ROOM_ADJACENCY has no left/right
 # link between them), so only the order *within* each row matters:
-#   Kitchen -> Living Floor -> Cinema            (Level 27)
+#   Kitchen -> Living Room -> Cinema            (Level 27)
 #   Study -> Bedroom -> Closet -> Bathroom        (Level 28)
 _PENTHOUSE_ORDER = ["kitchen", "penthouse-living", "cinema", "study", "bedroom", "closet", "bath"]
 _penthouse_by_id = {f["id"]: f for f in FLOORS if f["lvl"] in ("27", "28")}
@@ -242,7 +242,7 @@ START_ROOM = "penthouse-living"  # data-start-room below; also which screen (if 
 # Room-to-room navigation is a real 2D layout, not a linear sequence:
 #   Level 28:  Study <-> Bedroom <-> Closet <-> Bathroom
 #                            |
-#   Level 27:  Kitchen <-> Living Floor <-> Cinema
+#   Level 27:  Kitchen <-> Living Room <-> Cinema
 # Left/right/up/down each name an explicit neighbor id (or are absent at an
 # edge) -- room-pager.js reads these directly rather than paging by array
 # index, so DOM order no longer needs to match traversal order.
@@ -278,17 +278,26 @@ for _f in PENTHOUSE_FLOORS:
     _level_entry_room.setdefault(_f["lvl"], _f["id"])
 _levels_desc = sorted(_level_entry_room, key=level_key, reverse=True)
 
-# The corner nav-panel's button list (assets/js/nav-panel.js) -- one button
-# per open floor, going to that floor's entry room.
-def _nav_panel_rows(floors_index):
+# The corner nav-panel's button list (assets/js/nav-panel.js) -- every open
+# room, not just one per floor (a level can hold more than one open room --
+# 28 alone is Study/Bedroom/Closet/Bath -- and picking just one as that
+# level's "entry" silently made the rest unreachable except by paging
+# through prev/next one room at a time), grouped under a small level
+# heading so a level with several rooms doesn't read as a flat, undifferentiated
+# list.
+def _nav_panel_rows():
+    by_level = {}
+    for f in PENTHOUSE_FLOORS:
+        by_level.setdefault(f["lvl"], []).append(f)
     rows = []
     for lvl in _levels_desc:
-        room = floors_index[_level_entry_room[lvl]]
-        rows.append(
-            f'<button type="button" class="nav-panel__btn" data-nav-panel-go="{room["id"]}">'
-            f'<span class="nav-panel__btn-lvl">{lvl}</span>'
-            f'<span class="nav-panel__btn-name">{esc(room["name"])}</span></button>'
-        )
+        rows.append(f'<p class="nav-panel__group">Level {lvl}</p>')
+        for room in by_level[lvl]:
+            rows.append(
+                f'<button type="button" class="nav-panel__btn" data-nav-panel-go="{room["id"]}">'
+                f'<span class="nav-panel__btn-lvl">{lvl}</span>'
+                f'<span class="nav-panel__btn-name">{esc(room["name"])}</span></button>'
+            )
     return "\n    ".join(rows)
 
 # The mobile menu's Explore section (index.html's <nav class="menu">, hand-
@@ -323,7 +332,7 @@ TV_SCREENS = {
 
 # Physical "open the remote" artifact-style marker in the room photo, for
 # rooms where it's worth one -- reachable without clicking the screen
-# itself, or (for the Living Floor, sitting mid-room where it just got in
+# itself, or (for the Living Room, sitting mid-room where it just got in
 # the way of the coffee table) the always-visible fixed Remote pill.
 # Cinema sits at the foot of the screen (derived from its box above --
 # y + h/2, the bottom edge).
@@ -367,9 +376,9 @@ JOURNAL_CTA = ('<a class="cta pent__open" href="journal.html" style="margin-top:
 # lifted from index.html at build time (above) so the handles and icon set
 # can't drift from the rest of the site.
 MONOGRAM_BIO = f'''<div class="bio">
-                  <img class="bio__portrait" src="assets/img/paris-hero.jpg"
-                       srcset="assets/img/paris-hero@sm.jpg 900w, assets/img/paris-hero.jpg 1800w"
-                       sizes="(max-width:760px) 88vw, 30vw" alt="Paris Pullen" loading="lazy">
+                  <img class="bio__portrait" src="assets/img/paris-fireside.jpg"
+                       srcset="assets/img/paris-fireside@sm.jpg 562w, assets/img/paris-fireside.jpg 1125w"
+                       sizes="(max-width:760px) 88vw, 30vw" alt="Paris Pullen seated fireside, holding an Emmy" loading="lazy">
                   <p class="bio__mission">The city thinks he&#8217;s selling luxury. The people who matter know he&#8217;s selling access.</p>
                   <p class="body">Charlotte, by way of three schools, seven years of trumpet and a backpack business printing t-shirts for his own classmates. A cold email nobody asked for turned into brand activation work; that turned into a nightlife partnership that made a 600-capacity room the best Friday in the city; that turned into hosting, then building rooms of his own.</p>
                   <p class="body">Menswear, hospitality, automotive culture and fragrance &#8212; run as one practice rather than four hobbies. The through-line is the same every time: put a mark on a thing, and make the right people want to be in the room with it.</p>
@@ -403,7 +412,6 @@ GUIDE_PORTAL_CTA = ('<button type="button" class="cta pent__open" data-guide-por
     '<span>Explore the City Guide</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>')
 
 def floor_html(f):
-    zoom = f.get("zoom","1")
     grade = (" "+f["grade"]) if f.get("grade") else ""
     arts, panels = [], []
     for key,name,x,y,body,specs in f["arts"]:
@@ -418,7 +426,7 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
         spec = "".join(f'<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>' for k,v in specs)
         wardrobe_cta = (
             '<a class="cta pent__open" href="wardrobe.html" style="margin-top:var(--s2)">'
-            '<span>Enter the Wardrobe</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
+            '<span>Enter the Boutique</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
             if f["id"] == "closet" and key == "suits" else ""
         )
         tag = f'Level {f["lvl"]} &#183; Artifact'
@@ -428,7 +436,7 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
         elif key == "window":
             wardrobe_cta = GUIDE_PORTAL_CTA
         elif key == "journal":
-            # Both the Living Floor's face-down journal and the Study's
+            # Both the Living Room's face-down journal and the Study's
             # pencil-marked draft point at the same published dispatches.
             wardrobe_cta = JOURNAL_CTA
         elif key == "monogram":
@@ -442,7 +450,7 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
         elif f["id"] == "penthouse-living" and key == "jacket":
             wardrobe_cta = (
                 '<a class="cta pent__open" href="wardrobe.html" style="margin-top:var(--s2)">'
-                '<span>Enter the Wardrobe</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
+                '<span>Enter the Boutique</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
             )
         panels.append(
 f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
@@ -555,10 +563,10 @@ f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
         <img src="assets/img/{f["img"]}.jpg"
              srcset="assets/img/{f["img"]}@sm.jpg 1200w, assets/img/{f["img"]}.jpg 2400w"
              sizes="100vw" alt="{esc(f["name"])}" loading="lazy"
-             style="--focus:{f["focus"]};--zoom:{zoom}" width="2400" height="1340">
-      </div>
-{tv}      <div class="artifacts">
+             style="--focus:{f["focus"]}" width="2400" height="1340">
+{tv}        <div class="artifacts">
 {chr(10).join(arts)}{chr(10) + remote_node if remote_node else ''}{chr(10) + city_link_node if city_link_node else ''}
+        </div>
       </div>
     </div>
   </div>
@@ -580,7 +588,7 @@ f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
 </section>
 '''
 
-NAV_PANEL_ROWS = _nav_panel_rows({f["id"]: f for f in PENTHOUSE_FLOORS})
+NAV_PANEL_ROWS = _nav_panel_rows()
 
 html = f'''<!DOCTYPE html>
 <html lang="en">

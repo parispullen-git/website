@@ -118,7 +118,7 @@
     return;
   }
 
-  fetch('/.netlify/functions/proposals?id=' + encodeURIComponent(id))
+  fetch('/api/proposals?id=' + encodeURIComponent(id))
     .then(function(r){
       if (!r.ok) throw new Error('not found');
       return r.json();
