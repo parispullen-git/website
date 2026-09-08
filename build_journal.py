@@ -565,7 +565,11 @@ def build_journal_index():
         f'<button type="button" data-cat="{slug}">{label}</button>' for slug, label in CATS
     )
 
-    grid_html = "\n".join(render_jcard(p) for p in grid_posts) + "\n" + PANTRY_CARD_HTML
+    # PANTRY_CARD_HTML (the HelloFresh pantry-collab card) pulled from the
+    # public grid -- it's a real brand-pitch concept, not a published Journal
+    # entry, and now lives as a draft on the dashboard's Pitches tab instead.
+    # pantry.html itself is left in place, just no longer linked from here.
+    grid_html = "\n".join(render_jcard(p) for p in grid_posts)
 
     html = f'''<!DOCTYPE html>
 <html lang="en">
