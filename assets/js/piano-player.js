@@ -165,6 +165,16 @@
       if (!IFrameAPI) return;
       IFrameAPI.createController(el, { uri: 'spotify:playlist:7b46c5syjtG86a77R7SnMs' }, function (controller) {
         loungeController = controller;
+        // Exposed so the global Suite Remote (tv-remote.js) can control
+        // this exact controller from any room's Music tab, instead of
+        // running a second, separately-maintained player of its own.
+        window.PP_LOUNGE_CONTROLLER = controller;
+        controller.addListener('playback_update', function (e) {
+          document.dispatchEvent(new CustomEvent('pp:lounge-playback', {
+            detail: { isPaused: !!(e && e.data && e.data.isPaused) }
+          }));
+        });
+        document.dispatchEvent(new CustomEvent('pp:lounge-controller-ready'));
       });
     });
   }

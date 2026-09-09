@@ -1,0 +1,149 @@
+{
+  "routes": [
+    {
+      "routePath": "/api/casefiles-live",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/casefiles-live.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/charlotte-live",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/charlotte-live.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/clients",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/clients.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/content",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/content.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/create-invoice",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/create-invoice.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/deploy",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/deploy.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/house-channels-live",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/house-channels-live.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/house-music-live",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/house-music-live.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/house-rooms-live",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/house-rooms-live.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/inquiries",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/inquiries.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/invoices",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/invoices.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/journal-live",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/journal-live.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/network",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/network.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/orders",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/orders.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/proposals",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/proposals.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/stripe-webhook",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/stripe-webhook.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/api/wardrobe-live",
+      "mountPath": "/api",
+      "method": "",
+      "module": [
+        "api/wardrobe-live.js:onRequest"
+      ]
+    },
+    {
+      "routePath": "/",
+      "mountPath": "/",
+      "method": "",
+      "middleware": [
+        "_middleware.js:onRequest"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}

@@ -44,35 +44,36 @@ def esc(t):
 # runs backwards from what the arrow/swipe implied. Each row below is an
 # independent left-right chain (ROOM_ADJACENCY has no left/right link
 # between rows), so only the order *within* each row matters:
-#   Kitchen -> Living Room -> Cinema            (Level 27)
-#   Study -> Bedroom -> Closet -> Bathroom        (Level 28)
-#   Lounge Bar -> Music Lounge                    (Level 26, reached via
-#                                                   the Living Room's down arrow)
-_PENTHOUSE_ORDER = ["kitchen", "penthouse-living", "cinema", "study", "bedroom", "closet", "bath",
-                     "music-lounge-bar", "music-lounge"]
+#   Bathroom -> Bedroom -> Closet                 (Level 28)
+#   Kitchen -> Living Room -> Study                (Level 27)
+#   Lounge Bar -> Music Lounge -> Cinema           (Level 26)
+_PENTHOUSE_ORDER = ["bath", "bedroom", "closet",
+                     "kitchen", "penthouse-living", "study",
+                     "music-lounge-bar", "music-lounge", "cinema"]
 _penthouse_by_id = {f["id"]: f for f in FLOORS if f["lvl"] in ("26", "27", "28")}
 PENTHOUSE_FLOORS = [_penthouse_by_id[_id] for _id in _PENTHOUSE_ORDER]
 START_ROOM = "penthouse-living"  # data-start-room below; also which screen (if any) autoplays on load
 
-# Room-to-room navigation is a real 2D layout, not a linear sequence:
-#   Level 28:  Study <-> Bedroom <-> Closet <-> Bathroom
-#                            |
-#   Level 27:  Kitchen <-> Living Room <-> Cinema
-#                            |
-#   Level 26:            Music Lounge <-> Lounge Bar
+# Room-to-room navigation is a real 2D layout, a true 3x3 grid -- each
+# room's up/down neighbor sits in the same column one floor away:
+#   Level 28:  Bathroom <-> Bedroom    <-> Closet
+#                  |            |            |
+#   Level 27:  Kitchen <-> Living Room <-> Study
+#                  |            |            |
+#   Level 26: Lounge Bar <-> Music Lounge <-> Cinema
 # Left/right/up/down each name an explicit neighbor id (or are absent at an
 # edge) -- room-pager.js reads these directly rather than paging by array
 # index, so DOM order no longer needs to match traversal order.
 ROOM_ADJACENCY = {
-    "penthouse-living": {"left": "kitchen", "right": "cinema", "up": "bedroom", "down": "music-lounge"},
-    "kitchen":           {"right": "penthouse-living"},
-    "cinema":             {"left": "penthouse-living"},
-    "bedroom":            {"left": "study", "right": "closet", "down": "penthouse-living"},
-    "study":              {"right": "bedroom"},
-    "closet":             {"left": "bedroom", "right": "bath"},
-    "bath":               {"left": "closet"},
-    "music-lounge":       {"left": "music-lounge-bar", "up": "penthouse-living"},
-    "music-lounge-bar":   {"right": "music-lounge"},
+    "bath":               {"right": "bedroom", "down": "kitchen"},
+    "bedroom":            {"left": "bath", "right": "closet", "down": "penthouse-living"},
+    "closet":             {"left": "bedroom", "down": "study"},
+    "kitchen":            {"right": "penthouse-living", "up": "bath", "down": "music-lounge-bar"},
+    "penthouse-living":   {"left": "kitchen", "right": "study", "up": "bedroom", "down": "music-lounge"},
+    "study":              {"left": "penthouse-living", "up": "closet", "down": "cinema"},
+    "music-lounge-bar":   {"right": "music-lounge", "up": "kitchen"},
+    "music-lounge":       {"left": "music-lounge-bar", "right": "cinema", "up": "penthouse-living"},
+    "cinema":             {"left": "music-lounge", "up": "study"},
 }
 
 # Room-to-room nav (ROOM_ADJACENCY, above) is fully explicit now, but the
@@ -98,12 +99,11 @@ for _f in PENTHOUSE_FLOORS:
 _levels_desc = sorted(_level_entry_room, key=level_key, reverse=True)
 
 # The corner nav-panel's button list (assets/js/nav-panel.js) -- every open
-# room, not just one per floor (a level can hold more than one open room --
-# 28 alone is Study/Bedroom/Closet/Bath -- and picking just one as that
-# level's "entry" silently made the rest unreachable except by paging
-# through prev/next one room at a time), grouped under a small level
-# heading so a level with several rooms doesn't read as a flat, undifferentiated
-# list.
+# room, not just one per floor (each level holds three rooms in a 3x3
+# grid, and picking just one as that level's "entry" silently made the
+# rest unreachable except by paging through prev/next one room at a
+# time), grouped under a small level heading so a level with several
+# rooms doesn't read as a flat, undifferentiated list.
 def _nav_panel_rows():
     by_level = {}
     for f in PENTHOUSE_FLOORS:
@@ -229,7 +229,8 @@ VAULT_CTA = ('<a class="cta pent__open" href="urwelcome.html" data-vault-enter s
 # the DOM (and the controller/iframe with it) whether or not this
 # drawer's actually open, so playback continues in the background either
 # way, same as any other embedded player on the site.
-MUSIC_LOUNGE_SPOTIFY = '''<div class="spotify-embed">
+MUSIC_LOUNGE_SPOTIFY = '''<p class="body" style="margin-top:var(--s3)">Curated by <a class="link-under" href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>
+                <div class="spotify-embed">
                   <div data-lounge-spotify></div>
                 </div>'''
 

@@ -885,14 +885,6 @@
     // Cinema/Music to control.
     if (!document.querySelector('[data-room-pager]')) return;
 
-    // Last-resort only -- the real rotation is resolved at runtime by
-    // resolveMusic() below. Kept so the Music tab can never render empty
-    // even with every fetch tier unreachable (offline, function down).
-    // "Slow, Smoky Vintage Noir Jazz -- The Night Is Mine"
-    var MUSIC_FALLBACK = [
-      { type: 'playlist', id: '1JhREpY7u0E0LAYTDgYKwz', label: 'The Night Is Mine' }
-    ];
-
     var toggleBtn = document.createElement('button');
     toggleBtn.type = 'button';
     toggleBtn.className = 'remote-toggle';
@@ -956,17 +948,15 @@
     var muteBtn = panel.querySelector('[data-sr-action="mute"]');
     var pwrBtn = panel.querySelector('.suite-remote__pwr');
     var musicEl = panel.querySelector('[data-sr-music]');
+    musicEl.innerHTML = '<p class="suite-remote__credit">Curated by <a href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>';
     var guidePanel = panel.querySelector('[data-sr-guide-panel]');
     var guideList = panel.querySelector('[data-sr-guide-list]');
     var transportEls = panel.querySelectorAll('[data-sr-transport]');
     var sourceBtns = panel.querySelectorAll('[data-sr-source]');
 
     var activeSource = 'tv'; // 'tv' | 'music' | 'cinema'
-    var musicLoaded = false;
-    var musicList = MUSIC_FALLBACK; // replaced once resolveMusic() lands
-    var musicIdx = 0;
-    var musicFrame = null;
     var contextualKey = null; // the current room's own channel-set, if any
+    var loungeIsPaused = true;
 
     function keyForSource(src) { return src === 'tv' ? 'living' : src === 'cinema' ? 'cinema' : null; }
     // Named to avoid any confusion with the fullscreen modal's own
@@ -975,120 +965,46 @@
     function currentState() { var k = keyForSource(activeSource); return k && STATE_BY_KEY[k]; }
     function contextualSource() { return contextualKey === 'living' ? 'tv' : contextualKey === 'cinema' ? 'cinema' : null; }
 
-    /* ---------- Music: the house-wide rotation, not a second playlist ----------
-       Same {type,id,label} entries piano-player.js resolves (it still runs
-       just to fetch/expose this data -- no room artifact embeds it as a
-       widget anymore, see MUSIC_LOUNGE_SPOTIFY), so a dashboard edit to the
-       'playlists' collection updates this tab immediately.
-       Resolution order, cheapest first:
-         1. window.PP_PIANO_PLAYLISTS_RESOLVED -- piano-player.js already
-            finished resolving; reuse its answer and fetch nothing at all.
-         2. window.PP_PIANO_PLAYLISTS_READY -- piano-player.js is on the page
-            but still in flight; wait on its promise instead of racing it
-            with a duplicate request for the same data.
-         3/4. the collection fetch, then data/house-music.json -- the exact
-            two tiers piano-player.js uses, reached only on a page that
-            doesn't load piano-player.js at all.
-         5. MUSIC_FALLBACK -- last resort, so the tab is never empty. */
-    function normalizeMusic(list) {
-      if (!Array.isArray(list)) return null;
-      var out = list.filter(function (it) { return it && it.type && it.id && it.label; });
-      return out.length ? out : null;
-    }
-
-    function resolveMusic() {
-      var already = normalizeMusic(window.PP_PIANO_PLAYLISTS_RESOLVED);
-      if (already) return Promise.resolve(already);
-      var ready = window.PP_PIANO_PLAYLISTS_READY;
-      if (ready && typeof ready.then === 'function') return ready.then(normalizeMusic);
-      return fetch('/api/content?collection=playlists')
-        .then(function (r) { if (!r.ok) throw new Error('not found'); return r.json(); })
-        .then(function (data) {
-          var records = (data && data.records) || [];
-          records.sort(function (a, b) {
-            if (typeof a.order === 'number' && typeof b.order === 'number') return a.order - b.order;
-            return (a.createdAt || 0) - (b.createdAt || 0);
-          });
-          var list = normalizeMusic(records.map(function (r) {
-            return { type: r.type, id: r.spotifyId, label: r.label };
-          }));
-          if (!list) throw new Error('empty');
-          return list;
-        })
-        .catch(function () {
-          return fetch('data/house-music.json')
-            .then(function (r) { return r.json(); })
-            .then(normalizeMusic);
-        });
-    }
-
-    // Kicked off at init (not on first Music click) so it has almost always
-    // landed by the time anyone opens the tab; ensureMusicEmbed() still waits
-    // on it rather than building the fallback embed and swapping its src out
-    // from under a visitor who already pressed play.
-    var musicReady = resolveMusic()
-      .catch(function () { return null; })
-      .then(function (list) {
-        if (list && list.length) { musicList = list; musicIdx = 0; }
-        if (activeSource === 'music') render();
-      });
-
-    function musicSrc(item) {
-      return 'https://open.spotify.com/embed/' + item.type + '/' + item.id +
-        '?utm_source=generator&theme=0';
-    }
-
-    function ensureMusicEmbed() {
-      if (musicLoaded) return;
-      musicLoaded = true;
-      musicReady.then(function () {
-        musicFrame = document.createElement('iframe');
-        musicFrame.src = musicSrc(musicList[musicIdx]);
-        musicFrame.width = '100%';
-        musicFrame.height = '152';
-        musicFrame.style.borderRadius = '12px';
-        musicFrame.setAttribute('frameborder', '0');
-        musicFrame.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
-        musicFrame.loading = 'lazy';
-        musicEl.appendChild(musicFrame);
-      });
-    }
-
-    // Step through the rotation on the existing rw/ff buttons -- the Spotify
-    // embed supplies its own play/pause, but nothing to reach the next entry.
-    // Loads paused -- same behavior piano-player.js's own prev/next used.
-    function stepMusic(delta) {
-      if (musicList.length < 2) return;
-      musicIdx = ((musicIdx + delta) % musicList.length + musicList.length) % musicList.length;
-      if (musicFrame) musicFrame.src = musicSrc(musicList[musicIdx]);
-      render();
-    }
+    /* ---------- Music: the Music Lounge's own controller, from any room ----------
+       Not a separate rotation anymore -- this tab controls the exact same
+       Spotify IFrame API controller the Music Lounge's record-player
+       artifact plays through (piano-player.js's initLoungeSpotify(),
+       exposed as window.PP_LOUNGE_CONTROLLER once created). Wherever the
+       visitor actually is in the building, pressing play here plays (and
+       pauses) the one playlist genuinely running in the Music Lounge --
+       there's nothing left to fetch or swap, so no resolution chain, no
+       fallback list, no per-tab embed. pp:lounge-playback carries the
+       controller's own playback_update events over so this tab's dial
+       stays in sync without a direct reference to piano-player.js. */
+    function loungeController() { return window.PP_LOUNGE_CONTROLLER || null; }
+    document.addEventListener('pp:lounge-playback', function (e) {
+      loungeIsPaused = !!(e.detail && e.detail.isPaused);
+      if (activeSource === 'music') render();
+    });
+    document.addEventListener('pp:lounge-controller-ready', function () {
+      if (activeSource === 'music') render();
+    });
 
     function render() {
       Array.prototype.forEach.call(sourceBtns, function (b) {
         b.classList.toggle('is-active', b.dataset.srSource === activeSource);
       });
       var isMusic = activeSource === 'music';
-      // Music keeps ONE transport group -- the rw/ff pair, repurposed as
-      // prev/next through the rotation. Mute/Guide/Fullscreen stay hidden
-      // (nothing to point them at) and so does the play dial: the Spotify
-      // embed owns its own play/pause. The dial's class rule sets
-      // display:flex, which outranks the [hidden] attribute, so it has to
-      // be hidden inline rather than via el.hidden like the groups.
-      var canStep = isMusic && musicList.length > 1;
+      // Music keeps just the transport row (for the dial) -- rw/ff have
+      // nothing left to step between (one fixed playlist, not a
+      // rotation), and Mute/Guide/Fullscreen stay hidden (nothing to
+      // point them at either).
       Array.prototype.forEach.call(transportEls, function (el) {
-        el.hidden = isMusic && !(canStep && el === seekRow);
+        el.hidden = isMusic && el !== seekRow;
       });
-      if (dialBtn) dialBtn.style.display = isMusic ? 'none' : '';
-      if (rwBtn) rwBtn.setAttribute('aria-label', isMusic ? 'Previous playlist' : 'Rewind 10 seconds');
-      if (ffBtn) ffBtn.setAttribute('aria-label', isMusic ? 'Next playlist' : 'Fast forward 10 seconds');
+      if (rwBtn) rwBtn.hidden = isMusic;
+      if (ffBtn) ffBtn.hidden = isMusic;
       musicEl.hidden = !isMusic;
       panel.classList.remove('is-power-off');
       if (isMusic) {
-        var nowPlaying = musicList[musicIdx];
-        titleEl.textContent = 'Music · ' + (nowPlaying ? nowPlaying.label : '—');
+        titleEl.textContent = 'Music · Music Lounge';
         if (pwrBtn) { pwrBtn.disabled = true; pwrBtn.classList.remove('is-off'); }
-        ensureMusicEmbed();
+        if (dialBtn) dialBtn.classList.toggle('is-paused', loungeIsPaused);
         return;
       }
       if (pwrBtn) pwrBtn.disabled = false;
@@ -1215,13 +1131,13 @@
       switch (actionBtn.dataset.srAction) {
         case 'close': close(); break;
         case 'power': if (st) { st.togglePower(); render(); } break;
-        case 'playpause': if (st) st.togglePlayPause(); break;
+        case 'playpause':
+          if (activeSource === 'music') { var lc = loungeController(); if (lc) lc.togglePlay(); }
+          else if (st) st.togglePlayPause();
+          break;
         case 'mute': if (st) st.toggleMute(); break;
-        // Under Music these two step the rotation instead of seeking; under
-        // TV/Cinema (where currentState() is non-null and activeSource is
-        // never 'music') they stay the same ∓10s seek they always were.
-        case 'rw': if (activeSource === 'music') stepMusic(-1); else if (st) st.seekRw(); break;
-        case 'ff': if (activeSource === 'music') stepMusic(1); else if (st) st.seekFf(); break;
+        case 'rw': if (st) st.seekRw(); break;
+        case 'ff': if (st) st.seekFf(); break;
         case 'guide':
           if (!st) break;
           renderGuide(st);

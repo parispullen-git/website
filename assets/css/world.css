@@ -1804,6 +1804,9 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
    spell it out explicitly so hiding these during Music actually hides them. */
 [data-sr-transport][hidden]{display:none}
 .suite-remote__music iframe{display:block;border:0}
+.suite-remote__credit{font-family:var(--font-sans);font-size:var(--t-label);line-height:1.5;
+  color:var(--ash);text-align:center;margin:0}
+.suite-remote__credit a{color:var(--brass-lit)}
 .suite-remote__guide-panel{
   position:absolute;inset:0;z-index:2;border-radius:16px;
   background:linear-gradient(180deg,#161616,#0a0a0b);

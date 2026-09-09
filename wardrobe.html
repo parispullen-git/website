@@ -54,8 +54,8 @@
     <a class="menu__explore-link" href="house.html#bath">28 &#183; The Bathroom</a>
     <a class="menu__explore-link" href="house.html#closet">28 &#183; The Closet</a>
     <a class="menu__explore-link" href="house.html#kitchen">27 &#183; The Kitchen</a>
-    <a class="menu__explore-link" href="house.html#study">28 &#183; The Study</a>
-    <a class="menu__explore-link" href="house.html#cinema">27 &#183; The Cinema</a>
+    <a class="menu__explore-link" href="house.html#study">27 &#183; The Study</a>
+    <a class="menu__explore-link" href="house.html#cinema">26 &#183; The Cinema</a>
     </div>
   </div>
   <div class="menu__foot">

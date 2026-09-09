@@ -21,48 +21,48 @@
   // runs backwards from what the arrow/swipe implied. Each row is an
   // independent left-right chain (ROOM_ADJACENCY, below, has no left/
   // right link between rows), so only the order *within* each row matters:
-  //   Kitchen -> Living Room -> Cinema            (Level 27)
-  //   Study -> Bedroom -> Closet -> Bathroom        (Level 28)
-  //   Lounge Bar -> Music Lounge                    (Level 26, via the
-  //                                                   Living Room's down arrow)
+  //   Bathroom -> Bedroom -> Closet                 (Level 28)
+  //   Kitchen -> Living Room -> Study                (Level 27)
+  //   Lounge Bar -> Music Lounge -> Cinema           (Level 26)
   var ROOMS = [
-    { id:'kitchen', lvl:'Level 27', name:'The Kitchen',
-      note:'Black marble, brass and a range that has seen more entertaining than cooking.', img:'room-kitchen' },
-    { id:'penthouse-living', lvl:'Level 27', name:'The Living Room',
-      note:'Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.', img:'room-living' },
-    { id:'cinema',  lvl:'Level 27', name:'The Cinema',
-      note:'Nine seats, one screen, and a rule about phones that is actually enforced.', img:'room-cinema' },
-    { id:'study',   lvl:'Level 28', name:'The Study',
-      note:'The room where the answer is usually no, and where it gets said politely.', img:'room-study' },
+    { id:'bath',    lvl:'Level 28', name:'The Bathroom',
+      note:'Stone, brass and steam, with the whole city on the other side of the glass.', img:'room-bath' },
     { id:'bedroom', lvl:'Level 28', name:'The Bedroom',
       note:'Blackout to the glass, and a bed that faces away from the view on purpose.', img:'room-bedroom' },
     { id:'closet',  lvl:'Level 28', name:'The Closet',
       note:'Not a room of clothes. A room of decisions already made.', img:'room-closet' },
-    { id:'bath',    lvl:'Level 28', name:'The Bathroom',
-      note:'Stone, brass and steam, with the whole city on the other side of the glass.', img:'room-bath' },
+    { id:'kitchen', lvl:'Level 27', name:'The Kitchen',
+      note:'Black marble, brass and a range that has seen more entertaining than cooking.', img:'room-kitchen' },
+    { id:'penthouse-living', lvl:'Level 27', name:'The Living Room',
+      note:'Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.', img:'room-living' },
+    { id:'study',   lvl:'Level 27', name:'The Study',
+      note:'The room where the answer is usually no, and where it gets said politely.', img:'room-study' },
     { id:'music-lounge-bar', lvl:'Level 26', name:'The Lounge Bar',
       note:'Marble and brass, poured slow, with the same record wall spilling over from next door.', img:'room-musicloungebar' },
     { id:'music-lounge', lvl:'Level 26', name:'The Music Lounge',
-      note:'Vinyl floor to ceiling on one wall, a turntable that never gets left idle, and a couch built for people who came to listen, not to talk over it.', img:'room-musiclounge' }
+      note:'Vinyl floor to ceiling on one wall, a turntable that never gets left idle, and a couch built for people who came to listen, not to talk over it.', img:'room-musiclounge' },
+    { id:'cinema',  lvl:'Level 26', name:'The Cinema',
+      note:'Nine seats, one screen, and a rule about phones that is actually enforced.', img:'room-cinema' }
   ];
 
-  // Room-to-room navigation is a real 2D layout, not a linear sequence
+  // Room-to-room navigation is a real 2D layout, a true 3x3 grid -- each
+  // room's up/down neighbor sits in the same column one floor away
   // (mirrors build_house.py's ROOM_ADJACENCY exactly):
-  //   Level 28:  Study <-> Bedroom <-> Closet <-> Bathroom
-  //                            |
-  //   Level 27:  Kitchen <-> Living Room <-> Cinema
-  //                            |
-  //   Level 26:            Music Lounge <-> Lounge Bar
+  //   Level 28:  Bathroom <-> Bedroom    <-> Closet
+  //                  |            |            |
+  //   Level 27:  Kitchen <-> Living Room <-> Study
+  //                  |            |            |
+  //   Level 26: Lounge Bar <-> Music Lounge <-> Cinema
   var ROOM_ADJACENCY = {
-    'penthouse-living': { left:'kitchen', right:'cinema', up:'bedroom', down:'music-lounge' },
-    'kitchen':          { right:'penthouse-living' },
-    'cinema':           { left:'penthouse-living' },
-    'bedroom':          { left:'study', right:'closet', down:'penthouse-living' },
-    'study':            { right:'bedroom' },
-    'closet':           { left:'bedroom', right:'bath' },
-    'bath':             { left:'closet' },
-    'music-lounge':     { left:'music-lounge-bar', up:'penthouse-living' },
-    'music-lounge-bar': { right:'music-lounge' }
+    'bath':             { right:'bedroom', down:'kitchen' },
+    'bedroom':          { left:'bath', right:'closet', down:'penthouse-living' },
+    'closet':           { left:'bedroom', down:'study' },
+    'kitchen':          { right:'penthouse-living', up:'bath', down:'music-lounge-bar' },
+    'penthouse-living': { left:'kitchen', right:'study', up:'bedroom', down:'music-lounge' },
+    'study':            { left:'penthouse-living', up:'closet', down:'cinema' },
+    'music-lounge-bar': { right:'music-lounge', up:'kitchen' },
+    'music-lounge':     { left:'music-lounge-bar', right:'cinema', up:'penthouse-living' },
+    'cinema':           { left:'music-lounge', up:'study' }
   };
 
   var ARTS = {
@@ -73,7 +73,7 @@
       { key:'jacket', name:'The Jacket', x:'39.2%', y:'67.5%', body:"Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion &#8212; see the Boutique.", specs:[['Hung', 'No'], ['Ordered elsewhere', 'By occasion'], ['See also', 'The Boutique']] },
     ],
     'music-lounge': [
-      { key:'recordplayer', name:'The Record Player', x:'38%', y:'33%', body:'One playlist, queued on shuffle and left running &#8212; the same records this wall is built around, on a loop nobody has to manage.', specs:[['Plays', 'One playlist, shuffled'], ['Chosen by', 'Him'], ['Manual skips', 'Yes']] },
+      { key:'recordplayer', name:'The Record Player', x:'38%', y:'33%', body:'ATF to OVO &#8212; the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.', specs:[['Plays', 'One playlist, shuffled'], ['Curated by', '@djangodegree'], ['Manual skips', 'Yes']] },
     ],
     'music-lounge-bar': [],
     'bedroom': [
@@ -282,7 +282,8 @@
   // controller.play() once the entry sting finishes. The house-wide
   // rotation piano-player.js also drives still exists and still plays,
   // just via the global Suite Remote's Music tab now, not an in-room widget.
-  var MUSIC_LOUNGE_SPOTIFY = '<div class="spotify-embed"><div data-lounge-spotify></div></div>';
+  var MUSIC_LOUNGE_SPOTIFY = '<p class="body" style="margin-top:var(--s3)">Curated by <a class="link-under" href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>' +
+    '<div class="spotify-embed"><div data-lounge-spotify></div></div>';
   var CANDLE_COMING_SOON = '<div class="coming-soon"><span class="coming-soon__badge">UR Welcome &#183; Coming Soon</span></div>';
 
   function extrasFor(roomId, key) {
@@ -307,11 +308,11 @@
   /* ============================================================
      THE NAV PANEL — only Levels 26-28 (The Penthouse) are open right
      now, so the panel only ever lists these three -- but every ROOM on
-     each, not just one "entry" room per level (28 alone is Study/
-     Bedroom/Closet/Bath -- picking just one as that level's entry
-     silently made the rest unreachable except by paging prev/next one
-     room at a time), grouped under a small level heading. Mirrors
-     build_house.py's own _nav_panel_rows() exactly.
+     each, not just one "entry" room per level (three rooms per level,
+     a true 3x3 grid -- picking just one as that level's entry silently
+     made the rest unreachable except by paging prev/next one room at a
+     time), grouped under a small level heading. Mirrors build_house.py's
+     own _nav_panel_rows() exactly.
      ============================================================ */
   function roomById(id) { return ROOMS.filter(function (r) { return r.id === id; })[0]; }
 

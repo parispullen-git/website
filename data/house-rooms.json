@@ -366,7 +366,7 @@
   },
   {
     "id": "study",
-    "lvl": "28",
+    "lvl": "27",
     "name": "The Study",
     "state": "restricted",
     "img": "room-study",
@@ -479,7 +479,7 @@
   },
   {
     "id": "cinema",
-    "lvl": "27",
+    "lvl": "26",
     "name": "The Cinema",
     "state": "restricted",
     "img": "room-cinema",
@@ -1643,15 +1643,15 @@
         "name": "The Record Player",
         "x": "38%",
         "y": "33%",
-        "desc": "One playlist, queued on shuffle and left running — the same records this wall is built around, on a loop nobody has to manage.",
+        "desc": "ATF to OVO — the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.",
         "specs": [
           [
             "Plays",
             "One playlist, shuffled"
           ],
           [
-            "Chosen by",
-            "Him"
+            "Curated by",
+            "@djangodegree"
           ],
           [
             "Manual skips",
