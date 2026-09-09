@@ -275,15 +275,14 @@
   var JOURNAL_CTA = '<a class="cta pent__open" href="journal.html" style="margin-top:var(--s2)"><span>Read the Journal</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   var VAULT_CTA = '<a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)"><span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   // The Piano artifact (Living Room) is retired -- mirrors build_house.py's
-  // MUSIC_LOUNGE_SPOTIFY exactly: one fixed playlist, Spotify's own embed
-  // player verbatim (it already has play/pause/shuffle built in), on the
-  // Music Lounge's record-player artifact. The house-wide rotation
-  // piano-player.js drove still exists and still plays, just via the
-  // global Suite Remote's Music tab now, not an in-room widget.
-  var MUSIC_LOUNGE_SPOTIFY = '<div class="spotify-embed">' +
-    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7b46c5syjtG86a77R7SnMs?utm_source=generator" ' +
-    'width="100%" height="352" frameborder="0" loading="lazy" ' +
-    'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe></div>';
+  // MUSIC_LOUNGE_SPOTIFY exactly: one fixed playlist on the Music Lounge's
+  // record-player artifact. The target is an empty div, not a plain
+  // <iframe> -- piano-player.js's initLoungeSpotify() creates a real
+  // Spotify IFrame API controller on it, so entering the room can call
+  // controller.play() once the entry sting finishes. The house-wide
+  // rotation piano-player.js also drives still exists and still plays,
+  // just via the global Suite Remote's Music tab now, not an in-room widget.
+  var MUSIC_LOUNGE_SPOTIFY = '<div class="spotify-embed"><div data-lounge-spotify></div></div>';
   var CANDLE_COMING_SOON = '<div class="coming-soon"><span class="coming-soon__badge">UR Welcome &#183; Coming Soon</span></div>';
 
   function extrasFor(roomId, key) {

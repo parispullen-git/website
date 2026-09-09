@@ -136,8 +136,57 @@
     if (el._pianoSwitch) el._pianoSwitch(btn.hasAttribute('data-piano-next') ? 1 : -1);
   });
 
+  /* ----------------------------------------------------------------
+     Music Lounge entry sequence -- arriving at the room (pp:room-change,
+     see room-pager.js) plays a short sting (assets/audio/music-lounge-
+     intro.m4a), then autoplays the record player artifact's own fixed
+     playlist once the sting ends. Reuses spotifyApiPromise above rather
+     than loading the IFrame API a second time; the target div itself
+     (data-lounge-spotify, inside the artifact's drawer -- see
+     MUSIC_LOUNGE_SPOTIFY in build_house.py/penthouse.js) sits in the DOM
+     whether or not the drawer's actually open, so the controller plays
+     in the background either way, same as any other embedded player.
+
+     Spotify's public embed API has no documented way to force shuffle
+     on programmatically -- this starts the playlist in its own track
+     order; the widget's own shuffle icon (visible once the drawer's
+     opened) is there for the visitor to toggle themselves.
+
+     Best-effort only: a browser that blocks the sting's autoplay (most
+     likely the very first click into house.html, before any in-page
+     interaction) still gets the playlist call as a fallback, but if
+     that's blocked too, the record player artifact's own play button
+     works exactly as it always has -- no regression either way. */
+  var loungeController = null;
+  function initLoungeSpotify(el) {
+    if (inited.has(el)) return;
+    inited.add(el);
+    spotifyApiPromise.then(function (IFrameAPI) {
+      if (!IFrameAPI) return;
+      IFrameAPI.createController(el, { uri: 'spotify:playlist:7b46c5syjtG86a77R7SnMs' }, function (controller) {
+        loungeController = controller;
+      });
+    });
+  }
+
+  var loungeIntro = null;
+  document.addEventListener('pp:room-change', function (e) {
+    if (!e.detail || e.detail.id !== 'music-lounge') return;
+    if (!loungeIntro) {
+      loungeIntro = new Audio('assets/audio/music-lounge-intro.m4a');
+      loungeIntro.addEventListener('ended', function () {
+        if (loungeController) loungeController.play();
+      });
+    }
+    loungeIntro.currentTime = 0;
+    loungeIntro.play().catch(function () {
+      if (loungeController) loungeController.play();
+    });
+  });
+
   function initAll() {
     Array.prototype.forEach.call(document.querySelectorAll('[data-piano-player]'), initPlayer);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-lounge-spotify]'), initLoungeSpotify);
   }
 
   if (document.readyState === 'loading') {
@@ -157,6 +206,10 @@
         if (node.hasAttribute && node.hasAttribute('data-piano-player')) initPlayer(node);
         if (node.querySelectorAll) {
           Array.prototype.forEach.call(node.querySelectorAll('[data-piano-player]'), initPlayer);
+        }
+        if (node.hasAttribute && node.hasAttribute('data-lounge-spotify')) initLoungeSpotify(node);
+        if (node.querySelectorAll) {
+          Array.prototype.forEach.call(node.querySelectorAll('[data-lounge-spotify]'), initLoungeSpotify);
         }
       }
     }

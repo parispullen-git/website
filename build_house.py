@@ -217,14 +217,20 @@ VAULT_CTA = ('<a class="cta pent__open" href="urwelcome.html" data-vault-enter s
 # replacement. Deliberately NOT the same mechanism as the old
 # piano-player.js widget (a dashboard-editable multi-playlist rotation
 # with prev/next) -- this is one specific playlist, using Spotify's own
-# embed player verbatim (it has its own play/pause/shuffle controls
-# built in already). The house-wide rotation piano-player.js drove still
-# exists and still plays -- just via the global Suite Remote's Music tab
+# embed player (it has its own play/pause/shuffle controls built in
+# already). The house-wide rotation piano-player.js drove still exists
+# and still plays -- just via the global Suite Remote's Music tab
 # (tv-remote.js), reachable from every room, not from an in-room widget.
+#
+# The target is an empty div, not a plain <iframe> -- piano-player.js's
+# initLoungeSpotify() creates a real Spotify IFrame API controller on it
+# (same mechanism as the Piano widget used), so entering the room can
+# call controller.play() after the entry sting finishes. The div sits in
+# the DOM (and the controller/iframe with it) whether or not this
+# drawer's actually open, so playback continues in the background either
+# way, same as any other embedded player on the site.
 MUSIC_LOUNGE_SPOTIFY = '''<div class="spotify-embed">
-                  <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7b46c5syjtG86a77R7SnMs?utm_source=generator"
-                    width="100%" height="352" frameborder="0" loading="lazy"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                  <div data-lounge-spotify></div>
                 </div>'''
 
 CANDLE_COMING_SOON = '''<div class="coming-soon">
