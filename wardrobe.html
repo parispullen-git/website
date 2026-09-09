@@ -49,13 +49,15 @@
   <div class="menu__explore">
     <p class="menu__explore-label">Explore the Floors</p>
     <div class="menu__explore-grid">
-    <a class="menu__explore-link" href="house.html#penthouse-living">27 &#183; The Living Room</a>
-    <a class="menu__explore-link" href="house.html#bedroom">28 &#183; The Bedroom</a>
-    <a class="menu__explore-link" href="house.html#bath">28 &#183; The Bathroom</a>
-    <a class="menu__explore-link" href="house.html#closet">28 &#183; The Closet</a>
-    <a class="menu__explore-link" href="house.html#kitchen">27 &#183; The Kitchen</a>
-    <a class="menu__explore-link" href="house.html#study">27 &#183; The Study</a>
-    <a class="menu__explore-link" href="house.html#cinema">26 &#183; The Cinema</a>
+    <a class="menu__explore-link" href="house.html#penthouse-living">27 · The Living Room</a>
+    <a class="menu__explore-link" href="house.html#bedroom">28 · The Bedroom</a>
+    <a class="menu__explore-link" href="house.html#bath">28 · The Bathroom</a>
+    <a class="menu__explore-link" href="house.html#closet">28 · The Closet</a>
+    <a class="menu__explore-link" href="house.html#kitchen">27 · The Kitchen</a>
+    <a class="menu__explore-link" href="house.html#study">27 · The Study</a>
+    <a class="menu__explore-link" href="house.html#cinema">26 · The Cinema</a>
+    <a class="menu__explore-link" href="house.html#music-lounge">26 · The Music Lounge</a>
+    <a class="menu__explore-link" href="house.html#music-lounge-bar">26 · The Lounge Bar</a>
     </div>
   </div>
   <div class="menu__foot">
