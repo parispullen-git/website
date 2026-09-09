@@ -6,11 +6,10 @@
    are wired up generically by world.js/tv-remote.js once this content
    exists in the DOM -- nothing page-specific needed for those.
 
-   Only Levels 27-28 (seven rooms) have real content, matching the
-   section's own copy ("Seven rooms open. The rest, in time.") -- the
-   corner nav-panel (below) still lists every floor in the building,
-   linking out to house.html for the rest rather than duplicating all
-   21 rooms' content here too.
+   Only Levels 26-28 (nine rooms) have real content here -- the corner
+   nav-panel (below) still lists every floor in the building, linking out
+   to house.html for the rest rather than duplicating all 23 rooms'
+   content here too.
    ============================================================ */
 (function () {
   'use strict';
@@ -19,11 +18,13 @@
   // the room-pager's slide direction is actually built from -- it pages by
   // array index (translateX(-i*100%)), so a "left" move needs to land on a
   // lower index and a "right" move a higher one, or the slide visually
-  // runs backwards from what the arrow/swipe implied. The two rows are
-  // independent left-right chains (ROOM_ADJACENCY, below, has no left/
-  // right link between them), so only the order *within* each row matters:
+  // runs backwards from what the arrow/swipe implied. Each row is an
+  // independent left-right chain (ROOM_ADJACENCY, below, has no left/
+  // right link between rows), so only the order *within* each row matters:
   //   Kitchen -> Living Room -> Cinema            (Level 27)
   //   Study -> Bedroom -> Closet -> Bathroom        (Level 28)
+  //   Lounge Bar -> Music Lounge                    (Level 26, via the
+  //                                                   Living Room's down arrow)
   var ROOMS = [
     { id:'kitchen', lvl:'Level 27', name:'The Kitchen',
       note:'Black marble, brass and a range that has seen more entertaining than cooking.', img:'room-kitchen' },
@@ -38,7 +39,11 @@
     { id:'closet',  lvl:'Level 28', name:'The Closet',
       note:'Not a room of clothes. A room of decisions already made.', img:'room-closet' },
     { id:'bath',    lvl:'Level 28', name:'The Bathroom',
-      note:'Stone, brass and steam, with the whole city on the other side of the glass.', img:'room-bath' }
+      note:'Stone, brass and steam, with the whole city on the other side of the glass.', img:'room-bath' },
+    { id:'music-lounge-bar', lvl:'Level 26', name:'The Lounge Bar',
+      note:'Marble and brass, poured slow, with the same record wall spilling over from next door.', img:'room-musicloungebar' },
+    { id:'music-lounge', lvl:'Level 26', name:'The Music Lounge',
+      note:'Vinyl floor to ceiling on one wall, a turntable that never gets left idle, and a couch built for people who came to listen, not to talk over it.', img:'room-musiclounge' }
   ];
 
   // Room-to-room navigation is a real 2D layout, not a linear sequence
@@ -46,24 +51,31 @@
   //   Level 28:  Study <-> Bedroom <-> Closet <-> Bathroom
   //                            |
   //   Level 27:  Kitchen <-> Living Room <-> Cinema
+  //                            |
+  //   Level 26:            Music Lounge <-> Lounge Bar
   var ROOM_ADJACENCY = {
-    'penthouse-living': { left:'kitchen', right:'cinema', up:'bedroom' },
+    'penthouse-living': { left:'kitchen', right:'cinema', up:'bedroom', down:'music-lounge' },
     'kitchen':          { right:'penthouse-living' },
     'cinema':           { left:'penthouse-living' },
     'bedroom':          { left:'study', right:'closet', down:'penthouse-living' },
     'study':            { right:'bedroom' },
     'closet':           { left:'bedroom', right:'bath' },
-    'bath':             { left:'closet' }
+    'bath':             { left:'closet' },
+    'music-lounge':     { left:'music-lounge-bar', up:'penthouse-living' },
+    'music-lounge-bar': { right:'music-lounge' }
   };
 
   var ARTS = {
     'penthouse-living': [
       { key:'journal', name:'The Journal', x:'28%', y:'91%', body:'Left face-down and open, which he knows ruins a spine. Everything written in it eventually turns up here, several drafts later &#8212; dispatches, not diary entries.', specs:[['Position', 'Face-down'], ['Draft or final', 'Several drafts later'], ['Read it', 'The Journal']] },
-      { key:'piano', name:'The Piano', x:'72%', y:'88%', body:'He played trumpet for seven years, first chair, and cannot play this at all. It is here because a room with a piano in it behaves differently from a room without one &#8212; and because it\'s wired to whatever he\'s actually listening to.', specs:[['Played by him', 'No'], ['Actual instrument', 'Trumpet'], ['Function', 'Atmosphere &amp; the speakers']] },
-      { key:'vault', name:'The Vault', x:'91%', y:'70%', body:"Brass wheel, black steel, set into the wall beside the piano and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.", specs:[['Concealed', 'No'], ['Contents', 'UR Welcome'], ['Combination', 'One person']] },
+      { key:'vault', name:'The Vault', x:'91%', y:'70%', body:"Brass wheel, black steel, set into the wall and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.", specs:[['Concealed', 'No'], ['Contents', 'UR Welcome'], ['Combination', 'One person']] },
       { key:'candle', name:'The Candle', x:'74.58%', y:'36.17%', body:'Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome &#8212; coming soon.', specs:[['Status', 'Coming soon'], ['Lit', 'Not yet']] },
       { key:'jacket', name:'The Jacket', x:'39.2%', y:'67.5%', body:"Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion &#8212; see the Boutique.", specs:[['Hung', 'No'], ['Ordered elsewhere', 'By occasion'], ['See also', 'The Boutique']] },
     ],
+    'music-lounge': [
+      { key:'recordplayer', name:'The Record Player', x:'38%', y:'33%', body:'One playlist, queued on shuffle and left running &#8212; the same records this wall is built around, on a loop nobody has to manage.', specs:[['Plays', 'One playlist, shuffled'], ['Chosen by', 'Him'], ['Manual skips', 'Yes']] },
+    ],
+    'music-lounge-bar': [],
     'bedroom': [
       { key:'artwork', name:'The Artwork', x:'67%', y:'36%', body:'Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.', specs:[['Acquired', 'Early, badly timed'], ['Subject', 'Unexplained'], ['Moved with him', 'Every time']] },
       { key:'chair', name:'The Lounge Chair', x:'10%', y:'72%', body:'Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.', specs:[['Faces', 'The city'], ['Television', 'None'], ['Hours logged', 'Considerable']] },
@@ -106,15 +118,21 @@
   // for rooms where it's worth one -- mirrors build_house.py's
   // REMOTE_NODE_POS exactly. Living Room's sat mid-room, in the way of
   // the coffee table -- removed in favor of the always-visible fixed
-  // Remote pill. Cinema sits at the foot of the screen.
+  // Remote pill. Cinema sits at the foot of the screen. Music Lounge has
+  // no screen of its own (no TV_SCREENS entry), so its marker forces the
+  // remote's Music tab instead of a channel -- see the 'music' fallback
+  // below and tv-remote.js's toggle handler.
   var REMOTE_NODE_POS = {
-    'cinema': ['50%', '53%']
+    'cinema': ['50%', '53%'],
+    'music-lounge': ['50%', '62%']
   };
   function remoteNodeHTML(roomId) {
-    var ts = TV_SCREENS[roomId], pos = REMOTE_NODE_POS[roomId];
-    if (!ts || !pos) return '';
+    var pos = REMOTE_NODE_POS[roomId];
+    if (!pos) return '';
+    var ts = TV_SCREENS[roomId];
+    var toggle = ts ? ts.channelSet : 'music';
     return '<button type="button" class="artifact artifact--remote" style="--x:' + pos[0] + ';--y:' + pos[1] + '" ' +
-             'data-tv-remote-toggle="' + ts.channelSet + '" aria-label="Open the remote">' +
+             'data-tv-remote-toggle="' + toggle + '" aria-label="Open the remote">' +
              '<span class="artifact__dot" aria-hidden="true"></span>' +
              '<span class="artifact__label">The Remote</span>' +
            '</button>';
@@ -256,41 +274,16 @@
   var GUIDE_PORTAL_CTA = '<button type="button" class="cta pent__open" data-guide-portal style="margin-top:var(--s2)"><span>Explore the City Guide</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>';
   var JOURNAL_CTA = '<a class="cta pent__open" href="journal.html" style="margin-top:var(--s2)"><span>Read the Journal</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   var VAULT_CTA = '<a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)"><span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
-  // Hardcoded last-resort fallback only -- piano-player.js fetches the real
-  // rotation at runtime (dashboard's 'playlists' collection, falling back to
-  // data/house-music.json) and exposes it as window.PP_PIANO_PLAYLISTS_RESOLVED.
-  // Since this popup is only built when the user actually clicks the piano
-  // artifact (never at page load), that fetch -- kicked off by piano-player.js
-  // as soon as the page loads -- has almost always already resolved by the
-  // time this function runs, so buildPianoPlayer() below reads it lazily
-  // instead of baking a single static array in at parse time.
-  var PIANO_PLAYLISTS_FALLBACK = [
-    { type:'playlist', id:'6XS1tFYgCi82SrDtHFLUov', label:'UR WELCOME Vol.1' },
-    { type:'album', id:'5mz0mJxb80gqJIcRf9LGHJ', label:'Nothing Was The Same' },
-    { type:'playlist', id:'7b46c5syjtG86a77R7SnMs', label:'All Drake Songs On Spotify' },
-    { type:'album', id:'40GMAhriYJRO1rsY4YdrZb', label:'Views' },
-    { type:'album', id:'6qhOiAW8Zes8U4UyhMYCpx', label:'(a)Live In Vegas' },
-    { type:'album', id:'0OAv7DCME2AV4q1KPO95HY', label:'ICEMAN' },
-    { type:'album', id:'4dHcuizgdi9fpKX8MKQm43', label:'LUCKY YOU' },
-    { type:'album', id:'60cNc5CdvVCTEF5A6FRhFN', label:'with all due respect' },
-    { type:'album', id:'36KvnNSPeyCHUrAQVpgwwN', label:'For All The Right Reasons Vol. 1' }
-  ];
-  function buildPianoPlayer() {
-    var list = (window.PP_PIANO_PLAYLISTS_RESOLVED && window.PP_PIANO_PLAYLISTS_RESOLVED.length)
-      ? window.PP_PIANO_PLAYLISTS_RESOLVED : PIANO_PLAYLISTS_FALLBACK;
-    var first = list[0];
-    return '<div class="piano-player" data-piano-player data-playlists="' + esc(JSON.stringify(list)) + '">' +
-        '<div class="piano-player__head">' +
-          '<p class="piano-player__eyebrow">Now Playing &#183; <span data-piano-label>' + esc(first.label) + '</span></p>' +
-          '<div class="piano-player__nav">' +
-            '<button type="button" data-piano-prev aria-label="Previous">&#8249;</button>' +
-            '<button type="button" data-piano-play aria-label="Play">&#9654;</button>' +
-            '<button type="button" data-piano-next aria-label="Next">&#8250;</button>' +
-          '</div>' +
-        '</div>' +
-        '<div class="piano-player__frame"><div data-piano-frame></div></div>' +
-      '</div>';
-  }
+  // The Piano artifact (Living Room) is retired -- mirrors build_house.py's
+  // MUSIC_LOUNGE_SPOTIFY exactly: one fixed playlist, Spotify's own embed
+  // player verbatim (it already has play/pause/shuffle built in), on the
+  // Music Lounge's record-player artifact. The house-wide rotation
+  // piano-player.js drove still exists and still plays, just via the
+  // global Suite Remote's Music tab now, not an in-room widget.
+  var MUSIC_LOUNGE_SPOTIFY = '<div class="spotify-embed">' +
+    '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7b46c5syjtG86a77R7SnMs?utm_source=generator" ' +
+    'width="100%" height="352" frameborder="0" loading="lazy" ' +
+    'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe></div>';
   var CANDLE_COMING_SOON = '<div class="coming-soon"><span class="coming-soon__badge">UR Welcome &#183; Coming Soon</span></div>';
 
   function extrasFor(roomId, key) {
@@ -306,15 +299,15 @@
     // draft point at the same published dispatches.
     if (key === 'journal') wardrobeCta = JOURNAL_CTA;
     if (roomId === 'penthouse-living' && key === 'vault') wardrobeCta = VAULT_CTA;
-    if (roomId === 'penthouse-living' && key === 'piano') wardrobeCta = buildPianoPlayer();
+    if (roomId === 'music-lounge' && key === 'recordplayer') wardrobeCta = MUSIC_LOUNGE_SPOTIFY;
     if (roomId === 'penthouse-living' && key === 'candle') wardrobeCta = CANDLE_COMING_SOON;
     if (roomId === 'penthouse-living' && key === 'jacket') wardrobeCta = SUITS_CTA;
     return { wardrobeCta: wardrobeCta, tag: tag };
   }
 
   /* ============================================================
-     THE NAV PANEL — only Levels 27-28 (The Penthouse) are open right
-     now, so the panel only ever lists these two -- but every ROOM on
+     THE NAV PANEL — only Levels 26-28 (The Penthouse) are open right
+     now, so the panel only ever lists these three -- but every ROOM on
      each, not just one "entry" room per level (28 alone is Study/
      Bedroom/Closet/Bath -- picking just one as that level's entry
      silently made the rest unreachable except by paging prev/next one
@@ -353,7 +346,7 @@
     var lvlBare = room.lvl.replace(/^Level\s+/i, '');
 
     var artsHTML = arts.map(function (a) {
-      var notes = a.key === 'piano' ? '<span class="artifact__notes" aria-hidden="true"><i>&#9834;</i><i>&#9835;</i><i>&#9834;</i></span>' : '';
+      var notes = a.key === 'recordplayer' ? '<span class="artifact__notes" aria-hidden="true"><i>&#9834;</i><i>&#9835;</i><i>&#9834;</i></span>' : '';
       return '<button class="artifact" style="--x:' + a.x + ';--y:' + a.y + '" data-artifact="' + a.key + '">' +
                '<span class="artifact__dot" aria-hidden="true"></span>' +
                '<span class="artifact__label">' + a.name + '</span>' +

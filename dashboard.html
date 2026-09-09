@@ -234,7 +234,7 @@
         <div class="dashnav__groupbody">
           <button type="button" class="dashnav__item" data-tab="lookbook">Lookbook</button>
           <button type="button" class="dashnav__item" data-tab="casefiles">Case Files</button>
-          <button type="button" class="dashnav__item" data-tab="music">Piano Rotation</button>
+          <button type="button" class="dashnav__item" data-tab="music">Remote Rotation</button>
           <button type="button" class="dashnav__item" data-tab="video">TV Fallback</button>
         </div>
       </div>
@@ -680,7 +680,7 @@
 
     <!-- MUSIC -->
     <div class="dash__panel" id="panel-music">
-      <p class="body">The Piano's Spotify rotation, in the House and on the homepage. Edits here take effect immediately — <code>assets/js/piano-player.js</code> fetches this list at runtime on every page load, falling back to the site's built-in rotation if this collection is ever empty or unreachable.</p>
+      <p class="body">The house-wide Spotify rotation, played through the global Suite Remote's Music tab (reachable from every room). Edits here take effect immediately — <code>assets/js/piano-player.js</code> fetches this list at runtime on every page load, falling back to the site's built-in rotation if this collection is ever empty or unreachable.</p>
 
       <div class="newform" id="music-newform">
         <p class="eyebrow">Add Track / Playlist / Album</p>
@@ -841,7 +841,7 @@
 
     <!-- PENTHOUSE (read view of the live subset of Rooms) -->
     <div class="dash__panel" id="panel-penthouse">
-      <p class="body">The seven rooms actually open to the public on <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> right now — Levels 27&#8211;28. Everything else in the Rooms library is real, authored content kept in reserve for a future expansion. Edit any of these on the <b>Rooms</b> tab; this view just shows what's currently live.</p>
+      <p class="body">The nine rooms actually open to the public on <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> right now — Levels 26&#8211;28. Everything else in the Rooms library is real, authored content kept in reserve for a future expansion. Edit any of these on the <b>Rooms</b> tab; this view just shows what's currently live.</p>
       <p class="dash__loading" id="ph-loading">Loading&#8230;</p>
       <p class="dash__err" id="ph-loaderr" hidden></p>
       <div id="ph-list" class="card-grid"></div>
@@ -849,7 +849,7 @@
 
     <!-- ROOMS (live -- full room library) -->
     <div class="dash__panel" id="panel-hrooms">
-      <p class="body">Edits the real Room library — <code>data/house-rooms.json</code>, which <code>build_house.py</code> bakes into <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> (only the Level 27&#8211;28 "Penthouse" subset is actually built into the live page — see the <b>Penthouse</b> tab). Commits straight to GitHub; use <b>Deploy Live</b> in the sidebar to publish. <b>Some artifact IDs are wired into real site behavior</b> (piano, vault, journal, monogram, hellofresh, suits, jacket, candle, window) — renaming one of those breaks the feature it powers.</p>
+      <p class="body">Edits the real Room library — <code>data/house-rooms.json</code>, which <code>build_house.py</code> bakes into <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> (only the Level 26&#8211;28 "Penthouse" subset is actually built into the live page — see the <b>Penthouse</b> tab). Commits straight to GitHub; use <b>Deploy Live</b> in the sidebar to publish. <b>Some artifact IDs are wired into real site behavior</b> (recordplayer, vault, journal, monogram, hellofresh, suits, jacket, candle, window) — renaming one of those breaks the feature it powers.</p>
       <div class="newform">
         <p class="eyebrow">Rooms</p>
         <div class="card__row">
@@ -2898,13 +2898,19 @@
     ],
   });
 
+  // Levels actually built into house.html right now -- mirrors
+  // build_house.py's PENTHOUSE_FLOORS filter (f["lvl"] in ("26","27","28"))
+  // exactly. One shared constant so Rooms/Penthouse/Floors can't drift out
+  // of sync with each other the way three separate hardcoded checks did.
+  var HR_LIVE_LEVELS = {'26':1, '27':1, '28':1};
+
   // ================= ROOMS (live -- full room library) =================
   var hrEditor = makeLiveList({
     key: 'hr', label: 'Room', apiPath: '/api/house-rooms-live', idField: 'id',
     newLabel: 'New Room', required: ['id', 'name', 'lvl'], requiredMsg: 'ID, name, and level are required.',
     summary: function(r){ return r.name || 'Untitled'; },
     subSummary: function(r){ return '/' + (r.id||'') + ' · Level ' + (r.lvl||'') + ' · ' + (r.state||'') +
-      ((r.lvl === '27' || r.lvl === '28') ? ' · Live' : ' · Dormant'); },
+      (HR_LIVE_LEVELS[r.lvl] ? ' · Live' : ' · Dormant'); },
     searchFields: ['name', 'id', 'lvl', 'state'],
     fields: [
       {key:'id', label:'ID (slug, unique — some artifact ids below are wired into real site behavior)', type:'text'},
@@ -2915,7 +2921,7 @@
       {key:'grade', label:'Color grade class (optional, e.g. "grade--noir")', type:'text'},
       {key:'focus', label:'Focus (background-position, e.g. "50% 50%")', type:'text'},
       {key:'note', label:'Note (one line, shown low in the room)', type:'textarea'},
-      {key:'arts', label:'Artifacts (below) — some IDs are wired into real site behavior: renaming "id" on piano, vault, journal, monogram, hellofresh, suits, jacket, candle, or window breaks the feature it powers.', type:'json', jsonEmpty:[]},
+      {key:'arts', label:'Artifacts (below) — some IDs are wired into real site behavior: renaming "id" on recordplayer, vault, journal, monogram, hellofresh, suits, jacket, candle, or window breaks the feature it powers.', type:'json', jsonEmpty:[]},
     ],
     afterRender: function(body, record){ hrEnhanceArtifacts(); },
   });
@@ -3015,7 +3021,7 @@
       .then(function(res){
         loading.hidden = true;
         if (!res.ok) { err.textContent = res.data.error || 'Could not load.'; err.hidden = false; return; }
-        var rooms = res.data.items.filter(function(r){ return r.lvl === '27' || r.lvl === '28'; });
+        var rooms = res.data.items.filter(function(r){ return HR_LIVE_LEVELS[r.lvl]; });
         if (!rooms.length) { list.innerHTML = '<p class="dash__empty">Nothing yet.</p>'; return; }
         list.innerHTML = rooms.map(function(r){
           return '<div class="card">' +
@@ -3053,7 +3059,7 @@
         res.data.items.forEach(function(r){ (byLevel[r.lvl] = byLevel[r.lvl] || []).push(r); });
         var levels = Object.keys(byLevel).sort(function(a, b){ return hrLevelKey(b) - hrLevelKey(a); });
         list.innerHTML = levels.map(function(lvl){
-          var isLive = lvl === '27' || lvl === '28';
+          var isLive = !!HR_LIVE_LEVELS[lvl];
           return '<div class="card">' +
             '<div class="card__top"><span class="card__title">Level ' + esc(lvl) + '</span>' +
             (isLive ? '<span class="badge badge--brass">Live</span>' : '<span class="badge">Dormant</span>') + '</div>' +
@@ -3158,7 +3164,7 @@
     automotive:'Automotive', travel:'Travel', venue:'City Guide Venue', laws:'Daily Laws', news:'News'};
   var DISP_HINTS = {
     film: 'Title & where/when watched · The standout scene · A character whose personality resonated · One exact line of dialogue · Wardrobe/style moment · Official poster or stills wanted',
-    music: 'Artist / Album / Track · Where you were the first time it landed · The specific lyric or moment (describe, don’t transcribe) · What mood it now belongs to · Cover art · Add to the Piano’s rotation?',
+    music: 'Artist / Album / Track · Where you were the first time it landed · The specific lyric or moment (describe, don’t transcribe) · What mood it now belongs to · Cover art · Add to the Remote’s rotation?',
     tech: 'The tool & what you were trying to do · The specific interaction that impressed or unsettled you · Screenshot or real output · The bigger-picture read',
     gaming: 'Title & what stage it’s in · What actually hooked you · Official trailer link or screenshot · Culture/anticipation, or hands-on?',
     automotive: 'Make / model / trim · The design detail that got you · Your own or official photos · Aspirational or actually driven? · Who buys this',
@@ -3279,7 +3285,7 @@
       .catch(function(){ btn.disabled = false; btn.textContent = dispEditingId ? 'Update Brief' : 'Submit to Archive'; err.textContent = 'Could not reach the server.'; err.hidden = false; });
   });
 
-  // ================= MUSIC (Piano playlists) =================
+  // ================= MUSIC (Remote's house-wide rotation) =================
   function extractSpotifyId(input){
     input = (input || '').trim();
     var m = input.match(/spotify\.com\/(?:embed\/)?(playlist|album)\/([A-Za-z0-9]+)/i);
@@ -3288,7 +3294,7 @@
   }
 
   var musicRecords = [];
-  var MUSIC_SEED_NOTE = '<p class="dash__empty">Not yet edited from the dashboard — the Piano is currently using its built-in rotation (data/house-music.json). Add a track below to start managing it live.</p>';
+  var MUSIC_SEED_NOTE = '<p class="dash__empty">Not yet edited from the dashboard — the Remote is currently using its built-in rotation (data/house-music.json). Add a track below to start managing it live.</p>';
 
   function musicCard(r, i, total){
     return '<div class="card">' +

@@ -127,32 +127,11 @@
         ]
       },
       {
-        "id": "piano",
-        "name": "The Piano",
-        "x": "72%",
-        "y": "88%",
-        "desc": "He played trumpet for seven years, first chair, and cannot play this at all. It is here because a room with a piano in it behaves differently from a room without one — and because it's wired to whatever he's actually listening to.",
-        "specs": [
-          [
-            "Played by him",
-            "No"
-          ],
-          [
-            "Actual instrument",
-            "Trumpet"
-          ],
-          [
-            "Function",
-            "Atmosphere & the speakers"
-          ]
-        ]
-      },
-      {
         "id": "vault",
         "name": "The Vault",
         "x": "91%",
         "y": "70%",
-        "desc": "Brass wheel, black steel, set into the wall beside the piano and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.",
+        "desc": "Brass wheel, black steel, set into the wall and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.",
         "specs": [
           [
             "Concealed",
@@ -1648,5 +1627,49 @@
         ]
       }
     ]
+  },
+  {
+    "id": "music-lounge",
+    "lvl": "26",
+    "name": "The Music Lounge",
+    "state": "restricted",
+    "img": "room-musiclounge",
+    "grade": "",
+    "focus": "50% 50%",
+    "note": "Vinyl floor to ceiling on one wall, a turntable that never gets left idle, and a couch built for people who came to listen, not to talk over it.",
+    "arts": [
+      {
+        "id": "recordplayer",
+        "name": "The Record Player",
+        "x": "38%",
+        "y": "33%",
+        "desc": "One playlist, queued on shuffle and left running — the same records this wall is built around, on a loop nobody has to manage.",
+        "specs": [
+          [
+            "Plays",
+            "One playlist, shuffled"
+          ],
+          [
+            "Chosen by",
+            "Him"
+          ],
+          [
+            "Manual skips",
+            "Yes"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "music-lounge-bar",
+    "lvl": "26",
+    "name": "The Lounge Bar",
+    "state": "restricted",
+    "img": "room-musicloungebar",
+    "grade": "",
+    "focus": "50% 50%",
+    "note": "Marble and brass, poured slow, with the same record wall spilling over from next door.",
+    "arts": []
   }
 ]

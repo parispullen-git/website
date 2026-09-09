@@ -31,7 +31,7 @@ FLOORS = json.loads((Path(__file__).resolve().parent / "data" / "house-rooms.jso
 def esc(t):
     return t.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#8217;")
 
-# Only Levels 27-28 (The Penthouse) are open to the public right now --
+# Only Levels 26-28 (The Penthouse) are open to the public right now --
 # every other floor in FLOORS is real, authored content kept around as
 # source material, but not built into the site. Restricting the actual
 # room-pager to this subset, rather than deleting the rest of FLOORS,
@@ -41,13 +41,16 @@ def esc(t):
 # room-pager's slide direction is actually built from -- it pages by
 # array index (translateX(-i*100%)), so a "left" move needs to land on a
 # lower index and a "right" move a higher one, or the slide visually
-# runs backwards from what the arrow/swipe implied. The two rows below
-# are independent left-right chains (ROOM_ADJACENCY has no left/right
-# link between them), so only the order *within* each row matters:
+# runs backwards from what the arrow/swipe implied. Each row below is an
+# independent left-right chain (ROOM_ADJACENCY has no left/right link
+# between rows), so only the order *within* each row matters:
 #   Kitchen -> Living Room -> Cinema            (Level 27)
 #   Study -> Bedroom -> Closet -> Bathroom        (Level 28)
-_PENTHOUSE_ORDER = ["kitchen", "penthouse-living", "cinema", "study", "bedroom", "closet", "bath"]
-_penthouse_by_id = {f["id"]: f for f in FLOORS if f["lvl"] in ("27", "28")}
+#   Lounge Bar -> Music Lounge                    (Level 26, reached via
+#                                                   the Living Room's down arrow)
+_PENTHOUSE_ORDER = ["kitchen", "penthouse-living", "cinema", "study", "bedroom", "closet", "bath",
+                     "music-lounge-bar", "music-lounge"]
+_penthouse_by_id = {f["id"]: f for f in FLOORS if f["lvl"] in ("26", "27", "28")}
 PENTHOUSE_FLOORS = [_penthouse_by_id[_id] for _id in _PENTHOUSE_ORDER]
 START_ROOM = "penthouse-living"  # data-start-room below; also which screen (if any) autoplays on load
 
@@ -55,17 +58,21 @@ START_ROOM = "penthouse-living"  # data-start-room below; also which screen (if 
 #   Level 28:  Study <-> Bedroom <-> Closet <-> Bathroom
 #                            |
 #   Level 27:  Kitchen <-> Living Room <-> Cinema
+#                            |
+#   Level 26:            Music Lounge <-> Lounge Bar
 # Left/right/up/down each name an explicit neighbor id (or are absent at an
 # edge) -- room-pager.js reads these directly rather than paging by array
 # index, so DOM order no longer needs to match traversal order.
 ROOM_ADJACENCY = {
-    "penthouse-living": {"left": "kitchen", "right": "cinema", "up": "bedroom"},
+    "penthouse-living": {"left": "kitchen", "right": "cinema", "up": "bedroom", "down": "music-lounge"},
     "kitchen":           {"right": "penthouse-living"},
     "cinema":             {"left": "penthouse-living"},
     "bedroom":            {"left": "study", "right": "closet", "down": "penthouse-living"},
     "study":              {"right": "bedroom"},
     "closet":             {"left": "bedroom", "right": "bath"},
     "bath":               {"left": "closet"},
+    "music-lounge":       {"left": "music-lounge-bar", "up": "penthouse-living"},
+    "music-lounge-bar":   {"right": "music-lounge"},
 }
 
 # Room-to-room nav (ROOM_ADJACENCY, above) is fully explicit now, but the
@@ -147,9 +154,13 @@ TV_SCREENS = {
 # itself, or (for the Living Room, sitting mid-room where it just got in
 # the way of the coffee table) the always-visible fixed Remote pill.
 # Cinema sits at the foot of the screen (derived from its box above --
-# y + h/2, the bottom edge).
+# y + h/2, the bottom edge). A room with no TV_SCREENS entry (Music
+# Lounge has no screen at all) still gets a marker here, forced to the
+# remote's Music tab instead of a channel -- see the "music" fallback in
+# floor_html() below and tv-remote.js's toggle handler.
 REMOTE_NODE_POS = {
     "cinema": ("50%", "53%"),
+    "music-lounge": ("50%", "62%"),
 }
 
 # "The City" marker -- a real link to charlotte.html, styled exactly like an
@@ -201,19 +212,19 @@ MONOGRAM_BIO = f'''<div class="bio">
 VAULT_CTA = ('<a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)">'
     '<span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
 
-PIANO_PLAYLISTS = json.loads((Path(__file__).resolve().parent / "data" / "house-music.json").read_text(encoding="utf-8"))
-_piano_first = PIANO_PLAYLISTS[0]
-_piano_json = json.dumps(PIANO_PLAYLISTS).replace('"', "&quot;")
-PIANO_PLAYER = f'''<div class="piano-player" data-piano-player data-playlists="{_piano_json}">
-                  <div class="piano-player__head">
-                    <p class="piano-player__eyebrow">Now Playing &#183; <span data-piano-label>{esc(_piano_first["label"])}</span></p>
-                    <div class="piano-player__nav">
-                      <button type="button" data-piano-prev aria-label="Previous">&#8249;</button>
-                      <button type="button" data-piano-play aria-label="Play">&#9654;</button>
-                      <button type="button" data-piano-next aria-label="Next">&#8250;</button>
-                    </div>
-                  </div>
-                  <div class="piano-player__frame"><div data-piano-frame></div></div>
+# The Piano artifact (Living Room) is retired -- this fixed single
+# playlist embed on the Music Lounge's own record-player artifact is its
+# replacement. Deliberately NOT the same mechanism as the old
+# piano-player.js widget (a dashboard-editable multi-playlist rotation
+# with prev/next) -- this is one specific playlist, using Spotify's own
+# embed player verbatim (it has its own play/pause/shuffle controls
+# built in already). The house-wide rotation piano-player.js drove still
+# exists and still plays -- just via the global Suite Remote's Music tab
+# (tv-remote.js), reachable from every room, not from an in-room widget.
+MUSIC_LOUNGE_SPOTIFY = '''<div class="spotify-embed">
+                  <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7b46c5syjtG86a77R7SnMs?utm_source=generator"
+                    width="100%" height="352" frameborder="0" loading="lazy"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                 </div>'''
 
 CANDLE_COMING_SOON = '''<div class="coming-soon">
@@ -229,7 +240,7 @@ def floor_html(f):
     for a in f["arts"]:
         key,name,x,y,body,specs = a["id"],a["name"],a["x"],a["y"],a["desc"],a["specs"]
         notes = ('<span class="artifact__notes" aria-hidden="true"><i>&#9834;</i><i>&#9835;</i><i>&#9834;</i></span>'
-                 if key == "piano" else "")
+                 if key == "recordplayer" else "")
         arts.append(
 f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key}">
           <span class="artifact__dot" aria-hidden="true"></span>
@@ -256,8 +267,8 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
             wardrobe_cta = MONOGRAM_BIO
         elif f["id"] == "penthouse-living" and key == "vault":
             wardrobe_cta = VAULT_CTA
-        elif f["id"] == "penthouse-living" and key == "piano":
-            wardrobe_cta = PIANO_PLAYER
+        elif f["id"] == "music-lounge" and key == "recordplayer":
+            wardrobe_cta = MUSIC_LOUNGE_SPOTIFY
         elif f["id"] == "penthouse-living" and key == "candle":
             wardrobe_cta = CANDLE_COMING_SOON
         elif f["id"] == "penthouse-living" and key == "jacket":
@@ -346,9 +357,14 @@ f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
 '''
 
     remote_node = ''
-    if ts and f["id"] in REMOTE_NODE_POS:
+    if f["id"] in REMOTE_NODE_POS:
         rx, ry = REMOTE_NODE_POS[f["id"]]
-        remote_node = f'''        <button type="button" class="artifact artifact--remote" style="--x:{rx};--y:{ry}" data-tv-remote-toggle="{ts["channel_set"]}" aria-label="Open the remote">
+        # A room with its own screen forces the remote open on that
+        # channel; a room with none (Music Lounge) forces it open on the
+        # Music tab instead -- see the "music" case in tv-remote.js's
+        # data-tv-remote-toggle click handler.
+        toggle = ts["channel_set"] if ts else "music"
+        remote_node = f'''        <button type="button" class="artifact artifact--remote" style="--x:{rx};--y:{ry}" data-tv-remote-toggle="{toggle}" aria-label="Open the remote">
           <span class="artifact__dot" aria-hidden="true"></span>
           <span class="artifact__label">The Remote</span>
         </button>'''

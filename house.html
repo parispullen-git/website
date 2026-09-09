@@ -48,6 +48,8 @@
     <a class="menu__explore-link" href="house.html#kitchen">27 · The Kitchen</a>
     <a class="menu__explore-link" href="house.html#study">28 · The Study</a>
     <a class="menu__explore-link" href="house.html#cinema">27 · The Cinema</a>
+    <a class="menu__explore-link" href="house.html#music-lounge">26 · The Music Lounge</a>
+    <a class="menu__explore-link" href="house.html#music-lounge-bar">26 · The Lounge Bar</a>
     </div>
   </div>
   <div class="menu__foot">
@@ -137,7 +139,7 @@
           </div>
   </div>
 </section>
-<section class="floor-scene" id="penthouse-living" tabindex="-1" aria-label="Level 27 — The Living Room" data-left="kitchen" data-right="cinema" data-up="bedroom">
+<section class="floor-scene" id="penthouse-living" tabindex="-1" aria-label="Level 27 — The Living Room" data-left="kitchen" data-right="cinema" data-up="bedroom" data-down="music-lounge">
   <div class="floor-scene__surface">
     <div class="floor-scene__canvas">
       <div class="floor-scene__view">
@@ -190,11 +192,6 @@
           <span class="artifact__label">The Journal</span>
           
         </button>
-        <button class="artifact" style="--x:72%;--y:88%" data-artifact="piano">
-          <span class="artifact__dot" aria-hidden="true"></span>
-          <span class="artifact__label">The Piano</span>
-          <span class="artifact__notes" aria-hidden="true"><i>&#9834;</i><i>&#9835;</i><i>&#9834;</i></span>
-        </button>
         <button class="artifact" style="--x:91%;--y:70%" data-artifact="vault">
           <span class="artifact__dot" aria-hidden="true"></span>
           <span class="artifact__label">The Vault</span>
@@ -225,7 +222,7 @@
       <h2 class="floor-plate__name">The Living Room</h2>
       <p class="floor-plate__level"><b>27</b> <span>The Penthouse</span></p>
       <p class="floor-plate__note">Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.</p>
-      <p class="floor-plate__count"><i></i>5 artifacts on this floor</p>
+      <p class="floor-plate__count"><i></i>4 artifacts on this floor</p>
     </div>
   </div>
 
@@ -244,29 +241,6 @@
               </div>
             </div>
           </div>
-          <div class="drawer__panel" data-artifact="piano" hidden>
-            <div class="drawer__inner">
-              <div class="drawer__head">
-                <p class="drawer__tag">Level 27 &#183; Artifact</p>
-                <h3 class="drawer__name">The Piano</h3>
-              </div>
-              <div class="drawer__body">
-                <p class="body">He played trumpet for seven years, first chair, and cannot play this at all. It is here because a room with a piano in it behaves differently from a room without one — and because it&#8217;s wired to whatever he&#8217;s actually listening to.</p>
-                <dl class="drawer__spec"><div><dt>Played by him</dt><dd>No</dd></div><div><dt>Actual instrument</dt><dd>Trumpet</dd></div><div><dt>Function</dt><dd>Atmosphere &amp; the speakers</dd></div></dl>
-                <div class="piano-player" data-piano-player data-playlists="[{&quot;type&quot;: &quot;playlist&quot;, &quot;id&quot;: &quot;6XS1tFYgCi82SrDtHFLUov&quot;, &quot;label&quot;: &quot;UR WELCOME Vol.1&quot;}, {&quot;type&quot;: &quot;album&quot;, &quot;id&quot;: &quot;5mz0mJxb80gqJIcRf9LGHJ&quot;, &quot;label&quot;: &quot;Nothing Was The Same&quot;}, {&quot;type&quot;: &quot;playlist&quot;, &quot;id&quot;: &quot;7b46c5syjtG86a77R7SnMs&quot;, &quot;label&quot;: &quot;All Drake Songs On Spotify&quot;}, {&quot;type&quot;: &quot;album&quot;, &quot;id&quot;: &quot;40GMAhriYJRO1rsY4YdrZb&quot;, &quot;label&quot;: &quot;Views&quot;}, {&quot;type&quot;: &quot;album&quot;, &quot;id&quot;: &quot;6qhOiAW8Zes8U4UyhMYCpx&quot;, &quot;label&quot;: &quot;(a)Live In Vegas&quot;}, {&quot;type&quot;: &quot;album&quot;, &quot;id&quot;: &quot;0OAv7DCME2AV4q1KPO95HY&quot;, &quot;label&quot;: &quot;ICEMAN&quot;}, {&quot;type&quot;: &quot;album&quot;, &quot;id&quot;: &quot;4dHcuizgdi9fpKX8MKQm43&quot;, &quot;label&quot;: &quot;LUCKY YOU&quot;}, {&quot;type&quot;: &quot;album&quot;, &quot;id&quot;: &quot;60cNc5CdvVCTEF5A6FRhFN&quot;, &quot;label&quot;: &quot;with all due respect&quot;}, {&quot;type&quot;: &quot;album&quot;, &quot;id&quot;: &quot;36KvnNSPeyCHUrAQVpgwwN&quot;, &quot;label&quot;: &quot;For All The Right Reasons Vol. 1&quot;}]">
-                  <div class="piano-player__head">
-                    <p class="piano-player__eyebrow">Now Playing &#183; <span data-piano-label>UR WELCOME Vol.1</span></p>
-                    <div class="piano-player__nav">
-                      <button type="button" data-piano-prev aria-label="Previous">&#8249;</button>
-                      <button type="button" data-piano-play aria-label="Play">&#9654;</button>
-                      <button type="button" data-piano-next aria-label="Next">&#8250;</button>
-                    </div>
-                  </div>
-                  <div class="piano-player__frame"><div data-piano-frame></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="drawer__panel" data-artifact="vault" hidden>
             <div class="drawer__inner">
               <div class="drawer__head">
@@ -274,7 +248,7 @@
                 <h3 class="drawer__name">The Vault</h3>
               </div>
               <div class="drawer__body">
-                <p class="body">Brass wheel, black steel, set into the wall beside the piano and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What&#8217;s inside isn&#8217;t paper.</p>
+                <p class="body">Brass wheel, black steel, set into the wall and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What&#8217;s inside isn&#8217;t paper.</p>
                 <dl class="drawer__spec"><div><dt>Concealed</dt><dd>No</dd></div><div><dt>Contents</dt><dd>UR Welcome</dd></div><div><dt>Combination</dt><dd>One person</dd></div></dl>
                 <a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)"><span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
               </div>
@@ -745,6 +719,90 @@
 
   </div>
 </section>
+<section class="floor-scene" id="music-lounge-bar" tabindex="-1" aria-label="Level 26 — The Lounge Bar" data-right="music-lounge">
+  <div class="floor-scene__surface">
+    <div class="floor-scene__canvas">
+      <div class="floor-scene__view">
+        <img src="assets/img/room-musicloungebar.jpg"
+             srcset="assets/img/room-musicloungebar@sm.jpg 1200w, assets/img/room-musicloungebar.jpg 2400w"
+             sizes="100vw" alt="The Lounge Bar" loading="lazy"
+             style="--focus:50% 50%" width="2400" height="1340">
+        <div class="artifacts">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <h2 class="floor-plate__name">The Lounge Bar</h2>
+      <p class="floor-plate__level"><b>26</b> <span>The Penthouse</span></p>
+      <p class="floor-plate__note">Marble and brass, poured slow, with the same record wall spilling over from next door.</p>
+      <p class="floor-plate__count"><i></i>0 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="drawer" id="drawer-music-lounge-bar" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+
+  </div>
+</section>
+<section class="floor-scene" id="music-lounge" tabindex="-1" aria-label="Level 26 — The Music Lounge" data-left="music-lounge-bar" data-up="penthouse-living">
+  <div class="floor-scene__surface">
+    <div class="floor-scene__canvas">
+      <div class="floor-scene__view">
+        <img src="assets/img/room-musiclounge.jpg"
+             srcset="assets/img/room-musiclounge@sm.jpg 1200w, assets/img/room-musiclounge.jpg 2400w"
+             sizes="100vw" alt="The Music Lounge" loading="lazy"
+             style="--focus:50% 50%" width="2400" height="1340">
+        <div class="artifacts">
+        <button class="artifact" style="--x:38%;--y:33%" data-artifact="recordplayer">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Record Player</span>
+          <span class="artifact__notes" aria-hidden="true"><i>&#9834;</i><i>&#9835;</i><i>&#9834;</i></span>
+        </button>
+        <button type="button" class="artifact artifact--remote" style="--x:50%;--y:62%" data-tv-remote-toggle="music" aria-label="Open the remote">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Remote</span>
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <h2 class="floor-plate__name">The Music Lounge</h2>
+      <p class="floor-plate__level"><b>26</b> <span>The Penthouse</span></p>
+      <p class="floor-plate__note">Vinyl floor to ceiling on one wall, a turntable that never gets left idle, and a couch built for people who came to listen, not to talk over it.</p>
+      <p class="floor-plate__count"><i></i>1 artifact on this floor</p>
+    </div>
+  </div>
+
+  <div class="drawer" id="drawer-music-lounge" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="recordplayer" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 26 &#183; Artifact</p>
+                <h3 class="drawer__name">The Record Player</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">One playlist, queued on shuffle and left running — the same records this wall is built around, on a loop nobody has to manage.</p>
+                <dl class="drawer__spec"><div><dt>Plays</dt><dd>One playlist, shuffled</dd></div><div><dt>Chosen by</dt><dd>Him</dd></div><div><dt>Manual skips</dt><dd>Yes</dd></div></dl>
+                <div class="spotify-embed">
+                  <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7b46c5syjtG86a77R7SnMs?utm_source=generator"
+                    width="100%" height="352" frameborder="0" loading="lazy"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
   </div>
   <button type="button" class="room-pager__nav room-pager__nav--prev" data-room-pager-prev aria-label="Previous room"><span aria-hidden="true">&#8249;</span><span class="room-pager__nav-hint" data-room-pager-hint aria-hidden="true"></span></button>
   <button type="button" class="room-pager__nav room-pager__nav--next" data-room-pager-next aria-label="Next room"><span aria-hidden="true">&#8250;</span><span class="room-pager__nav-hint" data-room-pager-hint aria-hidden="true"></span></button>
@@ -764,6 +822,9 @@
     <button type="button" class="nav-panel__btn" data-nav-panel-go="kitchen"><span class="nav-panel__btn-lvl">27</span><span class="nav-panel__btn-name">The Kitchen</span></button>
     <button type="button" class="nav-panel__btn" data-nav-panel-go="penthouse-living"><span class="nav-panel__btn-lvl">27</span><span class="nav-panel__btn-name">The Living Room</span></button>
     <button type="button" class="nav-panel__btn" data-nav-panel-go="cinema"><span class="nav-panel__btn-lvl">27</span><span class="nav-panel__btn-name">The Cinema</span></button>
+    <p class="nav-panel__group">Level 26</p>
+    <button type="button" class="nav-panel__btn" data-nav-panel-go="music-lounge-bar"><span class="nav-panel__btn-lvl">26</span><span class="nav-panel__btn-name">The Lounge Bar</span></button>
+    <button type="button" class="nav-panel__btn" data-nav-panel-go="music-lounge"><span class="nav-panel__btn-lvl">26</span><span class="nav-panel__btn-name">The Music Lounge</span></button>
     </div>
   </div>
 </section>

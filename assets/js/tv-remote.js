@@ -866,10 +866,15 @@
      objects/verbs as the embedded panel (toggleMute, seekRw/Ff, etc. --
      see initScreen above), so the two surfaces can never drift out of
      sync with each other. Music plays the SAME dashboard-editable
-     rotation the Piano artifact does (see piano-player.js) rather than a
-     second, separately-maintained playlist -- embedded via Spotify's own
-     iframe player, whose embed already has its own play/pause/seek/volume
-     UI, so only stepping between entries needs remote buttons. */
+     rotation piano-player.js drives -- house-wide, not tied to any one
+     room's own artifact (the Music Lounge's record-player artifact plays
+     its own separate, fixed playlist instead, embedded directly rather
+     than through this rotation) -- via Spotify's own iframe player, whose
+     embed already has its own play/pause/seek/volume UI, so only
+     stepping between entries needs remote buttons. The Music Lounge's own
+     Remote prop (data-tv-remote-toggle="music", see REMOTE_NODE_POS in
+     build_house.py/penthouse.js) forces this tab open directly, since
+     that room has no screen of its own to default to. */
   function initSuiteRemote() {
     // init() can run more than once (penthouse.js renders its rooms
     // asynchronously -- see the setTimeout(init, 300) retry below); guard
@@ -970,9 +975,11 @@
     function currentState() { var k = keyForSource(activeSource); return k && STATE_BY_KEY[k]; }
     function contextualSource() { return contextualKey === 'living' ? 'tv' : contextualKey === 'cinema' ? 'cinema' : null; }
 
-    /* ---------- Music: the Piano's rotation, not a second playlist ----------
-       Same {type,id,label} entries the Piano artifact plays, so a dashboard
-       edit to the 'playlists' collection moves both surfaces at once.
+    /* ---------- Music: the house-wide rotation, not a second playlist ----------
+       Same {type,id,label} entries piano-player.js resolves (it still runs
+       just to fetch/expose this data -- no room artifact embeds it as a
+       widget anymore, see MUSIC_LOUNGE_SPOTIFY), so a dashboard edit to the
+       'playlists' collection updates this tab immediately.
        Resolution order, cheapest first:
          1. window.PP_PIANO_PLAYLISTS_RESOLVED -- piano-player.js already
             finished resolving; reuse its answer and fetch nothing at all.
@@ -1049,7 +1056,7 @@
 
     // Step through the rotation on the existing rw/ff buttons -- the Spotify
     // embed supplies its own play/pause, but nothing to reach the next entry.
-    // Loads paused, exactly like the Piano's own prev/next.
+    // Loads paused -- same behavior piano-player.js's own prev/next used.
     function stepMusic(delta) {
       if (musicList.length < 2) return;
       musicIdx = ((musicIdx + delta) % musicList.length + musicList.length) % musicList.length;
@@ -1187,7 +1194,7 @@
       e.preventDefault();
       e.stopImmediatePropagation();
       var key = btn.dataset.tvRemoteToggle;
-      open(key === 'cinema' ? 'cinema' : key === 'living' ? 'tv' : null);
+      open(key === 'cinema' ? 'cinema' : key === 'living' ? 'tv' : key === 'music' ? 'music' : null);
     });
 
     Array.prototype.forEach.call(sourceBtns, function (btn) {

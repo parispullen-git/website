@@ -2205,6 +2205,13 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 }
 .piano-player__frame iframe{display:block;width:100%;border:0}
 
+/* 26c2. Fixed single-playlist embed (Music Lounge's record-player artifact)
+   -- Spotify's own iframe already ships play/pause/shuffle/seek, so unlike
+   .piano-player this needs no custom transport UI, just the same divider
+   treatment as the other in-drawer widgets. */
+.spotify-embed{margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--rule)}
+.spotify-embed iframe{display:block;width:100%;border:0}
+
 /* 26d. COMING SOON badge (candle, etc.) */
 .coming-soon{margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--rule)}
 .coming-soon__badge{
