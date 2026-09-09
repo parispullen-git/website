@@ -1567,8 +1567,14 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   width:var(--w);height:var(--h);
   transform:translate(-50%,-50%);
   z-index:10;background:#000;
+  box-sizing:border-box;
+  border:2.5px solid #17171a;
+  outline:1px solid rgba(255,255,255,0.09);
+  outline-offset:-1px;
+  border-radius:3px;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.85), 0 8px 24px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.9);
 }
-.floor-scene__screen-frame{position:absolute;inset:0;overflow:hidden;cursor:pointer;container-type:size}
+.floor-scene__screen-frame{position:absolute;inset:0;overflow:hidden;cursor:pointer;container-type:size;border-radius:1px}
 .floor-scene__screen-frame iframe{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   border:0;pointer-events:none;
