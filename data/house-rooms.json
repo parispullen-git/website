@@ -1,0 +1,1652 @@
+[
+  {
+    "id": "skyline",
+    "lvl": "29",
+    "name": "The Skyline Club",
+    "state": "members",
+    "img": "env-rooftop",
+    "grade": "",
+    "focus": "50% 46%",
+    "note": "You step out of the lift into moving air and the sound of a room that started without you.",
+    "arts": [
+      {
+        "id": "pool",
+        "name": "The Water",
+        "x": "62%",
+        "y": "64%",
+        "desc": "The pool is four feet deep and nobody has ever swum in it. It exists to put moving light on the faces of people having conversations near it, which it does exceptionally well.",
+        "specs": [
+          [
+            "Depth",
+            "4 ft"
+          ],
+          [
+            "Purpose",
+            "Lighting"
+          ],
+          [
+            "Swimmers",
+            "None on record"
+          ]
+        ]
+      },
+      {
+        "id": "parapet",
+        "name": "The Parapet",
+        "x": "24%",
+        "y": "52%",
+        "desc": "The glass edge. Every significant conversation on this roof has happened within six feet of it, because people tell the truth more readily when they can see how far down it is.",
+        "specs": [
+          [
+            "Height",
+            "29 floors"
+          ],
+          [
+            "Glass",
+            "Structural"
+          ],
+          [
+            "Rule",
+            "No phones out"
+          ]
+        ]
+      },
+      {
+        "id": "cabana",
+        "name": "The Cabanas",
+        "x": "82%",
+        "y": "58%",
+        "desc": "Four of them. Three can be booked. The fourth has never been available on any night, to anyone, and the staff have been trained not to explain why.",
+        "specs": [
+          [
+            "Total",
+            "Four"
+          ],
+          [
+            "Bookable",
+            "Three"
+          ],
+          [
+            "The fourth",
+            "Not discussed"
+          ]
+        ]
+      },
+      {
+        "id": "booth",
+        "name": "The Corner Booth",
+        "x": "44%",
+        "y": "78%",
+        "desc": "Faces the door, backs to the wall, worst view in the building. Held permanently. If you are sitting in it you were invited to sit in it.",
+        "specs": [
+          [
+            "View",
+            "Deliberately poor"
+          ],
+          [
+            "Sightline",
+            "The lift"
+          ],
+          [
+            "Held",
+            "Permanently"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "penthouse-living",
+    "lvl": "27",
+    "name": "The Living Room",
+    "state": "restricted",
+    "img": "room-living",
+    "grade": "",
+    "focus": "50% 50%",
+    "note": "Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.",
+    "arts": [
+      {
+        "id": "journal",
+        "name": "The Journal",
+        "x": "28%",
+        "y": "91%",
+        "desc": "Left face-down and open, which he knows ruins a spine. Everything written in it eventually turns up here, several drafts later — dispatches, not diary entries.",
+        "specs": [
+          [
+            "Position",
+            "Face-down"
+          ],
+          [
+            "Draft or final",
+            "Several drafts later"
+          ],
+          [
+            "Read it",
+            "The Journal"
+          ]
+        ]
+      },
+      {
+        "id": "piano",
+        "name": "The Piano",
+        "x": "72%",
+        "y": "88%",
+        "desc": "He played trumpet for seven years, first chair, and cannot play this at all. It is here because a room with a piano in it behaves differently from a room without one — and because it's wired to whatever he's actually listening to.",
+        "specs": [
+          [
+            "Played by him",
+            "No"
+          ],
+          [
+            "Actual instrument",
+            "Trumpet"
+          ],
+          [
+            "Function",
+            "Atmosphere & the speakers"
+          ]
+        ]
+      },
+      {
+        "id": "vault",
+        "name": "The Vault",
+        "x": "91%",
+        "y": "70%",
+        "desc": "Brass wheel, black steel, set into the wall beside the piano and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.",
+        "specs": [
+          [
+            "Concealed",
+            "No"
+          ],
+          [
+            "Contents",
+            "UR Welcome"
+          ],
+          [
+            "Combination",
+            "One person"
+          ]
+        ]
+      },
+      {
+        "id": "candle",
+        "name": "The Candle",
+        "x": "74.58%",
+        "y": "36.17%",
+        "desc": "Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome — coming soon.",
+        "specs": [
+          [
+            "Status",
+            "Coming soon"
+          ],
+          [
+            "Lit",
+            "Not yet"
+          ]
+        ]
+      },
+      {
+        "id": "jacket",
+        "name": "The Jacket",
+        "x": "39.2%",
+        "y": "67.5%",
+        "desc": "Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion — see the Boutique.",
+        "specs": [
+          [
+            "Hung",
+            "No"
+          ],
+          [
+            "Ordered elsewhere",
+            "By occasion"
+          ],
+          [
+            "See also",
+            "The Boutique"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bedroom",
+    "lvl": "28",
+    "name": "The Bedroom",
+    "state": "restricted",
+    "img": "room-bedroom",
+    "grade": "",
+    "focus": "50% 52%",
+    "note": "Blackout to the glass, and a bed that faces away from the view on purpose.",
+    "arts": [
+      {
+        "id": "artwork",
+        "name": "The Artwork",
+        "x": "67%",
+        "y": "36%",
+        "desc": "Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.",
+        "specs": [
+          [
+            "Acquired",
+            "Early, badly timed"
+          ],
+          [
+            "Subject",
+            "Unexplained"
+          ],
+          [
+            "Moved with him",
+            "Every time"
+          ]
+        ]
+      },
+      {
+        "id": "chair",
+        "name": "The Lounge Chair",
+        "x": "10%",
+        "y": "72%",
+        "desc": "Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.",
+        "specs": [
+          [
+            "Faces",
+            "The city"
+          ],
+          [
+            "Television",
+            "None"
+          ],
+          [
+            "Hours logged",
+            "Considerable"
+          ]
+        ]
+      },
+      {
+        "id": "door",
+        "name": "The Closet Door",
+        "x": "93%",
+        "y": "54%",
+        "desc": "Left open more often than not. What is behind it is arranged by occasion, not by colour — see the Closet.",
+        "specs": [
+          [
+            "Kept",
+            "Open"
+          ],
+          [
+            "Ordered by",
+            "Occasion"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bath",
+    "lvl": "28",
+    "name": "The Bathroom",
+    "state": "restricted",
+    "img": "room-bath",
+    "grade": "",
+    "focus": "50% 50%",
+    "note": "Stone, brass and steam, with the whole city on the other side of the glass.",
+    "arts": []
+  },
+  {
+    "id": "closet",
+    "lvl": "28",
+    "name": "The Closet",
+    "state": "restricted",
+    "img": "room-closet",
+    "grade": "",
+    "focus": "50% 52%",
+    "note": "Not a room of clothes. A room of decisions already made.",
+    "arts": [
+      {
+        "id": "suits",
+        "name": "The Suits & Tuxedos",
+        "x": "50%",
+        "y": "42%",
+        "desc": "Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like. Two dinner jackets at the centre, black-tie and white-tie, either one pressed and ready before he has to ask.",
+        "specs": [
+          [
+            "Ordered by",
+            "Occasion"
+          ],
+          [
+            "Navy suits",
+            "Twelve"
+          ],
+          [
+            "Tuxedos",
+            "Two, black-tie and white-tie"
+          ]
+        ]
+      },
+      {
+        "id": "shoes",
+        "name": "The Shoes",
+        "x": "9%",
+        "y": "62%",
+        "desc": "Cedar-treed, rotated, never worn two days running. The oldest pair on the shelf is fourteen years old and still the best thing in the room.",
+        "specs": [
+          [
+            "Rotation",
+            "Enforced"
+          ],
+          [
+            "Oldest pair",
+            "14 years"
+          ],
+          [
+            "Trees",
+            "Cedar"
+          ]
+        ]
+      },
+      {
+        "id": "ties",
+        "name": "The Ties",
+        "x": "91%",
+        "y": "56%",
+        "desc": "Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.",
+        "specs": [
+          [
+            "Hung",
+            "Never rolled"
+          ],
+          [
+            "Worn regularly",
+            "Six"
+          ],
+          [
+            "Owned",
+            "Considerably more"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kitchen",
+    "lvl": "27",
+    "name": "The Kitchen",
+    "state": "restricted",
+    "img": "room-kitchen",
+    "grade": "",
+    "focus": "50% 54%",
+    "note": "Black marble, brass, and one box that showed up on the counter this morning.",
+    "arts": [
+      {
+        "id": "hellofresh",
+        "name": "The Delivery",
+        "x": "53%",
+        "y": "60%",
+        "desc": "It arrived before he did. No note, no ceremony — just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.",
+        "specs": []
+      }
+    ]
+  },
+  {
+    "id": "study",
+    "lvl": "28",
+    "name": "The Study",
+    "state": "restricted",
+    "img": "room-study",
+    "grade": "",
+    "focus": "50% 52%",
+    "note": "The room where the answer is usually no, and where it gets said politely.",
+    "arts": [
+      {
+        "id": "monogram",
+        "name": "The Monogram",
+        "x": "57%",
+        "y": "30%",
+        "desc": "Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.",
+        "specs": [
+          [
+            "Material",
+            "Brass"
+          ],
+          [
+            "Other branding here",
+            "None"
+          ],
+          [
+            "Self-aware",
+            "Entirely"
+          ]
+        ]
+      },
+      {
+        "id": "pullenlaws",
+        "name": "The Pullen Laws",
+        "x": "38%",
+        "y": "37%",
+        "desc": "Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.",
+        "specs": [
+          [
+            "Count",
+            "Fourteen"
+          ],
+          [
+            "Written over",
+            "Eleven years"
+          ],
+          [
+            "Read aloud",
+            "Thirteen of them"
+          ]
+        ]
+      },
+      {
+        "id": "journal",
+        "name": "The Journal",
+        "x": "57%",
+        "y": "57%",
+        "desc": "This week's pages, face-up on the blotter for once, marked in pencil rather than ink so that nothing is decided yet. What survives the pencil goes out as a dispatch. Most of it does not survive the pencil.",
+        "specs": [
+          [
+            "State",
+            "Draft"
+          ],
+          [
+            "Marked in",
+            "Pencil"
+          ],
+          [
+            "Survival rate",
+            "Low"
+          ]
+        ]
+      },
+      {
+        "id": "cocktails",
+        "name": "The Cocktail Guide",
+        "x": "75%",
+        "y": "37%",
+        "desc": "Six drinks, written on a card and kept behind the bottles, because a man looking up an Old Fashioned in front of guests has already lost the evening. Six is the entire list. There has never been a seventh.",
+        "specs": [
+          [
+            "Drinks",
+            "Six"
+          ],
+          [
+            "Kept",
+            "Behind the bottles"
+          ],
+          [
+            "Consulted in company",
+            "Never"
+          ]
+        ]
+      },
+      {
+        "id": "map",
+        "name": "The Map",
+        "x": "91%",
+        "y": "44%",
+        "desc": "Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.",
+        "specs": [
+          [
+            "Marks",
+            "Cities worked"
+          ],
+          [
+            "Not",
+            "Cities visited"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cinema",
+    "lvl": "27",
+    "name": "The Cinema",
+    "state": "restricted",
+    "img": "room-cinema",
+    "grade": "",
+    "focus": "50% 54%",
+    "note": "Nine seats, one screen, and a rule about phones that is actually enforced.",
+    "arts": [
+      {
+        "id": "posters",
+        "name": "The Posters",
+        "x": "12%",
+        "y": "42%",
+        "desc": "All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.",
+        "specs": [
+          [
+            "Register",
+            "One"
+          ],
+          [
+            "Claimed purpose",
+            "Research"
+          ],
+          [
+            "Actual",
+            "Partly"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "corridor",
+    "lvl": "26",
+    "name": "The Corridor",
+    "state": "restricted",
+    "img": "env-network",
+    "grade": "grade--cold",
+    "focus": "40% 56%",
+    "note": "No numbers on these doors. The carpet is thicker here, which is not a decorating choice.",
+    "arts": [
+      {
+        "id": "door",
+        "name": "The Unmarked Door",
+        "x": "30%",
+        "y": "48%",
+        "desc": "There is no handle on this side. It opens from within, or it does not open. Staff are instructed never to knock on it, and never to mention it to a guest who has not mentioned it first.",
+        "specs": [
+          [
+            "Handle",
+            "Interior only"
+          ],
+          [
+            "Knocking",
+            "Prohibited"
+          ],
+          [
+            "Mentioned first by",
+            "The guest"
+          ]
+        ]
+      },
+      {
+        "id": "carpet",
+        "name": "The Carpet",
+        "x": "58%",
+        "y": "82%",
+        "desc": "Deeper pile than the floors above and below. Sound does not carry in this hallway, and that is the entire specification.",
+        "specs": [
+          [
+            "Pile",
+            "Deep"
+          ],
+          [
+            "Acoustic",
+            "Dead"
+          ],
+          [
+            "Specification",
+            "One line"
+          ]
+        ]
+      },
+      {
+        "id": "lift",
+        "name": "The Second Lift",
+        "x": "74%",
+        "y": "44%",
+        "desc": "It does not appear on the panel in the main bank. It is called by a card, not a button, and it only travels between three floors.",
+        "specs": [
+          [
+            "Called by",
+            "Card"
+          ],
+          [
+            "Serves",
+            "Three floors"
+          ],
+          [
+            "On the panel",
+            "No"
+          ]
+        ]
+      },
+      {
+        "id": "weeklydelivery",
+        "name": "The Weekly Delivery",
+        "x": "86%",
+        "y": "68%",
+        "desc": "It comes up the private line, not the guest elevator — the only recurring thing that does. The staff know not to ask what's inside. It's produce.",
+        "specs": [
+          [
+            "Route",
+            "Private elevator"
+          ],
+          [
+            "Frequency",
+            "Weekly"
+          ],
+          [
+            "Contents",
+            "Produce, mostly"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "order",
+    "lvl": "25",
+    "name": "The Order",
+    "state": "restricted",
+    "img": "env-chamber",
+    "grade": "",
+    "focus": "50% 50%",
+    "note": "Twelve chairs. Eleven are spoken for. Nobody sits down until the last person is standing.",
+    "arts": [
+      {
+        "id": "twelfth",
+        "name": "The Twelfth Chair",
+        "x": "62%",
+        "y": "56%",
+        "desc": "Identical to the other eleven and never once occupied. It is not reserved for anyone. It is there so that everybody seated can see that the table is not full.",
+        "specs": [
+          [
+            "Occupied",
+            "Never"
+          ],
+          [
+            "Reserved for",
+            "No one"
+          ],
+          [
+            "Purpose",
+            "Visible incompleteness"
+          ]
+        ]
+      },
+      {
+        "id": "table",
+        "name": "The Table",
+        "x": "50%",
+        "y": "70%",
+        "desc": "One piece of walnut, brought in before the walls were finished because it does not fit through the door. The room was built around it, which is the point being made.",
+        "specs": [
+          [
+            "Material",
+            "Single walnut slab"
+          ],
+          [
+            "Installed",
+            "Before the walls"
+          ],
+          [
+            "Removable",
+            "No"
+          ]
+        ]
+      },
+      {
+        "id": "lamps",
+        "name": "The Lamps",
+        "x": "44%",
+        "y": "24%",
+        "desc": "Hung low enough that everyone's face is lit and nobody's eyes are in shadow. You cannot lie comfortably at this table. That is engineering, not decor.",
+        "specs": [
+          [
+            "Height",
+            "Low"
+          ],
+          [
+            "Shadow",
+            "None on the face"
+          ],
+          [
+            "Effect",
+            "Deliberate"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "operations",
+    "lvl": "24",
+    "name": "The Operations Room",
+    "state": "restricted",
+    "img": "env-opsroom",
+    "grade": "",
+    "focus": "50% 54%",
+    "note": "The warmest room in the building, and the only one where the furniture is doing arithmetic.",
+    "arts": [
+      {
+        "id": "table",
+        "name": "The Table",
+        "x": "40%",
+        "y": "64%",
+        "desc": "Walnut with smoked glass inlaid flush into the surface, lit from beneath in fine amber linework. It shows the city as relationships rather than streets. At rest it is a very good table.",
+        "specs": [
+          [
+            "Output",
+            "Amber only"
+          ],
+          [
+            "Ceiling",
+            "12% brightness"
+          ],
+          [
+            "At rest",
+            "Furniture"
+          ]
+        ]
+      },
+      {
+        "id": "instruments",
+        "name": "The Instruments",
+        "x": "62%",
+        "y": "58%",
+        "desc": "Machined brass and titanium, laid out like surgical tools. None of them have a screen. Every one of them does something a screen would do worse.",
+        "specs": [
+          [
+            "Screens",
+            "None"
+          ],
+          [
+            "Material",
+            "Brass, titanium"
+          ],
+          [
+            "Read by",
+            "Touch"
+          ]
+        ]
+      },
+      {
+        "id": "library",
+        "name": "The Shelves",
+        "x": "86%",
+        "y": "36%",
+        "desc": "Real books, read. The technology in this room is deliberately outnumbered by things made of paper, which is a decision he will defend at length if asked.",
+        "specs": [
+          [
+            "Books",
+            "Read, not staged"
+          ],
+          [
+            "Ratio",
+            "Paper wins"
+          ],
+          [
+            "Defends this",
+            "At length"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lab",
+    "lvl": "18",
+    "name": "The Lab",
+    "state": "restricted",
+    "img": "env-atelier",
+    "grade": "grade--amber",
+    "focus": "50% 52%",
+    "note": "It smells like the inside of a cigar box and faintly of citrus. This is where the whole thing started.",
+    "arts": [
+      {
+        "id": "scales",
+        "name": "The Scales",
+        "x": "34%",
+        "y": "62%",
+        "desc": "Accurate to a hundredth of a gram. Everything else in the building is measured in impressions and relationships. This is the one room that deals in numbers that cannot be argued with.",
+        "specs": [
+          [
+            "Accuracy",
+            "0.01 g"
+          ],
+          [
+            "Arguable",
+            "No"
+          ],
+          [
+            "Calibrated",
+            "Weekly"
+          ]
+        ]
+      },
+      {
+        "id": "blotters",
+        "name": "The Blotters",
+        "x": "58%",
+        "y": "54%",
+        "desc": "Fanned in a brass rack, each one a version that did not make it. She keeps them. He has asked why. She has not answered.",
+        "specs": [
+          [
+            "Kept",
+            "All of them"
+          ],
+          [
+            "Reason given",
+            "None"
+          ],
+          [
+            "Versions to date",
+            "Undisclosed"
+          ]
+        ]
+      },
+      {
+        "id": "notebook",
+        "name": "The Notebook",
+        "x": "24%",
+        "y": "82%",
+        "desc": "Leather, handwritten, and the only complete formula record in existence. There is no digital copy, on purpose, and it does not leave this room.",
+        "specs": [
+          [
+            "Copies",
+            "One"
+          ],
+          [
+            "Digital",
+            "None"
+          ],
+          [
+            "Leaves the room",
+            "No"
+          ]
+        ]
+      },
+      {
+        "id": "bottles",
+        "name": "The Unlabelled Bottles",
+        "x": "76%",
+        "y": "44%",
+        "desc": "Amber glass, no labels, arranged in an order that makes sense to exactly one person. Moving them is the fastest way to be asked to leave.",
+        "specs": [
+          [
+            "Labels",
+            "None"
+          ],
+          [
+            "Order",
+            "Personal"
+          ],
+          [
+            "Touched by others",
+            "Never"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "haberdashery",
+    "lvl": "12",
+    "name": "The Haberdashery",
+    "state": "members",
+    "img": "env-bespoke",
+    "grade": "",
+    "focus": "50% 50%",
+    "note": "Warm wood, cold discipline. The room where the building decides what you are going to look like.",
+    "arts": [
+      {
+        "id": "cloth",
+        "name": "The Cloth Wall",
+        "x": "74%",
+        "y": "40%",
+        "desc": "Bolts stacked by weight, not colour. A client who asks for the blue one is gently redirected. A client who asks what will still look correct in nine years is offered a chair.",
+        "specs": [
+          [
+            "Ordered by",
+            "Weight"
+          ],
+          [
+            "Wrong question",
+            "Colour"
+          ],
+          [
+            "Right question",
+            "Longevity"
+          ]
+        ]
+      },
+      {
+        "id": "table",
+        "name": "The Cutting Table",
+        "x": "46%",
+        "y": "76%",
+        "desc": "Chalk, shears and forty years of hands. Nothing is cut on this table that has not been argued about first.",
+        "specs": [
+          [
+            "Chalk",
+            "Tailor's"
+          ],
+          [
+            "Argued about",
+            "Everything"
+          ],
+          [
+            "Cut twice",
+            "Never"
+          ]
+        ]
+      },
+      {
+        "id": "shoes",
+        "name": "The Shoes",
+        "x": "20%",
+        "y": "70%",
+        "desc": "A rack of them, all dark, all polished past the point of necessity. The first thing the doorman checks and the last thing an amateur thinks about.",
+        "specs": [
+          [
+            "Finish",
+            "Excessive"
+          ],
+          [
+            "Checked by",
+            "The doorman"
+          ],
+          [
+            "Noticed by amateurs",
+            "No"
+          ]
+        ]
+      },
+      {
+        "id": "hiddendoor",
+        "name": "The Panel That Is Not A Panel",
+        "x": "88%",
+        "y": "62%",
+        "desc": "Third panel from the corner. It reads as joinery. It is a door, and behind it the room is not about tailoring.",
+        "specs": [
+          [
+            "Reads as",
+            "Joinery"
+          ],
+          [
+            "Actually",
+            "A door"
+          ],
+          [
+            "Behind it",
+            "See below"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "armoury",
+    "lvl": "12M",
+    "name": "The Armoury",
+    "state": "restricted",
+    "img": "env-bespoke",
+    "grade": "grade--noir",
+    "focus": "86% 58%",
+    "note": "A gentleman's defensive kit, in the Savile Row tradition. Nothing in here fires anything.",
+    "arts": [
+      {
+        "id": "umbrellas",
+        "name": "The Umbrellas",
+        "x": "32%",
+        "y": "46%",
+        "desc": "Storm-rated, reinforced along the spine, weighted correctly for the hand. It rains a great deal in this state and a man should not be caught holding something flimsy.",
+        "specs": [
+          [
+            "Frame",
+            "Reinforced"
+          ],
+          [
+            "Weight",
+            "Hand-balanced"
+          ],
+          [
+            "Fires",
+            "Nothing"
+          ]
+        ]
+      },
+      {
+        "id": "canes",
+        "name": "The Canes",
+        "x": "54%",
+        "y": "52%",
+        "desc": "Malacca and blackthorn. Two of them belonged to men who are named on the wall downstairs. They are carried on occasions that call for being reminded of something.",
+        "specs": [
+          [
+            "Woods",
+            "Malacca, blackthorn"
+          ],
+          [
+            "Inherited",
+            "Two"
+          ],
+          [
+            "Ceremonial",
+            "Mostly"
+          ]
+        ]
+      },
+      {
+        "id": "sabres",
+        "name": "The Sabres",
+        "x": "70%",
+        "y": "44%",
+        "desc": "Fencing blades, buttoned, kept sharp enough to be respected and blunt enough to be legal. He fences badly and enjoys it enormously.",
+        "specs": [
+          [
+            "Buttoned",
+            "Yes"
+          ],
+          [
+            "His standard",
+            "Poor"
+          ],
+          [
+            "His enthusiasm",
+            "Total"
+          ]
+        ]
+      },
+      {
+        "id": "case",
+        "name": "The Locked Case",
+        "x": "46%",
+        "y": "78%",
+        "desc": "The only locked thing in the building. It contains correspondence, not hardware, which is the joke and also the truth.",
+        "specs": [
+          [
+            "Contents",
+            "Paper"
+          ],
+          [
+            "Hardware",
+            "None"
+          ],
+          [
+            "Key held by",
+            "One person"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "fitting",
+    "lvl": "11",
+    "name": "The Fitting Floor",
+    "state": "members",
+    "img": "paris-bespoke",
+    "grade": "grade--warm",
+    "focus": "50% 42%",
+    "note": "Three mirrors, angled so you cannot avoid yourself. Somebody is mid-fitting. He does not stop.",
+    "arts": [
+      {
+        "id": "mirrors",
+        "name": "The Three Mirrors",
+        "x": "24%",
+        "y": "36%",
+        "desc": "Set so that you see your own back. Most men have never seen how they actually stand, and the first fitting is largely about surviving that information.",
+        "specs": [
+          [
+            "Angles",
+            "Three"
+          ],
+          [
+            "Shows",
+            "Your back"
+          ],
+          [
+            "First reaction",
+            "Silence"
+          ]
+        ]
+      },
+      {
+        "id": "rails",
+        "name": "The Rails",
+        "x": "82%",
+        "y": "54%",
+        "desc": "Finished garments waiting on brass. Each one has a name on the ticket and a date, and the date is when it was promised rather than when it was finished.",
+        "specs": [
+          [
+            "On the ticket",
+            "Name and date"
+          ],
+          [
+            "Date means",
+            "Promised"
+          ],
+          [
+            "Late",
+            "Occasionally"
+          ]
+        ]
+      },
+      {
+        "id": "cuff",
+        "name": "The Cuff",
+        "x": "46%",
+        "y": "62%",
+        "desc": "Half an inch of shirt, no more. He adjusts it without thinking about it roughly forty times a day, which the Cutter finds funny and has never mentioned.",
+        "specs": [
+          [
+            "Exposure",
+            "0.5 in"
+          ],
+          [
+            "Adjusted",
+            "~40/day"
+          ],
+          [
+            "Conscious",
+            "No"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "restaurant",
+    "lvl": "03",
+    "name": "The Restaurant",
+    "state": "public",
+    "img": "env-gala",
+    "grade": "grade--warm",
+    "focus": "50% 56%",
+    "note": "Sixty covers, one seating, and a kitchen that closes when it is finished rather than when the clock says so.",
+    "arts": [
+      {
+        "id": "corner",
+        "name": "The Corner Table",
+        "x": "22%",
+        "y": "60%",
+        "desc": "Two chairs, both facing out. Every deal this building has ever done was either agreed at this table or fell apart at it.",
+        "specs": [
+          [
+            "Covers",
+            "Two"
+          ],
+          [
+            "Both facing",
+            "Out"
+          ],
+          [
+            "Record",
+            "Mixed"
+          ]
+        ]
+      },
+      {
+        "id": "pass",
+        "name": "The Pass",
+        "x": "62%",
+        "y": "44%",
+        "desc": "Visible from the room on purpose. Diners can watch the kitchen work, and the kitchen can watch who has arrived, which matters more than the diners realise.",
+        "specs": [
+          [
+            "Visible",
+            "Both directions"
+          ],
+          [
+            "Matters more to",
+            "The kitchen"
+          ]
+        ]
+      },
+      {
+        "id": "flowers",
+        "name": "The Arrangements",
+        "x": "82%",
+        "y": "52%",
+        "desc": "Replaced entirely twice a week, dark and slightly overgrown rather than neat. Neat flowers make a room look like it is trying.",
+        "specs": [
+          [
+            "Replaced",
+            "2x weekly"
+          ],
+          [
+            "Style",
+            "Overgrown"
+          ],
+          [
+            "Neatness",
+            "Avoided"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bar",
+    "lvl": "02",
+    "name": "The Bar",
+    "state": "public",
+    "img": "env-bar",
+    "grade": "",
+    "focus": "46% 54%",
+    "note": "Low ceiling, low light, low voices. The best-run room in the building and the one he is proudest of.",
+    "arts": [
+      {
+        "id": "backbar",
+        "name": "The Back Bar",
+        "x": "22%",
+        "y": "32%",
+        "desc": "Lit from within, unlabelled by house policy. If you want to know what you are drinking you have to ask, and asking is how conversations start.",
+        "specs": [
+          [
+            "Labels",
+            "Removed"
+          ],
+          [
+            "Policy",
+            "House"
+          ],
+          [
+            "Effect",
+            "You ask"
+          ]
+        ]
+      },
+      {
+        "id": "ice",
+        "name": "The Ice",
+        "x": "36%",
+        "y": "64%",
+        "desc": "Cut from a single block each afternoon. Clear ice melts slower, dilutes less, and signals that somebody spent time on your drink before you ordered it.",
+        "specs": [
+          [
+            "Cut",
+            "Daily"
+          ],
+          [
+            "Clarity",
+            "Total"
+          ],
+          [
+            "Signals",
+            "Effort"
+          ]
+        ]
+      },
+      {
+        "id": "rail",
+        "name": "The Brass Rail",
+        "x": "56%",
+        "y": "82%",
+        "desc": "Unlacquered, so it takes a fingerprint and keeps it. Polished once a week, never more, because a rail with no wear on it means nobody is standing here.",
+        "specs": [
+          [
+            "Finish",
+            "Unlacquered"
+          ],
+          [
+            "Polished",
+            "Weekly"
+          ],
+          [
+            "Wear",
+            "Wanted"
+          ]
+        ]
+      },
+      {
+        "id": "banquette",
+        "name": "The Banquettes",
+        "x": "82%",
+        "y": "62%",
+        "desc": "Burgundy leather, deliberately slightly too deep, so that people sit back rather than forward. Nobody has ever had a rushed conversation in one.",
+        "specs": [
+          [
+            "Depth",
+            "Excessive"
+          ],
+          [
+            "Posture",
+            "Back"
+          ],
+          [
+            "Rushed talk",
+            "None"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "coffee",
+    "lvl": "01",
+    "name": "The Coffee House",
+    "state": "public",
+    "img": "env-bar",
+    "grade": "grade--dawn",
+    "focus": "30% 60%",
+    "note": "The same marble counter, twelve hours earlier. Different room entirely.",
+    "arts": [
+      {
+        "id": "counter",
+        "name": "The Counter",
+        "x": "34%",
+        "y": "62%",
+        "desc": "This is the bar. At six in the morning the bottles are shuttered, the lights come up, and the same stone serves espresso to people who have no idea what happens here after dark.",
+        "specs": [
+          [
+            "Same stone",
+            "Yes"
+          ],
+          [
+            "Shuttered",
+            "The back bar"
+          ],
+          [
+            "Overlap",
+            "Two hours"
+          ]
+        ]
+      },
+      {
+        "id": "regulars",
+        "name": "The Regulars",
+        "x": "70%",
+        "y": "70%",
+        "desc": "Bankers at six, builders at seven, the Cutter at eight-fifteen without fail. He orders the same thing and has never once said thank you, which everyone finds endearing.",
+        "specs": [
+          [
+            "Cutter arrives",
+            "08:15"
+          ],
+          [
+            "Order",
+            "Unchanged"
+          ],
+          [
+            "Thanks anyone",
+            "No"
+          ]
+        ]
+      },
+      {
+        "id": "window",
+        "name": "The Window",
+        "x": "86%",
+        "y": "40%",
+        "desc": "Ground floor, full height, facing the street. The only room in the building where the public can see in — and the only floor where that is the entire idea.",
+        "specs": [
+          [
+            "Visibility",
+            "Total"
+          ],
+          [
+            "Deliberate",
+            "Yes"
+          ],
+          [
+            "Only floor like it",
+            "Yes"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lobby",
+    "lvl": "G",
+    "name": "The Lobby",
+    "state": "public",
+    "img": "env-lobby",
+    "grade": "grade--jewel",
+    "focus": "50% 52%",
+    "note": "The doors give, the noise of the street stops, and the building tells you everything about itself in about four seconds.",
+    "arts": [
+      {
+        "id": "doors",
+        "name": "The Doors",
+        "x": "80%",
+        "y": "50%",
+        "desc": "Brass, and heavier than they need to be. The weight is the point — you have to commit to opening them, and by the time you are through you have already made a small decision about being here.",
+        "specs": [
+          [
+            "Material",
+            "Solid brass"
+          ],
+          [
+            "Weight",
+            "Deliberate"
+          ],
+          [
+            "Held for you",
+            "Only sometimes"
+          ]
+        ]
+      },
+      {
+        "id": "flowers",
+        "name": "The Arrangements",
+        "x": "50%",
+        "y": "44%",
+        "desc": "Replaced entirely twice a week and never symmetrical. They are cut tall enough that you cannot see the whole room at once, so the lobby reveals itself in pieces rather than all at once.",
+        "specs": [
+          [
+            "Replaced",
+            "2x weekly"
+          ],
+          [
+            "Symmetry",
+            "Avoided"
+          ],
+          [
+            "Function",
+            "Concealment"
+          ]
+        ]
+      },
+      {
+        "id": "water",
+        "name": "The Water",
+        "x": "44%",
+        "y": "80%",
+        "desc": "A still black basin, no fountain, no movement. It exists so the room has a sound floor — the faint hush that stops a marble hall from ringing like a bank.",
+        "specs": [
+          [
+            "Movement",
+            "None"
+          ],
+          [
+            "Purpose",
+            "Acoustic"
+          ],
+          [
+            "Depth",
+            "Shallow"
+          ]
+        ]
+      },
+      {
+        "id": "desk",
+        "name": "The Desk",
+        "x": "29%",
+        "y": "58%",
+        "desc": "Honed black marble, no computer visible, no queue rope, no signage. Whoever is standing behind it already knows your name or is about to find it out.",
+        "specs": [
+          [
+            "Screens",
+            "Hidden"
+          ],
+          [
+            "Queue",
+            "Never"
+          ],
+          [
+            "Signage",
+            "None"
+          ]
+        ]
+      },
+      {
+        "id": "ceiling",
+        "name": "The Ceiling",
+        "x": "62%",
+        "y": "11%",
+        "desc": "Four storeys of it. Every material expense in this building was argued about except this one — height is the only luxury that cannot be faked, and he paid for it without discussion.",
+        "specs": [
+          [
+            "Height",
+            "Four storeys"
+          ],
+          [
+            "Argued about",
+            "No"
+          ],
+          [
+            "Fakeable",
+            "Not at all"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "motor",
+    "lvl": "B1",
+    "name": "The Motor Club",
+    "state": "members",
+    "img": "env-motorclub",
+    "grade": "",
+    "focus": "50% 50%",
+    "note": "Cool air, polished concrete, and twenty-four reasons somebody had a good year.",
+    "arts": [
+      {
+        "id": "bays",
+        "name": "The Bays",
+        "x": "40%",
+        "y": "56%",
+        "desc": "Twenty-four, each lit like an exhibit. The Curator can tell you what closed the deal that paid for every single one, and will, at length, if you make eye contact.",
+        "specs": [
+          [
+            "Bays",
+            "24"
+          ],
+          [
+            "Lit as",
+            "Exhibits"
+          ],
+          [
+            "Stories",
+            "Unavoidable"
+          ]
+        ]
+      },
+      {
+        "id": "lounge",
+        "name": "The Lounge",
+        "x": "78%",
+        "y": "52%",
+        "desc": "At the far end, behind glass, so members can sit with a drink and look at the collection. Nobody has ever sat facing away from it.",
+        "specs": [
+          [
+            "Glazing",
+            "Full"
+          ],
+          [
+            "Seating",
+            "Faces in"
+          ],
+          [
+            "Exceptions",
+            "None"
+          ]
+        ]
+      },
+      {
+        "id": "lift",
+        "name": "The Private Lift",
+        "x": "88%",
+        "y": "64%",
+        "desc": "Goes up. Does not stop at the lobby, the bar or the restaurant. There is only one card that calls it from down here.",
+        "specs": [
+          [
+            "Stops",
+            "Not the lobby"
+          ],
+          [
+            "Callable by",
+            "One card"
+          ],
+          [
+            "Direction",
+            "Up"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "inventory",
+    "lvl": "B2",
+    "name": "The Inventory",
+    "state": "restricted",
+    "img": "env-motorclub",
+    "grade": "grade--noir",
+    "focus": "18% 62%",
+    "note": "Below the club. Colder, darker, and considerably more interesting.",
+    "arts": [
+      {
+        "id": "racks",
+        "name": "The Racks",
+        "x": "30%",
+        "y": "48%",
+        "desc": "Parts, panels and things that no longer exist anywhere else. When a car upstairs needs something unobtainable, it is obtained from down here.",
+        "specs": [
+          [
+            "Contents",
+            "Unobtainable"
+          ],
+          [
+            "Catalogue",
+            "Handwritten"
+          ],
+          [
+            "Insured",
+            "Separately"
+          ]
+        ]
+      },
+      {
+        "id": "ledger",
+        "name": "The Ledger",
+        "x": "56%",
+        "y": "64%",
+        "desc": "A handwritten record of every acquisition, what was paid, and who was outbid. That last column is the one people ask about and the one that never gets shown.",
+        "specs": [
+          [
+            "Columns",
+            "Three"
+          ],
+          [
+            "Third column",
+            "Who lost"
+          ],
+          [
+            "Shown",
+            "Never"
+          ]
+        ]
+      },
+      {
+        "id": "crates",
+        "name": "The Crates",
+        "x": "78%",
+        "y": "72%",
+        "desc": "Unopened. Some for years. He buys things he does not need in order to be the person who has them when somebody finally does need one.",
+        "specs": [
+          [
+            "Opened",
+            "Some, eventually"
+          ],
+          [
+            "Needed",
+            "Rarely"
+          ],
+          [
+            "Strategy",
+            "Patience"
+          ]
+        ]
+      }
+    ]
+  }
+]

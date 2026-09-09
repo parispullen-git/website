@@ -34,12 +34,26 @@
     background:var(--charcoal);border:1px solid var(--rule);border-radius:var(--dash-radius);
     padding:var(--s4);max-height:calc(100vh - var(--s7));overflow-y:auto}
   .dashnav__item{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;
-    text-transform:uppercase;color:var(--graphite);background:none;border:none;
+    text-transform:uppercase;color:var(--ash);background:none;border:none;
     border-radius:var(--dash-radius-sm);text-align:left;padding:.65em .9em;cursor:pointer;
     transition:color var(--d-fast),background var(--d-fast)}
   .dashnav__item:hover{color:var(--bone);background:var(--smoke)}
   .dashnav__item.is-active{color:var(--brass-lit);background:var(--smoke);
     box-shadow:inset 3px 0 0 var(--brass)}
+
+  .dashnav__group{display:flex;flex-direction:column;gap:.1em}
+  .dashnav__grouphead{display:flex;align-items:center;justify-content:space-between;gap:.5em;
+    font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--silver);background:none;border:none;border-radius:var(--dash-radius-sm);
+    text-align:left;padding:.65em .9em;cursor:pointer;transition:color var(--d-fast),background var(--d-fast)}
+  .dashnav__grouphead::after{content:'\2304';display:inline-block;font-size:.9em;color:var(--ash);
+    transition:transform var(--d-fast)}
+  .dashnav__grouphead:hover{color:var(--bone);background:var(--smoke)}
+  .dashnav__group.is-open>.dashnav__grouphead::after{transform:rotate(180deg)}
+  .dashnav__group.is-current>.dashnav__grouphead{color:var(--brass-lit)}
+  .dashnav__groupbody{display:none;flex-direction:column;gap:.1em;padding-left:var(--s3);
+    border-left:1px solid var(--rule);margin:.1em 0 .3em .9em}
+  .dashnav__group.is-open>.dashnav__groupbody{display:flex}
   .dashnav__deploy{margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--rule)}
   .dashnav__deploybtn{width:100%;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;
     text-transform:uppercase;color:var(--ink);background:var(--brass-lit);border:1px solid var(--brass-lit);
@@ -61,6 +75,8 @@
     .dashnav{position:static;flex-direction:row;flex-wrap:wrap;gap:.3em;
       max-height:none;margin-bottom:var(--s5)}
     .dashnav__item.is-active{box-shadow:none;background:var(--smoke)}
+    .dashnav__group{flex-basis:100%}
+    .dashnav__groupbody{flex-direction:row;flex-wrap:wrap;margin-left:0;padding-left:var(--s3)}
     .dashnav__deploy{flex-basis:100%;margin-top:var(--s3);padding-top:var(--s3)}
   }
 
@@ -69,7 +85,7 @@
     display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);flex-wrap:wrap}
   .sitecard:hover{border-color:var(--graphite);background:var(--smoke)}
   .sitecard__name{font-family:var(--font-display);font-size:1.1rem;color:var(--ivory)}
-  .sitecard__meta{font-family:var(--font-mono);font-size:.78rem;color:var(--graphite);
+  .sitecard__meta{font-family:var(--font-mono);font-size:.78rem;color:var(--ash);
     margin-top:.35em;line-height:1.7}
   .sitecard__meta code{color:var(--bone)}
   .notebox{border-left:2px solid var(--brass);border-radius:0 var(--dash-radius-sm) var(--dash-radius-sm) 0;
@@ -78,9 +94,9 @@
   .reorder{display:inline-flex;gap:.3em}
 
   .dash__row{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);flex-wrap:wrap}
-  .dash__loading,.dash__empty{color:var(--graphite);font-family:var(--font-mono);font-size:var(--t-micro);
+  .dash__loading,.dash__empty{color:var(--ash);font-family:var(--font-mono);font-size:var(--t-micro);
     letter-spacing:.08em;margin-top:var(--s5)}
-  .dash__hint{color:var(--graphite);font-size:.82rem;line-height:1.6;margin:.35em 0}
+  .dash__hint{color:var(--ash);font-size:.82rem;line-height:1.6;margin:.35em 0}
   .dash__hint code{font-family:var(--font-mono);font-size:.78em;color:var(--brass-lit);
     background:rgba(201,169,97,.08);padding:.15em .4em;border-radius:3px}
   .card__thumb{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--dash-radius-sm);margin-bottom:var(--s3);
@@ -91,7 +107,7 @@
   .card:hover{border-color:var(--graphite);background:var(--smoke)}
   .card__top{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;align-items:baseline}
   .card__title{font-family:var(--font-display);font-size:1.15rem;color:var(--ivory)}
-  .card__meta{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--graphite);letter-spacing:.06em}
+  .card__meta{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--ash);letter-spacing:.06em}
   .card__body{margin-top:var(--s3);color:var(--bone);font-size:.95rem;line-height:1.6}
   .card__row{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;margin-top:var(--s4)}
   .badge{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;text-transform:uppercase;
@@ -100,7 +116,7 @@
 
   .fld{display:grid;gap:.4em}
   .fld label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;
-    text-transform:uppercase;color:var(--graphite)}
+    text-transform:uppercase;color:var(--ash)}
   .fld input,.fld select,.fld textarea{background:var(--obsidian);border:1px solid var(--hairline);
     border-radius:var(--dash-radius-sm);color:var(--ivory);padding:.65em .85em;font-family:var(--font-body);
     font-size:.95rem;width:100%;transition:border-color var(--d-fast),background var(--d-fast)}
@@ -138,7 +154,7 @@
   .dash-modal__panel{position:relative;background:var(--ink);border:1px solid var(--rule);
     border-radius:var(--dash-radius);max-width:640px;width:100%;padding:var(--s6);display:grid;gap:var(--s4);margin:auto 0}
   .dash-modal__close{position:absolute;top:var(--s4);right:var(--s4);background:none;border:none;
-    color:var(--graphite);font-size:1.4rem;line-height:1;cursor:pointer;padding:.2em .4em}
+    color:var(--ash);font-size:1.4rem;line-height:1;cursor:pointer;padding:.2em .4em}
   .dash-modal__close:hover{color:var(--bone)}
   .dash-modal__thumb{width:100%;max-height:22rem;object-fit:contain;background:var(--obsidian);
     border:1px solid var(--hairline);border-radius:var(--dash-radius-sm)}
@@ -154,7 +170,7 @@
   .curcard__select.is-selected{background:var(--brass);border-color:var(--brass);color:var(--obsidian)}
   .curcard__select.is-selected svg{fill:currentColor}
   .curcard__name{color:var(--ivory);font-size:.78rem;line-height:1.25}
-  .curcard__meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.04em;color:var(--graphite)}
+  .curcard__meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.04em;color:var(--ash)}
 </style>
 </head>
 <body>
@@ -191,30 +207,71 @@
 
     <div class="dashwrap">
     <nav class="dashnav" aria-label="Dashboard sections">
-      <button class="dashnav__item is-active" data-tab="orders">Orders</button>
-      <button class="dashnav__item" data-tab="invoices">Invoices</button>
-      <button class="dashnav__item" data-tab="proposals">Proposals</button>
-      <button class="dashnav__item" data-tab="inquiries">Inquiries</button>
-      <button class="dashnav__item" data-tab="clients">Clients</button>
-      <button class="dashnav__item" data-tab="lookbook">Lookbook</button>
-      <button class="dashnav__item" data-tab="journal">Journal</button>
-      <button class="dashnav__item" data-tab="journal-live">Journal (Live)</button>
-      <button class="dashnav__item" data-tab="boutique">Boutique</button>
-      <button class="dashnav__item" data-tab="dispatch">Dispatch Briefs</button>
-      <button class="dashnav__item" data-tab="music">Music</button>
-      <button class="dashnav__item" data-tab="video">Video</button>
-      <button class="dashnav__item" data-tab="pitches">Pitches &amp; Goals</button>
-      <button class="dashnav__item" data-tab="network">Network</button>
-      <button class="dashnav__item" data-tab="websites">Websites</button>
-      <button class="dashnav__item" data-tab="casefiles">Case Files</button>
-      <button class="dashnav__item" data-tab="charlottemap">Charlotte Map</button>
-      <button class="dashnav__item" data-tab="housemusic">House Music</button>
-      <button class="dashnav__item" data-tab="housechannels">House Channels</button>
-      <button class="dashnav__item" data-tab="trackedbrands">Tracked Brands</button>
-      <button class="dashnav__item" data-tab="dailynews">Daily News</button>
-      <button class="dashnav__item" data-tab="social">Social Analytics</button>
-      <button class="dashnav__item" data-tab="newsletter">Newsletter</button>
-      <button class="dashnav__item" data-tab="content">Content</button>
+      <button type="button" class="dashnav__item" data-tab="boutique">Boutique</button>
+
+      <div class="dashnav__group" data-group="journal">
+        <button type="button" class="dashnav__grouphead">Journal</button>
+        <div class="dashnav__groupbody">
+          <button type="button" class="dashnav__item" data-tab="journal">Journal</button>
+          <button type="button" class="dashnav__item" data-tab="journal-live">Journal (Live)</button>
+        </div>
+      </div>
+
+      <div class="dashnav__group" data-group="world">
+        <button type="button" class="dashnav__grouphead">World</button>
+        <div class="dashnav__groupbody">
+          <button type="button" class="dashnav__item" data-tab="penthouse">Penthouse</button>
+          <button type="button" class="dashnav__item" data-tab="hrooms">Rooms</button>
+          <button type="button" class="dashnav__item" data-tab="floors">Floors</button>
+          <button type="button" class="dashnav__item" data-tab="charlottemap">Charlotte Map</button>
+          <button type="button" class="dashnav__item" data-tab="housemusic">Music</button>
+          <button type="button" class="dashnav__item" data-tab="housechannels">Videos</button>
+        </div>
+      </div>
+
+      <div class="dashnav__group" data-group="site">
+        <button type="button" class="dashnav__grouphead">Site</button>
+        <div class="dashnav__groupbody">
+          <button type="button" class="dashnav__item" data-tab="lookbook">Lookbook</button>
+          <button type="button" class="dashnav__item" data-tab="casefiles">Case Files</button>
+          <button type="button" class="dashnav__item" data-tab="music">Piano Rotation</button>
+          <button type="button" class="dashnav__item" data-tab="video">TV Fallback</button>
+        </div>
+      </div>
+
+      <div class="dashnav__group is-open" data-group="business">
+        <button type="button" class="dashnav__grouphead">Business</button>
+        <div class="dashnav__groupbody">
+          <button type="button" class="dashnav__item is-active" data-tab="orders">Orders</button>
+          <button type="button" class="dashnav__item" data-tab="invoices">Invoices</button>
+          <button type="button" class="dashnav__item" data-tab="proposals">Proposals</button>
+          <button type="button" class="dashnav__item" data-tab="inquiries">Inquiries</button>
+          <button type="button" class="dashnav__item" data-tab="clients">Clients</button>
+        </div>
+      </div>
+
+      <div class="dashnav__group" data-group="brand">
+        <button type="button" class="dashnav__grouphead">Brand</button>
+        <div class="dashnav__groupbody">
+          <button type="button" class="dashnav__item" data-tab="dispatch">Dispatch Briefs</button>
+          <button type="button" class="dashnav__item" data-tab="pitches">Pitches &amp; Goals</button>
+          <button type="button" class="dashnav__item" data-tab="network">Network</button>
+          <button type="button" class="dashnav__item" data-tab="websites">Websites</button>
+        </div>
+      </div>
+
+      <div class="dashnav__group" data-group="growth">
+        <button type="button" class="dashnav__grouphead">Growth</button>
+        <div class="dashnav__groupbody">
+          <button type="button" class="dashnav__item" data-tab="trackedbrands">Tracked Brands</button>
+          <button type="button" class="dashnav__item" data-tab="dailynews">Daily News</button>
+          <button type="button" class="dashnav__item" data-tab="social">Social Analytics</button>
+          <button type="button" class="dashnav__item" data-tab="newsletter">Newsletter</button>
+        </div>
+      </div>
+
+      <button type="button" class="dashnav__item" data-tab="content">Content</button>
+
       <div class="dashnav__deploy">
         <button type="button" class="dashnav__deploybtn" id="deploy-live-btn">Deploy Live</button>
         <p id="deploy-live-msg"></p>
@@ -248,7 +305,7 @@
           <div class="fld"><label>Tracking (optional)</label><input id="ord-tracking"></div>
         </div>
         <div class="card__row">
-          <label style="display:flex;align-items:center;gap:.5em;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.08em;color:var(--graphite)">
+          <label style="display:flex;align-items:center;gap:.5em;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.08em;color:var(--ash)">
             <input type="checkbox" id="ord-sendemail" checked style="width:auto"> Email client on status change
           </label>
           <button type="button" class="btn-sm" id="ord-save">Save Order</button>
@@ -782,6 +839,41 @@
       </div>
     </div>
 
+    <!-- PENTHOUSE (read view of the live subset of Rooms) -->
+    <div class="dash__panel" id="panel-penthouse">
+      <p class="body">The seven rooms actually open to the public on <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> right now — Levels 27&#8211;28. Everything else in the Rooms library is real, authored content kept in reserve for a future expansion. Edit any of these on the <b>Rooms</b> tab; this view just shows what's currently live.</p>
+      <p class="dash__loading" id="ph-loading">Loading&#8230;</p>
+      <p class="dash__err" id="ph-loaderr" hidden></p>
+      <div id="ph-list" class="card-grid"></div>
+    </div>
+
+    <!-- ROOMS (live -- full room library) -->
+    <div class="dash__panel" id="panel-hrooms">
+      <p class="body">Edits the real Room library — <code>data/house-rooms.json</code>, which <code>build_house.py</code> bakes into <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> (only the Level 27&#8211;28 "Penthouse" subset is actually built into the live page — see the <b>Penthouse</b> tab). Commits straight to GitHub; use <b>Deploy Live</b> in the sidebar to publish. <b>Some artifact IDs are wired into real site behavior</b> (piano, vault, journal, monogram, hellofresh, suits, jacket, candle, window) — renaming one of those breaks the feature it powers.</p>
+      <div class="newform">
+        <p class="eyebrow">Rooms</p>
+        <div class="card__row">
+          <input type="text" id="hr-search" placeholder="Search by room name, id, or level&#8230;" style="flex:1 1 auto">
+          <button type="button" class="btn-sm" id="hr-new">+ New Room</button>
+        </div>
+        <p class="dash__loading" id="hr-loading">Loading&#8230;</p>
+        <p class="dash__err" id="hr-loaderr" hidden></p>
+        <div id="hr-list" class="card-grid"></div>
+      </div>
+      <div class="dash-modal" id="hr-editor" hidden>
+        <div class="dash-modal__backdrop" data-hr-modal-close></div>
+        <div class="dash-modal__panel"><button type="button" class="dash-modal__close" data-hr-modal-close aria-label="Close">&#215;</button><div id="hr-editor-body"></div></div>
+      </div>
+    </div>
+
+    <!-- FLOORS (read view, grouped by level) -->
+    <div class="dash__panel" id="panel-floors">
+      <p class="body">Every level in the Room library, grouped and ordered top-to-bottom the same way the building's own floor index is computed in <code>build_house.py</code>. <b>Live</b> marks a level with at least one room actually open on <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a>.</p>
+      <p class="dash__loading" id="fl-loading">Loading&#8230;</p>
+      <p class="dash__err" id="fl-loaderr" hidden></p>
+      <div id="fl-list"></div>
+    </div>
+
     <!-- HOUSE MUSIC (live) -->
     <div class="dash__panel" id="panel-housemusic">
       <p class="body">Edits the real House Music list — <code>data/house-music.json</code>. <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> fetches this live at runtime, so a save here reaches the site as soon as it's committed — <b>no Deploy Live needed</b> for this one.</p>
@@ -810,7 +902,7 @@
 
     <!-- CONTENT -->
     <div class="dash__panel" id="panel-content">
-      <p class="body">Journal (Live), Boutique, Case Files, Charlotte Map, House Music, and House Channels are all genuinely live-editable from this dashboard — commits straight to GitHub, then <b>Deploy Live</b> in the sidebar publishes everything at once. The local Operator Console still exists for local-only convenience (and as a backup publish path independent of GitHub Actions), but this dashboard is the one place that houses everything.</p>
+      <p class="body">Journal (Live), Boutique, Case Files, Charlotte Map, Rooms, House Music, and House Channels are all genuinely live-editable from this dashboard — commits straight to GitHub, then <b>Deploy Live</b> in the sidebar publishes everything at once. The local Operator Console still exists for local-only convenience (and as a backup publish path independent of GitHub Actions), but this dashboard is the one place that houses everything.</p>
       <div class="card" style="margin-top:var(--s5)">
         <p class="card__title">Local Operator Console</p>
         <p class="card__body">On your machine: <code>node local-admin/server.js</code>, then open <code>local-admin/console.html</code>. Edits regenerate the real static pages via the existing <code>build_*.py</code> scripts — review the result, then deploy as usual.</p>
@@ -933,8 +1025,28 @@
         Object.keys(panels).forEach(function(k){ panels[k].classList.remove('is-active'); });
         t.classList.add('is-active');
         panels[t.dataset.tab].classList.add('is-active');
+        markCurrentGroup(t);
       });
     });
+
+    // nav groups (Journal / World / Site / Business / Brand / Growth) --
+    // each header toggles its own body open/closed, closing any other open
+    // group so the sidebar stays short; the group holding the active tab
+    // stays labeled in brass even while collapsed, via markCurrentGroup().
+    var groups = Array.prototype.slice.call(document.querySelectorAll('.dashnav__group'));
+    groups.forEach(function(g){
+      g.querySelector('.dashnav__grouphead').addEventListener('click', function(){
+        var opening = !g.classList.contains('is-open');
+        groups.forEach(function(x){ x.classList.remove('is-open'); });
+        if (opening) g.classList.add('is-open');
+      });
+    });
+    function markCurrentGroup(activeTabBtn){
+      groups.forEach(function(g){ g.classList.remove('is-current'); });
+      var g = activeTabBtn.closest('.dashnav__group');
+      if (g) { g.classList.add('is-current'); g.classList.add('is-open'); groups.forEach(function(x){ if (x!==g) x.classList.remove('is-open'); }); }
+    }
+    markCurrentGroup(document.querySelector('.dashnav__item.is-active'));
 
     loadOrders();
     loadInvoices();
@@ -2778,9 +2890,95 @@
     ],
   });
 
+  // ================= ROOMS (live -- full room library) =================
+  var hrEditor = makeLiveList({
+    key: 'hr', label: 'Room', apiPath: '/api/house-rooms-live', idField: 'id',
+    newLabel: 'New Room', required: ['id', 'name', 'lvl'], requiredMsg: 'ID, name, and level are required.',
+    summary: function(r){ return r.name || 'Untitled'; },
+    subSummary: function(r){ return '/' + (r.id||'') + ' · Level ' + (r.lvl||'') + ' · ' + (r.state||'') +
+      ((r.lvl === '27' || r.lvl === '28') ? ' · Live' : ' · Dormant'); },
+    searchFields: ['name', 'id', 'lvl', 'state'],
+    fields: [
+      {key:'id', label:'ID (slug, unique — some artifact ids below are wired into real site behavior)', type:'text'},
+      {key:'lvl', label:'Level (e.g. "27", "G", "B1", "12M")', type:'text'},
+      {key:'name', label:'Room name', type:'text'},
+      {key:'state', label:'State', type:'select', options:['public','members','restricted']},
+      {key:'img', label:'Image key', type:'text'},
+      {key:'grade', label:'Color grade class (optional, e.g. "grade--noir")', type:'text'},
+      {key:'focus', label:'Focus (background-position, e.g. "50% 50%")', type:'text'},
+      {key:'note', label:'Note (one line, shown low in the room)', type:'textarea'},
+      {key:'arts', label:'Artifacts — raw JSON array. Each: {"id","name","x","y","desc","specs":[["Label","Value"],...]}. Renaming "id" on piano, vault, journal, monogram, hellofresh, suits, jacket, candle, or window breaks the feature it powers.', type:'json', jsonEmpty:[]},
+    ],
+  });
+
+  // Read-only view of just the live (Level 27-28) subset of Rooms.
+  function loadPenthouseDash(){
+    var loading = document.getElementById('ph-loading');
+    var err = document.getElementById('ph-loaderr');
+    var list = document.getElementById('ph-list');
+    loading.hidden = false; err.hidden = true; list.innerHTML = '';
+    fetch('/api/house-rooms-live')
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        loading.hidden = true;
+        if (!res.ok) { err.textContent = res.data.error || 'Could not load.'; err.hidden = false; return; }
+        var rooms = res.data.items.filter(function(r){ return r.lvl === '27' || r.lvl === '28'; });
+        if (!rooms.length) { list.innerHTML = '<p class="dash__empty">Nothing yet.</p>'; return; }
+        list.innerHTML = rooms.map(function(r){
+          return '<div class="card">' +
+            '<div class="card__top"><span class="card__title">' + esc(r.name || 'Untitled') + '</span>' +
+            '<span class="badge badge--brass">Live</span></div>' +
+            '<p class="card__meta">/' + esc(r.id || '') + ' &#183; Level ' + esc(r.lvl || '') + ' &#183; ' + esc(r.state || '') + '</p>' +
+            '<p class="card__body">' + esc(r.note || '') + '</p>' +
+            '<p class="card__meta" style="margin-top:var(--s3)">' + (r.arts || []).length + ' artifact' + ((r.arts || []).length === 1 ? '' : 's') + '</p>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.hidden = true; err.textContent = 'Could not reach GitHub.'; err.hidden = false; });
+  }
+
+  // Read-only floor index -- mirrors build_house.py's own level_key() so the
+  // ordering here always matches the real building order (levels aren't
+  // plain integers: "G", "B1", "B2", "12M" all appear).
+  function hrLevelKey(lvl){
+    if (lvl === 'G') return 0;
+    if (lvl.charAt(0) === 'B') return -parseFloat(lvl.slice(1));
+    if (lvl.slice(-1) === 'M') return parseFloat(lvl.slice(0, -1)) - 0.5;
+    return parseFloat(lvl);
+  }
+  function loadFloorsDash(){
+    var loading = document.getElementById('fl-loading');
+    var err = document.getElementById('fl-loaderr');
+    var list = document.getElementById('fl-list');
+    loading.hidden = false; err.hidden = true; list.innerHTML = '';
+    fetch('/api/house-rooms-live')
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        loading.hidden = true;
+        if (!res.ok) { err.textContent = res.data.error || 'Could not load.'; err.hidden = false; return; }
+        var byLevel = {};
+        res.data.items.forEach(function(r){ (byLevel[r.lvl] = byLevel[r.lvl] || []).push(r); });
+        var levels = Object.keys(byLevel).sort(function(a, b){ return hrLevelKey(b) - hrLevelKey(a); });
+        list.innerHTML = levels.map(function(lvl){
+          var isLive = lvl === '27' || lvl === '28';
+          return '<div class="card">' +
+            '<div class="card__top"><span class="card__title">Level ' + esc(lvl) + '</span>' +
+            (isLive ? '<span class="badge badge--brass">Live</span>' : '<span class="badge">Dormant</span>') + '</div>' +
+            '<div class="card__row" style="margin-top:var(--s3)">' +
+              byLevel[lvl].map(function(r){ return '<span class="badge">' + esc(r.name || r.id) + '</span>'; }).join('') +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.hidden = true; err.textContent = 'Could not reach GitHub.'; err.hidden = false; });
+  }
+
   document.querySelector('[data-tab="casefiles"]').addEventListener('click', function(){ cfEditor.load(); }, {once:true});
   document.querySelector('[data-tab="charlottemap"]').addEventListener('click', function(){ cmEditor.load(); }, {once:true});
   document.querySelector('[data-tab="housemusic"]').addEventListener('click', function(){ hmEditor.load(); }, {once:true});
+  document.querySelector('[data-tab="penthouse"]').addEventListener('click', function(){ loadPenthouseDash(); }, {once:true});
+  document.querySelector('[data-tab="hrooms"]').addEventListener('click', function(){ hrEditor.load(); }, {once:true});
+  document.querySelector('[data-tab="floors"]').addEventListener('click', function(){ loadFloorsDash(); }, {once:true});
 
   // ================= HOUSE CHANNELS (live, dict-of-lists) =================
   // Not a plain array like the collections above -- data/house-channels.json
