@@ -31,6 +31,9 @@
   .jp-nav{margin-top:var(--s10);border-top:1px solid var(--rule);padding-top:var(--s7)}
   .jp-nav a{color:var(--bone)}
   .jp__err{color:#C0555A}
+  .jp-draftbar{position:sticky;top:0;z-index:20;background:#4A3414;border-bottom:1px solid var(--brass);
+    color:var(--champagne);font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;
+    text-transform:uppercase;text-align:center;padding:.7em 1em}
 </style>
 </head>
 <body>
@@ -41,6 +44,7 @@
   <a class="worldnav__mark" href="index.html"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
 </header>
 
+<p class="jp-draftbar" id="jpDraftbar" hidden>Draft Preview — not visible on the live Journal</p>
 <main>
 <section class="scene scene--pad" id="jpLoading">
   <div class="wrap jp__state">
@@ -97,15 +101,22 @@
     [loadingEl, missingEl, contentEl].forEach(function(e){ e.hidden = (e !== el); });
   }
 
-  var slug = new URLSearchParams(window.location.search).get('slug');
+  var qs = new URLSearchParams(window.location.search);
+  var slug = qs.get('slug');
+  var preview = qs.get('preview') === '1';
   if (!slug) { show(missingEl); return; }
 
   fetch('/api/content?collection=journal')
     .then(function(r){ return r.json(); })
     .then(function(data){
       var posts = (data && data.records) || [];
-      var p = posts.filter(function(x){ return x && x.slug === slug && x.status !== 'draft'; })[0];
+      var p = posts.filter(function(x){ return x && x.slug === slug && (x.status !== 'draft' || preview); })[0];
       if (!p) throw new Error('not found');
+
+      // ?preview=1 is how the dashboard's own Preview button reaches a
+      // draft before it's published -- never linked from anywhere public,
+      // so this banner is the only tell that it isn't the live page.
+      if (preview && p.status === 'draft') document.getElementById('jpDraftbar').hidden = false;
 
       document.title = (p.title || 'The Journal') + ' — Paris Pullen';
       document.getElementById('jp-cat').textContent = p.catlabel || p.cat || '';

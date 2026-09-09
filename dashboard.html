@@ -2144,6 +2144,7 @@
           '<button type="button" class="btn-sm" data-jl-move="down" data-jl-slug="' + esc(p.slug) + '"' + (i === ordered.length - 1 ? ' disabled' : '') + '>&#8595; Move Down</button>' +
           (isFeatured ? '' : '<button type="button" class="btn-sm" data-jl-feature="' + esc(p.slug) + '">Set as Featured</button>') +
           '<button type="button" class="btn-sm" data-jl-edit="' + esc(p.slug) + '">Edit</button>' +
+          '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="journal-post.html?slug=' + esc(p.slug) + (isDraft ? '&preview=1' : '') + '" target="_blank" rel="noopener">Preview &#8594;</a>' +
         '</div>' +
       '</div>';
     }).join('');
@@ -2755,6 +2756,13 @@
 
       document.getElementById(cfg.key + '-save-btn').addEventListener('click', save);
       if (!isNew) document.getElementById(cfg.key + '-delete-btn').addEventListener('click', del);
+
+      // Optional escape hatch for a field that needs a real interactive
+      // widget instead of a plain input -- e.g. Rooms' Artifacts editor.
+      // Runs after the fields above are in the DOM; the enhancer owns
+      // keeping its own field's underlying input/textarea in sync so
+      // readForm() above needs no changes at all.
+      if (cfg.afterRender) cfg.afterRender(body, record);
     }
 
     function readForm(){
@@ -2907,9 +2915,94 @@
       {key:'grade', label:'Color grade class (optional, e.g. "grade--noir")', type:'text'},
       {key:'focus', label:'Focus (background-position, e.g. "50% 50%")', type:'text'},
       {key:'note', label:'Note (one line, shown low in the room)', type:'textarea'},
-      {key:'arts', label:'Artifacts — raw JSON array. Each: {"id","name","x","y","desc","specs":[["Label","Value"],...]}. Renaming "id" on piano, vault, journal, monogram, hellofresh, suits, jacket, candle, or window breaks the feature it powers.', type:'json', jsonEmpty:[]},
+      {key:'arts', label:'Artifacts (below) — some IDs are wired into real site behavior: renaming "id" on piano, vault, journal, monogram, hellofresh, suits, jacket, candle, or window breaks the feature it powers.', type:'json', jsonEmpty:[]},
     ],
+    afterRender: function(body, record){ hrEnhanceArtifacts(); },
   });
+
+  // Turns the arts field's plain JSON textarea (still there, hidden --
+  // readForm()/save() keep working against it unmodified) into a real
+  // add/edit/remove UI: one card per artifact (id/name/x/y/desc), each
+  // with its own specs sub-list (the label/value pairs shown in the
+  // room's drawer). Every edit here just rewrites the hidden textarea's
+  // value, so nothing about how a Room actually saves has to change.
+  function hrEnhanceArtifacts(){
+    var textarea = document.getElementById('hrf-arts');
+    if (!textarea) return;
+    var arts;
+    try { arts = JSON.parse(textarea.value || '[]'); } catch (e) { arts = []; }
+    if (!Array.isArray(arts)) arts = [];
+    textarea.style.display = 'none';
+    var wrap = document.createElement('div');
+    textarea.insertAdjacentElement('afterend', wrap);
+
+    function sync(){ textarea.value = JSON.stringify(arts, null, 2); }
+
+    function specRow(art, i, spec, si){
+      return '<div class="card__row" style="margin-top:.3em;flex-wrap:nowrap">' +
+        '<input type="text" data-hr-spec-label data-i="' + i + '" data-si="' + si + '" placeholder="Label" value="' + esc((spec && spec[0]) || '') + '" style="flex:1">' +
+        '<input type="text" data-hr-spec-value data-i="' + i + '" data-si="' + si + '" placeholder="Value" value="' + esc((spec && spec[1]) || '') + '" style="flex:1">' +
+        '<button type="button" class="btn-sm" data-hr-spec-remove data-i="' + i + '" data-si="' + si + '">&#215;</button>' +
+      '</div>';
+    }
+
+    function render(){
+      wrap.innerHTML = arts.map(function(a, i){
+        return '<div class="card" style="margin-top:var(--s3)">' +
+          '<div class="card__row" style="flex-wrap:wrap">' +
+            '<div class="fld" style="flex:1 1 45%"><label>ID</label><input type="text" data-hr-art="id" data-i="' + i + '" value="' + esc(a.id || '') + '"></div>' +
+            '<div class="fld" style="flex:1 1 45%"><label>Name</label><input type="text" data-hr-art="name" data-i="' + i + '" value="' + esc(a.name || '') + '"></div>' +
+            '<div class="fld" style="flex:1 1 20%"><label>X</label><input type="text" data-hr-art="x" data-i="' + i + '" value="' + esc(a.x || '') + '"></div>' +
+            '<div class="fld" style="flex:1 1 20%"><label>Y</label><input type="text" data-hr-art="y" data-i="' + i + '" value="' + esc(a.y || '') + '"></div>' +
+          '</div>' +
+          '<div class="fld" style="margin-top:var(--s3)"><label>Description</label><textarea data-hr-art="desc" data-i="' + i + '">' + esc(a.desc || '') + '</textarea></div>' +
+          '<div class="fld" style="margin-top:var(--s3)"><label>Specs</label>' +
+            '<div data-hr-specs-for="' + i + '">' + (a.specs || []).map(function(s, si){ return specRow(a, i, s, si); }).join('') + '</div>' +
+            '<button type="button" class="btn-sm" data-hr-spec-add data-i="' + i + '" style="margin-top:.4em">+ Add Spec</button>' +
+          '</div>' +
+          '<button type="button" class="btn-sm" data-hr-art-remove data-i="' + i + '" style="margin-top:var(--s4)">Remove Artifact</button>' +
+        '</div>';
+      }).join('') + '<button type="button" class="btn-sm" data-hr-art-add style="margin-top:var(--s3)">+ Add Artifact</button>';
+    }
+
+    wrap.addEventListener('input', function(e){
+      var t = e.target;
+      if (t.hasAttribute('data-hr-art')) {
+        arts[Number(t.dataset.i)][t.getAttribute('data-hr-art')] = t.value;
+        sync();
+      } else if (t.hasAttribute('data-hr-spec-label') || t.hasAttribute('data-hr-spec-value')) {
+        var i = Number(t.dataset.i), si = Number(t.dataset.si);
+        arts[i].specs = arts[i].specs || [];
+        arts[i].specs[si] = arts[i].specs[si] || ['', ''];
+        arts[i].specs[si][t.hasAttribute('data-hr-spec-label') ? 0 : 1] = t.value;
+        sync();
+      }
+    });
+    wrap.addEventListener('click', function(e){
+      if (e.target.closest('[data-hr-art-add]')) {
+        arts.push({id:'', name:'', x:'50%', y:'50%', desc:'', specs:[]});
+        sync(); render(); return;
+      }
+      var remArt = e.target.closest('[data-hr-art-remove]');
+      if (remArt) { arts.splice(Number(remArt.dataset.i), 1); sync(); render(); return; }
+      var addSpec = e.target.closest('[data-hr-spec-add]');
+      if (addSpec) {
+        var i = Number(addSpec.dataset.i);
+        arts[i].specs = arts[i].specs || [];
+        arts[i].specs.push(['', '']);
+        sync(); render(); return;
+      }
+      var remSpec = e.target.closest('[data-hr-spec-remove]');
+      if (remSpec) {
+        var ri = Number(remSpec.dataset.i), rsi = Number(remSpec.dataset.si);
+        arts[ri].specs.splice(rsi, 1);
+        sync(); render(); return;
+      }
+    });
+
+    sync();
+    render();
+  }
 
   // Read-only view of just the live (Level 27-28) subset of Rooms.
   function loadPenthouseDash(){
