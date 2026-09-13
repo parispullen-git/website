@@ -948,7 +948,6 @@
     var muteBtn = panel.querySelector('[data-sr-action="mute"]');
     var pwrBtn = panel.querySelector('.suite-remote__pwr');
     var musicEl = panel.querySelector('[data-sr-music]');
-    var loungeCredit = '<p class="suite-remote__credit">Curated by <a href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>';
     var guidePanel = panel.querySelector('[data-sr-guide-panel]');
     var guideList = panel.querySelector('[data-sr-guide-list]');
     var transportEls = panel.querySelectorAll('[data-sr-transport]');
@@ -985,6 +984,37 @@
       renderPP();
     });
 
+    // Simple now-playing card: album art, song title, room title -- built
+    // with DOM methods rather than innerHTML since the title text comes
+    // from Spotify's oEmbed response, not something to trust blindly into
+    // markup. Built fresh each render (cheap, three small elements) rather
+    // than diffed in place.
+    function renderNowPlaying(meta, roomLabel) {
+      musicEl.innerHTML = '';
+      if (!meta) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'suite-remote__nowplaying';
+      var img = document.createElement('img');
+      img.className = 'suite-remote__art';
+      img.src = meta.art;
+      img.alt = '';
+      img.width = 56;
+      img.height = 56;
+      var metaWrap = document.createElement('div');
+      metaWrap.className = 'suite-remote__meta';
+      var song = document.createElement('p');
+      song.className = 'suite-remote__song';
+      song.textContent = meta.title;
+      var room = document.createElement('p');
+      room.className = 'suite-remote__room';
+      room.textContent = roomLabel;
+      metaWrap.appendChild(song);
+      metaWrap.appendChild(room);
+      wrap.appendChild(img);
+      wrap.appendChild(metaWrap);
+      musicEl.appendChild(wrap);
+    }
+
     function render() {
       Array.prototype.forEach.call(sourceBtns, function (b) {
         b.classList.toggle('is-active', b.dataset.srSource === activeSource);
@@ -1003,8 +1033,9 @@
       panel.classList.remove('is-power-off');
       if (isMusic) {
         var amb = ambient();
-        titleEl.textContent = amb ? 'Music · ' + (window.PPAmbient.label(amb.roomId) || amb.roomId) : 'No music in this room';
-        musicEl.innerHTML = amb && amb.roomId === 'music-lounge' ? loungeCredit : '';
+        var roomLabel = amb ? (window.PPAmbient.label(amb.roomId) || amb.roomId) : '';
+        titleEl.textContent = amb ? 'Music · ' + roomLabel : 'No music in this room';
+        renderNowPlaying(amb && window.PPAmbient.meta(), roomLabel);
         if (dialBtn) dialBtn.classList.toggle('is-disabled', !amb);
         if (pwrBtn) { pwrBtn.disabled = true; pwrBtn.classList.remove('is-off'); }
         if (dialBtn) dialBtn.classList.toggle('is-paused', !amb || amb.isPaused);

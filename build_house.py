@@ -261,26 +261,14 @@ VAULT_CTA = ('<a class="cta pent__open" href="urwelcome.html" data-vault-enter s
     '<span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
 
 # The Piano artifact (Living Room) is retired -- this fixed single
-# playlist embed on the Music Lounge's own record-player artifact is its
-# replacement. Deliberately NOT the same mechanism as the old
-# piano-player.js widget (a dashboard-editable multi-playlist rotation
-# with prev/next) -- this is one specific playlist, using Spotify's own
-# embed player (it has its own play/pause/shuffle controls built in
-# already). The house-wide rotation piano-player.js drove still exists
-# and still plays -- just via the global Suite Remote's Music tab
-# (tv-remote.js), reachable from every room, not from an in-room widget.
-#
-# The target is an empty div, not a plain <iframe> -- piano-player.js's
-# initLoungeSpotify() creates a real Spotify IFrame API controller on it
-# (same mechanism as the Piano widget used), so entering the room can
-# call controller.play() after the entry sting finishes. The div sits in
-# the DOM (and the controller/iframe with it) whether or not this
-# drawer's actually open, so playback continues in the background either
-# way, same as any other embedded player on the site.
-MUSIC_LOUNGE_SPOTIFY = '''<p class="body" style="margin-top:var(--s3)">Curated by <a class="link-under" href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>
-                <div class="spotify-embed">
-                  <div data-lounge-spotify></div>
-                </div>'''
+# playlist on the Music Lounge's own record-player artifact is its
+# replacement. No visible embed in the drawer any more -- the controller
+# (piano-player.js's ensureLoungeController) lives on its own hidden host,
+# same as every other room's ambient track, and plays in the background
+# regardless of whether this drawer's ever opened. The now-playing display
+# (album art, song, room title) lives on the global Suite Remote's Music
+# tab instead (tv-remote.js), reachable from every room.
+MUSIC_LOUNGE_SPOTIFY = '''<p class="body" style="margin-top:var(--s3)">Curated by <a class="link-under" href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>'''
 
 CANDLE_COMING_SOON = '''<div class="coming-soon">
                   <span class="coming-soon__badge">UR Welcome &#183; Coming Soon</span>
@@ -503,7 +491,7 @@ html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css?v=7">
+<link rel="stylesheet" href="assets/css/world.css?v=8">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -541,14 +529,14 @@ html = f'''<!DOCTYPE html>
      tv-remote.js's initSuiteRemote() -- one instance regardless of how
      many rooms have a screen. -->
 
-<script src="assets/js/room-pager.js?v=7" defer></script>
-<script src="assets/js/nav-panel.js?v=7" defer></script>
-<script src="assets/js/world.js?v=7" defer></script>
-<script src="assets/js/tv-remote.js?v=7" defer></script>
-<script src="assets/js/guide-portal.js?v=7" defer></script>
-<script src="assets/js/gym-portal.js?v=7" defer></script>
-<script src="assets/js/vault-entrance.js?v=7" defer></script>
-<script src="assets/js/piano-player.js?v=7" defer></script>
+<script src="assets/js/room-pager.js?v=8" defer></script>
+<script src="assets/js/nav-panel.js?v=8" defer></script>
+<script src="assets/js/world.js?v=8" defer></script>
+<script src="assets/js/tv-remote.js?v=8" defer></script>
+<script src="assets/js/guide-portal.js?v=8" defer></script>
+<script src="assets/js/gym-portal.js?v=8" defer></script>
+<script src="assets/js/vault-entrance.js?v=8" defer></script>
+<script src="assets/js/piano-player.js?v=8" defer></script>
 </body>
 </html>
 '''

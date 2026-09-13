@@ -290,14 +290,12 @@
   var VAULT_CTA = '<a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)"><span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   // The Piano artifact (Living Room) is retired -- mirrors build_house.py's
   // MUSIC_LOUNGE_SPOTIFY exactly: one fixed playlist on the Music Lounge's
-  // record-player artifact. The target is an empty div, not a plain
-  // <iframe> -- piano-player.js's initLoungeSpotify() creates a real
-  // Spotify IFrame API controller on it, so entering the room can call
-  // controller.play() once the entry sting finishes. The house-wide
-  // rotation piano-player.js also drives still exists and still plays,
-  // just via the global Suite Remote's Music tab now, not an in-room widget.
-  var MUSIC_LOUNGE_SPOTIFY = '<p class="body" style="margin-top:var(--s3)">Curated by <a class="link-under" href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>' +
-    '<div class="spotify-embed"><div data-lounge-spotify></div></div>';
+  // record-player artifact. No visible embed in the drawer -- the
+  // controller (piano-player.js's ensureLoungeController) lives on its own
+  // hidden host, same as every other room's ambient track. The now-playing
+  // display (album art, song, room title) lives on the global Suite
+  // Remote's Music tab instead, reachable from every room.
+  var MUSIC_LOUNGE_SPOTIFY = '<p class="body" style="margin-top:var(--s3)">Curated by <a class="link-under" href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>';
   var CANDLE_COMING_SOON = '<div class="coming-soon"><span class="coming-soon__badge">UR Welcome &#183; Coming Soon</span></div>';
   // Mirrors build_house.py's LIVING_FASHIONNOVA_UNLOCK exactly -- reused by
   // both the Living Room's Jacket and the Music Lounge's Polo, one collab

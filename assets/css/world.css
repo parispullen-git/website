@@ -1817,10 +1817,16 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
    flex beats the UA stylesheet's [hidden]{display:none} on specificity) --
    spell it out explicitly so hiding these during Music actually hides them. */
 [data-sr-transport][hidden]{display:none}
-.suite-remote__music iframe{display:block;border:0}
-.suite-remote__credit{font-family:var(--font-sans);font-size:var(--t-label);line-height:1.5;
-  color:var(--ash);text-align:center;margin:0}
-.suite-remote__credit a{color:var(--brass-lit)}
+/* Now-playing card (album art, song, room title) -- replaces the old
+   in-panel Spotify iframe embed with a simple, uniform display fed by
+   window.PPAmbient.meta() (tv-remote.js), same for every room. */
+.suite-remote__nowplaying{display:flex;align-items:center;gap:var(--s3)}
+.suite-remote__art{width:56px;height:56px;border-radius:6px;object-fit:cover;flex:none;background:var(--charcoal)}
+.suite-remote__meta{display:grid;gap:.2em;min-width:0}
+.suite-remote__song{font-family:var(--font-sans);font-size:var(--t-label);line-height:1.3;
+  color:var(--ivory);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.suite-remote__room{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--brass);margin:0}
 .suite-remote__guide-panel{
   position:absolute;inset:0;z-index:2;border-radius:16px;
   background:linear-gradient(180deg,#161616,#0a0a0b);
@@ -2221,13 +2227,6 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   box-shadow:0 20px 50px rgba(0,0,0,.45);background:#0a0a0b;
 }
 .piano-player__frame iframe{display:block;width:100%;border:0}
-
-/* 26c2. Fixed single-playlist embed (Music Lounge's record-player artifact)
-   -- Spotify's own iframe already ships play/pause/shuffle/seek, so unlike
-   .piano-player this needs no custom transport UI, just the same divider
-   treatment as the other in-drawer widgets. */
-.spotify-embed{margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--rule)}
-.spotify-embed iframe{display:block;width:100%;border:0}
 
 /* 26d. COMING SOON badge (candle, etc.) */
 .coming-soon{margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--rule)}

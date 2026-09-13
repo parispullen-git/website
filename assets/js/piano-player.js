@@ -140,30 +140,35 @@
      Music Lounge entry sequence -- arriving at the room (pp:room-change,
      see room-pager.js) plays a short sting (assets/audio/music-lounge-
      intro.m4a), then autoplays the record player artifact's own fixed
-     playlist once the sting ends. Reuses spotifyApiPromise above rather
-     than loading the IFrame API a second time; the target div itself
-     (data-lounge-spotify, inside the artifact's drawer -- see
-     MUSIC_LOUNGE_SPOTIFY in build_house.py/penthouse.js) sits in the DOM
-     whether or not the drawer's actually open, so the controller plays
-     in the background either way, same as any other embedded player.
+     playlist once the sting ends. The controller now lives on its own
+     hidden host (same .room-track-host pattern every other room's
+     ambient track uses -- see ensureRoomController below), created lazily
+     on first entry rather than depending on drawer markup, so playback
+     continues in the background regardless of whether the drawer's ever
+     opened -- there's no visible in-room widget for it any more (see
+     window.PPAmbient.meta() / tv-remote.js's Suite Remote Music tab for
+     the now-playing display that replaced it).
 
      Spotify's public embed API has no documented way to force shuffle
      on programmatically -- this starts the playlist in its own track
-     order; the widget's own shuffle icon (visible once the drawer's
-     opened) is there for the visitor to toggle themselves.
+     order.
 
      Best-effort only: a browser that blocks the sting's autoplay (most
      likely the very first click into house.html, before any in-page
      interaction) still gets the playlist call as a fallback, but if
      that's blocked too, the record player artifact's own play button
      works exactly as it always has -- no regression either way. */
+  var LOUNGE_PLAYLIST_ID = '7b46c5syjtG86a77R7SnMs';
   var loungeController = null;
-  function initLoungeSpotify(el) {
-    if (inited.has(el)) return;
-    inited.add(el);
+  function ensureLoungeController(cb) {
+    if (loungeController) { cb(loungeController); return; }
+    var host = document.createElement('div');
+    host.className = 'room-track-host';
+    host.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(host);
     spotifyApiPromise.then(function (IFrameAPI) {
       if (!IFrameAPI) return;
-      IFrameAPI.createController(el, { uri: 'spotify:playlist:7b46c5syjtG86a77R7SnMs' }, function (controller) {
+      IFrameAPI.createController(host, { uri: 'spotify:playlist:' + LOUNGE_PLAYLIST_ID }, function (controller) {
         loungeController = controller;
         // Exposed so the global Suite Remote (tv-remote.js) can control
         // this exact controller from any room's Music tab, instead of
@@ -179,6 +184,7 @@
           }
         });
         document.dispatchEvent(new CustomEvent('pp:lounge-controller-ready'));
+        cb(controller);
       });
     });
   }
@@ -219,9 +225,43 @@
     document.dispatchEvent(new CustomEvent('pp:ambient-change'));
   }
 
+  // Now-playing metadata (album art + song title) for the Suite Remote's
+  // Music tab -- fetched from Spotify's public oEmbed endpoint (no API
+  // key needed, CORS-enabled) rather than the IFrame API, which doesn't
+  // expose track metadata. Cached per URI since it never changes for a
+  // given track/playlist; re-dispatches pp:ambient-change once a fetch
+  // resolves so the remote (already listening for that event) re-renders
+  // with the art once it's in.
+  var trackMetaCache = {}; // uri -> {title, art} | 'loading' | null (failed)
+  function ambientUri(roomId) {
+    if (roomId === 'music-lounge') return 'spotify:playlist:' + LOUNGE_PLAYLIST_ID;
+    return ROOM_TRACKS[roomId] ? 'spotify:track:' + ROOM_TRACKS[roomId] : null;
+  }
+  function fetchTrackMeta(uri) {
+    trackMetaCache[uri] = 'loading';
+    fetch('https://open.spotify.com/oembed?url=' + encodeURIComponent(uri))
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        trackMetaCache[uri] = { title: data.title, art: data.thumbnail_url };
+        document.dispatchEvent(new CustomEvent('pp:ambient-change'));
+      })
+      .catch(function () { trackMetaCache[uri] = null; });
+  }
+
   window.PPAmbient = {
     get: function () { return ambient; },
-    label: function (roomId) { return ROOM_LABELS[roomId] || ''; }
+    label: function (roomId) { return ROOM_LABELS[roomId] || ''; },
+    // {title, art} for whatever's currently ambient, or null while it's
+    // still loading (or if it has no track/failed) -- triggers the fetch
+    // on first ask, same lazy-then-cache shape as ensureRoomController.
+    meta: function () {
+      if (!ambient) return null;
+      var uri = ambientUri(ambient.roomId);
+      if (!uri) return null;
+      var cached = trackMetaCache[uri];
+      if (cached === undefined) { fetchTrackMeta(uri); return null; }
+      return cached === 'loading' ? null : cached;
+    }
   };
 
   function ensureRoomController(roomId, cb) {
@@ -259,17 +299,20 @@
     }
 
     if (id === 'music-lounge') {
-      if (!loungeIntro) {
-        loungeIntro = new Audio('assets/audio/music-lounge-intro.m4a');
-        loungeIntro.addEventListener('ended', function () {
-          if (loungeController) { loungeController.play(); setAmbient('music-lounge', loungeController); }
+      function playLounge() {
+        ensureLoungeController(function (controller) {
+          var pager = window.PPRoomPagers && window.PPRoomPagers[0];
+          if (pager && pager.getCurrentId() !== 'music-lounge') return;
+          controller.play();
+          setAmbient('music-lounge', controller);
         });
       }
+      if (!loungeIntro) {
+        loungeIntro = new Audio('assets/audio/music-lounge-intro.m4a');
+        loungeIntro.addEventListener('ended', playLounge);
+      }
       loungeIntro.currentTime = 0;
-      loungeIntro.play().catch(function () {
-        if (loungeController) { loungeController.play(); setAmbient('music-lounge', loungeController); }
-      });
-      if (loungeController) setAmbient('music-lounge', loungeController);
+      loungeIntro.play().catch(playLounge);
     } else if (ROOM_TRACKS[id]) {
       ensureRoomController(id, function (controller) {
         // A later pp:room-change may have already fired (fast paging) by
@@ -292,7 +335,6 @@
 
   function initAll() {
     Array.prototype.forEach.call(document.querySelectorAll('[data-piano-player]'), initPlayer);
-    Array.prototype.forEach.call(document.querySelectorAll('[data-lounge-spotify]'), initLoungeSpotify);
   }
 
   if (document.readyState === 'loading') {
@@ -312,10 +354,6 @@
         if (node.hasAttribute && node.hasAttribute('data-piano-player')) initPlayer(node);
         if (node.querySelectorAll) {
           Array.prototype.forEach.call(node.querySelectorAll('[data-piano-player]'), initPlayer);
-        }
-        if (node.hasAttribute && node.hasAttribute('data-lounge-spotify')) initLoungeSpotify(node);
-        if (node.querySelectorAll) {
-          Array.prototype.forEach.call(node.querySelectorAll('[data-lounge-spotify]'), initLoungeSpotify);
         }
       }
     }
