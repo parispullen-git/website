@@ -18,7 +18,7 @@
   // a room photo is re-shot in place (same filename, new bytes), since
   // browsers and Cloudflare's edge otherwise keep serving the old file for
   // hours off the unchanged URL.
-  var IMG_VER = '20260913g';
+  var IMG_VER = '20260913h';
 
   // Order here (mirrors build_house.py's _PENTHOUSE_ORDER exactly) is what
   // the room-pager's slide direction is actually built from -- it pages by
@@ -104,12 +104,12 @@
       { key:'jacket', name:'The Jacket', x:'35%', y:'66%', body:"Brown tweed, hung over the back of the chair the second he sat down to eat. Off duty doesn't mean off brand &#8212; the same collaboration as the one on the stairs, just left somewhere it wasn't supposed to be.", specs:[['Collection', 'Fashion Nova × Paris Pullen'], ['Hung', 'No'], ['Also worn', 'The Living Room']] },
     ],
     'study': [
-      { key:'monogram', name:'The Monogram', x:'55%', y:'12.7%', body:'Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.', specs:[['Material', 'Brass'], ['Other branding here', 'None'], ['Self-aware', 'Entirely']] },
-      { key:'pullenlaws', name:'The Pullen Laws', x:'38%', y:'11.8%', body:'Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.', specs:[['Count', 'Fourteen'], ['Written over', 'Eleven years'], ['Read aloud', 'Thirteen of them']] },
-      { key:'journal', name:'The Journal', x:'51%', y:'38.8%', body:"This week's pages, face-up on the blotter for once, marked in pencil rather than ink so that nothing is decided yet. What survives the pencil goes out as a dispatch. Most of it does not survive the pencil.", specs:[['State', 'Draft'], ['Marked in', 'Pencil'], ['Survival rate', 'Low']] },
-      { key:'cocktails', name:'The Cocktail Guide', x:'83%', y:'14.3%', body:'Six drinks, written on a card and kept behind the bottles, because a man looking up an Old Fashioned in front of guests has already lost the evening. Six is the entire list. There has never been a seventh.', specs:[['Drinks', 'Six'], ['Kept', 'Behind the bottles'], ['Consulted in company', 'Never']] },
-      { key:'map', name:'The Map', x:'94%', y:'18.6%', body:'Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.', specs:[['Marks', 'Cities worked'], ['Not', 'Cities visited']] },
-      { key:'oxknit-study', name:'The Polo', x:'54%', y:'31%', body:"Dark green cable knit, sleeves pushed to the forearm &#8212; the version of him that answers email after the desk lamp is the only light left on. OXKNIT again, the same collaboration as the one on the stairs downstairs, cut for a colder register.", specs:[['Collection', 'OXKNIT × Paris Pullen'], ['Knit', 'Cable'], ['Also worn', 'The Living Room']] },
+      { key:'monogram', name:'The Monogram', x:'47%', y:'11%', body:'Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.', specs:[['Material', 'Brass'], ['Other branding here', 'None'], ['Self-aware', 'Entirely']] },
+      { key:'pullenlaws', name:'The Pullen Laws', x:'60%', y:'17%', body:'Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.', specs:[['Count', 'Fourteen'], ['Written over', 'Eleven years'], ['Read aloud', 'Thirteen of them']] },
+      { key:'journal', name:'The Journal', x:'47%', y:'37%', body:"This week's pages, face-up on the blotter for once, marked in pencil rather than ink so that nothing is decided yet. What survives the pencil goes out as a dispatch. Most of it does not survive the pencil.", specs:[['State', 'Draft'], ['Marked in', 'Pencil'], ['Survival rate', 'Low']] },
+      { key:'cocktails', name:'The Cocktail Guide', x:'23%', y:'10%', body:'Six drinks, written on a card and kept behind the bottles, because a man looking up an Old Fashioned in front of guests has already lost the evening. Six is the entire list. There has never been a seventh.', specs:[['Drinks', 'Six'], ['Kept', 'Behind the bottles'], ['Consulted in company', 'Never']] },
+      { key:'map', name:'The Map', x:'12%', y:'25%', body:'Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.', specs:[['Marks', 'Cities worked'], ['Not', 'Cities visited']] },
+      { key:'oxknit-study', name:'The Polo', x:'49%', y:'31%', body:"Dark green cable knit, sleeves pushed to the forearm &#8212; the version of him that answers email after the desk lamp is the only light left on. OXKNIT again, the same collaboration as the one on the stairs downstairs, cut for a colder register.", specs:[['Collection', 'OXKNIT × Paris Pullen'], ['Knit', 'Cable'], ['Also worn', 'The Living Room']] },
     ],
     'cinema': [
       { key:'posters', name:'The Posters', x:'10%', y:'32%', body:'All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.', specs:[['Register', 'One'], ['Claimed purpose', 'Research'], ['Actual', 'Partly']] },

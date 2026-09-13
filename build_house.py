@@ -33,7 +33,7 @@ FLOORS = json.loads((Path(__file__).resolve().parent / "data" / "house-rooms.jso
 # serving the old file for hours after a swap unless the URL itself
 # changes. Bumping this on every image update forces a fresh fetch --
 # mirror any change here in assets/js/penthouse.js's IMG_VER too.
-IMG_VER = "20260913g"
+IMG_VER = "20260913h"
 
 def esc(t):
     return t.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#8217;")

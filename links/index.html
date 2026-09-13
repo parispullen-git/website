@@ -156,12 +156,11 @@
   .lib__card--locked img{filter:brightness(.42) saturate(.7) grayscale(.3)}
   .lib__card--locked::after{background:var(--ash);box-shadow:0 0 0 1px rgba(10,10,11,.6),0 0 6px rgba(113,113,124,.6)}
   .lib__card--locked:hover,.lib__card--locked:focus-visible{border-color:var(--hairline)}
-  .lib__card-sub--restricted{color:#B4566A}
-  .lib__card-lock{flex:0 0 auto;color:var(--ash);font-size:1rem;opacity:.8}
+  .lib__card-lock{flex:0 0 auto;color:var(--ash);font-size:1rem;opacity:.8;margin-left:var(--s3)}
   .lib__card-tag{
-    display:inline-block;margin-top:.4em;padding:.25em .6em;
+    flex:0 0 auto;margin-left:auto;padding:.35em .7em;
     font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
-    color:#B4566A;border:1px solid rgba(180,86,106,.45);border-radius:2px;width:fit-content;
+    color:#B4566A;border:1px solid rgba(180,86,106,.45);border-radius:2px;white-space:nowrap;
   }
 
   /* embedded playlist -- sits below the card list, plays right on the page */
@@ -314,14 +313,14 @@
       </span>
     </a>
 
-    <div class="lib__card lib__card--locked" aria-disabled="true" tabindex="0" role="button" aria-label="The Vault, holding UR Welcome — restricted, access revoked, currently out of stock">
+    <div class="lib__card lib__card--locked" aria-disabled="true" tabindex="0" role="button" aria-label="The Vault, holding UR Welcome — restricted, currently out of stock">
       <img src="/assets/img/vault@sm.jpg" srcset="/assets/img/vault@sm.jpg 700w, /assets/img/vault.jpg 1400w" sizes="420px" alt="" loading="lazy">
       <span class="lib__card-body">
         <span class="lib__card-text">
           <span class="lib__card-name">The Vault</span>
-          <span class="lib__card-sub lib__card-sub--restricted">UR Welcome &#8212; Restricted, access revoked</span>
-          <span class="lib__card-tag">Currently Out of Stock</span>
+          <span class="lib__card-sub">UR Welcome</span>
         </span>
+        <span class="lib__card-tag">Out of Stock</span>
         <span class="lib__card-lock" aria-hidden="true">&#128274;</span>
       </span>
     </div>
