@@ -1085,11 +1085,14 @@
     // fresh (nothing explicitly requested) lands on that room's own
     // source -- but only while the panel is closed, so paging through
     // rooms with the remote already open never yanks someone off Music.
+    // A room with its own screen (Living Room, Cinema) defaults to that
+    // screen's tab; every other room defaults to Music, since that's the
+    // only source it actually has.
     document.addEventListener('pp:room-change', function (e) {
       var scene = e.detail && e.detail.id && document.getElementById(e.detail.id);
       var screen = scene && scene.querySelector('.floor-scene__screen[data-tv]');
       contextualKey = screen ? screen.dataset.channelSet : null;
-      if (!panel.classList.contains('is-open') && contextualSource()) activeSource = contextualSource();
+      if (!panel.classList.contains('is-open')) activeSource = contextualSource() || 'music';
       renderPP();
     });
     // room-pager.js has already landed on the starting room by the time
@@ -1103,7 +1106,7 @@
       var screen = scene && scene.querySelector('.floor-scene__screen[data-tv]');
       contextualKey = screen ? screen.dataset.channelSet : null;
     })();
-    activeSource = contextualSource() || 'tv';
+    activeSource = contextualSource() || 'music';
     renderPP();
 
     ppBtn.addEventListener('click', function (e) {

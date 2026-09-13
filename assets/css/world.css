@@ -2032,7 +2032,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .floor-scene > .wrap{pointer-events:none}
 .floor-plate{
   position:relative;z-index:4;
-  display:grid;gap:var(--s1);
+  display:grid;gap:0;
   max-width:none;
   padding:0 var(--gutter) clamp(5.5rem,15vh,7.5rem);
   pointer-events:none;
@@ -2049,7 +2049,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   font-family:var(--font-display);font-size:var(--t-h3);
   font-weight:400;letter-spacing:-.02em;color:var(--champagne);
 }
-.floor-plate__name{font-family:var(--font-display);font-size:var(--t-h3);line-height:.95;letter-spacing:-.022em;margin-top:.2em}
+.floor-plate__name{font-family:var(--font-display);font-size:var(--t-h3);line-height:.95;letter-spacing:-.022em;margin-top:-.08em}
 /* The photo does the work; a room's own artifacts/drawer are the way to
    actually learn more, at every breakpoint -- not just on a phone. */
 .floor-plate__note,.floor-plate__count{display:none}
