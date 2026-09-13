@@ -18,7 +18,7 @@
   // a room photo is re-shot in place (same filename, new bytes), since
   // browsers and Cloudflare's edge otherwise keep serving the old file for
   // hours off the unchanged URL.
-  var IMG_VER = '20260913e';
+  var IMG_VER = '20260913f';
 
   // Order here (mirrors build_house.py's _PENTHOUSE_ORDER exactly) is what
   // the room-pager's slide direction is actually built from -- it pages by
@@ -91,6 +91,7 @@
       { key:'artwork', name:'The Artwork', x:'39%', y:'16%', body:'Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.', specs:[['Acquired', 'Early, badly timed'], ['Subject', 'Unexplained'], ['Moved with him', 'Every time']] },
       { key:'chair', name:'The Lounge Chair', x:'21%', y:'54%', body:'Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.', specs:[['Faces', 'The city'], ['Television', 'None'], ['Hours logged', 'Considerable']] },
       { key:'door', name:'The Closet Door', x:'45%', y:'12.7%', body:'Left open more often than not. What is behind it is arranged by occasion, not by colour — see the Closet.', specs:[['Kept', 'Open'], ['Ordered by', 'Occasion']] },
+      { key:'suit', name:'The Suit', x:'62%', y:'39%', body:"Black tie, laid out before he's even decided if tonight calls for it. Everything he owns is arranged by occasion &#8212; this one's already made the case for itself.", specs:[['Laid out', 'Before the invitation'], ['Occasion', 'Undecided'], ['See the rest', 'The Boutique']] },
     ],
     'bath': [],
     'closet': [
@@ -113,7 +114,7 @@
       { key:'posters', name:'The Posters', x:'10%', y:'32%', body:'All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.', specs:[['Register', 'One'], ['Claimed purpose', 'Research'], ['Actual', 'Partly']] },
     ],
     'gym': [
-      { key:'boxer', name:'The Boxer', x:'89%', y:'33%', body:"Black leather, brass monogram, hung dead centre of the room. He doesn't skip this one, ever &#8212; the rest of the gym is maintenance, this is the part he actually shows up for.", specs:[['Material', 'Leather'], ['Skipped', 'Never'], ['Open a challenge', 'After Hours']] },
+      { key:'boxer', name:'Training After Dark', x:'89%', y:'33%', body:"Black leather, brass monogram, hung dead centre of the room. He doesn't skip this one, ever &#8212; the rest of the gym is maintenance, this is the part he actually shows up for.", specs:[['Material', 'Leather'], ['Skipped', 'Never'], ['Open a challenge', 'After Hours']] },
     ],
   };
 
@@ -165,7 +166,7 @@
   var CITY_NODE_POS = {
     'penthouse-living': ['18%', '22%'],  // upper pane of the stairwell glass wall, clear of the staircase below
     'bedroom':          ['19%', '18.6%'], // clear glass past the lamp, above the lounge chair
-    'bath':             ['48%', '6%'],   // the skyline through the window, top edge of the now-wider frame, clear of the tub and plant
+    'bath':             ['38%', '6%'],   // the skyline through the window, clear of the tub and plant
     'kitchen':          ['32%', '6.8%'], // the narrow window beside the fireplace wall, clear of the plant
     'music-lounge':     ['72%', '8%']    // the sliver of skyline beside the bar's PP sign, past the curtain
   };
@@ -290,11 +291,6 @@
   var GUIDE_PORTAL_CTA = '<button type="button" class="cta pent__open" data-guide-portal style="margin-top:var(--s2)"><span>Explore the City Guide</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>';
   var JOURNAL_CTA = '<a class="cta pent__open" href="journal.html" style="margin-top:var(--s2)"><span>Read the Journal</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   var VAULT_CTA = '<a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)"><span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
-  // Mirrors build_house.py's GYM_BOXING_CTA exactly -- the Gym's boxing
-  // minigame lives at gym/ as its own standalone page, not part of the
-  // room-pager, so this artifact is the one doorway from the photo room
-  // into it.
-  var GYM_BOXING_CTA = '<button type="button" class="cta cta--ghost" data-gym-portal style="margin-top:var(--s2)"><span>Enter the Ring &#8212; After Hours</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>';
   // The Piano artifact (Living Room) is retired -- mirrors build_house.py's
   // MUSIC_LOUNGE_SPOTIFY exactly: one fixed playlist on the Music Lounge's
   // record-player artifact. The target is an empty div, not a plain
@@ -323,7 +319,7 @@
     '</div>';
 
   function extrasFor(roomId, key) {
-    var wardrobeCta = (roomId === 'closet' && key === 'suits') ? SUITS_CTA : '';
+    var wardrobeCta = ((roomId === 'closet' && key === 'suits') || (roomId === 'bedroom' && key === 'suit')) ? SUITS_CTA : '';
     var tag = ' &#183; Artifact';
     if (roomId === 'kitchen' && key === 'hellofresh') {
       wardrobeCta = HELLOFRESH_UNLOCK;
@@ -345,7 +341,6 @@
       wardrobeCta = FASHIONNOVA_UNLOCK;
       tag = ' &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen';
     }
-    if (roomId === 'gym' && key === 'boxer') wardrobeCta = GYM_BOXING_CTA;
     return { wardrobeCta: wardrobeCta, tag: tag };
   }
 
@@ -390,6 +385,16 @@
     var lvlBare = room.lvl.replace(/^Level\s+/i, '');
 
     var artsHTML = arts.map(function (a) {
+      // The Gym's Boxer skips the drawer entirely -- goes straight into
+      // gym-portal.js instead of world.js's drawer-toggle delegate, which
+      // only claims elements carrying data-artifact (mirrors
+      // build_house.py's floor_html() exactly).
+      if (room.id === 'gym' && a.key === 'boxer') {
+        return '<button type="button" class="artifact" style="--x:' + a.x + ';--y:' + a.y + '" data-gym-portal>' +
+                 '<span class="artifact__dot" aria-hidden="true"></span>' +
+                 '<span class="artifact__label">' + a.name + '</span>' +
+               '</button>';
+      }
       var notes = a.key === 'recordplayer' ? '<span class="artifact__notes" aria-hidden="true"><i>&#9834;</i><i>&#9835;</i><i>&#9834;</i></span>' : '';
       return '<button class="artifact" style="--x:' + a.x + ';--y:' + a.y + '" data-artifact="' + a.key + '">' +
                '<span class="artifact__dot" aria-hidden="true"></span>' +
@@ -398,7 +403,9 @@
              '</button>';
     }).join('');
 
-    var panelsHTML = arts.map(function (a) {
+    var panelsHTML = arts.filter(function (a) {
+      return !(room.id === 'gym' && a.key === 'boxer');
+    }).map(function (a) {
       var spec = a.specs.map(function (kv) {
         return '<div><dt>' + kv[0] + '</dt><dd>' + kv[1] + '</dd></div>';
       }).join('');

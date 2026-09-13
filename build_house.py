@@ -33,7 +33,7 @@ FLOORS = json.loads((Path(__file__).resolve().parent / "data" / "house-rooms.jso
 # serving the old file for hours after a swap unless the URL itself
 # changes. Bumping this on every image update forces a fresh fetch --
 # mirror any change here in assets/js/penthouse.js's IMG_VER too.
-IMG_VER = "20260913e"
+IMG_VER = "20260913f"
 
 def esc(t):
     return t.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#8217;")
@@ -186,7 +186,7 @@ REMOTE_NODE_POS = {
 CITY_NODE_POS = {
     "penthouse-living": ("18%", "22%"),   # upper pane of the stairwell glass wall, clear of the staircase below
     "bedroom":          ("19%", "18.6%"), # clear glass past the lamp, above the lounge chair
-    "bath":             ("48%", "6%"),    # the skyline through the window, top edge of the now-wider frame, clear of the tub and plant
+    "bath":             ("38%", "6%"),    # the skyline through the window, clear of the tub and plant
     "kitchen":          ("32%", "6.8%"),  # the narrow window beside the fireplace wall, clear of the plant
     "music-lounge":     ("72%", "8%"),    # the sliver of skyline beside the bar's PP sign, past the curtain
 }
@@ -260,15 +260,6 @@ MONOGRAM_BIO = f'''<div class="bio">
 VAULT_CTA = ('<a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)">'
     '<span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
 
-# The Gym's own boxing minigame lives at gym/ as a standalone page (built
-# separately, not part of the room-pager) -- this artifact is the one
-# doorway from the photo room into it, so the two don't read as two
-# unrelated "Gym" features living side by side. Opens in the gym-portal.js
-# overlay (same lazy-iframe pattern as the Guide Portal) rather than
-# navigating away, so clicking the Boxer goes straight into the fight.
-GYM_BOXING_CTA = ('<button type="button" class="cta cta--ghost" data-gym-portal style="margin-top:var(--s2)">'
-    '<span>Enter the Ring &#8212; After Hours</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>')
-
 # The Piano artifact (Living Room) is retired -- this fixed single
 # playlist embed on the Music Lounge's own record-player artifact is its
 # replacement. Deliberately NOT the same mechanism as the old
@@ -303,6 +294,20 @@ def floor_html(f):
     arts, panels = [], []
     for a in f["arts"]:
         key,name,x,y,body,specs = a["id"],a["name"],a["x"],a["y"],a["desc"],a["specs"]
+        # The Gym's Boxer skips the usual drawer entirely -- clicking it
+        # should go straight into the fight, not open an info panel first.
+        # Styled identically to every other artifact dot (so it still reads
+        # as "a thing in the room worth investigating"), but wired directly
+        # to gym-portal.js instead of world.js's drawer delegate: no
+        # data-artifact means the generic drawer-toggle click handler never
+        # claims it (same opt-out mechanism "The City" link already uses).
+        if f["id"] == "gym" and key == "boxer":
+            arts.append(
+f'''        <button type="button" class="artifact" style="--x:{x};--y:{y}" data-gym-portal>
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">{esc(name)}</span>
+        </button>''')
+            continue
         notes = ('<span class="artifact__notes" aria-hidden="true"><i>&#9834;</i><i>&#9835;</i><i>&#9834;</i></span>'
                  if key == "recordplayer" else "")
         arts.append(
@@ -315,7 +320,7 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
         wardrobe_cta = (
             '<a class="cta pent__open" href="wardrobe.html" style="margin-top:var(--s2)">'
             '<span>Enter the Boutique</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
-            if f["id"] == "closet" and key == "suits" else ""
+            if (f["id"] == "closet" and key == "suits") or (f["id"] == "bedroom" and key == "suit") else ""
         )
         tag = f'Level {f["lvl"]} &#183; Artifact'
         if f["id"] == "kitchen" and key == "hellofresh":
@@ -343,8 +348,6 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
             tag = f'Level {f["lvl"]} &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen'
         elif f["id"] == "study" and key == "cocktails":
             wardrobe_cta = STUDY_COCKTAILS_TRACE
-        elif f["id"] == "gym" and key == "boxer":
-            wardrobe_cta = GYM_BOXING_CTA
         panels.append(
 f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
             <div class="drawer__inner">
@@ -500,7 +503,7 @@ html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css?v=3">
+<link rel="stylesheet" href="assets/css/world.css?v=4">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -538,14 +541,14 @@ html = f'''<!DOCTYPE html>
      tv-remote.js's initSuiteRemote() -- one instance regardless of how
      many rooms have a screen. -->
 
-<script src="assets/js/room-pager.js?v=3" defer></script>
-<script src="assets/js/nav-panel.js?v=3" defer></script>
-<script src="assets/js/world.js?v=3" defer></script>
-<script src="assets/js/tv-remote.js?v=3" defer></script>
-<script src="assets/js/guide-portal.js?v=3" defer></script>
-<script src="assets/js/gym-portal.js?v=3" defer></script>
-<script src="assets/js/vault-entrance.js?v=3" defer></script>
-<script src="assets/js/piano-player.js?v=3" defer></script>
+<script src="assets/js/room-pager.js?v=4" defer></script>
+<script src="assets/js/nav-panel.js?v=4" defer></script>
+<script src="assets/js/world.js?v=4" defer></script>
+<script src="assets/js/tv-remote.js?v=4" defer></script>
+<script src="assets/js/guide-portal.js?v=4" defer></script>
+<script src="assets/js/gym-portal.js?v=4" defer></script>
+<script src="assets/js/vault-entrance.js?v=4" defer></script>
+<script src="assets/js/piano-player.js?v=4" defer></script>
 </body>
 </html>
 '''

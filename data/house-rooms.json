@@ -276,6 +276,27 @@
             "Occasion"
           ]
         ]
+      },
+      {
+        "id": "suit",
+        "name": "The Suit",
+        "x": "62%",
+        "y": "39%",
+        "desc": "Black tie, laid out before he's even decided if tonight calls for it. Everything he owns is arranged by occasion — this one's already made the case for itself.",
+        "specs": [
+          [
+            "Laid out",
+            "Before the invitation"
+          ],
+          [
+            "Occasion",
+            "Undecided"
+          ],
+          [
+            "See the rest",
+            "The Boutique"
+          ]
+        ]
       }
     ]
   },
@@ -1736,7 +1757,7 @@
     "arts": [
       {
         "id": "boxer",
-        "name": "The Boxer",
+        "name": "Training After Dark",
         "x": "89%",
         "y": "33%",
         "desc": "Black leather, brass monogram, hung dead centre of the room. He doesn't skip this one, ever — the rest of the gym is maintenance, this is the part he actually shows up for.",
