@@ -33,7 +33,7 @@ FLOORS = json.loads((Path(__file__).resolve().parent / "data" / "house-rooms.jso
 # serving the old file for hours after a swap unless the URL itself
 # changes. Bumping this on every image update forces a fresh fetch --
 # mirror any change here in assets/js/penthouse.js's IMG_VER too.
-IMG_VER = "20260913h"
+IMG_VER = "20260913i"
 
 def esc(t):
     return t.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#8217;")
@@ -187,7 +187,7 @@ CITY_NODE_POS = {
     "penthouse-living": ("21%", "10%"),   # clean window pane above the stairwell beam, skyline visible
     "bedroom":          ("19%", "18.6%"), # clear glass past the lamp, above the lounge chair
     "bath":             ("38%", "6%"),    # the skyline through the window, clear of the tub and plant
-    "kitchen":          ("32%", "6.8%"),  # the narrow window beside the fireplace wall, clear of the plant
+    "kitchen":          ("27.5%", "3.75%"),  # clean skyline pane left of the curtain, clear of the plant
     "music-lounge":     ("72%", "8%"),    # the sliver of skyline beside the bar's PP sign, past the curtain
 }
 

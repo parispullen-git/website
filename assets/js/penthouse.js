@@ -18,7 +18,7 @@
   // a room photo is re-shot in place (same filename, new bytes), since
   // browsers and Cloudflare's edge otherwise keep serving the old file for
   // hours off the unchanged URL.
-  var IMG_VER = '20260913h';
+  var IMG_VER = '20260913i';
 
   // Order here (mirrors build_house.py's _PENTHOUSE_ORDER exactly) is what
   // the room-pager's slide direction is actually built from -- it pages by
@@ -164,7 +164,7 @@
     'penthouse-living': ['21%', '10%'],  // clean window pane above the stairwell beam, skyline visible
     'bedroom':          ['19%', '18.6%'], // clear glass past the lamp, above the lounge chair
     'bath':             ['38%', '6%'],   // the skyline through the window, clear of the tub and plant
-    'kitchen':          ['32%', '6.8%'], // the narrow window beside the fireplace wall, clear of the plant
+    'kitchen':          ['27.5%', '3.75%'], // clean skyline pane left of the curtain, clear of the plant
     'music-lounge':     ['72%', '8%']    // the sliver of skyline beside the bar's PP sign, past the curtain
   };
   function cityLinkHTML(roomId) {
