@@ -18,7 +18,7 @@
   // a room photo is re-shot in place (same filename, new bytes), since
   // browsers and Cloudflare's edge otherwise keep serving the old file for
   // hours off the unchanged URL.
-  var IMG_VER = '20260913f';
+  var IMG_VER = '20260913g';
 
   // Order here (mirrors build_house.py's _PENTHOUSE_ORDER exactly) is what
   // the room-pager's slide direction is actually built from -- it pages by
@@ -100,7 +100,8 @@
       { key:'ties', name:'The Ties', x:'85%', y:'31.2%', body:'Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.', specs:[['Hung', 'Never rolled'], ['Worn regularly', 'Six'], ['Owned', 'Considerably more']] },
     ],
     'kitchen': [
-      { key:'hellofresh', name:'The Delivery', x:'57.5%', y:'51.5%', body:'It arrived before he did. No note, no ceremony &#8212; just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.', specs:[] },
+      { key:'hellofresh', name:'The Delivery', x:'37%', y:'44%', body:'It arrived before he did. No note, no ceremony &#8212; just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.', specs:[] },
+      { key:'jacket', name:'The Jacket', x:'35%', y:'66%', body:"Brown tweed, hung over the back of the chair the second he sat down to eat. Off duty doesn't mean off brand &#8212; the same collaboration as the one on the stairs, just left somewhere it wasn't supposed to be.", specs:[['Collection', 'Fashion Nova × Paris Pullen'], ['Hung', 'No'], ['Also worn', 'The Living Room']] },
     ],
     'study': [
       { key:'monogram', name:'The Monogram', x:'55%', y:'12.7%', body:'Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.', specs:[['Material', 'Brass'], ['Other branding here', 'None'], ['Self-aware', 'Entirely']] },
@@ -338,6 +339,10 @@
       tag = ' &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen';
     }
     if (roomId === 'music-lounge' && key === 'polo') {
+      wardrobeCta = FASHIONNOVA_UNLOCK;
+      tag = ' &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen';
+    }
+    if (roomId === 'kitchen' && key === 'jacket') {
       wardrobeCta = FASHIONNOVA_UNLOCK;
       tag = ' &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen';
     }

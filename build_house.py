@@ -33,7 +33,7 @@ FLOORS = json.loads((Path(__file__).resolve().parent / "data" / "house-rooms.jso
 # serving the old file for hours after a swap unless the URL itself
 # changes. Bumping this on every image update forces a fresh fetch --
 # mirror any change here in assets/js/penthouse.js's IMG_VER too.
-IMG_VER = "20260913f"
+IMG_VER = "20260913g"
 
 def esc(t):
     return t.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#8217;")
@@ -344,6 +344,9 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
             wardrobe_cta = LIVING_FASHIONNOVA_UNLOCK
             tag = f'Level {f["lvl"]} &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen'
         elif f["id"] == "music-lounge" and key == "polo":
+            wardrobe_cta = LIVING_FASHIONNOVA_UNLOCK
+            tag = f'Level {f["lvl"]} &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen'
+        elif f["id"] == "kitchen" and key == "jacket":
             wardrobe_cta = LIVING_FASHIONNOVA_UNLOCK
             tag = f'Level {f["lvl"]} &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen'
         elif f["id"] == "study" and key == "cocktails":

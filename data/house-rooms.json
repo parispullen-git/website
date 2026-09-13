@@ -399,10 +399,31 @@
       {
         "id": "hellofresh",
         "name": "The Delivery",
-        "x": "57.5%",
-        "y": "51.5%",
+        "x": "37%",
+        "y": "44%",
         "desc": "It arrived before he did. No note, no ceremony — just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.",
         "specs": []
+      },
+      {
+        "id": "jacket",
+        "name": "The Jacket",
+        "x": "35%",
+        "y": "66%",
+        "desc": "Brown tweed, hung over the back of the chair the second he sat down to eat. Off duty doesn't mean off brand — the same collaboration as the one on the stairs, just left somewhere it wasn't supposed to be.",
+        "specs": [
+          [
+            "Collection",
+            "Fashion Nova × Paris Pullen"
+          ],
+          [
+            "Hung",
+            "No"
+          ],
+          [
+            "Also worn",
+            "The Living Room"
+          ]
+        ]
       }
     ]
   },
