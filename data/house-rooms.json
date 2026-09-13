@@ -1712,6 +1712,28 @@
     "grade": "",
     "focus": "50% 50%",
     "note": "Steel and rope, one flight from the record wall, with a skyline that doesn't care if you skip a set.",
-    "arts": []
+    "arts": [
+      {
+        "id": "boxer",
+        "name": "The Boxer",
+        "x": "89%",
+        "y": "33%",
+        "desc": "Black leather, brass monogram, hung dead centre of the room. He doesn't skip this one, ever — the rest of the gym is maintenance, this is the part he actually shows up for.",
+        "specs": [
+          [
+            "Material",
+            "Leather"
+          ],
+          [
+            "Skipped",
+            "Never"
+          ],
+          [
+            "Open a challenge",
+            "After Hours"
+          ]
+        ]
+      }
+    ]
   }
 ]

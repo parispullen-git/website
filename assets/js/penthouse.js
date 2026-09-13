@@ -111,6 +111,9 @@
     'cinema': [
       { key:'posters', name:'The Posters', x:'10%', y:'32%', body:'All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.', specs:[['Register', 'One'], ['Claimed purpose', 'Research'], ['Actual', 'Partly']] },
     ],
+    'gym': [
+      { key:'boxer', name:'The Boxer', x:'89%', y:'33%', body:"Black leather, brass monogram, hung dead centre of the room. He doesn't skip this one, ever &#8212; the rest of the gym is maintenance, this is the part he actually shows up for.", specs:[['Material', 'Leather'], ['Skipped', 'Never'], ['Open a challenge', 'After Hours']] },
+    ],
   };
 
   // Rooms with a playable screen — id/label must match the matching entry in
@@ -286,6 +289,11 @@
   var GUIDE_PORTAL_CTA = '<button type="button" class="cta pent__open" data-guide-portal style="margin-top:var(--s2)"><span>Explore the City Guide</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>';
   var JOURNAL_CTA = '<a class="cta pent__open" href="journal.html" style="margin-top:var(--s2)"><span>Read the Journal</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   var VAULT_CTA = '<a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)"><span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
+  // Mirrors build_house.py's GYM_BOXING_CTA exactly -- the Gym's boxing
+  // minigame lives at gym/ as its own standalone page, not part of the
+  // room-pager, so this artifact is the one doorway from the photo room
+  // into it.
+  var GYM_BOXING_CTA = '<a class="cta cta--ghost" href="gym/" target="_blank" rel="noopener" style="margin-top:var(--s2)"><span>Enter the Ring &#8212; After Hours</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   // The Piano artifact (Living Room) is retired -- mirrors build_house.py's
   // MUSIC_LOUNGE_SPOTIFY exactly: one fixed playlist on the Music Lounge's
   // record-player artifact. The target is an empty div, not a plain
@@ -336,6 +344,7 @@
       wardrobeCta = FASHIONNOVA_UNLOCK;
       tag = ' &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen';
     }
+    if (roomId === 'gym' && key === 'boxer') wardrobeCta = GYM_BOXING_CTA;
     return { wardrobeCta: wardrobeCta, tag: tag };
   }
 

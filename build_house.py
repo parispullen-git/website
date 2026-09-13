@@ -260,6 +260,13 @@ MONOGRAM_BIO = f'''<div class="bio">
 VAULT_CTA = ('<a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)">'
     '<span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
 
+# The Gym's own boxing minigame lives at gym/ as a standalone page (built
+# separately, not part of the room-pager) -- this artifact is the one
+# doorway from the photo room into it, so the two don't read as two
+# unrelated "Gym" features living side by side.
+GYM_BOXING_CTA = ('<a class="cta cta--ghost" href="gym/" target="_blank" rel="noopener" style="margin-top:var(--s2)">'
+    '<span>Enter the Ring &#8212; After Hours</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
+
 # The Piano artifact (Living Room) is retired -- this fixed single
 # playlist embed on the Music Lounge's own record-player artifact is its
 # replacement. Deliberately NOT the same mechanism as the old
@@ -334,6 +341,8 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
             tag = f'Level {f["lvl"]} &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen'
         elif f["id"] == "study" and key == "cocktails":
             wardrobe_cta = STUDY_COCKTAILS_TRACE
+        elif f["id"] == "gym" and key == "boxer":
+            wardrobe_cta = GYM_BOXING_CTA
         panels.append(
 f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
             <div class="drawer__inner">

@@ -48,7 +48,6 @@
     <a class="menu__explore-link" href="house.html#kitchen">27 · The Kitchen</a>
     <a class="menu__explore-link" href="house.html#study">27 · The Study</a>
     <a class="menu__explore-link" href="house.html#cinema">26 · The Cinema</a>
-    <a class="menu__explore-link" href="gym/">26 · The Gym</a>
     <a class="menu__explore-link" href="house.html#music-lounge">26 · The Music Lounge</a>
     <a class="menu__explore-link" href="house.html#gym">26 · The Gym</a>
     </div>
@@ -755,7 +754,11 @@
              sizes="100vw" alt="The Gym" loading="lazy"
              style="--focus:50% 50%" width="2400" height="1340">
         <div class="artifacts">
-
+        <button class="artifact" style="--x:89%;--y:33%" data-artifact="boxer">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Boxer</span>
+          
+        </button>
         </div>
       </div>
     </div>
@@ -767,13 +770,25 @@
       <h2 class="floor-plate__name">The Gym</h2>
       <p class="floor-plate__level"><b>26</b> <span>The Penthouse</span></p>
       <p class="floor-plate__note">Steel and rope, one flight from the record wall, with a skyline that doesn&#8217;t care if you skip a set.</p>
-      <p class="floor-plate__count"><i></i>0 artifacts on this floor</p>
+      <p class="floor-plate__count"><i></i>1 artifact on this floor</p>
     </div>
   </div>
 
   <div class="drawer" id="drawer-gym" aria-hidden="true">
     <button class="drawer__close">Close &#215;</button>
-
+          <div class="drawer__panel" data-artifact="boxer" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 26 &#183; Artifact</p>
+                <h3 class="drawer__name">The Boxer</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Black leather, brass monogram, hung dead centre of the room. He doesn&#8217;t skip this one, ever — the rest of the gym is maintenance, this is the part he actually shows up for.</p>
+                <dl class="drawer__spec"><div><dt>Material</dt><dd>Leather</dd></div><div><dt>Skipped</dt><dd>Never</dd></div><div><dt>Open a challenge</dt><dd>After Hours</dd></div></dl>
+                <a class="cta cta--ghost" href="gym/" target="_blank" rel="noopener" style="margin-top:var(--s2)"><span>Enter the Ring &#8212; After Hours</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+              </div>
+            </div>
+          </div>
   </div>
 </section>
 <section class="floor-scene" id="cinema" tabindex="-1" aria-label="Level 26 — The Cinema" data-left="gym" data-up="study">
