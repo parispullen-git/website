@@ -262,13 +262,12 @@ VAULT_CTA = ('<a class="cta pent__open" href="urwelcome.html" data-vault-enter s
 
 # The Piano artifact (Living Room) is retired -- this fixed single
 # playlist on the Music Lounge's own record-player artifact is its
-# replacement. No visible embed in the drawer any more -- the controller
-# (piano-player.js's ensureLoungeController) lives on its own hidden host,
-# same as every other room's ambient track, and plays in the background
-# regardless of whether this drawer's ever opened. The now-playing display
-# (album art, song, room title) lives on the global Suite Remote's Music
-# tab instead (tv-remote.js), reachable from every room.
-MUSIC_LOUNGE_SPOTIFY = '''<p class="body" style="margin-top:var(--s3)">Curated by <a class="link-under" href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>'''
+# replacement. No song/playlist details in the drawer at all any more --
+# the controller (piano-player.js's ensureLoungeController) lives on its
+# own hidden host, same as every other room's ambient track, and plays in
+# the background regardless of whether this drawer's ever opened. Now-
+# playing details (album art, song, room title) live on the global Suite
+# Remote's Music tab only (tv-remote.js), reachable from every room.
 
 CANDLE_COMING_SOON = '''<div class="coming-soon">
                   <span class="coming-soon__badge">UR Welcome &#183; Coming Soon</span>
@@ -324,8 +323,6 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
             wardrobe_cta = MONOGRAM_BIO
         elif f["id"] == "penthouse-living" and key == "vault":
             wardrobe_cta = VAULT_CTA
-        elif f["id"] == "music-lounge" and key == "recordplayer":
-            wardrobe_cta = MUSIC_LOUNGE_SPOTIFY
         elif f["id"] == "penthouse-living" and key == "candle":
             wardrobe_cta = CANDLE_COMING_SOON
         elif f["id"] == "music-lounge" and key == "polo":
@@ -491,7 +488,7 @@ html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css?v=8">
+<link rel="stylesheet" href="assets/css/world.css?v=11">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -529,14 +526,14 @@ html = f'''<!DOCTYPE html>
      tv-remote.js's initSuiteRemote() -- one instance regardless of how
      many rooms have a screen. -->
 
-<script src="assets/js/room-pager.js?v=8" defer></script>
-<script src="assets/js/nav-panel.js?v=8" defer></script>
-<script src="assets/js/world.js?v=8" defer></script>
-<script src="assets/js/tv-remote.js?v=8" defer></script>
-<script src="assets/js/guide-portal.js?v=8" defer></script>
-<script src="assets/js/gym-portal.js?v=8" defer></script>
-<script src="assets/js/vault-entrance.js?v=8" defer></script>
-<script src="assets/js/piano-player.js?v=8" defer></script>
+<script src="assets/js/room-pager.js?v=11" defer></script>
+<script src="assets/js/nav-panel.js?v=11" defer></script>
+<script src="assets/js/world.js?v=11" defer></script>
+<script src="assets/js/tv-remote.js?v=11" defer></script>
+<script src="assets/js/guide-portal.js?v=11" defer></script>
+<script src="assets/js/gym-portal.js?v=11" defer></script>
+<script src="assets/js/vault-entrance.js?v=11" defer></script>
+<script src="assets/js/piano-player.js?v=11" defer></script>
 </body>
 </html>
 '''

@@ -83,7 +83,7 @@
       { key:'oxknit', name:'The Polo', x:'29%', y:'21%', body:"Knit and collared, dark as the room around it &#8212; the one piece on him tonight that isn't from the Closet. OXKNIT cut this one to his spec, and he wears it the same way he wears everything else: like it was always his.", specs:[['Collection', 'OXKNIT × Paris Pullen'], ['Fit', 'Tailored'], ['Worn', 'Off the rack, on him only']] },
     ],
     'music-lounge': [
-      { key:'recordplayer', name:'The Record Player', x:'37%', y:'32%', body:'ATF to OVO &#8212; the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.', specs:[['Plays', 'One playlist, shuffled'], ['Curated by', '@djangodegree'], ['Manual skips', 'Yes']] },
+      { key:'recordplayer', name:'The Record Player', x:'37%', y:'32%', body:'ATF to OVO &#8212; the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.', specs:[['Plays', 'One playlist, shuffled'], ['Manual skips', 'Yes']] },
       { key:'polo', name:'The Polo', x:'11%', y:'65.5%', body:"Cream knit, chocolate collar, worn open at the throat now that the tie's had its day. Off duty doesn't mean off brand.", specs:[['Collar', 'Open'], ['Collection', 'Fashion Nova × Paris Pullen'], ['Also worn', 'The Kitchen']] },
     ],
     'bedroom': [
@@ -288,14 +288,13 @@
   var GUIDE_PORTAL_CTA = '<button type="button" class="cta pent__open" data-guide-portal style="margin-top:var(--s2)"><span>Explore the City Guide</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>';
   var JOURNAL_CTA = '<a class="cta pent__open" href="journal.html" style="margin-top:var(--s2)"><span>Read the Journal</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   var VAULT_CTA = '<a class="cta pent__open" href="urwelcome.html" data-vault-enter style="margin-top:var(--s2)"><span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
-  // The Piano artifact (Living Room) is retired -- mirrors build_house.py's
-  // MUSIC_LOUNGE_SPOTIFY exactly: one fixed playlist on the Music Lounge's
-  // record-player artifact. No visible embed in the drawer -- the
-  // controller (piano-player.js's ensureLoungeController) lives on its own
-  // hidden host, same as every other room's ambient track. The now-playing
-  // display (album art, song, room title) lives on the global Suite
-  // Remote's Music tab instead, reachable from every room.
-  var MUSIC_LOUNGE_SPOTIFY = '<p class="body" style="margin-top:var(--s3)">Curated by <a class="link-under" href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>';
+  // The Piano artifact (Living Room) is retired -- one fixed playlist on
+  // the Music Lounge's own record-player artifact is its replacement. No
+  // song/playlist details in the drawer at all -- the controller
+  // (piano-player.js's ensureLoungeController) lives on its own hidden
+  // host, same as every other room's ambient track. Now-playing details
+  // (album art, song, room title) live on the global Suite Remote's
+  // Music tab only, reachable from every room.
   var CANDLE_COMING_SOON = '<div class="coming-soon"><span class="coming-soon__badge">UR Welcome &#183; Coming Soon</span></div>';
   // Mirrors build_house.py's LIVING_FASHIONNOVA_UNLOCK exactly -- reused by
   // both the Living Room's Jacket and the Music Lounge's Polo, one collab
@@ -326,7 +325,6 @@
     // draft point at the same published dispatches.
     if (key === 'journal') wardrobeCta = JOURNAL_CTA;
     if (roomId === 'penthouse-living' && key === 'vault') wardrobeCta = VAULT_CTA;
-    if (roomId === 'music-lounge' && key === 'recordplayer') wardrobeCta = MUSIC_LOUNGE_SPOTIFY;
     if (roomId === 'penthouse-living' && key === 'candle') wardrobeCta = CANDLE_COMING_SOON;
     if (roomId === 'music-lounge' && key === 'polo') {
       wardrobeCta = FASHIONNOVA_UNLOCK;

@@ -1046,17 +1046,25 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   transition:opacity var(--d-med) var(--ease-out),visibility var(--d-med);
 }
 .is-toggleable.is-open{opacity:1;visibility:visible;pointer-events:auto}
-.footer-toggle,.guide-info-toggle{
-  position:fixed;bottom:var(--s5);z-index:850;
+.guide-info-toggle{
+  position:fixed;bottom:var(--s5);z-index:850;right:var(--gutter);
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
   color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
   border-radius:999px;padding:.6em 1em;cursor:pointer;
   backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
   transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast);
 }
-.footer-toggle{left:var(--gutter)}
-.guide-info-toggle{right:var(--gutter)}
-.footer-toggle:hover,.guide-info-toggle:hover{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
+.guide-info-toggle:hover{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
+/* The Footer overlay's trigger now lives inside the hamburger menu
+   (.menu__foot) instead of a persistent fixed pill -- styled like a
+   small outlined tag alongside the social row, not a full menu__list
+   entry (it toggles an overlay in place rather than navigating). */
+.menu__footer-link{
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ash);border:1px solid var(--hairline);padding:.7em 1.1em;border-radius:999px;
+  cursor:pointer;transition:color var(--d-fast),border-color var(--d-fast);
+}
+.menu__footer-link:hover{color:var(--ivory);border-color:var(--brass)}
 /* Lives inside .wrap (the popup's own content column) as its first
    child, not pinned to the raw viewport corner -- that used to land it
    directly on top of the persistent site header's Menu button instead
@@ -1444,9 +1452,9 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 /* ---------- 25a-iv. NAV PANEL — corner floor/district jump list, an
    elevator-panel stand-in for paging one-by-one. Reusable: fed either
    floors (house.html, the homepage) or City Guide districts, wired up by
-   assets/js/nav-panel.js. Same bottom-right corner as the Remote/Play-
-   Pause pills at every breakpoint, one more slot further left of them. */
-.nav-panel{position:fixed;bottom:var(--s5);right:calc(var(--gutter) + 12.8rem);z-index:45}
+   assets/js/nav-panel.js. Bottom-left corner (opposite the Remote/Play-
+   Pause pills) at every breakpoint. */
+.nav-panel{position:fixed;bottom:var(--s5);left:var(--gutter);z-index:45}
 .nav-panel__tab{
   display:flex;align-items:center;gap:.5em;
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
@@ -1458,7 +1466,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .nav-panel__tab:hover,.nav-panel__tab:focus-visible,
 .nav-panel.is-open .nav-panel__tab{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
 .nav-panel__grid{
-  position:absolute;bottom:calc(100% + .6em);right:0;
+  position:absolute;bottom:calc(100% + .6em);left:0;
   width:min(280px,72vw);max-height:min(70svh,32rem);overflow-y:auto;
   background:rgba(10,10,11,.94);border:1px solid rgba(201,169,97,.28);border-radius:12px;
   padding:var(--s3);display:grid;gap:2px;
@@ -3040,12 +3048,21 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   /* Journal entries */
   .entry__title{max-width:none}
 
-  /* Play/Pause/Remote/Footer/Guide Info controls out of the content's way */
+  /* Play/Pause/Remote/Guide Info controls out of the content's way */
   .playpause-toggle{bottom:var(--s4);right:var(--s4)}
   .remote-toggle{bottom:var(--s4);right:calc(var(--s4) + 5.2rem)}
-  .nav-panel{bottom:var(--s4);right:calc(var(--s4) + 10.4rem)}
-  .footer-toggle{bottom:var(--s4);left:var(--s4)}
+  .nav-panel{bottom:var(--s4);left:var(--s4)}
   .guide-info-toggle{bottom:var(--s4);right:var(--s4)}
+  /* The centered floor-down arrow shares this same bottom row on a narrow
+     viewport -- the Floors/Remote/Pause pills above sit exactly wide
+     enough to land right under it otherwise. Clear it above the pills
+     rather than moving them, so it stays aligned with the floor-up arrow.
+     That raise leaves barely any gap below the room title, though, so its
+     destination hint (which floats above the button) has nowhere left to
+     sit without overlapping the title text -- drop just that one hint
+     rather than fight for a few more pixels of clearance. */
+  .room-pager__nav--down{bottom:calc(var(--s4) + 3.6rem)}
+  .room-pager__nav--down .room-pager__nav-hint{display:none}
 
   /* Building: one screen, minimal text -- the photo does the work, and
      the room's own artifacts/drawer are the way to actually learn more.

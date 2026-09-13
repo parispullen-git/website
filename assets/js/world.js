@@ -60,7 +60,10 @@
       set(!panel.classList.contains('is-open'));
     });
     panel.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') set(false);
+      // A real nav link, or the Footer entry (a <button>, since it opens
+      // an overlay rather than navigating) -- either way, close the menu
+      // behind it rather than leaving it open over the destination.
+      if (e.target.tagName === 'A' || e.target.closest('[data-footer-toggle]')) set(false);
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && panel.classList.contains('is-open')) set(false);
@@ -493,13 +496,16 @@
 
   /* ---------- 10b. TOGGLEABLE OVERLAYS ----------
      Shared by any section that's better reached as an on-demand full-
-     screen panel than sitting in normal page flow -- a fixed button
+     screen panel than sitting in normal page flow -- a trigger button
      toggles it open, closed via its own close button, clicking outside
      .wrap, or Escape. Used for the footer (sitemap, contact, copyright --
      used to mean scrolling past a full-screen room on the room-pager
      pages) and the City Guide's legend/methodology block (used to mean
      scrolling past it to reach... nothing, since it's the last thing on
-     the page -- but at 75-listings length, still real height to shed). */
+     the page -- but at 75-listings length, still real height to shed).
+     opts.toggleEl uses an existing element already in the page (the
+     Footer entry inside the hamburger menu); opts.toggleClass/toggleLabel
+     instead creates a new fixed pill button (still used by Guide Info). */
   function makeToggleableOverlay(el, opts) {
     el.classList.add('is-toggleable');
     el.setAttribute('aria-hidden', 'true');
@@ -516,11 +522,14 @@
     if (wrap) wrap.insertBefore(closeBtn, wrap.firstChild);
     else el.insertBefore(closeBtn, el.firstChild);
 
-    var toggleBtn = document.createElement('button');
-    toggleBtn.type = 'button';
-    toggleBtn.className = opts.toggleClass;
-    toggleBtn.textContent = opts.toggleLabel;
-    document.body.appendChild(toggleBtn);
+    var toggleBtn = opts.toggleEl;
+    if (!toggleBtn) {
+      toggleBtn = document.createElement('button');
+      toggleBtn.type = 'button';
+      toggleBtn.className = opts.toggleClass;
+      toggleBtn.textContent = opts.toggleLabel;
+      document.body.appendChild(toggleBtn);
+    }
 
     function setOpen(open) {
       el.classList.toggle('is-open', open);
@@ -540,15 +549,17 @@
 
   function footerOverlay() {
     var foot = $('.foot--film');
-    if (!foot) return;
-    var ctrl = makeToggleableOverlay(foot, { toggleClass: 'footer-toggle', toggleLabel: 'Footer' });
+    var toggleEl = document.querySelector('[data-footer-toggle]');
+    if (!foot || !toggleEl) return;
+    var ctrl = makeToggleableOverlay(foot, { toggleEl: toggleEl });
 
     // The Cinema room's own content (a large TV plus its lower-third/
     // guide-panel/remote overlays) was throwing off the page's scroll when
     // the footer -- unrelated content living way down the page -- was
-    // reachable from there too. Simplest fix: the Footer button (and so
-    // the overlay it opens) just isn't offered while Cinema is the room
-    // on screen; it force-closes on the way in, in case it was left open.
+    // reachable from there too. Simplest fix: the Footer menu entry (and
+    // so the overlay it opens) just isn't offered while Cinema is the
+    // room on screen; it force-closes on the way in, in case it was left
+    // open.
     document.addEventListener('pp:room-change', function (e) {
       var inCinema = e.detail && e.detail.id === 'cinema';
       ctrl.toggleBtn.hidden = inCinema;
