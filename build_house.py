@@ -190,6 +190,36 @@ KITCHEN_HELLOFRESH_UNLOCK = '''<div class="hf-unlock">
                   <a class="cta cta--ghost hf-unlock__cta" href="pantry.html"><span>Get the Box &#8212; HelloFresh &#215; Paris Pullen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
                 </div>'''
 
+# A deliberately soft second touch, not a second unlock -- the Corridor's
+# own "Weekly Delivery" artifact would have told this story (private
+# elevator, recurring, produce) but that room isn't one of the 9 actually
+# open right now (see _PENTHOUSE_ORDER above), so this lands on the Study's
+# Cocktail Guide instead -- already open, already Level 27, and its own
+# six-drinks rule ("never consulted in company") makes a private aside
+# about tonight's menu a natural fit rather than a bolted-on mention.
+STUDY_COCKTAILS_TRACE = ('<p class="body" style="margin-top:var(--s2);color:var(--ash)">'
+    'One of the six has a way of turning up next to whatever&#8217;s coming out of the Kitchen &#8212; '
+    '<a class="link-under" href="house.html#kitchen">see what that is this week</a>.</p>')
+
+# The Jacket's own description (left over the chair, not hung, "wasn't
+# planning on staying") already reads as the off-duty counterpoint to the
+# Closet's bespoke, arranged-by-occasion suits one floor up -- so this is
+# where Fashion Nova's more casual, quicker register lives, rather than
+# folding it into the Closet's own pieces. Mirrors KITCHEN_HELLOFRESH_UNLOCK's
+# shape (eyebrow, short list, one CTA) so the two brand unlocks read as the
+# same fixture rather than two different site features.
+LIVING_FASHIONNOVA_UNLOCK = '''<div class="unlock">
+                  <p class="unlock__eyebrow">Unlocked &#183; What He Reaches For</p>
+                  <ul class="unlock-list">
+                    <li><span class="unlock-list__name">The Reset Denim</span><span class="unlock-list__note">Straight through the knee. Nothing to prove.</span></li>
+                    <li><span class="unlock-list__name">The Quarter-Zip</span><span class="unlock-list__note">Reads expensive from ten feet. Isn't.</span></li>
+                    <li><span class="unlock-list__name">The Night Puffer</span><span class="unlock-list__note">For the walk between the car and the door.</span></li>
+                    <li><span class="unlock-list__name">The Weighted Tee</span><span class="unlock-list__note">The one under everything else that actually holds its shape.</span></li>
+                    <li><span class="unlock-list__name">The Going-Out Chain</span><span class="unlock-list__note">Not gold. Reads gold across a room.</span></li>
+                  </ul>
+                  <a class="cta cta--ghost unlock__cta" href="off-duty.html"><span>Shop the Fit &#8212; Fashion Nova &#215; Paris Pullen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+                </div>'''
+
 JOURNAL_CTA = ('<a class="cta pent__open" href="journal.html" style="margin-top:var(--s2)">'
     '<span>Read the Journal</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
 
@@ -279,10 +309,10 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
         elif f["id"] == "penthouse-living" and key == "candle":
             wardrobe_cta = CANDLE_COMING_SOON
         elif f["id"] == "penthouse-living" and key == "jacket":
-            wardrobe_cta = (
-                '<a class="cta pent__open" href="wardrobe.html" style="margin-top:var(--s2)">'
-                '<span>Enter the Boutique</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
-            )
+            wardrobe_cta = LIVING_FASHIONNOVA_UNLOCK
+            tag = f'Level {f["lvl"]} &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen'
+        elif f["id"] == "study" and key == "cocktails":
+            wardrobe_cta = STUDY_COCKTAILS_TRACE
         panels.append(
 f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
             <div class="drawer__inner">

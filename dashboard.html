@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Dashboard — Paris Pullen</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Command Deck — Paris Pullin</title>
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -172,21 +172,22 @@
   .curcard__name{color:var(--ivory);font-size:.78rem;line-height:1.25}
   .curcard__meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.04em;color:var(--ash)}
 </style>
+<link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
 
 <header class="worldnav">
-  <a class="worldnav__mark" href="index.html"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
+  <a class="worldnav__mark" href="index.html"><span class="foxx" aria-hidden="true"></span>Paris Pullin</a>
 </header>
 
 <main>
 <section class="scene scene--pad" id="dashgate">
   <div class="wrap dash__gate">
     <p class="eyebrow">Private</p>
-    <h1 class="display display--h2">Dashboard</h1>
-    <p class="body" style="margin-top:var(--s3)">Invoices, orders, proposals, inquiries, clients, and site content.</p>
+    <h1 class="display display--h2">Command Deck</h1>
+    <p class="body" style="margin-top:var(--s3)">The private operating surface for Paris Pullin and the Compliment Hotel.</p>
     <form id="dashgateform">
       <input id="dashgateinput" type="password" autocomplete="off" placeholder="Passphrase" aria-label="Passphrase">
       <button type="submit" class="cta"><span>Enter</span></button>
@@ -199,14 +200,16 @@
   <div class="wrap dash">
     <div class="dash__row">
       <div>
-        <p class="eyebrow">Backend</p>
-        <h1 class="display display--h2">Dashboard</h1>
+        <p class="eyebrow">Paris Pullin / Private workspace</p>
+        <h1 class="display display--h2">Command Deck</h1>
       </div>
       <a class="link-under" href="atelier.html">+ New Invoice &#8594;</a>
     </div>
 
     <div class="dashwrap">
     <nav class="dashnav" aria-label="Dashboard sections">
+      <p class="deck-navlabel">Operating surface</p>
+      <button type="button" class="dashnav__item is-active" data-tab="overview">Command Deck</button>
       <button type="button" class="dashnav__item" data-tab="boutique">Boutique</button>
 
       <div class="dashnav__group" data-group="journal">
@@ -218,7 +221,7 @@
       </div>
 
       <div class="dashnav__group" data-group="world">
-        <button type="button" class="dashnav__grouphead">World</button>
+        <button type="button" class="dashnav__grouphead">Compliment Hotel</button>
         <div class="dashnav__groupbody">
           <button type="button" class="dashnav__item" data-tab="penthouse">Penthouse</button>
           <button type="button" class="dashnav__item" data-tab="hrooms">Rooms</button>
@@ -242,7 +245,7 @@
       <div class="dashnav__group is-open" data-group="business">
         <button type="button" class="dashnav__grouphead">Business</button>
         <div class="dashnav__groupbody">
-          <button type="button" class="dashnav__item is-active" data-tab="orders">Orders</button>
+          <button type="button" class="dashnav__item" data-tab="orders">Orders</button>
           <button type="button" class="dashnav__item" data-tab="invoices">Invoices</button>
           <button type="button" class="dashnav__item" data-tab="proposals">Proposals</button>
           <button type="button" class="dashnav__item" data-tab="inquiries">Inquiries</button>
@@ -251,9 +254,9 @@
       </div>
 
       <div class="dashnav__group" data-group="brand">
-        <button type="button" class="dashnav__grouphead">Brand</button>
+        <button type="button" class="dashnav__grouphead">Relationships</button>
         <div class="dashnav__groupbody">
-          <button type="button" class="dashnav__item" data-tab="partnerships">Partnership Command 🦊</button>
+          <button type="button" class="dashnav__item" data-tab="partnerships">Partnership Command</button>
           <button type="button" class="dashnav__item" data-tab="dispatch">Dispatch Briefs</button>
           <button type="button" class="dashnav__item" data-tab="pitches">Pitches &amp; Goals</button>
           <button type="button" class="dashnav__item" data-tab="network">Network</button>
@@ -262,7 +265,7 @@
       </div>
 
       <div class="dashnav__group" data-group="growth">
-        <button type="button" class="dashnav__grouphead">Growth</button>
+        <button type="button" class="dashnav__grouphead">Intelligence</button>
         <div class="dashnav__groupbody">
           <button type="button" class="dashnav__item" data-tab="trackedbrands">Tracked Brands</button>
           <button type="button" class="dashnav__item" data-tab="dailynews">Daily News</button>
@@ -279,9 +282,25 @@
       </div>
     </nav>
     <div class="dashmain">
+      <div class="deck-context"><span id="deck-location">Workspace / Command Deck</span><span id="deck-date"></span></div>
+      <div class="dash__panel is-active" id="panel-overview">
+        <div class="deck-hero">
+          <div class="deck-hero__copy"><p class="eyebrow">The world is yours to shape</p><h2>Stay curious.<br><em>Move with intention.</em></h2><p>Your stories, relationships, and immersive world.<br>One place to decide what happens next.</p><button type="button" class="btn-sm" data-open-panel="dailynews">Open Daily News <span aria-hidden="true">↗</span></button></div>
+          <div class="deck-orbit" aria-hidden="true"><span class="deck-orbit__ring"></span><span class="deck-orbit__core">PP<span>THE COMPLIMENT HOTEL</span></span><span class="deck-orbit__label">Explore · Create · Connect</span></div>
+        </div>
+        <div class="deck-sectionhead"><h3>Today's operating surface</h3><span>Choose your next move</span></div>
+        <div class="deck-grid"><button type="button" class="deck-card" data-open-panel="dailynews"><span class="deck-card__meta">01 / Intelligence<span aria-hidden="true">↗</span></span><strong>Daily News</strong><span>Read the signals. Find your next story.</span></button><button type="button" class="deck-card" data-open-panel="trackedbrands"><span class="deck-card__meta">02 / Radar<span aria-hidden="true">↗</span></span><strong>Tracked Brands</strong><span>Tune the people, brands, and outlets in view.</span></button><button type="button" class="deck-card" data-open-panel="partnerships"><span class="deck-card__meta">03 / Relationships<span aria-hidden="true">↗</span></span><strong>Partnership Command</strong><span>Shape the next collaboration.</span></button><button type="button" class="deck-card" data-open-panel="dispatch"><span class="deck-card__meta">04 / Creative direction<span aria-hidden="true">↗</span></span><strong>Dispatch Briefs</strong><span>Give Agent Foxx the details that matter.</span></button><button type="button" class="deck-card" data-open-panel="pitches"><span class="deck-card__meta">05 / Momentum<span aria-hidden="true">↗</span></span><strong>Pitches & Goals</strong><span>Move an idea toward its next milestone.</span></button><button type="button" class="deck-card" data-open-panel="journal"><span class="deck-card__meta">06 / Editorial<span aria-hidden="true">↗</span></span><strong>Journal</strong><span>Turn lived experience into a story.</span></button></div>
+        <div class="deck-world">
+          <div><p class="eyebrow">The Compliment Hotel</p><h3>A world worth<br>stepping into.</h3><p>Your immersive digital world and collaboration medium.</p><button type="button" class="btn-sm" data-open-panel="penthouse">Enter the Penthouse ↗</button></div>
+          <div class="deck-world__links"><button type="button" data-open-panel="hrooms">01 / Rooms <span>↗</span></button><button type="button" data-open-panel="floors">02 / Floors <span>↗</span></button><button type="button" data-open-panel="housemusic">03 / Music <span>↗</span></button><button type="button" data-open-panel="housechannels">04 / Video <span>↗</span></button></div>
+        </div>
+        <div class="deck-footer"><div><p class="eyebrow">Agent Foxx / Creative direction</p><p>Your AI avatar and concierge. Brand positioning, tone, continuity, quality, and polish.</p></div><div><p class="eyebrow">Paris Pullin / Owner</p><p>Creator. Host. Explorer.<br>The person behind the world.</p></div></div>
+        <div class="deck-shortcuts" aria-label="More workspaces"><button type="button" data-open-panel="lookbook">Lookbook ↗</button><button type="button" data-open-panel="casefiles">Case Files ↗</button><button type="button" data-open-panel="network">Network ↗</button><button type="button" data-open-panel="orders">Business records ↗</button></div>
+      </div>
+
 
     <!-- ORDERS -->
-    <div class="dash__panel is-active" id="panel-orders">
+    <div class="dash__panel" id="panel-orders">
       <p class="body">Track order status per invoice. Updating status can email the client automatically (Resend) and always gives you a copy-paste message for iMessage/SMS.</p>
 
       <div class="newform" id="orders-newform">
@@ -855,7 +874,7 @@
 
     <!-- ROOMS (live -- full room library) -->
     <div class="dash__panel" id="panel-hrooms">
-      <p class="body">Edits the real Room library — <code>data/house-rooms.json</code>, which <code>build_house.py</code> bakes into <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> (only the Level 26&#8211;28 "Penthouse" subset is actually built into the live page — see the <b>Penthouse</b> tab). Commits straight to GitHub; use <b>Deploy Live</b> in the sidebar to publish. <b>Some artifact IDs are wired into real site behavior</b> (recordplayer, vault, journal, monogram, hellofresh, suits, jacket, candle, window) — renaming one of those breaks the feature it powers.</p>
+      <p class="body">Edits the real Room library — <code>data/house-rooms.json</code>, which <code>build_house.py</code> bakes into <a class="link-under" href="house.html" target="_blank" rel="noopener">house.html</a> (only the Level 26&#8211;28 "Penthouse" subset is actually built into the live page — see the <b>Penthouse</b> tab). Commits straight to GitHub; use <b>Deploy Live</b> in the sidebar to publish. <b>Some artifact IDs are wired into real site behavior</b> (recordplayer, vault, journal, monogram, hellofresh, suits, jacket, candle, window, cocktails) — renaming one of those breaks the feature it powers.</p>
       <div class="newform">
         <p class="eyebrow">Rooms</p>
         <div class="card__row">
@@ -2927,7 +2946,7 @@
       {key:'grade', label:'Color grade class (optional, e.g. "grade--noir")', type:'text'},
       {key:'focus', label:'Focus (background-position, e.g. "50% 50%")', type:'text'},
       {key:'note', label:'Note (one line, shown low in the room)', type:'textarea'},
-      {key:'arts', label:'Artifacts (below) — some IDs are wired into real site behavior: renaming "id" on recordplayer, vault, journal, monogram, hellofresh, suits, jacket, candle, or window breaks the feature it powers.', type:'json', jsonEmpty:[]},
+      {key:'arts', label:'Artifacts (below) — some IDs are wired into real site behavior: renaming "id" on recordplayer, vault, journal, monogram, hellofresh, suits, jacket, candle, window, or cocktails breaks the feature it powers.', type:'json', jsonEmpty:[]},
     ],
     afterRender: function(body, record){ hrEnhanceArtifacts(); },
   });
@@ -4209,5 +4228,6 @@
 
 })();
 </script>
+<script src="assets/js/dashboard-surface.js"></script>
 </body>
 </html>
