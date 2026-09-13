@@ -615,10 +615,36 @@
     $$('[data-year]').forEach(function (n) { n.textContent = String(new Date().getFullYear()); });
   }
 
+  /* ---------- 13. BACK TO THE LAST ROOM ----------
+     Saved to localStorage on every pp:room-change (fired by room-pager.js
+     on house.html and the homepage's own embedded pager) -- read back on
+     The City/Journal/Boutique/Fragrance/Man pages to power their "Back"
+     link (#back-to-room in .worldnav__actions, hidden in markup by
+     default since there's nothing to return to until a room's been
+     visited at least once this browser). */
+  function rememberLastRoom() {
+    document.addEventListener('pp:room-change', function (e) {
+      var id = e.detail && e.detail.id;
+      if (!id) return;
+      try { localStorage.setItem('pp:lastRoom', id); } catch (err) {}
+    });
+  }
+
+  function backToRoomLink() {
+    var link = document.getElementById('back-to-room');
+    if (!link) return;
+    var id;
+    try { id = localStorage.getItem('pp:lastRoom'); } catch (err) { id = null; }
+    if (!id) return;
+    link.href = 'house.html#' + id;
+    link.hidden = false;
+  }
+
   /* ---------- BOOT ---------- */
   function boot() {
     gate(); menu(); reveal(); parallax(); tracker(); navHide();
     accordions(); redactions(); network(); doors(); artifacts(); forceEagerImageOnRoomChange(); sizeFloorScenes(); beforeAfter(); footerOverlay(); guideInfoOverlay(); lazyVideo(); year();
+    rememberLastRoom(); backToRoomLink();
   }
 
   if (document.readyState === 'loading') {

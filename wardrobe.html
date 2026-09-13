@@ -31,10 +31,15 @@
 
 <header class="worldnav">
   <a class="worldnav__mark" href="index.html"><span class="foxx" aria-hidden="true"></span>Paris Pullen</a>
-  <button class="worldnav__toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu">
-    <span class="worldnav__label">Menu</span>
-    <span class="worldnav__bars" aria-hidden="true"><i></i><i></i></span>
-  </button>
+  <div class="worldnav__actions">
+    <a class="worldnav__city" id="back-to-room" href="house.html" aria-label="Back to the room you left" hidden>
+      <span class="worldnav__label">Back</span>
+    </a>
+    <button class="worldnav__toggle" id="menu-toggle" aria-expanded="false" aria-controls="menu">
+      <span class="worldnav__label">Menu</span>
+      <span class="worldnav__bars" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
 </header>
 
 <nav class="menu" id="menu" aria-label="World navigation">
@@ -10547,6 +10552,6 @@
 </footer>
 
 <script src="assets/js/wardrobe.js" defer></script>
-<script src="assets/js/world.js" defer></script>
+<script src="assets/js/world.js?v=15" defer></script>
 </body>
 </html>
