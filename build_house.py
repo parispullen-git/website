@@ -184,7 +184,7 @@ REMOTE_NODE_POS = {
 # pinned to the viewport edges and vertically centred, so stay past x=14%
 # on the left and off mid-height at the far right.
 CITY_NODE_POS = {
-    "penthouse-living": ("18%", "22%"),   # upper pane of the stairwell glass wall, clear of the staircase below
+    "penthouse-living": ("21%", "10%"),   # clean window pane above the stairwell beam, skyline visible
     "bedroom":          ("19%", "18.6%"), # clear glass past the lamp, above the lounge chair
     "bath":             ("38%", "6%"),    # the skyline through the window, clear of the tub and plant
     "kitchen":          ("32%", "6.8%"),  # the narrow window beside the fireplace wall, clear of the plant
@@ -340,9 +340,6 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
             wardrobe_cta = MUSIC_LOUNGE_SPOTIFY
         elif f["id"] == "penthouse-living" and key == "candle":
             wardrobe_cta = CANDLE_COMING_SOON
-        elif f["id"] == "penthouse-living" and key == "jacket":
-            wardrobe_cta = LIVING_FASHIONNOVA_UNLOCK
-            tag = f'Level {f["lvl"]} &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen'
         elif f["id"] == "music-lounge" and key == "polo":
             wardrobe_cta = LIVING_FASHIONNOVA_UNLOCK
             tag = f'Level {f["lvl"]} &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen'
@@ -478,8 +475,8 @@ f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
 
   <div class="wrap">
     <div class="floor-plate reveal">
-      <h2 class="floor-plate__name">{esc(f["name"])}</h2>
       <p class="floor-plate__level"><b>{f["lvl"]}</b> <span>The Penthouse</span></p>
+      <h2 class="floor-plate__name">{esc(f["name"])}</h2>
       <p class="floor-plate__note">{esc(f["note"])}</p>
       <p class="floor-plate__count"><i></i>{len(f["arts"])} artifact{'s' if len(f["arts"]) != 1 else ''} on this floor</p>
     </div>
@@ -506,7 +503,7 @@ html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css?v=5">
+<link rel="stylesheet" href="assets/css/world.css?v=7">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -544,14 +541,14 @@ html = f'''<!DOCTYPE html>
      tv-remote.js's initSuiteRemote() -- one instance regardless of how
      many rooms have a screen. -->
 
-<script src="assets/js/room-pager.js?v=5" defer></script>
-<script src="assets/js/nav-panel.js?v=5" defer></script>
-<script src="assets/js/world.js?v=5" defer></script>
-<script src="assets/js/tv-remote.js?v=5" defer></script>
-<script src="assets/js/guide-portal.js?v=5" defer></script>
-<script src="assets/js/gym-portal.js?v=5" defer></script>
-<script src="assets/js/vault-entrance.js?v=5" defer></script>
-<script src="assets/js/piano-player.js?v=6" defer></script>
+<script src="assets/js/room-pager.js?v=7" defer></script>
+<script src="assets/js/nav-panel.js?v=7" defer></script>
+<script src="assets/js/world.js?v=7" defer></script>
+<script src="assets/js/tv-remote.js?v=7" defer></script>
+<script src="assets/js/guide-portal.js?v=7" defer></script>
+<script src="assets/js/gym-portal.js?v=7" defer></script>
+<script src="assets/js/vault-entrance.js?v=7" defer></script>
+<script src="assets/js/piano-player.js?v=7" defer></script>
 </body>
 </html>
 '''

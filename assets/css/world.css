@@ -1444,8 +1444,9 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 /* ---------- 25a-iv. NAV PANEL — corner floor/district jump list, an
    elevator-panel stand-in for paging one-by-one. Reusable: fed either
    floors (house.html, the homepage) or City Guide districts, wired up by
-   assets/js/nav-panel.js. Same corner at every breakpoint. ---------- */
-.nav-panel{position:fixed;top:4.6rem;right:clamp(var(--s4),3vw,var(--s6));z-index:45}
+   assets/js/nav-panel.js. Same bottom-right corner as the Remote/Play-
+   Pause pills at every breakpoint, one more slot further left of them. */
+.nav-panel{position:fixed;bottom:var(--s5);right:calc(var(--gutter) + 12.8rem);z-index:45}
 .nav-panel__tab{
   display:flex;align-items:center;gap:.5em;
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
@@ -1457,7 +1458,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .nav-panel__tab:hover,.nav-panel__tab:focus-visible,
 .nav-panel.is-open .nav-panel__tab{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
 .nav-panel__grid{
-  position:absolute;top:calc(100% + .6em);right:0;
+  position:absolute;bottom:calc(100% + .6em);right:0;
   width:min(280px,72vw);max-height:min(70svh,32rem);overflow-y:auto;
   background:rgba(10,10,11,.94);border:1px solid rgba(201,169,97,.28);border-radius:12px;
   padding:var(--s3);display:grid;gap:2px;
@@ -3043,6 +3044,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   /* Play/Pause/Remote/Footer/Guide Info controls out of the content's way */
   .playpause-toggle{bottom:var(--s4);right:var(--s4)}
   .remote-toggle{bottom:var(--s4);right:calc(var(--s4) + 5.2rem)}
+  .nav-panel{bottom:var(--s4);right:calc(var(--s4) + 10.4rem)}
   .footer-toggle{bottom:var(--s4);left:var(--s4)}
   .guide-info-toggle{bottom:var(--s4);right:var(--s4)}
 

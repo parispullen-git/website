@@ -214,8 +214,8 @@
   var roomControllers = {}; // roomId -> Spotify controller, built lazily on first entry
   var ambient = null; // { roomId, controller, isPaused } for whichever track is live right now, or null
 
-  function setAmbient(roomId, controller) {
-    ambient = controller ? { roomId: roomId, controller: controller, isPaused: false } : null;
+  function setAmbient(roomId, controller, startPaused) {
+    ambient = controller ? { roomId: roomId, controller: controller, isPaused: !!startPaused } : null;
     document.dispatchEvent(new CustomEvent('pp:ambient-change'));
   }
 
@@ -277,8 +277,15 @@
         // ambient slot if we're still actually in this room.
         var pager = window.PPRoomPagers && window.PPRoomPagers[0];
         if (pager && pager.getCurrentId() !== id) return;
-        controller.play();
-        setAmbient(id, controller);
+        if (id === 'penthouse-living') {
+          // The Living Room keeps its track assigned and controllable from
+          // the remote, but doesn't autoplay on entry -- the TV's own audio
+          // stays the room's default sound, same as before this track existed.
+          setAmbient(id, controller, true);
+        } else {
+          controller.play();
+          setAmbient(id, controller);
+        }
       });
     }
   });

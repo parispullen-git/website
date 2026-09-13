@@ -80,17 +80,14 @@
       { key:'journal', name:'The Journal', x:'54%', y:'48%', body:'Left face-down and open, which he knows ruins a spine. Everything written in it eventually turns up here, several drafts later &#8212; dispatches, not diary entries.', specs:[['Position', 'Face-down'], ['Draft or final', 'Several drafts later'], ['Read it', 'The Journal']] },
       { key:'vault', name:'The Vault', x:'81%', y:'48%', body:"Brass wheel, black steel, set into the wall and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.", specs:[['Concealed', 'No'], ['Contents', 'UR Welcome'], ['Combination', 'One person']] },
       { key:'candle', name:'The Candle', x:'62%', y:'46%', body:'Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome &#8212; coming soon.', specs:[['Status', 'Coming soon'], ['Lit', 'Not yet']] },
-      { key:'jacket', name:'The Jacket', x:'46%', y:'41%', body:"Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion &#8212; see the Boutique.", specs:[['Hung', 'No'], ['Ordered elsewhere', 'By occasion'], ['See also', 'The Boutique']] },
       { key:'oxknit', name:'The Polo', x:'29%', y:'21%', body:"Knit and collared, dark as the room around it &#8212; the one piece on him tonight that isn't from the Closet. OXKNIT cut this one to his spec, and he wears it the same way he wears everything else: like it was always his.", specs:[['Collection', 'OXKNIT × Paris Pullen'], ['Fit', 'Tailored'], ['Worn', 'Off the rack, on him only']] },
     ],
     'music-lounge': [
       { key:'recordplayer', name:'The Record Player', x:'37%', y:'32%', body:'ATF to OVO &#8212; the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.', specs:[['Plays', 'One playlist, shuffled'], ['Curated by', '@djangodegree'], ['Manual skips', 'Yes']] },
-      { key:'polo', name:'The Polo', x:'11%', y:'65.5%', body:"Cream knit, chocolate collar, worn open at the throat now that the tie's had its day. Off duty doesn't mean off brand.", specs:[['Collar', 'Open'], ['Collection', 'Fashion Nova × Paris Pullen'], ['Also worn', 'The Living Room']] },
+      { key:'polo', name:'The Polo', x:'11%', y:'65.5%', body:"Cream knit, chocolate collar, worn open at the throat now that the tie's had its day. Off duty doesn't mean off brand.", specs:[['Collar', 'Open'], ['Collection', 'Fashion Nova × Paris Pullen'], ['Also worn', 'The Kitchen']] },
     ],
     'bedroom': [
-      { key:'artwork', name:'The Artwork', x:'39%', y:'16%', body:'Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.', specs:[['Acquired', 'Early, badly timed'], ['Subject', 'Unexplained'], ['Moved with him', 'Every time']] },
-      { key:'chair', name:'The Lounge Chair', x:'21%', y:'54%', body:'Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.', specs:[['Faces', 'The city'], ['Television', 'None'], ['Hours logged', 'Considerable']] },
-      { key:'door', name:'The Closet Door', x:'45%', y:'12.7%', body:'Left open more often than not. What is behind it is arranged by occasion, not by colour — see the Closet.', specs:[['Kept', 'Open'], ['Ordered by', 'Occasion']] },
+      { key:'artwork', name:'The Artwork', x:'36.5%', y:'17.5%', body:'Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.', specs:[['Acquired', 'Early, badly timed'], ['Subject', 'Unexplained'], ['Moved with him', 'Every time']] },
       { key:'suit', name:'The Suit', x:'62%', y:'39%', body:"Black tie, laid out before he's even decided if tonight calls for it. Everything he owns is arranged by occasion &#8212; this one's already made the case for itself.", specs:[['Laid out', 'Before the invitation'], ['Occasion', 'Undecided'], ['See the rest', 'The Boutique']] },
     ],
     'bath': [],
@@ -101,14 +98,13 @@
     ],
     'kitchen': [
       { key:'hellofresh', name:'The Delivery', x:'37%', y:'44%', body:'It arrived before he did. No note, no ceremony &#8212; just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.', specs:[] },
-      { key:'jacket', name:'The Jacket', x:'35%', y:'66%', body:"Brown tweed, hung over the back of the chair the second he sat down to eat. Off duty doesn't mean off brand &#8212; the same collaboration as the one on the stairs, just left somewhere it wasn't supposed to be.", specs:[['Collection', 'Fashion Nova × Paris Pullen'], ['Hung', 'No'], ['Also worn', 'The Living Room']] },
+      { key:'jacket', name:'The Jacket', x:'35%', y:'66%', body:"Brown tweed, hung over the back of the chair the second he sat down to eat. Off duty doesn't mean off brand &#8212; the same collaboration as the one in the Music Lounge, just left somewhere it wasn't supposed to be.", specs:[['Collection', 'Fashion Nova × Paris Pullen'], ['Hung', 'No'], ['Also worn', 'The Music Lounge']] },
     ],
     'study': [
       { key:'monogram', name:'The Monogram', x:'47%', y:'11%', body:'Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.', specs:[['Material', 'Brass'], ['Other branding here', 'None'], ['Self-aware', 'Entirely']] },
-      { key:'pullenlaws', name:'The Pullen Laws', x:'60%', y:'17%', body:'Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.', specs:[['Count', 'Fourteen'], ['Written over', 'Eleven years'], ['Read aloud', 'Thirteen of them']] },
+      { key:'pullenlaws', name:'The Pullen Laws', x:'65%', y:'13%', body:'Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.', specs:[['Count', 'Fourteen'], ['Written over', 'Eleven years'], ['Read aloud', 'Thirteen of them']] },
       { key:'journal', name:'The Journal', x:'47%', y:'37%', body:"This week's pages, face-up on the blotter for once, marked in pencil rather than ink so that nothing is decided yet. What survives the pencil goes out as a dispatch. Most of it does not survive the pencil.", specs:[['State', 'Draft'], ['Marked in', 'Pencil'], ['Survival rate', 'Low']] },
       { key:'cocktails', name:'The Cocktail Guide', x:'23%', y:'10%', body:'Six drinks, written on a card and kept behind the bottles, because a man looking up an Old Fashioned in front of guests has already lost the evening. Six is the entire list. There has never been a seventh.', specs:[['Drinks', 'Six'], ['Kept', 'Behind the bottles'], ['Consulted in company', 'Never']] },
-      { key:'map', name:'The Map', x:'12%', y:'25%', body:'Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.', specs:[['Marks', 'Cities worked'], ['Not', 'Cities visited']] },
       { key:'oxknit-study', name:'The Polo', x:'49%', y:'31%', body:"Dark green cable knit, sleeves pushed to the forearm &#8212; the version of him that answers email after the desk lamp is the only light left on. OXKNIT again, the same collaboration as the one on the stairs downstairs, cut for a colder register.", specs:[['Collection', 'OXKNIT × Paris Pullen'], ['Knit', 'Cable'], ['Also worn', 'The Living Room']] },
     ],
     'cinema': [
@@ -165,7 +161,7 @@
   // x=14% on the left and off mid-height at the far right.
   // Mirrors build_house.py's CITY_NODE_POS exactly.
   var CITY_NODE_POS = {
-    'penthouse-living': ['18%', '22%'],  // upper pane of the stairwell glass wall, clear of the staircase below
+    'penthouse-living': ['21%', '10%'],  // clean window pane above the stairwell beam, skyline visible
     'bedroom':          ['19%', '18.6%'], // clear glass past the lamp, above the lounge chair
     'bath':             ['38%', '6%'],   // the skyline through the window, clear of the tub and plant
     'kitchen':          ['32%', '6.8%'], // the narrow window beside the fireplace wall, clear of the plant
@@ -334,10 +330,6 @@
     if (roomId === 'penthouse-living' && key === 'vault') wardrobeCta = VAULT_CTA;
     if (roomId === 'music-lounge' && key === 'recordplayer') wardrobeCta = MUSIC_LOUNGE_SPOTIFY;
     if (roomId === 'penthouse-living' && key === 'candle') wardrobeCta = CANDLE_COMING_SOON;
-    if (roomId === 'penthouse-living' && key === 'jacket') {
-      wardrobeCta = FASHIONNOVA_UNLOCK;
-      tag = ' &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen';
-    }
     if (roomId === 'music-lounge' && key === 'polo') {
       wardrobeCta = FASHIONNOVA_UNLOCK;
       tag = ' &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen';
@@ -450,8 +442,8 @@
       '</div>' +
       '<div class="floor-scene__scrim"></div>' +
       '<div class="wrap"><div class="floor-plate reveal">' +
-        '<h2 class="floor-plate__name">' + esc(room.name) + '</h2>' +
         '<p class="floor-plate__level"><b>' + esc(lvlBare) + '</b> <span>The Penthouse</span></p>' +
+        '<h2 class="floor-plate__name">' + esc(room.name) + '</h2>' +
         '<p class="floor-plate__note">' + esc(room.note) + '</p>' +
         '<p class="floor-plate__count"><i></i>' + arts.length + ' artifact' + (arts.length !== 1 ? 's' : '') + ' on this floor</p>' +
       '</div></div>' +

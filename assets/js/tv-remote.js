@@ -978,9 +978,11 @@
     function ambient() { return window.PPAmbient && window.PPAmbient.get(); }
     document.addEventListener('pp:ambient-playback', function () {
       if (activeSource === 'music') render();
+      renderPP();
     });
     document.addEventListener('pp:ambient-change', function () {
       if (activeSource === 'music') render();
+      renderPP();
     });
 
     function render() {
@@ -1030,13 +1032,22 @@
 
     // Room-contextual, independent of whatever source tab the panel
     // itself has selected -- always reflects/controls the current room's
-    // OWN screen, exactly like the Remote pill's own contextual default.
+    // own screen when it has one; rooms with no screen fall back to
+    // that room's own ambient track (window.PPAmbient) instead, so every
+    // room gets a one-tap play/pause, not just TV/Cinema rooms.
     function renderPP() {
       var st = contextualKey && STATE_BY_KEY[contextualKey];
-      ppBtn.hidden = !st;
-      if (!st) return;
-      ppBtn.classList.toggle('is-paused', !!st.isPaused);
-      if (ppLabel) ppLabel.textContent = st.isPaused ? 'Play' : 'Pause';
+      if (st) {
+        ppBtn.hidden = false;
+        ppBtn.classList.toggle('is-paused', !!st.isPaused);
+        if (ppLabel) ppLabel.textContent = st.isPaused ? 'Play' : 'Pause';
+        return;
+      }
+      var amb = ambient();
+      ppBtn.hidden = !amb;
+      if (!amb) return;
+      ppBtn.classList.toggle('is-paused', !!amb.isPaused);
+      if (ppLabel) ppLabel.textContent = amb.isPaused ? 'Play' : 'Pause';
     }
 
     // Tracks which room the visitor is actually in so opening the remote
@@ -1067,7 +1078,9 @@
     ppBtn.addEventListener('click', function (e) {
       e.stopPropagation();
       var st = contextualKey && STATE_BY_KEY[contextualKey];
-      if (st) st.togglePlayPause();
+      if (st) { st.togglePlayPause(); return; }
+      var amb = ambient();
+      if (amb) amb.controller.togglePlay();
     });
 
     // Keeps the panel's own display correct when the underlying state

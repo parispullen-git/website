@@ -165,27 +165,6 @@
         ]
       },
       {
-        "id": "jacket",
-        "name": "The Jacket",
-        "x": "46%",
-        "y": "41%",
-        "desc": "Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion — see the Boutique.",
-        "specs": [
-          [
-            "Hung",
-            "No"
-          ],
-          [
-            "Ordered elsewhere",
-            "By occasion"
-          ],
-          [
-            "See also",
-            "The Boutique"
-          ]
-        ]
-      },
-      {
         "id": "oxknit",
         "name": "The Polo",
         "x": "29%",
@@ -221,8 +200,8 @@
       {
         "id": "artwork",
         "name": "The Artwork",
-        "x": "39%",
-        "y": "16%",
+        "x": "36.5%",
+        "y": "17.5%",
         "desc": "Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.",
         "specs": [
           [
@@ -236,44 +215,6 @@
           [
             "Moved with him",
             "Every time"
-          ]
-        ]
-      },
-      {
-        "id": "chair",
-        "name": "The Lounge Chair",
-        "x": "21%",
-        "y": "54%",
-        "desc": "Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.",
-        "specs": [
-          [
-            "Faces",
-            "The city"
-          ],
-          [
-            "Television",
-            "None"
-          ],
-          [
-            "Hours logged",
-            "Considerable"
-          ]
-        ]
-      },
-      {
-        "id": "door",
-        "name": "The Closet Door",
-        "x": "45%",
-        "y": "12.7%",
-        "desc": "Left open more often than not. What is behind it is arranged by occasion, not by colour — see the Closet.",
-        "specs": [
-          [
-            "Kept",
-            "Open"
-          ],
-          [
-            "Ordered by",
-            "Occasion"
           ]
         ]
       },
@@ -409,7 +350,7 @@
         "name": "The Jacket",
         "x": "35%",
         "y": "66%",
-        "desc": "Brown tweed, hung over the back of the chair the second he sat down to eat. Off duty doesn't mean off brand — the same collaboration as the one on the stairs, just left somewhere it wasn't supposed to be.",
+        "desc": "Brown tweed, hung over the back of the chair the second he sat down to eat. Off duty doesn't mean off brand — the same collaboration as the one in the Music Lounge, just left somewhere it wasn't supposed to be.",
         "specs": [
           [
             "Collection",
@@ -421,7 +362,7 @@
           ],
           [
             "Also worn",
-            "The Living Room"
+            "The Music Lounge"
           ]
         ]
       }
@@ -461,8 +402,8 @@
       {
         "id": "pullenlaws",
         "name": "The Pullen Laws",
-        "x": "60%",
-        "y": "17%",
+        "x": "65%",
+        "y": "13%",
         "desc": "Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.",
         "specs": [
           [
@@ -518,23 +459,6 @@
           [
             "Consulted in company",
             "Never"
-          ]
-        ]
-      },
-      {
-        "id": "map",
-        "name": "The Map",
-        "x": "12%",
-        "y": "25%",
-        "desc": "Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.",
-        "specs": [
-          [
-            "Marks",
-            "Cities worked"
-          ],
-          [
-            "Not",
-            "Cities visited"
           ]
         ]
       },
@@ -1760,7 +1684,7 @@
           ],
           [
             "Also worn",
-            "The Living Room"
+            "The Kitchen"
           ]
         ]
       }
