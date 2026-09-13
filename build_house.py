@@ -488,7 +488,7 @@ html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css?v=11">
+<link rel="stylesheet" href="assets/css/world.css?v=12">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -509,7 +509,7 @@ html = f'''<!DOCTYPE html>
   <button type="button" class="room-pager__nav room-pager__nav--down" data-room-pager-down aria-label="Floor down"><span aria-hidden="true">&#9660;</span><span class="room-pager__nav-hint" data-room-pager-hint aria-hidden="true"></span></button>
   <div class="nav-panel" data-nav-panel>
     <button type="button" class="nav-panel__tab" data-nav-panel-toggle aria-expanded="false" aria-controls="nav-panel-grid">
-      <span class="nav-panel__tab-label">Floors</span>
+      <span class="nav-panel__tab-label">Directory</span>
     </button>
     <div class="nav-panel__grid" id="nav-panel-grid" data-nav-panel-grid hidden>
     {NAV_PANEL_ROWS}
@@ -526,14 +526,14 @@ html = f'''<!DOCTYPE html>
      tv-remote.js's initSuiteRemote() -- one instance regardless of how
      many rooms have a screen. -->
 
-<script src="assets/js/room-pager.js?v=11" defer></script>
-<script src="assets/js/nav-panel.js?v=11" defer></script>
-<script src="assets/js/world.js?v=11" defer></script>
-<script src="assets/js/tv-remote.js?v=11" defer></script>
-<script src="assets/js/guide-portal.js?v=11" defer></script>
-<script src="assets/js/gym-portal.js?v=11" defer></script>
-<script src="assets/js/vault-entrance.js?v=11" defer></script>
-<script src="assets/js/piano-player.js?v=11" defer></script>
+<script src="assets/js/room-pager.js?v=12" defer></script>
+<script src="assets/js/nav-panel.js?v=12" defer></script>
+<script src="assets/js/world.js?v=12" defer></script>
+<script src="assets/js/tv-remote.js?v=12" defer></script>
+<script src="assets/js/guide-portal.js?v=12" defer></script>
+<script src="assets/js/gym-portal.js?v=12" defer></script>
+<script src="assets/js/vault-entrance.js?v=12" defer></script>
+<script src="assets/js/piano-player.js?v=12" defer></script>
 </body>
 </html>
 '''
