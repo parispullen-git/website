@@ -108,8 +108,8 @@
       {
         "id": "journal",
         "name": "The Journal",
-        "x": "28%",
-        "y": "91%",
+        "x": "54%",
+        "y": "48%",
         "desc": "Left face-down and open, which he knows ruins a spine. Everything written in it eventually turns up here, several drafts later — dispatches, not diary entries.",
         "specs": [
           [
@@ -129,8 +129,8 @@
       {
         "id": "vault",
         "name": "The Vault",
-        "x": "91%",
-        "y": "70%",
+        "x": "81%",
+        "y": "48%",
         "desc": "Brass wheel, black steel, set into the wall and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.",
         "specs": [
           [
@@ -150,8 +150,8 @@
       {
         "id": "candle",
         "name": "The Candle",
-        "x": "74.58%",
-        "y": "36.17%",
+        "x": "62%",
+        "y": "46%",
         "desc": "Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome — coming soon.",
         "specs": [
           [
@@ -167,8 +167,8 @@
       {
         "id": "jacket",
         "name": "The Jacket",
-        "x": "39.2%",
-        "y": "67.5%",
+        "x": "46%",
+        "y": "41%",
         "desc": "Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion — see the Boutique.",
         "specs": [
           [
@@ -182,6 +182,27 @@
           [
             "See also",
             "The Boutique"
+          ]
+        ]
+      },
+      {
+        "id": "oxknit",
+        "name": "The Polo",
+        "x": "29%",
+        "y": "21%",
+        "desc": "Knit and collared, dark as the room around it — the one piece on him tonight that isn't from the Closet. OXKNIT cut this one to his spec, and he wears it the same way he wears everything else: like it was always his.",
+        "specs": [
+          [
+            "Collection",
+            "OXKNIT × Paris Pullen"
+          ],
+          [
+            "Fit",
+            "Tailored"
+          ],
+          [
+            "Worn",
+            "Off the rack, on him only"
           ]
         ]
       }
@@ -200,8 +221,8 @@
       {
         "id": "artwork",
         "name": "The Artwork",
-        "x": "67%",
-        "y": "36%",
+        "x": "39%",
+        "y": "16%",
         "desc": "Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.",
         "specs": [
           [
@@ -221,8 +242,8 @@
       {
         "id": "chair",
         "name": "The Lounge Chair",
-        "x": "10%",
-        "y": "72%",
+        "x": "21%",
+        "y": "54%",
         "desc": "Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.",
         "specs": [
           [
@@ -242,8 +263,8 @@
       {
         "id": "door",
         "name": "The Closet Door",
-        "x": "93%",
-        "y": "54%",
+        "x": "45%",
+        "y": "12.7%",
         "desc": "Left open more often than not. What is behind it is arranged by occasion, not by colour — see the Closet.",
         "specs": [
           [
@@ -282,8 +303,8 @@
       {
         "id": "suits",
         "name": "The Suits & Tuxedos",
-        "x": "50%",
-        "y": "42%",
+        "x": "19%",
+        "y": "16.9%",
         "desc": "Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like. Two dinner jackets at the centre, black-tie and white-tie, either one pressed and ready before he has to ask.",
         "specs": [
           [
@@ -304,7 +325,7 @@
         "id": "shoes",
         "name": "The Shoes",
         "x": "9%",
-        "y": "62%",
+        "y": "32.9%",
         "desc": "Cedar-treed, rotated, never worn two days running. The oldest pair on the shelf is fourteen years old and still the best thing in the room.",
         "specs": [
           [
@@ -324,8 +345,8 @@
       {
         "id": "ties",
         "name": "The Ties",
-        "x": "91%",
-        "y": "56%",
+        "x": "85%",
+        "y": "31.2%",
         "desc": "Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.",
         "specs": [
           [
@@ -357,8 +378,8 @@
       {
         "id": "hellofresh",
         "name": "The Delivery",
-        "x": "53%",
-        "y": "60%",
+        "x": "57.5%",
+        "y": "51.5%",
         "desc": "It arrived before he did. No note, no ceremony — just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.",
         "specs": []
       }
@@ -377,8 +398,8 @@
       {
         "id": "monogram",
         "name": "The Monogram",
-        "x": "57%",
-        "y": "30%",
+        "x": "55%",
+        "y": "12.7%",
         "desc": "Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.",
         "specs": [
           [
@@ -399,7 +420,7 @@
         "id": "pullenlaws",
         "name": "The Pullen Laws",
         "x": "38%",
-        "y": "37%",
+        "y": "11.8%",
         "desc": "Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.",
         "specs": [
           [
@@ -419,8 +440,8 @@
       {
         "id": "journal",
         "name": "The Journal",
-        "x": "57%",
-        "y": "57%",
+        "x": "51%",
+        "y": "38.8%",
         "desc": "This week's pages, face-up on the blotter for once, marked in pencil rather than ink so that nothing is decided yet. What survives the pencil goes out as a dispatch. Most of it does not survive the pencil.",
         "specs": [
           [
@@ -440,8 +461,8 @@
       {
         "id": "cocktails",
         "name": "The Cocktail Guide",
-        "x": "75%",
-        "y": "37%",
+        "x": "83%",
+        "y": "14.3%",
         "desc": "Six drinks, written on a card and kept behind the bottles, because a man looking up an Old Fashioned in front of guests has already lost the evening. Six is the entire list. There has never been a seventh.",
         "specs": [
           [
@@ -461,8 +482,8 @@
       {
         "id": "map",
         "name": "The Map",
-        "x": "91%",
-        "y": "44%",
+        "x": "94%",
+        "y": "18.6%",
         "desc": "Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.",
         "specs": [
           [
@@ -490,8 +511,8 @@
       {
         "id": "posters",
         "name": "The Posters",
-        "x": "12%",
-        "y": "42%",
+        "x": "10%",
+        "y": "32%",
         "desc": "All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.",
         "specs": [
           [
@@ -1641,8 +1662,8 @@
       {
         "id": "recordplayer",
         "name": "The Record Player",
-        "x": "38%",
-        "y": "33%",
+        "x": "37%",
+        "y": "32%",
         "desc": "ATF to OVO — the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.",
         "specs": [
           [
@@ -1658,18 +1679,39 @@
             "Yes"
           ]
         ]
+      },
+      {
+        "id": "polo",
+        "name": "The Polo",
+        "x": "11%",
+        "y": "65.5%",
+        "desc": "Cream knit, chocolate collar, worn open at the throat now that the tie's had its day. Off duty doesn't mean off brand.",
+        "specs": [
+          [
+            "Collar",
+            "Open"
+          ],
+          [
+            "Collection",
+            "Fashion Nova × Paris Pullen"
+          ],
+          [
+            "Also worn",
+            "The Living Room"
+          ]
+        ]
       }
     ]
   },
   {
-    "id": "music-lounge-bar",
+    "id": "gym",
     "lvl": "26",
-    "name": "The Lounge Bar",
+    "name": "The Gym",
     "state": "restricted",
-    "img": "room-musicloungebar",
+    "img": "room-gym",
     "grade": "",
     "focus": "50% 50%",
-    "note": "Marble and brass, poured slow, with the same record wall spilling over from next door.",
+    "note": "Steel and rope, one flight from the record wall, with a skyline that doesn't care if you skip a set.",
     "arts": []
   }
 ]

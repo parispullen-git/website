@@ -28,6 +28,13 @@ SITE_SOCIAL = re.search(r'<div class="social">.*?</a>\s*</div>', _index_src, re.
 # to bake changes into house.html.
 FLOORS = json.loads((Path(__file__).resolve().parent / "data" / "house-rooms.json").read_text(encoding="utf-8"))
 
+# Room photos are re-shot in place (same filename, new bytes) rather than
+# renamed, so browsers and Cloudflare's edge cache (max-age=14400) keep
+# serving the old file for hours after a swap unless the URL itself
+# changes. Bumping this on every image update forces a fresh fetch --
+# mirror any change here in assets/js/penthouse.js's IMG_VER too.
+IMG_VER = "20260913d"
+
 def esc(t):
     return t.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#8217;")
 
@@ -46,34 +53,39 @@ def esc(t):
 # between rows), so only the order *within* each row matters:
 #   Bathroom -> Bedroom -> Closet                 (Level 28)
 #   Kitchen -> Living Room -> Study                (Level 27)
-#   Lounge Bar -> Music Lounge -> Cinema           (Level 26)
+#   Music Lounge -> Gym -> Cinema                  (Level 26 -- Lounge Bar retired, see below)
 _PENTHOUSE_ORDER = ["bath", "bedroom", "closet",
                      "kitchen", "penthouse-living", "study",
-                     "music-lounge-bar", "music-lounge", "cinema"]
+                     "music-lounge", "gym", "cinema"]
 _penthouse_by_id = {f["id"]: f for f in FLOORS if f["lvl"] in ("26", "27", "28")}
 PENTHOUSE_FLOORS = [_penthouse_by_id[_id] for _id in _PENTHOUSE_ORDER]
 START_ROOM = "penthouse-living"  # data-start-room below; also which screen (if any) autoplays on load
 
-# Room-to-room navigation is a real 2D layout, a true 3x3 grid -- each
-# room's up/down neighbor sits in the same column one floor away:
+# Room-to-room navigation is a real 2D layout -- each room's up/down
+# neighbor sits in the same column one floor away:
 #   Level 28:  Bathroom <-> Bedroom    <-> Closet
 #                  |            |            |
 #   Level 27:  Kitchen <-> Living Room <-> Study
-#                  |            |            |
-#   Level 26: Lounge Bar <-> Music Lounge <-> Cinema
-# Left/right/up/down each name an explicit neighbor id (or are absent at an
-# edge) -- room-pager.js reads these directly rather than paging by array
-# index, so DOM order no longer needs to match traversal order.
+#                               |            |
+#   Level 26:              Music Lounge <-> Gym <-> Cinema
+# The Lounge Bar (former Level 26, column 1) has been retired -- Kitchen's
+# column now dead-ends at Level 27 (no "down"), and Music Lounge has no
+# "left" neighbor of its own. The Gym is a pure left-right insertion between
+# Music Lounge and Cinema, with no up/down neighbor of its own (there's no
+# Level 27 room to anchor it to). Left/right/up/down each name an explicit
+# neighbor id (or are absent at an edge) -- room-pager.js reads these
+# directly rather than paging by array index, so DOM order no longer needs
+# to match traversal order.
 ROOM_ADJACENCY = {
     "bath":               {"right": "bedroom", "down": "kitchen"},
     "bedroom":            {"left": "bath", "right": "closet", "down": "penthouse-living"},
     "closet":             {"left": "bedroom", "down": "study"},
-    "kitchen":            {"right": "penthouse-living", "up": "bath", "down": "music-lounge-bar"},
+    "kitchen":            {"right": "penthouse-living", "up": "bath"},
     "penthouse-living":   {"left": "kitchen", "right": "study", "up": "bedroom", "down": "music-lounge"},
     "study":              {"left": "penthouse-living", "up": "closet", "down": "cinema"},
-    "music-lounge-bar":   {"right": "music-lounge", "up": "kitchen"},
-    "music-lounge":       {"left": "music-lounge-bar", "right": "cinema", "up": "penthouse-living"},
-    "cinema":             {"left": "music-lounge", "up": "study"},
+    "music-lounge":       {"right": "gym", "up": "penthouse-living"},
+    "gym":                {"left": "music-lounge", "right": "cinema"},
+    "cinema":             {"left": "gym", "up": "study"},
 }
 
 # Room-to-room nav (ROOM_ADJACENCY, above) is fully explicit now, but the
@@ -138,13 +150,13 @@ if _menu_room_ids != _floor_ids:
 # CHANNEL_SETS[channel_set][0] in assets/js/tv-remote.js.
 TV_SCREENS = {
     "penthouse-living": dict(
-        x="57.5%", y="24.3%", w="19%", h="15%",
-        box="0.4854,0.1742,0.6646,0.3113",
+        x="55.7%", y="24.0%", w="17%", h="14%",
+        box="0.4740,0.1704,0.6406,0.3093",
         channel_set="living", id="4xVVFJuycww", label="The Gentlemen",
     ),
     "cinema": dict(
-        x="50%", y="37.6%", w="27.9%", h="29.3%",
-        box="0.3604,0.2296,0.6396,0.5222",
+        x="49.7%", y="30.9%", w="28%", h="25%",
+        box="0.3563,0.1833,0.6385,0.4352",
         channel_set="cinema", id="gnm4HgIAVmU", label="The Thomas Crown Affair — Official Teaser Trailer",
     ),
 }
@@ -159,7 +171,7 @@ TV_SCREENS = {
 # remote's Music tab instead of a channel -- see the "music" fallback in
 # floor_html() below and tv-remote.js's toggle handler.
 REMOTE_NODE_POS = {
-    "cinema": ("50%", "53%"),
+    "cinema": ("50%", "45%"),
     "music-lounge": ("50%", "62%"),
 }
 
@@ -172,10 +184,11 @@ REMOTE_NODE_POS = {
 # pinned to the viewport edges and vertically centred, so stay past x=14%
 # on the left and off mid-height at the far right.
 CITY_NODE_POS = {
-    "penthouse-living": ("17%", "62%"),   # left-hand window wall, mid-height, clear of the Kitchen arrow
-    "bedroom":          ("20%", "46%"),   # the floor-to-ceiling glass left of the bed
-    "bath":             ("50%", "50%"),   # the city behind the tub, centred on the glass
-    "kitchen":          ("93%", "25%"),   # the right-hand window, high enough to clear the next-room arrow
+    "penthouse-living": ("18%", "22%"),   # upper pane of the stairwell glass wall, clear of the staircase below
+    "bedroom":          ("19%", "18.6%"), # clear glass past the lamp, above the lounge chair
+    "bath":             ("48%", "6%"),    # the skyline through the window, top edge of the now-wider frame, clear of the tub and plant
+    "kitchen":          ("32%", "6.8%"),  # the narrow window beside the fireplace wall, clear of the plant
+    "music-lounge":     ("72%", "8%"),    # the sliver of skyline beside the bar's PP sign, past the curtain
 }
 
 KITCHEN_HELLOFRESH_UNLOCK = '''<div class="hf-unlock">
@@ -208,6 +221,10 @@ STUDY_COCKTAILS_TRACE = ('<p class="body" style="margin-top:var(--s2);color:var(
 # folding it into the Closet's own pieces. Mirrors KITCHEN_HELLOFRESH_UNLOCK's
 # shape (eyebrow, short list, one CTA) so the two brand unlocks read as the
 # same fixture rather than two different site features.
+#
+# Reused verbatim (not a per-room copy) by the Music Lounge's own Polo
+# artifact below -- one collab, discovered from two rooms, should read as
+# the same six-piece capsule rather than drift into two different lists.
 LIVING_FASHIONNOVA_UNLOCK = '''<div class="unlock">
                   <p class="unlock__eyebrow">Unlocked &#183; What He Reaches For</p>
                   <ul class="unlock-list">
@@ -216,6 +233,7 @@ LIVING_FASHIONNOVA_UNLOCK = '''<div class="unlock">
                     <li><span class="unlock-list__name">The Night Puffer</span><span class="unlock-list__note">For the walk between the car and the door.</span></li>
                     <li><span class="unlock-list__name">The Weighted Tee</span><span class="unlock-list__note">The one under everything else that actually holds its shape.</span></li>
                     <li><span class="unlock-list__name">The Going-Out Chain</span><span class="unlock-list__note">Not gold. Reads gold across a room.</span></li>
+                    <li><span class="unlock-list__name">The Knit Polo</span><span class="unlock-list__note">Cream knit, chocolate collar. Doesn't ask to be noticed.</span></li>
                   </ul>
                   <a class="cta cta--ghost unlock__cta" href="off-duty.html"><span>Shop the Fit &#8212; Fashion Nova &#215; Paris Pullen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
                 </div>'''
@@ -309,6 +327,9 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
         elif f["id"] == "penthouse-living" and key == "candle":
             wardrobe_cta = CANDLE_COMING_SOON
         elif f["id"] == "penthouse-living" and key == "jacket":
+            wardrobe_cta = LIVING_FASHIONNOVA_UNLOCK
+            tag = f'Level {f["lvl"]} &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen'
+        elif f["id"] == "music-lounge" and key == "polo":
             wardrobe_cta = LIVING_FASHIONNOVA_UNLOCK
             tag = f'Level {f["lvl"]} &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen'
         elif f["id"] == "study" and key == "cocktails":
@@ -426,8 +447,8 @@ f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
   <div class="floor-scene__surface">
     <div class="floor-scene__canvas">
       <div class="floor-scene__view">
-        <img src="assets/img/{f["img"]}.jpg"
-             srcset="assets/img/{f["img"]}@sm.jpg 1200w, assets/img/{f["img"]}.jpg 2400w"
+        <img src="assets/img/{f["img"]}.jpg?v={IMG_VER}"
+             srcset="assets/img/{f["img"]}@sm.jpg?v={IMG_VER} 1200w, assets/img/{f["img"]}.jpg?v={IMG_VER} 2400w"
              sizes="100vw" alt="{esc(f["name"])}" loading="lazy"
              style="--focus:{f["focus"]}" width="2400" height="1340">
 {tv}        <div class="artifacts">

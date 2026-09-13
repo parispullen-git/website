@@ -14,6 +14,12 @@
 (function () {
   'use strict';
 
+  // Mirrors build_house.py's IMG_VER exactly -- bump both together whenever
+  // a room photo is re-shot in place (same filename, new bytes), since
+  // browsers and Cloudflare's edge otherwise keep serving the old file for
+  // hours off the unchanged URL.
+  var IMG_VER = '20260913d';
+
   // Order here (mirrors build_house.py's _PENTHOUSE_ORDER exactly) is what
   // the room-pager's slide direction is actually built from -- it pages by
   // array index (translateX(-i*100%)), so a "left" move needs to land on a
@@ -23,7 +29,7 @@
   // right link between rows), so only the order *within* each row matters:
   //   Bathroom -> Bedroom -> Closet                 (Level 28)
   //   Kitchen -> Living Room -> Study                (Level 27)
-  //   Lounge Bar -> Music Lounge -> Cinema           (Level 26)
+  //   Music Lounge -> Gym -> Cinema                  (Level 26 -- Lounge Bar retired, see below)
   var ROOMS = [
     { id:'bath',    lvl:'Level 28', name:'The Bathroom',
       note:'Stone, brass and steam, with the whole city on the other side of the glass.', img:'room-bath' },
@@ -37,68 +43,73 @@
       note:'Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.', img:'room-living' },
     { id:'study',   lvl:'Level 27', name:'The Study',
       note:'The room where the answer is usually no, and where it gets said politely.', img:'room-study' },
-    { id:'music-lounge-bar', lvl:'Level 26', name:'The Lounge Bar',
-      note:'Marble and brass, poured slow, with the same record wall spilling over from next door.', img:'room-musicloungebar' },
     { id:'music-lounge', lvl:'Level 26', name:'The Music Lounge',
       note:'Vinyl floor to ceiling on one wall, a turntable that never gets left idle, and a couch built for people who came to listen, not to talk over it.', img:'room-musiclounge' },
+    { id:'gym', lvl:'Level 26', name:'The Gym',
+      note:"Steel and rope, one flight from the record wall, with a skyline that doesn't care if you skip a set.", img:'room-gym' },
     { id:'cinema',  lvl:'Level 26', name:'The Cinema',
       note:'Nine seats, one screen, and a rule about phones that is actually enforced.', img:'room-cinema' }
   ];
 
-  // Room-to-room navigation is a real 2D layout, a true 3x3 grid -- each
-  // room's up/down neighbor sits in the same column one floor away
-  // (mirrors build_house.py's ROOM_ADJACENCY exactly):
+  // Room-to-room navigation is a real 2D layout -- each room's up/down
+  // neighbor sits in the same column one floor away (mirrors
+  // build_house.py's ROOM_ADJACENCY exactly):
   //   Level 28:  Bathroom <-> Bedroom    <-> Closet
   //                  |            |            |
   //   Level 27:  Kitchen <-> Living Room <-> Study
-  //                  |            |            |
-  //   Level 26: Lounge Bar <-> Music Lounge <-> Cinema
+  //                               |            |
+  //   Level 26:              Music Lounge <-> Gym <-> Cinema
+  // The Lounge Bar (former Level 26, column 1) has been retired -- Kitchen's
+  // column now dead-ends at Level 27 (no "down"), and Music Lounge has no
+  // "left" neighbor of its own. The Gym is a pure left-right insertion
+  // between Music Lounge and Cinema, with no up/down neighbor of its own.
   var ROOM_ADJACENCY = {
     'bath':             { right:'bedroom', down:'kitchen' },
     'bedroom':          { left:'bath', right:'closet', down:'penthouse-living' },
     'closet':           { left:'bedroom', down:'study' },
-    'kitchen':          { right:'penthouse-living', up:'bath', down:'music-lounge-bar' },
+    'kitchen':          { right:'penthouse-living', up:'bath' },
     'penthouse-living': { left:'kitchen', right:'study', up:'bedroom', down:'music-lounge' },
     'study':            { left:'penthouse-living', up:'closet', down:'cinema' },
-    'music-lounge-bar': { right:'music-lounge', up:'kitchen' },
-    'music-lounge':     { left:'music-lounge-bar', right:'cinema', up:'penthouse-living' },
-    'cinema':           { left:'music-lounge', up:'study' }
+    'music-lounge':     { right:'gym', up:'penthouse-living' },
+    'gym':              { left:'music-lounge', right:'cinema' },
+    'cinema':           { left:'gym', up:'study' }
   };
 
   var ARTS = {
     'penthouse-living': [
-      { key:'journal', name:'The Journal', x:'28%', y:'91%', body:'Left face-down and open, which he knows ruins a spine. Everything written in it eventually turns up here, several drafts later &#8212; dispatches, not diary entries.', specs:[['Position', 'Face-down'], ['Draft or final', 'Several drafts later'], ['Read it', 'The Journal']] },
-      { key:'vault', name:'The Vault', x:'91%', y:'70%', body:"Brass wheel, black steel, set into the wall and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.", specs:[['Concealed', 'No'], ['Contents', 'UR Welcome'], ['Combination', 'One person']] },
-      { key:'candle', name:'The Candle', x:'74.58%', y:'36.17%', body:'Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome &#8212; coming soon.', specs:[['Status', 'Coming soon'], ['Lit', 'Not yet']] },
-      { key:'jacket', name:'The Jacket', x:'39.2%', y:'67.5%', body:"Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion &#8212; see the Boutique.", specs:[['Hung', 'No'], ['Ordered elsewhere', 'By occasion'], ['See also', 'The Boutique']] },
+      { key:'journal', name:'The Journal', x:'54%', y:'48%', body:'Left face-down and open, which he knows ruins a spine. Everything written in it eventually turns up here, several drafts later &#8212; dispatches, not diary entries.', specs:[['Position', 'Face-down'], ['Draft or final', 'Several drafts later'], ['Read it', 'The Journal']] },
+      { key:'vault', name:'The Vault', x:'81%', y:'48%', body:"Brass wheel, black steel, set into the wall and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.", specs:[['Concealed', 'No'], ['Contents', 'UR Welcome'], ['Combination', 'One person']] },
+      { key:'candle', name:'The Candle', x:'62%', y:'46%', body:'Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome &#8212; coming soon.', specs:[['Status', 'Coming soon'], ['Lit', 'Not yet']] },
+      { key:'jacket', name:'The Jacket', x:'46%', y:'41%', body:"Left over the back of the reading chair rather than hung, which tells you he wasn't planning on staying gone long. Everything else he owns is arranged by occasion &#8212; see the Boutique.", specs:[['Hung', 'No'], ['Ordered elsewhere', 'By occasion'], ['See also', 'The Boutique']] },
+      { key:'oxknit', name:'The Polo', x:'29%', y:'21%', body:"Knit and collared, dark as the room around it &#8212; the one piece on him tonight that isn't from the Closet. OXKNIT cut this one to his spec, and he wears it the same way he wears everything else: like it was always his.", specs:[['Collection', 'OXKNIT × Paris Pullen'], ['Fit', 'Tailored'], ['Worn', 'Off the rack, on him only']] },
     ],
     'music-lounge': [
-      { key:'recordplayer', name:'The Record Player', x:'38%', y:'33%', body:'ATF to OVO &#8212; the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.', specs:[['Plays', 'One playlist, shuffled'], ['Curated by', '@djangodegree'], ['Manual skips', 'Yes']] },
+      { key:'recordplayer', name:'The Record Player', x:'37%', y:'32%', body:'ATF to OVO &#8212; the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.', specs:[['Plays', 'One playlist, shuffled'], ['Curated by', '@djangodegree'], ['Manual skips', 'Yes']] },
+      { key:'polo', name:'The Polo', x:'11%', y:'65.5%', body:"Cream knit, chocolate collar, worn open at the throat now that the tie's had its day. Off duty doesn't mean off brand.", specs:[['Collar', 'Open'], ['Collection', 'Fashion Nova × Paris Pullen'], ['Also worn', 'The Living Room']] },
     ],
-    'music-lounge-bar': [],
     'bedroom': [
-      { key:'artwork', name:'The Artwork', x:'67%', y:'36%', body:'Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.', specs:[['Acquired', 'Early, badly timed'], ['Subject', 'Unexplained'], ['Moved with him', 'Every time']] },
-      { key:'chair', name:'The Lounge Chair', x:'10%', y:'72%', body:'Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.', specs:[['Faces', 'The city'], ['Television', 'None'], ['Hours logged', 'Considerable']] },
-      { key:'door', name:'The Closet Door', x:'93%', y:'54%', body:'Left open more often than not. What is behind it is arranged by occasion, not by colour — see the Closet.', specs:[['Kept', 'Open'], ['Ordered by', 'Occasion']] },
+      { key:'artwork', name:'The Artwork', x:'39%', y:'16%', body:'Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.', specs:[['Acquired', 'Early, badly timed'], ['Subject', 'Unexplained'], ['Moved with him', 'Every time']] },
+      { key:'chair', name:'The Lounge Chair', x:'21%', y:'54%', body:'Angled at the window rather than the television, because there is no television. Most of the thinking that matters happens in it.', specs:[['Faces', 'The city'], ['Television', 'None'], ['Hours logged', 'Considerable']] },
+      { key:'door', name:'The Closet Door', x:'45%', y:'12.7%', body:'Left open more often than not. What is behind it is arranged by occasion, not by colour — see the Closet.', specs:[['Kept', 'Open'], ['Ordered by', 'Occasion']] },
     ],
     'bath': [],
     'closet': [
-      { key:'suits', name:'The Suits &amp; Tuxedos', x:'50%', y:'42%', body:'Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like. Two dinner jackets at the centre, black-tie and white-tie, either one pressed and ready before he has to ask.', specs:[['Ordered by', 'Occasion'], ['Navy suits', 'Twelve'], ['Tuxedos', 'Two, black-tie and white-tie']] },
-      { key:'shoes', name:'The Shoes', x:'9%', y:'62%', body:'Cedar-treed, rotated, never worn two days running. The oldest pair on the shelf is fourteen years old and still the best thing in the room.', specs:[['Rotation', 'Enforced'], ['Oldest pair', '14 years'], ['Trees', 'Cedar']] },
-      { key:'ties', name:'The Ties', x:'91%', y:'56%', body:'Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.', specs:[['Hung', 'Never rolled'], ['Worn regularly', 'Six'], ['Owned', 'Considerably more']] },
+      { key:'suits', name:'The Suits &amp; Tuxedos', x:'19%', y:'16.9%', body:'Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like. Two dinner jackets at the centre, black-tie and white-tie, either one pressed and ready before he has to ask.', specs:[['Ordered by', 'Occasion'], ['Navy suits', 'Twelve'], ['Tuxedos', 'Two, black-tie and white-tie']] },
+      { key:'shoes', name:'The Shoes', x:'9%', y:'32.9%', body:'Cedar-treed, rotated, never worn two days running. The oldest pair on the shelf is fourteen years old and still the best thing in the room.', specs:[['Rotation', 'Enforced'], ['Oldest pair', '14 years'], ['Trees', 'Cedar']] },
+      { key:'ties', name:'The Ties', x:'85%', y:'31.2%', body:'Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.', specs:[['Hung', 'Never rolled'], ['Worn regularly', 'Six'], ['Owned', 'Considerably more']] },
     ],
     'kitchen': [
-      { key:'hellofresh', name:'The Delivery', x:'53%', y:'60%', body:'It arrived before he did. No note, no ceremony &#8212; just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.', specs:[] },
+      { key:'hellofresh', name:'The Delivery', x:'57.5%', y:'51.5%', body:'It arrived before he did. No note, no ceremony &#8212; just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.', specs:[] },
     ],
     'study': [
-      { key:'monogram', name:'The Monogram', x:'57%', y:'30%', body:'Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.', specs:[['Material', 'Brass'], ['Other branding here', 'None'], ['Self-aware', 'Entirely']] },
-      { key:'pullenlaws', name:'The Pullen Laws', x:'38%', y:'37%', body:'Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.', specs:[['Count', 'Fourteen'], ['Written over', 'Eleven years'], ['Read aloud', 'Thirteen of them']] },
-      { key:'journal', name:'The Journal', x:'57%', y:'57%', body:"This week's pages, face-up on the blotter for once, marked in pencil rather than ink so that nothing is decided yet. What survives the pencil goes out as a dispatch. Most of it does not survive the pencil.", specs:[['State', 'Draft'], ['Marked in', 'Pencil'], ['Survival rate', 'Low']] },
-      { key:'cocktails', name:'The Cocktail Guide', x:'75%', y:'37%', body:'Six drinks, written on a card and kept behind the bottles, because a man looking up an Old Fashioned in front of guests has already lost the evening. Six is the entire list. There has never been a seventh.', specs:[['Drinks', 'Six'], ['Kept', 'Behind the bottles'], ['Consulted in company', 'Never']] },
-      { key:'map', name:'The Map', x:'91%', y:'44%', body:'Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.', specs:[['Marks', 'Cities worked'], ['Not', 'Cities visited']] },
+      { key:'monogram', name:'The Monogram', x:'55%', y:'12.7%', body:'Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.', specs:[['Material', 'Brass'], ['Other branding here', 'None'], ['Self-aware', 'Entirely']] },
+      { key:'pullenlaws', name:'The Pullen Laws', x:'38%', y:'11.8%', body:'Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.', specs:[['Count', 'Fourteen'], ['Written over', 'Eleven years'], ['Read aloud', 'Thirteen of them']] },
+      { key:'journal', name:'The Journal', x:'51%', y:'38.8%', body:"This week's pages, face-up on the blotter for once, marked in pencil rather than ink so that nothing is decided yet. What survives the pencil goes out as a dispatch. Most of it does not survive the pencil.", specs:[['State', 'Draft'], ['Marked in', 'Pencil'], ['Survival rate', 'Low']] },
+      { key:'cocktails', name:'The Cocktail Guide', x:'83%', y:'14.3%', body:'Six drinks, written on a card and kept behind the bottles, because a man looking up an Old Fashioned in front of guests has already lost the evening. Six is the entire list. There has never been a seventh.', specs:[['Drinks', 'Six'], ['Kept', 'Behind the bottles'], ['Consulted in company', 'Never']] },
+      { key:'map', name:'The Map', x:'94%', y:'18.6%', body:'Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.', specs:[['Marks', 'Cities worked'], ['Not', 'Cities visited']] },
     ],
     'cinema': [
-      { key:'posters', name:'The Posters', x:'12%', y:'42%', body:'All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.', specs:[['Register', 'One'], ['Claimed purpose', 'Research'], ['Actual', 'Partly']] },
+      { key:'posters', name:'The Posters', x:'10%', y:'32%', body:'All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.', specs:[['Register', 'One'], ['Claimed purpose', 'Research'], ['Actual', 'Partly']] },
     ],
   };
 
@@ -106,11 +117,11 @@
   // CHANNEL_SETS[channelSet][0] in assets/js/tv-remote.js.
   var START_ROOM = 'penthouse-living'; // matches data-start-room below; also which screen (if any) autoplays on load
   var TV_SCREENS = {
-    'penthouse-living': { x:'57.5%', y:'24.3%', w:'19%', h:'15%',
-      box:'0.4854,0.1742,0.6646,0.3113', channelSet:'living',
+    'penthouse-living': { x:'55.7%', y:'24.0%', w:'17%', h:'14%',
+      box:'0.4740,0.1704,0.6406,0.3093', channelSet:'living',
       id:'4xVVFJuycww', label:'The Gentlemen' },
-    'cinema': { x:'50%', y:'37.6%', w:'27.9%', h:'29.3%',
-      box:'0.3604,0.2296,0.6396,0.5222', channelSet:'cinema',
+    'cinema': { x:'49.7%', y:'30.9%', w:'28%', h:'25%',
+      box:'0.3563,0.1833,0.6385,0.4352', channelSet:'cinema',
       id:'gnm4HgIAVmU', label:'The Thomas Crown Affair — Official Teaser Trailer' }
   };
 
@@ -123,7 +134,7 @@
   // remote's Music tab instead of a channel -- see the 'music' fallback
   // below and tv-remote.js's toggle handler.
   var REMOTE_NODE_POS = {
-    'cinema': ['50%', '53%'],
+    'cinema': ['50%', '45%'],
     'music-lounge': ['50%', '62%']
   };
   function remoteNodeHTML(roomId) {
@@ -148,10 +159,11 @@
   // x=14% on the left and off mid-height at the far right.
   // Mirrors build_house.py's CITY_NODE_POS exactly.
   var CITY_NODE_POS = {
-    'penthouse-living': ['17%', '62%'],  // left-hand window wall, mid-height, clear of the Kitchen arrow
-    'bedroom':          ['20%', '46%'],  // the floor-to-ceiling glass left of the bed
-    'bath':             ['50%', '50%'],  // the city behind the tub, centred on the glass
-    'kitchen':          ['93%', '25%']   // the right-hand window, high enough to clear the next-room arrow
+    'penthouse-living': ['18%', '22%'],  // upper pane of the stairwell glass wall, clear of the staircase below
+    'bedroom':          ['19%', '18.6%'], // clear glass past the lamp, above the lounge chair
+    'bath':             ['48%', '6%'],   // the skyline through the window, top edge of the now-wider frame, clear of the tub and plant
+    'kitchen':          ['32%', '6.8%'], // the narrow window beside the fireplace wall, clear of the plant
+    'music-lounge':     ['72%', '8%']    // the sliver of skyline beside the bar's PP sign, past the curtain
   };
   function cityLinkHTML(roomId) {
     var pos = CITY_NODE_POS[roomId];
@@ -285,6 +297,21 @@
   var MUSIC_LOUNGE_SPOTIFY = '<p class="body" style="margin-top:var(--s3)">Curated by <a class="link-under" href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>' +
     '<div class="spotify-embed"><div data-lounge-spotify></div></div>';
   var CANDLE_COMING_SOON = '<div class="coming-soon"><span class="coming-soon__badge">UR Welcome &#183; Coming Soon</span></div>';
+  // Mirrors build_house.py's LIVING_FASHIONNOVA_UNLOCK exactly -- reused by
+  // both the Living Room's Jacket and the Music Lounge's Polo, one collab
+  // discovered from two rooms rather than two different lists.
+  var FASHIONNOVA_UNLOCK = '<div class="unlock">' +
+      '<p class="unlock__eyebrow">Unlocked &#183; What He Reaches For</p>' +
+      '<ul class="unlock-list">' +
+        '<li><span class="unlock-list__name">The Reset Denim</span><span class="unlock-list__note">Straight through the knee. Nothing to prove.</span></li>' +
+        '<li><span class="unlock-list__name">The Quarter-Zip</span><span class="unlock-list__note">Reads expensive from ten feet. Isn\'t.</span></li>' +
+        '<li><span class="unlock-list__name">The Night Puffer</span><span class="unlock-list__note">For the walk between the car and the door.</span></li>' +
+        '<li><span class="unlock-list__name">The Weighted Tee</span><span class="unlock-list__note">The one under everything else that actually holds its shape.</span></li>' +
+        '<li><span class="unlock-list__name">The Going-Out Chain</span><span class="unlock-list__note">Not gold. Reads gold across a room.</span></li>' +
+        '<li><span class="unlock-list__name">The Knit Polo</span><span class="unlock-list__note">Cream knit, chocolate collar. Doesn\'t ask to be noticed.</span></li>' +
+      '</ul>' +
+      '<a class="cta cta--ghost unlock__cta" href="off-duty.html"><span>Shop the Fit &#8212; Fashion Nova &#215; Paris Pullen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>' +
+    '</div>';
 
   function extrasFor(roomId, key) {
     var wardrobeCta = (roomId === 'closet' && key === 'suits') ? SUITS_CTA : '';
@@ -301,7 +328,14 @@
     if (roomId === 'penthouse-living' && key === 'vault') wardrobeCta = VAULT_CTA;
     if (roomId === 'music-lounge' && key === 'recordplayer') wardrobeCta = MUSIC_LOUNGE_SPOTIFY;
     if (roomId === 'penthouse-living' && key === 'candle') wardrobeCta = CANDLE_COMING_SOON;
-    if (roomId === 'penthouse-living' && key === 'jacket') wardrobeCta = SUITS_CTA;
+    if (roomId === 'penthouse-living' && key === 'jacket') {
+      wardrobeCta = FASHIONNOVA_UNLOCK;
+      tag = ' &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen';
+    }
+    if (roomId === 'music-lounge' && key === 'polo') {
+      wardrobeCta = FASHIONNOVA_UNLOCK;
+      tag = ' &#183; Artifact &#183; Fashion Nova &#215; Paris Pullen';
+    }
     return { wardrobeCta: wardrobeCta, tag: tag };
   }
 
@@ -384,8 +418,8 @@
       '<div class="floor-scene__surface">' +
         '<div class="floor-scene__canvas">' +
           '<div class="floor-scene__view">' +
-            '<img src="assets/img/' + room.img + '.jpg" ' +
-            'srcset="assets/img/' + room.img + '@sm.jpg 1200w, assets/img/' + room.img + '.jpg 2400w" ' +
+            '<img src="assets/img/' + room.img + '.jpg?v=' + IMG_VER + '" ' +
+            'srcset="assets/img/' + room.img + '@sm.jpg?v=' + IMG_VER + ' 1200w, assets/img/' + room.img + '.jpg?v=' + IMG_VER + ' 2400w" ' +
             'sizes="100vw" alt="' + esc(room.name) + '" loading="lazy" width="2400" height="1350">' +
             buildTVHTML(TV_SCREENS[room.id], room.id) +
             '<div class="artifacts">' + artsHTML + remoteNodeHTML(room.id) + cityLinkHTML(room.id) + '</div>' +
