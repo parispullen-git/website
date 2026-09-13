@@ -2253,6 +2253,35 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 }
 .guide-portal__close:hover{border-color:var(--brass);color:var(--brass-lit)}
 
+/* 26f2. GYM PORTAL — same shape as the Guide Portal above, for the Gym's
+   Boxer artifact into the After Hours boxing minigame. Sized wider/taller
+   since the game's own dialog wants more room than the City Guide iframe
+   does. Built lazily by gym-portal.js. */
+.gym-portal{
+  position:fixed;inset:0;z-index:920;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(6,6,7,.92);padding:var(--s5);
+}
+.gym-portal.is-open{display:flex}
+.gym-portal__frame{
+  position:relative;width:min(97vw,1400px);height:min(94vh,980px);
+  background:#0a0a0b;border-radius:8px;overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,.65);
+}
+.gym-portal__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.gym-portal__close{
+  position:absolute;top:-2.6rem;right:0;
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;text-transform:uppercase;
+  background:none;border:1px solid var(--hairline);color:var(--bone);
+  padding:.5em 1em;border-radius:4px;cursor:pointer;
+}
+.gym-portal__close:hover{border-color:var(--brass);color:var(--brass-lit)}
+@media (max-width:760px){
+  .gym-portal{padding:0}
+  .gym-portal__frame{width:100vw;height:100svh;border-radius:0}
+  .gym-portal__close{top:.6rem;right:.6rem;z-index:2;background:rgba(10,10,11,.75)}
+}
+
 /* 26f. VAULT TRANSITION — full-screen wipe played before handing off to
    urwelcome.html from the Living Floor's Door artifact. */
 .vault-transition{

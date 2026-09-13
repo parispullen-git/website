@@ -495,6 +495,27 @@
             "Cities visited"
           ]
         ]
+      },
+      {
+        "id": "oxknit-study",
+        "name": "The Polo",
+        "x": "54%",
+        "y": "31%",
+        "desc": "Dark green cable knit, sleeves pushed to the forearm — the version of him that answers email after the desk lamp is the only light left on. OXKNIT again, the same collaboration as the one on the stairs downstairs, cut for a colder register.",
+        "specs": [
+          [
+            "Collection",
+            "OXKNIT × Paris Pullen"
+          ],
+          [
+            "Knit",
+            "Cable"
+          ],
+          [
+            "Also worn",
+            "The Living Room"
+          ]
+        ]
       }
     ]
   },

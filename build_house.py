@@ -33,7 +33,7 @@ FLOORS = json.loads((Path(__file__).resolve().parent / "data" / "house-rooms.jso
 # serving the old file for hours after a swap unless the URL itself
 # changes. Bumping this on every image update forces a fresh fetch --
 # mirror any change here in assets/js/penthouse.js's IMG_VER too.
-IMG_VER = "20260913d"
+IMG_VER = "20260913e"
 
 def esc(t):
     return t.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#8217;")
@@ -263,9 +263,11 @@ VAULT_CTA = ('<a class="cta pent__open" href="urwelcome.html" data-vault-enter s
 # The Gym's own boxing minigame lives at gym/ as a standalone page (built
 # separately, not part of the room-pager) -- this artifact is the one
 # doorway from the photo room into it, so the two don't read as two
-# unrelated "Gym" features living side by side.
-GYM_BOXING_CTA = ('<a class="cta cta--ghost" href="gym/" target="_blank" rel="noopener" style="margin-top:var(--s2)">'
-    '<span>Enter the Ring &#8212; After Hours</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
+# unrelated "Gym" features living side by side. Opens in the gym-portal.js
+# overlay (same lazy-iframe pattern as the Guide Portal) rather than
+# navigating away, so clicking the Boxer goes straight into the fight.
+GYM_BOXING_CTA = ('<button type="button" class="cta cta--ghost" data-gym-portal style="margin-top:var(--s2)">'
+    '<span>Enter the Ring &#8212; After Hours</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>')
 
 # The Piano artifact (Living Room) is retired -- this fixed single
 # playlist embed on the Music Lounge's own record-player artifact is its
@@ -541,6 +543,7 @@ html = f'''<!DOCTYPE html>
 <script src="assets/js/world.js?v=2" defer></script>
 <script src="assets/js/tv-remote.js?v=2" defer></script>
 <script src="assets/js/guide-portal.js?v=2" defer></script>
+<script src="assets/js/gym-portal.js?v=2" defer></script>
 <script src="assets/js/vault-entrance.js?v=2" defer></script>
 <script src="assets/js/piano-player.js?v=2" defer></script>
 </body>

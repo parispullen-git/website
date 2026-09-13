@@ -18,7 +18,7 @@
   // a room photo is re-shot in place (same filename, new bytes), since
   // browsers and Cloudflare's edge otherwise keep serving the old file for
   // hours off the unchanged URL.
-  var IMG_VER = '20260913d';
+  var IMG_VER = '20260913e';
 
   // Order here (mirrors build_house.py's _PENTHOUSE_ORDER exactly) is what
   // the room-pager's slide direction is actually built from -- it pages by
@@ -107,6 +107,7 @@
       { key:'journal', name:'The Journal', x:'51%', y:'38.8%', body:"This week's pages, face-up on the blotter for once, marked in pencil rather than ink so that nothing is decided yet. What survives the pencil goes out as a dispatch. Most of it does not survive the pencil.", specs:[['State', 'Draft'], ['Marked in', 'Pencil'], ['Survival rate', 'Low']] },
       { key:'cocktails', name:'The Cocktail Guide', x:'83%', y:'14.3%', body:'Six drinks, written on a card and kept behind the bottles, because a man looking up an Old Fashioned in front of guests has already lost the evening. Six is the entire list. There has never been a seventh.', specs:[['Drinks', 'Six'], ['Kept', 'Behind the bottles'], ['Consulted in company', 'Never']] },
       { key:'map', name:'The Map', x:'94%', y:'18.6%', body:'Brass inlay on black. Cities he has worked, not cities he has visited — a distinction he will make if you ask.', specs:[['Marks', 'Cities worked'], ['Not', 'Cities visited']] },
+      { key:'oxknit-study', name:'The Polo', x:'54%', y:'31%', body:"Dark green cable knit, sleeves pushed to the forearm &#8212; the version of him that answers email after the desk lamp is the only light left on. OXKNIT again, the same collaboration as the one on the stairs downstairs, cut for a colder register.", specs:[['Collection', 'OXKNIT × Paris Pullen'], ['Knit', 'Cable'], ['Also worn', 'The Living Room']] },
     ],
     'cinema': [
       { key:'posters', name:'The Posters', x:'10%', y:'32%', body:'All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.', specs:[['Register', 'One'], ['Claimed purpose', 'Research'], ['Actual', 'Partly']] },
@@ -293,7 +294,7 @@
   // minigame lives at gym/ as its own standalone page, not part of the
   // room-pager, so this artifact is the one doorway from the photo room
   // into it.
-  var GYM_BOXING_CTA = '<a class="cta cta--ghost" href="gym/" target="_blank" rel="noopener" style="margin-top:var(--s2)"><span>Enter the Ring &#8212; After Hours</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
+  var GYM_BOXING_CTA = '<button type="button" class="cta cta--ghost" data-gym-portal style="margin-top:var(--s2)"><span>Enter the Ring &#8212; After Hours</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>';
   // The Piano artifact (Living Room) is retired -- mirrors build_house.py's
   // MUSIC_LOUNGE_SPOTIFY exactly: one fixed playlist on the Music Lounge's
   // record-player artifact. The target is an empty div, not a plain
