@@ -114,6 +114,14 @@ ul,ol{margin:0;padding:0;list-style:none}
 }
 .eyebrow--muted{color:var(--ash)}
 
+.brand-row{display:flex;align-items:center;gap:var(--s4);margin:0 0 var(--s4)}
+.brand-badge{display:inline-flex;align-items:center;justify-content:center;background:var(--ivory);
+  border-radius:3px;padding:9px 16px;line-height:0}
+.brand-badge img{display:block;height:22px;width:auto}
+.brand-row__x{font-family:var(--font-display);font-style:italic;font-size:1.1rem;color:var(--graphite)}
+.brand-row__pp{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.28em;
+  text-transform:uppercase;color:var(--brass-lit)}
+
 .classified{
   font-family:var(--font-mono);
   font-size:var(--t-micro);
