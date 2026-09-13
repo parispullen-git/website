@@ -34,17 +34,21 @@
   .offduty-hero__title{font-family:var(--font-display);font-size:clamp(2rem,1.3rem+2.6vw,3.2rem);
     color:var(--ivory);line-height:1.05;margin:0;max-width:18ch}
 
-  .offduty-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  .offduty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
     gap:var(--s6);margin-top:var(--s8)}
-  .offduty-card{border:1px solid var(--hairline);padding:var(--s6);display:grid;gap:var(--s4);
+  .offduty-card{border:1px solid var(--hairline);display:grid;gap:0;
     transition:border-color var(--d-fast) var(--ease-out)}
   .offduty-card:hover{border-color:var(--brass)}
+  .offduty-card__figure{aspect-ratio:2/3;background:#e9e4d8;overflow:hidden}
+  .offduty-card__figure img{width:100%;height:100%;object-fit:cover;display:block}
+  .offduty-card__body{padding:var(--s5);display:grid;gap:var(--s3)}
   .offduty-card__index{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
     color:var(--graphite)}
-  .offduty-card__name{font-family:var(--font-display);font-size:1.5rem;line-height:1.15;color:var(--ivory)}
-  .offduty-card__note{color:var(--ash);font-size:var(--t-label);line-height:1.7}
+  .offduty-card__name{font-family:var(--font-display);font-size:1.3rem;line-height:1.2;color:var(--ivory)}
+  .offduty-card__note{color:var(--ash);font-size:var(--t-label);line-height:1.65}
   .offduty-card__meta{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;
-    text-transform:uppercase;color:var(--graphite);border-top:1px solid var(--rule);padding-top:var(--s3)}
+    text-transform:uppercase;color:var(--brass-lit);border-top:1px solid var(--rule);padding-top:var(--s3);
+    display:flex;align-items:center;gap:.5em}
 
   .offduty-cta{margin-top:var(--s9);padding-top:var(--s7);border-top:1px solid var(--rule);
     display:grid;gap:var(--s4);justify-items:start}
@@ -112,7 +116,7 @@
     <header class="stack reveal" style="max-width:760px">
       <p class="eyebrow">Fashion Nova &#215; Paris Pullen</p>
       <h1 class="display display--mega">Off<br>Duty</h1>
-      <p class="lede">The suits stay upstairs in the Closet, arranged by occasion. This is what's left over the back of the chair instead &#8212; six pieces for the nights that don't get a reservation.</p>
+      <p class="lede">The suits stay upstairs in the Closet, arranged by occasion. This is what's left over the back of the chair instead &#8212; seven pieces for the nights that don't get a reservation.</p>
     </header>
 
     <div class="offduty-hero reveal reveal-d1">
@@ -125,46 +129,73 @@
 
     <div class="offduty-grid">
       <article class="offduty-card reveal">
-        <p class="offduty-card__index">01 &#183; The Reset</p>
-        <h3 class="offduty-card__name">The Reset Denim</h3>
-        <p class="offduty-card__note">Straight through the knee. Nothing to prove, nothing to explain.</p>
-        <p class="offduty-card__meta">Everyday &#183; True to Size</p>
+        <div class="offduty-card__figure"><img src="assets/img/collabs/fashion-nova/00.jpg" alt="Herringbone Tweed Jacket, sage green, matching trousers" loading="lazy"></div>
+        <div class="offduty-card__body">
+          <p class="offduty-card__index">01 &#183; The Weekend Suit</p>
+          <h3 class="offduty-card__name">Herringbone Tweed Jacket</h3>
+          <p class="offduty-card__note">Sage herringbone, boxy collar, worn top to bottom as its own matching set. Some nights a uniform beats a decision.</p>
+          <a class="offduty-card__meta" href="https://www.fashionnova.com/products/herringbone-tweed-jacket?color=hunter-green" target="_blank" rel="noopener">Shop the piece <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
       <article class="offduty-card reveal">
-        <p class="offduty-card__index">02 &#183; The Quiet Flex</p>
-        <h3 class="offduty-card__name">The Quarter-Zip</h3>
-        <p class="offduty-card__note">Reads expensive from ten feet away. Isn't. Nobody at that distance can tell.</p>
-        <p class="offduty-card__meta">Everyday &#183; Layer Under Outerwear</p>
+        <div class="offduty-card__figure"><img src="assets/img/collabs/fashion-nova/01.jpg" alt="Cropped Tapestry Skyline Work Jacket, city skyline print" loading="lazy"></div>
+        <div class="offduty-card__body">
+          <p class="offduty-card__index">02 &#183; The Skyline</p>
+          <h3 class="offduty-card__name">Tapestry Skyline Work Jacket</h3>
+          <p class="offduty-card__note">A city dissolving into a sunset gradient, printed edge to edge across denim. Takes a second look to notice it's Charlotte's skyline and not just weather.</p>
+          <a class="offduty-card__meta" href="https://www.fashionnova.com/products/cropped-tapestry-skyline-work-jacket?color=blue" target="_blank" rel="noopener">Shop the piece <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
       <article class="offduty-card reveal">
-        <p class="offduty-card__index">03 &#183; The Commute</p>
-        <h3 class="offduty-card__name">The Night Puffer</h3>
-        <p class="offduty-card__note">For the walk between the car and the door, and nothing said about the weather.</p>
-        <p class="offduty-card__meta">Cold Weather &#183; Runs True</p>
+        <div class="offduty-card__figure"><img src="assets/img/collabs/fashion-nova/02.jpg" alt="Tapestry Trucker Jacket, green floral print, cream cargo shorts" loading="lazy"></div>
+        <div class="offduty-card__body">
+          <p class="offduty-card__index">03 &#183; The Botanist</p>
+          <h3 class="offduty-card__name">Tapestry Trucker Jacket</h3>
+          <p class="offduty-card__note">A floral tapestry nobody else in the room would try, over cream cargo shorts. The warm-weather version of the same instinct.</p>
+          <a class="offduty-card__meta" href="https://www.fashionnova.com/products/all-you-need-is-tapestry-trucker-jacket?color=green-combo" target="_blank" rel="noopener">Shop the piece <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
       <article class="offduty-card reveal">
-        <p class="offduty-card__index">04 &#183; The Foundation</p>
-        <h3 class="offduty-card__name">The Weighted Tee</h3>
-        <p class="offduty-card__note">The one under everything else that actually holds its shape by the third wash.</p>
-        <p class="offduty-card__meta">Everyday &#183; Size Up for Layering</p>
+        <div class="offduty-card__figure"><img src="assets/img/collabs/fashion-nova/03.jpg" alt="Patch Jacket, grey houndstooth and herringbone patchwork" loading="lazy"></div>
+        <div class="offduty-card__body">
+          <p class="offduty-card__index">04 &#183; The Patchwork</p>
+          <h3 class="offduty-card__name">Patch Jacket</h3>
+          <p class="offduty-card__note">Grey houndstooth and herringbone pieced into one jacket. Reads as a single fabric until someone's close enough to count the four.</p>
+          <a class="offduty-card__meta" href="https://www.fashionnova.com/products/theyre-satisfied-patch-jacket?color=grey" target="_blank" rel="noopener">Shop the piece <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
       <article class="offduty-card reveal">
-        <p class="offduty-card__index">05 &#183; The Finish</p>
-        <h3 class="offduty-card__name">The Going-Out Chain</h3>
-        <p class="offduty-card__note">Not gold. Reads gold across a room, which is the only room it needs to read in.</p>
-        <p class="offduty-card__meta">Accessory &#183; One Size</p>
+        <div class="offduty-card__figure"><img src="assets/img/collabs/fashion-nova/04.jpg" alt="Duke Textured Bomber Jacket, hunter green, cream ribbing" loading="lazy"></div>
+        <div class="offduty-card__body">
+          <p class="offduty-card__index">05 &#183; The Varsity</p>
+          <h3 class="offduty-card__name">Duke Textured Bomber</h3>
+          <p class="offduty-card__note">Hunter green, quilted, cream ribbing at the collar and cuffs. The chain isn't required. It's implied.</p>
+          <a class="offduty-card__meta" href="https://www.fashionnova.com/products/duke-textured-bomber-jacket?color=green" target="_blank" rel="noopener">Shop the piece <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
       <article class="offduty-card reveal">
-        <p class="offduty-card__index">06 &#183; The Off-Duty Icon</p>
-        <h3 class="offduty-card__name">The Knit Polo</h3>
-        <p class="offduty-card__note">Cream knit, chocolate collar. Doesn't ask to be noticed, gets noticed anyway.</p>
-        <p class="offduty-card__meta">Everyday &#183; True to Size</p>
+        <div class="offduty-card__figure"><img src="assets/img/collabs/fashion-nova/05.jpg" alt="Beverly Tweed Contrasting Stitch Trucker Jacket, brown basketweave" loading="lazy"></div>
+        <div class="offduty-card__body">
+          <p class="offduty-card__index">06 &#183; The Contrast Stitch</p>
+          <h3 class="offduty-card__name">Beverly Tweed Trucker</h3>
+          <p class="offduty-card__note">Brown basketweave tweed, cream stitching traced through every seam like a blueprint of the jacket underneath it.</p>
+          <a class="offduty-card__meta" href="https://www.fashionnova.com/products/beverly-tweed-contrasting-stitch-trucker-jacket?color=brown" target="_blank" rel="noopener">Shop the piece <span aria-hidden="true">&#8594;</span></a>
+        </div>
+      </article>
+      <article class="offduty-card reveal">
+        <div class="offduty-card__figure"><img src="assets/img/collabs/fashion-nova/06.jpg" alt="Teddy Varsity Sherpa Jacket, camel shearling with striped ribbing" loading="lazy"></div>
+        <div class="offduty-card__body">
+          <p class="offduty-card__index">07 &#183; The Shearling Letterman</p>
+          <h3 class="offduty-card__name">Teddy Varsity Sherpa</h3>
+          <p class="offduty-card__note">Camel shearling, navy-striped ribbing, built like a letterman jacket that spent a winter somewhere colder than here.</p>
+          <a class="offduty-card__meta" href="https://www.fashionnova.com/products/teddy-varsity-sherpa-jacket?color=taupe" target="_blank" rel="noopener">Shop the piece <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
     </div>
 
     <div class="offduty-cta reveal">
       <p class="pullquote">The bespoke wardrobe is upstairs. This is what he actually reaches for.</p>
-      <p class="classified">Partner shopping links coming soon.</p><a class="cta" href="house.html#kitchen"><span>Explore the capsule in the Kitchen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+      <a class="cta" href="house.html#kitchen"><span>Explore the capsule in the Kitchen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
       <p class="classified">Also found in The Kitchen and The Music Lounge &#183; <a class="link-under" href="house.html#kitchen">Level 27 &#8594;</a> &#183; <a class="link-under" href="house.html#music-lounge">Level 26 &#8594;</a></p>
     </div>
   </div>

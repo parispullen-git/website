@@ -36,15 +36,19 @@
 
   .pantry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:var(--s6);margin-top:var(--s8)}
-  .pantry-card{border:1px solid var(--hairline);padding:var(--s6);display:grid;gap:var(--s4);
+  .pantry-card{border:1px solid var(--hairline);display:grid;gap:0;
     transition:border-color var(--d-fast) var(--ease-out)}
   .pantry-card:hover{border-color:var(--brass)}
+  .pantry-card__figure{aspect-ratio:16/10;background:#e9e4d8;overflow:hidden}
+  .pantry-card__figure img{width:100%;height:100%;object-fit:cover;display:block}
+  .pantry-card__body{padding:var(--s6);display:grid;gap:var(--s4)}
   .pantry-card__index{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;
     color:var(--graphite)}
-  .pantry-card__name{font-family:var(--font-display);font-size:1.5rem;line-height:1.15;color:var(--ivory)}
+  .pantry-card__name{font-family:var(--font-display);font-size:1.3rem;line-height:1.2;color:var(--ivory)}
   .pantry-card__note{color:var(--ash);font-size:var(--t-label);line-height:1.7}
   .pantry-card__meta{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;
-    text-transform:uppercase;color:var(--graphite);border-top:1px solid var(--rule);padding-top:var(--s3)}
+    text-transform:uppercase;color:var(--brass-lit);border-top:1px solid var(--rule);padding-top:var(--s3);
+    display:flex;align-items:center;gap:.5em}
 
   .pantry-cta{margin-top:var(--s9);padding-top:var(--s7);border-top:1px solid var(--rule);
     display:grid;gap:var(--s4);justify-items:start}
@@ -125,40 +129,55 @@
 
     <div class="pantry-grid">
       <article class="pantry-card reveal">
-        <p class="pantry-card__index">01 &#183; The Standby</p>
-        <h3 class="pantry-card__name">Pan-Seared Filet, Peppercorn Sauce</h3>
-        <p class="pantry-card__note">The one that never needs an occasion. Twelve minutes, one pan, and a sauce that does the impressing for you.</p>
-        <p class="pantry-card__meta">Weeknight &#183; Serves 2</p>
+        <div class="pantry-card__figure"><img src="assets/img/collabs/hellofresh/00.jpg" alt="Gouda Vibes Burgers with Tomato Onion Jam and Potato Wedges" loading="lazy"></div>
+        <div class="pantry-card__body">
+          <p class="pantry-card__index">01 &#183; The Standby</p>
+          <h3 class="pantry-card__name">Gouda Vibes Burgers</h3>
+          <p class="pantry-card__note">Beef patty, nutty gouda, tomato onion jam, and potato wedges. The one that never needs an occasion.</p>
+          <a class="pantry-card__meta" href="https://www.hellofresh.com/recipes/gouda-vibes-burgers-5eb9aeccd2f80a637e0e4e5d" target="_blank" rel="noopener">Get this recipe <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
       <article class="pantry-card reveal">
-        <p class="pantry-card__index">02 &#183; The Quick One</p>
-        <h3 class="pantry-card__name">Miso-Glazed Salmon, Charred Broccolini</h3>
-        <p class="pantry-card__note">Fifteen minutes, looks like an hour. The recipe that made him stop ordering delivery on a Tuesday.</p>
-        <p class="pantry-card__meta">Weeknight &#183; Serves 2</p>
+        <div class="pantry-card__figure"><img src="assets/img/collabs/hellofresh/01.jpg" alt="Southwest Shrimp Tacos with Pico de Gallo and Hot Sauce Crema" loading="lazy"></div>
+        <div class="pantry-card__body">
+          <p class="pantry-card__index">02 &#183; The Quick One</p>
+          <h3 class="pantry-card__name">Southwest Shrimp Tacos</h3>
+          <p class="pantry-card__note">Twenty-five minutes, tastes like it took longer. Pico de gallo, hot sauce crema, warm tortillas.</p>
+          <a class="pantry-card__meta" href="https://www.hellofresh.com/recipes/southwest-shrimp-tacos-61a789cad3877c660a03a872" target="_blank" rel="noopener">Get this recipe <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
       <article class="pantry-card reveal">
-        <p class="pantry-card__index">03 &#183; The Occasion</p>
-        <h3 class="pantry-card__name">French Onion Steak Frites</h3>
-        <p class="pantry-card__note">For the night he's not ordering in. Caramelized onions, a proper sear, and frites that hold up to the sauce.</p>
-        <p class="pantry-card__meta">45 min &#183; Serves 2</p>
+        <div class="pantry-card__figure"><img src="assets/img/collabs/hellofresh/02.jpg" alt="Honey Sriracha Pork Tenderloin with Roasted Sesame Carrots and Cilantro-Lime Rice" loading="lazy"></div>
+        <div class="pantry-card__body">
+          <p class="pantry-card__index">03 &#183; The Occasion</p>
+          <h3 class="pantry-card__name">Honey Sriracha Pork Tenderloin</h3>
+          <p class="pantry-card__note">Sesame, ginger, honey, sriracha. A lick-the-plate glaze over rested pork tenderloin, worth clearing the evening for.</p>
+          <a class="pantry-card__meta" href="https://www.hellofresh.com/recipes/honey-sriracha-pork-tenderloin-5fa07b6801edba49463cf224" target="_blank" rel="noopener">Get this recipe <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
       <article class="pantry-card reveal">
-        <p class="pantry-card__index">04 &#183; The Crowd-Pleaser</p>
-        <h3 class="pantry-card__name">Rigatoni alla Vodka, Torn Basil</h3>
-        <p class="pantry-card__note">Cooks in one pan. Photographs in every light. The dish that gets requested by name.</p>
-        <p class="pantry-card__meta">25 min &#183; Serves 2&#8211;3</p>
+        <div class="pantry-card__figure"><img src="assets/img/collabs/hellofresh/03.jpg" alt="Chimichurri Lamb Chops and Hot Honey Brussels Sprouts" loading="lazy"></div>
+        <div class="pantry-card__body">
+          <p class="pantry-card__index">04 &#183; The Showstopper</p>
+          <h3 class="pantry-card__name">Chimichurri Lamb & Hot Honey Brussels Sprouts</h3>
+          <p class="pantry-card__note">Seared lamb chops, bold herby chimichurri, and Brussels sprouts roasted with hot honey and feta. No apology required.</p>
+          <a class="pantry-card__meta" href="https://www.hellofresh.com/recipes/chimichurri-lamb-and-hot-honey-brussels-sprouts-69f21d783ace2ca2f08f08ba" target="_blank" rel="noopener">Get this recipe <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
       <article class="pantry-card reveal">
-        <p class="pantry-card__index">05 &#183; The Weekly</p>
-        <h3 class="pantry-card__name">Smoked Paprika Chicken, Root Vegetables</h3>
-        <p class="pantry-card__note">The one he actually makes twice a week. Nothing clever about it &#8212; it just works, every time.</p>
-        <p class="pantry-card__meta">35 min &#183; Serves 2</p>
+        <div class="pantry-card__figure"><img src="assets/img/collabs/hellofresh/04.jpg" alt="Turkey and Mushroom Shepherd's Pie with White Cheddar Mashed Potatoes" loading="lazy"></div>
+        <div class="pantry-card__body">
+          <p class="pantry-card__index">05 &#183; The Weekly</p>
+          <h3 class="pantry-card__name">Turkey & Mushroom Shepherd's Pie</h3>
+          <p class="pantry-card__note">Meaty mushrooms stand in for the beef nobody misses, broiled white cheddar on top. Comfort, no performance required.</p>
+          <a class="pantry-card__meta" href="https://www.hellofresh.com/recipes/turkey-mushroom-shepherd-s-pie-649c8b124387a88e63f51410" target="_blank" rel="noopener">Get this recipe <span aria-hidden="true">&#8594;</span></a>
+        </div>
       </article>
     </div>
 
     <div class="pantry-cta reveal">
       <p class="pullquote">He does not cook often. He cooks well when he does.</p>
-      <p class="classified">Partner ordering link coming soon.</p><a class="cta" href="house.html#kitchen"><span>Explore the cookbook in the Kitchen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+      <a class="cta" href="house.html#kitchen"><span>Explore the cookbook in the Kitchen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
       <p class="classified">Also found in The Kitchen &#183; <a class="link-under" href="house.html#kitchen">Level 27, The Compliment &#8594;</a></p>
       <p class="classified">There's a second mention of it, if you know where to look &#8212; <a class="link-under" href="house.html#study">The Study, Level 27 &#8594;</a></p>
     </div>
