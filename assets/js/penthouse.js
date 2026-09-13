@@ -27,16 +27,16 @@
   // runs backwards from what the arrow/swipe implied. Each row is an
   // independent left-right chain (ROOM_ADJACENCY, below, has no left/
   // right link between rows), so only the order *within* each row matters:
-  //   Bathroom -> Bedroom -> Closet                 (Level 28)
+  //   Closet -> Bedroom -> Bathroom                 (Level 28)
   //   Kitchen -> Living Room -> Study                (Level 27)
-  //   Music Lounge -> Gym -> Cinema                  (Level 26 -- Lounge Bar retired, see below)
+  //   Music Lounge -> Cinema -> Gym                  (Level 26)
   var ROOMS = [
-    { id:'bath',    lvl:'Level 28', name:'The Bathroom',
-      note:'Stone, brass and steam, with the whole city on the other side of the glass.', img:'room-bath' },
-    { id:'bedroom', lvl:'Level 28', name:'The Bedroom',
-      note:'Blackout to the glass, and a bed that faces away from the view on purpose.', img:'room-bedroom' },
     { id:'closet',  lvl:'Level 28', name:'The Closet',
       note:'Not a room of clothes. A room of decisions already made.', img:'room-closet' },
+    { id:'bedroom', lvl:'Level 28', name:'The Bedroom',
+      note:'Blackout to the glass, and a bed that faces away from the view on purpose.', img:'room-bedroom' },
+    { id:'bath',    lvl:'Level 28', name:'The Bathroom',
+      note:'Stone, brass and steam, with the whole city on the other side of the glass.', img:'room-bath' },
     { id:'kitchen', lvl:'Level 27', name:'The Kitchen',
       note:'Black marble, brass and a range that has seen more entertaining than cooking.', img:'room-kitchen' },
     { id:'penthouse-living', lvl:'Level 27', name:'The Living Room',
@@ -45,34 +45,31 @@
       note:'The room where the answer is usually no, and where it gets said politely.', img:'room-study' },
     { id:'music-lounge', lvl:'Level 26', name:'The Music Lounge',
       note:'Vinyl floor to ceiling on one wall, a turntable that never gets left idle, and a couch built for people who came to listen, not to talk over it.', img:'room-musiclounge' },
-    { id:'gym', lvl:'Level 26', name:'The Gym',
-      note:"Steel and rope, one flight from the record wall, with a skyline that doesn't care if you skip a set.", img:'room-gym' },
     { id:'cinema',  lvl:'Level 26', name:'The Cinema',
-      note:'Nine seats, one screen, and a rule about phones that is actually enforced.', img:'room-cinema' }
+      note:'Nine seats, one screen, and a rule about phones that is actually enforced.', img:'room-cinema' },
+    { id:'gym', lvl:'Level 26', name:'The Gym',
+      note:"Steel and rope, one flight from the record wall, with a skyline that doesn't care if you skip a set.", img:'room-gym' }
   ];
 
   // Room-to-room navigation is a real 2D layout -- each room's up/down
   // neighbor sits in the same column one floor away (mirrors
   // build_house.py's ROOM_ADJACENCY exactly):
-  //   Level 28:  Bathroom <-> Bedroom    <-> Closet
-  //                  |            |            |
-  //   Level 27:  Kitchen <-> Living Room <-> Study
-  //                               |            |
-  //   Level 26:              Music Lounge <-> Gym <-> Cinema
-  // The Lounge Bar (former Level 26, column 1) has been retired -- Kitchen's
-  // column now dead-ends at Level 27 (no "down"), and Music Lounge has no
-  // "left" neighbor of its own. The Gym is a pure left-right insertion
-  // between Music Lounge and Cinema, with no up/down neighbor of its own.
+  //   Level 28:  Closet   <-> Bedroom     <-> Bathroom
+  //                  |            |             |
+  //   Level 27:  Kitchen  <-> Living Room  <-> Study
+  //                  |            |             |
+  //   Level 26:  Music Lounge <-> Cinema   <-> Gym
+  // A full 3x3 grid -- every room has an up/down neighbor.
   var ROOM_ADJACENCY = {
-    'bath':             { right:'bedroom', down:'kitchen' },
-    'bedroom':          { left:'bath', right:'closet', down:'penthouse-living' },
-    'closet':           { left:'bedroom', down:'study' },
-    'kitchen':          { right:'penthouse-living', up:'bath' },
-    'penthouse-living': { left:'kitchen', right:'study', up:'bedroom', down:'music-lounge' },
-    'study':            { left:'penthouse-living', up:'closet', down:'cinema' },
-    'music-lounge':     { right:'gym', up:'penthouse-living' },
-    'gym':              { left:'music-lounge', right:'cinema' },
-    'cinema':           { left:'gym', up:'study' }
+    'closet':           { right:'bedroom', down:'kitchen' },
+    'bedroom':          { left:'closet', right:'bath', down:'penthouse-living' },
+    'bath':             { left:'bedroom', down:'study' },
+    'kitchen':          { up:'closet', right:'penthouse-living', down:'music-lounge' },
+    'penthouse-living': { left:'kitchen', right:'study', up:'bedroom', down:'cinema' },
+    'study':            { left:'penthouse-living', up:'bath', down:'gym' },
+    'music-lounge':     { up:'kitchen', right:'cinema' },
+    'cinema':           { left:'music-lounge', right:'gym', up:'penthouse-living' },
+    'gym':              { left:'cinema', up:'study' }
   };
 
   var ARTS = {

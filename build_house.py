@@ -51,41 +51,37 @@ def esc(t):
 # runs backwards from what the arrow/swipe implied. Each row below is an
 # independent left-right chain (ROOM_ADJACENCY has no left/right link
 # between rows), so only the order *within* each row matters:
-#   Bathroom -> Bedroom -> Closet                 (Level 28)
+#   Closet -> Bedroom -> Bathroom                  (Level 28)
 #   Kitchen -> Living Room -> Study                (Level 27)
-#   Music Lounge -> Gym -> Cinema                  (Level 26 -- Lounge Bar retired, see below)
-_PENTHOUSE_ORDER = ["bath", "bedroom", "closet",
+#   Music Lounge -> Cinema -> Gym                  (Level 26)
+_PENTHOUSE_ORDER = ["closet", "bedroom", "bath",
                      "kitchen", "penthouse-living", "study",
-                     "music-lounge", "gym", "cinema"]
+                     "music-lounge", "cinema", "gym"]
 _penthouse_by_id = {f["id"]: f for f in FLOORS if f["lvl"] in ("26", "27", "28")}
 PENTHOUSE_FLOORS = [_penthouse_by_id[_id] for _id in _PENTHOUSE_ORDER]
 START_ROOM = "penthouse-living"  # data-start-room below; also which screen (if any) autoplays on load
 
 # Room-to-room navigation is a real 2D layout -- each room's up/down
 # neighbor sits in the same column one floor away:
-#   Level 28:  Bathroom <-> Bedroom    <-> Closet
-#                  |            |            |
-#   Level 27:  Kitchen <-> Living Room <-> Study
-#                               |            |
-#   Level 26:              Music Lounge <-> Gym <-> Cinema
-# The Lounge Bar (former Level 26, column 1) has been retired -- Kitchen's
-# column now dead-ends at Level 27 (no "down"), and Music Lounge has no
-# "left" neighbor of its own. The Gym is a pure left-right insertion between
-# Music Lounge and Cinema, with no up/down neighbor of its own (there's no
-# Level 27 room to anchor it to). Left/right/up/down each name an explicit
-# neighbor id (or are absent at an edge) -- room-pager.js reads these
-# directly rather than paging by array index, so DOM order no longer needs
-# to match traversal order.
+#   Level 28:  Closet   <-> Bedroom     <-> Bathroom
+#                  |            |             |
+#   Level 27:  Kitchen  <-> Living Room  <-> Study
+#                  |            |             |
+#   Level 26:  Music Lounge <-> Cinema   <-> Gym
+# A full 3x3 grid -- every room has an up/down neighbor. Left/right/up/down
+# each name an explicit neighbor id (or are absent at an edge) -- room-
+# pager.js reads these directly rather than paging by array index, so DOM
+# order no longer needs to match traversal order.
 ROOM_ADJACENCY = {
-    "bath":               {"right": "bedroom", "down": "kitchen"},
-    "bedroom":            {"left": "bath", "right": "closet", "down": "penthouse-living"},
-    "closet":             {"left": "bedroom", "down": "study"},
-    "kitchen":            {"right": "penthouse-living", "up": "bath"},
-    "penthouse-living":   {"left": "kitchen", "right": "study", "up": "bedroom", "down": "music-lounge"},
-    "study":              {"left": "penthouse-living", "up": "closet", "down": "cinema"},
-    "music-lounge":       {"right": "gym", "up": "penthouse-living"},
-    "gym":                {"left": "music-lounge", "right": "cinema"},
-    "cinema":             {"left": "gym", "up": "study"},
+    "closet":             {"right": "bedroom", "down": "kitchen"},
+    "bedroom":            {"left": "closet", "right": "bath", "down": "penthouse-living"},
+    "bath":               {"left": "bedroom", "down": "study"},
+    "kitchen":            {"up": "closet", "right": "penthouse-living", "down": "music-lounge"},
+    "penthouse-living":   {"left": "kitchen", "right": "study", "up": "bedroom", "down": "cinema"},
+    "study":              {"left": "penthouse-living", "up": "bath", "down": "gym"},
+    "music-lounge":       {"up": "kitchen", "right": "cinema"},
+    "cinema":             {"left": "music-lounge", "right": "gym", "up": "penthouse-living"},
+    "gym":                {"left": "cinema", "up": "study"},
 }
 
 # Room-to-room nav (ROOM_ADJACENCY, above) is fully explicit now, but the
@@ -488,7 +484,7 @@ html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css?v=15">
+<link rel="stylesheet" href="assets/css/world.css?v=16">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -526,14 +522,14 @@ html = f'''<!DOCTYPE html>
      tv-remote.js's initSuiteRemote() -- one instance regardless of how
      many rooms have a screen. -->
 
-<script src="assets/js/room-pager.js?v=15" defer></script>
-<script src="assets/js/nav-panel.js?v=15" defer></script>
-<script src="assets/js/world.js?v=15" defer></script>
-<script src="assets/js/tv-remote.js?v=15" defer></script>
-<script src="assets/js/guide-portal.js?v=15" defer></script>
-<script src="assets/js/gym-portal.js?v=15" defer></script>
-<script src="assets/js/vault-entrance.js?v=15" defer></script>
-<script src="assets/js/piano-player.js?v=15" defer></script>
+<script src="assets/js/room-pager.js?v=16" defer></script>
+<script src="assets/js/nav-panel.js?v=16" defer></script>
+<script src="assets/js/world.js?v=16" defer></script>
+<script src="assets/js/tv-remote.js?v=16" defer></script>
+<script src="assets/js/guide-portal.js?v=16" defer></script>
+<script src="assets/js/gym-portal.js?v=16" defer></script>
+<script src="assets/js/vault-entrance.js?v=16" defer></script>
+<script src="assets/js/piano-player.js?v=16" defer></script>
 </body>
 </html>
 '''
