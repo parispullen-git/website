@@ -506,7 +506,7 @@ html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css?v=4">
+<link rel="stylesheet" href="assets/css/world.css?v=5">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -544,14 +544,14 @@ html = f'''<!DOCTYPE html>
      tv-remote.js's initSuiteRemote() -- one instance regardless of how
      many rooms have a screen. -->
 
-<script src="assets/js/room-pager.js?v=4" defer></script>
-<script src="assets/js/nav-panel.js?v=4" defer></script>
-<script src="assets/js/world.js?v=4" defer></script>
-<script src="assets/js/tv-remote.js?v=4" defer></script>
-<script src="assets/js/guide-portal.js?v=4" defer></script>
-<script src="assets/js/gym-portal.js?v=4" defer></script>
-<script src="assets/js/vault-entrance.js?v=4" defer></script>
-<script src="assets/js/piano-player.js?v=4" defer></script>
+<script src="assets/js/room-pager.js?v=5" defer></script>
+<script src="assets/js/nav-panel.js?v=5" defer></script>
+<script src="assets/js/world.js?v=5" defer></script>
+<script src="assets/js/tv-remote.js?v=5" defer></script>
+<script src="assets/js/guide-portal.js?v=5" defer></script>
+<script src="assets/js/gym-portal.js?v=5" defer></script>
+<script src="assets/js/vault-entrance.js?v=5" defer></script>
+<script src="assets/js/piano-player.js?v=6" defer></script>
 </body>
 </html>
 '''

@@ -50,6 +50,18 @@
   }
   .lib__panel::before{left:.9rem}
   .lib__panel::after{right:.9rem}
+  .lib__music-toggle{
+    position:absolute;top:1.7rem;right:1.3rem;z-index:2;
+    width:2.4rem;height:2.4rem;border-radius:50%;flex:none;cursor:pointer;
+    background:radial-gradient(circle,#1c1c1c,#0d0d0e 72%);border:1px solid var(--hairline);
+    display:flex;align-items:center;justify-content:center;color:var(--bone);
+    transition:border-color var(--d-fast) var(--ease-out),color var(--d-fast) var(--ease-out);
+  }
+  .lib__music-toggle:hover{border-color:var(--brass);color:var(--brass-lit)}
+  .lib__music-icon::before{content:'\25B6';font-size:.8rem;line-height:1;margin-left:2px}
+  .lib__music-toggle.is-playing .lib__music-icon::before{content:'\23F8';margin-left:0}
+  .lib__music-toggle.is-loading{opacity:.5;pointer-events:none}
+  .lib__music-host{position:fixed;left:-9999px;bottom:0;width:1px;height:1px;overflow:hidden}
   /* a thin reflective "floor" strip at the foot of the panel, echoing the
      marble underfoot in the photo behind it */
   .lib__floor{
@@ -198,6 +210,9 @@
 
 <main class="lib">
  <div class="lib__panel">
+  <button type="button" class="lib__music-toggle" id="musicToggle" aria-label="Play music" aria-pressed="false">
+    <span class="lib__music-icon" aria-hidden="true"></span>
+  </button>
   <div class="lib__avatar">
     <img src="/assets/img/paris-headshot@sm.jpg" srcset="/assets/img/paris-headshot@sm.jpg 462w, /assets/img/paris-headshot.jpg 925w" sizes="84px" alt="Paris Pullen" width="84" height="84">
   </div>
@@ -450,6 +465,47 @@
       submit.disabled = false;
       submit.textContent = 'Join the Network';
     });
+  });
+})();
+
+/* ---------- One ambient track for this page, via Spotify's IFrame API ----------
+   Manual play/pause only -- autoplay-with-sound gets blocked by most
+   browsers before any interaction anyway, and a link-in-bio page grabbing
+   audio on load without being asked is exactly the kind of thing this
+   button avoids. Controller is created on page load (so the first tap is
+   instant, no load delay) but never told to play until that tap happens. */
+(function () {
+  'use strict';
+  var TRACK_ID = '4xRxYWgAtL6pzRz94GlZlA';
+  var btn = document.getElementById('musicToggle');
+  if (!btn) return;
+
+  var controller = null;
+  btn.classList.add('is-loading');
+
+  var apiScript = document.createElement('script');
+  apiScript.src = 'https://open.spotify.com/embed/iframe-api/v1';
+  apiScript.async = true;
+  window.onSpotifyIframeApiReady = function (IFrameAPI) {
+    var host = document.createElement('div');
+    host.className = 'lib__music-host';
+    host.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(host);
+    IFrameAPI.createController(host, { uri: 'spotify:track:' + TRACK_ID }, function (c) {
+      controller = c;
+      btn.classList.remove('is-loading');
+      c.addListener('playback_update', function (e) {
+        var isPaused = !!(e && e.data && e.data.isPaused);
+        btn.classList.toggle('is-playing', !isPaused);
+        btn.setAttribute('aria-pressed', String(!isPaused));
+        btn.setAttribute('aria-label', isPaused ? 'Play music' : 'Pause music');
+      });
+    });
+  };
+  document.head.appendChild(apiScript);
+
+  btn.addEventListener('click', function () {
+    if (controller) controller.togglePlay();
   });
 })();
 </script>

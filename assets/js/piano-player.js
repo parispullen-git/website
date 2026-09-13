@@ -173,25 +173,114 @@
           document.dispatchEvent(new CustomEvent('pp:lounge-playback', {
             detail: { isPaused: !!(e && e.data && e.data.isPaused) }
           }));
+          if (ambient && ambient.roomId === 'music-lounge') {
+            ambient.isPaused = !!(e && e.data && e.data.isPaused);
+            document.dispatchEvent(new CustomEvent('pp:ambient-playback'));
+          }
         });
         document.dispatchEvent(new CustomEvent('pp:lounge-controller-ready'));
       });
     });
   }
 
+  /* ----------------------------------------------------------------
+     Ambient per-room tracks -- every room without a screen of its own
+     gets one assigned Spotify track that starts the instant you arrive
+     and pauses the instant you leave, exactly like the Living Room and
+     Cinema's own video audio already does for THEIR rooms (see
+     tv-remote.js's IntersectionObserver). The Music Lounge keeps its
+     distinct intro-sting-then-playlist sequence below rather than
+     joining this map, but reports into the same `ambient` slot so the
+     Suite Remote's Music tab (tv-remote.js) has exactly one thing to
+     ask about regardless of which mechanism is actually playing --
+     "what's the current room's ambient audio, if any" -- since by
+     construction at most one of these is ever playing at a time.
+     window.PPAmbient exposes that read (and a togglePlay convenience)
+     without tv-remote.js needing to know piano-player.js's internals. */
+  var ROOM_TRACKS = {
+    study: '2bjwRfXMk4uRgOD9IBYl9h',
+    gym: '05KOgYg8PGeJyyWBPi5ja8',
+    bedroom: '1F6nHHDJyTHLgDDFj1ZZDt',
+    kitchen: '11pEKMLmavDu8fxOB5QjbQ',
+    closet: '6jy9yJfgCsMHdu2Oz4BGKX',
+    bath: '1Tnw0ItH1Macok8gblnPPd',
+    'penthouse-living': '6jy9yJfgCsMHdu2Oz4BGKX'
+  };
+  var ROOM_LABELS = {
+    study: 'The Study', gym: 'The Gym', bedroom: 'The Bedroom',
+    kitchen: 'The Kitchen', closet: 'The Closet', bath: 'The Bathroom',
+    'penthouse-living': 'The Living Room', 'music-lounge': 'The Music Lounge'
+  };
+  var roomControllers = {}; // roomId -> Spotify controller, built lazily on first entry
+  var ambient = null; // { roomId, controller, isPaused } for whichever track is live right now, or null
+
+  function setAmbient(roomId, controller) {
+    ambient = controller ? { roomId: roomId, controller: controller, isPaused: false } : null;
+    document.dispatchEvent(new CustomEvent('pp:ambient-change'));
+  }
+
+  window.PPAmbient = {
+    get: function () { return ambient; },
+    label: function (roomId) { return ROOM_LABELS[roomId] || ''; }
+  };
+
+  function ensureRoomController(roomId, cb) {
+    if (roomControllers[roomId]) { cb(roomControllers[roomId]); return; }
+    var host = document.createElement('div');
+    host.className = 'room-track-host';
+    host.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(host);
+    spotifyApiPromise.then(function (IFrameAPI) {
+      if (!IFrameAPI) return;
+      IFrameAPI.createController(host, { uri: 'spotify:track:' + ROOM_TRACKS[roomId] }, function (controller) {
+        roomControllers[roomId] = controller;
+        controller.addListener('playback_update', function (e) {
+          if (ambient && ambient.roomId === roomId) {
+            ambient.isPaused = !!(e && e.data && e.data.isPaused);
+            document.dispatchEvent(new CustomEvent('pp:ambient-playback'));
+          }
+        });
+        cb(controller);
+      });
+    });
+  }
+
   var loungeIntro = null;
   document.addEventListener('pp:room-change', function (e) {
-    if (!e.detail || e.detail.id !== 'music-lounge') return;
-    if (!loungeIntro) {
-      loungeIntro = new Audio('assets/audio/music-lounge-intro.m4a');
-      loungeIntro.addEventListener('ended', function () {
-        if (loungeController) loungeController.play();
+    var id = e.detail && e.detail.id;
+
+    // Leaving whichever room owned the currently-playing ambient track
+    // (individual track or the Lounge's own controller) pauses it --
+    // covers every case, including paging away from the Lounge mid-sting.
+    if (ambient && ambient.roomId !== id) {
+      if (loungeIntro && ambient.roomId === 'music-lounge' && !loungeIntro.paused) loungeIntro.pause();
+      ambient.controller.pause();
+      setAmbient(null, null);
+    }
+
+    if (id === 'music-lounge') {
+      if (!loungeIntro) {
+        loungeIntro = new Audio('assets/audio/music-lounge-intro.m4a');
+        loungeIntro.addEventListener('ended', function () {
+          if (loungeController) { loungeController.play(); setAmbient('music-lounge', loungeController); }
+        });
+      }
+      loungeIntro.currentTime = 0;
+      loungeIntro.play().catch(function () {
+        if (loungeController) { loungeController.play(); setAmbient('music-lounge', loungeController); }
+      });
+      if (loungeController) setAmbient('music-lounge', loungeController);
+    } else if (ROOM_TRACKS[id]) {
+      ensureRoomController(id, function (controller) {
+        // A later pp:room-change may have already fired (fast paging) by
+        // the time this lazy controller resolves -- only play/claim the
+        // ambient slot if we're still actually in this room.
+        var pager = window.PPRoomPagers && window.PPRoomPagers[0];
+        if (pager && pager.getCurrentId() !== id) return;
+        controller.play();
+        setAmbient(id, controller);
       });
     }
-    loungeIntro.currentTime = 0;
-    loungeIntro.play().catch(function () {
-      if (loungeController) loungeController.play();
-    });
   });
 
   function initAll() {

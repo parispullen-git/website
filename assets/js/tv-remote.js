@@ -948,7 +948,7 @@
     var muteBtn = panel.querySelector('[data-sr-action="mute"]');
     var pwrBtn = panel.querySelector('.suite-remote__pwr');
     var musicEl = panel.querySelector('[data-sr-music]');
-    musicEl.innerHTML = '<p class="suite-remote__credit">Curated by <a href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>';
+    var loungeCredit = '<p class="suite-remote__credit">Curated by <a href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>';
     var guidePanel = panel.querySelector('[data-sr-guide-panel]');
     var guideList = panel.querySelector('[data-sr-guide-list]');
     var transportEls = panel.querySelectorAll('[data-sr-transport]');
@@ -956,7 +956,6 @@
 
     var activeSource = 'tv'; // 'tv' | 'music' | 'cinema'
     var contextualKey = null; // the current room's own channel-set, if any
-    var loungeIsPaused = true;
 
     function keyForSource(src) { return src === 'tv' ? 'living' : src === 'cinema' ? 'cinema' : null; }
     // Named to avoid any confusion with the fullscreen modal's own
@@ -965,23 +964,22 @@
     function currentState() { var k = keyForSource(activeSource); return k && STATE_BY_KEY[k]; }
     function contextualSource() { return contextualKey === 'living' ? 'tv' : contextualKey === 'cinema' ? 'cinema' : null; }
 
-    /* ---------- Music: the Music Lounge's own controller, from any room ----------
-       Not a separate rotation anymore -- this tab controls the exact same
-       Spotify IFrame API controller the Music Lounge's record-player
-       artifact plays through (piano-player.js's initLoungeSpotify(),
-       exposed as window.PP_LOUNGE_CONTROLLER once created). Wherever the
-       visitor actually is in the building, pressing play here plays (and
-       pauses) the one playlist genuinely running in the Music Lounge --
-       there's nothing left to fetch or swap, so no resolution chain, no
-       fallback list, no per-tab embed. pp:lounge-playback carries the
-       controller's own playback_update events over so this tab's dial
-       stays in sync without a direct reference to piano-player.js. */
-    function loungeController() { return window.PP_LOUNGE_CONTROLLER || null; }
-    document.addEventListener('pp:lounge-playback', function (e) {
-      loungeIsPaused = !!(e.detail && e.detail.isPaused);
+    /* ---------- Music: whatever ambient track is playing in the CURRENT
+       room ----------
+       Every room without a screen of its own now starts its own assigned
+       Spotify track on arrival and pauses it on departure (piano-player.js
+       -- individual tracks for most rooms, the Music Lounge's own intro-
+       sting-then-playlist sequence for that one), so at most one ambient
+       track is ever live at a time. window.PPAmbient exposes exactly that:
+       whichever one it is, if any -- this tab doesn't pick a source, it
+       just reflects and controls it. pp:ambient-playback/pp:ambient-change
+       (dispatched by piano-player.js) keep this tab's dial in sync without
+       a direct reference to its internals. */
+    function ambient() { return window.PPAmbient && window.PPAmbient.get(); }
+    document.addEventListener('pp:ambient-playback', function () {
       if (activeSource === 'music') render();
     });
-    document.addEventListener('pp:lounge-controller-ready', function () {
+    document.addEventListener('pp:ambient-change', function () {
       if (activeSource === 'music') render();
     });
 
@@ -1002,9 +1000,12 @@
       musicEl.hidden = !isMusic;
       panel.classList.remove('is-power-off');
       if (isMusic) {
-        titleEl.textContent = 'Music · Music Lounge';
+        var amb = ambient();
+        titleEl.textContent = amb ? 'Music · ' + (window.PPAmbient.label(amb.roomId) || amb.roomId) : 'No music in this room';
+        musicEl.innerHTML = amb && amb.roomId === 'music-lounge' ? loungeCredit : '';
+        if (dialBtn) dialBtn.classList.toggle('is-disabled', !amb);
         if (pwrBtn) { pwrBtn.disabled = true; pwrBtn.classList.remove('is-off'); }
-        if (dialBtn) dialBtn.classList.toggle('is-paused', loungeIsPaused);
+        if (dialBtn) dialBtn.classList.toggle('is-paused', !amb || amb.isPaused);
         return;
       }
       if (pwrBtn) pwrBtn.disabled = false;
@@ -1132,7 +1133,7 @@
         case 'close': close(); break;
         case 'power': if (st) { st.togglePower(); render(); } break;
         case 'playpause':
-          if (activeSource === 'music') { var lc = loungeController(); if (lc) lc.togglePlay(); }
+          if (activeSource === 'music') { var amb = ambient(); if (amb) amb.controller.togglePlay(); }
           else if (st) st.togglePlayPause();
           break;
         case 'mute': if (st) st.toggleMute(); break;
