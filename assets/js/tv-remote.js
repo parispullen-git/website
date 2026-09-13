@@ -300,8 +300,10 @@
 
   function buildModal() {
     if (modalEl) return;
-    modalEl = document.createElement('div');
+    modalEl = document.createElement('dialog');
     modalEl.className = 'tv-modal';
+    modalEl.setAttribute('aria-label', 'The screening room');
+    modalEl.addEventListener('cancel', function (e) { e.preventDefault(); closeModal(); });
     modalEl.innerHTML =
       '<div class="tv-modal__frame">' +
         '<button type="button" class="tv-modal__close" data-tv-modal-close aria-label="Close">Close &#215;</button>' +
@@ -487,6 +489,7 @@
     state.iframe.src = ''; // fully stop the small TV rather than just pausing it —
                             // two simultaneous YouTube embeds can starve each other
     modalEl.classList.add('is-open');
+    if (!modalEl.open) modalEl.showModal();
     rotatePromptDismissed = false;
     updateRotatePrompt();
     var ch = state.channels[state.chIndex];
@@ -505,6 +508,7 @@
   function closeModal() {
     if (!modalEl) return;
     modalEl.classList.remove('is-open');
+    if (modalEl.open) modalEl.close();
     modalIframe.src = '';
     if (modalGuideEl) modalGuideEl.hidden = true;
     if (modalRotateEl) modalRotateEl.hidden = true;
@@ -948,6 +952,7 @@
     var muteBtn = panel.querySelector('[data-sr-action="mute"]');
     var pwrBtn = panel.querySelector('.suite-remote__pwr');
     var musicEl = panel.querySelector('[data-sr-music]');
+    var loungeCredit = '<p class="suite-remote__credit">Curated by <a href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>';
     var guidePanel = panel.querySelector('[data-sr-guide-panel]');
     var guideList = panel.querySelector('[data-sr-guide-list]');
     var transportEls = panel.querySelectorAll('[data-sr-transport]');
@@ -984,37 +989,6 @@
       renderPP();
     });
 
-    // Simple now-playing card: album art, song title, room title -- built
-    // with DOM methods rather than innerHTML since the title text comes
-    // from Spotify's oEmbed response, not something to trust blindly into
-    // markup. Built fresh each render (cheap, three small elements) rather
-    // than diffed in place.
-    function renderNowPlaying(meta, roomLabel) {
-      musicEl.innerHTML = '';
-      if (!meta) return;
-      var wrap = document.createElement('div');
-      wrap.className = 'suite-remote__nowplaying';
-      var img = document.createElement('img');
-      img.className = 'suite-remote__art';
-      img.src = meta.art;
-      img.alt = '';
-      img.width = 56;
-      img.height = 56;
-      var metaWrap = document.createElement('div');
-      metaWrap.className = 'suite-remote__meta';
-      var song = document.createElement('p');
-      song.className = 'suite-remote__song';
-      song.textContent = meta.title;
-      var room = document.createElement('p');
-      room.className = 'suite-remote__room';
-      room.textContent = roomLabel;
-      metaWrap.appendChild(song);
-      metaWrap.appendChild(room);
-      wrap.appendChild(img);
-      wrap.appendChild(metaWrap);
-      musicEl.appendChild(wrap);
-    }
-
     function render() {
       Array.prototype.forEach.call(sourceBtns, function (b) {
         b.classList.toggle('is-active', b.dataset.srSource === activeSource);
@@ -1033,9 +1007,8 @@
       panel.classList.remove('is-power-off');
       if (isMusic) {
         var amb = ambient();
-        var roomLabel = amb ? (window.PPAmbient.label(amb.roomId) || amb.roomId) : '';
-        titleEl.textContent = amb ? 'Music · ' + roomLabel : 'No music in this room';
-        renderNowPlaying(amb && window.PPAmbient.meta(), roomLabel);
+        titleEl.textContent = amb ? 'Music · ' + (window.PPAmbient.label(amb.roomId) || amb.roomId) : 'No music in this room';
+        musicEl.innerHTML = amb && amb.roomId === 'music-lounge' ? loungeCredit : '';
         if (dialBtn) dialBtn.classList.toggle('is-disabled', !amb);
         if (pwrBtn) { pwrBtn.disabled = true; pwrBtn.classList.remove('is-off'); }
         if (dialBtn) dialBtn.classList.toggle('is-paused', !amb || amb.isPaused);
@@ -1085,14 +1058,11 @@
     // fresh (nothing explicitly requested) lands on that room's own
     // source -- but only while the panel is closed, so paging through
     // rooms with the remote already open never yanks someone off Music.
-    // A room with its own screen (Living Room, Cinema) defaults to that
-    // screen's tab; every other room defaults to Music, since that's the
-    // only source it actually has.
     document.addEventListener('pp:room-change', function (e) {
       var scene = e.detail && e.detail.id && document.getElementById(e.detail.id);
       var screen = scene && scene.querySelector('.floor-scene__screen[data-tv]');
       contextualKey = screen ? screen.dataset.channelSet : null;
-      if (!panel.classList.contains('is-open')) activeSource = contextualSource() || 'music';
+      if (!panel.classList.contains('is-open') && contextualSource()) activeSource = contextualSource();
       renderPP();
     });
     // room-pager.js has already landed on the starting room by the time
@@ -1106,7 +1076,7 @@
       var screen = scene && scene.querySelector('.floor-scene__screen[data-tv]');
       contextualKey = screen ? screen.dataset.channelSet : null;
     })();
-    activeSource = contextualSource() || 'music';
+    activeSource = contextualSource() || 'tv';
     renderPP();
 
     ppBtn.addEventListener('click', function (e) {
@@ -1209,6 +1179,24 @@
 
     render();
   }
+
+  // Room-native programme cards use this bridge into the existing player.
+  window.PPTheatre = {
+    channels: function (key) {
+      var state = STATE_BY_KEY[key];
+      return state ? state.channels.map(function (ch) { return { id: ch.id, label: ch.label }; }) : null;
+    },
+    watch: function (key, id) {
+      var state = STATE_BY_KEY[key];
+      if (!state) return false;
+      var index = state.channels.findIndex(function (ch) { return ch.id === id; });
+      if (index < 0) return false;
+      state.chIndex = index;
+      if (window.PPAmbient && window.PPAmbient.get()) window.PPAmbient.get().controller.pause();
+      openModal(state);
+      return true;
+    }
+  };
 
   function init() {
     channelsReady.then(function () {

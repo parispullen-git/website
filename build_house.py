@@ -187,7 +187,7 @@ CITY_NODE_POS = {
     "penthouse-living": ("21%", "10%"),   # clean window pane above the stairwell beam, skyline visible
     "bedroom":          ("19%", "18.6%"), # clear glass past the lamp, above the lounge chair
     "bath":             ("38%", "6%"),    # the skyline through the window, clear of the tub and plant
-    "kitchen":          ("27.5%", "3.75%"),  # clean skyline pane left of the curtain, clear of the plant
+    "kitchen":          ("32%", "6.8%"),  # the narrow window beside the fireplace wall, clear of the plant
     "music-lounge":     ("72%", "8%"),    # the sliver of skyline beside the bar's PP sign, past the curtain
 }
 
@@ -261,13 +261,26 @@ VAULT_CTA = ('<a class="cta pent__open" href="urwelcome.html" data-vault-enter s
     '<span>Enter the Vault</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
 
 # The Piano artifact (Living Room) is retired -- this fixed single
-# playlist on the Music Lounge's own record-player artifact is its
-# replacement. No song/playlist details in the drawer at all any more --
-# the controller (piano-player.js's ensureLoungeController) lives on its
-# own hidden host, same as every other room's ambient track, and plays in
-# the background regardless of whether this drawer's ever opened. Now-
-# playing details (album art, song, room title) live on the global Suite
-# Remote's Music tab only (tv-remote.js), reachable from every room.
+# playlist embed on the Music Lounge's own record-player artifact is its
+# replacement. Deliberately NOT the same mechanism as the old
+# piano-player.js widget (a dashboard-editable multi-playlist rotation
+# with prev/next) -- this is one specific playlist, using Spotify's own
+# embed player (it has its own play/pause/shuffle controls built in
+# already). The house-wide rotation piano-player.js drove still exists
+# and still plays -- just via the global Suite Remote's Music tab
+# (tv-remote.js), reachable from every room, not from an in-room widget.
+#
+# The target is an empty div, not a plain <iframe> -- piano-player.js's
+# initLoungeSpotify() creates a real Spotify IFrame API controller on it
+# (same mechanism as the Piano widget used), so entering the room can
+# call controller.play() after the entry sting finishes. The div sits in
+# the DOM (and the controller/iframe with it) whether or not this
+# drawer's actually open, so playback continues in the background either
+# way, same as any other embedded player on the site.
+MUSIC_LOUNGE_SPOTIFY = '''<p class="body" style="margin-top:var(--s3)">Curated by <a class="link-under" href="https://instagram.com/djangodegree" target="_blank" rel="noopener">@djangodegree</a>, Host of <i>The Greatest Show On Earth</i>.</p>
+                <div class="spotify-embed">
+                  <div data-lounge-spotify></div>
+                </div>'''
 
 CANDLE_COMING_SOON = '''<div class="coming-soon">
                   <span class="coming-soon__badge">UR Welcome &#183; Coming Soon</span>
@@ -323,6 +336,8 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
             wardrobe_cta = MONOGRAM_BIO
         elif f["id"] == "penthouse-living" and key == "vault":
             wardrobe_cta = VAULT_CTA
+        elif f["id"] == "music-lounge" and key == "recordplayer":
+            wardrobe_cta = MUSIC_LOUNGE_SPOTIFY
         elif f["id"] == "penthouse-living" and key == "candle":
             wardrobe_cta = CANDLE_COMING_SOON
         elif f["id"] == "music-lounge" and key == "polo":
@@ -488,7 +503,7 @@ html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css?v=15">
+<link rel="stylesheet" href="assets/css/world.css?v=7">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -509,7 +524,7 @@ html = f'''<!DOCTYPE html>
   <button type="button" class="room-pager__nav room-pager__nav--down" data-room-pager-down aria-label="Floor down"><span aria-hidden="true">&#9660;</span><span class="room-pager__nav-hint" data-room-pager-hint aria-hidden="true"></span></button>
   <div class="nav-panel" data-nav-panel>
     <button type="button" class="nav-panel__tab" data-nav-panel-toggle aria-expanded="false" aria-controls="nav-panel-grid">
-      <span class="nav-panel__tab-label">Directory</span>
+      <span class="nav-panel__tab-label">Floors</span>
     </button>
     <div class="nav-panel__grid" id="nav-panel-grid" data-nav-panel-grid hidden>
     {NAV_PANEL_ROWS}
@@ -526,14 +541,16 @@ html = f'''<!DOCTYPE html>
      tv-remote.js's initSuiteRemote() -- one instance regardless of how
      many rooms have a screen. -->
 
-<script src="assets/js/room-pager.js?v=15" defer></script>
-<script src="assets/js/nav-panel.js?v=15" defer></script>
-<script src="assets/js/world.js?v=15" defer></script>
-<script src="assets/js/tv-remote.js?v=15" defer></script>
-<script src="assets/js/guide-portal.js?v=15" defer></script>
-<script src="assets/js/gym-portal.js?v=15" defer></script>
-<script src="assets/js/vault-entrance.js?v=15" defer></script>
-<script src="assets/js/piano-player.js?v=15" defer></script>
+<script src="assets/js/room-pager.js?v=7" defer></script>
+<script src="assets/js/nav-panel.js?v=7" defer></script>
+<script src="assets/js/world.js?v=7" defer></script>
+<script src="assets/js/tv-remote.js?v=7" defer></script>
+<script src="assets/js/guide-portal.js?v=7" defer></script>
+<script src="assets/js/gym-portal.js?v=7" defer></script>
+<script src="assets/js/vault-entrance.js?v=7" defer></script>
+<script src="assets/js/piano-player.js?v=7" defer></script>
+<link rel="stylesheet" href="assets/css/artifact-experiences.css?v=3">
+<script src="assets/js/artifact-experiences.js?v=3" defer></script>
 </body>
 </html>
 '''
