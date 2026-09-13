@@ -82,17 +82,17 @@
 @keyframes ae-spin{to{transform:rotate(360deg)}}
 @media(max-width:760px){.ae-dialog{width:calc(100vw - 20px);max-height:91dvh}.ae-header{padding:14px 18px}.ae-content{padding:22px 18px}.ae-split{grid-template-columns:1fr;gap:24px}.ae-focus{height:30vh;min-height:190px}.ae-objects{grid-template-columns:1fr 1fr}.ae-object{padding:16px;min-height:105px}.ae-room-grid{grid-template-columns:1fr 1fr}.ae-toolbar{bottom:78px;left:16px;max-width:calc(100vw - 32px);gap:0}.ae-toolbar button{padding:12px 13px}.ae-book{grid-template-columns:1fr}.ae-book::after{display:none}.ae-page{padding:28px 24px}.ae-page:first-child{min-height:210px}.ae-page h3{font-size:34px}.ae-book-mark{font-size:52px;margin:0}.ae-selected{grid-template-columns:80px 1fr;gap:15px}.ae-selected img{width:80px;height:105px}.ae-selected>.ae-actions{grid-column:1/-1}.ae-hanger{width:180px;min-width:180px}.ae-hanger img{height:195px}.ae-film{grid-template-columns:80px 1fr;gap:12px}.ae-film img{width:80px}.ae-film>span:last-child{display:none}.ae-film strong{font-size:18px}.ae-record{width:230px}.ae-dialog h2{font-size:38px}}
 @media(prefers-reduced-motion:reduce){.ae-dialog[open],.ae-record,.ae-book.is-turning .ae-page{animation:none!important}.ae-dialog *,.ae-room-focus *{transition:none!important;scroll-behavior:auto!important}.ae-hanger:hover,.ae-sleeve:hover,.ae-object:hover{transform:none}}
-/* One compact hotel entry point. The old floor and footer launchers retire. */
+/* One compact hotel entry point. The old floor and footer launchers retire.
+   Floors keeps the bottom-left corner (the site's own placement, not the
+   original bottom-right this file shipped with) -- Remote/Pause stay put
+   at bottom-right in world.css, untouched. */
 dialog.tv-modal{width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;border:0;padding:0;color:inherit}
 dialog.tv-modal::backdrop{background:var(--obsidian)}
 .footer-toggle,.nav-panel{display:none!important}
-.ae-toolbar{left:auto;right:var(--gutter,28px);bottom:var(--s6,24px);padding:0;max-width:none}
+.ae-toolbar{right:auto;left:var(--gutter,28px);bottom:var(--s6,24px);padding:0;max-width:none}
 .ae-toolbar button{min-width:78px;min-height:38px;padding:11px 17px;text-transform:uppercase;letter-spacing:.15em}
 .ae-toolbar button:first-child{background:transparent}
-.remote-toggle{right:auto;left:var(--gutter,28px)}
-.playpause-toggle{right:auto;left:calc(var(--gutter,28px) + 76px)}
-@media(max-width:760px){.ae-toolbar{left:auto;right:var(--s4,16px);bottom:var(--s4,16px)}.remote-toggle{right:auto;left:var(--s4,16px)}.playpause-toggle{right:auto;left:calc(var(--s4,16px) + 76px)}}
-@media(max-width:360px){.remote-toggle{bottom:calc(var(--s4,16px) + 40px)}.playpause-toggle{left:var(--s4,16px)}}
+@media(max-width:760px){.ae-toolbar{right:auto;left:var(--s4,16px);bottom:var(--s4,16px)}}
 
 /* The hotel’s existing design tokens govern every new experience. Paper and
    cloth are object materials inside this shared obsidian-and-brass shell. */
