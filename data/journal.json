@@ -2252,5 +2252,48 @@
       "There's a size conversation here the spec sheet won't have, and it matters more than the reviews will admit: what any of these three actually do to the line of a tailored suit. The Pro Max has always been the compromise — heavier, taller, a rectangle your trouser pocket has to negotiate with all day, and any cutter worth the fitting will tell you a phone that thick is already fighting the drape. The Duo, folded, is worse. Two panels stacked is real thickness, not marketing thickness, and a closed Duo in a trouser pocket doesn't sit like a phone — it sits like a growth, a hard square edge insisting on itself exactly where the leg is supposed to break clean. Wanting the Duo and staying polished are not automatically the same decision. That's not a spec. It's the actual cost of carrying one.",
       "Buy the 18 Pro if you want the most phone for the least money — the same camera and chip as the Max, in a size that's actually easy to live with. Buy the Pro Max if screen size and battery life are the whole ask. Buy the Duo only if split-screen multitasking and a stylus are things you'll reach for weekly — not just at the reveal, and not while you're also minding your trouser line. Ternus picked a bold way to introduce himself. Whether it's the right $1,999 is a much smaller, much more personal question."
     ]
+  },
+  {
+    "slug": "artificial-openai-altman-firing-movie",
+    "status": "draft",
+    "cat": "film",
+    "catlabel": "Film",
+    "vol": "51",
+    "read": "5 min read",
+    "title": "Artificial: Luca Guadagnino's OpenAI Boardroom Comedy, Explained",
+    "stand": "Andrew Garfield plays Sam Altman. The real story he's playing didn't need embellishing — a nonprofit board fired the CEO of the world's most valuable AI company, then reversed itself five days later, and still can't fully explain why.",
+    "meta_description": "Artificial, Luca Guadagnino's dramatic comedy starring Andrew Garfield as Sam Altman, retells the five-day 2023 OpenAI firing and reinstatement crisis. Cast, release date, and what the real WilmerHale investigation actually found.",
+    "featured": false,
+    "hero": {
+      "img": "press-artificial-teaser",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "Two men toasting with shot glasses at a restaurant table in a still from Artificial"
+    },
+    "images": [
+      {
+        "img": "press-artificial-teaser",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "A still from Artificial's official teaser trailer.",
+        "alt": "Two men toasting with shot glasses at a restaurant table in a still from Artificial"
+      }
+    ],
+    "video": {
+      "youtube_id": "_Wv9oLUe740",
+      "title": "Artificial — Official Teaser Trailer"
+    },
+    "body": [
+      "Luca Guadagnino doesn't usually direct comedies, and OpenAI's board doesn't usually make for one — which is exactly the gap \"Artificial\" is built to work in. The film takes the five days in November 2023 when Sam Altman was fired as CEO of OpenAI and reinstated less than a week later, and plays it as an institutional farce with real money and real power at stake, not a straight-faced tech biopic. Andrew Garfield plays Altman. Simon Rich wrote the screenplay. That combination alone tells you which register this is aiming for.",
+      "The ensemble is doing real work here, not filling out a call sheet: Yura Borisov and Monica Barbaro carry supporting weight, alongside Ike Barinholtz, Cooper Hoffman, Chris O'Dowd, Jason Schwartzman, and Mark Rylance — a cast built for people talking fast in rooms, which is what the actual crisis mostly was. The trailer frames the film as a fight over who actually controls the technology, not a hero's-journey founder story, and that tracks: the real week was never really about Altman as a person. It was about who a nonprofit board answers to once the thing it's supervising is suddenly worth hundreds of billions of dollars.",
+      "IMG::0",
+      "What actually happened is stranger than most fiction would risk. On November 17, 2023, OpenAI's board fired Altman, citing a breakdown of trust rather than any specific finding of wrongdoing — its statement said he hadn't been \"consistently candid\" with directors. Co-founder Greg Brockman quit in solidarity within hours. Two days later, Microsoft's Satya Nadella offered to hire both of them to run a new research team inside Microsoft, instantly turning OpenAI's own staff into leverage. More than 700 of OpenAI's roughly 770 employees signed a letter threatening to follow Altman out the door. By November 29, the board had reversed itself entirely, and Altman was back as CEO under a rebuilt board.",
+      "TABLE::{\"title\": \"Five days in November 2023\", \"headers\": [\"Date\", \"What happened\"], \"rows\": [[\"Nov 17\", \"Board fires Altman over a \\\"loss of trust\\\"; Brockman resigns in solidarity\"], [\"Nov 19\", \"Microsoft offers to hire Altman and Brockman to run a new research team\"], [\"Nov 20\", \"700+ OpenAI employees sign a letter threatening to leave\"], [\"Nov 22\", \"Board agrees in principle to reinstate Altman\"], [\"Nov 29\", \"Altman returns as CEO under a rebuilt board\"]]}",
+      "The part that actually makes this worth a screenplay came later. OpenAI's own review — run by outside law firm WilmerHale, based on more than 30,000 documents and dozens of interviews — found that Altman's conduct \"did not mandate removal.\" It wasn't a safety concern, a security issue, or anything to do with OpenAI's finances or investor relations. It was a relationship that had broken down between a handful of people, handled by a board that had the legal authority to act but rushed the decision, skipped due process, and had no idea it was about to blow up in public. That's not a thriller premise about dangerous AI. It's a thriller premise about four or five people making a very fast, very bad decision in a room, and losing control of the consequences within 48 hours.",
+      "VIDEO::",
+      "Neon has \"Artificial\" opening in limited theaters on December 25, 2026, widening through January. Whatever the finished film gets right or wrong about the specifics, the underlying shape is the most honestly dramatic version of the Altman story likely to get made: not a genius under siege, but a governance structure built for a nonprofit suddenly discovering it was steering something that had outgrown it — for five days, before it reversed itself and pretended the whole thing had gone according to plan."
+    ]
   }
 ]
