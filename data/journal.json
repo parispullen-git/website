@@ -1697,7 +1697,7 @@
     "cat": "business",
     "catlabel": "Business",
     "vol": "45",
-    "read": "4 min read",
+    "read": "5 min read",
     "title": "What Is Habitus? Pierre Bourdieu's Theory, Explained Simply",
     "stand": "Some men read a room and adjust. Others walk in and the room already fits. Pierre Bourdieu spent a career explaining why that difference has almost nothing to do with confidence.",
     "featured": false,
@@ -1711,19 +1711,28 @@
     },
     "meta_description": "A plain-English breakdown of Pierre Bourdieu's habitus, capital, and field — the sociology behind why some people read a room instinctively and others have to learn it, and how the framework applies to fashion, business, and taste.",
     "body": [
-      "Watch the same man walk into a boardroom, a gallery opening, and a members' bar in the same week. In one room his shoulders drop half an inch. In another they don't. His suit didn't change between stops. Something else did — and the French sociologist Pierre Bourdieu spent a career naming exactly what.",
-      "He called it habitus — the internalized feel for the world you build through upbringing, class, education, every room you've already survived. Not a rulebook, not a personal quirk like a standing coffee order. A set of learned instincts — what reads as good taste, what a normal risk looks like, what room you believe is \"for people like me\" — worn so deep it stops feeling learned and starts feeling like common sense.",
+      "I've watched the same man walk into a boardroom, a gallery opening, a club, and a members-only bar in the same week. In one room his shoulders drop an inch — an adjustment only the people paying attention ever catch, and in most cases those are exactly the people who matter most. In some rooms Jason moved like he owned the place; in others he faded straight into the background. His suit never changed between stops. Something else did — and the French sociologist Pierre Bourdieu spent a career naming exactly what.",
+      "He called it habitus — the internalized feel for the world you build through upbringing, class, education, every room you've already survived. Not a rulebook, not a personal quirk like a standing coffee order.",
+      "<b>Foxx Take:</b> Junior year, Young Jeezy's Thug Motivation 101 blaring out of my headphones while a packed lunchroom of savage high schoolers staked out their tables by whatever they were into that week. Me, I was just trying to make a living — burning Napster-sourced copies of Jeezy's first album and walking them table to table like a one-man distribution deal. I've always fit in, in more places than I haven't. Sorry, Jeezy — here's the song, so you can finally collect some of that streaming money I owe you.",
+      "VIDEO::",
+      "PQA::We are the sum total of our experiences. Those experiences — be they positive or negative — make us the person we are, at any given point in our lives. And, like a flowing river, those same experiences, and those yet to come, continue to influence and reshape the person we are, and the person we become. None of us are the same as we were yesterday, nor will be tomorrow.||B.J. Neblett||Author",
+      "A set of learned instincts — what reads as good taste, what a normal risk looks like, what room you believe is \"for people like me\" — worn so deep it stops feeling learned and starts feeling like common sense.",
       "That's the trick of it, and the politics of it too. Confidence in a boardroom, an easy read of a wine list, the instinct to negotiate instead of taking the first number — none of it announces itself as background. It presents as personality. A lot of what gets called personality is actually biography, replayed enough times it stops feeling like a memory.",
       "PQ::A great deal of what gets called personality is actually biography, replayed so many times it no longer feels like a memory.",
-      "Habitus rarely works alone. Bourdieu paired it with two other ideas — worth keeping in your back pocket:",
+      "Habitus rarely works alone — Bourdieu paired it with two other ideas I still keep in my own back pocket:",
       "FORMULA::Practice = Habitus + Capital + Field",
       "Habitus is the instinct. Capital's what you actually have to spend — money, sure, but also knowledge, relationships, reputation. Field's the specific arena those instincts and assets get spent in, because luxury fashion runs on a different exchange rate than a trading floor, and a trading floor runs on a different one than a gallery.",
       "TABLE::{\"title\": \"The three terms, applied\", \"headers\": [\"Concept\", \"What it means\", \"Where you'd feel it\"], \"rows\": [[\"Habitus\", \"Your learned instincts, taste, and posture\", \"Knowing without thinking how formal a room actually is\"], [\"Capital\", \"The resources you can actually spend\", \"Money, yes \\u2014 but also a name, a network, a credential\"], [\"Field\", \"The arena, with its own unwritten rules\", \"What reads as sharp in menswear reads as try-hard in private equity\"]]}",
       "Put two equally talented designers in the same room at a trade show and the gap's rarely talent. One grew up around galleries and creative circles and already knows how long to hold a handshake, which reference signals taste instead of trend-chasing, how to turn small talk into a follow-up email. The other's just as good, doing all that math in real time, consciously, while the first guy doesn't notice he's doing it at all.",
       "None of this makes habitus a life sentence. Bourdieu called it durable, not permanent — reinforced by repetition, not fixed by birth. Enter a new field consistently enough and the instinct rewires: new vocabulary, new relationships, a new sense of what's actually at stake, until the room that used to need translation starts to feel native.",
-      "That's the useful version of this for anyone building something instead of inheriting it. The goal was never to erase the habitus you already have — the taste and instinct from wherever you actually came from is real information, not something to hide. The goal's addition: enough new rooms, survived enough times, that a second habitus grows in alongside the first. Not a costume. A second native language."
+      "That's the useful version of this for anyone building something instead of inheriting it. The goal was never to erase the habitus you already have — the taste and instinct from wherever you actually came from is real information, not something to hide. The goal's addition: enough new rooms, survived enough times, that a second habitus grows in alongside the first. Not a costume. A second native language.",
+      "That's been my own experience of it, concretely. My life's been full of travel — different cities, different circles, time spent around people who were more creative than me, more resourceful, further along as tastemakers or straight-up titans in their own lane. Enough of that, enough times, and we stop walking into a room bracing for it. We start walking in looking for what we can add — a read on the room, a connection worth making, a reason the conversation's better for us being in it. That's the whole point of building a second habitus instead of hiding the first one: not fitting in by disappearing into the room, but showing up as someone it's better for having."
     ],
-    "status": "draft"
+    "status": "draft",
+    "video": {
+      "youtube_id": "CtoveCIR8Sk",
+      "title": "Young Jeezy — Thug Motivation 101"
+    }
   },
   {
     "slug": "habitus-in-the-gentlemen-guy-ritchie",
@@ -2299,7 +2308,7 @@
     "cat": "film",
     "catlabel": "Film",
     "vol": "52",
-    "read": "3 min read",
+    "read": "4 min read",
     "title": "The Social Reckoning: Sorkin's Back, and Zuckerberg's Not Getting Out Clean",
     "stand": "Sixteen years after The Social Network, Sorkin's writing the deposition. Jeremy Strong takes over as Zuckerberg, and this trailer makes one thing clear — nobody walks out of this one looking cool.",
     "meta_description": "Aaron Sorkin's The Social Reckoning trailer: Jeremy Strong as Mark Zuckerberg, Mikey Madison as whistleblower Frances Haugen, Jeremy Allen White as the reporter. In theaters October 9, 2026.",
@@ -2326,11 +2335,15 @@
       "title": "The Social Reckoning — Official Trailer"
     },
     "body": [
-      "Sixteen years after The Social Network made \"I'm CEO, bitch\" a personality trait, Sorkin's coming back to finish the sentence. The Social Reckoning isn't the origin story anymore — it's the deposition. And from this trailer, nobody's walking out of that courtroom looking cool.",
-      "Jeremy Strong takes over as Zuckerberg from Eisenberg, and he's playing him colder — less genius-in-a-hoodie, more guy who's been coached by four lawyers on how to sit still. Jeremy Allen White's the reporter chasing the story, Mikey Madison's the whistleblower who handed it to him. You know the dynamic: one of them needs the truth out, one of them needs it proven, and neither one of them walks away clean.",
+      "Sixteen years after The Social Network made \"I'm CEO, bitch\" a personality trait, Sorkin's coming back to finish the sentence — and I'll admit, I've been waiting for him to. The Social Reckoning isn't the origin story anymore — it's the deposition. And from this trailer, nobody's walking out of that courtroom looking cool.",
+      "Jeremy Strong takes over as Zuckerberg from Eisenberg, and I think he's playing him colder — less genius-in-a-hoodie, more guy who's been coached by four lawyers on how to sit still. Jeremy Allen White's the reporter chasing the story, Mikey Madison's the whistleblower who handed it to him. You know the dynamic: one of them needs the truth out, one of them needs it proven, and neither one of them walks away clean.",
       "IMG::0",
-      "This isn't the fun one. The Social Network was about ambition — who built the thing, who got cut out, who got rich off it. This one's about what the thing actually did once it got big enough to run itself: the algorithm, the outrage, what Facebook knew and kept feeding you anyway. Same writer, much less charming subject.",
-      "Sorkin wrote and directed it himself this time, which tells you he's not handing this one off to anybody. Sony's got it in theaters October 9th. I'll be honest — I'm more interested in watching Strong get cross-examined than I ever was watching Eisenberg get famous.",
+      "This isn't the fun one. The Social Network was about ambition — who built the thing, who got cut out, who got rich off it. This one's about what the thing actually did once it got big enough to run itself: the algorithm, the outrage, what Facebook knew and kept feeding us anyway. Same writer, much less charming subject.",
+      "That \"we're not the ref, we're the public square\" line Zuckerberg's people love — Bill Maher took a swing at it on his show not long ago, and it's stuck with me since: you're like a crossing guard standing in front of a school, not doing anything with your arms, so the cars just plow through the kids. That's the whole movie in one image — the position was never neutral, it was just undefended.",
+      "It's the same idea Blink Twice landed harder than I expected — a psychological thriller about a tech billionaire who built a private-island playground and then looked away from what happened inside it. The confrontation near the end says the quiet part about people who benefit from a system and claim they're not responsible for it:",
+      "PQA::You did nothing for yourself. You did nothing for them. And, in my opinion, there's a real special place in Hell reserved for people that just choose to do nothing.||Blink Twice||",
+      "<a href=\"https://www.instagram.com/reel/DCHZCcgvYcf/\" target=\"_blank\" rel=\"noopener\">Someone on Instagram already cut the two clips together</a>, and it plays like they were always meant to be one scene.",
+      "Sorkin wrote and directed it himself this time, which tells us he's not handing this one off to anybody. Sony's got it in theaters October 9th. I'll be honest — I'm more interested in watching Strong get cross-examined than I ever was watching Eisenberg get famous.",
       "VIDEO::"
     ]
   }
