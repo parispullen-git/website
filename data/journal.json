@@ -1727,22 +1727,27 @@
   },
   {
     "slug": "habitus-in-the-gentlemen-guy-ritchie",
+    "status": "published",
     "cat": "film",
-    "catlabel": "Film",
     "vol": "44",
     "read": "6 min read",
     "title": "Why Mickey Pearson Wins: Reading The Gentlemen Through Pierre Bourdieu",
     "stand": "Guy Ritchie's title is a joke with a straight face. Nobody in The Gentlemen is measured by whether they're good — only by whether they've learned to look like they belong at the top of the room.",
+    "meta_description": "How Pierre Bourdieu's theory of habitus, capital, and field explains the class hierarchy in Guy Ritchie's The Gentlemen — why Mickey Pearson's composure outranks Dry Eye's ambition, and what the film's title is really arguing.",
     "featured": false,
     "wide": false,
-    "hero": {
-      "img": "press-the-gentlemen-still",
-      "ext": "jpg",
-      "mode": "cover",
-      "srcset": true,
-      "alt": "A tense beat from Guy Ritchie's The Gentlemen (2019) — a suited man drawing a gun"
-    },
-    "meta_description": "How Pierre Bourdieu's theory of habitus, capital, and field explains the class hierarchy in Guy Ritchie's The Gentlemen — why Mickey Pearson's composure outranks Dry Eye's ambition, and what the film's title is really arguing.",
+    "images": [
+      {
+        "img": "press-gentlemen-s2",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The Gentlemen — Season 2: the same class performance, one generation further in.",
+        "alt": "Theo James in a suit in Netflix's The Gentlemen Season 2"
+      }
+    ],
+    "video": null,
+    "videos": [],
     "body": [
       "The title of The Gentlemen is doing more work than it lets on. Nobody in Guy Ritchie's film earns that word through decency. They earn it — or fail to — through composure, tailoring, timing, and the ability to make violence look like the last resort of a reasonable man instead of the whole plan. It's a two-hour argument for a very specific idea: that power is a performance most people never learn the choreography for, and the sociologist Pierre Bourdieu spent a career explaining exactly why.",
       "Bourdieu's terms map onto this film almost too cleanly. Habitus is the instinct a person carries into a room — taste, posture, the unconscious sense of what's appropriate here. Capital is what they actually have to spend: money, yes, but also reputation, relationships, information. Field is the arena those instincts and assets get spent in, and The Gentlemen's field is a genuinely strange one — British organized crime stitched together with land-rich, cash-poor aristocracy, all of it running on rules nobody states out loud.",
@@ -1756,17 +1761,14 @@
       "Even the film's landed aristocrats make the same point from the opposite direction. They still carry the old symbolic weight — the name, the estate, the bearing that says they belong at the top. What they've lost is the cash to keep any of it running, which is exactly the gap Mickey exploits, trading money for the use of a prestige he could never inherit but can, for the right price, rent.",
       "Strip the tailoring and the one-liners away and The Gentlemen is making a fairly serious argument about how power actually gets distributed: not to whoever has the most money, and not to whoever is willing to go furthest, but to whoever has learned to make their particular mix of money, violence, and charm look like it was always supposed to be there. Mickey wins because nobody in the room can tell where his performance ends and his authority begins. That, the film keeps insisting, is the whole trick."
     ],
-    "images": [
-      {
-        "img": "press-gentlemen-s2",
-        "ext": "jpg",
-        "mode": "cover",
-        "srcset": true,
-        "caption": "The Gentlemen — Season 2: the same class performance, one generation further in.",
-        "alt": "Theo James in a suit in Netflix's The Gentlemen Season 2"
-      }
-    ],
-    "status": "draft"
+    "hero": {
+      "img": "press-the-gentlemen-still",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "A tense beat from Guy Ritchie's The Gentlemen (2019) — a suited man drawing a gun",
+      "srcset": true
+    },
+    "catlabel": "Film"
   },
   {
     "slug": "louis-vuitton-singer-porsche-911",
