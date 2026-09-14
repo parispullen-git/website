@@ -2170,7 +2170,7 @@
           '<button type="button" class="btn-sm" data-jl-move="down" data-jl-slug="' + esc(p.slug) + '"' + (i === ordered.length - 1 ? ' disabled' : '') + '>&#8595; Move Down</button>' +
           (isFeatured ? '' : '<button type="button" class="btn-sm" data-jl-feature="' + esc(p.slug) + '">Set as Featured</button>') +
           '<button type="button" class="btn-sm" data-jl-edit="' + esc(p.slug) + '">Edit</button>' +
-          '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="journal-post.html?slug=' + esc(p.slug) + (isDraft ? '&preview=1' : '') + '" target="_blank" rel="noopener">Preview &#8594;</a>' +
+          '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="journal-' + esc(p.slug) + '.html" target="_blank" rel="noopener">Preview &#8594;</a>' +
         '</div>' +
       '</div>';
     }).join('');

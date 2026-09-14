@@ -647,12 +647,28 @@ def build_journal_index():
 # ----------------------------------------------------------------------
 # journal-<slug>.html article pages
 # ----------------------------------------------------------------------
+def next_published_after(index):
+    # Walks forward from `index` in JOURNAL_POSTS (wrapping around) to find
+    # the next published post -- used so a draft's preview page can still
+    # show a "Next" link, and so a published page's "Next" never lands on
+    # an unpublished draft, without needing two separate code paths.
+    n = len(JOURNAL_POSTS)
+    for offset in range(1, n + 1):
+        candidate = JOURNAL_POSTS[(index + offset) % n]
+        if candidate.get("status", "published") != "draft":
+            return candidate
+    return None
+
 def build_article_pages():
-    posts = PUBLISHED_POSTS
+    # Every post gets a real journal-<slug>.html page -- including drafts,
+    # so "Preview" in the dashboard can link to the actual page instead of
+    # a fake one. Drafts just stay out of journal.html (build_journal_index,
+    # PUBLISHED_POSTS only) and out of every "Next" chain, so nothing links
+    # to them and they're unreachable except by whoever has the direct URL.
+    posts = JOURNAL_POSTS
     n = len(posts)
     for i, post in enumerate(posts):
-        prev_post = posts[i - 1]
-        next_post = posts[(i + 1) % n]
+        next_post = next_published_after(i)
         html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
