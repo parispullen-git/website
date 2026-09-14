@@ -1770,9 +1770,8 @@
   },
   {
     "slug": "louis-vuitton-singer-porsche-911",
-    "status": "draft",
+    "status": "published",
     "cat": "automotive",
-    "catlabel": "Motors",
     "vol": "49",
     "read": "6 min read",
     "title": "Louis Vuitton x Singer Porsche 911: Inside Both One-Off Cars",
@@ -1780,13 +1779,6 @@
     "meta_description": "Singer Vehicle Design and Louis Vuitton unveiled two one-off Porsche 911 restomods at Monterey Car Week 2026 -- a road-trip Classic coupe and a Riviera-styled Classic Turbo Cabriolet designed by Nicolas Ghesquière, built around a joint capsule of luggage, watches, and instruments.",
     "featured": true,
     "wide": false,
-    "hero": {
-      "img": "press-lv-singer-911-pair",
-      "ext": "jpg",
-      "mode": "cover",
-      "alt": "The saffron Porsche 911 Reimagined by Singer Classic and the white Classic Turbo Cabriolet parked together in a mountain meadow",
-      "srcset": true
-    },
     "images": [
       {
         "img": "press-lv-singer-classic-beach",
@@ -1887,7 +1879,15 @@
       "Neither company has published pricing, and these are bespoke, client-commissioned builds rather than anything orderable off a configurator — between the going rate for a Singer commission and the scope of custom Louis Vuitton work involved, a seven-figure proposition is the reasonable assumption rather than a number anyone needs to confirm.",
       "IMG::8",
       "Of the two, the Classic is the more coherent piece of design thinking: archival color, travel hardware, and a clear road-trip narrative all pulling in the same direction. The Turbo Cabriolet is more editorial than practical — a 911 reimagined as a yacht is a harder brief to fully resolve than a 911 reimagined as a road-trip car, and it reads that way. But the lesson sitting underneath both cars is the same one either way: the project never once reached for a logo as the shortcut. It carried one creative language through shape, material, instruments, and the imagined life of the owner, all the way down to what's strapped to the roof."
-    ]
+    ],
+    "hero": {
+      "img": "press-lv-singer-911-pair",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "The saffron Porsche 911 Reimagined by Singer Classic and the white Classic Turbo Cabriolet parked together in a mountain meadow",
+      "srcset": true
+    },
+    "catlabel": "Motors"
   },
   {
     "slug": "berneron-mirage-miroir",
