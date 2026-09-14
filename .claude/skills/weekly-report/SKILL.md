@@ -12,7 +12,10 @@ A recurring social package for parispullen.com: a branded slide set recapping th
 - **Cover slide** — "The Weekly Report" eyebrow, a Playfair headline teasing the week, one line stitching the stories together.
 - **One slide per post** — hero image full-bleed, category eyebrow, headline, one-line hook (from the post's own standfirst), "Read the full story" / "Swipe up" cue.
 - **Closing "navigate" slide** — a real screenshot of the live journal.html grid with a hand-drawn arrow pointing at the JOURNAL nav item ("Tap here"), so anyone who only sees this on social knows exactly where to go.
+- Every slide is branded with the real brand mark — the interlocking double-P monogram (`assets/img/monogram-mark.svg`, the same one the live site masks white in the header and the gate) inlined and tinted ivory, next to "PARIS PULLEN" — not a placeholder.
 - Two formats: **carousel** (1080×1350, 4:5 — IG/Threads/Facebook feed) and **story** (1080×1920, 9:16 — IG/FB Stories, TikTok).
+  - Story format only: each post slide carries a "Tap here ↓" up in the top-right, right under "THE WEEKLY REPORT" — that's where to drop the link sticker when posting, since Instagram/TikTok don't support a real embedded link in the image itself. Carousel format keeps a plain "Read the full story →" text line instead (a feed carousel's own swipe is the navigation, no sticker needed).
+  - Story format only: the top row (mark + wordmark + tag) and the bottom row (footer) both sit 20px further from their edges than carousel's do, clearing Stories/TikTok's own overlay chrome (the profile-pic/close-button strip up top, the reply-bar strip at the bottom).
 - Captions for **Instagram, Threads, Facebook, and TikTok** — written separately each time (see Voice below), not templated, because the hook needs to be specific to that week's actual stories.
 
 ## How to run it

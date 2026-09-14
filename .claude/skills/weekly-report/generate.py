@@ -62,6 +62,19 @@ FORMATS = {
     "story": {"w": 1080, "h": 1920},
 }
 
+# The real brand mark (assets/img/monogram-mark.svg): an interlocking
+# double-P, the same one the live site masks white (--foxx-color:#fff) at
+# 32px wide, aspect-ratio 240/208, next to "Paris Pullen" in the header
+# nav and the gate. Inlined here (fill swapped to ivory) instead of the
+# placeholder circled "P" a slide-only mark would otherwise need.
+_MONOGRAM_SVG = open(os.path.join(REPO, "assets", "img", "monogram-mark.svg")).read()
+MONOGRAM_INNER = _MONOGRAM_SVG.split(">", 1)[1].rsplit("</svg>", 1)[0].replace('fill="#000"', 'fill="#F3F0EA"')
+WORDMARK_HTML = (
+    f'<div class="wordmark"><span class="mark">'
+    f'<svg viewBox="0 0 240 208">{MONOGRAM_INNER}</svg>'
+    f'</span>PARIS PULLEN</div>'
+)
+
 BASE_CSS_TMPL = """
 * {{ margin:0; padding:0; box-sizing:border-box; }}
 html,body {{ width:{w}px; height:{h}px; overflow:hidden; background:#101012; }}
@@ -70,24 +83,35 @@ body {{ font-family:'Inter',sans-serif; color:#F3F0EA; position:relative; }}
   font-family:'Inter',sans-serif; font-weight:500; font-size:{wm_size}px;
   letter-spacing:.22em; text-transform:uppercase; color:#F3F0EA;
   display:flex; align-items:center; gap:14px; }}
-.wordmark .mark {{ width:{mark}px; height:{mark}px; border:1.5px solid #DBD5C9; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Playfair Display',serif; font-size:{mark_font}px; font-style:italic; }}
+.wordmark .mark {{ width:{mark}px; aspect-ratio:240/208; display:block; flex-shrink:0; }}
+.wordmark .mark svg {{ width:100%; height:100%; display:block; }}
 .tag {{ position:absolute; top:{top_pad2}px; right:{side_pad}px;
   font-family:ui-monospace,Menlo,monospace; font-size:{tag_size}px; letter-spacing:.14em;
   text-transform:uppercase; color:#A8874E; text-align:right; }}
+.taphere-top {{ position:absolute; top:{taphere_top}px; right:{side_pad}px;
+  display:flex; flex-direction:column; align-items:flex-end; gap:8px; }}
+.taphere-top .lbl {{ font-family:ui-monospace,Menlo,monospace; font-size:{tag_size}px; letter-spacing:.14em;
+  text-transform:uppercase; color:#C9A961; }}
 """
 
 def base_css(w, h):
+    # +20px on the top row and the footer/bottom row (below) keeps text
+    # clear of Instagram/TikTok Stories' own overlay chrome -- the
+    # profile-pic/close-button strip at the very top and the reply-bar
+    # strip at the very bottom -- on 9:16 only; carousel has no such
+    # overlay to dodge.
+    tall = h > 1600
+    top_pad = (108 if tall else 64)
+    top_pad2 = (114 if tall else 70)
     return BASE_CSS_TMPL.format(
         w=w, h=h,
-        top_pad=(88 if h > 1600 else 64),
-        top_pad2=(94 if h > 1600 else 70),
-        side_pad=(72 if h > 1600 else 64),
-        wm_size=(24 if h > 1600 else 22),
-        mark=(38 if h > 1600 else 34),
-        mark_font=(21 if h > 1600 else 19),
-        tag_size=(16 if h > 1600 else 15),
+        top_pad=top_pad,
+        top_pad2=top_pad2,
+        taphere_top=top_pad2 + 40,
+        side_pad=(72 if tall else 64),
+        wm_size=(24 if tall else 22),
+        mark=(40 if tall else 36),
+        tag_size=(16 if tall else 15),
     )
 
 def html_doc(css, body):
@@ -108,13 +132,13 @@ def cover_slide(cfg, w, h):
     .headline {{ font-family:'Playfair Display',serif; font-weight:500; font-size:{96 if tall else 92}px; line-height:1.06; letter-spacing:-.01em; color:#F3F0EA; }}
     .headline em {{ font-style:italic; color:#C9A961; }}
     .sub {{ margin-top:{44 if tall else 36}px; font-size:{29 if tall else 26}px; line-height:1.58; color:#DBD5C9; max-width:840px; font-weight:300; }}
-    .rule {{ position:absolute; left:96px; right:96px; bottom:{230 if tall else 150}px; height:1px; background:rgba(219,213,201,.18); }}
-    .foot {{ position:absolute; left:96px; right:96px; bottom:{150 if tall else 96}px; display:flex; justify-content:space-between; align-items:baseline;
+    .rule {{ position:absolute; left:96px; right:96px; bottom:{250 if tall else 150}px; height:1px; background:rgba(219,213,201,.18); }}
+    .foot {{ position:absolute; left:96px; right:96px; bottom:{170 if tall else 96}px; display:flex; justify-content:space-between; align-items:baseline;
       font-family:ui-monospace,Menlo,monospace; font-size:{16 if tall else 15}px; letter-spacing:.14em; text-transform:uppercase; color:#71717C; }}
     """
     c = cfg["cover"]
     body = f"""
-    <div class="wordmark"><span class="mark">P</span>PARIS PULLEN</div>
+    {WORDMARK_HTML}
     <div class="tag">THE JOURNAL</div>
     <div class="field">
       <div class="eyebrow">{c.get('eyebrow', 'The Weekly Report')}</div>
@@ -136,32 +160,32 @@ def story_slide(post, img, cat, headline, hook, idx, total, w, h, focal="center"
     .headline {{ font-family:'Playfair Display',serif; font-weight:500; font-size:{72 if tall else 68}px; line-height:1.08; letter-spacing:-.01em; color:#F3F0EA; max-width:920px; }}
     .hook {{ margin-top:{32 if tall else 28}px; font-size:{27 if tall else 25}px; line-height:1.5; color:#DBD5C9; max-width:860px; font-weight:300; }}
     .cta {{ margin-top:{46 if tall else 40}px; font-family:ui-monospace,Menlo,monospace; font-size:{16 if tall else 15}px; letter-spacing:.14em; text-transform:uppercase; color:#A8874E; }}
-    .foot {{ position:absolute; left:{80 if tall else 88}px; right:{80 if tall else 88}px; bottom:{96 if tall else 52}px; display:flex; justify-content:space-between; align-items:baseline;
+    .foot {{ position:absolute; left:{80 if tall else 88}px; right:{80 if tall else 88}px; bottom:{116 if tall else 52}px; display:flex; justify-content:space-between; align-items:baseline;
       font-family:ui-monospace,Menlo,monospace; font-size:{15 if tall else 14}px; letter-spacing:.14em; text-transform:uppercase; color:#71717C; }}
-    .taphere {{ margin-top:46px; display:flex; align-items:center; gap:16px; }}
-    .taphere .lbl {{ font-family:ui-monospace,Menlo,monospace; font-size:16px; letter-spacing:.14em; text-transform:uppercase; color:#A8874E; }}
     """
-    # Story format (9:16) swaps the carousel's "Read the full story" text
-    # for a "TAP HERE" + downward arrow, pointing into the blank strip
-    # between the text block and the footer -- that's where a link sticker
-    # goes once this is posted to Stories/TikTok. Instagram/TikTok don't
-    # support a real embedded link in the image itself, so the arrow just
-    # marks the spot; the actual link gets added by hand at posting time.
-    # Carousel format keeps the plain CTA line -- a feed carousel's own
-    # swipe gesture is the navigation, there's no link sticker to place.
-    if tall:
-        cta_block = """
-        <div class="taphere">
-          <span class="lbl">Tap here</span>
-          <svg width="34" height="40" viewBox="0 0 34 40" fill="none"><path d="M17 2V32" stroke="#C9A961" stroke-width="2.5" stroke-linecap="round"/><path d="M6 22L17 34L28 22" stroke="#C9A961" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-        </div>
-        """
-    else:
-        cta_block = '<div class="cta">Read the full story &#8594;</div>'
+    # Story format (9:16) puts "TAP HERE" + a downward arrow up in the
+    # top-right corner, right under the "THE WEEKLY REPORT" tag -- that's
+    # where the link sticker goes once this is posted to Stories/TikTok
+    # (Instagram/TikTok don't support a real embedded link in the image
+    # itself, so the arrow just marks the spot; the link gets added by
+    # hand at posting time). Top-right instead of down by the text block:
+    # it stays clear of the bottom reply-bar overlay entirely, and reads
+    # as its own callout rather than competing with the headline/hook.
+    # Carousel format keeps the plain "Read the full story" CTA line in
+    # the text column instead -- a feed carousel's own swipe gesture is
+    # the navigation, there's no link sticker to place.
+    taphere_block = """
+    <div class="taphere-top">
+      <span class="lbl">Tap here</span>
+      <svg width="30" height="34" viewBox="0 0 30 34" fill="none"><path d="M15 2V26" stroke="#C9A961" stroke-width="2.5" stroke-linecap="round"/><path d="M5 18L15 28L25 18" stroke="#C9A961" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </div>
+    """ if tall else ""
+    cta_block = "" if tall else '<div class="cta">Read the full story &#8594;</div>'
     body = f"""
     <div class="bg"></div><div class="scrim"></div>
-    <div class="wordmark"><span class="mark">P</span>PARIS PULLEN</div>
+    {WORDMARK_HTML}
     <div class="tag">THE WEEKLY REPORT</div>
+    {taphere_block}
     <div class="field">
       <div class="cat">{cat}</div>
       <div class="headline">{headline}</div>
@@ -185,7 +209,7 @@ def nav_slide(cfg, shot_path, idx, total, w, h):
     .pointer {{ position:absolute; top:{130 if tall else 96}px; right:{120 if tall else 130}px; display:flex; flex-direction:column; align-items:flex-end; gap:8px; }}
     .pointer .lbl {{ font-family:ui-monospace,Menlo,monospace; font-size:{16 if tall else 15}px; letter-spacing:.14em; text-transform:uppercase; color:#C9A961; }}
     .pointer svg {{ transform:scaleX(-1) rotate(8deg); }}
-    .foot {{ position:absolute; left:{80 if tall else 88}px; right:{80 if tall else 88}px; bottom:{96 if tall else 52}px; display:flex; justify-content:space-between; align-items:baseline;
+    .foot {{ position:absolute; left:{80 if tall else 88}px; right:{80 if tall else 88}px; bottom:{116 if tall else 52}px; display:flex; justify-content:space-between; align-items:baseline;
       font-family:ui-monospace,Menlo,monospace; font-size:{15 if tall else 14}px; letter-spacing:.14em; text-transform:uppercase; color:#71717C; }}
     """
     n = cfg["nav"]
