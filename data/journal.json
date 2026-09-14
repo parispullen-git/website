@@ -2203,5 +2203,53 @@
       "srcset": true
     },
     "catlabel": "Business"
+  },
+  {
+    "slug": "iphone-18-pro-duo-what-changed",
+    "status": "draft",
+    "cat": "tech",
+    "catlabel": "Tech",
+    "vol": "50",
+    "read": "5 min read",
+    "title": "iPhone 18 Pro, Pro Max, and Duo: What's Actually New, and Which One to Buy",
+    "stand": "Three new iPhones, one of them foldable, and a new CEO's first real product story. Here's what actually shipped — and which one is worth the money.",
+    "meta_description": "Apple's iPhone 18 Pro, Pro Max, and first foldable iPhone Duo: prices, release dates, camera upgrades, and which one is actually worth buying.",
+    "featured": false,
+    "hero": {
+      "img": "press-iphone-18-camera-lineup",
+      "ext": "jpg",
+      "mode": "cover",
+      "srcset": true,
+      "alt": "iPhone 18 Pro camera modules in four finishes — Deep Black, Silver, Glacier Blue, and Burgundy"
+    },
+    "images": [
+      {
+        "img": "press-iphone-18-pro-finishes",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The iPhone 18 Pro lineup in Deep Black, Silver, Glacier, and Burgundy.",
+        "alt": "Four iPhone 18 Pro phones standing in a row showing their back finishes"
+      },
+      {
+        "img": "press-iphone-duo-unfolded",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "The iPhone Duo, open, in Starlight and Night Sky.",
+        "alt": "Two iPhone Duo foldable phones open side by side in white and dark blue finishes"
+      }
+    ],
+    "video": null,
+    "body": [
+      "John Ternus's first keynote as Apple CEO didn't open with a mission statement. It opened with a folding phone — the thing Apple had spent a decade insisting it wasn't building, unveiled by the executive who spent 25 years building Apple's hardware instead of talking about it. That's the real headline under \"Surprise and Shine\": not the event name, but who was standing on stage for it.",
+      "The lineup is three phones. The iPhone 18 Pro starts at $1,199 for 256GB; the iPhone 18 Pro Max starts at $1,299. Both ship September 18, in four finishes — Deep Black, Silver, a fashion-forward Burgundy, and a pale, glacier-toned blue that's a real departure from Apple's usual Pro restraint. The headline upgrade is the camera: a 48MP main sensor with variable aperture, the first time Apple has given the iPhone real optical control over depth of field instead of leaning entirely on computational blur. New Pro Camera controls — aperture, shutter, white balance, a live histogram — turn manual shooting from a workaround into an actual mode. A new A20 Pro chip and vapor-chamber cooling back it up, alongside Apple's own C2 modem and battery life Apple rates at up to 36 hours (Pro) and 45 hours (Pro Max) of video playback.",
+      "IMG::0",
+      "TABLE::{\"title\": \"The new lineup\", \"headers\": [\"Model\", \"Starts at\", \"Ships\"], \"rows\": [[\"iPhone 18 Pro\", \"$1,199 · 256GB\", \"September 18\"], [\"iPhone 18 Pro Max\", \"$1,299 · 256GB\", \"September 18\"], [\"iPhone Duo\", \"$1,999 · 256GB\", \"October 23\"]]}",
+      "Then there's the iPhone Duo — Apple's first foldable, and the thing everyone will actually be talking about. Closed, it's a 5.4-inch phone. Opened, a Grade 5 titanium hinge unfolds it into a 7.6-inch display built for split-screen work, reading, and — for the first time on any iPhone — Apple Pencil support on both screens. Touch ID moves into the side button, since Face ID's usual hardware doesn't fit the fold. It starts at $1,999 and ships October 23, which makes it Apple's most expensive iPhone ever by a wide margin.",
+      "IMG::1",
+      "That price is the entire decision. The Duo isn't a phone with a bonus screen; it's a phone plus a small tablet, priced like both. If the fold genuinely replaces an iPad in your bag, it's a good trade. If it doesn't, you're paying $800 over the Pro Max for real estate you won't use daily.",
+      "Buy the 18 Pro if you want the most phone for the least money — the same camera and chip as the Max, in a size that's actually easy to live with. Buy the Pro Max if screen size and battery life are the whole ask. Buy the Duo only if split-screen multitasking and a stylus are things you'll reach for weekly, not just at the reveal. Ternus picked a bold way to introduce himself. Whether it's the right $1,999 is a much smaller, much more personal question."
+    ]
   }
 ]
