@@ -138,8 +138,26 @@ def story_slide(post, img, cat, headline, hook, idx, total, w, h, focal="center"
     .cta {{ margin-top:{46 if tall else 40}px; font-family:ui-monospace,Menlo,monospace; font-size:{16 if tall else 15}px; letter-spacing:.14em; text-transform:uppercase; color:#A8874E; }}
     .foot {{ position:absolute; left:{80 if tall else 88}px; right:{80 if tall else 88}px; bottom:{96 if tall else 52}px; display:flex; justify-content:space-between; align-items:baseline;
       font-family:ui-monospace,Menlo,monospace; font-size:{15 if tall else 14}px; letter-spacing:.14em; text-transform:uppercase; color:#71717C; }}
+    .taphere {{ margin-top:46px; display:flex; align-items:center; gap:16px; }}
+    .taphere .lbl {{ font-family:ui-monospace,Menlo,monospace; font-size:16px; letter-spacing:.14em; text-transform:uppercase; color:#A8874E; }}
     """
-    cta = "Swipe up for the full story &#8594;" if tall else "Read the full story &#8594;"
+    # Story format (9:16) swaps the carousel's "Read the full story" text
+    # for a "TAP HERE" + downward arrow, pointing into the blank strip
+    # between the text block and the footer -- that's where a link sticker
+    # goes once this is posted to Stories/TikTok. Instagram/TikTok don't
+    # support a real embedded link in the image itself, so the arrow just
+    # marks the spot; the actual link gets added by hand at posting time.
+    # Carousel format keeps the plain CTA line -- a feed carousel's own
+    # swipe gesture is the navigation, there's no link sticker to place.
+    if tall:
+        cta_block = """
+        <div class="taphere">
+          <span class="lbl">Tap here</span>
+          <svg width="34" height="40" viewBox="0 0 34 40" fill="none"><path d="M17 2V32" stroke="#C9A961" stroke-width="2.5" stroke-linecap="round"/><path d="M6 22L17 34L28 22" stroke="#C9A961" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        </div>
+        """
+    else:
+        cta_block = '<div class="cta">Read the full story &#8594;</div>'
     body = f"""
     <div class="bg"></div><div class="scrim"></div>
     <div class="wordmark"><span class="mark">P</span>PARIS PULLEN</div>
@@ -148,7 +166,7 @@ def story_slide(post, img, cat, headline, hook, idx, total, w, h, focal="center"
       <div class="cat">{cat}</div>
       <div class="headline">{headline}</div>
       <div class="hook">{hook}</div>
-      <div class="cta">{cta}</div>
+      {cta_block}
     </div>
     <div class="foot"><span>PARISPULLEN.COM/JOURNAL</span><span>{idx:02d} / {total:02d}</span></div>
     """
