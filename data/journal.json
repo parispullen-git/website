@@ -1893,9 +1893,8 @@
   },
   {
     "slug": "berneron-mirage-miroir",
-    "status": "draft",
+    "status": "published",
     "cat": "timepiece",
-    "catlabel": "Timepiece",
     "vol": "46",
     "read": "5 min read",
     "title": "Berneron Mirage Miroir: Price, Specs, What Makes It Different",
@@ -1903,13 +1902,6 @@
     "meta_description": "Berneron's Mirage Miroir replaces the dial entirely -- its new Caliber 283 movement is built to be read directly, in solid 18K white or yellow gold. Specs, finishing, pricing (CHF 72,500 / 130,250), and the 36-piece annual Series A run.",
     "featured": false,
     "wide": false,
-    "hero": {
-      "img": "press-berneron-miroir-pair",
-      "ext": "jpg",
-      "mode": "cover",
-      "alt": "The Berneron Mirage Miroir in 18K white gold and 18K yellow gold, mirrored flat lay",
-      "srcset": true
-    },
     "images": [
       {
         "img": "press-berneron-miroir-dial-macro",
@@ -1991,7 +1983,15 @@
       "Availability runs on watchmaking's slower clock rather than a typical limited-edition drop: Series A production is planned at 36 pieces per colorway, every year, for ten years, with first deliveries not landing until October 2027. That's a running production line dressed up as scarcity, and also genuinely as scarce as most actual limited editions manage to be.",
       "IMG::6",
       "White gold reads sharper here, closer to industrial jewelry than watchmaking. Yellow gold reads warmer and more archival, more willing to show its own hand-finishing. Either way, the asymmetry that's defined every Mirage watch so far stops being a styling decision on the Miroir and becomes something closer to a byproduct — the shape the movement generated for itself once it was finally allowed to be the whole watch."
-    ]
+    ],
+    "hero": {
+      "img": "press-berneron-miroir-pair",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "The Berneron Mirage Miroir in 18K white gold and 18K yellow gold, mirrored flat lay",
+      "srcset": true
+    },
+    "catlabel": "Timepiece"
   },
   {
     "slug": "drake-fomo-iceman-trilogy",
