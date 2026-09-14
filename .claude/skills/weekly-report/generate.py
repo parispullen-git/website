@@ -71,7 +71,7 @@ _MONOGRAM_SVG = open(os.path.join(REPO, "assets", "img", "monogram-mark.svg")).r
 MONOGRAM_INNER = _MONOGRAM_SVG.split(">", 1)[1].rsplit("</svg>", 1)[0].replace('fill="#000"', 'fill="#F3F0EA"')
 WORDMARK_HTML = (
     f'<div class="wordmark"><span class="mark">'
-    f'<svg viewBox="0 0 240 208">{MONOGRAM_INNER}</svg>'
+    f'<svg viewBox="0 0 240 208" fill-rule="evenodd">{MONOGRAM_INNER}</svg>'
     f'</span>PARIS PULLEN</div>'
 )
 
@@ -150,11 +150,13 @@ def cover_slide(cfg, w, h):
     """
     return html_doc(css, body)
 
-def story_slide(post, img, cat, headline, hook, idx, total, w, h, focal="center"):
+def story_slide(post, img, cat, headline, hook, idx, total, w, h, focal="center", series_tag="THE WEEKLY REPORT"):
     tall = h > 1600
     css = base_css(w, h) + f"""
     .bg {{ position:absolute; inset:0; background:url('file://{REPO}/assets/img/{img}.jpg') {focal}/cover no-repeat; }}
     .scrim {{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,16,18,.12) 0%, rgba(16,16,18,.2) {'38%' if not tall else '30%'}, rgba(10,10,11,{'.94' if not tall else '.72'}) {'82%' if not tall else '62%'}, rgba(10,10,11,.97) {'92%' if not tall else '80%'}, #0A0A0B 100%); }}
+    .topscrim {{ position:absolute; top:0; left:0; right:0; height:{260 if tall else 210}px;
+      background:linear-gradient(180deg, rgba(10,10,11,.6) 0%, rgba(10,10,11,0) 100%); }}
     .field {{ position:absolute; left:0; right:0; bottom:0; padding:0 {80 if tall else 88}px {320 if tall else 120}px; }}
     .cat {{ font-family:ui-monospace,Menlo,monospace; font-size:{18 if tall else 17}px; letter-spacing:.24em; text-transform:uppercase; color:#C9A961; margin-bottom:{26 if tall else 24}px; }}
     .headline {{ font-family:'Playfair Display',serif; font-weight:500; font-size:{72 if tall else 68}px; line-height:1.08; letter-spacing:-.01em; color:#F3F0EA; max-width:920px; }}
@@ -182,9 +184,9 @@ def story_slide(post, img, cat, headline, hook, idx, total, w, h, focal="center"
     """ if tall else ""
     cta_block = "" if tall else '<div class="cta">Read the full story &#8594;</div>'
     body = f"""
-    <div class="bg"></div><div class="scrim"></div>
+    <div class="bg"></div><div class="scrim"></div><div class="topscrim"></div>
     {WORDMARK_HTML}
-    <div class="tag">THE WEEKLY REPORT</div>
+    <div class="tag">{series_tag}</div>
     {taphere_block}
     <div class="field">
       <div class="cat">{cat}</div>
@@ -296,7 +298,8 @@ def main():
             # reads better than a group hero once it's cropped to 4:5/9:16).
             img = p.get("image_override") or rec["hero"]["img"]
             focal = p.get("focal", "center")
-            slides.append((f"{i}-{p['slug']}", story_slide(p, img, cat, headline, hook, i, total, w, h, focal)))
+            series_tag = cfg.get("series_tag", "THE WEEKLY REPORT")
+            slides.append((f"{i}-{p['slug']}", story_slide(p, img, cat, headline, hook, i, total, w, h, focal, series_tag)))
         slides.append((f"{total}-navigate", nav_slide(cfg, nav_shot, total, total, w, h)))
 
         for name, html in slides:

@@ -2,17 +2,21 @@
   "site_url": "http://localhost:4330",
   "cover": {
     "eyebrow": "The Weekly Report",
-    "headline_html": "Four things<br>worth your<br><em>attention</em><br>this week.",
-    "sub": "A folded phone, a boardroom nobody could've scripted, a deposition sixteen years in the making, and the sociology behind why some men just fit in."
+    "headline_html": "Eight things<br>that caught<br>my <em>attention</em>.",
+    "sub": "A folded phone, a boardroom nobody could've scripted, a deposition sixteen years in the making, the sociology behind why some men just fit in — plus four more from last week you shouldn't miss."
   },
   "posts": [
     { "slug": "iphone-18-pro-duo-what-changed", "headline": "iPhone 18 Pro, Pro Max &amp; Duo", "focal": "center 30%" },
     { "slug": "artificial-openai-altman-firing-movie", "headline": "Artificial", "focal": "center 25%" },
     { "slug": "the-social-reckoning-trailer", "headline": "The Social Reckoning", "focal": "center 12%", "image_override": "press-social-reckoning-zuckerberg" },
-    { "slug": "pierre-bourdieu-habitus-explained", "headline": "What Is Habitus?", "focal": "center 15%" }
+    { "slug": "pierre-bourdieu-habitus-explained", "headline": "What Is Habitus?", "focal": "center 15%" },
+    { "slug": "louis-vuitton-singer-porsche-911", "headline": "Louis Vuitton x Singer Porsche 911" },
+    { "slug": "you-live-it-before-you-sell-it" },
+    { "slug": "berneron-mirage-miroir", "headline": "Berneron Mirage Miroir" },
+    { "slug": "habitus-in-the-gentlemen-guy-ritchie", "headline": "Why Mickey Pearson Wins" }
   ],
   "nav": {
-    "eyebrow": "Find All Four",
+    "eyebrow": "Find All Eight",
     "headline": "Open Journal on parispullen.com",
     "sub": "Every story above is live right now &#8212; tap Journal in the top nav, or follow the link in bio."
   }
