@@ -1,6 +1,6 @@
 ---
 name: weekly-report
-description: Generate The Weekly Report — a branded carousel/Stories slide set (cover + one slide per Journal post + a "how to find it" closing slide) plus IG/Threads/Facebook/TikTok captions, summarizing this week's parispullen.com Journal posts. Use when the user asks for a weekly report, a carousel or Stories recap of recent Journal posts, or social slides/captions for new Journal entries.
+description: Generate parispullen.com Journal social content — either The Weekly Report (a branded carousel/Stories slide set recapping several Journal posts, plus IG/Threads/Facebook/TikTok captions) or a per-entry Hook/Pain Point/Payoff 3-slide carousel for a single post. Use when the user asks for a weekly report, a carousel or Stories recap of recent Journal posts, social slides/captions for new Journal entries, or a hook/pain-point/solution-style promotional carousel for one or more entries.
 ---
 
 # The Weekly Report
@@ -52,6 +52,16 @@ A recurring social package for parispullen.com: a branded slide set recapping th
    Voice: first-person Paris, confidently cocky, charming, personal — see the `journal-voice-first-person` memory. These are posts *about* the Journal entries, written the same way Paris would text a friend "new one's up, here's why you should read it," not neutral announcement copy.
 
 6. **Deliver** the PNGs (both formats if built) plus a `captions.md` via SendUserFile.
+
+## Per-entry Hook / Pain Point / Payoff carousels
+
+A second, different content shape lives in the same skill: `generate_beats.py` builds a **3-slide carousel per Journal entry** — Hook, Pain Point, Payoff — instead of the Weekly Report's multi-entry recap shape. Same visual system (monogram, Playfair + Inter, ink/charcoal/brass, the same `topscrim` legibility fix), different structure and a different reason to exist: one post promoting one article with a direct-response beat, versus one post recapping several.
+
+- Copy `beats.example.json` for the config shape: `entries[]`, each with `slug`, `short_title` (shown top-right on all 3 of that entry's slides, in place of a series tag), optional `focal`/`image_override` (same meaning as the weekly-report config), and the three required beats — `hook`, `pain`, `solution`. These need real thought each time, not a formula: the hook is the line that stops the scroll, the pain point names the specific hesitation or fear the reader already has (not a generic one), and the solution is the concrete payoff of reading the piece — not "read more," but what they actually walk away with.
+- Run: `python3 .claude/skills/weekly-report/generate_beats.py --config beats.json --format both --out <dir outside the repo>` (same local-server requirement as `generate.py`, though this script doesn't screenshot the site — it only reads `data/journal.json` for each entry's hero image).
+- Output: `<out>/<format>/<slug>/1-hook.png`, `2-pain.png`, `3-solution.png` — one subfolder per entry, so each entry's 3-slide set can be posted as its own carousel.
+- Only the payoff (3rd) slide carries a call to action — "Tap here" on Stories, "Read the full story" on carousel — since the hook and pain-point slides exist to earn the swipe, not to sell yet.
+- Captions for this format follow the same beat logic, written fresh per entry (not templated): lead with the hook line or a tightened version of it, name the pain point in the reader's own words, and close on the payoff plus the link.
 
 ## Design system reference
 

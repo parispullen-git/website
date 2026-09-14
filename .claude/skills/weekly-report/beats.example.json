@@ -1,0 +1,66 @@
+{
+  "site_url": "http://localhost:4330",
+  "entries": [
+    {
+      "slug": "iphone-18-pro-duo-what-changed",
+      "short_title": "iPhone 18 Pro, Pro Max & Duo",
+      "focal": "center 30%",
+      "hook": "The new Apple CEO's first move was a folding phone. Bold, or a mistake?",
+      "pain": "You don't want to drop a grand on the wrong one — or ruin your pocket line with a phone that doesn't fold flat under a tailored jacket.",
+      "solution": "My real verdict on all three, tested against how they actually carry — so you buy the one that fits your life, not just the keynote."
+    },
+    {
+      "slug": "artificial-openai-altman-firing-movie",
+      "short_title": "Artificial",
+      "focal": "center 25%",
+      "hook": "The wildest tech story of the decade just became a movie you can't look away from.",
+      "pain": "You half-remember the OpenAI boardroom chaos from the headlines, and you don't want to be the guy at dinner who doesn't get the reference.",
+      "solution": "My breakdown of what's true, what's dramatized, and why it's the first AI-era movie actually worth watching twice."
+    },
+    {
+      "slug": "the-social-reckoning-trailer",
+      "short_title": "The Social Reckoning",
+      "focal": "center 12%",
+      "image_override": "press-social-reckoning-zuckerberg",
+      "hook": "Sixteen years after The Social Network, Sorkin's back — and nobody walks out of this one looking cool.",
+      "pain": "You loved the first film but you're not sure a sequel-in-spirit can hit as hard without feeling like a lecture.",
+      "solution": "My read on why this one's sharper and darker — and exactly why I'm more excited to watch Strong get cross-examined than Eisenberg get famous."
+    },
+    {
+      "slug": "pierre-bourdieu-habitus-explained",
+      "short_title": "What Is Habitus?",
+      "focal": "center 15%",
+      "hook": "Some men walk into any room like they own it. That's not confidence — it's something else entirely.",
+      "pain": "You've felt like an outsider in a room that mattered — a boardroom, a gallery, a members' bar — and wondered if that feeling ever actually goes away.",
+      "solution": "The sociology behind it, plus my own story of building a second one — so the next room doesn't need translation."
+    },
+    {
+      "slug": "louis-vuitton-singer-porsche-911",
+      "short_title": "LV x Singer Porsche 911",
+      "hook": "Two houses. Two one-off Porsches. Neither one a compromise between them.",
+      "pain": "Most 'collab cars' are just a logo slapped on someone else's engineering — a gimmick dressed up as a collectible.",
+      "solution": "Inside both builds — what LV and Singer actually each brought — and why this is the rare pairing that earns the price tag."
+    },
+    {
+      "slug": "you-live-it-before-you-sell-it",
+      "short_title": "You Live It Before You Sell It",
+      "hook": "I'm building the biggest men's lifestyle brand the world has ever seen. Here's the confession behind it.",
+      "pain": "You've watched brand founders talk a big game while the substance behind it feels thin — and wondered if that's just how it has to be.",
+      "solution": "My own boardroom story — why the brand was never going to be the proof. I was."
+    },
+    {
+      "slug": "berneron-mirage-miroir",
+      "short_title": "Berneron Mirage Miroir",
+      "hook": "No hour markers. No subdial. No face at all. So how do you actually read the time?",
+      "pain": "You want a watch that says something different, but most 'no-dial' pieces feel like a gimmick you can't really wear or read.",
+      "solution": "Why Berneron let the mechanism BE the dial — and exactly what that costs you in legibility versus what it gives you in presence."
+    },
+    {
+      "slug": "habitus-in-the-gentlemen-guy-ritchie",
+      "short_title": "Why Mickey Pearson Wins",
+      "hook": "Guy Ritchie's title is a joke with a straight face — and almost nobody catches it.",
+      "pain": "You watched The Gentlemen for the plot twists and missed the actual thesis about who really wins a room.",
+      "solution": "Reading the film through Pierre Bourdieu's sociology — so your next rewatch, you see exactly what Ritchie was really saying."
+    }
+  ]
+}
