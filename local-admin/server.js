@@ -118,6 +118,17 @@ async function publishPipeline(onStep) {
   step('Pushing to GitHub');
   await run('git', ['push', 'origin', 'main']);
 
+  // Temporary throttle: when Cloudflare's daily deploy limit is close to
+  // maxed, drop a `.skip-cloudflare-deploy` marker file in the repo root
+  // so Publish Live still pushes to GitHub (so nothing is lost / the
+  // dashboard stays usable) but stops spending deploys until the marker
+  // is removed once the limit resets.
+  if (fs.existsSync(path.join(ROOT, '.skip-cloudflare-deploy'))) {
+    step('Skipping Cloudflare Pages deploy (daily limit throttle active)');
+    log.push('Pushed to GitHub only -- remove .skip-cloudflare-deploy to resume deploying.\n');
+    return log.join('');
+  }
+
   step('Deploying to Cloudflare Pages');
   await run('npx', ['wrangler', 'pages', 'deploy', '.', '--project-name=parispullen', '--commit-dirty=true']);
 

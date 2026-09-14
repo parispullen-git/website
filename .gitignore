@@ -12,6 +12,11 @@ __pycache__/
 .DS_Store
 ._*
 
+# Local throttle switch -- present when Cloudflare's daily deploy limit is
+# close to maxed; Publish Live still pushes to GitHub but skips wrangler
+# deploy until this is deleted. Machine-local, not meant to be shared.
+.skip-cloudflare-deploy
+
 # Local content-console runtime (Phase 2/3)
 local-admin/node_modules
 
