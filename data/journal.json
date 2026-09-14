@@ -2159,8 +2159,8 @@
   },
   {
     "slug": "you-live-it-before-you-sell-it",
+    "status": "published",
     "cat": "business",
-    "catlabel": "Business",
     "vol": "48",
     "read": "4 min read",
     "title": "You Live It Before You Sell It",
@@ -2168,13 +2168,6 @@
     "meta_description": "Paris Pullen's manifesto on building a community of men through honest exchange, style, and culture — and why he has to actually live this before any of it sells.",
     "featured": false,
     "wide": false,
-    "hero": {
-      "img": "paris-boardroom",
-      "ext": "jpg",
-      "mode": "cover",
-      "alt": "Paris Pullen seated alone at the head of a long dark boardroom table, single pendant light overhead",
-      "srcset": true
-    },
     "images": [
       {
         "img": "paris-surrounded",
@@ -2185,6 +2178,8 @@
         "alt": "Paris Pullen surrounded on all sides by hands holding guns pointed at his head and chest"
       }
     ],
+    "video": null,
+    "videos": [],
     "body": [
       "Everything that lands in this channel is mine. Not a brand voice, not a content calendar someone built for me to sound consistent — my take, my interpretation, the things that actually catch me as I move through the world. I'm still building the best version of myself, and I'm doing it in public, by chasing what's good: culture, style, travel, books, film — the things worth paying real attention to in a life that doesn't need escaping from, just going deeper into.",
       "I think the world is a genuinely beautiful place if you look at it right. That's the whole engine underneath this — the Journal, this channel, all of it. I'm trying to bring more men into that same view. A better, fuller life, while we're actually here for it, not once we've earned our way into deserving one.",
@@ -2198,6 +2193,13 @@
       "I'm genuinely happy with the decisions I've made building this. I'm happier, if I'm honest with you, about the ones I chose not to make — the deal I didn't take, the version of this that would've grown faster and meant less, the room I didn't walk back into once I understood what walking back in would actually cost the people already standing in it.",
       "That's the whole thing, if you want to call it a manifesto. Not a mission statement written for a pitch deck. Just an honest account of why I'm actually doing this, for the men reading it start to finish instead of skimming for the part with the watch in it. Bring me your own version — the decisions you made, and the ones you chose not to make. That exchange is the actual thing being built here. The brand was always just how I paid for the room."
     ],
-    "status": "draft"
+    "hero": {
+      "img": "paris-boardroom",
+      "ext": "jpg",
+      "mode": "cover",
+      "alt": "Paris Pullen seated alone at the head of a long dark boardroom table, single pendant light overhead",
+      "srcset": true
+    },
+    "catlabel": "Business"
   }
 ]
