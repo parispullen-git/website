@@ -1703,15 +1703,16 @@
     "featured": false,
     "wide": false,
     "hero": {
-      "img": "press-pierre-bourdieu-portrait",
+      "img": "press-pierre-bourdieu-nyt-portrait",
       "ext": "jpg",
-      "mode": "contain",
+      "mode": "cover",
       "srcset": true,
-      "alt": "Portrait of French sociologist Pierre Bourdieu, 1996"
+      "alt": "Black-and-white portrait of Pierre Bourdieu in a tweed jacket"
     },
     "meta_description": "A plain-English breakdown of Pierre Bourdieu's habitus, capital, and field — the sociology behind why some people read a room instinctively and others have to learn it, and how the framework applies to fashion, business, and taste.",
     "body": [
       "I've watched the same man walk into a boardroom, a gallery opening, a club, and a members-only bar in the same week. In one room his shoulders drop an inch — an adjustment only the people paying attention ever catch, and in most cases those are exactly the people who matter most. In some rooms Jason moved like he owned the place; in others he faded straight into the background. His suit never changed between stops. Something else did — and the French sociologist Pierre Bourdieu spent a career naming exactly what.",
+      "IMG::0",
       "He called it habitus — the internalized feel for the world you build through upbringing, class, education, every room you've already survived. Not a rulebook, not a personal quirk like a standing coffee order.",
       "<b>Foxx Take:</b> Junior year, Young Jeezy's Thug Motivation 101 blaring out of my headphones while a packed lunchroom of savage high schoolers staked out their tables by whatever they were into that week. Me, I was just trying to make a living — burning Napster-sourced copies of Jeezy's first album and walking them table to table like a one-man distribution deal. I've always fit in, in more places than I haven't. Sorry, Jeezy — here's the song, so you can finally collect some of that streaming money I owe you.",
       "VIDEO::",
@@ -1723,16 +1724,45 @@
       "FORMULA::Practice = Habitus + Capital + Field",
       "Habitus is the instinct. Capital's what you actually have to spend — money, sure, but also knowledge, relationships, reputation. Field's the specific arena those instincts and assets get spent in, because luxury fashion runs on a different exchange rate than a trading floor, and a trading floor runs on a different one than a gallery.",
       "TABLE::{\"title\": \"The three terms, applied\", \"headers\": [\"Concept\", \"What it means\", \"Where you'd feel it\"], \"rows\": [[\"Habitus\", \"Your learned instincts, taste, and posture\", \"Knowing without thinking how formal a room actually is\"], [\"Capital\", \"The resources you can actually spend\", \"Money, yes \\u2014 but also a name, a network, a credential\"], [\"Field\", \"The arena, with its own unwritten rules\", \"What reads as sharp in menswear reads as try-hard in private equity\"]]}",
+      "IMG::1",
       "Put two equally talented designers in the same room at a trade show and the gap's rarely talent. One grew up around galleries and creative circles and already knows how long to hold a handshake, which reference signals taste instead of trend-chasing, how to turn small talk into a follow-up email. The other's just as good, doing all that math in real time, consciously, while the first guy doesn't notice he's doing it at all.",
       "None of this makes habitus a life sentence. Bourdieu called it durable, not permanent — reinforced by repetition, not fixed by birth. Enter a new field consistently enough and the instinct rewires: new vocabulary, new relationships, a new sense of what's actually at stake, until the room that used to need translation starts to feel native.",
       "That's the useful version of this for anyone building something instead of inheriting it. The goal was never to erase the habitus you already have — the taste and instinct from wherever you actually came from is real information, not something to hide. The goal's addition: enough new rooms, survived enough times, that a second habitus grows in alongside the first. Not a costume. A second native language.",
+      "IMG::2",
+      "Here's the psychology under all of it, as I understand it: the environment you're raised in, and however much more of the world you go out and actually explore after that — the people you spend time around, the rooms you make yourself walk into before you're ready — trains your nervous system to either own a room or brace against it. It's not really about the room in front of you. It's about how many rooms like it you've already survived.",
       "That's been my own experience of it, concretely. My life's been full of travel — different cities, different circles, time spent around people who were more creative than me, more resourceful, further along as tastemakers or straight-up titans in their own lane. Enough of that, enough times, and we stop walking into a room bracing for it. We start walking in looking for what we can add — a read on the room, a connection worth making, a reason the conversation's better for us being in it. That's the whole point of building a second habitus instead of hiding the first one: not fitting in by disappearing into the room, but showing up as someone it's better for having."
     ],
     "status": "draft",
     "video": {
       "youtube_id": "CtoveCIR8Sk",
       "title": "Young Jeezy — Thug Motivation 101"
-    }
+    },
+    "images": [
+      {
+        "img": "press-pierre-bourdieu-library",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Pierre Bourdieu in his study.",
+        "alt": "Pierre Bourdieu in a tweed jacket in front of bookshelves"
+      },
+      {
+        "img": "press-pierre-bourdieu-taste-collage",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Taste, sorted by class before anyone opens their mouth.",
+        "alt": "Photo illustration of Pierre Bourdieu layered over vintage fashion-magazine cutouts"
+      },
+      {
+        "img": "press-pierre-bourdieu-paris-1998",
+        "ext": "jpg",
+        "mode": "cover",
+        "srcset": true,
+        "caption": "Bourdieu on the street in Paris, 1998.",
+        "alt": "Pierre Bourdieu in a scarf and coat on a Paris street in 1998"
+      }
+    ]
   },
   {
     "slug": "habitus-in-the-gentlemen-guy-ritchie",
@@ -2341,8 +2371,7 @@
       "This isn't the fun one. The Social Network was about ambition — who built the thing, who got cut out, who got rich off it. This one's about what the thing actually did once it got big enough to run itself: the algorithm, the outrage, what Facebook knew and kept feeding us anyway. Same writer, much less charming subject.",
       "That \"we're not the ref, we're the public square\" line Zuckerberg's people love — Bill Maher took a swing at it on his show not long ago, and it's stuck with me since: you're like a crossing guard standing in front of a school, not doing anything with your arms, so the cars just plow through the kids. That's the whole movie in one image — the position was never neutral, it was just undefended.",
       "It's the same idea Blink Twice landed harder than I expected — a psychological thriller about a tech billionaire who built a private-island playground and then looked away from what happened inside it. The confrontation near the end says the quiet part about people who benefit from a system and claim they're not responsible for it:",
-      "PQA::You did nothing for yourself. You did nothing for them. And, in my opinion, there's a real special place in Hell reserved for people that just choose to do nothing.||Blink Twice||",
-      "<a href=\"https://www.instagram.com/reel/DCHZCcgvYcf/\" target=\"_blank\" rel=\"noopener\">Someone on Instagram already cut the two clips together</a>, and it plays like they were always meant to be one scene.",
+      "PQA_IG::You did nothing for yourself. You did nothing for them. And, in my opinion, there's a real special place in Hell reserved for people that just choose to do nothing.||Blink Twice||||https://www.instagram.com/reel/DCHZCcgvYcf/",
       "Sorkin wrote and directed it himself this time, which tells us he's not handing this one off to anybody. Sony's got it in theaters October 9th. I'll be honest — I'm more interested in watching Strong get cross-examined than I ever was watching Eisenberg get famous.",
       "VIDEO::"
     ]

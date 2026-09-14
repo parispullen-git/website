@@ -11,11 +11,11 @@
 <meta property="og:description" content="A plain-English breakdown of Pierre Bourdieu's habitus, capital, and field — the sociology behind why some people read a room instinctively and others have to learn it, and how the framework applies to fashion, business, and taste.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://parispullen.com/journal-pierre-bourdieu-habitus-explained.html">
-<meta property="og:image" content="https://parispullen.com/assets/img/press-pierre-bourdieu-portrait.jpg">
+<meta property="og:image" content="https://parispullen.com/assets/img/press-pierre-bourdieu-nyt-portrait.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="What Is Habitus? Pierre Bourdieu's Theory, Explained Simply">
 <meta name="twitter:description" content="A plain-English breakdown of Pierre Bourdieu's habitus, capital, and field — the sociology behind why some people read a room instinctively and others have to learn it, and how the framework applies to fashion, business, and taste.">
-<meta name="twitter:image" content="https://parispullen.com/assets/img/press-pierre-bourdieu-portrait.jpg">
+<meta name="twitter:image" content="https://parispullen.com/assets/img/press-pierre-bourdieu-nyt-portrait.jpg">
 <meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,6 +85,19 @@
     text-transform:uppercase;color:var(--bone)}
   .jread-pullquote__title{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.04em;
     color:var(--graphite)}
+
+  /* An attributed pull-quote paired side-by-side with an Instagram embed --
+     PQA_IG(), for when the quote and a specific clip make the same point
+     and read better as one beat than two. Same two-column collapse-on-
+     mobile shape as .jread-media--pair above. Instagram's own embed.js
+     restyles the .instagram-media blockquote once it loads; the min-height
+     just holds the row's shape before that happens. */
+  .jread-quote-ig{margin-top:var(--s7);max-width:var(--measure);display:grid;
+    grid-template-columns:1fr 1fr;gap:var(--s5);align-items:start}
+  .jread-quote-ig .jread-pullquote{margin:0;max-width:none}
+  .jread-quote-ig__embed{min-height:280px}
+  .jread-quote-ig__embed .instagram-media{margin:0 !important;width:100% !important}
+  @media (max-width:640px){.jread-quote-ig{grid-template-columns:1fr}}
 
   /* Responsive 16:9 YouTube embed. Same container-query technique as the
      Living Room / Cinema TV screens (assets/css/world.css .tv-modal__frame,
@@ -217,10 +230,15 @@
       <p class="lede">Some men read a room and adjust. Others walk in and the room already fits. Pierre Bourdieu spent a career explaining why that difference has almost nothing to do with confidence.</p>
     </header>
 
-    <div class="jread-hero jread-hero--contain"><img src="assets/img/press-pierre-bourdieu-portrait@sm.jpg" srcset="assets/img/press-pierre-bourdieu-portrait@sm.jpg 1200w, assets/img/press-pierre-bourdieu-portrait.jpg 2400w" sizes="100vw" alt="Portrait of French sociologist Pierre Bourdieu, 1996" loading="eager"></div>
+    <div class="jread-hero jread-hero--cover"><img src="assets/img/press-pierre-bourdieu-nyt-portrait@sm.jpg" srcset="assets/img/press-pierre-bourdieu-nyt-portrait@sm.jpg 1200w, assets/img/press-pierre-bourdieu-nyt-portrait.jpg 2400w" sizes="100vw" alt="Black-and-white portrait of Pierre Bourdieu in a tweed jacket" loading="eager"></div>
 
     <div class="jread-body reveal reveal-d1">
       <p class="body">I've watched the same man walk into a boardroom, a gallery opening, a club, and a members-only bar in the same week. In one room his shoulders drop an inch — an adjustment only the people paying attention ever catch, and in most cases those are exactly the people who matter most. In some rooms Jason moved like he owned the place; in others he faded straight into the background. His suit never changed between stops. Something else did — and the French sociologist Pierre Bourdieu spent a career naming exactly what.</p>
+    </div>
+
+    <figure class="jread-media jread-media--full"><img src="assets/img/press-pierre-bourdieu-library@sm.jpg" srcset="assets/img/press-pierre-bourdieu-library@sm.jpg 800w, assets/img/press-pierre-bourdieu-library.jpg 1600w" sizes="(max-width:900px) 100vw, 700px" alt="Pierre Bourdieu in a tweed jacket in front of bookshelves" loading="lazy"><figcaption class="jread-caption">Pierre Bourdieu in his study.</figcaption></figure>
+
+    <div class="jread-body">
       <p class="body">He called it habitus — the internalized feel for the world you build through upbringing, class, education, every room you've already survived. Not a rulebook, not a personal quirk like a standing coffee order.</p>
       <p class="body"><b>Foxx Take:</b> Junior year, Young Jeezy's Thug Motivation 101 blaring out of my headphones while a packed lunchroom of savage high schoolers staked out their tables by whatever they were into that week. Me, I was just trying to make a living — burning Napster-sourced copies of Jeezy's first album and walking them table to table like a one-man distribution deal. I've always fit in, in more places than I haven't. Sorry, Jeezy — here's the song, so you can finally collect some of that streaming money I owe you.</p>
     </div>
@@ -243,10 +261,18 @@
 
     <div class="jtable"><p class="jtable__title">The three terms, applied</p><div class="jtable__scroll"><table><thead><tr><th>Concept</th><th>What it means</th><th>Where you'd feel it</th></tr></thead><tbody><tr><td>Habitus</td><td>Your learned instincts, taste, and posture</td><td>Knowing without thinking how formal a room actually is</td></tr><tr><td>Capital</td><td>The resources you can actually spend</td><td>Money, yes — but also a name, a network, a credential</td></tr><tr><td>Field</td><td>The arena, with its own unwritten rules</td><td>What reads as sharp in menswear reads as try-hard in private equity</td></tr></tbody></table></div></div>
 
+    <figure class="jread-media jread-media--full"><img src="assets/img/press-pierre-bourdieu-taste-collage@sm.jpg" srcset="assets/img/press-pierre-bourdieu-taste-collage@sm.jpg 800w, assets/img/press-pierre-bourdieu-taste-collage.jpg 1600w" sizes="(max-width:900px) 100vw, 700px" alt="Photo illustration of Pierre Bourdieu layered over vintage fashion-magazine cutouts" loading="lazy"><figcaption class="jread-caption">Taste, sorted by class before anyone opens their mouth.</figcaption></figure>
+
     <div class="jread-body">
       <p class="body">Put two equally talented designers in the same room at a trade show and the gap's rarely talent. One grew up around galleries and creative circles and already knows how long to hold a handshake, which reference signals taste instead of trend-chasing, how to turn small talk into a follow-up email. The other's just as good, doing all that math in real time, consciously, while the first guy doesn't notice he's doing it at all.</p>
       <p class="body">None of this makes habitus a life sentence. Bourdieu called it durable, not permanent — reinforced by repetition, not fixed by birth. Enter a new field consistently enough and the instinct rewires: new vocabulary, new relationships, a new sense of what's actually at stake, until the room that used to need translation starts to feel native.</p>
       <p class="body">That's the useful version of this for anyone building something instead of inheriting it. The goal was never to erase the habitus you already have — the taste and instinct from wherever you actually came from is real information, not something to hide. The goal's addition: enough new rooms, survived enough times, that a second habitus grows in alongside the first. Not a costume. A second native language.</p>
+    </div>
+
+    <figure class="jread-media jread-media--full"><img src="assets/img/press-pierre-bourdieu-paris-1998@sm.jpg" srcset="assets/img/press-pierre-bourdieu-paris-1998@sm.jpg 800w, assets/img/press-pierre-bourdieu-paris-1998.jpg 1600w" sizes="(max-width:900px) 100vw, 700px" alt="Pierre Bourdieu in a scarf and coat on a Paris street in 1998" loading="lazy"><figcaption class="jread-caption">Bourdieu on the street in Paris, 1998.</figcaption></figure>
+
+    <div class="jread-body">
+      <p class="body">Here's the psychology under all of it, as I understand it: the environment you're raised in, and however much more of the world you go out and actually explore after that — the people you spend time around, the rooms you make yourself walk into before you're ready — trains your nervous system to either own a room or brace against it. It's not really about the room in front of you. It's about how many rooms like it you've already survived.</p>
       <p class="body">That's been my own experience of it, concretely. My life's been full of travel — different cities, different circles, time spent around people who were more creative than me, more resourceful, further along as tastemakers or straight-up titans in their own lane. Enough of that, enough times, and we stop walking into a room bracing for it. We start walking in looking for what we can add — a read on the room, a connection worth making, a reason the conversation's better for us being in it. That's the whole point of building a second habitus instead of hiding the first one: not fitting in by disappearing into the room, but showing up as someone it's better for having.</p>
     </div>
 

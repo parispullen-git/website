@@ -216,6 +216,19 @@ ARTICLE_CSS = '''<style>
   .jread-pullquote__title{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.04em;
     color:var(--graphite)}
 
+  /* An attributed pull-quote paired side-by-side with an Instagram embed --
+     PQA_IG(), for when the quote and a specific clip make the same point
+     and read better as one beat than two. Same two-column collapse-on-
+     mobile shape as .jread-media--pair above. Instagram's own embed.js
+     restyles the .instagram-media blockquote once it loads; the min-height
+     just holds the row's shape before that happens. */
+  .jread-quote-ig{margin-top:var(--s7);max-width:var(--measure);display:grid;
+    grid-template-columns:1fr 1fr;gap:var(--s5);align-items:start}
+  .jread-quote-ig .jread-pullquote{margin:0;max-width:none}
+  .jread-quote-ig__embed{min-height:280px}
+  .jread-quote-ig__embed .instagram-media{margin:0 !important;width:100% !important}
+  @media (max-width:640px){.jread-quote-ig{grid-template-columns:1fr}}
+
   /* Responsive 16:9 YouTube embed. Same container-query technique as the
      Living Room / Cinema TV screens (assets/css/world.css .tv-modal__frame,
      .floor-scene__screen-frame) -- a container-type:size box holding an
@@ -378,6 +391,20 @@ def pullquote_attr_html(text, name, title):
     return (f'<blockquote class="jread-pullquote"><p>{text}</p>'
             f'<footer class="jread-pullquote__attr">{who}</footer></blockquote>')
 
+def instagram_embed_html(url):
+    return (f'<blockquote class="instagram-media" data-instgrm-permalink="{esc(url)}" '
+            f'data-instgrm-version="14"><a href="{esc(url)}" target="_blank" rel="noopener">'
+            f'View this post on Instagram</a></blockquote>')
+
+def pullquote_ig_html(text, name, title, ig_url):
+    who = f'<span class="jread-pullquote__name">{esc(name)}</span>'
+    if title:
+        who += f'<span class="jread-pullquote__title">{esc(title)}</span>'
+    quote = (f'<blockquote class="jread-pullquote"><p>{text}</p>'
+             f'<footer class="jread-pullquote__attr">{who}</footer></blockquote>')
+    return (f'<div class="jread-quote-ig"><div class="jread-quote-ig__quote">{quote}</div>'
+            f'<div class="jread-quote-ig__embed">{instagram_embed_html(ig_url)}</div></div>')
+
 def video_html(video):
     if not video:
         return ""
@@ -420,6 +447,11 @@ def body_html(post):
         elif para.startswith("PQA::"):
             quote, pname, ptitle = para[5:].split("||")
             current.append(pullquote_attr_html(quote, pname, ptitle))
+            i += 1
+        elif para.startswith("PQA_IG::"):
+            flush()
+            quote, pname, ptitle, ig_url = para[8:].split("||")
+            segments.append(("media", pullquote_ig_html(quote, pname, ptitle, ig_url)))
             i += 1
         elif para.startswith("IMG::"):
             flush()
@@ -669,6 +701,8 @@ def build_article_pages():
     n = len(posts)
     for i, post in enumerate(posts):
         next_post = next_published_after(i)
+        has_ig_embed = any(b.startswith("PQA_IG::") for b in post["body"])
+        ig_script = '\n<script async src="https://www.instagram.com/embed.js"></script>' if has_ig_embed else ""
         html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -720,7 +754,7 @@ def build_article_pages():
 </section>
 </main>
 {SITE_FOOT}
-<script src="assets/js/world.js" defer></script>
+<script src="assets/js/world.js" defer></script>{ig_script}
 </body>
 </html>
 '''

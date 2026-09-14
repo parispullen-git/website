@@ -86,6 +86,19 @@
   .jread-pullquote__title{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.04em;
     color:var(--graphite)}
 
+  /* An attributed pull-quote paired side-by-side with an Instagram embed --
+     PQA_IG(), for when the quote and a specific clip make the same point
+     and read better as one beat than two. Same two-column collapse-on-
+     mobile shape as .jread-media--pair above. Instagram's own embed.js
+     restyles the .instagram-media blockquote once it loads; the min-height
+     just holds the row's shape before that happens. */
+  .jread-quote-ig{margin-top:var(--s7);max-width:var(--measure);display:grid;
+    grid-template-columns:1fr 1fr;gap:var(--s5);align-items:start}
+  .jread-quote-ig .jread-pullquote{margin:0;max-width:none}
+  .jread-quote-ig__embed{min-height:280px}
+  .jread-quote-ig__embed .instagram-media{margin:0 !important;width:100% !important}
+  @media (max-width:640px){.jread-quote-ig{grid-template-columns:1fr}}
+
   /* Responsive 16:9 YouTube embed. Same container-query technique as the
      Living Room / Cinema TV screens (assets/css/world.css .tv-modal__frame,
      .floor-scene__screen-frame) -- a container-type:size box holding an
