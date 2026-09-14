@@ -132,8 +132,8 @@ def cover_slide(cfg, w, h):
     .headline {{ font-family:'Playfair Display',serif; font-weight:500; font-size:{96 if tall else 92}px; line-height:1.06; letter-spacing:-.01em; color:#F3F0EA; }}
     .headline em {{ font-style:italic; color:#C9A961; }}
     .sub {{ margin-top:{44 if tall else 36}px; font-size:{29 if tall else 26}px; line-height:1.58; color:#DBD5C9; max-width:840px; font-weight:300; }}
-    .rule {{ position:absolute; left:96px; right:96px; bottom:{250 if tall else 150}px; height:1px; background:rgba(219,213,201,.18); }}
-    .foot {{ position:absolute; left:96px; right:96px; bottom:{170 if tall else 96}px; display:flex; justify-content:space-between; align-items:baseline;
+    .rule {{ position:absolute; left:96px; right:96px; bottom:{270 if tall else 150}px; height:1px; background:rgba(219,213,201,.18); }}
+    .foot {{ position:absolute; left:96px; right:96px; bottom:{190 if tall else 96}px; display:flex; justify-content:space-between; align-items:baseline;
       font-family:ui-monospace,Menlo,monospace; font-size:{16 if tall else 15}px; letter-spacing:.14em; text-transform:uppercase; color:#71717C; }}
     """
     c = cfg["cover"]
@@ -155,12 +155,12 @@ def story_slide(post, img, cat, headline, hook, idx, total, w, h, focal="center"
     css = base_css(w, h) + f"""
     .bg {{ position:absolute; inset:0; background:url('file://{REPO}/assets/img/{img}.jpg') {focal}/cover no-repeat; }}
     .scrim {{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,16,18,.12) 0%, rgba(16,16,18,.2) {'38%' if not tall else '30%'}, rgba(10,10,11,{'.94' if not tall else '.72'}) {'82%' if not tall else '62%'}, rgba(10,10,11,.97) {'92%' if not tall else '80%'}, #0A0A0B 100%); }}
-    .field {{ position:absolute; left:0; right:0; bottom:0; padding:0 {80 if tall else 88}px {200 if tall else 120}px; }}
+    .field {{ position:absolute; left:0; right:0; bottom:0; padding:0 {80 if tall else 88}px {320 if tall else 120}px; }}
     .cat {{ font-family:ui-monospace,Menlo,monospace; font-size:{18 if tall else 17}px; letter-spacing:.24em; text-transform:uppercase; color:#C9A961; margin-bottom:{26 if tall else 24}px; }}
     .headline {{ font-family:'Playfair Display',serif; font-weight:500; font-size:{72 if tall else 68}px; line-height:1.08; letter-spacing:-.01em; color:#F3F0EA; max-width:920px; }}
     .hook {{ margin-top:{32 if tall else 28}px; font-size:{27 if tall else 25}px; line-height:1.5; color:#DBD5C9; max-width:860px; font-weight:300; }}
     .cta {{ margin-top:{46 if tall else 40}px; font-family:ui-monospace,Menlo,monospace; font-size:{16 if tall else 15}px; letter-spacing:.14em; text-transform:uppercase; color:#A8874E; }}
-    .foot {{ position:absolute; left:{80 if tall else 88}px; right:{80 if tall else 88}px; bottom:{116 if tall else 52}px; display:flex; justify-content:space-between; align-items:baseline;
+    .foot {{ position:absolute; left:{80 if tall else 88}px; right:{80 if tall else 88}px; bottom:{190 if tall else 52}px; display:flex; justify-content:space-between; align-items:baseline;
       font-family:ui-monospace,Menlo,monospace; font-size:{15 if tall else 14}px; letter-spacing:.14em; text-transform:uppercase; color:#71717C; }}
     """
     # Story format (9:16) puts "TAP HERE" + a downward arrow up in the
@@ -202,14 +202,14 @@ def nav_slide(cfg, shot_path, idx, total, w, h):
     .bg {{ position:absolute; top:0; left:0; width:{w}px; height:{h}px;
       background:url('file://{shot_path}') top/{w}px auto no-repeat; }}
     .scrim {{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,11,.2) 0%, rgba(10,10,11,{'.35' if not tall else '.35'}) {'40%' if not tall else '32%'}, rgba(10,10,11,{'.55' if not tall else '.85'}) {'70%' if not tall else '62%'}, #0A0A0B {'88%' if not tall else '84%'}); }}
-    .field {{ position:absolute; left:0; right:0; bottom:0; padding:0 {80 if tall else 88}px {200 if tall else 130}px; }}
+    .field {{ position:absolute; left:0; right:0; bottom:0; padding:0 {80 if tall else 88}px {320 if tall else 130}px; }}
     .eyebrow {{ font-family:ui-monospace,Menlo,monospace; font-size:{18 if tall else 17}px; letter-spacing:.24em; text-transform:uppercase; color:#A8874E; margin-bottom:{26 if tall else 22}px; }}
     .headline {{ font-family:'Playfair Display',serif; font-weight:500; font-size:{62 if tall else 58}px; line-height:1.15; color:#F3F0EA; max-width:900px; }}
     .sub {{ margin-top:{30 if tall else 26}px; font-size:{26 if tall else 24}px; line-height:1.55; color:#DBD5C9; max-width:820px; font-weight:300; }}
     .pointer {{ position:absolute; top:{130 if tall else 96}px; right:{120 if tall else 130}px; display:flex; flex-direction:column; align-items:flex-end; gap:8px; }}
     .pointer .lbl {{ font-family:ui-monospace,Menlo,monospace; font-size:{16 if tall else 15}px; letter-spacing:.14em; text-transform:uppercase; color:#C9A961; }}
     .pointer svg {{ transform:scaleX(-1) rotate(8deg); }}
-    .foot {{ position:absolute; left:{80 if tall else 88}px; right:{80 if tall else 88}px; bottom:{116 if tall else 52}px; display:flex; justify-content:space-between; align-items:baseline;
+    .foot {{ position:absolute; left:{80 if tall else 88}px; right:{80 if tall else 88}px; bottom:{190 if tall else 52}px; display:flex; justify-content:space-between; align-items:baseline;
       font-family:ui-monospace,Menlo,monospace; font-size:{15 if tall else 14}px; letter-spacing:.14em; text-transform:uppercase; color:#71717C; }}
     """
     n = cfg["nav"]
