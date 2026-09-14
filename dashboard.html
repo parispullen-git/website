@@ -2169,6 +2169,7 @@
           '<button type="button" class="btn-sm" data-jl-move="up" data-jl-slug="' + esc(p.slug) + '"' + (i === 0 ? ' disabled' : '') + '>&#8593; Move Up</button>' +
           '<button type="button" class="btn-sm" data-jl-move="down" data-jl-slug="' + esc(p.slug) + '"' + (i === ordered.length - 1 ? ' disabled' : '') + '>&#8595; Move Down</button>' +
           (isFeatured ? '' : '<button type="button" class="btn-sm" data-jl-feature="' + esc(p.slug) + '">Set as Featured</button>') +
+          '<button type="button" class="btn-sm" data-jl-publish-toggle="' + esc(p.slug) + '">' + (isDraft ? 'Add to Journal' : 'Pull to Draft') + '</button>' +
           '<button type="button" class="btn-sm" data-jl-edit="' + esc(p.slug) + '">Edit</button>' +
           '<a class="btn-sm" style="text-decoration:none;display:inline-block" href="journal-' + esc(p.slug) + '.html" target="_blank" rel="noopener">Preview &#8594;</a>' +
         '</div>' +
@@ -2218,6 +2219,27 @@
         .then(function(res){
           if (!res.ok) { alert(res.data.error || 'Could not set as featured.'); }
           jlRenderFilter();
+          jlRenderList();
+        })
+        .catch(function(){ alert('Could not reach the server.'); jlRenderList(); });
+      return;
+    }
+
+    var publishBtn = e.target.closest('[data-jl-publish-toggle]');
+    if (publishBtn) {
+      publishBtn.disabled = true;
+      var tSlug = publishBtn.getAttribute('data-jl-publish-toggle');
+      var tPost = jlPosts.filter(function(p){ return p.slug === tSlug; })[0];
+      if (!tPost) return;
+      var toDraft = tPost.status !== 'draft';
+      var newStatus = jlPosts.map(function(p){
+        return p.slug === tSlug ? Object.assign({}, p, {status: toDraft ? 'draft' : 'published'}) : p;
+      });
+      var verb = toDraft ? 'pull "' : 'add "';
+      jlSaveReorder(newStatus, 'Dashboard: ' + verb + (tPost.title || tSlug) + '" ' + (toDraft ? 'back to draft' : 'to the Journal'))
+        .then(function(res){
+          if (!res.ok) { alert(res.data.error || 'Could not update status.'); }
+          jlRenderStatusFilter();
           jlRenderList();
         })
         .catch(function(){ alert('Could not reach the server.'); jlRenderList(); });
