@@ -1,0 +1,228 @@
+<title>Penthouse Walkthrough Editor</title>
+<style>
+:root{
+  --ink:#101012; --charcoal:#17171A; --graphite:#33333A; --ash:#71717C;
+  --bone:#DBD5C9; --ivory:#F3F0EA; --brass:#A8874E; --brass-lit:#C9A961;
+  --rule:rgba(219,213,201,.14);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ink); color:var(--ivory);
+  font-family:'Inter',sans-serif; padding:0 20px 80px;
+}
+.head{
+  max-width:1400px; margin:0 auto; padding:44px 0 28px;
+  border-bottom:1px solid var(--rule);
+}
+.head .kicker{
+  font-family:ui-monospace,Menlo,monospace; font-size:13px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--brass-lit);
+}
+.head h1{
+  font-family:'Playfair Display',serif; font-weight:500; font-size:clamp(28px,4vw,42px);
+  margin:10px 0 12px; text-wrap:balance;
+}
+.head p{
+  font-size:15px; line-height:1.6; color:var(--bone); max-width:64ch; margin:0;
+}
+.head .status{
+  display:inline-flex; align-items:center; gap:8px; margin-top:16px;
+  font-family:ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ash);
+}
+.head .status .dot{width:6px;height:6px;border-radius:50%;background:var(--ash)}
+.head .status.saved .dot{background:#7A9B7E}
+.head .status.saving .dot{background:var(--brass-lit)}
+
+.groups{max-width:1400px; margin:0 auto}
+.group{margin-top:48px}
+.group__label{
+  font-family:ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ash); padding-bottom:10px;
+  border-bottom:1px solid var(--rule); margin-bottom:20px;
+}
+.grid{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:20px;
+}
+.card{
+  position:relative; aspect-ratio:1080/1920; border-radius:6px; overflow:hidden;
+  background:var(--charcoal); box-shadow:0 14px 34px rgba(0,0,0,.45);
+}
+.card img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
+}
+.card .scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(16,16,18,.05) 0%, rgba(10,10,11,.25) 45%, rgba(10,10,11,.94) 72%, #0A0A0B 100%);
+}
+.card .kind-tag{
+  position:absolute; top:10px; left:10px; z-index:2;
+  font-family:ui-monospace,Menlo,monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brass-lit); background:rgba(10,10,11,.55); padding:3px 7px; border-radius:3px;
+}
+.card .field{
+  position:absolute; left:0; right:0; bottom:0; padding:14px 14px 16px; z-index:2;
+}
+.card .eyebrow{
+  font-family:ui-monospace,Menlo,monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brass-lit); margin-bottom:6px; outline:none; cursor:text;
+  border-radius:3px; padding:1px 3px; margin-left:-3px;
+}
+.card .headline{
+  font-family:'Playfair Display',serif; font-weight:500; font-size:19px; line-height:1.18;
+  color:var(--ivory); outline:none; cursor:text; border-radius:3px; padding:1px 3px; margin:0 0 0 -3px;
+}
+.card .sub{
+  font-family:'Inter',sans-serif; font-weight:300; font-size:11.5px; line-height:1.45;
+  color:var(--bone); margin-top:6px; outline:none; cursor:text; border-radius:3px; padding:1px 3px; margin-left:-3px;
+}
+.card [contenteditable]:hover{background:rgba(255,255,255,.06)}
+.card [contenteditable]:focus{background:rgba(201,169,97,.16); box-shadow:0 0 0 1px var(--brass)}
+.card .order{
+  position:absolute; bottom:10px; right:12px; z-index:2;
+  font-family:ui-monospace,Menlo,monospace; font-size:9px; color:var(--ash);
+}
+.card .savedmark{
+  position:absolute; top:10px; right:10px; z-index:2; width:7px; height:7px; border-radius:50%;
+  background:#7A9B7E; opacity:0; transition:opacity .4s;
+}
+.card .savedmark.show{opacity:1}
+</style>
+
+<div class="head">
+  <div class="kicker">The Penthouse Walkthrough &#183; Editable</div>
+  <h1>Tweak anything below, then tell Claude to render the final images.</h1>
+  <p>Every headline and line of copy is editable right in place — click text, edit it, click away. Changes save automatically. The photos and layout are locked to what the site actually shows; only the words move.</p>
+  <div class="status" id="status"><span class="dot"></span><span id="statusText">Connecting&#8230;</span></div>
+</div>
+
+<div class="groups" id="groups"></div>
+
+<script>
+const FALLBACK_SLIDES = [
+  { id: "1-cover", order: 1, group: "Cover", kind: "cover", eyebrow: "Example Eyebrow", headline: "Example headline", sub: "Example supporting line.", imgUrl: "/_blob/REPLACE_WITH_UPLOADED_ASSET_ID" },
+  { id: "002-example", order: 2, group: "Example Group", kind: "room", eyebrow: "Example Eyebrow", headline: "Example headline", sub: "Example supporting line.", imgUrl: "/_blob/REPLACE_WITH_UPLOADED_ASSET_ID" }
+];
+
+
+let db = null;
+const groupsEl = document.getElementById('groups');
+const statusEl = document.getElementById('status');
+const statusText = document.getElementById('statusText');
+
+function setStatus(state, text) {
+  statusEl.className = 'status ' + state;
+  statusText.textContent = text;
+}
+
+function render(slides) {
+  slides.sort((a, b) => a.order - b.order);
+  const byGroup = new Map();
+  for (const s of slides) {
+    if (!byGroup.has(s.group)) byGroup.set(s.group, []);
+    byGroup.get(s.group).push(s);
+  }
+  groupsEl.innerHTML = '';
+  for (const [group, items] of byGroup) {
+    const sec = document.createElement('div');
+    sec.className = 'group';
+    const label = document.createElement('div');
+    label.className = 'group__label';
+    label.textContent = group;
+    sec.appendChild(label);
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+    for (const s of items) {
+      grid.appendChild(card(s));
+    }
+    sec.appendChild(grid);
+    groupsEl.appendChild(sec);
+  }
+}
+
+function card(s) {
+  const el = document.createElement('div');
+  el.className = 'card';
+  el.innerHTML = `
+    <img src="${s.imgUrl}" alt="">
+    <div class="scrim"></div>
+    <div class="kind-tag">${s.kind}</div>
+    <div class="savedmark" id="saved-${s.id}"></div>
+    <div class="field">
+      <div class="eyebrow" contenteditable="true" data-field="eyebrow" data-id="${s.id}">${esc(s.eyebrow)}</div>
+      <div class="headline" contenteditable="true" data-field="headline" data-id="${s.id}">${esc(s.headline)}</div>
+      <div class="sub" contenteditable="true" data-field="sub" data-id="${s.id}">${esc(s.sub)}</div>
+    </div>
+    <div class="order">${String(s.order).padStart(2,'0')} / ${s.total}</div>
+  `;
+  return el;
+}
+
+function esc(t) {
+  const d = document.createElement('div');
+  d.textContent = t || '';
+  return d.innerHTML;
+}
+
+const timers = {};
+function scheduleSave(id, field, value) {
+  const key = id + ':' + field;
+  clearTimeout(timers[key]);
+  setStatus('saving', 'Saving…');
+  timers[key] = setTimeout(async () => {
+    if (!db) return;
+    try {
+      await db.doc('slides/' + id).update({ [field]: value });
+      setStatus('saved', 'All changes saved');
+      const mark = document.getElementById('saved-' + id);
+      if (mark) { mark.classList.add('show'); setTimeout(() => mark.classList.remove('show'), 1200); }
+    } catch (e) {
+      setStatus('idle', 'Could not save — edits kept on screen only');
+    }
+  }, 700);
+}
+
+groupsEl.addEventListener('input', (e) => {
+  const t = e.target;
+  if (!t.dataset || !t.dataset.field) return;
+  scheduleSave(t.dataset.id, t.dataset.field, t.textContent);
+});
+
+async function boot() {
+  // Render the seed data immediately so the page is never blank while
+  // `db` resolves (or if it never does) — then swap to the live,
+  // editable copy the moment the first real snapshot arrives.
+  const seedDocs = FALLBACK_SLIDES.map(s => ({ ...s }));
+  const total = seedDocs.length;
+  seedDocs.forEach(d => d.total = total);
+  render(seedDocs);
+
+  db = await claude.use('db');
+  if (!db) {
+    setStatus('idle', 'Read-only preview — this view has no editor access');
+    return;
+  }
+
+  try {
+    const res = await db.collection('slides').limit(100).get();
+    const docs = res.docs.map(d => ({ id: d.id, ...d.data() }));
+    docs.forEach(d => d.total = docs.length);
+    render(docs);
+    setStatus('saved', 'All changes saved');
+  } catch (e) {
+    setStatus('idle', 'Showing the last saved copy — editing is unavailable right now');
+    return;
+  }
+
+  db.collection('slides').limit(100).onSnapshot(
+    (snap) => {
+      const live = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      live.forEach(d => d.total = live.length);
+      if (document.activeElement && document.activeElement.hasAttribute('contenteditable')) return;
+      render(live);
+    },
+    () => setStatus('idle', 'Live updates paused — reload to reconnect')
+  );
+}
+boot();
+</script>
