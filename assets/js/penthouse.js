@@ -148,16 +148,17 @@
            '</button>';
   }
 
-  // "The City" marker -- a real link to charlotte.html, styled exactly like
-  // an artifact dot but NOT a drawer (no data-artifact attribute, so
-  // world.js's drawer delegate never claims the click and the <a> navigates
-  // normally). Same shape as REMOTE_NODE_POS above: any room with glass
-  // worth walking through gets an entry, positioned on that room's own view.
-  // Keep every position clear of the fixed left/right nav arrows -- those
-  // are pinned to the viewport edges and vertically centred, so stay past
-  // x=14% on the left and off mid-height at the far right.
-  // Mirrors build_house.py's CITY_NODE_POS exactly.
-  var CITY_NODE_POS = {
+  // "The Barbershop" marker -- a real link to house.html#barbershop (was
+  // "The City", linking to charlotte.html, until repointed here), styled
+  // exactly like an artifact dot but NOT a drawer (no data-artifact
+  // attribute, so world.js's drawer delegate never claims the click and
+  // the <a> navigates normally). Same shape as REMOTE_NODE_POS above: any
+  // room with glass worth walking through gets an entry, positioned on
+  // that room's own view. Keep every position clear of the fixed
+  // left/right nav arrows -- those are pinned to the viewport edges and
+  // vertically centred, so stay past x=14% on the left and off mid-height
+  // at the far right. Mirrors build_house.py's BARBERSHOP_NODE_POS exactly.
+  var BARBERSHOP_NODE_POS = {
     'penthouse-living': ['21%', '10%'],  // clean window pane above the stairwell beam, skyline visible
     'bedroom':          ['19%', '18.6%'], // clear glass past the lamp, above the lounge chair
     'bath':             ['38%', '6%'],   // the skyline through the window, clear of the tub and plant
@@ -165,11 +166,11 @@
     'music-lounge':     ['72%', '8%']    // the sliver of skyline beside the bar's PP sign, past the curtain
   };
   function cityLinkHTML(roomId) {
-    var pos = CITY_NODE_POS[roomId];
+    var pos = BARBERSHOP_NODE_POS[roomId];
     if (!pos) return '';
-    return '<a href="charlotte.html" class="artifact artifact--remote" style="--x:' + pos[0] + ';--y:' + pos[1] + '">' +
+    return '<a href="house.html#barbershop" class="artifact artifact--remote" style="--x:' + pos[0] + ';--y:' + pos[1] + '">' +
              '<span class="artifact__dot" aria-hidden="true"></span>' +
-             '<span class="artifact__label">The City</span>' +
+             '<span class="artifact__label">The Barbershop</span>' +
            '</a>';
   }
 

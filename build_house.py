@@ -59,6 +59,17 @@ _PENTHOUSE_ORDER = ["closet", "bedroom", "bath",
                      "music-lounge", "cinema", "gym"]
 _penthouse_by_id = {f["id"]: f for f in FLOORS if f["lvl"] in ("26", "27", "28")}
 PENTHOUSE_FLOORS = [_penthouse_by_id[_id] for _id in _PENTHOUSE_ORDER]
+
+# The Barbershop is a real open room, appended after the 3x3 penthouse
+# grid above -- it's wired into ROOM_ADJACENCY as a 4th room on the
+# Level 26 row (right of the Gym), so DOM order doesn't need to match
+# traversal order here either. It also keeps the repurposed "window"
+# markers (see BARBERSHOP_NODE_POS below) as quick-jump shortcuts from
+# the far side of the penthouse, and a Floors nav panel entry.
+_barbershop = next((f for f in FLOORS if f["id"] == "barbershop"), None)
+if _barbershop:
+    PENTHOUSE_FLOORS = PENTHOUSE_FLOORS + [_barbershop]
+
 START_ROOM = "penthouse-living"  # data-start-room below; also which screen (if any) autoplays on load
 
 # Room-to-room navigation is a real 2D layout -- each room's up/down
@@ -67,11 +78,12 @@ START_ROOM = "penthouse-living"  # data-start-room below; also which screen (if 
 #                  |            |             |
 #   Level 27:  Kitchen  <-> Living Room  <-> Study
 #                  |            |             |
-#   Level 26:  Music Lounge <-> Cinema   <-> Gym
-# A full 3x3 grid -- every room has an up/down neighbor. Left/right/up/down
-# each name an explicit neighbor id (or are absent at an edge) -- room-
-# pager.js reads these directly rather than paging by array index, so DOM
-# order no longer needs to match traversal order.
+#   Level 26:  Music Lounge <-> Cinema   <-> Gym <-> Barbershop
+# Every room has an up/down neighbor except the Barbershop, a 4th room
+# on the Level 26 row with no Level 27 counterpart above it. Left/right/
+# up/down each name an explicit neighbor id (or are absent at an edge) --
+# room-pager.js reads these directly rather than paging by array index,
+# so DOM order no longer needs to match traversal order.
 ROOM_ADJACENCY = {
     "closet":             {"right": "bedroom", "down": "kitchen"},
     "bedroom":            {"left": "closet", "right": "bath", "down": "penthouse-living"},
@@ -81,7 +93,8 @@ ROOM_ADJACENCY = {
     "study":              {"left": "penthouse-living", "up": "bath", "down": "gym"},
     "music-lounge":       {"up": "kitchen", "right": "cinema"},
     "cinema":             {"left": "music-lounge", "right": "gym", "up": "penthouse-living"},
-    "gym":                {"left": "cinema", "up": "study"},
+    "gym":                {"left": "cinema", "up": "study", "right": "barbershop"},
+    "barbershop":         {"left": "gym"},
 }
 
 # Room-to-room nav (ROOM_ADJACENCY, above) is fully explicit now, but the
@@ -171,15 +184,16 @@ REMOTE_NODE_POS = {
     "music-lounge": ("50%", "62%"),
 }
 
-# "The City" marker -- a real link to charlotte.html, styled exactly like an
-# artifact dot but NOT a drawer (no data-artifact attribute, so world.js's
-# drawer delegate never claims the click and the <a> navigates normally).
-# Same shape as REMOTE_NODE_POS above: any room that has glass worth
-# walking through gets an entry here, positioned on that room's own view.
-# Keep every position clear of the fixed left/right nav arrows -- those are
-# pinned to the viewport edges and vertically centred, so stay past x=14%
-# on the left and off mid-height at the far right.
-CITY_NODE_POS = {
+# "The Barbershop" marker -- a real link to the Barbershop room (was "The
+# City", linking to charlotte.html, until repointed here), styled exactly
+# like an artifact dot but NOT a drawer (no data-artifact attribute, so
+# world.js's drawer delegate never claims the click and the <a> navigates
+# normally). Same shape as REMOTE_NODE_POS above: any room that has glass
+# worth walking through gets an entry here, positioned on that room's own
+# view. Keep every position clear of the fixed left/right nav arrows --
+# those are pinned to the viewport edges and vertically centred, so stay
+# past x=14% on the left and off mid-height at the far right.
+BARBERSHOP_NODE_POS = {
     "penthouse-living": ("21%", "10%"),   # clean window pane above the stairwell beam, skyline visible
     "bedroom":          ("19%", "18.6%"), # clear glass past the lamp, above the lounge chair
     "bath":             ("38%", "6%"),    # the skyline through the window, clear of the tub and plant
@@ -425,14 +439,18 @@ f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
     # A real link, not a drawer -- styled exactly like any other artifact
     # marker, but tapping it leaves the room entirely rather than opening
     # a panel. Deliberately carries no data-artifact attribute, so world.js's
-    # drawer handler ignores it and the <a> is allowed to navigate.
-    # Positions live in CITY_NODE_POS above.
+    # drawer handler ignores it and the <a> is allowed to navigate. Same-page
+    # hash link (not a different page, like charlotte.html used to be here)
+    # -- room-pager.js reads window.location.hash on load and hashchange,
+    # so this lands straight on the Barbershop room, same mechanism
+    # STUDY_COCKTAILS_TRACE's "house.html#kitchen" link already relies on.
+    # Positions live in BARBERSHOP_NODE_POS above.
     city_link_node = ''
-    if f["id"] in CITY_NODE_POS:
-        cx, cy = CITY_NODE_POS[f["id"]]
-        city_link_node = f'''        <a href="charlotte.html" class="artifact artifact--remote" style="--x:{cx};--y:{cy}">
+    if f["id"] in BARBERSHOP_NODE_POS:
+        cx, cy = BARBERSHOP_NODE_POS[f["id"]]
+        city_link_node = f'''        <a href="house.html#barbershop" class="artifact artifact--remote" style="--x:{cx};--y:{cy}">
           <span class="artifact__dot" aria-hidden="true"></span>
-          <span class="artifact__label">The City</span>
+          <span class="artifact__label">The Barbershop</span>
         </a>'''
 
     adj = ROOM_ADJACENCY.get(f["id"], {})

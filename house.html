@@ -51,6 +51,7 @@
     <a class="menu__explore-link" href="house.html#music-lounge">26 · The Music Lounge</a>
     <a class="menu__explore-link" href="house.html#cinema">26 · The Cinema</a>
     <a class="menu__explore-link" href="house.html#gym">26 · The Gym</a>
+    <a class="menu__explore-link" href="house.html#barbershop">25 · The Barbershop</a>
     </div>
   </div>
   <div class="menu__foot">
@@ -182,9 +183,9 @@
           <span class="artifact__label">The Suit</span>
           
         </button>
-        <a href="charlotte.html" class="artifact artifact--remote" style="--x:19%;--y:18.6%">
+        <a href="house.html#barbershop" class="artifact artifact--remote" style="--x:19%;--y:18.6%">
           <span class="artifact__dot" aria-hidden="true"></span>
-          <span class="artifact__label">The City</span>
+          <span class="artifact__label">The Barbershop</span>
         </a>
         </div>
       </div>
@@ -241,9 +242,9 @@
              style="--focus:50% 50%" width="2400" height="1340">
         <div class="artifacts">
 
-        <a href="charlotte.html" class="artifact artifact--remote" style="--x:38%;--y:6%">
+        <a href="house.html#barbershop" class="artifact artifact--remote" style="--x:38%;--y:6%">
           <span class="artifact__dot" aria-hidden="true"></span>
-          <span class="artifact__label">The City</span>
+          <span class="artifact__label">The Barbershop</span>
         </a>
         </div>
       </div>
@@ -284,9 +285,9 @@
           <span class="artifact__label">The Jacket</span>
           
         </button>
-        <a href="charlotte.html" class="artifact artifact--remote" style="--x:27.5%;--y:3.75%">
+        <a href="house.html#barbershop" class="artifact artifact--remote" style="--x:27.5%;--y:3.75%">
           <span class="artifact__dot" aria-hidden="true"></span>
-          <span class="artifact__label">The City</span>
+          <span class="artifact__label">The Barbershop</span>
         </a>
         </div>
       </div>
@@ -422,9 +423,9 @@
           <span class="artifact__label">The Polo</span>
           
         </button>
-        <a href="charlotte.html" class="artifact artifact--remote" style="--x:21%;--y:10%">
+        <a href="house.html#barbershop" class="artifact artifact--remote" style="--x:21%;--y:10%">
           <span class="artifact__dot" aria-hidden="true"></span>
-          <span class="artifact__label">The City</span>
+          <span class="artifact__label">The Barbershop</span>
         </a>
         </div>
       </div>
@@ -666,9 +667,9 @@
           <span class="artifact__dot" aria-hidden="true"></span>
           <span class="artifact__label">The Remote</span>
         </button>
-        <a href="charlotte.html" class="artifact artifact--remote" style="--x:72%;--y:8%">
+        <a href="house.html#barbershop" class="artifact artifact--remote" style="--x:72%;--y:8%">
           <span class="artifact__dot" aria-hidden="true"></span>
-          <span class="artifact__label">The City</span>
+          <span class="artifact__label">The Barbershop</span>
         </a>
         </div>
       </div>
@@ -815,7 +816,7 @@
           </div>
   </div>
 </section>
-<section class="floor-scene" id="gym" tabindex="-1" aria-label="Level 26 — The Gym" data-left="cinema" data-up="study">
+<section class="floor-scene" id="gym" tabindex="-1" aria-label="Level 26 — The Gym" data-left="cinema" data-right="barbershop" data-up="study">
   <div class="floor-scene__surface">
     <div class="floor-scene__canvas">
       <div class="floor-scene__view">
@@ -848,6 +849,70 @@
 
   </div>
 </section>
+<section class="floor-scene" id="barbershop" tabindex="-1" aria-label="Level 25 — The Barbershop" data-left="gym">
+  <div class="floor-scene__surface">
+    <div class="floor-scene__canvas">
+      <div class="floor-scene__view">
+        <img src="assets/img/room-barbershop.jpg?v=20260913i"
+             srcset="assets/img/room-barbershop@sm.jpg?v=20260913i 1200w, assets/img/room-barbershop.jpg?v=20260913i 2400w"
+             sizes="100vw" alt="The Barbershop" loading="lazy"
+             style="--focus:54% 46%" width="2400" height="1340">
+        <div class="artifacts">
+        <button class="artifact" style="--x:48%;--y:52%" data-artifact="chairs">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Chairs</span>
+          
+        </button>
+        <button class="artifact" style="--x:90%;--y:42%" data-artifact="shelf">
+          <span class="artifact__dot" aria-hidden="true"></span>
+          <span class="artifact__label">The Shelf</span>
+          
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="floor-scene__scrim"></div>
+
+  <div class="wrap">
+    <div class="floor-plate reveal">
+      <p class="floor-plate__level"><b>25</b> <span>The Penthouse</span></p>
+      <h2 class="floor-plate__name">The Barbershop</h2>
+      <p class="floor-plate__note">Two chairs, a rule about phones, and the same line stenciled on both walls so it can’t be missed even once: discipline creates freedom.</p>
+      <p class="floor-plate__count"><i></i>2 artifacts on this floor</p>
+    </div>
+  </div>
+
+  <div class="drawer" id="drawer-barbershop" aria-hidden="true">
+    <button class="drawer__close">Close &#215;</button>
+          <div class="drawer__panel" data-artifact="chairs" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 25 &#183; Artifact</p>
+                <h3 class="drawer__name">The Chairs</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Two chairs, never three — a third seat would turn a standing appointment into a walk-in business, and that isn’t the business. Both face the skyline, not the mirror.</p>
+                <dl class="drawer__spec"><div><dt>Seats</dt><dd>Two</dd></div><div><dt>Booking</dt><dd>Referral only</dd></div><div><dt>House rule</dt><dd>No phones in the chair</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+          <div class="drawer__panel" data-artifact="shelf" hidden>
+            <div class="drawer__inner">
+              <div class="drawer__head">
+                <p class="drawer__tag">Level 25 &#183; Artifact</p>
+                <h3 class="drawer__name">The Shelf</h3>
+              </div>
+              <div class="drawer__body">
+                <p class="body">Everything on it is unlabeled to a stranger and instantly recognizable to a regular — the whole point of a house line is that you stop having to ask.</p>
+                <dl class="drawer__spec"><div><dt>Stock</dt><dd>House line only</dd></div><div><dt>Restock</dt><dd>Weekly</dd></div><div><dt>For sale</dt><dd>Ask the chair</dd></div></dl>
+                
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
   </div>
   <button type="button" class="room-pager__nav room-pager__nav--prev" data-room-pager-prev aria-label="Previous room"><span aria-hidden="true">&#8249;</span><span class="room-pager__nav-hint" data-room-pager-hint aria-hidden="true"></span></button>
   <button type="button" class="room-pager__nav room-pager__nav--next" data-room-pager-next aria-label="Next room"><span aria-hidden="true">&#8250;</span><span class="room-pager__nav-hint" data-room-pager-hint aria-hidden="true"></span></button>
@@ -871,6 +936,8 @@
     <button type="button" class="nav-panel__btn" data-nav-panel-go="music-lounge"><span class="nav-panel__btn-lvl">26</span><span class="nav-panel__btn-name">The Music Lounge</span></button>
     <button type="button" class="nav-panel__btn" data-nav-panel-go="cinema"><span class="nav-panel__btn-lvl">26</span><span class="nav-panel__btn-name">The Cinema</span></button>
     <button type="button" class="nav-panel__btn" data-nav-panel-go="gym"><span class="nav-panel__btn-lvl">26</span><span class="nav-panel__btn-name">The Gym</span></button>
+    <p class="nav-panel__group">Level 25</p>
+    <button type="button" class="nav-panel__btn" data-nav-panel-go="barbershop"><span class="nav-panel__btn-lvl">25</span><span class="nav-panel__btn-name">The Barbershop</span></button>
     </div>
   </div>
 </section>

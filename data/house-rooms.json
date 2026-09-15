@@ -1718,5 +1718,59 @@
         ]
       }
     ]
+  },
+  {
+    "id": "barbershop",
+    "lvl": "25",
+    "name": "The Barbershop",
+    "state": "restricted",
+    "img": "room-barbershop",
+    "grade": "",
+    "focus": "54% 46%",
+    "note": "Two chairs, a rule about phones, and the same line stenciled on both walls so it can’t be missed even once: discipline creates freedom.",
+    "arts": [
+      {
+        "id": "chairs",
+        "name": "The Chairs",
+        "x": "48%",
+        "y": "52%",
+        "desc": "Two chairs, never three — a third seat would turn a standing appointment into a walk-in business, and that isn’t the business. Both face the skyline, not the mirror.",
+        "specs": [
+          [
+            "Seats",
+            "Two"
+          ],
+          [
+            "Booking",
+            "Referral only"
+          ],
+          [
+            "House rule",
+            "No phones in the chair"
+          ]
+        ]
+      },
+      {
+        "id": "shelf",
+        "name": "The Shelf",
+        "x": "90%",
+        "y": "42%",
+        "desc": "Everything on it is unlabeled to a stranger and instantly recognizable to a regular — the whole point of a house line is that you stop having to ask.",
+        "specs": [
+          [
+            "Stock",
+            "House line only"
+          ],
+          [
+            "Restock",
+            "Weekly"
+          ],
+          [
+            "For sale",
+            "Ask the chair"
+          ]
+        ]
+      }
+    ]
   }
 ]
