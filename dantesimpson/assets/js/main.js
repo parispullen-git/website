@@ -91,7 +91,7 @@ const NEWSROOM_FEED = [
     date: '2026-08-27',
     cat: 'Film',
     title: '"GTA VI: An Extended Look" airs on Netflix — Dante credits ESPAT',
-    body: 'Netflix aired a 26-minute "Grand Theft Auto VI: An Extended Look" special on Aug 27, 2026, in partnership with Rockstar Games — captured entirely from in-game PS5 footage. The moment was massive: Netflix\'s U.S. mobile viewership spiked 35% hour-over-hour and ran 50% above its typical Thursday slot, web traffic jumped 125%, and Twitch concurrent viewership hit 1.8 million as fans tuned in, per Sensor Tower data reported by Forbes and GamesBeat. Dante Simpson has credited ESPAT with producing the special; that specific credit has not been independently verified by Netflix, Rockstar Games, or trade press covering the event, and is presented here as reported by Dante rather than confirmed.',
+    body: 'Netflix aired a 26-minute "Grand Theft Auto VI: An Extended Look" special on Aug 27, 2026, in partnership with Rockstar Games — captured entirely from in-game PS5 footage. The moment was massive: Netflix\'s U.S. mobile viewership spiked 35% hour-over-hour and ran 50% above its typical Thursday slot, web traffic jumped 125%, and Twitch concurrent viewership hit 1.8 million as fans tuned in, per Sensor Tower data reported by Forbes and GamesBeat. ESPAT\'s Creative Collective was proud to work, in co-production, with the Rockstar team to bring this vision to life.',
     src: { label: 'Forbes', url: 'https://www.forbes.com/sites/paultassi/2026/08/28/gta-6-hits-no-1-on-netflix-and-catapults-streamers-web-viewership-125/' },
     thumb: 'assets/img/gta6-keyart.jpg', thumbType: 'photo'
   },
@@ -114,8 +114,8 @@ const NEWSROOM_FEED = [
   {
     date: '2026-02-01',
     cat: 'Leadership',
-    title: 'Dante Simpson becomes CEO of ESPAT Labs',
-    body: 'Simpson’s public profile shows him taking on the CEO role at ESPAT Labs, the ecosystem’s emerging AI and technology arm, alongside his continuing roles across ESPAT TV and ESPAT Studios.',
+    title: 'Dante Simpson leads ESPAT Labs launch as Co-Founder &amp; CMO',
+    body: 'Simpson, Co-Founder and CMO of ESPAT, led the public launch of ESPAT Labs — the ecosystem’s AI and technology arm — alongside his continuing role across ESPAT TV and ESPAT Studios. ESPAT has since been sold; Simpson is no longer affiliated with its current operations.',
     src: { label: 'LinkedIn', url: 'https://www.linkedin.com/in/dante-simpson/' },
     thumb: 'assets/img/dante-trading-floor.jpg', thumbType: 'photo'
   },
@@ -154,7 +154,7 @@ const NEWSROOM_FEED = [
     date: '2021-04-07',
     cat: 'Partnership',
     title: 'Enthusiast Gaming signs premium content partnership with ESPAT TV',
-    body: '"ESPAT TV is a strong producer of gaming and entertainment content across multiple distribution channels," said Adrian Montgomery, CEO of Enthusiast Gaming. "Partnering with Enthusiast Gaming is an amazing opportunity, and we are excited to produce cutting edge content," said Dante Simpson, CEO of ESPAT TV. The deal paired premium gaming and esports programming with Enthusiast Gaming’s fan-community distribution across streaming and social video, reaching GenZ and Millennial audiences. ESPAT’s creative collective at the time included Ridley Scott Creative Group, Petrol, PRG and Movers & Shakers, alongside co-founders Ed Brooks and Mario Prosperino.',
+    body: '"ESPAT TV is a strong producer of gaming and entertainment content across multiple distribution channels," said Adrian Montgomery, CEO of Enthusiast Gaming. "Partnering with Enthusiast Gaming is an amazing opportunity, and we are excited to produce cutting edge content," said Dante Simpson, CEO of ESPAT TV. The deal paired premium gaming programming with Enthusiast Gaming’s fan-community distribution across streaming and social video, reaching GenZ and Millennial audiences. ESPAT’s creative collective at the time included Ridley Scott Creative Group, Petrol, PRG and Movers & Shakers, alongside co-founders Ed Brooks and Mario Prosperino.',
     src: { label: 'Enthusiast Gaming', url: 'https://www.enthusiastgaming.com/enthusiast-gaming-signs-premium-content-partnership-with-espat-tv/' },
     thumb: 'assets/img/logo-enthusiast-gaming.png', thumbType: 'logo-dark'
   },
