@@ -4,7 +4,7 @@
 Generates charlotte.html — "Charlotte: A Gentleman's Guide".
 
 A real, practical city guide (unlike the rest of the site's fictional
-"Gentleman Operator" lore) covering verified restaurants, bars, cigar
+"American Gentleman" lore) covering verified restaurants, bars, cigar
 lounges, clubs and coffee counters across seven Charlotte NC neighborhood
 groups. Every listing was checked against current web sources at build
 time; anything that could not be confirmed is flagged in-page rather

@@ -1,4 +1,4 @@
-# PARISPULLEN.COM — The Gentleman Operator
+# PARISPULLEN.COM — American Gentleman
 
 A cinematic digital world for Paris Pullen. Not a portfolio, not a conventional
 personal-brand site: the visitor enters a world and moves through it.
