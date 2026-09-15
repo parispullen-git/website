@@ -1457,6 +1457,36 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .floor-scene.room-pager__vslide--over{position:fixed;inset:0;z-index:45}
 @media(prefers-reduced-motion:reduce){.floor-scene.room-pager__vslide{transition:none}}
 
+/* ---------- 25a-iii-b. SWIPE HINT — mobile-only "swipe to explore" cue,
+   retriggered on every room entry (room-pager.js) and every arrival at
+   the City Guide's own pannable map (city.js). Both surfaces already
+   pan on a drag/swipe at every breakpoint; this just teaches a first-
+   time mobile visitor the gesture exists, then gets out of the way --
+   hidden entirely above 760px, where a mouse/trackpad visitor doesn't
+   get (or need) "swipe" language. */
+.swipe-hint{
+  position:absolute;left:50%;bottom:24%;z-index:6;
+  display:none;align-items:center;gap:.65em;
+  padding:.6em 1.1em;border-radius:999px;
+  background:rgba(10,10,11,.62);border:1px solid rgba(201,169,97,.4);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--bone);white-space:nowrap;pointer-events:none;
+  opacity:0;transform:translate(-50%,6px);
+  transition:opacity .5s var(--ease-out),transform .5s var(--ease-out);
+}
+@media(max-width:760px){.swipe-hint{display:flex}}
+.swipe-hint.is-active{opacity:1;transform:translate(-50%,0)}
+.swipe-hint__arrow{color:var(--brass-lit);font-family:var(--font-display);font-size:1.15em;line-height:1;display:inline-block}
+.swipe-hint.is-active .swipe-hint__arrow--left{animation:swipeNudgeLeft 1.3s ease-in-out .5s infinite}
+.swipe-hint.is-active .swipe-hint__arrow--right{animation:swipeNudgeRight 1.3s ease-in-out .5s infinite}
+@keyframes swipeNudgeLeft{0%,100%{transform:translateX(0)}50%{transform:translateX(-5px)}}
+@keyframes swipeNudgeRight{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+@media(prefers-reduced-motion:reduce){
+  .swipe-hint{transition:none}
+  .swipe-hint.is-active .swipe-hint__arrow--left,.swipe-hint.is-active .swipe-hint__arrow--right{animation:none}
+}
+
 /* ---------- 25a-iv. NAV PANEL — corner floor/district jump list, an
    elevator-panel stand-in for paging one-by-one. Reusable: fed either
    floors (house.html, the homepage) or City Guide districts, wired up by

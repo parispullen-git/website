@@ -118,6 +118,7 @@
         <!-- chrome and districts injected by city.js -->
       </svg>
       <!-- venue hotspots for the selected district injected by city-explorer.js -->
+      <div class="swipe-hint" data-swipe-hint aria-hidden="true"><span class="swipe-hint__arrow swipe-hint__arrow--left">&#8249;</span><span class="swipe-hint__label">Swipe to explore</span><span class="swipe-hint__arrow swipe-hint__arrow--right">&#8250;</span></div>
     </div>
   </div>
 
@@ -148,14 +149,13 @@
 </div>
 
 <!-- ============ THE GUIDE ============ -->
-<section class="scene scene--pad tint-ink" id="guide" style="padding-bottom:0">
+<section class="scene scene--pad tint-ink" id="guide" style="padding-top:clamp(2rem,4.8vh,4.4rem);padding-bottom:0">
   <div class="wrap">
     <header class="split reveal" style="align-items:end;margin-bottom:var(--s7)">
       <div class="stack stack--tight">
         <p class="eyebrow">The Guide</p>
         <h2 class="display display--h2">75 places<br>worth knowing.</h2>
       </div>
-      <p class="body">Not a list of the best places. A list of the right places, organized by district &#8212; a client dinner reads differently than a solo coffee, and this is built to tell the two apart.</p>
     </header>
   </div>
 </section>
@@ -1927,7 +1927,7 @@
 
 <script src="assets/js/charlotte-guide.js" defer></script>
 <script src="assets/js/city-explorer.js" defer></script>
-<script src="assets/js/city.js" defer></script>
+<script src="assets/js/city.js?v=3" defer></script>
 <script src="assets/js/world.js" defer></script>
 </body>
 </html>

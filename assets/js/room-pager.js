@@ -40,8 +40,25 @@
     var nextBtn = pagerRoot.querySelector('[data-room-pager-next]');
     var upBtn = pagerRoot.querySelector('[data-room-pager-up]');
     var downBtn = pagerRoot.querySelector('[data-room-pager-down]');
+    var swipeHint = pagerRoot.querySelector('[data-swipe-hint]');
     var current = 0;
     var pagerInView = false;
+
+    // Mobile-only "swipe to explore" cue (see .swipe-hint in world.css) --
+    // retriggered on every room entry, a fresh 3s pulse each time rather
+    // than a one-shot on first load, since arriving at a DIFFERENT room's
+    // photo is a new thing to teach the gesture for. No-ops harmlessly
+    // above the 760px breakpoint, where the element stays display:none.
+    function pulseSwipeHint() {
+      if (!swipeHint) return;
+      swipeHint.classList.remove('is-active');
+      void swipeHint.offsetWidth; // restart the CSS transition/animation cleanly
+      swipeHint.classList.add('is-active');
+      clearTimeout(swipeHint._hideTimer);
+      swipeHint._hideTimer = setTimeout(function () {
+        swipeHint.classList.remove('is-active');
+      }, 3000);
+    }
 
     // Room display names ("The Cinema") minus their leading "The " --
     // used to label each arrow with the room it leads to.
@@ -98,6 +115,7 @@
       if (block) pagerRoot.scrollIntoView({ behavior: behavior, block: block });
       centerSurface(rooms[i]);
       updateButtons();
+      pulseSwipeHint();
       // Lets anything outside this closure (the fixed "Remote" button near
       // .sound, see tv-remote.js) know which room is current without its
       // own coupling to room-pager internals.

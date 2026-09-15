@@ -264,12 +264,28 @@ window.CHARLOTTE = {
   // actually on screen, so they don't float over the rest of the page
   // (the .vhood listings, etc.) once scrolled past it.
   var cityscapeNavPanel = document.querySelector('.cityscape [data-nav-panel]');
+  // Mobile-only "swipe to explore" cue (see .swipe-hint in world.css),
+  // same component and 3s pulse room-pager.js retriggers on every room
+  // entry -- here, retriggered every time the map itself scrolls into
+  // view rather than on a room change, since that's this page's own
+  // equivalent "arrival" moment.
+  var swipeHint = document.querySelector('.cityplate [data-swipe-hint]');
+  var swipeHintTimer = null;
+  function pulseSwipeHint() {
+    if (!swipeHint) return;
+    swipeHint.classList.remove('is-active');
+    void swipeHint.offsetWidth;
+    swipeHint.classList.add('is-active');
+    clearTimeout(swipeHintTimer);
+    swipeHintTimer = setTimeout(function () { swipeHint.classList.remove('is-active'); }, 3000);
+  }
   if (surface && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (prevBtn) prevBtn.classList.toggle('is-in-view', entry.isIntersecting);
         if (nextBtn) nextBtn.classList.toggle('is-in-view', entry.isIntersecting);
         if (cityscapeNavPanel) cityscapeNavPanel.classList.toggle('is-in-view', entry.isIntersecting);
+        if (entry.isIntersecting) pulseSwipeHint();
       });
     }, { threshold: 0.15 }).observe(surface);
   }
