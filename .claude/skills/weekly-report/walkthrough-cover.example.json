@@ -1,0 +1,14 @@
+{
+  "cover": {
+    "tag": "THE PENTHOUSE",
+    "eyebrow": "Room By Room",
+    "headline_html": "Every room.<br>Every object.<br>The whole <em>house</em>.",
+    "sub": "Nine rooms, twenty artifacts, all of it real. Walk it with me."
+  },
+  "closing": {
+    "url_path": "house.html",
+    "eyebrow": "Walk It Yourself",
+    "headline": "Open the Penthouse",
+    "sub": "Tap Menu, pick The Penthouse, and start wherever you like — every room and every artifact above is really there."
+  }
+}
