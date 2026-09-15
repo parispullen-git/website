@@ -230,11 +230,32 @@ def nav_slide(cfg, shot_path, idx, total, w, h):
     """
     return html_doc(css, body)
 
-def chrome_screenshot(url_or_file, w, h, out_path):
-    subprocess.run([
-        CHROME, "--headless", "--disable-gpu", f"--window-size={w},{h}",
-        f"--screenshot={out_path}", url_or_file,
-    ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+def chrome_screenshot(url_or_file, w, h, out_path, wait_for_fonts=True):
+    # --virtual-time-budget + --run-all-compositor-stages-before-draw make
+    # headless Chrome hold the final paint until pending network loads (the
+    # Google Fonts CSS + woff2 files every slide references) settle, or the
+    # budget runs out -- without this, --screenshot can fire before Playfair
+    # Display / Inter finish downloading and silently fall back to a system
+    # serif/sans-serif for that capture.
+    #
+    # wait_for_fonts=False skips those flags -- use it for capturing the
+    # LIVE SITE (house.html, journal.html, ...), never for our own generated
+    # slide HTML. A live page can embed a real YouTube iframe (house.html's
+    # Living Room does), which keeps making network requests indefinitely;
+    # paired with --virtual-time-budget that has caused multi-minute hangs
+    # in practice, not just a slower capture. Site screenshots don't need
+    # font-load precision anyway -- they're just background photos, not
+    # text we're trying to render accurately ourselves.
+    #
+    # The explicit timeout is a hard safety net on top of that distinction,
+    # not a substitute for it -- if a capture ever hangs again, it fails
+    # loudly in under a minute instead of sitting there silently.
+    cmd = [CHROME, "--headless", "--disable-gpu", f"--window-size={w},{h}"]
+    if wait_for_fonts:
+        cmd += ["--run-all-compositor-stages-before-draw", "--virtual-time-budget=4000"]
+    cmd += [f"--screenshot={out_path}", url_or_file]
+    subprocess.run(cmd, check=True, timeout=45,
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def wait_for_server(url, tries=5):
     for _ in range(tries):
@@ -279,7 +300,7 @@ def main():
 
         # Screenshot the live journal grid once per format (exact pixel size)
         nav_shot = os.path.join(work_dir, f"nav-shot-{fmt}.png")
-        chrome_screenshot(journal_url, w, h, nav_shot)
+        chrome_screenshot(journal_url, w, h, nav_shot, wait_for_fonts=False)
 
         slides = []
         slides.append(("1-cover", cover_slide(cfg, w, h)))

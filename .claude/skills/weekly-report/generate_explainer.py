@@ -151,7 +151,7 @@ def main():
         for i, sec in enumerate(cfg["sections"], start=2):
             cap_h = sec.get("capture_height") or h
             shot_path = os.path.join(work_dir, f"{fmt}-shot-{sec['key']}.png")
-            chrome_screenshot(site_url + "/" + sec["url_path"], w, cap_h, shot_path)
+            chrome_screenshot(site_url + "/" + sec["url_path"], w, cap_h, shot_path, wait_for_fonts=False)
             html = section_slide(sec, shot_path, i, total, w, h)
             html_path = os.path.join(work_dir, f"{fmt}-{i}-{sec['key']}.html")
             open(html_path, "w").write(html)
@@ -161,7 +161,7 @@ def main():
 
         c = cfg["closing"]
         shot_path = os.path.join(work_dir, f"{fmt}-shot-closing.png")
-        chrome_screenshot(site_url + "/" + c["url_path"], w, h, shot_path)
+        chrome_screenshot(site_url + "/" + c["url_path"], w, h, shot_path, wait_for_fonts=False)
         html = closing_slide(c, shot_path, total, total, w, h)
         html_path = os.path.join(work_dir, f"{fmt}-{total}-closing.html")
         open(html_path, "w").write(html)

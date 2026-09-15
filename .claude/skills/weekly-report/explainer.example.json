@@ -16,11 +16,27 @@
       "sub": "Nine floors of it, real artifacts you can open, a screening room that's actually playing something. Walk it like you're actually here."
     },
     {
+      "key": "artifacts",
+      "url_path": "house.html#closet",
+      "focal": "center",
+      "eyebrow": "02 — THE ARTIFACTS",
+      "headline": "Every object in the house opens.",
+      "sub": "Twelve navy suits. Two tuxedos. Six ties, hung, never rolled. Click anything and it tells you the real story behind it."
+    },
+    {
+      "key": "navigate",
+      "url_path": "house.html#penthouse-living",
+      "focal": "center",
+      "eyebrow": "03 — GETTING AROUND",
+      "headline": "Pan the room. Walk the floors.",
+      "sub": "Arrows move you room to room, floor to floor — or jump straight to any of the nine from the Floors panel."
+    },
+    {
       "key": "city",
       "url_path": "charlotte.html",
       "focal": "center 100%",
       "capture_height": 3200,
-      "eyebrow": "02 — THE CITY",
+      "eyebrow": "04 — THE CITY",
       "headline": "A gentleman's guide to Charlotte.",
       "sub": "75 verified spots across seven districts — every address and access rule checked before it went on the page."
     },
@@ -28,7 +44,7 @@
       "key": "journal",
       "url_path": "journal.html",
       "focal": "center",
-      "eyebrow": "03 — THE JOURNAL",
+      "eyebrow": "05 — THE JOURNAL",
       "headline": "My actual takes, not press releases.",
       "sub": "Tech, film, style, watches, whatever else — whatever caught my attention that week, written like I'd tell you in person."
     },
@@ -36,7 +52,7 @@
       "key": "boutique",
       "url_path": "wardrobe.html",
       "focal": "center",
-      "eyebrow": "04 — THE BOUTIQUE",
+      "eyebrow": "06 — THE BOUTIQUE",
       "headline": "560 pieces, made to order.",
       "sub": "A lookbook, not a store. Filter it, save what you like, send us the names."
     },
@@ -44,7 +60,7 @@
       "key": "fragrance",
       "url_path": "urwelcome.html",
       "focal": "center",
-      "eyebrow": "05 — UR WELCOME",
+      "eyebrow": "07 — UR WELCOME",
       "headline": "You don't buy it. You get invited to it.",
       "sub": "A hundred percent oil, mixed by hand, one hundred bottles total. The first one's under glass."
     },
@@ -52,7 +68,7 @@
       "key": "the-man",
       "url_path": "about.html",
       "focal": "center",
-      "eyebrow": "06 — THE MAN",
+      "eyebrow": "08 — THE MAN",
       "headline": "Everything here was assembled on purpose.",
       "sub": "Justin Anthony Paris Pullen. Born Dayton, Ohio. Based Charlotte, North Carolina. Call sign 00."
     }
