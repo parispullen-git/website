@@ -1,0 +1,66 @@
+{
+  "site_url": "http://localhost:4330",
+  "cover": {
+    "tag": "PARISPULLEN.COM",
+    "eyebrow": "So, What Is This?",
+    "headline_html": "Not a store.<br>Not a blog.<br>A <em>world</em> I built.",
+    "sub": "Six rooms, one address. Here's what's actually inside parispullen.com."
+  },
+  "sections": [
+    {
+      "key": "penthouse",
+      "url_path": "house.html",
+      "focal": "center",
+      "eyebrow": "01 — THE PENTHOUSE",
+      "headline": "My home, room by room.",
+      "sub": "Nine floors of it, real artifacts you can open, a screening room that's actually playing something. Walk it like you're actually here."
+    },
+    {
+      "key": "city",
+      "url_path": "charlotte.html",
+      "focal": "center 100%",
+      "capture_height": 3200,
+      "eyebrow": "02 — THE CITY",
+      "headline": "A gentleman's guide to Charlotte.",
+      "sub": "75 verified spots across seven districts — every address and access rule checked before it went on the page."
+    },
+    {
+      "key": "journal",
+      "url_path": "journal.html",
+      "focal": "center",
+      "eyebrow": "03 — THE JOURNAL",
+      "headline": "My actual takes, not press releases.",
+      "sub": "Tech, film, style, watches, whatever else — whatever caught my attention that week, written like I'd tell you in person."
+    },
+    {
+      "key": "boutique",
+      "url_path": "wardrobe.html",
+      "focal": "center",
+      "eyebrow": "04 — THE BOUTIQUE",
+      "headline": "560 pieces, made to order.",
+      "sub": "A lookbook, not a store. Filter it, save what you like, send us the names."
+    },
+    {
+      "key": "fragrance",
+      "url_path": "urwelcome.html",
+      "focal": "center",
+      "eyebrow": "05 — UR WELCOME",
+      "headline": "You don't buy it. You get invited to it.",
+      "sub": "A hundred percent oil, mixed by hand, one hundred bottles total. The first one's under glass."
+    },
+    {
+      "key": "the-man",
+      "url_path": "about.html",
+      "focal": "center",
+      "eyebrow": "06 — THE MAN",
+      "headline": "Everything here was assembled on purpose.",
+      "sub": "Justin Anthony Paris Pullen. Born Dayton, Ohio. Based Charlotte, North Carolina. Call sign 00."
+    }
+  ],
+  "closing": {
+    "url_path": "journal.html",
+    "eyebrow": "Start Here",
+    "headline": "Open parispullen.com",
+    "sub": "Tap Menu in the top right and pick a room — every one of them is one click away."
+  }
+}

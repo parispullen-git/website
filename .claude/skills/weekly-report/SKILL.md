@@ -1,6 +1,6 @@
 ---
 name: weekly-report
-description: Generate parispullen.com Journal social content — either The Weekly Report (a branded carousel/Stories slide set recapping several Journal posts, plus IG/Threads/Facebook/TikTok captions) or a per-entry Hook/Pain Point/Payoff 3-slide carousel for a single post. Use when the user asks for a weekly report, a carousel or Stories recap of recent Journal posts, social slides/captions for new Journal entries, or a hook/pain-point/solution-style promotional carousel for one or more entries.
+description: Generate parispullen.com social content — The Weekly Report (a branded carousel/Stories slide set recapping several Journal posts, plus IG/Threads/Facebook/TikTok captions), a per-entry Hook/Pain Point/Payoff 3-slide carousel for a single post, or a "What Is This Site" explainer carousel introducing the whole site (Penthouse, City, Journal, Boutique, Fragrance, The Man). Use when the user asks for a weekly report, a carousel or Stories recap of recent Journal posts, social slides/captions for new Journal entries, a hook/pain-point/solution-style promotional carousel, or a carousel/Stories set that explains/promotes/shares what the site is and what's in it.
 ---
 
 # The Weekly Report
@@ -62,6 +62,18 @@ A second, different content shape lives in the same skill: `generate_beats.py` b
 - Output: `<out>/<format>/<slug>/1-hook.png`, `2-pain.png`, `3-solution.png` — one subfolder per entry, so each entry's 3-slide set can be posted as its own carousel.
 - Only the payoff (3rd) slide carries a call to action — "Tap here" on Stories, "Read the full story" on carousel — since the hook and pain-point slides exist to earn the swipe, not to sell yet.
 - Captions for this format follow the same beat logic, written fresh per entry (not templated): lead with the hook line or a tightened version of it, name the pain point in the reader's own words, and close on the payoff plus the link.
+
+## "What Is This Site" explainer carousel
+
+A third content shape: `generate_explainer.py` builds a site-orientation carousel — cover, one slide per major section of the site, a closing "start here" slide — for when the ask is to promote/explain/share what parispullen.com *is*, not to recap or promote specific Journal posts. Built 2026-09-14 covering all six sections in the site's own nav (`index.html`'s `.menu__list`): The Penthouse, The City, The Journal, The Boutique, UR Welcome (the fragrance), The Man.
+
+**One carousel, not several — a deliberate call.** When first asked whether this should be one post or many, the answer was one 8-slide carousel covering every section at a glance, rather than fragmenting into six separate single-topic posts. Reasoning: an audience meeting the brand for the first time needs one clear "here's everything" orientation before separate deep-dive posts (e.g. a future Penthouse-only walkthrough, or a Boutique-only lookbook) would make sense — those are legitimate follow-up content, not a replacement for a single overview. Revisit this call if the site gains enough sections that eight-plus slides starts to feel padded.
+
+- Unlike the other two generators, each section slide's background is a **real, freshly-captured screenshot of that section's own live page** (via the same headless-Chrome technique the other generators use for their closing slide) — not a Journal post's hero image. This means the carousel always shows what the site actually looks like, and it needs real copy pulled from each page's own hero/lede text (don't invent facts like "560 pieces" or "75 verified listings" — read them off the live page first).
+- Copy `explainer.example.json` for the config shape: `cover` (same shape as weekly-report's), `sections[]` (one per site destination: `key`, `url_path`, `eyebrow`, `headline`, `sub`, optional `focal`/`capture_height`), and `closing` (points at whichever page makes the best "start here" background — `journal.html` worked well since it's visually rich and has a MENU link visible top-right for the "tap here" pointer).
+- **The `capture_height` + `focal` combo matters more here than in the other generators**, because a page's own hero text can land inside the frame and visually fight this carousel's overlay text. The City section is the clearest example: charlotte.html's real H1 ("A Gentleman's Guide") sits at the top of the page, so `generate_explainer.py` captures it at `capture_height: 3200` (much taller than the slide itself) and crops in with `focal: "center 100%"` (bottom-anchored) to land on the city map further down the page instead, where there's no competing headline. If a future section's page has its key visual up top with no competing text, no `capture_height` override is needed.
+- A stronger `topscrim` than the other two generators (opacity .95 at the very top, versus .6) exists specifically to hide the real page's own header row — every section screenshot includes the live site's actual wordmark + nav, which would otherwise visibly double up against this carousel's own `WORDMARK_HTML`.
+- `cover_slide()` in `generate.py` gained a `cover.tag` config option (was hardcoded to `"THE JOURNAL"`) so this generator's cover can say `"PARISPULLEN.COM"` instead — pass it explicitly; weekly-report's own config doesn't need to since the old hardcoded value is still the default.
 
 ## Design system reference
 

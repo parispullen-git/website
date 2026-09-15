@@ -139,7 +139,7 @@ def cover_slide(cfg, w, h):
     c = cfg["cover"]
     body = f"""
     {WORDMARK_HTML}
-    <div class="tag">THE JOURNAL</div>
+    <div class="tag">{c.get('tag', 'THE JOURNAL')}</div>
     <div class="field">
       <div class="eyebrow">{c.get('eyebrow', 'The Weekly Report')}</div>
       <div class="headline">{c['headline_html']}</div>
