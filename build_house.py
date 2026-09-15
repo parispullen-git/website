@@ -484,7 +484,7 @@ html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css?v=17">
+<link rel="stylesheet" href="assets/css/world.css?v=18">
 <link rel="stylesheet" href="assets/css/artifact-experiences.css?v=5">
 </head>
 <body>
@@ -530,8 +530,8 @@ html = f'''<!DOCTYPE html>
 <script src="assets/js/guide-portal.js?v=16" defer></script>
 <script src="assets/js/gym-portal.js?v=16" defer></script>
 <script src="assets/js/vault-entrance.js?v=16" defer></script>
-<script src="assets/js/piano-player.js?v=16" defer></script>
-<script src="assets/js/artifact-experiences.js?v=5" defer></script>
+<script src="assets/js/piano-player.js?v=17" defer></script>
+<script src="assets/js/artifact-experiences.js?v=6" defer></script>
 </body>
 </html>
 '''

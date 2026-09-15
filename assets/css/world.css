@@ -1812,11 +1812,6 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .suite-remote__dial.is-disabled{opacity:.35;pointer-events:none}
 .suite-remote__row{display:flex;gap:.5em}
 
-/* Hidden host for a room's ambient Spotify track (piano-player.js) --
-   kept in the DOM with a real (if tiny) rendered size rather than
-   display:none, since some embeds refuse to initialize/autoplay when
-   never actually rendered. */
-.room-track-host{position:fixed;left:-9999px;bottom:0;width:1px;height:1px;overflow:hidden}
 .suite-remote__pill{
   flex:1;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.06em;
   background:none;border:1px solid var(--hairline);color:var(--bone);

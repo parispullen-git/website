@@ -238,27 +238,12 @@
         const item=items[selected];
         const artwork=item.art?`<img class="ae-record-art" src="${esc(item.art)}" alt="" loading="eager">`:`<span class="ae-record-label">${esc(item.artLabel||'PP')}</span>`;
         const shelfArt=p=>p.art?`<img src="${esc(p.art)}" alt="" loading="lazy">`:`<span class="ae-sleeve-art ae-sleeve-art--${esc(p.artTone||'black')}"><b>${esc(p.artLabel||'PP')}</b></span>`;
-        fill(`<div class="ae-split"><div class="ae-record-wrap"><div class="ae-record" data-tone="${esc(item.artTone||'black')}" aria-hidden="true">${artwork}</div><span class="ae-record-caption">${selected===0?'THE HOUSE MIX':'SELECTED RECORD'} · ${esc(item.type)}</span></div><div><span class="ae-kicker">The Music Lounge · The listening shelf</span><h3>${esc(item.label)}</h3><p class="ae-lede">Pull a record from the shelf. Explore it on Spotify, or stay with the room’s own soundtrack.</p>${actions('<button class="ae-action" data-action="audio">Play / pause room audio</button>'+`<a class="ae-action ae-action--quiet" href="https://open.spotify.com/${esc(item.type)}/${esc(item.id)}" target="_blank" rel="noopener">Open this record in Spotify ↗</a>`+saveButton('record:'+item.id))}<p class="ae-note">The room’s Drake collection is curated by @djangodegree. Opening another record takes you to Spotify; it does not silently replace the room audio.</p><p class="ae-note" role="status" data-audio-status></p></div></div><div class="ae-sleeves" aria-label="Record shelf">${items.map((p,i)=>`<button class="ae-sleeve" data-action="record" data-index="${i}" aria-pressed="${selected===i}">${shelfArt(p)}<span class="ae-sleeve-copy"><small>SIDE ${num(i+1)} · ${esc(p.type)}</small><b>${esc(p.label)}</b><small>${selected===i?'ON THE TABLE':'PULL THE RECORD ↗'}</small></span></button>`).join('')}</div>`);
-        syncRecord();
+        fill(`<div class="ae-split"><div class="ae-record-wrap"><div class="ae-record" data-tone="${esc(item.artTone||'black')}" aria-hidden="true">${artwork}</div><span class="ae-record-caption">${selected===0?'THE HOUSE MIX':'SELECTED RECORD'} · ${esc(item.type)}</span></div><div><span class="ae-kicker">The Music Lounge · The listening shelf</span><h3>${esc(item.label)}</h3><p class="ae-lede">Pull a record from the shelf, then open it on Spotify to listen.</p>${actions(`<a class="ae-action" href="https://open.spotify.com/${esc(item.type)}/${esc(item.id)}" target="_blank" rel="noopener">Open this record in Spotify ↗</a>`+saveButton('record:'+item.id))}<p class="ae-note">The room’s Drake collection is curated by @djangodegree.</p></div></div><div class="ae-sleeves" aria-label="Record shelf">${items.map((p,i)=>`<button class="ae-sleeve" data-action="record" data-index="${i}" aria-pressed="${selected===i}">${shelfArt(p)}<span class="ae-sleeve-copy"><small>SIDE ${num(i+1)} · ${esc(p.type)}</small><b>${esc(p.label)}</b><small>${selected===i?'ON THE TABLE':'PULL THE RECORD ↗'}</small></span></button>`).join('')}</div>`);
       }
       actionHandlers.record=b=>{selected=Number(b.dataset.index);draw();};
-      actionHandlers.audio=()=>{
-        const amb=window.PPAmbient?.get();
-        if(amb?.controller) amb.controller.togglePlay();
-        else $('[data-audio-status]',dialog).textContent='Room audio is still connecting. You can open the selected record in Spotify.';
-      };
       sequence=d=>{selected=(selected+d+items.length)%items.length;draw();};draw();
     } catch (_) {fill('<p>The record shelf is unavailable. Use the room remote to control its soundtrack.</p>',token);}
   }
-  function syncRecord(){
-    if(!dialog.open || dialog.dataset.kind!=='record')return;
-    const amb=window.PPAmbient?.get();
-    $('.ae-record',dialog)?.classList.toggle('is-playing',Boolean(amb&&!amb.isPaused));
-    const status=$('[data-audio-status]',dialog);
-    if(status) status.textContent=amb?(amb.isPaused?'Room soundtrack paused.':'Room soundtrack playing.'):'Room audio is connecting…';
-  }
-  document.addEventListener('pp:ambient-playback',syncRecord);
-  document.addEventListener('pp:ambient-change',syncRecord);
   async function cinema(spot, key='cinema') {
     const token=begin('cinema',key==='cinema'?'Tonight, in the screening room.':'An evening on the television.',spot);
     try{
