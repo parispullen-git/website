@@ -1721,7 +1721,7 @@
   },
   {
     "id": "barbershop",
-    "lvl": "25",
+    "lvl": "26",
     "name": "The Barbershop",
     "state": "restricted",
     "img": "room-barbershop",
