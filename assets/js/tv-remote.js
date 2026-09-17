@@ -23,14 +23,14 @@
     return data && Object.keys(data).some(function (k) { return Array.isArray(data[k]) && data[k].length; });
   }
 
-  var channelsReady = fetch('/api/content?collection=channels&id=main')
+  var channelsReady = fetch('data/house-channels.json')
     .then(function (r) { if (!r.ok) throw new Error('not found'); return r.json(); })
     .then(function (data) {
       if (!hasChannels(data)) throw new Error('empty');
       CHANNEL_SETS = data;
     })
     .catch(function () {
-      return fetch('data/house-channels.json')
+      return fetch('/api/content?collection=channels&id=main')
         .then(function (r) { return r.json(); })
         .then(function (data) { CHANNEL_SETS = data || {}; })
         .catch(function () { CHANNEL_SETS = {}; });

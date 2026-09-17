@@ -18,7 +18,7 @@
   // a room photo is re-shot in place (same filename, new bytes), since
   // browsers and Cloudflare's edge otherwise keep serving the old file for
   // hours off the unchanged URL.
-  var IMG_VER = '20260913i';
+  var IMG_VER = '20260917a';
 
   // Order here (mirrors build_house.py's _PENTHOUSE_ORDER exactly) is what
   // the room-pager's slide direction is actually built from -- it pages by
