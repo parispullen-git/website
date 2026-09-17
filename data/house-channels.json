@@ -1,6 +1,10 @@
 {
   "living": [
     {
+      "id": "kDK8-psUjzY",
+      "label": "FOMO — Drake"
+    },
+    {
       "id": "uDB1CScElo4",
       "label": "Iceman — Drake"
     },
@@ -22,6 +26,10 @@
     }
   ],
   "cinema": [
+    {
+      "id": "kDK8-psUjzY",
+      "label": "FOMO — Drake"
+    },
     {
       "id": "gnm4HgIAVmU",
       "label": "The Thomas Crown Affair — Official Teaser Trailer"

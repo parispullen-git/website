@@ -161,12 +161,12 @@ TV_SCREENS = {
     "penthouse-living": dict(
         x="55.7%", y="24.0%", w="17%", h="14%",
         box="0.4740,0.1704,0.6406,0.3093",
-        channel_set="living", id="4xVVFJuycww", label="The Gentlemen",
+        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",
     ),
     "cinema": dict(
         x="49.7%", y="30.9%", w="28%", h="25%",
         box="0.3563,0.1833,0.6385,0.4352",
-        channel_set="cinema", id="gnm4HgIAVmU", label="The Thomas Crown Affair — Official Teaser Trailer",
+        channel_set="cinema", id="kDK8-psUjzY", label="FOMO — Drake",
     ),
 }
 
