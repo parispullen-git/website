@@ -83,6 +83,25 @@
   .lib__tag{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--brass-lit);text-align:center;margin-bottom:.55rem}
   .lib__lede{font-size:var(--t-label);color:var(--ash);text-align:center;max-width:34ch;margin-top:0}
 
+  /* The Blueprint is the primary mobile destination and must be visible
+     before the lead form or the longer destination list. */
+  .lib__blueprint{
+    width:100%;min-height:116px;margin-top:var(--s6);position:relative;
+    display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;
+    border:1px solid var(--brass);border-radius:3px;
+    box-shadow:0 14px 40px rgba(0,0,0,.42),inset 0 1px 0 rgba(236,213,163,.18);
+    -webkit-tap-highlight-color:transparent;
+    transition:border-color var(--d-fast) var(--ease-out),transform var(--d-fast) var(--ease-out);
+  }
+  .lib__blueprint:hover,.lib__blueprint:focus-visible{border-color:var(--brass-lit)}
+  .lib__blueprint:active{transform:scale(.975)}
+  .lib__blueprint img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:-2;filter:brightness(.7) saturate(.9)}
+  .lib__blueprint::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(6,6,7,.96),rgba(6,6,7,.46) 64%,rgba(6,6,7,.18))}
+  .lib__blueprint-body{width:100%;padding:var(--s4) var(--s5);display:flex;align-items:center;justify-content:space-between;gap:var(--s4)}
+  .lib__blueprint-kicker{display:block;margin-bottom:3px;font-family:var(--font-mono);font-size:.61rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-lit)}
+  .lib__blueprint-name{display:block;font-family:var(--font-display);font-size:1.3rem;line-height:1.05;color:var(--ivory)}
+  .lib__blueprint-action{flex:0 0 auto;padding:.6em .8em;border:1px solid rgba(236,213,163,.6);font-family:var(--font-mono);font-size:.61rem;letter-spacing:.14em;text-transform:uppercase;color:var(--champagne)}
+
   /* join the network -- a quick lead-capture form, meant to be filled out
      in seconds from a phone while moving through a city, event, or venue */
   .lib__network{width:100%;margin-top:var(--s6)}
@@ -215,6 +234,17 @@
   <p class="lib__tag">American Gentleman</p>
   <p class="lib__lede">Everything you just saw &#8212; one tap away.</p>
 
+  <a class="lib__blueprint" href="/blueprint.html" aria-label="Play The Blueprint, the game of suits">
+    <img src="/assets/blueprint/blueprint-approved.webp?v=20260920b" alt="" loading="eager">
+    <span class="lib__blueprint-body">
+      <span>
+        <span class="lib__blueprint-kicker">The Game of Suits</span>
+        <span class="lib__blueprint-name">The Blueprint</span>
+      </span>
+      <span class="lib__blueprint-action">Play Now</span>
+    </span>
+  </a>
+
   <div class="lib__network" id="network">
     <button type="button" class="lib__net-toggle" id="netToggle" aria-expanded="false" aria-controls="netForm">
       <span>
@@ -274,17 +304,6 @@
         <span class="lib__card-text">
           <span class="lib__card-name">The Journal</span>
           <span class="lib__card-sub">Dispatches &amp; opinion</span>
-        </span>
-        <span class="lib__card-arrow" aria-hidden="true">&#8594;</span>
-      </span>
-    </a>
-
-    <a class="lib__card" href="/blueprint.html">
-      <img src="/assets/blueprint/blueprint-approved.webp?v=20260920a" sizes="420px" alt="The Blueprint game of suits" loading="lazy">
-      <span class="lib__card-body">
-        <span class="lib__card-text">
-          <span class="lib__card-name">The Blueprint</span>
-          <span class="lib__card-sub">Play the game of suits</span>
         </span>
         <span class="lib__card-arrow" aria-hidden="true">&#8594;</span>
       </span>
