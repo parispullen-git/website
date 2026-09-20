@@ -43,6 +43,8 @@
   var scrim = document.getElementById('drawerScrim');
   var status = document.getElementById('gameStatus');
   var lookImage = document.getElementById('lookImage');
+  var playerLookImage = document.getElementById('playerLookImage');
+  var playerLookName = document.getElementById('playerLookName');
   var lookName = document.getElementById('lookName');
   var lookNumber = document.getElementById('lookNumber');
   var lookSummary = document.getElementById('lookSummary');
@@ -95,6 +97,9 @@
     var absolute = LOOKS.indexOf(look) + 1;
     lookImage.src = imageFor(look);
     lookImage.alt = title(look.suit) + ' three-piece suit with ' + title(look.shirt) + ' shirt and ' + title(look.tie) + (look.tie === 'open' ? '' : ' tie');
+    playerLookImage.src = imageFor(look);
+    playerLookImage.alt = 'Paris Pullen look: ' + title(look.suit) + ' three-piece suit with ' + title(look.shirt) + ' shirt and ' + title(look.tie) + (look.tie === 'open' ? '' : ' tie');
+    playerLookName.textContent = title(look.suit) + ' / ' + title(look.shirt) + ' / ' + title(look.tie);
     lookName.textContent = title(look.suit) + ' Foundation';
     lookNumber.textContent = 'Look ' + String(absolute).padStart(2,'0') + ' / ' + LOOKS.length;
     lookSummary.textContent = title(look.suit) + ' / ' + title(look.shirt) + ' shirt / ' + title(look.tie) + (look.tie === 'open' ? '' : ' tie');
@@ -147,6 +152,10 @@
           var selected = visibleLooks[current] && visibleLooks[current].id;
           filters[key] = value;
           applyFilters(selected);
+          var applied = visibleLooks[current];
+          if (applied) {
+            announce(title(applied.suit) + ', ' + title(applied.shirt) + ' shirt, ' + title(applied.tie));
+          }
         });
         container.appendChild(button);
       });
@@ -213,13 +222,13 @@
       label.textContent = title(suit);
       button.appendChild(img);
       button.appendChild(label);
-      button.addEventListener('click', function () { selectFoundation(suit, true); });
+      button.addEventListener('click', function () { selectFoundation(suit, false); });
       mobile.appendChild(button);
     });
   }
 
   document.querySelectorAll('.bp__rack-zone').forEach(function (button) {
-    button.addEventListener('click', function () { selectFoundation(button.getAttribute('data-suit'), true); });
+    button.addEventListener('click', function () { selectFoundation(button.getAttribute('data-suit'), false); });
   });
   document.querySelectorAll('.bp__category').forEach(function (button) {
     button.addEventListener('click', function () { openDrawer(button.getAttribute('data-category')); });
@@ -240,7 +249,7 @@
     if (!look) return;
     try { window.localStorage.setItem('paris-pullen-blueprint-look', look.id); } catch (ignore) {}
     closeDrawer();
-    showToast('Look applied — ' + title(look.suit) + ' foundation');
+    showToast('Look selected — ' + title(look.suit) + ' foundation');
   });
 
   game.addEventListener('touchstart', function (event) {
