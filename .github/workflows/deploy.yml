@@ -8,10 +8,6 @@ name: Build and Deploy
 # itself put anything live; going live is still its own explicit step.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'blueprint.html'
 
 jobs:
   deploy:
