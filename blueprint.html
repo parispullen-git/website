@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07120e">
+  <meta name="description" content="The Blueprint by Paris Pullen — build a signature three-piece suit look from the official wardrobe archive.">
+  <meta property="og:title" content="The Blueprint — The Ultimate Game of Suits">
+  <meta property="og:description" content="Enter the Paris Pullen wardrobe and build your look.">
+  <meta property="og:image" content="https://parispullen.com/assets/blueprint/blueprint-approved.webp">
+  <title>The Blueprint | Paris Pullen</title>
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/blueprint.css?v=20260920a">
+</head>
+<body>
+  <main class="bp" id="blueprintGame">
+    <div class="bp__backdrop" aria-hidden="true"></div>
+    <div class="bp__shade" aria-hidden="true"></div>
+
+    <a class="bp__exit" href="/house.html#closet" aria-label="Return to the Compliment Hotel closet">
+      <span aria-hidden="true">&#8592;</span><span>Closet</span>
+    </a>
+
+    <p class="bp__status" id="gameStatus" aria-live="polite">Navy foundation selected</p>
+
+    <section class="bp__rack-zones" aria-label="Foundation suits">
+      <button class="bp__rack-zone is-active" data-suit="navy" aria-label="Select navy foundation suit"><span>Navy</span></button>
+      <button class="bp__rack-zone" data-suit="grey" aria-label="Select grey foundation suit"><span>Grey</span></button>
+      <button class="bp__rack-zone" data-suit="tan" aria-label="Select tan foundation suit"><span>Tan</span></button>
+      <button class="bp__rack-zone" data-suit="brown" aria-label="Select brown foundation suit"><span>Brown</span></button>
+      <button class="bp__rack-zone" data-suit="black" aria-label="Select black foundation suit"><span>Black</span></button>
+    </section>
+
+    <button class="bp__step bp__step--prev" id="previousLook" type="button" aria-label="Previous uploaded look">&#8249;</button>
+    <button class="bp__step bp__step--next" id="nextLook" type="button" aria-label="Next uploaded look">&#8250;</button>
+
+    <div class="bp__mobile-suits" id="mobileSuits" aria-label="Swipe foundation suits"></div>
+
+    <nav class="bp__controls" aria-label="Wardrobe controls">
+      <div class="bp__categories" role="group" aria-label="Choose a wardrobe category">
+        <button class="bp__category is-active" type="button" data-category="suit">
+          <span class="bp__category-icon" aria-hidden="true">&#9830;</span><span>Suit</span>
+        </button>
+        <button class="bp__category" type="button" data-category="shirt">
+          <span class="bp__category-icon" aria-hidden="true">&#9633;</span><span>Shirt</span>
+        </button>
+        <button class="bp__category" type="button" data-category="tie">
+          <span class="bp__category-icon" aria-hidden="true">&#9662;</span><span>Tie</span>
+        </button>
+        <button class="bp__category" type="button" data-category="square">
+          <span class="bp__category-icon bp__category-icon--diamond" aria-hidden="true"></span><span>Pocket square</span>
+        </button>
+      </div>
+      <span class="bp__control-rule" aria-hidden="true"></span>
+      <button class="bp__filter-button" id="openFilters" type="button">
+        <span class="bp__filter-lines" aria-hidden="true"><i></i><i></i><i></i></span><span>Filter</span>
+      </button>
+      <button class="bp__view-button" id="openLook" type="button"><span>View look</span><span aria-hidden="true">&#8250;</span></button>
+    </nav>
+
+    <aside class="bp__drawer" id="lookDrawer" aria-labelledby="drawerTitle" aria-hidden="true">
+      <button class="bp__drawer-close" id="closeDrawer" type="button" aria-label="Close look builder">&#215;</button>
+      <header class="bp__drawer-head">
+        <p>The Blueprint Archive</p>
+        <h1 id="drawerTitle">Build your look</h1>
+        <span id="resultCount">21 uploaded combinations</span>
+      </header>
+
+      <div class="bp__drawer-main">
+        <figure class="bp__look-figure">
+          <img id="lookImage" src="/assets/blueprint/looks/navy-white-blue.webp" alt="Navy three-piece suit with white shirt and blue tie">
+          <figcaption><span id="lookNumber">Look 01 / 21</span><strong id="lookName">Navy Foundation</strong></figcaption>
+        </figure>
+
+        <div class="bp__builder">
+          <div class="bp__filter-group" data-filter-group="suit">
+            <p><span>01</span> Suit</p>
+            <div class="bp__chips" id="suitFilters"></div>
+          </div>
+          <div class="bp__filter-group" data-filter-group="shirt">
+            <p><span>02</span> Shirt</p>
+            <div class="bp__chips" id="shirtFilters"></div>
+          </div>
+          <div class="bp__filter-group" data-filter-group="tie">
+            <p><span>03</span> Tie</p>
+            <div class="bp__chips" id="tieFilters"></div>
+          </div>
+
+          <div class="bp__look-summary">
+            <span>Your look</span>
+            <strong id="lookSummary">Navy / White shirt / Blue tie</strong>
+            <small id="squareSummary">White pocket square</small>
+          </div>
+
+          <div class="bp__drawer-actions">
+            <button id="resetFilters" type="button">Reset</button>
+            <button class="bp__apply" id="applyLook" type="button">Apply look <span aria-hidden="true">&#8250;</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bp__look-strip" id="lookStrip" aria-label="Matching uploaded looks"></div>
+    </aside>
+
+    <div class="bp__drawer-scrim" id="drawerScrim" aria-hidden="true"></div>
+    <div class="bp__toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="/assets/js/blueprint.js?v=20260920a" defer></script>
+</body>
+</html>
