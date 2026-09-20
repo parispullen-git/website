@@ -10,7 +10,7 @@
   <meta property="og:image" content="https://parispullen.com/assets/blueprint/blueprint-approved.webp">
   <title>The Blueprint | Paris Pullen</title>
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/assets/css/blueprint.css?v=20260920b">
+  <link rel="stylesheet" href="/assets/css/blueprint.css?v=20260920c">
 </head>
 <body>
   <main class="bp" id="blueprintGame">
@@ -22,6 +22,15 @@
     </a>
 
     <p class="bp__status" id="gameStatus" aria-live="polite">Navy foundation selected</p>
+
+    <section class="bp__player" aria-label="Paris Pullen wearing the selected look">
+      <img class="bp__player-look" id="playerLookImage" src="/assets/blueprint/looks/navy-white-blue.webp" alt="Paris Pullen look: navy three-piece suit with white shirt and blue tie">
+      <img class="bp__player-face" src="/assets/img/paris-headshot@sm.jpg" alt="" aria-hidden="true">
+      <div class="bp__player-label">
+        <span>Now wearing</span>
+        <strong id="playerLookName">Navy / White / Blue</strong>
+      </div>
+    </section>
 
     <section class="bp__rack-zones" aria-label="Foundation suits">
       <button class="bp__rack-zone is-active" data-suit="navy" aria-label="Select navy foundation suit"><span>Navy</span></button>
@@ -55,7 +64,7 @@
       <button class="bp__filter-button" id="openFilters" type="button">
         <span class="bp__filter-lines" aria-hidden="true"><i></i><i></i><i></i></span><span>Filter</span>
       </button>
-      <button class="bp__view-button" id="openLook" type="button"><span>View look</span><span aria-hidden="true">&#8250;</span></button>
+      <button class="bp__view-button" id="openLook" type="button"><span>Selections</span><span aria-hidden="true">&#8250;</span></button>
     </nav>
 
     <aside class="bp__drawer" id="lookDrawer" aria-labelledby="drawerTitle" aria-hidden="true">
@@ -94,7 +103,7 @@
 
           <div class="bp__drawer-actions">
             <button id="resetFilters" type="button">Reset</button>
-            <button class="bp__apply" id="applyLook" type="button">Apply look <span aria-hidden="true">&#8250;</span></button>
+            <button class="bp__apply" id="applyLook" type="button">Done <span aria-hidden="true">&#8250;</span></button>
           </div>
         </div>
       </div>
@@ -105,6 +114,6 @@
     <div class="bp__drawer-scrim" id="drawerScrim" aria-hidden="true"></div>
     <div class="bp__toast" id="toast" role="status" aria-live="polite"></div>
   </main>
-  <script src="/assets/js/blueprint.js?v=20260920b" defer></script>
+  <script src="/assets/js/blueprint.js?v=20260920c" defer></script>
 </body>
 </html>
