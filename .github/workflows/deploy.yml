@@ -8,6 +8,13 @@ name: Build and Deploy
 # itself put anything live; going live is still its own explicit step.
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'blueprint.html'
+      - 'assets/js/artifact-experiences.js'
+      - 'links/index.html'
+      - 'wardrobe.html'
 
 jobs:
   deploy:
