@@ -32,6 +32,7 @@ jobs:
           python3 build_casefiles.py
           python3 build_charlotte.py
           python3 scripts/build_wardrobe.py
+          python3 scripts/patch_blueprint_mobile.py
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
