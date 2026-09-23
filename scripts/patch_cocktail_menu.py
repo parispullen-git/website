@@ -1,89 +1,121 @@
 #!/usr/bin/env python3
+"""Definitive production patch for The Gentleman's Cocktail Menu.
+
+This patch is intentionally append-only and does not depend on the exact
+minified card/openDrink source. It wires the 11 committed cocktail JPGs at
+runtime and overrides the fixed-height mobile recipe rules that caused the
+poster and recipe copy to overlap.
+"""
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PATH = ROOT / "cocktail-menu.html"
-
-IMAGE_PATHS = [
-    "/assets/img/cocktails/old-fashioned.jpg?v=20260923c",
-    "/assets/img/cocktails/cuba-libre.jpg?v=20260923c",
-    "/assets/img/cocktails/espresso-martini.jpg?v=20260923c",
-    "/assets/img/cocktails/bellini.jpg?v=20260923c",
-    "/assets/img/cocktails/whiskey-sour.jpg?v=20260923c",
-    "/assets/img/cocktails/dirty-martini.jpg?v=20260923c",
-    "/assets/img/cocktails/moscow-mule.jpg?v=20260923c",
-    "/assets/img/cocktails/sidecar.jpg?v=20260923c",
-    "/assets/img/cocktails/gin-tonic.jpg?v=20260923c",
-    "/assets/img/cocktails/negroni.jpg?v=20260923c",
-    "/assets/img/cocktails/french-75.jpg?v=20260923c",
-]
+MARKER = "PP_COCKTAIL_FIX_V4"
 
 CSS = r'''
-/* cocktail-menu-real-images-v3 */
-.card{background:#e7dccb}
+/* PP_COCKTAIL_FIX_V4 */
+.card{isolation:isolate;background:#e7dccb!important}
+.card-photo-v4{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;z-index:0;filter:saturate(.92) contrast(.96)}
 .card:before{display:none!important}
-.card-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;filter:saturate(.9) contrast(.96)}
-.card:after{z-index:1}
-.card-body,.card-mark{z-index:2}
-.poster-image{display:block;width:auto;max-width:100%;height:auto;max-height:calc(100dvh - 108px);object-fit:contain;box-shadow:0 18px 50px rgba(53,39,22,.22)}
-.poster-card{display:none!important}
+.card:after{z-index:1!important;pointer-events:none}
+.card-body,.card-mark{position:relative;z-index:2!important}
+.poster.has-real-photo .poster-card{display:none!important}
+.poster-photo-v4{display:block;width:100%;height:auto;max-width:560px;object-fit:contain;object-position:center;box-shadow:0 18px 50px rgba(53,39,22,.18)}
 @media(max-width:900px){
-  .recipe{overflow:auto!important;-webkit-overflow-scrolling:touch}
-  .recipe-inner{display:block!important;min-height:0!important;height:auto!important}
-  .poster{height:auto!important;min-height:0!important;padding:12px!important;border-right:0!important;border-bottom:1px solid rgba(23,19,16,.2)!important;display:flex!important;align-items:flex-start!important;justify-content:center!important}
-  .poster-image{display:block!important;width:min(100%,360px)!important;height:auto!important;max-height:none!important;aspect-ratio:2/3;object-fit:cover!important}
-  .detail{height:auto!important;min-height:0!important;overflow:visible!important;padding:18px 16px calc(42px + env(safe-area-inset-bottom))!important}
-  .detail h2{font-size:46px!important;line-height:.98!important;overflow-wrap:anywhere}
+  .recipe{overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important}
+  .recipe-inner{display:block!important;grid-template-columns:none!important;min-height:0!important;height:auto!important}
+  .poster{display:block!important;height:auto!important;min-height:0!important;padding:12px!important;border-right:0!important;border-bottom:1px solid rgba(23,19,16,.2)!important;background:var(--paper)!important}
+  .poster-photo-v4{width:100%!important;height:auto!important;max-width:620px!important;max-height:none!important;margin:0 auto!important;object-fit:contain!important;box-shadow:none!important}
+  .detail{display:block!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:20px 18px calc(44px + env(safe-area-inset-bottom))!important}
+  .detail h2{font-size:48px!important;line-height:.98!important;overflow-wrap:anywhere!important}
   .cols{grid-template-columns:1fr!important;gap:24px!important}
 }
 @media(max-width:520px){
-  .grid{grid-template-columns:1fr 1fr!important;gap:7px!important}
-  .poster{height:auto!important;padding:10px 10px 14px!important}
-  .poster-image{width:min(82vw,300px)!important;height:auto!important;max-height:none!important}
-  .detail{height:auto!important;min-height:0!important;overflow:visible!important;padding:16px 14px calc(34px + env(safe-area-inset-bottom))!important}
-  .detail h2{font-size:42px!important;line-height:.98!important;margin-bottom:16px!important}
-  .meta{grid-template-columns:1fr 1fr!important}
-  .meta strong{overflow-wrap:anywhere}
+  .index{padding:12px 10px calc(26px + env(safe-area-inset-bottom))!important}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  .card{min-height:150px!important}
+  .card-name{font-size:21px!important;line-height:1!important}
+  .card-body{position:absolute!important;left:0;right:0;bottom:0;padding:10px!important}
+  .poster{height:auto!important;min-height:0!important;padding:10px 10px 0!important}
+  .poster-photo-v4{width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;border:1px solid rgba(23,19,16,.18)!important}
+  .detail{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:16px 14px calc(32px + env(safe-area-inset-bottom))!important}
+  .back{margin-bottom:18px!important}
+  .detail h2{font-size:42px!important;line-height:.98!important;margin:8px 0 16px!important}
+  .meta{grid-template-columns:1fr 1fr!important;margin-bottom:22px!important}
+  .meta strong{font-size:17px!important;line-height:1.15!important;overflow-wrap:anywhere!important}
+  .cols{display:block!important}
+  .cols>div+div{margin-top:28px!important}
+  li{font-size:14px!important;line-height:1.55!important}
+  .house-note{font-size:16px!important}
 }
 '''
 
+JS = r'''<script>
+/* PP_COCKTAIL_FIX_V4 */
+(()=>{
+  const slugs=['old-fashioned','cuba-libre','espresso-martini','bellini','whiskey-sour','dirty-martini','moscow-mule','sidecar','gin-tonic','negroni','french-75'];
+  const names=['Old Fashioned','Cuba Libre','Espresso Martini','Bellini','Whiskey Sour','Dirty Martini','Moscow Mule','Sidecar','Gin & Tonic','Negroni','French 75'];
+  const src=i=>`/assets/img/cocktails/${slugs[i]}.jpg?v=20260923d`;
+  const grid=document.getElementById('grid');
+  const poster=document.querySelector('.poster');
+  const recipe=document.getElementById('recipe');
+  if(!grid||!poster) return;
 
-def replace_once(text, old, new, label):
-    if new in text:
-        return text
-    count = text.count(old)
-    if count != 1:
-        raise RuntimeError(f"Expected one {label}; found {count}")
-    return text.replace(old, new, 1)
+  function wireCards(){
+    [...grid.querySelectorAll('.card')].forEach((card,i)=>{
+      if(i>=slugs.length||card.querySelector('.card-photo-v4')) return;
+      const img=document.createElement('img');
+      img.className='card-photo-v4';
+      img.src=src(i);
+      img.alt=`${names[i]} cocktail artwork`;
+      img.loading=i<4?'eager':'lazy';
+      img.decoding='async';
+      card.prepend(img);
+    });
+  }
+
+  let posterImg=poster.querySelector('.poster-photo-v4');
+  if(!posterImg){
+    posterImg=document.createElement('img');
+    posterImg.className='poster-photo-v4';
+    posterImg.id='posterPhotoV4';
+    posterImg.src=src(0);
+    posterImg.alt='Old Fashioned cocktail artwork';
+    poster.prepend(posterImg);
+  }
+  poster.classList.add('has-real-photo');
+
+  function setPoster(i){
+    if(!Number.isInteger(i)||i<0||i>=slugs.length) return;
+    posterImg.src=src(i);
+    posterImg.alt=`${names[i]} cocktail artwork`;
+  }
+
+  wireCards();
+  new MutationObserver(wireCards).observe(grid,{childList:true,subtree:false});
+
+  grid.addEventListener('click',e=>{
+    const card=e.target.closest('.card');
+    if(!card) return;
+    const i=Number(card.dataset.i);
+    setPoster(i);
+    requestAnimationFrame(()=>{ if(recipe) recipe.scrollTop=0; });
+  },true);
+})();
+</script>'''
 
 
 def main():
     text = PATH.read_text(encoding="utf-8")
-
-    if "cocktail-menu-real-images-v3" not in text:
-        text = text.replace("</style>", CSS + "\n</style>", 1)
-
-    poster_old = '<div class="poster"><div class="poster-card">'
-    poster_new = '<div class="poster"><img class="poster-image" id="posterImage" src="' + IMAGE_PATHS[0] + '" alt="Old Fashioned cocktail artwork"><div class="poster-card">'
-    if 'id="posterImage"' not in text:
-        text = replace_once(text, poster_old, poster_new, "poster container")
-
-    if "const COCKTAIL_IMAGES=" not in text:
-        js_array = "const COCKTAIL_IMAGES=" + repr(IMAGE_PATHS).replace("'", '"') + ";\n"
-        text = replace_once(text, "];\nconst grid=", "];\n" + js_array + "const grid=", "cocktail image array insertion")
-
-    card_old = '<button class="card" data-i="${i}"><span class="card-mark">'
-    card_new = '<button class="card" data-i="${i}"><img class="card-image" src="${COCKTAIL_IMAGES[i]}" alt="${esc(d.name)} cocktail artwork" loading="${i<4?\'eager\':\'lazy\'}"><span class="card-mark">'
-    if 'class="card-image"' not in text:
-        text = replace_once(text, card_old, card_new, "card image renderer")
-
-    open_old = "function openDrink(i){const d=DRINKS[i];"
-    open_new = "function openDrink(i){const d=DRINKS[i];const poster=document.getElementById('posterImage');if(poster){poster.src=COCKTAIL_IMAGES[i];poster.alt=d.name+' cocktail artwork';}"
-    if "poster.src=COCKTAIL_IMAGES[i]" not in text:
-        text = replace_once(text, open_old, open_new, "recipe poster renderer")
-
+    if MARKER in text:
+        print("Cocktail Menu V4 already applied")
+        return
+    if "</style>" not in text or "</body>" not in text:
+        raise RuntimeError("Cocktail Menu missing expected style/body closing tags")
+    text = text.replace("</style>", CSS + "\n</style>", 1)
+    text = text.replace("</body>", JS + "\n</body>", 1)
     PATH.write_text(text, encoding="utf-8")
-    print("Cocktail Menu patched: 11 real images + auto-height mobile recipe layout")
+    print("Cocktail Menu V4 applied: 11 real JPGs + mobile single-scroll layout")
 
 
 if __name__ == "__main__":
