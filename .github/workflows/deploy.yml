@@ -33,6 +33,7 @@ jobs:
           python3 build_charlotte.py
           python3 scripts/build_wardrobe.py
           python3 scripts/patch_blueprint_mobile.py
+          python3 scripts/patch_city_popup.py
           python3 scripts/update_links_hub.py
 
       - name: Deploy to Cloudflare Pages
