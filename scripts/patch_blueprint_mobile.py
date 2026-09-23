@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Apply the production mobile-layout patch to blueprint.html.
+"""Apply production fixes to blueprint.html.
 
-The Blueprint preview is a large self-contained HTML artifact. Keeping this
-small deterministic patch in the deploy pipeline lets the canonical artifact
-remain the source of truth while ensuring every production deploy gets the
-same responsive mobile rack behavior.
+The Blueprint is a large self-contained HTML artifact. Keeping small,
+deterministic patches in the deploy pipeline lets the canonical artifact
+remain the source of truth while production consistently receives the
+responsive rack behavior and correct return-to-Penthouse navigation.
 """
 from pathlib import Path
 
@@ -49,10 +49,12 @@ NEW_RENDER = "const count=rackCount(),offset=Math.floor(count/2);const rackLooks
 OLD_RESIZE = "new ResizeObserver(railHeight).observe($(&#x27;stage&#x27;));"
 NEW_RESIZE = "new ResizeObserver(railHeight).observe($(&#x27;stage&#x27;));const mobileRackQuery=window.matchMedia(&#x27;(max-width:760px)&#x27;);mobileRackQuery.addEventListener?.(&#x27;change&#x27;,()=&gt;render());"
 
+RETURN_SCRIPT = """<script id=\"blueprint-return-navigation\">(()=>{const button=document.getElementById('return');if(!button)return;button.addEventListener('click',event=>{event.preventDefault();event.stopImmediatePropagation();let fromPenthouse=false;try{const ref=new URL(document.referrer);fromPenthouse=ref.origin===location.origin&&/\\/house\\.html$/.test(ref.pathname);}catch(_){}if(fromPenthouse&&history.length>1){history.back();}else{location.href='/house.html#closet';}},true);})();</script>"""
+
 
 def replace_once(text: str, old: str, new: str, label: str) -> str:
     if new in text:
-        print(f"Blueprint mobile patch already applied: {label}")
+        print(f"Blueprint patch already applied: {label}")
         return text
     if text.count(old) != 1:
         raise RuntimeError(f"Expected exactly one {label} target; found {text.count(old)}")
@@ -65,8 +67,15 @@ def main() -> None:
     text = replace_once(text, OLD_RAIL, NEW_RAIL, "rail sizing")
     text = replace_once(text, OLD_RENDER, NEW_RENDER, "mobile rack count")
     text = replace_once(text, OLD_RESIZE, NEW_RESIZE, "responsive rerender")
+    if RETURN_SCRIPT not in text:
+        if text.count("</body>") != 1:
+            raise RuntimeError(f"Expected one outer </body> target; found {text.count('</body>')}")
+        text = text.replace("</body>", RETURN_SCRIPT + "</body>", 1)
+        print("Blueprint return navigation applied: previous Penthouse room or Closet fallback")
+    else:
+        print("Blueprint return navigation already applied")
     PATH.write_text(text, encoding="utf-8")
-    print("Blueprint mobile patch applied: full-height rack, 3 mobile looks, stable sizing")
+    print("Blueprint production patch applied")
 
 
 if __name__ == "__main__":
