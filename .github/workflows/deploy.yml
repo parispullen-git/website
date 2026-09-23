@@ -36,6 +36,7 @@ jobs:
           python3 scripts/patch_blueprint_mobile.py
           python3 scripts/patch_city_popup.py
           python3 scripts/update_links_hub.py
+          python3 scripts/patch_cocktail_artifacts.py
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
