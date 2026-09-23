@@ -259,6 +259,19 @@
     fill(`<div class="ae-split"><div>${focusMarkup(current(),spot,'The evening ritual')}</div><div><span class="ae-kicker">The Bathroom · A moment to yourself</span><p class="ae-lede">Three moments, chosen slowly. A ritual tray for future grooming, fragrance and linen collaborations.</p><div class="ae-ritual"><button data-action="ritual" aria-pressed="false"><strong>01 · Unwind</strong><span>Warm stone, quiet light. Start with a breath.</span></button><button data-action="ritual" aria-pressed="false"><strong>02 · Reset</strong><span>The vanity, cleared to the essentials.</span></button><button data-action="ritual" aria-pressed="false"><strong>03 · Return</strong><span>Choose what the rest of the evening feels like.</span></button></div>${actions(goButton('bedroom','Back to the Bedroom')+saveButton('bath:ritual'))}<p class="ae-note">A house ritual concept. No grooming products or brand availability are implied.</p></div></div>`);
     actionHandlers.ritual=b=>{ $$('.ae-ritual button',dialog).forEach(el=>el.setAttribute('aria-pressed',String(el===b)));$('.ae-focus',dialog).style.setProperty('--ae-zoom',['1.2','1.6','1'].at($$('.ae-ritual button',dialog).indexOf(b))); };
   }
+  function blueprintPortal(spot) {
+    const existing = document.getElementById('blueprint-room-portal');
+    if (existing) { existing.showModal(); return; }
+    const portal = document.createElement('dialog');
+    portal.id = 'blueprint-room-portal';
+    portal.className = 'ae-dialog';
+    portal.innerHTML = '<header class="ae-header"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE BLUEPRINT · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to room ×</button></header><iframe title="The Blueprint wardrobe game" src="/blueprint.html?embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#0a0a0b"></iframe>';
+    document.body.appendChild(portal);
+    portal.querySelector('.ae-close').addEventListener('click', () => portal.close());
+    portal.addEventListener('click', event => { if (event.target === portal) portal.close(); });
+    portal.addEventListener('close', () => { portal.remove(); if (spot?.isConnected) spot.focus({preventScroll:true}); });
+    portal.showModal();
+  }
   function openArtifact(spot){
     const room=spot.closest('.floor-scene');
     const id=spot.dataset.artifact;
@@ -266,7 +279,7 @@
     if(!panel)return false;
     const key=id;
     if(key==='hellofresh')cookbook(spot);
-    else if((room.id==='closet'&&key==='suits')||key==='suit')wardrobe(spot);
+    else if((room.id==='closet'&&key==='suits')||key==='suit')blueprintPortal(spot);
     else if(key.includes('oxknit'))capsule(spot,panel,true);
     else if(key==='jacket'||key==='polo')capsule(spot,panel,false);
     else if(key==='recordplayer')records(spot);
