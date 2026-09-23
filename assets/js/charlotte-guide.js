@@ -6,6 +6,16 @@
 (function () {
   'use strict';
 
+  // links.parispullen.com historically linked straight to charlotte.html.
+  // Keep that card useful without duplicating its markup: on the links
+  // subdomain, hand the top-level visit to the same immersive City Guide
+  // explorer used by the Penthouse popup. The full charlotte.html guide
+  // remains available normally on parispullen.com.
+  if (window.top === window.self && /^links\./i.test(location.hostname)) {
+    location.replace('/city-guide-popup.html' + (location.hash || ''));
+    return;
+  }
+
   var cards = Array.prototype.slice.call(document.querySelectorAll('.vcard'));
   if (!cards.length) return;
 
@@ -17,12 +27,6 @@
   var resetBtn = document.getElementById('vfilter-reset');
   var active = [];
 
-  // Each district's grid lives inside a <details class="vhood__acc">,
-  // collapsed by default so the page reads as a menu of neighborhoods
-  // rather than 75 listings dumped on one screen. Filtering searches the
-  // whole guide, not just whatever's open, so an active filter force-opens
-  // every district with at least one match; clearing filters returns
-  // everything to collapsed.
   function applyFilters() {
     var byHood = {};
     cards.forEach(function (card) {
@@ -164,16 +168,8 @@
     if (e.key === 'Escape' && quick.classList.contains('is-open')) closeQuick();
   });
 
-  // Exposed so assets/js/city-explorer.js can hand off a map click (or a
-  // "View Full Listing" link from the homepage's condensed drawer) into
-  // this same vquick drawer, rather than building a second one.
   window.__openVenueQuick = openQuick;
 
-  // Deep link from the homepage, the interactive map's "See all" links, or
-  // the directory at the top of the guide: charlotte.html#<id> should land
-  // on an OPEN accordion, not a collapsed one with nothing visible. Handles
-  // three shapes of target: a single venue card (opens its drawer too), a
-  // whole .vhood section, or anything else inside a .vhood__acc.
   function openFromHash() {
     if (!location.hash) return;
     var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
