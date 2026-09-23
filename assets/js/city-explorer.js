@@ -64,6 +64,31 @@
     return 'charlotte.html#' + vid;
   }
 
+  /* ---------- standalone City Guide return ---------- */
+  // Inside the Penthouse the parent Guide Portal owns the Back control.
+  // When the explorer is opened as a top-level page (notably from
+  // links.parispullen.com), give it the same return affordance itself.
+  function installStandaloneBack() {
+    if (window.top !== window.self || !/\/city-guide-popup\.html$/i.test(location.pathname)) return;
+    var style = document.createElement('style');
+    style.textContent = '.city-back-penthouse{position:fixed;z-index:80;top:max(12px,env(safe-area-inset-top));left:12px;min-height:44px;padding:0 14px;border:1px solid rgba(241,234,223,.22);background:rgba(8,9,8,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#f1eadf;font:500 9px Inter,Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.35)}.city-back-penthouse span{color:#c9a66a;margin-right:8px}.city-back-penthouse:hover,.city-back-penthouse:focus-visible{border-color:#c9a66a;color:#c9a66a}@media(max-width:840px){.city-back-penthouse{top:max(8px,env(safe-area-inset-top));left:auto;right:8px;min-height:46px;padding:0 12px;font-size:8px}.hud{padding-right:118px!important}}';
+    document.head.appendChild(style);
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'city-back-penthouse';
+    btn.innerHTML = '<span aria-hidden="true">&#8592;</span>Back to Penthouse';
+    btn.addEventListener('click', function () {
+      var match = document.cookie.match(/(?:^|;\s*)pp_last_penthouse_room=([^;]+)/);
+      var room = 'penthouse-living';
+      if (match) {
+        try { room = decodeURIComponent(match[1]) || room; } catch (err) {}
+      }
+      if (!/^[a-z0-9-]+$/i.test(room)) room = 'penthouse-living';
+      window.location.href = 'https://parispullen.com/#' + encodeURIComponent(room);
+    });
+    document.body.appendChild(btn);
+  }
+
   /* ---------- the condensed drawer (#cityquick) ---------- */
   var cq = document.getElementById('cityquick');
   var cqCat, cqName, cqNote, cqLink, cqAll;
@@ -196,4 +221,7 @@
     renderList(d);
     renderHotspots(d);
   });
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', installStandaloneBack);
+  else installStandaloneBack();
 })();
