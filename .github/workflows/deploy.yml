@@ -1,10 +1,12 @@
 name: Build and Deploy
 
-# Temporary release trigger. This commit deploys the current main branch once;
-# the workflow is restored to manual-only immediately afterward.
+# Manual only -- triggered by the dashboard's "Deploy Live" button (via
+# functions/api/deploy.js, which calls this workflow's dispatch API using
+# GITHUB_TOKEN) or by a person clicking "Run workflow" on this repo's
+# Actions tab. Deliberately NOT wired to push -- a commit landing on main
+# (from the dashboard's Journal editor, or anything else) should never by
+# itself put anything live; going live is still its own explicit step.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 jobs:
   deploy:
