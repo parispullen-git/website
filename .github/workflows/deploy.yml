@@ -28,6 +28,7 @@ jobs:
       - name: Rebuild generated pages
         run: |
           python3 build_journal.py
+          python3 scripts/patch_city_artifacts.py
           python3 build_house.py
           python3 build_casefiles.py
           python3 build_charlotte.py
