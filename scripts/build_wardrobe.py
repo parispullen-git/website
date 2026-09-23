@@ -184,8 +184,13 @@ def main():
     out = out.replace("{{CARDS}}", cards_html)
     out = out.replace("{{COUNT}}", str(len(WARDROBE)))
 
-    (ROOT / "wardrobe.html").write_text(out, encoding="utf-8")
-    print(f"\nWrote {ROOT / 'wardrobe.html'}")
+    # The interactive Blueprint is now the wardrobe experience. Keep the
+    # legacy catalog generator intact for data maintenance, but route the
+    # generated public entry point to the game so deploys cannot resurrect
+    # the large catalog by accident.
+    redirect = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/blueprint.html"><script>location.replace("/blueprint.html");</script><title>The Blueprint · Paris Pullen</title></head><body></body></html>'
+    (ROOT / "wardrobe.html").write_text(redirect, encoding="utf-8")
+    print(f"\nWrote {ROOT / 'wardrobe.html'} (Blueprint redirect)")
 
 
 if __name__ == "__main__":
