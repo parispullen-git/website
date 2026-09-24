@@ -72,20 +72,18 @@ jobs:
           for retired in ['The Candle', 'The Polo']:
               assert retired not in living, f'{retired} still present in Living Room'
 
-          assert living.count('data-artifact=') == 5, 'Living Room must contain exactly five drawer artifacts'
+          artifact_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', living)
+          assert len(artifact_buttons) == 5, f'Living Room must contain exactly five drawer artifact buttons, found {len(artifact_buttons)}'
           assert 'room-living-v7.jpg?v=20260924v7c' in living
           assert 'room-living-v7@sm.jpg?v=20260924v7c' in living
 
-          # Exact annotated positions.
           for xy in ['--x:75.0%;--y:10.0%', '--x:79.5%;--y:51.5%', '--x:91.5%;--y:68.5%', '--x:44.5%;--y:66.5%', '--x:9.0%;--y:87.5%']:
               assert xy in living, f'Living Room marker {xy} missing'
           assert '--x:15.0%;--y:35.0%' in living, 'City Guide position missing'
 
-          # TV must be centered over the fireplace on both generated page and homepage runtime.
           assert '--x:51.0%;--y:22.0%;--w:16.0%;--h:13.0%' in living
           assert "x:'51.0%', y:'22.0%', w:'16.0%', h:'13.0%'" in js
 
-          # Homepage/mobile runtime gets unique v7 images and cannot reuse cached Candle data.
           lr = re.search(r"'penthouse-living': \[.*?\n    \],\n    'music-lounge'", js, re.S)
           assert lr, 'Homepage Living Room runtime block missing'
           assert 'candle' not in lr.group(0).lower()
@@ -93,9 +91,9 @@ jobs:
           assert "img:'room-living-v7'" in js
           assert 'penthouse.js?v=20260924lr7c' in index
 
-          # Mobile renderer scales the full image rather than swapping coordinates.
+          # Mobile uses the same image-relative coordinates and the dedicated @sm srcset.
           assert '.floor-scene__view img{' in css and 'height:100%;width:auto' in css
-          assert 'room-living-v7@sm.jpg' in js or "img:'room-living-v7'" in js
+          assert "img:'room-living-v7'" in js
           print('Living Room v7 desktop/mobile verification passed')
           PY
 
