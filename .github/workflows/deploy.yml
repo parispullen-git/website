@@ -25,8 +25,8 @@ jobs:
           cp closet-v7.jpeg assets/img/room-closet@sm.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7@sm.jpg
-          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7h"/' build_house.py
-          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7h';/" assets/js/penthouse.js
+          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7i"/' build_house.py
+          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7i';/" assets/js/penthouse.js
 
       - name: Rebuild generated pages
         run: |
@@ -46,13 +46,13 @@ jobs:
 
       - name: Pin v7 assets and bust Penthouse runtime cache
         run: |
-          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7h#assets/img/room-living-v7@sm.jpg?v=20260924v7h#g' house.html
-          sed -i 's#assets/img/room-living.jpg?v=20260924v7h#assets/img/room-living-v7.jpg?v=20260924v7h#g' house.html
-          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7h#assets/img/room-closet-v7@sm.jpg?v=20260924v7h#g' house.html
-          sed -i 's#assets/img/room-closet.jpg?v=20260924v7h#assets/img/room-closet-v7.jpg?v=20260924v7h#g' house.html
-          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7h#g' index.html
+          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7i#assets/img/room-living-v7@sm.jpg?v=20260924v7i#g' house.html
+          sed -i 's#assets/img/room-living.jpg?v=20260924v7i#assets/img/room-living-v7.jpg?v=20260924v7i#g' house.html
+          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7i#assets/img/room-closet-v7@sm.jpg?v=20260924v7i#g' house.html
+          sed -i 's#assets/img/room-closet.jpg?v=20260924v7i#assets/img/room-closet-v7.jpg?v=20260924v7i#g' house.html
+          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7i#g' index.html
 
-      - name: Verify Living Room, Study, Kitchen and Music Lounge v7 desktop and mobile output
+      - name: Verify Living Room, Study, Kitchen, Music Lounge and Bedroom v7 output
         run: |
           python3 - <<'PY'
           import re
@@ -74,8 +74,8 @@ jobs:
               assert retired not in living, f'{retired} still present in Living Room'
           artifact_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', living)
           assert len(artifact_buttons) == 5, f'Living Room must contain exactly five drawer artifact buttons, found {len(artifact_buttons)}'
-          assert 'room-living-v7.jpg?v=20260924v7h' in living
-          assert 'room-living-v7@sm.jpg?v=20260924v7h' in living
+          assert 'room-living-v7.jpg?v=20260924v7i' in living
+          assert 'room-living-v7@sm.jpg?v=20260924v7i' in living
           for xy in ['--x:75.0%;--y:10.0%', '--x:79.5%;--y:51.5%', '--x:91.5%;--y:68.5%', '--x:44.5%;--y:66.5%', '--x:9.0%;--y:87.5%']:
               assert xy in living, f'Living Room marker {xy} missing'
           assert '--x:15.0%;--y:35.0%' in living, 'Living Room City Guide position missing'
@@ -125,7 +125,7 @@ jobs:
           assert "key:'hellofresh'" in kitchen_runtime.group(0), 'Kitchen HelloFresh runtime node missing'
           assert "roomId === 'kitchen'" in js, 'Kitchen Blueprint CTA is not wired'
 
-          # Music Lounge verification: four drawer artifacts + separate City Guide.
+          # Music Lounge verification.
           section = re.search(r'<section class="floor-scene[^>]*id="music-lounge".*?</section>', house, re.S)
           assert section, 'Music Lounge section missing from house.html'
           music = section.group(0)
@@ -149,9 +149,33 @@ jobs:
           assert "'music-lounge':     ['5.5%', '27.3%']" in js, 'Music Lounge City Guide runtime position missing'
           assert "'music-lounge': ['50%', '62%']" not in js, 'Old Music Lounge Remote runtime position still present'
 
-          assert 'penthouse.js?v=20260924lr7h' in index
+          # Bedroom verification: four drawer artifacts + separate City Guide.
+          section = re.search(r'<section class="floor-scene[^>]*id="bedroom".*?</section>', house, re.S)
+          assert section, 'Bedroom section missing from house.html'
+          bedroom = section.group(0)
+          for name in ['The Artwork', 'The Blueprint Game', 'The Gentlemen’s Cocktail Guide', 'The Journal']:
+              assert name in bedroom, f'{name} missing from Bedroom'
+          bedroom_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', bedroom)
+          assert len(bedroom_buttons) == 4, f'Bedroom must contain exactly four drawer artifact buttons, found {len(bedroom_buttons)}'
+          for xy in ['--x:36.8%;--y:17.4%', '--x:63.9%;--y:37.5%', '--x:16.2%;--y:46.1%', '--x:85.9%;--y:69.3%']:
+              assert xy in bedroom, f'Bedroom marker {xy} missing'
+          assert '--x:14.7%;--y:14.4%' in bedroom, 'Bedroom City Guide position missing'
+          assert 'The City Guide' in bedroom, 'Bedroom City Guide node missing'
+          assert 'The Suit' not in bedroom, 'Legacy Bedroom Suit label still present'
+
+          bedroom_runtime = re.search(r"'bedroom': \[.*?\n    \],\n    'bath'", js, re.S)
+          assert bedroom_runtime, 'Homepage Bedroom runtime block missing'
+          br = bedroom_runtime.group(0)
+          assert "key:'artwork'" in br
+          assert "key:'suit'" in br and "name:'The Blueprint Game'" in br
+          assert "key:'cocktails'" in br
+          assert "key:'journal'" in br
+          assert "'bedroom':     ['14.7%', '14.4%']" in js, 'Bedroom City Guide runtime position missing'
+          assert "roomId === 'bedroom' && key === 'suit'" in js, 'Bedroom Blueprint CTA is not wired'
+
+          assert 'penthouse.js?v=20260924lr7i' in index
           assert '.floor-scene__view img{' in css and 'height:100%;width:auto' in css
-          print('Living Room + Study + Kitchen + Music Lounge v7 desktop/mobile verification passed')
+          print('Living Room + Study + Kitchen + Music Lounge + Bedroom v7 verification passed')
           PY
 
       - name: Deploy to Cloudflare Pages
