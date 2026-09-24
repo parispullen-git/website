@@ -25,8 +25,8 @@ jobs:
           cp closet-v7.jpeg assets/img/room-closet@sm.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7@sm.jpg
-          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7e"/' build_house.py
-          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7e';/" assets/js/penthouse.js
+          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7f"/' build_house.py
+          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7f';/" assets/js/penthouse.js
 
       - name: Rebuild generated pages
         run: |
@@ -45,13 +45,13 @@ jobs:
 
       - name: Pin v7 assets and bust Penthouse runtime cache
         run: |
-          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7e#assets/img/room-living-v7@sm.jpg?v=20260924v7e#g' house.html
-          sed -i 's#assets/img/room-living.jpg?v=20260924v7e#assets/img/room-living-v7.jpg?v=20260924v7e#g' house.html
-          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7e#assets/img/room-closet-v7@sm.jpg?v=20260924v7e#g' house.html
-          sed -i 's#assets/img/room-closet.jpg?v=20260924v7e#assets/img/room-closet-v7.jpg?v=20260924v7e#g' house.html
-          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7e#g' index.html
+          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7f#assets/img/room-living-v7@sm.jpg?v=20260924v7f#g' house.html
+          sed -i 's#assets/img/room-living.jpg?v=20260924v7f#assets/img/room-living-v7.jpg?v=20260924v7f#g' house.html
+          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7f#assets/img/room-closet-v7@sm.jpg?v=20260924v7f#g' house.html
+          sed -i 's#assets/img/room-closet.jpg?v=20260924v7f#assets/img/room-closet-v7.jpg?v=20260924v7f#g' house.html
+          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7f#g' index.html
 
-      - name: Verify Living Room v7 desktop and mobile output
+      - name: Verify Living Room and Study v7 desktop and mobile output
         run: |
           python3 - <<'PY'
           import re
@@ -62,38 +62,51 @@ jobs:
           index = Path('index.html').read_text(encoding='utf-8')
           css = Path('assets/css/world.css').read_text(encoding='utf-8')
 
+          # Living Room verification.
           section = re.search(r'<section class="floor-scene[^>]*id="penthouse-living".*?</section>', house, re.S)
           assert section, 'Living Room section missing from house.html'
           living = section.group(0)
-
           approved = ['The Artwork', 'The Journal', 'The Vault', 'The Blueprint Game', 'The Gentlemen’s Cocktail Menu']
           for name in approved:
               assert name in living, f'{name} missing from Living Room'
           for retired in ['The Candle', 'The Polo']:
               assert retired not in living, f'{retired} still present in Living Room'
-
           artifact_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', living)
           assert len(artifact_buttons) == 5, f'Living Room must contain exactly five drawer artifact buttons, found {len(artifact_buttons)}'
-          assert 'room-living-v7.jpg?v=20260924v7e' in living
-          assert 'room-living-v7@sm.jpg?v=20260924v7e' in living
-
+          assert 'room-living-v7.jpg?v=20260924v7f' in living
+          assert 'room-living-v7@sm.jpg?v=20260924v7f' in living
           for xy in ['--x:75.0%;--y:10.0%', '--x:79.5%;--y:51.5%', '--x:91.5%;--y:68.5%', '--x:44.5%;--y:66.5%', '--x:9.0%;--y:87.5%']:
               assert xy in living, f'Living Room marker {xy} missing'
-          assert '--x:15.0%;--y:35.0%' in living, 'City Guide position missing'
-
+          assert '--x:15.0%;--y:35.0%' in living, 'Living Room City Guide position missing'
           assert '--x:51.0%;--y:26.375%;--w:16.0%;--h:13.0%' in living
           assert "x:'51.0%', y:'26.375%', w:'16.0%', h:'13.0%'" in js
 
-          lr = re.search(r"'penthouse-living': \[.*?\n    \],\n    'music-lounge'", js, re.S)
-          assert lr, 'Homepage Living Room runtime block missing'
-          assert 'candle' not in lr.group(0).lower()
-          assert 'oxknit' not in lr.group(0).lower()
-          assert "img:'room-living-v7'" in js
-          assert 'penthouse.js?v=20260924lr7e' in index
+          # Study verification: exactly the three annotated drawer artifacts
+          # plus the separate City Guide portal node on the window.
+          section = re.search(r'<section class="floor-scene[^>]*id="study".*?</section>', house, re.S)
+          assert section, 'Study section missing from house.html'
+          study = section.group(0)
+          for name in ['The Artwork', 'The Gentlemen’s Cocktail Menu', 'The Journal']:
+              assert name in study, f'{name} missing from Study'
+          for retired in ['The Monogram', 'The Pullen Laws', 'The Polo']:
+              assert retired not in study, f'{retired} still present in Study'
+          study_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', study)
+          assert len(study_buttons) == 3, f'Study must contain exactly three drawer artifact buttons, found {len(study_buttons)}'
+          for xy in ['--x:39.9%;--y:19.0%', '--x:36.9%;--y:44.2%', '--x:49.6%;--y:42.9%']:
+              assert xy in study, f'Study marker {xy} missing'
+          assert '--x:85.0%;--y:25.2%' in study, 'Study City Guide position missing'
+          assert 'The City Guide' in study, 'Study City Guide node missing'
 
+          study_runtime = re.search(r"'study': \[.*?\n    \],\n    'cinema'", js, re.S)
+          assert study_runtime, 'Homepage Study runtime block missing'
+          runtime_block = study_runtime.group(0).lower()
+          for retired in ['monogram', 'pullenlaws', 'oxknit-study']:
+              assert retired not in runtime_block, f'{retired} still present in Study runtime'
+          assert "'study':            ['85.0%', '25.2%']" in js
+
+          assert 'penthouse.js?v=20260924lr7f' in index
           assert '.floor-scene__view img{' in css and 'height:100%;width:auto' in css
-          assert "img:'room-living-v7'" in js
-          print('Living Room v7 desktop/mobile verification passed')
+          print('Living Room + Study v7 desktop/mobile verification passed')
           PY
 
       - name: Deploy to Cloudflare Pages
