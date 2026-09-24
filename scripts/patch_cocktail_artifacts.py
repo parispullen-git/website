@@ -5,6 +5,31 @@ ROOT=Path(__file__).resolve().parents[1]
 
 CARD='''\n    <a class="lib__card" href="/cocktail-menu.html" data-cocktail-portal>\n      <img src="/assets/img/room-study@sm.jpg?v=20260913g" srcset="/assets/img/room-study@sm.jpg?v=20260913g 700w, /assets/img/room-study.jpg?v=20260913g 1400w" sizes="420px" alt="" loading="lazy">\n      <span class="lib__card-body">\n        <span class="lib__card-text">\n          <span class="lib__card-name">The Gentleman’s Cocktail Menu</span>\n          <span class="lib__card-sub">11 house classics · recipes</span>\n        </span>\n        <span class="lib__card-arrow" aria-hidden="true">&#8594;</span>\n      </span>\n    </a>\n'''
 SCRIPT='\n<script src="/assets/js/cocktail-portal.js?v=1" defer></script>\n'
+ROUTER='''
+<script>
+/* PP_PENTHOUSE_ARTIFACT_ROUTES_V1
+   Keep the room hotspots where they are; only make their destinations explicit. */
+document.addEventListener('click', function (event) {
+  var spot = event.target.closest('[data-artifact]');
+  if (!spot) return;
+  var key = spot.getAttribute('data-artifact');
+  var room = spot.closest('.floor-scene');
+
+  if (key === 'journal') {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.href = '/journal.html';
+    return;
+  }
+
+  if (room && room.id === 'penthouse-living' && key === 'suits') {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.href = '/blueprint.html';
+  }
+}, true);
+</script>
+'''
 
 def patch_links():
     p=ROOT/'links'/'index.html'
@@ -25,9 +50,14 @@ def patch_links():
 def patch_house():
     p=ROOT/'house.html'
     s=p.read_text(encoding='utf-8')
-    # The existing Study artifact remains the visual target; the portal script intercepts it.
+    # Every cocktail artifact is intercepted by cocktail-portal.js and opens
+    # the full Gentleman's Cocktail Menu in the existing room-native overlay.
     if 'cocktail-portal.js' not in s:
         s=s.replace('</body>',SCRIPT+'</body>',1)
+    # Journal artifacts go straight to the Journal; the approved Living Room
+    # INDOCHINO/Suit Supply hotspot goes straight to The Blueprint game.
+    if 'PP_PENTHOUSE_ARTIFACT_ROUTES_V1' not in s:
+        s=s.replace('</body>',ROUTER+'</body>',1)
     p.write_text(s,encoding='utf-8')
 
 def patch_data_copy():
@@ -42,4 +72,4 @@ if __name__=='__main__':
     patch_data_copy()
     patch_links()
     patch_house()
-    print('Cocktail artifact patched into links/index.html and house.html')
+    print('Cocktail, Journal and Living Room Blueprint artifact routes patched')
