@@ -1,216 +1,27 @@
-/* ============================================================
-   Nav Panel — compact room navigation plus the public-facing
-   Gentleman artifact naming/routing compatibility layer.
-   ============================================================ */
-(function () {
-  'use strict';
-
-  function init(root, target) {
-    var toggle = root.querySelector('[data-nav-panel-toggle]');
-    var grid = root.querySelector('[data-nav-panel-grid]');
-    if (!toggle || !grid || !target) return null;
-    var go = typeof target === 'function' ? target : function (id) { target.goToId(id, 'start'); };
-
-    function setOpen(open) {
-      grid.hidden = !open;
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      root.classList.toggle('is-open', open);
-    }
-    setOpen(false);
-
-    toggle.addEventListener('click', function (e) {
-      e.stopPropagation();
-      setOpen(grid.hidden);
-    });
-
-    grid.addEventListener('click', function (e) {
-      var btn = e.target.closest('[data-nav-panel-go]');
-      if (!btn) return;
-      go(btn.dataset.navPanelGo);
-      setOpen(false);
-    });
-
-    document.addEventListener('click', function (e) {
-      if (!grid.hidden && !root.contains(e.target)) setOpen(false);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !grid.hidden) setOpen(false);
-    });
-
-    return { setOpen: setOpen };
-  }
-
-  Array.prototype.forEach.call(document.querySelectorAll('[data-nav-panel]'), function (root) {
-    var pager = window.PPRoomPagers && window.PPRoomPagers[0];
-    if (pager) init(root, pager);
-  });
-
-  window.PPNavPanel = init;
-
-  var NAMES = {
-    suits: 'The Gentleman\u2019s Guide to Suits',
-    cocktails: 'The Gentleman\u2019s Guide to Cocktails',
-    hellofresh: 'The Gentleman\u2019s Guide to HelloFresh',
-    training: 'The Gentleman\u2019s Training Game',
-    charlotte: 'The Gentleman\u2019s Guide to Charlotte'
-  };
-
-  var COCKTAIL_ROOMS = ['penthouse-living', 'music-lounge', 'bedroom', 'study'];
-
-  function setText(selector, value, root) {
-    Array.prototype.forEach.call((root || document).querySelectorAll(selector), function (el) {
-      if (el.textContent !== value) el.textContent = value;
-    });
-  }
-
-  function renameArtifact(roomId, selector, name) {
-    var room = document.getElementById(roomId);
-    if (!room) return;
-    var spot = room.querySelector(selector);
-    if (!spot) return;
-    var label = spot.querySelector('.artifact__label');
-    if (label && label.textContent !== name) label.textContent = name;
-    var artifactId = spot.getAttribute('data-artifact');
-    if (artifactId) {
-      Array.prototype.forEach.call(room.querySelectorAll('.drawer__panel[data-artifact="' + artifactId + '"] .drawer__name'), function (title) {
-        if (title.textContent !== name) title.textContent = name;
-      });
-    }
-  }
-
-  function cocktailArtifactInRoom(room) {
-    if (!room || COCKTAIL_ROOMS.indexOf(room.id) === -1) return null;
-    var spots = room.querySelectorAll('.artifact[data-artifact]');
-    for (var i = 0; i < spots.length; i++) {
-      var label = spots[i].querySelector('.artifact__label');
-      var text = ((label && label.textContent) || spots[i].textContent || '').trim();
-      var id = spots[i].getAttribute('data-artifact') || '';
-      if (/cocktail/i.test(text) || /cocktail/i.test(id)) return spots[i];
-    }
-    return null;
-  }
-
-  function renameCocktailGuides() {
-    COCKTAIL_ROOMS.forEach(function (roomId) {
-      var room = document.getElementById(roomId);
-      var spot = cocktailArtifactInRoom(room);
-      if (!spot) return;
-      var label = spot.querySelector('.artifact__label');
-      if (label && label.textContent !== NAMES.cocktails) label.textContent = NAMES.cocktails;
-      var artifactId = spot.getAttribute('data-artifact');
-      if (artifactId) {
-        Array.prototype.forEach.call(room.querySelectorAll('.drawer__panel[data-artifact="' + artifactId + '"] .drawer__name'), function (title) {
-          if (title.textContent !== NAMES.cocktails) title.textContent = NAMES.cocktails;
-        });
-      }
-    });
-  }
-
-  function applyPublicNames() {
-    renameArtifact('closet', '[data-artifact="suits"]', NAMES.suits);
-    renameArtifact('bedroom', '[data-artifact="suit"]', NAMES.suits);
-    renameArtifact('kitchen', '[data-artifact="hellofresh"]', NAMES.hellofresh);
-    renameArtifact('gym', '[data-gym-portal]', NAMES.training);
-    renameCocktailGuides();
-
-    Array.prototype.forEach.call(document.querySelectorAll('[data-artifact="journal"]'), function (spot) {
-      var label = spot.querySelector('.artifact__label');
-      if (label && label.textContent !== 'The Journal') label.textContent = 'The Journal';
-    });
-
-    Array.prototype.forEach.call(document.querySelectorAll('[data-guide-portal],[data-city-guide]'), function (spot) {
-      var label = spot.querySelector('.artifact__label');
-      if (label && label.textContent !== NAMES.charlotte) label.textContent = NAMES.charlotte;
-      if (spot.getAttribute('aria-label') !== NAMES.charlotte) spot.setAttribute('aria-label', NAMES.charlotte);
-    });
-
-    Array.prototype.forEach.call(document.querySelectorAll('[data-floors]'), function (button) {
-      if (button.tagName === 'BUTTON' && button.textContent !== 'Directory') button.textContent = 'Directory';
-      if (button.getAttribute('aria-label') !== 'Directory') button.setAttribute('aria-label', 'Directory');
-    });
-    Array.prototype.forEach.call(document.querySelectorAll('[data-nav-panel-toggle]'), function (button) {
-      var text = (button.textContent || '').trim();
-      if (/^floors?$/i.test(text) || /floors/i.test(button.getAttribute('aria-label') || '')) {
-        if (button.textContent !== 'Directory') button.textContent = 'Directory';
-        if (button.getAttribute('aria-label') !== 'Directory') button.setAttribute('aria-label', 'Directory');
-      }
-    });
-    Array.prototype.forEach.call(document.querySelectorAll('.ae-tab'), function (button) {
-      if (/floors\s*&\s*rooms/i.test(button.textContent || '')) button.textContent = 'Directory';
-    });
-    var experienceTitle = document.getElementById('ae-title');
-    if (experienceTitle && /^the floors$/i.test((experienceTitle.textContent || '').trim())) experienceTitle.textContent = 'Directory';
-
-    setText('#blueprint-room-portal .ae-kicker', NAMES.suits);
-    setText('.guide-portal__title span', 'The Compliment Hotel \u00b7 ' + NAMES.charlotte);
-    var cityDialog = document.querySelector('.guide-portal');
-    if (cityDialog && cityDialog.getAttribute('aria-label') !== NAMES.charlotte) cityDialog.setAttribute('aria-label', NAMES.charlotte);
-    var cityFrame = document.querySelector('.guide-portal iframe');
-    if (cityFrame && cityFrame.getAttribute('title') !== NAMES.charlotte) cityFrame.setAttribute('title', NAMES.charlotte);
-    var gymFrame = document.querySelector('.gym-portal iframe');
-    if (gymFrame && gymFrame.getAttribute('title') !== NAMES.training) gymFrame.setAttribute('title', NAMES.training);
-
-    var ae = document.getElementById('artifact-experience');
-    if (ae && ae.open) {
-      var title = ae.querySelector('#ae-title');
-      if (title) {
-        if (/delivery|hello ?fresh/i.test(title.textContent || '') && title.textContent !== NAMES.hellofresh) title.textContent = NAMES.hellofresh;
-        if (/cocktail/i.test(title.textContent || '') && title.textContent !== NAMES.cocktails) title.textContent = NAMES.cocktails;
-      }
-    }
-  }
-
-  function openFramePortal(title, src, opener) {
-    var old = document.getElementById('gentleman-guide-portal');
-    if (old) old.remove();
-    var modal = document.createElement('dialog');
-    modal.id = 'gentleman-guide-portal';
-    modal.className = 'ae-dialog';
-    modal.setAttribute('aria-label', title);
-    modal.innerHTML = '<header class="ae-header"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker"></span></div><button class="ae-close" type="button" data-gentleman-close>Return to room \u00d7</button></header><iframe loading="eager" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#090a09"></iframe>';
-    modal.querySelector('.ae-kicker').textContent = title;
-    var frame = modal.querySelector('iframe');
-    frame.title = title;
-    frame.src = src;
-    document.body.appendChild(modal);
-    function close() {
-      if (modal.open) modal.close();
-      modal.remove();
-      if (opener && opener.isConnected) opener.focus({ preventScroll: true });
-    }
-    modal.querySelector('[data-gentleman-close]').addEventListener('click', close);
-    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
-    modal.addEventListener('cancel', function (e) { e.preventDefault(); close(); });
-    modal.showModal();
-  }
-
-  document.addEventListener('click', function (e) {
-    var journal = e.target.closest && e.target.closest('.artifact[data-artifact="journal"]');
-    if (journal) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      window.location.href = 'journal.html';
-      return;
-    }
-
-    var spot = e.target.closest && e.target.closest('.artifact[data-artifact]');
-    var room = spot && spot.closest('.floor-scene');
-    if (spot && room && COCKTAIL_ROOMS.indexOf(room.id) !== -1 && cocktailArtifactInRoom(room) === spot) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      openFramePortal(NAMES.cocktails, 'cocktail-menu.html?embed=1', spot);
-    }
-  }, true);
-
-  function bootNames() {
-    applyPublicNames();
-    var observer = new MutationObserver(function () {
-      observer.disconnect();
-      applyPublicNames();
-      observer.observe(document.body, { childList: true, subtree: true });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootNames, { once: true });
-  else bootNames();
+(function(){
+'use strict';
+function q(s,r){return (r||document).querySelector(s)}function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function init(root,target){var t=q('[data-nav-panel-toggle]',root),g=q('[data-nav-panel-grid]',root);if(!t||!g||!target)return null;var go=typeof target==='function'?target:function(id){target.goToId(id,'start')};function open(v){g.hidden=!v;t.setAttribute('aria-expanded',v?'true':'false');root.classList.toggle('is-open',v)}open(false);t.addEventListener('click',function(e){e.stopPropagation();open(g.hidden)});g.addEventListener('click',function(e){var b=e.target.closest('[data-nav-panel-go]');if(!b)return;go(b.dataset.navPanelGo);open(false)});document.addEventListener('click',function(e){if(!g.hidden&&!root.contains(e.target))open(false)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!g.hidden)open(false)});return{setOpen:open}}
+qa('[data-nav-panel]').forEach(function(r){var p=window.PPRoomPagers&&window.PPRoomPagers[0];if(p)init(r,p)});window.PPNavPanel=init;
+var N={suits:'The Gentleman’s Guide to Suits',cocktails:'The Gentleman’s Guide to Cocktails',hellofresh:'The Gentleman’s Guide to HelloFresh',training:'The Gentleman’s Training Game',charlotte:'The Gentleman’s Guide to Charlotte'};
+var CR=['penthouse-living','music-lounge','bedroom','study'];
+var H=[
+['Get Connect w/ Paris','network.html'],
+['The Gentlemen Penthouse','index.html#penthouse'],
+['From the word of The Gentleman','journal.html'],
+['The Gentlemen Guide to Suits','open:suits'],
+['The Gentlemen Guide to Cocktails','open:cocktails'],
+['The Gentlemen Guide to Charlotte','open:charlotte'],
+['The Gentlemen Guide to Hello Fresh','open:hellofresh'],
+["The Gentleman's Valuables",'open:vault']
+];
+function rename(roomId,sel,name){var r=document.getElementById(roomId),s=r&&q(sel,r);if(!s)return;var l=q('.artifact__label',s);if(l)l.textContent=name;var id=s.getAttribute('data-artifact');if(id)qa('.drawer__panel[data-artifact="'+id+'"] .drawer__name',r).forEach(function(x){x.textContent=name})}
+function cocktail(r){if(!r||CR.indexOf(r.id)<0)return null;return qa('.artifact[data-artifact]',r).find(function(s){var l=q('.artifact__label',s);return /cocktail/i.test(((l&&l.textContent)||s.textContent||'')+' '+(s.getAttribute('data-artifact')||''))})||null}
+function buildMenu(){var ul=q('#menu .menu__list');if(!ul||ul.dataset.gentlemanNav)return;ul.dataset.gentlemanNav='1';ul.innerHTML=H.map(function(x,i){var idx=String(i+1).padStart(2,'0');if(x[1].indexOf('open:')===0){var k=x[1].slice(5);return '<li><a href="?open='+k+'" data-gentleman-open="'+k+'"><span class="idx">'+idx+'</span>'+x[0]+'</a></li>'}return '<li><a href="'+x[1]+'"><span class="idx">'+idx+'</span>'+x[0]+'</a></li>'}).join('')}
+function names(){rename('closet','[data-artifact="suits"]',N.suits);rename('bedroom','[data-artifact="suit"]',N.suits);rename('kitchen','[data-artifact="hellofresh"]',N.hellofresh);rename('gym','[data-gym-portal]',N.training);CR.forEach(function(id){var r=document.getElementById(id),s=cocktail(r);if(!s)return;var l=q('.artifact__label',s);if(l)l.textContent=N.cocktails;var a=s.getAttribute('data-artifact');if(a)qa('.drawer__panel[data-artifact="'+a+'"] .drawer__name',r).forEach(function(x){x.textContent=N.cocktails})});qa('[data-artifact="journal"]').forEach(function(s){var l=q('.artifact__label',s);if(l)l.textContent='The Journal'});qa('[data-guide-portal],[data-city-guide]').forEach(function(s){var l=q('.artifact__label',s);if(l)l.textContent=N.charlotte;s.setAttribute('aria-label',N.charlotte)});qa('[data-floors]').forEach(function(b){if(b.tagName==='BUTTON')b.textContent='Directory';b.setAttribute('aria-label','Directory')});qa('[data-nav-panel-toggle]').forEach(function(b){if(/^floors?$/i.test((b.textContent||'').trim())||/floors/i.test(b.getAttribute('aria-label')||'')){b.textContent='Directory';b.setAttribute('aria-label','Directory')}});buildMenu()}
+function portal(title,src,opener){var old=document.getElementById('gentleman-guide-portal');if(old)old.remove();var d=document.createElement('dialog');d.id='gentleman-guide-portal';d.className='ae-dialog';d.setAttribute('aria-label',title);d.innerHTML='<header class="ae-header"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker"></span></div><button class="ae-close" type="button" data-gentleman-close>Return to room ×</button></header><iframe loading="eager" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#090a09"></iframe>';q('.ae-kicker',d).textContent=title;var f=q('iframe',d);f.title=title;f.src=src;document.body.appendChild(d);function close(){if(d.open)d.close();d.remove();if(opener&&opener.isConnected)opener.focus({preventScroll:true})}q('[data-gentleman-close]',d).addEventListener('click',close);d.addEventListener('click',function(e){if(e.target===d)close()});d.addEventListener('cancel',function(e){e.preventDefault();close()});d.showModal()}
+function launch(k,opener){if(k==='suits')return portal('The Gentlemen Guide to Suits','blueprint.html?embed=1',opener);if(k==='cocktails')return portal('The Gentlemen Guide to Cocktails','cocktail-menu.html?embed=1',opener);if(k==='vault')return portal("The Gentleman's Valuables",'vault.html',opener);if(k==='charlotte'){if(window.PPCityGuidePortal&&window.PPCityGuidePortal.open)return window.PPCityGuidePortal.open(opener||document.activeElement);return portal('The Gentlemen Guide to Charlotte','city-guide-popup.html',opener)}if(k==='hellofresh'){var p=window.PPRoomPagers&&window.PPRoomPagers[0];function openHF(){var s=q('#kitchen .artifact[data-artifact="hellofresh"]');if(s)s.click();else location.href='house.html#kitchen'}if(p&&p.hasRoom&&p.hasRoom('kitchen')){p.goToId('kitchen','start');setTimeout(openHF,250)}else openHF()}}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-gentleman-open]');if(a){e.preventDefault();e.stopImmediatePropagation();launch(a.getAttribute('data-gentleman-open'),a);return}var j=e.target.closest&&e.target.closest('.artifact[data-artifact="journal"]');if(j){e.preventDefault();e.stopImmediatePropagation();location.href='journal.html';return}var s=e.target.closest&&e.target.closest('.artifact[data-artifact]'),r=s&&s.closest('.floor-scene');if(s&&r&&CR.indexOf(r.id)>=0&&cocktail(r)===s){e.preventDefault();e.stopImmediatePropagation();portal(N.cocktails,'cocktail-menu.html?embed=1',s)}},true);
+function boot(){names();var o=new MutationObserver(function(){o.disconnect();names();o.observe(document.body,{childList:true,subtree:true})});o.observe(document.body,{childList:true,subtree:true});var k=new URLSearchParams(location.search).get('open');if(k)setTimeout(function(){launch(k,q('[data-gentleman-open="'+k+'"]'))},450)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
