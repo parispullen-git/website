@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply the approved Kitchen v7 + Music Lounge v7 artifact maps."""
+"""Apply the approved Kitchen, Music Lounge and Bedroom v7 artifact maps."""
 import json
 import re
 from pathlib import Path
@@ -19,52 +19,52 @@ def artifact(id_, name, x, y, desc, specs=()):
 
 
 KITCHEN_ARTS = [
-    artifact(
-        "artwork", "The Artwork", "23.1%", "10.5%",
-        "The framed portrait beside the fireplace and skyline.",
-        (("Collection", "Paris Pullen"),),
-    ),
-    artifact(
-        "suits", "The Blueprint Game", "58.3%", "42.1%",
-        "The Blueprint Game follows the same system used in the Closet — choose the look, then own it.",
-        (("Experience", "The Blueprint"),),
-    ),
-    artifact(
-        "hellofresh", "The Gentleman’s Guide to HelloFresh", "58.5%", "63.8%",
-        "The recipe card and ingredients on the island — the Gentleman’s Guide to HelloFresh.",
-        (("Partner", "HelloFresh"),),
-    ),
-    artifact(
-        "journal", "The Journal", "80.0%", "87.0%",
-        "The journal at the dining place setting, ready for the next note.",
-        (("Read it", "The Journal"),),
-    ),
+    artifact("artwork", "The Artwork", "23.1%", "10.5%",
+             "The framed portrait beside the fireplace and skyline.",
+             (("Collection", "Paris Pullen"),)),
+    artifact("suits", "The Blueprint Game", "58.3%", "42.1%",
+             "The Blueprint Game follows the same system used in the Closet — choose the look, then own it.",
+             (("Experience", "The Blueprint"),)),
+    artifact("hellofresh", "The Gentleman’s Guide to HelloFresh", "58.5%", "63.8%",
+             "The recipe card and ingredients on the island — the Gentleman’s Guide to HelloFresh.",
+             (("Partner", "HelloFresh"),)),
+    artifact("journal", "The Journal", "80.0%", "87.0%",
+             "The journal at the dining place setting, ready for the next note.",
+             (("Read it", "The Journal"),)),
 ]
 
 
-# Exact image-relative points from the approved 2048x1152 Music Lounge v7
-# annotation. City Guide is a separate animated portal, not a drawer artifact.
 MUSIC_ARTS = [
-    artifact(
-        "artwork", "The Artwork", "48.4%", "15.0%",
-        "The artwork wall above the record console — part gallery, part reference library.",
-        (("Collection", "Paris Pullen"),),
-    ),
-    artifact(
-        "recordplayer", "The Record Player", "38.6%", "34.1%",
-        "ATF to OVO — the complete list, queued on shuffle and left running.",
-        (("Plays", "One playlist, shuffled"), ("Manual skips", "Yes")),
-    ),
-    artifact(
-        "journal", "The Journal", "39.4%", "59.9%",
-        "The journal rests on the coffee table beside the books and candlelight.",
-        (("Read it", "The Journal"),),
-    ),
-    artifact(
-        "cocktails", "The Gentlemen’s Cocktail Guide", "72.1%", "70.3%",
-        "The house cocktail guide sits within reach of the sofa — the right drink without leaving the room.",
-        (("House classics", "Eleven"),),
-    ),
+    artifact("artwork", "The Artwork", "48.4%", "15.0%",
+             "The artwork wall above the record console — part gallery, part reference library.",
+             (("Collection", "Paris Pullen"),)),
+    artifact("recordplayer", "The Record Player", "38.6%", "34.1%",
+             "ATF to OVO — the complete list, queued on shuffle and left running.",
+             (("Plays", "One playlist, shuffled"), ("Manual skips", "Yes"))),
+    artifact("journal", "The Journal", "39.4%", "59.9%",
+             "The journal rests on the coffee table beside the books and candlelight.",
+             (("Read it", "The Journal"),)),
+    artifact("cocktails", "The Gentlemen’s Cocktail Guide", "72.1%", "70.3%",
+             "The house cocktail guide sits within reach of the sofa — the right drink without leaving the room.",
+             (("House classics", "Eleven"),)),
+]
+
+
+# Image-relative points from the approved 2048x1152 Bedroom v7 annotation.
+# City Guide is a separate animated portal, not a drawer artifact.
+BEDROOM_ARTS = [
+    artifact("artwork", "The Artwork", "36.8%", "17.4%",
+             "The portrait beside the fireplace anchors the room’s personal collection.",
+             (("Collection", "Paris Pullen"),)),
+    artifact("suit", "The Blueprint Game", "63.9%", "37.5%",
+             "The look laid across the bed opens The Blueprint — choose the combination, then own how you show up.",
+             (("Experience", "The Blueprint"),)),
+    artifact("cocktails", "The Gentlemen’s Cocktail Guide", "16.2%", "46.1%",
+             "The house cocktail guide sits beside the lounge seating for a proper nightcap without leaving the suite.",
+             (("House classics", "Eleven"),)),
+    artifact("journal", "The Journal", "85.9%", "69.3%",
+             "The open journal on the writing desk — a private note before the room goes quiet.",
+             (("Read it", "The Journal"),)),
 ]
 
 
@@ -73,46 +73,34 @@ def patch_data():
     by_id = {room["id"]: room for room in rooms}
     by_id["kitchen"]["arts"] = KITCHEN_ARTS
     by_id["music-lounge"]["arts"] = MUSIC_ARTS
+    by_id["bedroom"]["arts"] = BEDROOM_ARTS
     DATA.write_text(json.dumps(rooms, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def add_music_city_guide(text, js=False):
-    """Add/move the Music Lounge City Guide portal to the annotated skyline point."""
+def set_city_guide(text, room_id, x, y, js=False):
+    """Replace/add one room's City Guide portal in the active position map."""
     if js:
-        target = "'music-lounge':     ['5.5%', '27.3%']"
-        # Remove legacy city/barbershop Music Lounge entries if present.
-        text = re.sub(
-            r"\n\s*'music-lounge':\s*\['[^']+',\s*'[^']+'\],?[^\n]*",
-            "",
-            text,
-        )
-        # Add to whichever city-guide position map the earlier build patches produced.
+        target = f"'{room_id}':     ['{x}', '{y}']"
+        pattern = rf"\n\s*'{re.escape(room_id)}':\s*\['[^']+',\s*'[^']+'\],?[^\n]*"
+        text = re.sub(pattern, "", text)
         marker = "'study':            ['85.0%', '25.2%']"
         if target not in text and marker in text:
             text = text.replace(marker, marker + ",\n    " + target, 1)
         elif target not in text:
-            # Fallback: insert after bath in the active position map.
-            text = text.replace(
-                "'bath':             ['38%', '6%']",
-                "'bath':             ['38%', '6%'],\n    " + target,
-                1,
-            )
+            marker = "'bath':             ['38%', '6%']"
+            if marker in text:
+                text = text.replace(marker, marker + ",\n    " + target, 1)
     else:
-        target = '"music-lounge":     ("5.5%", "27.3%")'
-        text = re.sub(
-            r'\n\s*"music-lounge":\s*\("[^"]+",\s*"[^"]+"\),?[^\n]*',
-            "",
-            text,
-        )
+        target = f'"{room_id}":     ("{x}", "{y}")'
+        pattern = rf'\n\s*"{re.escape(room_id)}":\s*\("[^"]+",\s*"[^"]+"\),?[^\n]*'
+        text = re.sub(pattern, "", text)
         marker = '"study":            ("85.0%", "25.2%")'
         if target not in text and marker in text:
             text = text.replace(marker, marker + ",\n    " + target, 1)
         elif target not in text:
-            text = text.replace(
-                '"bath":             ("38%", "6%")',
-                '"bath":             ("38%", "6%"),\n    ' + target,
-                1,
-            )
+            marker = '"bath":             ("38%", "6%")'
+            if marker in text:
+                text = text.replace(marker, marker + ",\n    " + target, 1)
     return text
 
 
@@ -126,13 +114,8 @@ def patch_runtime():
       { key:'journal', name:'The Journal', x:'80.0%', y:'87.0%', body:'The journal at the dining place setting, ready for the next note.', specs:[['Read it', 'The Journal']] },
     ],
     'study': ["""
-    text, count = re.subn(
-        r"    'kitchen': \[.*?\n    \],\n    'study': \[",
-        kitchen_replacement,
-        text,
-        count=1,
-        flags=re.S,
-    )
+    text, count = re.subn(r"    'kitchen': \[.*?\n    \],\n    'study': \[", kitchen_replacement,
+                          text, count=1, flags=re.S)
     if count != 1:
         raise RuntimeError("Could not replace runtime Kitchen artifact set")
 
@@ -143,27 +126,29 @@ def patch_runtime():
       { key:'cocktails', name:'The Gentlemen&#8217;s Cocktail Guide', x:'72.1%', y:'70.3%', body:'The house cocktail guide sits within reach of the sofa — the right drink without leaving the room.', specs:[['House classics', 'Eleven']] },
     ],
     'bedroom': ["""
-    text, count = re.subn(
-        r"    'music-lounge': \[.*?\n    \],\n    'bedroom': \[",
-        music_replacement,
-        text,
-        count=1,
-        flags=re.S,
-    )
+    text, count = re.subn(r"    'music-lounge': \[.*?\n    \],\n    'bedroom': \[", music_replacement,
+                          text, count=1, flags=re.S)
     if count != 1:
         raise RuntimeError("Could not replace runtime Music Lounge artifact set")
 
-    # The approved Music Lounge mockup uses the Record Player as the music
-    # interaction and does not include the old separate Remote marker.
-    text = re.sub(
-        r"\n\s*'music-lounge':\s*\['50%',\s*'62%'\],?",
-        "",
-        text,
-        count=1,
-    )
-    text = add_music_city_guide(text, js=True)
+    bedroom_replacement = """    'bedroom': [
+      { key:'artwork', name:'The Artwork', x:'36.8%', y:'17.4%', body:'The portrait beside the fireplace anchors the room&#8217;s personal collection.', specs:[['Collection', 'Paris Pullen']] },
+      { key:'suit', name:'The Blueprint Game', x:'63.9%', y:'37.5%', body:'The look laid across the bed opens The Blueprint — choose the combination, then own how you show up.', specs:[['Experience', 'The Blueprint']] },
+      { key:'cocktails', name:'The Gentlemen&#8217;s Cocktail Guide', x:'16.2%', y:'46.1%', body:'The house cocktail guide sits beside the lounge seating for a proper nightcap without leaving the suite.', specs:[['House classics', 'Eleven']] },
+      { key:'journal', name:'The Journal', x:'85.9%', y:'69.3%', body:'The open journal on the writing desk — a private note before the room goes quiet.', specs:[['Read it', 'The Journal']] },
+    ],
+    'bath': ["""
+    text, count = re.subn(r"    'bedroom': \[.*?\n    \],\n    'bath': \[", bedroom_replacement,
+                          text, count=1, flags=re.S)
+    if count != 1:
+        raise RuntimeError("Could not replace runtime Bedroom artifact set")
 
-    # Make the Kitchen Blueprint node use the same Blueprint CTA as Closet/Living Room.
+    # Music Lounge no longer has a separate Remote marker.
+    text = re.sub(r"\n\s*'music-lounge':\s*\['50%',\s*'62%'\],?", "", text, count=1)
+    text = set_city_guide(text, "music-lounge", "5.5%", "27.3%", js=True)
+    text = set_city_guide(text, "bedroom", "14.7%", "14.4%", js=True)
+
+    # Kitchen uses the same Blueprint CTA as Closet/Living Room; Bedroom retains its suit-key Blueprint CTA.
     text = text.replace(
         "(((roomId === 'closet' || roomId === 'penthouse-living') && key === 'suits') || (roomId === 'bedroom' && key === 'suit'))",
         "(((roomId === 'closet' || roomId === 'penthouse-living' || roomId === 'kitchen') && key === 'suits') || (roomId === 'bedroom' && key === 'suit'))",
@@ -177,15 +162,9 @@ def patch_build():
         'if (f["id"] in ("closet", "penthouse-living") and key == "suits") or (f["id"] == "bedroom" and key == "suit") else ""',
         'if (f["id"] in ("closet", "penthouse-living", "kitchen") and key == "suits") or (f["id"] == "bedroom" and key == "suit") else ""',
     )
-
-    # Remove the retired Music Lounge remote and add the annotated City Guide portal.
-    text = re.sub(
-        r'\n\s*"music-lounge":\s*\("50%",\s*"62%"\),?',
-        "",
-        text,
-        count=1,
-    )
-    text = add_music_city_guide(text, js=False)
+    text = re.sub(r'\n\s*"music-lounge":\s*\("50%",\s*"62%"\),?', "", text, count=1)
+    text = set_city_guide(text, "music-lounge", "5.5%", "27.3%", js=False)
+    text = set_city_guide(text, "bedroom", "14.7%", "14.4%", js=False)
     BUILD.write_text(text, encoding="utf-8")
 
 
@@ -203,7 +182,7 @@ def main():
     patch_runtime()
     patch_build()
     patch_blueprint_dispatch()
-    print("Approved Kitchen v7 + Music Lounge v7 artifacts applied")
+    print("Approved Kitchen + Music Lounge + Bedroom v7 artifacts applied")
 
 
 if __name__ == "__main__":
