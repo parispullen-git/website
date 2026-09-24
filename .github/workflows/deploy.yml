@@ -25,8 +25,8 @@ jobs:
           cp closet-v7.jpeg assets/img/room-closet@sm.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7@sm.jpg
-          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7g"/' build_house.py
-          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7g';/" assets/js/penthouse.js
+          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7h"/' build_house.py
+          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7h';/" assets/js/penthouse.js
 
       - name: Rebuild generated pages
         run: |
@@ -46,13 +46,13 @@ jobs:
 
       - name: Pin v7 assets and bust Penthouse runtime cache
         run: |
-          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7g#assets/img/room-living-v7@sm.jpg?v=20260924v7g#g' house.html
-          sed -i 's#assets/img/room-living.jpg?v=20260924v7g#assets/img/room-living-v7.jpg?v=20260924v7g#g' house.html
-          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7g#assets/img/room-closet-v7@sm.jpg?v=20260924v7g#g' house.html
-          sed -i 's#assets/img/room-closet.jpg?v=20260924v7g#assets/img/room-closet-v7.jpg?v=20260924v7g#g' house.html
-          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7g#g' index.html
+          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7h#assets/img/room-living-v7@sm.jpg?v=20260924v7h#g' house.html
+          sed -i 's#assets/img/room-living.jpg?v=20260924v7h#assets/img/room-living-v7.jpg?v=20260924v7h#g' house.html
+          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7h#assets/img/room-closet-v7@sm.jpg?v=20260924v7h#g' house.html
+          sed -i 's#assets/img/room-closet.jpg?v=20260924v7h#assets/img/room-closet-v7.jpg?v=20260924v7h#g' house.html
+          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7h#g' index.html
 
-      - name: Verify Living Room, Study and Kitchen v7 desktop and mobile output
+      - name: Verify Living Room, Study, Kitchen and Music Lounge v7 desktop and mobile output
         run: |
           python3 - <<'PY'
           import re
@@ -74,8 +74,8 @@ jobs:
               assert retired not in living, f'{retired} still present in Living Room'
           artifact_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', living)
           assert len(artifact_buttons) == 5, f'Living Room must contain exactly five drawer artifact buttons, found {len(artifact_buttons)}'
-          assert 'room-living-v7.jpg?v=20260924v7g' in living
-          assert 'room-living-v7@sm.jpg?v=20260924v7g' in living
+          assert 'room-living-v7.jpg?v=20260924v7h' in living
+          assert 'room-living-v7@sm.jpg?v=20260924v7h' in living
           for xy in ['--x:75.0%;--y:10.0%', '--x:79.5%;--y:51.5%', '--x:91.5%;--y:68.5%', '--x:44.5%;--y:66.5%', '--x:9.0%;--y:87.5%']:
               assert xy in living, f'Living Room marker {xy} missing'
           assert '--x:15.0%;--y:35.0%' in living, 'Living Room City Guide position missing'
@@ -104,7 +104,7 @@ jobs:
               assert retired not in runtime_block, f'{retired} still present in Study runtime'
           assert "'study':            ['85.0%', '25.2%']" in js
 
-          # Kitchen verification: exactly the four artifacts in the approved mockup.
+          # Kitchen verification.
           section = re.search(r'<section class="floor-scene[^>]*id="kitchen".*?</section>', house, re.S)
           assert section, 'Kitchen section missing from house.html'
           kitchen = section.group(0)
@@ -125,9 +125,33 @@ jobs:
           assert "key:'hellofresh'" in kitchen_runtime.group(0), 'Kitchen HelloFresh runtime node missing'
           assert "roomId === 'kitchen'" in js, 'Kitchen Blueprint CTA is not wired'
 
-          assert 'penthouse.js?v=20260924lr7g' in index
+          # Music Lounge verification: four drawer artifacts + separate City Guide.
+          section = re.search(r'<section class="floor-scene[^>]*id="music-lounge".*?</section>', house, re.S)
+          assert section, 'Music Lounge section missing from house.html'
+          music = section.group(0)
+          for name in ['The Artwork', 'The Record Player', 'The Journal', 'The Gentlemen’s Cocktail Guide']:
+              assert name in music, f'{name} missing from Music Lounge'
+          assert 'The Polo' not in music, 'Retired Music Lounge Polo still present'
+          music_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', music)
+          assert len(music_buttons) == 4, f'Music Lounge must contain exactly four drawer artifact buttons, found {len(music_buttons)}'
+          for xy in ['--x:48.4%;--y:15.0%', '--x:38.6%;--y:34.1%', '--x:39.4%;--y:59.9%', '--x:72.1%;--y:70.3%']:
+              assert xy in music, f'Music Lounge marker {xy} missing'
+          assert '--x:5.5%;--y:27.3%' in music, 'Music Lounge City Guide position missing'
+          assert 'The City Guide' in music, 'Music Lounge City Guide node missing'
+          assert 'The Remote' not in music, 'Retired Music Lounge Remote still present'
+
+          music_runtime = re.search(r"'music-lounge': \[.*?\n    \],\n    'bedroom'", js, re.S)
+          assert music_runtime, 'Homepage Music Lounge runtime block missing'
+          mr = music_runtime.group(0).lower()
+          assert "key:'polo'" not in mr, 'Old Music Lounge Polo still present in runtime'
+          assert "key:'recordplayer'" in music_runtime.group(0), 'Music Lounge Record Player runtime node missing'
+          assert "key:'cocktails'" in music_runtime.group(0), 'Music Lounge Cocktail Guide runtime node missing'
+          assert "'music-lounge':     ['5.5%', '27.3%']" in js, 'Music Lounge City Guide runtime position missing'
+          assert "'music-lounge': ['50%', '62%']" not in js, 'Old Music Lounge Remote runtime position still present'
+
+          assert 'penthouse.js?v=20260924lr7h' in index
           assert '.floor-scene__view img{' in css and 'height:100%;width:auto' in css
-          print('Living Room + Study + Kitchen v7 desktop/mobile verification passed')
+          print('Living Room + Study + Kitchen + Music Lounge v7 desktop/mobile verification passed')
           PY
 
       - name: Deploy to Cloudflare Pages
