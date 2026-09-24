@@ -1,16 +1,6 @@
 /* ============================================================
-   Nav Panel — a compact, toggleable corner button grid for jumping
-   straight to any room (or, on the City Guide, any district) instead
-   of paging through them one at a time with arrows.
-
-   Reusable: window.PPNavPanel(rootEl, target) wires one up, where
-   `target` is either a room-pager instance (its goToId is called) or
-   a plain function(id) for anything else that isn't a room-pager.
-
-   This file also owns the public-facing Gentleman artifact labels and
-   global Directory wording. Keeping that lightweight compatibility
-   layer here makes older generated house.html builds pick up the new
-   language/routes without losing their authored room coordinates.
+   Nav Panel — compact room navigation plus the public-facing
+   Gentleman artifact naming/routing compatibility layer.
    ============================================================ */
 (function () {
   'use strict';
@@ -57,9 +47,6 @@
 
   window.PPNavPanel = init;
 
-  /* ------------------------------------------------------------
-     The Gentleman — canonical public artifact names + destinations
-     ------------------------------------------------------------ */
   var NAMES = {
     suits: 'The Gentleman\u2019s Guide to Suits',
     cocktails: 'The Gentleman\u2019s Guide to Cocktails',
@@ -67,6 +54,8 @@
     training: 'The Gentleman\u2019s Training Game',
     charlotte: 'The Gentleman\u2019s Guide to Charlotte'
   };
+
+  var COCKTAIL_ROOMS = ['penthouse-living', 'music-lounge', 'bedroom', 'study'];
 
   function setText(selector, value, root) {
     Array.prototype.forEach.call((root || document).querySelectorAll(selector), function (el) {
@@ -89,12 +78,40 @@
     }
   }
 
+  function cocktailArtifactInRoom(room) {
+    if (!room || COCKTAIL_ROOMS.indexOf(room.id) === -1) return null;
+    var spots = room.querySelectorAll('.artifact[data-artifact]');
+    for (var i = 0; i < spots.length; i++) {
+      var label = spots[i].querySelector('.artifact__label');
+      var text = ((label && label.textContent) || spots[i].textContent || '').trim();
+      var id = spots[i].getAttribute('data-artifact') || '';
+      if (/cocktail/i.test(text) || /cocktail/i.test(id)) return spots[i];
+    }
+    return null;
+  }
+
+  function renameCocktailGuides() {
+    COCKTAIL_ROOMS.forEach(function (roomId) {
+      var room = document.getElementById(roomId);
+      var spot = cocktailArtifactInRoom(room);
+      if (!spot) return;
+      var label = spot.querySelector('.artifact__label');
+      if (label && label.textContent !== NAMES.cocktails) label.textContent = NAMES.cocktails;
+      var artifactId = spot.getAttribute('data-artifact');
+      if (artifactId) {
+        Array.prototype.forEach.call(room.querySelectorAll('.drawer__panel[data-artifact="' + artifactId + '"] .drawer__name'), function (title) {
+          if (title.textContent !== NAMES.cocktails) title.textContent = NAMES.cocktails;
+        });
+      }
+    });
+  }
+
   function applyPublicNames() {
     renameArtifact('closet', '[data-artifact="suits"]', NAMES.suits);
     renameArtifact('bedroom', '[data-artifact="suit"]', NAMES.suits);
     renameArtifact('kitchen', '[data-artifact="hellofresh"]', NAMES.hellofresh);
-    renameArtifact('study', '[data-artifact="cocktails"]', NAMES.cocktails);
     renameArtifact('gym', '[data-gym-portal]', NAMES.training);
+    renameCocktailGuides();
 
     Array.prototype.forEach.call(document.querySelectorAll('[data-artifact="journal"]'), function (spot) {
       var label = spot.querySelector('.artifact__label');
@@ -175,11 +192,13 @@
       window.location.href = 'journal.html';
       return;
     }
-    var cocktail = e.target.closest && e.target.closest('#study .artifact[data-artifact="cocktails"]');
-    if (cocktail) {
+
+    var spot = e.target.closest && e.target.closest('.artifact[data-artifact]');
+    var room = spot && spot.closest('.floor-scene');
+    if (spot && room && COCKTAIL_ROOMS.indexOf(room.id) !== -1 && cocktailArtifactInRoom(room) === spot) {
       e.preventDefault();
       e.stopImmediatePropagation();
-      openFramePortal(NAMES.cocktails, 'cocktail-menu.html?embed=1', cocktail);
+      openFramePortal(NAMES.cocktails, 'cocktail-menu.html?embed=1', spot);
     }
   }, true);
 
