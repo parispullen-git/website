@@ -79,6 +79,25 @@ def patch_runtime():
     text = patch_js_art_block(text, "closet", "kitchen", ROOM_ARTS["closet"])
     for room_id, (x, y) in CITY_GUIDE.items():
         text = patch_city_map(text, room_id, x, y, js=True)
+
+    # Final authoritative portal wiring. Earlier patch scripts used two
+    # different Closet keys (after-hours vs boxer); normalize to boxer so
+    # the generated Penthouse runtime always opens the existing boxing portal.
+    text = text.replace(
+        "if ((room.id === 'gym' || room.id === 'closet') && a.key === 'boxer')",
+        "if ((room.id === 'gym' || room.id === 'closet') && a.key === 'boxer')",
+    )
+    text = text.replace(
+        "if (room.id === 'gym' && a.key === 'boxer')",
+        "if ((room.id === 'gym' || room.id === 'closet') && a.key === 'boxer')",
+    )
+    text = text.replace(
+        "return !(room.id === 'gym' && a.key === 'boxer');",
+        "return !((room.id === 'gym' || room.id === 'closet') && a.key === 'boxer');",
+    )
+    if "(room.id === 'gym' || room.id === 'closet') && a.key === 'boxer'" not in text:
+        raise RuntimeError("Could not enforce Closet After Hours portal wiring in penthouse.js")
+
     PENTHOUSE.write_text(text, encoding="utf-8")
 
 
@@ -86,6 +105,24 @@ def patch_build():
     text = BUILD.read_text(encoding="utf-8")
     for room_id, (x, y) in CITY_GUIDE.items():
         text = patch_city_map(text, room_id, x, y, js=False)
+
+    # patch_mockup_room_nodes.py historically converted Closet After Hours
+    # using key='after-hours'. The final Closet v7 data now uses key='boxer'.
+    # Normalize the generator after every earlier patch so build_house.py
+    # emits data-gym-portal for BOTH Gym and Closet boxer nodes.
+    stale_variants = [
+        'if (f["id"] == "gym" and key == "boxer") or (f["id"] == "closet" and key == "after-hours"):',
+        'if f["id"] == "gym" and key == "boxer":',
+    ]
+    correct = 'if f["id"] in ("gym", "closet") and key == "boxer":'
+    if correct not in text:
+        for stale in stale_variants:
+            if stale in text:
+                text = text.replace(stale, correct, 1)
+                break
+    if correct not in text:
+        raise RuntimeError("Could not enforce Closet After Hours portal wiring in build_house.py")
+
     BUILD.write_text(text, encoding="utf-8")
 
 
@@ -93,7 +130,7 @@ def main():
     patch_json()
     patch_runtime()
     patch_build()
-    print("Bedroom + Study + Closet arrow-tip positions corrected")
+    print("Bedroom + Study + Closet arrow-tip positions and portal wiring corrected")
 
 
 if __name__ == "__main__":
