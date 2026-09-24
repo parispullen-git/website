@@ -70,7 +70,7 @@
 
   function setText(selector, value, root) {
     Array.prototype.forEach.call((root || document).querySelectorAll(selector), function (el) {
-      el.textContent = value;
+      if (el.textContent !== value) el.textContent = value;
     });
   }
 
@@ -80,11 +80,11 @@
     var spot = room.querySelector(selector);
     if (!spot) return;
     var label = spot.querySelector('.artifact__label');
-    if (label) label.textContent = name;
+    if (label && label.textContent !== name) label.textContent = name;
     var artifactId = spot.getAttribute('data-artifact');
     if (artifactId) {
       Array.prototype.forEach.call(room.querySelectorAll('.drawer__panel[data-artifact="' + artifactId + '"] .drawer__name'), function (title) {
-        title.textContent = name;
+        if (title.textContent !== name) title.textContent = name;
       });
     }
   }
@@ -96,29 +96,26 @@
     renameArtifact('study', '[data-artifact="cocktails"]', NAMES.cocktails);
     renameArtifact('gym', '[data-gym-portal]', NAMES.training);
 
-    /* Journal is a destination, not a mini-reader. */
     Array.prototype.forEach.call(document.querySelectorAll('[data-artifact="journal"]'), function (spot) {
       var label = spot.querySelector('.artifact__label');
-      if (label) label.textContent = 'The Journal';
+      if (label && label.textContent !== 'The Journal') label.textContent = 'The Journal';
     });
 
-    /* Existing City Guide triggers keep their positions but inherit the new franchise name. */
     Array.prototype.forEach.call(document.querySelectorAll('[data-guide-portal],[data-city-guide]'), function (spot) {
       var label = spot.querySelector('.artifact__label');
-      if (label) label.textContent = NAMES.charlotte;
-      spot.setAttribute('aria-label', NAMES.charlotte);
+      if (label && label.textContent !== NAMES.charlotte) label.textContent = NAMES.charlotte;
+      if (spot.getAttribute('aria-label') !== NAMES.charlotte) spot.setAttribute('aria-label', NAMES.charlotte);
     });
 
-    /* Floors is now Directory everywhere the Penthouse UI exposes it. */
     Array.prototype.forEach.call(document.querySelectorAll('[data-floors]'), function (button) {
-      if (button.tagName === 'BUTTON') button.textContent = 'Directory';
-      button.setAttribute('aria-label', 'Directory');
+      if (button.tagName === 'BUTTON' && button.textContent !== 'Directory') button.textContent = 'Directory';
+      if (button.getAttribute('aria-label') !== 'Directory') button.setAttribute('aria-label', 'Directory');
     });
     Array.prototype.forEach.call(document.querySelectorAll('[data-nav-panel-toggle]'), function (button) {
       var text = (button.textContent || '').trim();
       if (/^floors?$/i.test(text) || /floors/i.test(button.getAttribute('aria-label') || '')) {
-        button.textContent = 'Directory';
-        button.setAttribute('aria-label', 'Directory');
+        if (button.textContent !== 'Directory') button.textContent = 'Directory';
+        if (button.getAttribute('aria-label') !== 'Directory') button.setAttribute('aria-label', 'Directory');
       }
     });
     Array.prototype.forEach.call(document.querySelectorAll('.ae-tab'), function (button) {
@@ -127,23 +124,21 @@
     var experienceTitle = document.getElementById('ae-title');
     if (experienceTitle && /^the floors$/i.test((experienceTitle.textContent || '').trim())) experienceTitle.textContent = 'Directory';
 
-    /* Rename portal chrome created lazily by the older portal scripts. */
     setText('#blueprint-room-portal .ae-kicker', NAMES.suits);
     setText('.guide-portal__title span', 'The Compliment Hotel \u00b7 ' + NAMES.charlotte);
     var cityDialog = document.querySelector('.guide-portal');
-    if (cityDialog) cityDialog.setAttribute('aria-label', NAMES.charlotte);
+    if (cityDialog && cityDialog.getAttribute('aria-label') !== NAMES.charlotte) cityDialog.setAttribute('aria-label', NAMES.charlotte);
     var cityFrame = document.querySelector('.guide-portal iframe');
-    if (cityFrame) cityFrame.setAttribute('title', NAMES.charlotte);
+    if (cityFrame && cityFrame.getAttribute('title') !== NAMES.charlotte) cityFrame.setAttribute('title', NAMES.charlotte);
     var gymFrame = document.querySelector('.gym-portal iframe');
-    if (gymFrame) gymFrame.setAttribute('title', NAMES.training);
+    if (gymFrame && gymFrame.getAttribute('title') !== NAMES.training) gymFrame.setAttribute('title', NAMES.training);
 
-    /* Native HelloFresh and generic readers are created after the click. */
     var ae = document.getElementById('artifact-experience');
     if (ae && ae.open) {
       var title = ae.querySelector('#ae-title');
       if (title) {
-        if (/delivery|hello ?fresh/i.test(title.textContent || '')) title.textContent = NAMES.hellofresh;
-        if (/cocktail/i.test(title.textContent || '')) title.textContent = NAMES.cocktails;
+        if (/delivery|hello ?fresh/i.test(title.textContent || '') && title.textContent !== NAMES.hellofresh) title.textContent = NAMES.hellofresh;
+        if (/cocktail/i.test(title.textContent || '') && title.textContent !== NAMES.cocktails) title.textContent = NAMES.cocktails;
       }
     }
   }
@@ -172,8 +167,6 @@
     modal.showModal();
   }
 
-  /* Register in capture phase before artifact-experiences.js: these two
-     destinations must not be swallowed by its generic reading experience. */
   document.addEventListener('click', function (e) {
     var journal = e.target.closest && e.target.closest('.artifact[data-artifact="journal"]');
     if (journal) {
@@ -192,7 +185,11 @@
 
   function bootNames() {
     applyPublicNames();
-    var observer = new MutationObserver(function () { applyPublicNames(); });
+    var observer = new MutationObserver(function () {
+      observer.disconnect();
+      applyPublicNames();
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
     observer.observe(document.body, { childList: true, subtree: true });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootNames, { once: true });
