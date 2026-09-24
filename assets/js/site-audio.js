@@ -67,7 +67,7 @@
     var s = document.createElement('script');
     s.src = 'https://open.spotify.com/embed/iframe-api/v1';
     s.async = true;
-    window.onSpotifyIframeApiReady = function (api) { window.SpotifyIframeApi = api; };
+    var previousReady = window.onSpotifyIframeApiReady; window.onSpotifyIframeApiReady = function (api) { if (typeof previousReady === 'function') previousReady(api); window.SpotifyIframeApi = api; };
     document.head.appendChild(s);
   }
 
