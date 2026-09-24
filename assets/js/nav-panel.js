@@ -1,17 +1,16 @@
 /* ============================================================
    Nav Panel — a compact, toggleable corner button grid for jumping
-   straight to any floor (or, on the City Guide, any district) instead
-   of paging through them one at a time with arrows. Replaces the old
-   always-visible directory list / elevator rail.
+   straight to any room (or, on the City Guide, any district) instead
+   of paging through them one at a time with arrows.
 
    Reusable: window.PPNavPanel(rootEl, target) wires one up, where
    `target` is either a room-pager instance (its goToId is called) or
-   a plain function(id) for anything else that isn't a room-pager (the
-   City Guide's district picker, e.g.). Every [data-nav-panel] present
-   when this script runs is auto-initialized, paired with the first
-   room-pager on the page -- pages without one (charlotte.html) are
-   expected to call PPNavPanel themselves with their own function once
-   their own data's ready, since auto-init has nothing to pair with.
+   a plain function(id) for anything else that isn't a room-pager.
+
+   This file also owns the public-facing Gentleman artifact labels and
+   global Directory wording. Keeping that lightweight compatibility
+   layer here makes older generated house.html builds pick up the new
+   language/routes without losing their authored room coordinates.
    ============================================================ */
 (function () {
   'use strict';
@@ -57,4 +56,145 @@
   });
 
   window.PPNavPanel = init;
+
+  /* ------------------------------------------------------------
+     The Gentleman — canonical public artifact names + destinations
+     ------------------------------------------------------------ */
+  var NAMES = {
+    suits: 'The Gentleman\u2019s Guide to Suits',
+    cocktails: 'The Gentleman\u2019s Guide to Cocktails',
+    hellofresh: 'The Gentleman\u2019s Guide to HelloFresh',
+    training: 'The Gentleman\u2019s Training Game',
+    charlotte: 'The Gentleman\u2019s Guide to Charlotte'
+  };
+
+  function setText(selector, value, root) {
+    Array.prototype.forEach.call((root || document).querySelectorAll(selector), function (el) {
+      el.textContent = value;
+    });
+  }
+
+  function renameArtifact(roomId, selector, name) {
+    var room = document.getElementById(roomId);
+    if (!room) return;
+    var spot = room.querySelector(selector);
+    if (!spot) return;
+    var label = spot.querySelector('.artifact__label');
+    if (label) label.textContent = name;
+    var artifactId = spot.getAttribute('data-artifact');
+    if (artifactId) {
+      Array.prototype.forEach.call(room.querySelectorAll('.drawer__panel[data-artifact="' + artifactId + '"] .drawer__name'), function (title) {
+        title.textContent = name;
+      });
+    }
+  }
+
+  function applyPublicNames() {
+    renameArtifact('closet', '[data-artifact="suits"]', NAMES.suits);
+    renameArtifact('bedroom', '[data-artifact="suit"]', NAMES.suits);
+    renameArtifact('kitchen', '[data-artifact="hellofresh"]', NAMES.hellofresh);
+    renameArtifact('study', '[data-artifact="cocktails"]', NAMES.cocktails);
+    renameArtifact('gym', '[data-gym-portal]', NAMES.training);
+
+    /* Journal is a destination, not a mini-reader. */
+    Array.prototype.forEach.call(document.querySelectorAll('[data-artifact="journal"]'), function (spot) {
+      var label = spot.querySelector('.artifact__label');
+      if (label) label.textContent = 'The Journal';
+    });
+
+    /* Existing City Guide triggers keep their positions but inherit the new franchise name. */
+    Array.prototype.forEach.call(document.querySelectorAll('[data-guide-portal],[data-city-guide]'), function (spot) {
+      var label = spot.querySelector('.artifact__label');
+      if (label) label.textContent = NAMES.charlotte;
+      spot.setAttribute('aria-label', NAMES.charlotte);
+    });
+
+    /* Floors is now Directory everywhere the Penthouse UI exposes it. */
+    Array.prototype.forEach.call(document.querySelectorAll('[data-floors]'), function (button) {
+      if (button.tagName === 'BUTTON') button.textContent = 'Directory';
+      button.setAttribute('aria-label', 'Directory');
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-nav-panel-toggle]'), function (button) {
+      var text = (button.textContent || '').trim();
+      if (/^floors?$/i.test(text) || /floors/i.test(button.getAttribute('aria-label') || '')) {
+        button.textContent = 'Directory';
+        button.setAttribute('aria-label', 'Directory');
+      }
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.ae-tab'), function (button) {
+      if (/floors\s*&\s*rooms/i.test(button.textContent || '')) button.textContent = 'Directory';
+    });
+    var experienceTitle = document.getElementById('ae-title');
+    if (experienceTitle && /^the floors$/i.test((experienceTitle.textContent || '').trim())) experienceTitle.textContent = 'Directory';
+
+    /* Rename portal chrome created lazily by the older portal scripts. */
+    setText('#blueprint-room-portal .ae-kicker', NAMES.suits);
+    setText('.guide-portal__title span', 'The Compliment Hotel \u00b7 ' + NAMES.charlotte);
+    var cityDialog = document.querySelector('.guide-portal');
+    if (cityDialog) cityDialog.setAttribute('aria-label', NAMES.charlotte);
+    var cityFrame = document.querySelector('.guide-portal iframe');
+    if (cityFrame) cityFrame.setAttribute('title', NAMES.charlotte);
+    var gymFrame = document.querySelector('.gym-portal iframe');
+    if (gymFrame) gymFrame.setAttribute('title', NAMES.training);
+
+    /* Native HelloFresh and generic readers are created after the click. */
+    var ae = document.getElementById('artifact-experience');
+    if (ae && ae.open) {
+      var title = ae.querySelector('#ae-title');
+      if (title) {
+        if (/delivery|hello ?fresh/i.test(title.textContent || '')) title.textContent = NAMES.hellofresh;
+        if (/cocktail/i.test(title.textContent || '')) title.textContent = NAMES.cocktails;
+      }
+    }
+  }
+
+  function openFramePortal(title, src, opener) {
+    var old = document.getElementById('gentleman-guide-portal');
+    if (old) old.remove();
+    var modal = document.createElement('dialog');
+    modal.id = 'gentleman-guide-portal';
+    modal.className = 'ae-dialog';
+    modal.setAttribute('aria-label', title);
+    modal.innerHTML = '<header class="ae-header"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker"></span></div><button class="ae-close" type="button" data-gentleman-close>Return to room \u00d7</button></header><iframe loading="eager" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#090a09"></iframe>';
+    modal.querySelector('.ae-kicker').textContent = title;
+    var frame = modal.querySelector('iframe');
+    frame.title = title;
+    frame.src = src;
+    document.body.appendChild(modal);
+    function close() {
+      if (modal.open) modal.close();
+      modal.remove();
+      if (opener && opener.isConnected) opener.focus({ preventScroll: true });
+    }
+    modal.querySelector('[data-gentleman-close]').addEventListener('click', close);
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+    modal.addEventListener('cancel', function (e) { e.preventDefault(); close(); });
+    modal.showModal();
+  }
+
+  /* Register in capture phase before artifact-experiences.js: these two
+     destinations must not be swallowed by its generic reading experience. */
+  document.addEventListener('click', function (e) {
+    var journal = e.target.closest && e.target.closest('.artifact[data-artifact="journal"]');
+    if (journal) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      window.location.href = 'journal.html';
+      return;
+    }
+    var cocktail = e.target.closest && e.target.closest('#study .artifact[data-artifact="cocktails"]');
+    if (cocktail) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openFramePortal(NAMES.cocktails, 'cocktail-menu.html?embed=1', cocktail);
+    }
+  }, true);
+
+  function bootNames() {
+    applyPublicNames();
+    var observer = new MutationObserver(function () { applyPublicNames(); });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootNames, { once: true });
+  else bootNames();
 })();
