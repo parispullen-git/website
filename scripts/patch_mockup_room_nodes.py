@@ -85,8 +85,8 @@ def patch_build():
     # screen sits completely over the framed image area in Living Room v7.
     old_tv = '''    "penthouse-living": dict(\n        x="55.7%", y="24.0%", w="17%", h="14%",\n        box="0.4740,0.1704,0.6406,0.3093",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
     wrong_tv = '''    "penthouse-living": dict(\n        x="41.1%", y="21.7%", w="13.1%", h="12.6%",\n        box="0.3455,0.1545,0.4766,0.2804",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
-    previous_tv = '''    "penthouse-living": dict(\n        x="51.0%", y="22.0%", w="16.0%", h="13.0%",\n        box="0.4300,0.1550,0.5900,0.2850",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
-    new_tv = '''    "penthouse-living": dict(\n        x="51.0%", y="24.5%", w="16.0%", h="13.0%",\n        box="0.4300,0.1800,0.5900,0.3100",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
+    previous_tv = '''    "penthouse-living": dict(\n        x="51.0%", y="24.5%", w="16.0%", h="13.0%",\n        box="0.4300,0.1800,0.5900,0.3100",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
+    new_tv = '''    "penthouse-living": dict(\n        x="51.0%", y="26.375%", w="16.0%", h="13.0%",\n        box="0.4300,0.19875,0.5900,0.32875",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
     if previous_tv in text:
         text = text.replace(previous_tv, new_tv, 1)
     elif wrong_tv in text:
@@ -154,11 +154,11 @@ def patch_runtime():
     wrong_tv = """    'penthouse-living': { x:'41.1%', y:'21.7%', w:'13.1%', h:'12.6%',
       box:'0.3455,0.1545,0.4766,0.2804', channelSet:'living',
       id:'4xVVFJuycww', label:'The Gentlemen' },"""
-    previous_tv = """    'penthouse-living': { x:'51.0%', y:'22.0%', w:'16.0%', h:'13.0%',
-      box:'0.4300,0.1550,0.5900,0.2850', channelSet:'living',
-      id:'4xVVFJuycww', label:'The Gentlemen' },"""
-    new_tv = """    'penthouse-living': { x:'51.0%', y:'24.5%', w:'16.0%', h:'13.0%',
+    previous_tv = """    'penthouse-living': { x:'51.0%', y:'24.5%', w:'16.0%', h:'13.0%',
       box:'0.4300,0.1800,0.5900,0.3100', channelSet:'living',
+      id:'4xVVFJuycww', label:'The Gentlemen' },"""
+    new_tv = """    'penthouse-living': { x:'51.0%', y:'26.375%', w:'16.0%', h:'13.0%',
+      box:'0.4300,0.19875,0.5900,0.32875', channelSet:'living',
       id:'4xVVFJuycww', label:'The Gentlemen' },"""
     if previous_tv in text:
         text = text.replace(previous_tv, new_tv, 1)
