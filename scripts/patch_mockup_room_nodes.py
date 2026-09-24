@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "house-rooms.json"
 BUILD = ROOT / "build_house.py"
 PENTHOUSE_JS = ROOT / "assets" / "js" / "penthouse.js"
+ARTIFACT_JS = ROOT / "assets" / "js" / "artifact-experiences.js"
 
 
 def artifact(id_, name, x, y, desc, specs=()):
@@ -129,10 +130,21 @@ def patch_runtime_city_positions():
     PENTHOUSE_JS.write_text(text, encoding="utf-8")
 
 
+def patch_blueprint_dispatch():
+    # The native artifact experience already sends Closet / suits to the
+    # Blueprint portal. Extend the same existing route to the Living Room.
+    text = ARTIFACT_JS.read_text(encoding="utf-8")
+    old = "else if((room.id==='closet'&&key==='suits')||key==='suit')blueprintPortal(spot);"
+    new = "else if(((room.id==='closet'||room.id==='penthouse-living')&&key==='suits')||key==='suit')blueprintPortal(spot);"
+    text = replace_required(text, old, new, "Blueprint artifact dispatch")
+    ARTIFACT_JS.write_text(text, encoding="utf-8")
+
+
 def main():
     patch_data()
     patch_build()
     patch_runtime_city_positions()
+    patch_blueprint_dispatch()
     print("Approved Living Room + Closet mockup nodes applied")
 
 
