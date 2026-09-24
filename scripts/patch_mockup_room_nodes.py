@@ -26,57 +26,56 @@ def patch_data():
     rooms = json.loads(DATA.read_text(encoding="utf-8"))
     by_id = {room["id"]: room for room in rooms}
 
-    # Exactly the artifacts shown on the approved Living Room mockup.
-    # City Guide + Remote are special build nodes and therefore are not
-    # duplicated in this list.
+    # Approved Living Room v5 hotspot set. Percentages are homography-mapped
+    # from the annotated mockup onto the clean 2048x1152 production image.
     by_id["penthouse-living"]["arts"] = [
         artifact(
-            "journal", "The Journal", "16.5%", "75%",
+            "journal", "The Journal", "15.999%", "73.594%",
             "Left open in the chair beside him. The published pages live in The Journal.",
             (("Read it", "The Journal"),),
         ),
         artifact(
-            "suits", "The Blueprint", "45.6%", "66%",
+            "suits", "The Blueprint", "44.101%", "62.643%",
             "The Blueprint sits with the tailoring boxes: the working system for getting dressed with intention.",
             (("Experience", "The Blueprint"),),
         ),
         artifact(
-            "cocktails", "The Cocktail Menu", "68.3%", "66.3%",
+            "cocktails", "The Cocktail Menu", "62.850%", "61.571%",
             "The house cocktail menu, placed beside the drink where it belongs.",
             (("House classics", "Eleven"),),
         ),
         artifact(
-            "vault", "The Vault", "94.2%", "63.1%",
+            "vault", "The Vault", "89.072%", "63.903%",
             "Brass wheel, black steel, set into the wall and deliberately visible.",
             (("Contents", "UR Welcome"),),
         ),
         artifact(
-            "artwork", "The Artwork", "88.5%", "9.5%",
+            "artwork", "The Artwork", "85.357%", "10.386%",
             "One of the framed pieces that turns the room into a lived-in gallery rather than a showroom.",
             (("Collection", "Paris Pullen"),),
         ),
     ]
 
-    # Exactly the artifacts shown on the approved Closet mockup.
-    # City Guide is a special build node and is not duplicated here.
+    # Approved Closet v5 hotspot set. Generic suit/shirt/vest/tie/shoe markers
+    # are deliberately replaced by these five authored experiences.
     by_id["closet"]["arts"] = [
         artifact(
-            "suits", "The Blueprint", "21.9%", "25.1%",
+            "suits", "The Blueprint", "21.432%", "23.230%",
             "The Blueprint begins on the rack: foundational tailoring, combinations and the decisions behind them.",
             (("Experience", "The Blueprint"),),
         ),
         artifact(
-            "artwork", "The Artwork", "93.6%", "38.5%",
+            "artwork", "The Artwork", "93.789%", "37.897%",
             "The portrait on the right wall — part reference, part reminder of the man the room is dressing.",
             (("Collection", "Paris Pullen"),),
         ),
         artifact(
-            "after-hours", "After Hours", "55.3%", "63.7%",
+            "after-hours", "After Hours", "54.651%", "60.775%",
             "The gloves are the handoff. After Hours continues in the Gym.",
             (("Next room", "The Gym"),),
         ),
         artifact(
-            "journal", "The Journal", "50.7%", "89%",
+            "journal", "The Journal", "50.784%", "91.622%",
             "The journal on the ottoman — notes, decisions and the pages that survive into publication.",
             (("Read it", "The Journal"),),
         ),
@@ -98,13 +97,19 @@ def patch_build():
 
     # City Guide was already converted from Barbershop by the preceding
     # patch_city_artifacts.py step. Reposition only the two approved rooms.
-    text = text.replace('"penthouse-living": ("21%", "10%")', '"penthouse-living": ("14.5%", "28.2%")')
-    text = text.replace('"closet":           ("50%", "8%")', '"closet":           ("65.1%", "13.9%")')
+    text = text.replace('"penthouse-living": ("21%", "10%")', '"penthouse-living": ("14.457%", "28.965%")')
+    text = text.replace('"penthouse-living": ("14.5%", "28.2%")', '"penthouse-living": ("14.457%", "28.965%")')
+    text = text.replace('"closet":           ("50%", "8%")', '"closet":           ("63.477%", "11.584%")')
+    text = text.replace('"closet":           ("65.1%", "13.9%")', '"closet":           ("63.477%", "11.584%")')
 
     # Living Room gets the real Suite Remote node at the fireplace.
     old_remote = 'REMOTE_NODE_POS = {\n    "cinema": ("50%", "45%"),'
-    new_remote = 'REMOTE_NODE_POS = {\n    "penthouse-living": ("55.2%", "35.3%"),\n    "cinema": ("50%", "45%"),'
-    text = replace_required(text, old_remote, new_remote, "Remote node map")
+    legacy_remote = 'REMOTE_NODE_POS = {\n    "penthouse-living": ("55.2%", "35.3%"),\n    "cinema": ("50%", "45%"),'
+    new_remote = 'REMOTE_NODE_POS = {\n    "penthouse-living": ("50.770%", "32.627%"),\n    "cinema": ("50%", "45%"),'
+    if legacy_remote in text:
+        text = text.replace(legacy_remote, new_remote, 1)
+    else:
+        text = replace_required(text, old_remote, new_remote, "Remote node map")
 
     # The glove hotspot is not a generic drawer. Reuse the existing Gym
     # portal button so clicking it moves into the actual Gym experience.
@@ -121,18 +126,15 @@ def patch_build():
 
 
 def patch_runtime_city_positions():
-    # penthouse.js is patched in-memory by patch_city_artifacts.py during the
-    # same build, so mirror the two coordinates there for dynamically rebuilt
-    # room markup as well.
     text = PENTHOUSE_JS.read_text(encoding="utf-8")
-    text = text.replace("'penthouse-living': ['21%', '10%']", "'penthouse-living': ['14.5%', '28.2%']")
-    text = text.replace("'closet':           ['50%', '8%']", "'closet':           ['65.1%', '13.9%']")
+    for old in ("'penthouse-living': ['21%', '10%']", "'penthouse-living': ['14.5%', '28.2%']"):
+        text = text.replace(old, "'penthouse-living': ['14.457%', '28.965%']")
+    for old in ("'closet':           ['50%', '8%']", "'closet':           ['65.1%', '13.9%']"):
+        text = text.replace(old, "'closet':           ['63.477%', '11.584%']")
     PENTHOUSE_JS.write_text(text, encoding="utf-8")
 
 
 def patch_blueprint_dispatch():
-    # The native artifact experience already sends Closet / suits to the
-    # Blueprint portal. Extend the same existing route to the Living Room.
     text = ARTIFACT_JS.read_text(encoding="utf-8")
     old = "else if((room.id==='closet'&&key==='suits')||key==='suit')blueprintPortal(spot);"
     new = "else if(((room.id==='closet'||room.id==='penthouse-living')&&key==='suits')||key==='suit')blueprintPortal(spot);"
@@ -145,7 +147,7 @@ def main():
     patch_build()
     patch_runtime_city_positions()
     patch_blueprint_dispatch()
-    print("Approved Living Room + Closet mockup nodes applied")
+    print("Approved Living Room + Closet v5 nodes applied")
 
 
 if __name__ == "__main__":
