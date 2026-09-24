@@ -73,13 +73,13 @@ for xy in ['--x:37.2%;--y:21.9%','--x:64.5%;--y:47.1%','--x:16.2%;--y:57.3%','--
     assert xy in bedroom, f'Bedroom marker {xy} missing'
 assert '--x:14.9%;--y:18.4%' in bedroom and 'The City Guide' in bedroom
 
-# Closet: two drawer artifacts + After Hours portal + City Guide portal.
+# Closet: Blueprint + Journal + City Guide use data-artifact buttons; After Hours is a separate portal button.
 closet = section('closet')
 for name in ['The Blueprint Game','The After Hours Boxing Game','The Journal','The City Guide']:
     assert name in closet, f'{name} missing from Closet'
 for retired in ['The Shoes','The Ties','The Suits &amp; Tuxedos']:
     assert retired not in closet, f'{retired} still present in Closet'
-assert len(buttons(closet)) == 2, f'Closet should have exactly two drawer artifacts, found {len(buttons(closet))}'
+assert len(buttons(closet)) == 3, f'Closet should have exactly three data-artifact buttons (Blueprint, Journal, City Guide), found {len(buttons(closet))}'
 for xy in ['--x:14.9%;--y:38.5%','--x:46.2%;--y:27.6%','--x:59.2%;--y:15.6%']:
     assert xy in closet, f'Closet marker {xy} missing'
 assert '--x:35.6%;--y:10.2%' in closet, 'Closet City Guide position missing'
