@@ -18,19 +18,19 @@ jobs:
         with:
           python-version: '3.12'
 
-      # The approved v5 room images are uploaded at repo root. Stage them into
+      # The approved v7 room images are uploaded at repo root. Stage them into
       # the existing responsive room-image slots at deploy time so the current
       # room renderer, mobile srcset, hotspots and artifact wiring stay intact.
-      - name: Stage approved Penthouse v5 room images
+      - name: Stage approved Penthouse v7 room images
         run: |
-          test -f living-room-v5.jpeg
-          test -f closet-v5.jpeg
-          cp living-room-v5.jpeg assets/img/room-living.jpg
-          cp living-room-v5.jpeg assets/img/room-living@sm.jpg
-          cp closet-v5.jpeg assets/img/room-closet.jpg
-          cp closet-v5.jpeg assets/img/room-closet@sm.jpg
-          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260923b"/' build_house.py
-          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260923b';/" assets/js/penthouse.js
+          test -f Living-room7.jpeg
+          test -f closet-v7.jpeg
+          cp Living-room7.jpeg assets/img/room-living.jpg
+          cp Living-room7.jpeg assets/img/room-living@sm.jpg
+          cp closet-v7.jpeg assets/img/room-closet.jpg
+          cp closet-v7.jpeg assets/img/room-closet@sm.jpg
+          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7"/' build_house.py
+          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7';/" assets/js/penthouse.js
 
       # Regenerates every static page from its data/*.json source, so the
       # deployed site always matches whatever was last saved -- from the
