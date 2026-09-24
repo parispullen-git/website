@@ -3,6 +3,7 @@ name: Build and Deploy
 # Manual only -- triggered by the dashboard's "Deploy Live" button or GitHub Actions.
 on:
   workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -25,8 +26,8 @@ jobs:
           cp closet-v7.jpeg assets/img/room-closet@sm.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7@sm.jpg
-          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7i"/' build_house.py
-          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7i';/" assets/js/penthouse.js
+          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7j"/' build_house.py
+          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7j';/" assets/js/penthouse.js
 
       - name: Rebuild generated pages
         run: |
@@ -46,137 +47,14 @@ jobs:
 
       - name: Pin v7 assets and bust Penthouse runtime cache
         run: |
-          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7i#assets/img/room-living-v7@sm.jpg?v=20260924v7i#g' house.html
-          sed -i 's#assets/img/room-living.jpg?v=20260924v7i#assets/img/room-living-v7.jpg?v=20260924v7i#g' house.html
-          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7i#assets/img/room-closet-v7@sm.jpg?v=20260924v7i#g' house.html
-          sed -i 's#assets/img/room-closet.jpg?v=20260924v7i#assets/img/room-closet-v7.jpg?v=20260924v7i#g' house.html
-          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7i#g' index.html
+          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7j#assets/img/room-living-v7@sm.jpg?v=20260924v7j#g' house.html
+          sed -i 's#assets/img/room-living.jpg?v=20260924v7j#assets/img/room-living-v7.jpg?v=20260924v7j#g' house.html
+          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7j#assets/img/room-closet-v7@sm.jpg?v=20260924v7j#g' house.html
+          sed -i 's#assets/img/room-closet.jpg?v=20260924v7j#assets/img/room-closet-v7.jpg?v=20260924v7j#g' house.html
+          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7j#g' index.html
 
-      - name: Verify Living Room, Study, Kitchen, Music Lounge and Bedroom v7 output
-        run: |
-          python3 - <<'PY'
-          import re
-          from pathlib import Path
-
-          house = Path('house.html').read_text(encoding='utf-8')
-          js = Path('assets/js/penthouse.js').read_text(encoding='utf-8')
-          index = Path('index.html').read_text(encoding='utf-8')
-          css = Path('assets/css/world.css').read_text(encoding='utf-8')
-
-          # Living Room verification.
-          section = re.search(r'<section class="floor-scene[^>]*id="penthouse-living".*?</section>', house, re.S)
-          assert section, 'Living Room section missing from house.html'
-          living = section.group(0)
-          approved = ['The Artwork', 'The Journal', 'The Vault', 'The Blueprint Game', 'The Gentlemen’s Cocktail Menu']
-          for name in approved:
-              assert name in living, f'{name} missing from Living Room'
-          for retired in ['The Candle', 'The Polo']:
-              assert retired not in living, f'{retired} still present in Living Room'
-          artifact_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', living)
-          assert len(artifact_buttons) == 5, f'Living Room must contain exactly five drawer artifact buttons, found {len(artifact_buttons)}'
-          assert 'room-living-v7.jpg?v=20260924v7i' in living
-          assert 'room-living-v7@sm.jpg?v=20260924v7i' in living
-          for xy in ['--x:75.0%;--y:10.0%', '--x:79.5%;--y:51.5%', '--x:91.5%;--y:68.5%', '--x:44.5%;--y:66.5%', '--x:9.0%;--y:87.5%']:
-              assert xy in living, f'Living Room marker {xy} missing'
-          assert '--x:15.0%;--y:35.0%' in living, 'Living Room City Guide position missing'
-          assert '--x:51.0%;--y:26.375%;--w:16.0%;--h:13.0%' in living
-          assert "x:'51.0%', y:'26.375%', w:'16.0%', h:'13.0%'" in js
-
-          # Study verification.
-          section = re.search(r'<section class="floor-scene[^>]*id="study".*?</section>', house, re.S)
-          assert section, 'Study section missing from house.html'
-          study = section.group(0)
-          for name in ['The Artwork', 'The Gentlemen’s Cocktail Menu', 'The Journal']:
-              assert name in study, f'{name} missing from Study'
-          for retired in ['The Monogram', 'The Pullen Laws', 'The Polo']:
-              assert retired not in study, f'{retired} still present in Study'
-          study_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', study)
-          assert len(study_buttons) == 3, f'Study must contain exactly three drawer artifact buttons, found {len(study_buttons)}'
-          for xy in ['--x:39.9%;--y:19.0%', '--x:36.9%;--y:44.2%', '--x:49.6%;--y:42.9%']:
-              assert xy in study, f'Study marker {xy} missing'
-          assert '--x:85.0%;--y:25.2%' in study, 'Study City Guide position missing'
-          assert 'The City Guide' in study, 'Study City Guide node missing'
-
-          study_runtime = re.search(r"'study': \[.*?\n    \],\n    'cinema'", js, re.S)
-          assert study_runtime, 'Homepage Study runtime block missing'
-          runtime_block = study_runtime.group(0).lower()
-          for retired in ['monogram', 'pullenlaws', 'oxknit-study']:
-              assert retired not in runtime_block, f'{retired} still present in Study runtime'
-          assert "'study':            ['85.0%', '25.2%']" in js
-
-          # Kitchen verification.
-          section = re.search(r'<section class="floor-scene[^>]*id="kitchen".*?</section>', house, re.S)
-          assert section, 'Kitchen section missing from house.html'
-          kitchen = section.group(0)
-          for name in ['The Artwork', 'The Blueprint Game', 'The Gentleman’s Guide to HelloFresh', 'The Journal']:
-              assert name in kitchen, f'{name} missing from Kitchen'
-          for retired in ['The Jacket', 'The Delivery']:
-              assert retired not in kitchen, f'{retired} still present in Kitchen'
-          kitchen_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', kitchen)
-          assert len(kitchen_buttons) == 4, f'Kitchen must contain exactly four drawer artifact buttons, found {len(kitchen_buttons)}'
-          for xy in ['--x:23.1%;--y:10.5%', '--x:58.3%;--y:42.1%', '--x:58.5%;--y:63.8%', '--x:80.0%;--y:87.0%']:
-              assert xy in kitchen, f'Kitchen marker {xy} missing'
-
-          kitchen_runtime = re.search(r"'kitchen': \[.*?\n    \],\n    'study'", js, re.S)
-          assert kitchen_runtime, 'Homepage Kitchen runtime block missing'
-          kr = kitchen_runtime.group(0).lower()
-          assert 'jacket' not in kr, 'Old Kitchen jacket still present in runtime'
-          assert "key:'suits'" in kitchen_runtime.group(0), 'Kitchen Blueprint runtime node missing'
-          assert "key:'hellofresh'" in kitchen_runtime.group(0), 'Kitchen HelloFresh runtime node missing'
-          assert "roomId === 'kitchen'" in js, 'Kitchen Blueprint CTA is not wired'
-
-          # Music Lounge verification.
-          section = re.search(r'<section class="floor-scene[^>]*id="music-lounge".*?</section>', house, re.S)
-          assert section, 'Music Lounge section missing from house.html'
-          music = section.group(0)
-          for name in ['The Artwork', 'The Record Player', 'The Journal', 'The Gentlemen’s Cocktail Guide']:
-              assert name in music, f'{name} missing from Music Lounge'
-          assert 'The Polo' not in music, 'Retired Music Lounge Polo still present'
-          music_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', music)
-          assert len(music_buttons) == 4, f'Music Lounge must contain exactly four drawer artifact buttons, found {len(music_buttons)}'
-          for xy in ['--x:48.4%;--y:15.0%', '--x:38.6%;--y:34.1%', '--x:39.4%;--y:59.9%', '--x:72.1%;--y:70.3%']:
-              assert xy in music, f'Music Lounge marker {xy} missing'
-          assert '--x:5.5%;--y:27.3%' in music, 'Music Lounge City Guide position missing'
-          assert 'The City Guide' in music, 'Music Lounge City Guide node missing'
-          assert 'The Remote' not in music, 'Retired Music Lounge Remote still present'
-
-          music_runtime = re.search(r"'music-lounge': \[.*?\n    \],\n    'bedroom'", js, re.S)
-          assert music_runtime, 'Homepage Music Lounge runtime block missing'
-          mr = music_runtime.group(0).lower()
-          assert "key:'polo'" not in mr, 'Old Music Lounge Polo still present in runtime'
-          assert "key:'recordplayer'" in music_runtime.group(0), 'Music Lounge Record Player runtime node missing'
-          assert "key:'cocktails'" in music_runtime.group(0), 'Music Lounge Cocktail Guide runtime node missing'
-          assert "'music-lounge':     ['5.5%', '27.3%']" in js, 'Music Lounge City Guide runtime position missing'
-          assert "'music-lounge': ['50%', '62%']" not in js, 'Old Music Lounge Remote runtime position still present'
-
-          # Bedroom verification: four drawer artifacts + separate City Guide.
-          section = re.search(r'<section class="floor-scene[^>]*id="bedroom".*?</section>', house, re.S)
-          assert section, 'Bedroom section missing from house.html'
-          bedroom = section.group(0)
-          for name in ['The Artwork', 'The Blueprint Game', 'The Gentlemen’s Cocktail Guide', 'The Journal']:
-              assert name in bedroom, f'{name} missing from Bedroom'
-          bedroom_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', bedroom)
-          assert len(bedroom_buttons) == 4, f'Bedroom must contain exactly four drawer artifact buttons, found {len(bedroom_buttons)}'
-          for xy in ['--x:36.8%;--y:17.4%', '--x:63.9%;--y:37.5%', '--x:16.2%;--y:46.1%', '--x:85.9%;--y:69.3%']:
-              assert xy in bedroom, f'Bedroom marker {xy} missing'
-          assert '--x:14.7%;--y:14.4%' in bedroom, 'Bedroom City Guide position missing'
-          assert 'The City Guide' in bedroom, 'Bedroom City Guide node missing'
-          assert 'The Suit' not in bedroom, 'Legacy Bedroom Suit label still present'
-
-          bedroom_runtime = re.search(r"'bedroom': \[.*?\n    \],\n    'bath'", js, re.S)
-          assert bedroom_runtime, 'Homepage Bedroom runtime block missing'
-          br = bedroom_runtime.group(0)
-          assert "key:'artwork'" in br
-          assert "key:'suit'" in br and "name:'The Blueprint Game'" in br
-          assert "key:'cocktails'" in br
-          assert "key:'journal'" in br
-          assert "'bedroom':     ['14.7%', '14.4%']" in js, 'Bedroom City Guide runtime position missing'
-          assert "roomId === 'bedroom' && key === 'suit'" in js, 'Bedroom Blueprint CTA is not wired'
-
-          assert 'penthouse.js?v=20260924lr7i' in index
-          assert '.floor-scene__view img{' in css and 'height:100%;width:auto' in css
-          print('Living Room + Study + Kitchen + Music Lounge + Bedroom v7 verification passed')
-          PY
+      - name: Verify Penthouse v7 desktop and mobile output
+        run: python3 scripts/verify_penthouse_v7.py
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
