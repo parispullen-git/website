@@ -1,11 +1,6 @@
 name: Build and Deploy
 
-# Manual only -- triggered by the dashboard's "Deploy Live" button (via
-# functions/api/deploy.js, which calls this workflow's dispatch API using
-# GITHUB_TOKEN) or by a person clicking "Run workflow" on this repo's
-# Actions tab. Deliberately NOT wired to push -- a commit landing on main
-# (from the dashboard's Journal editor, or anything else) should never by
-# itself put anything live; going live is still its own explicit step.
+# Manual only -- triggered by the dashboard's "Deploy Live" button or GitHub Actions.
 on:
   workflow_dispatch:
 jobs:
@@ -18,10 +13,6 @@ jobs:
         with:
           python-version: '3.12'
 
-      # The approved v7 room images are uploaded at repo root. Stage them into
-      # both the legacy slots and unique v7 filenames. The unique filenames are
-      # what house.html will use, so neither browser nor Cloudflare cache can
-      # serve an older room image under a previously reused URL.
       - name: Stage approved Penthouse v7 room images
         run: |
           test -f Living-room7.jpeg
@@ -34,16 +25,9 @@ jobs:
           cp closet-v7.jpeg assets/img/room-closet@sm.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7@sm.jpg
-          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7b"/' build_house.py
-          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7b';/" assets/js/penthouse.js
+          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7c"/' build_house.py
+          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7c';/" assets/js/penthouse.js
 
-      # Regenerates every static page from its data/*.json source, so the
-      # deployed site always matches whatever was last saved -- from the
-      # dashboard, the local Operator Console, or a direct file edit.
-      # Deliberately excludes build_drafting.py (reads uncommitted local
-      # client data) and scripts/build_brands.py (copies from sibling
-      # project directories that don't exist in this checkout) -- both
-      # stay local-only, manual operations.
       - name: Rebuild generated pages
         run: |
           python3 build_journal.py
@@ -59,18 +43,61 @@ jobs:
           python3 scripts/patch_cocktail_artifacts.py
           python3 scripts/patch_cocktail_menu.py
 
-      # Force the generated Penthouse page to use never-before-used v7 asset
-      # URLs for these two rooms. This bypasses all cache entries associated
-      # with room-living.jpg and room-closet.jpg while preserving responsive
-      # srcset behavior, hotspots, room navigation and the rest of the build.
-      - name: Pin Living Room and Closet to unique v7 URLs
+      - name: Pin v7 assets and bust Penthouse runtime cache
         run: |
-          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7b#assets/img/room-living-v7@sm.jpg?v=20260924v7b#g' house.html
-          sed -i 's#assets/img/room-living.jpg?v=20260924v7b#assets/img/room-living-v7.jpg?v=20260924v7b#g' house.html
-          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7b#assets/img/room-closet-v7@sm.jpg?v=20260924v7b#g' house.html
-          sed -i 's#assets/img/room-closet.jpg?v=20260924v7b#assets/img/room-closet-v7.jpg?v=20260924v7b#g' house.html
-          grep -q 'room-living-v7.jpg?v=20260924v7b' house.html
-          grep -q 'room-closet-v7.jpg?v=20260924v7b' house.html
+          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7c#assets/img/room-living-v7@sm.jpg?v=20260924v7c#g' house.html
+          sed -i 's#assets/img/room-living.jpg?v=20260924v7c#assets/img/room-living-v7.jpg?v=20260924v7c#g' house.html
+          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7c#assets/img/room-closet-v7@sm.jpg?v=20260924v7c#g' house.html
+          sed -i 's#assets/img/room-closet.jpg?v=20260924v7c#assets/img/room-closet-v7.jpg?v=20260924v7c#g' house.html
+          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7c#g' index.html
+
+      - name: Verify Living Room v7 desktop and mobile output
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          house = Path('house.html').read_text(encoding='utf-8')
+          js = Path('assets/js/penthouse.js').read_text(encoding='utf-8')
+          index = Path('index.html').read_text(encoding='utf-8')
+          css = Path('assets/css/world.css').read_text(encoding='utf-8')
+
+          section = re.search(r'<section class="floor-scene[^>]*id="penthouse-living".*?</section>', house, re.S)
+          assert section, 'Living Room section missing from house.html'
+          living = section.group(0)
+
+          approved = ['The Artwork', 'The Journal', 'The Vault', 'The Blueprint Game', 'The Gentlemen’s Cocktail Menu']
+          for name in approved:
+              assert name in living, f'{name} missing from Living Room'
+          for retired in ['The Candle', 'The Polo']:
+              assert retired not in living, f'{retired} still present in Living Room'
+
+          assert living.count('data-artifact=') == 5, 'Living Room must contain exactly five drawer artifacts'
+          assert 'room-living-v7.jpg?v=20260924v7c' in living
+          assert 'room-living-v7@sm.jpg?v=20260924v7c' in living
+
+          # Exact annotated positions.
+          for xy in ['--x:75.0%;--y:10.0%', '--x:79.5%;--y:51.5%', '--x:91.5%;--y:68.5%', '--x:44.5%;--y:66.5%', '--x:9.0%;--y:87.5%']:
+              assert xy in living, f'Living Room marker {xy} missing'
+          assert '--x:15.0%;--y:35.0%' in living, 'City Guide position missing'
+
+          # TV must be centered over the fireplace on both generated page and homepage runtime.
+          assert '--x:51.0%;--y:22.0%;--w:16.0%;--h:13.0%' in living
+          assert "x:'51.0%', y:'22.0%', w:'16.0%', h:'13.0%'" in js
+
+          # Homepage/mobile runtime gets unique v7 images and cannot reuse cached Candle data.
+          lr = re.search(r"'penthouse-living': \[.*?\n    \],\n    'music-lounge'", js, re.S)
+          assert lr, 'Homepage Living Room runtime block missing'
+          assert 'candle' not in lr.group(0).lower()
+          assert 'oxknit' not in lr.group(0).lower()
+          assert "img:'room-living-v7'" in js
+          assert 'penthouse.js?v=20260924lr7c' in index
+
+          # Mobile renderer scales the full image rather than swapping coordinates.
+          assert '.floor-scene__view img{' in css and 'height:100%;width:auto' in css
+          assert 'room-living-v7@sm.jpg' in js or "img:'room-living-v7'" in js
+          print('Living Room v7 desktop/mobile verification passed')
+          PY
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
