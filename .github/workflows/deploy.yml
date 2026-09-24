@@ -25,8 +25,8 @@ jobs:
           cp closet-v7.jpeg assets/img/room-closet@sm.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7@sm.jpg
-          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7c"/' build_house.py
-          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7c';/" assets/js/penthouse.js
+          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7d"/' build_house.py
+          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7d';/" assets/js/penthouse.js
 
       - name: Rebuild generated pages
         run: |
@@ -45,11 +45,11 @@ jobs:
 
       - name: Pin v7 assets and bust Penthouse runtime cache
         run: |
-          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7c#assets/img/room-living-v7@sm.jpg?v=20260924v7c#g' house.html
-          sed -i 's#assets/img/room-living.jpg?v=20260924v7c#assets/img/room-living-v7.jpg?v=20260924v7c#g' house.html
-          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7c#assets/img/room-closet-v7@sm.jpg?v=20260924v7c#g' house.html
-          sed -i 's#assets/img/room-closet.jpg?v=20260924v7c#assets/img/room-closet-v7.jpg?v=20260924v7c#g' house.html
-          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7c#g' index.html
+          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7d#assets/img/room-living-v7@sm.jpg?v=20260924v7d#g' house.html
+          sed -i 's#assets/img/room-living.jpg?v=20260924v7d#assets/img/room-living-v7.jpg?v=20260924v7d#g' house.html
+          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7d#assets/img/room-closet-v7@sm.jpg?v=20260924v7d#g' house.html
+          sed -i 's#assets/img/room-closet.jpg?v=20260924v7d#assets/img/room-closet-v7.jpg?v=20260924v7d#g' house.html
+          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7d#g' index.html
 
       - name: Verify Living Room v7 desktop and mobile output
         run: |
@@ -74,24 +74,23 @@ jobs:
 
           artifact_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', living)
           assert len(artifact_buttons) == 5, f'Living Room must contain exactly five drawer artifact buttons, found {len(artifact_buttons)}'
-          assert 'room-living-v7.jpg?v=20260924v7c' in living
-          assert 'room-living-v7@sm.jpg?v=20260924v7c' in living
+          assert 'room-living-v7.jpg?v=20260924v7d' in living
+          assert 'room-living-v7@sm.jpg?v=20260924v7d' in living
 
           for xy in ['--x:75.0%;--y:10.0%', '--x:79.5%;--y:51.5%', '--x:91.5%;--y:68.5%', '--x:44.5%;--y:66.5%', '--x:9.0%;--y:87.5%']:
               assert xy in living, f'Living Room marker {xy} missing'
           assert '--x:15.0%;--y:35.0%' in living, 'City Guide position missing'
 
-          assert '--x:51.0%;--y:22.0%;--w:16.0%;--h:13.0%' in living
-          assert "x:'51.0%', y:'22.0%', w:'16.0%', h:'13.0%'" in js
+          assert '--x:51.0%;--y:24.5%;--w:16.0%;--h:13.0%' in living
+          assert "x:'51.0%', y:'24.5%', w:'16.0%', h:'13.0%'" in js
 
           lr = re.search(r"'penthouse-living': \[.*?\n    \],\n    'music-lounge'", js, re.S)
           assert lr, 'Homepage Living Room runtime block missing'
           assert 'candle' not in lr.group(0).lower()
           assert 'oxknit' not in lr.group(0).lower()
           assert "img:'room-living-v7'" in js
-          assert 'penthouse.js?v=20260924lr7c' in index
+          assert 'penthouse.js?v=20260924lr7d' in index
 
-          # Mobile uses the same image-relative coordinates and the dedicated @sm srcset.
           assert '.floor-scene__view img{' in css and 'height:100%;width:auto' in css
           assert "img:'room-living-v7'" in js
           print('Living Room v7 desktop/mobile verification passed')
