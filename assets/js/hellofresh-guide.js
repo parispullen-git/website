@@ -4,162 +4,55 @@
   'use strict';
 
   var recipes = [
-    {
-      name: "Turkey & Mushroom Shepherd's Pie",
-      subtitle: 'topped with White Cheddar Mashed Potatoes',
-      tag: 'The comfort',
-      time: '50 minutes', calories: '890 kcal', protein: '44g protein', difficulty: 'Hard',
-      ingredients: ['Ground turkey', 'Button mushrooms', 'Potatoes', 'White cheddar', 'Fresh thyme'],
-      story: 'Savory turkey and mushrooms under creamy white-cheddar mashed potatoes, finished under the broiler for a deeply comforting crust.',
-      image: 'assets/img/collabs/hellofresh/04.jpg',
-      link: 'https://www.hellofresh.com/recipes/turkey-mushroom-shepherd-s-pie-649c8b124387a88e63f51410'
-    },
-    {
-      name: 'Bacon, Egg, and Cheese on Brioche',
-      subtitle: 'with Chipotle Ketchup and a Green Salad',
-      tag: 'The morning',
-      time: '20 minutes', calories: '590 kcal', protein: '22g protein', difficulty: 'Easy',
-      ingredients: ['Bacon', 'Eggs', 'Brioche buns', 'Chipotle ketchup', 'Salad greens'],
-      story: 'A deli-classic breakfast sandwich upgraded with a fluffy brioche bun, smoky bacon, egg, and feisty chipotle ketchup, balanced by lemony greens.',
-      image: 'https://media.hellofresh.com/q_100%2Cw_1600%2Cf_auto%2Cc_limit%2Cfl_lossy/recipes/image/bacon-egg-and-cheese-on-brioche-f77b5c14.jpg',
-      link: 'https://www.hellofresh.com/recipes/bacon-egg-and-cheese-on-brioche-5939ad4751d3f110b1548663'
-    },
-    {
-      name: 'Southwest Shrimp Tacos',
-      subtitle: 'with Pico de Gallo & Hot Sauce Crema',
-      tag: 'The quick one',
-      time: '25 minutes', calories: '640 kcal', protein: '27g protein', difficulty: 'Easy',
-      ingredients: ['Shrimp', 'Flour tortillas', 'Poblano pepper', 'Pico de gallo', 'Hot sauce crema'],
-      story: 'Southwest-spiced shrimp, poblano and onion tucked into warm tortillas with cool crema and fresh pico de gallo.',
-      image: 'assets/img/collabs/hellofresh/01.jpg',
-      link: 'https://www.hellofresh.com/recipes/southwest-shrimp-tacos-61a789cad3877c660a03a872'
-    },
-    {
-      name: 'Pork Sausage & Cheesy Eggplant Tomato Flatbreads',
-      subtitle: 'with Balsamic Glaze, Marinara & Parsley',
-      tag: 'The flatbread',
-      time: '25 minutes', calories: '930 kcal', protein: '39g protein', difficulty: 'Medium',
-      ingredients: ['Italian pork sausage', 'Flatbreads', 'Eggplant', 'Mozzarella & Parmesan', 'Balsamic glaze'],
-      story: 'Toasted flatbreads layered with marinara, sausage, tender eggplant, tomato, mozzarella and Parmesan, finished with balsamic glaze and parsley.',
-      image: '',
-      link: 'https://www.hellofresh.com/recipes/pork-sausage-and-cheesy-eggplant-tomato-flatbreads-68ed06f14a4d7386a892ac95'
-    },
-    {
-      name: 'BBQ Chicken Quesadillas',
-      subtitle: 'with Pickled Jalapeño & Zesty Crema',
-      tag: 'The fifteen-minute',
-      time: '15 minutes', calories: '580 kcal', protein: '38g protein', difficulty: 'Easy',
-      ingredients: ['Chicken', 'Flour tortillas', 'BBQ sauce', 'Mexican cheese blend', 'Pickled jalapeño'],
-      story: 'BBQ chicken and melty cheese folded into warm tortillas, with zesty crema for dipping and pickled jalapeño for a sharper finish.',
-      image: 'https://media.hellofresh.com/q_100%2Cw_1600%2Cf_auto%2Cc_limit%2Cfl_lossy/recipes/image/bbq-chicken-quesadillas-8ba8a8b0-aa02dbf1.jpg',
-      link: 'https://www.hellofresh.com/recipes/bbq-chicken-quesadillas-60dc84df03a6025d1b085f7c'
-    },
-    {
-      name: 'Lamb Chops au Poivre & Garlic Herb Potatoes',
-      subtitle: 'with Apple, Walnut & Blue Cheese Salad',
-      tag: 'The showstopper',
-      time: '40 minutes', calories: '1350 kcal', protein: '71g protein', difficulty: 'Medium',
-      ingredients: ['Lamb chops', 'Fingerling potatoes', 'Black peppercorns', 'Garlic herb butter', 'Apple, walnuts & blue cheese'],
-      story: 'Peppercorn-crusted lamb chops with velvety demi-glace, garlic-herb potatoes, and a crisp apple, walnut and blue-cheese salad.',
-      image: 'https://media.hellofresh.com/q_100%2Cw_1600%2Cf_auto%2Cc_limit%2Cfl_lossy/recipes/image/HelloFreshRC-R17782A_Hero_LambChopsAuPoivre_W44-33-2025_Web-6e2d7179.jpg',
-      link: 'https://www.hellofresh.com/recipes/lamb-chops-au-poivre-and-garlic-herb-potatoes-68e511c2908d7cf716b797ce'
-    }
+    {name:"Turkey & Mushroom Shepherd's Pie",subtitle:'topped with White Cheddar Mashed Potatoes',tag:'The comfort',time:'50 minutes',calories:'890 kcal',protein:'44g protein',difficulty:'Hard',ingredients:['Ground turkey','Button mushrooms','Potatoes','White cheddar','Fresh thyme'],story:'Savory turkey and mushrooms under creamy white-cheddar mashed potatoes, finished under the broiler for a deeply comforting crust.',image:'assets/img/collabs/hellofresh/04.jpg',link:'https://www.hellofresh.com/recipes/turkey-mushroom-shepherd-s-pie-649c8b124387a88e63f51410'},
+    {name:'Bacon, Egg, and Cheese on Brioche',subtitle:'with Chipotle Ketchup and a Green Salad',tag:'The morning',time:'20 minutes',calories:'590 kcal',protein:'22g protein',difficulty:'Easy',ingredients:['Bacon','Eggs','Brioche buns','Chipotle ketchup','Salad greens'],story:'A deli-classic breakfast sandwich upgraded with a fluffy brioche bun, smoky bacon, egg, and feisty chipotle ketchup, balanced by lemony greens.',image:'https://media.hellofresh.com/q_100%2Cw_1600%2Cf_auto%2Cc_limit%2Cfl_lossy/recipes/image/bacon-egg-and-cheese-on-brioche-f77b5c14.jpg',link:'https://www.hellofresh.com/recipes/bacon-egg-and-cheese-on-brioche-5939ad4751d3f110b1548663'},
+    {name:'Southwest Shrimp Tacos',subtitle:'with Pico de Gallo & Hot Sauce Crema',tag:'The quick one',time:'25 minutes',calories:'640 kcal',protein:'27g protein',difficulty:'Easy',ingredients:['Shrimp','Flour tortillas','Poblano pepper','Pico de gallo','Hot sauce crema'],story:'Southwest-spiced shrimp, poblano and onion tucked into warm tortillas with cool crema and fresh pico de gallo.',image:'assets/img/collabs/hellofresh/01.jpg',link:'https://www.hellofresh.com/recipes/southwest-shrimp-tacos-61a789cad3877c660a03a872'},
+    {name:'Pork Sausage & Cheesy Eggplant Tomato Flatbreads',subtitle:'with Balsamic Glaze, Marinara & Parsley',tag:'The flatbread',time:'25 minutes',calories:'930 kcal',protein:'39g protein',difficulty:'Medium',ingredients:['Italian pork sausage','Flatbreads','Eggplant','Mozzarella & Parmesan','Balsamic glaze'],story:'Toasted flatbreads layered with marinara, sausage, tender eggplant, tomato, mozzarella and Parmesan, finished with balsamic glaze and parsley.',image:'',link:'https://www.hellofresh.com/recipes/pork-sausage-and-cheesy-eggplant-tomato-flatbreads-68ed06f14a4d7386a892ac95'},
+    {name:'BBQ Chicken Quesadillas',subtitle:'with Pickled Jalapeño & Zesty Crema',tag:'The fifteen-minute',time:'15 minutes',calories:'580 kcal',protein:'38g protein',difficulty:'Easy',ingredients:['Chicken','Flour tortillas','BBQ sauce','Mexican cheese blend','Pickled jalapeño'],story:'BBQ chicken and melty cheese folded into warm tortillas, with zesty crema for dipping and pickled jalapeño for a sharper finish.',image:'https://media.hellofresh.com/q_100%2Cw_1600%2Cf_auto%2Cc_limit%2Cfl_lossy/recipes/image/bbq-chicken-quesadillas-8ba8a8b0-aa02dbf1.jpg',link:'https://www.hellofresh.com/recipes/bbq-chicken-quesadillas-60dc84df03a6025d1b085f7c'},
+    {name:'Lamb Chops au Poivre & Garlic Herb Potatoes',subtitle:'with Apple, Walnut & Blue Cheese Salad',tag:'The showstopper',time:'40 minutes',calories:'1350 kcal',protein:'71g protein',difficulty:'Medium',ingredients:['Lamb chops','Fingerling potatoes','Black peppercorns','Garlic herb butter','Apple, walnuts & blue cheese'],story:'Peppercorn-crusted lamb chops with velvety demi-glace, garlic-herb potatoes, and a crisp apple, walnut and blue-cheese salad.',image:'https://media.hellofresh.com/q_100%2Cw_1600%2Cf_auto%2Cc_limit%2Cfl_lossy/recipes/image/HelloFreshRC-R17782A_Hero_LambChopsAuPoivre_W44-33-2025_Web-6e2d7179.jpg',link:'https://www.hellofresh.com/recipes/lamb-chops-au-poivre-and-garlic-herb-potatoes-68e511c2908d7cf716b797ce'}
   ];
 
-  var state = { page: 0, ready: false, dialog: null };
+  var state={page:0,ready:false,dialog:null};
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function num(n){return String(n).padStart(2,'0');}
 
-  function esc(v) {
-    return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
-      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-    });
-  }
-  function num(n) { return String(n).padStart(2, '0'); }
-
-  function addStyles() {
-    if (document.getElementById('hf-six-style')) return;
-    var s = document.createElement('style');
-    s.id = 'hf-six-style';
-    s.textContent = [
-      '.hf-six-hero{position:relative;aspect-ratio:16/9;overflow:hidden;margin:14px 0 16px;background:linear-gradient(135deg,#182018,#090b09);border:1px solid rgba(201,169,97,.24)}',
-      '.hf-six-hero img{width:100%;height:100%;object-fit:cover;display:block}',
-      '.hf-six-placeholder{height:100%;display:grid;place-items:center;text-align:center;padding:22px;color:#d9bd7b;font:500 12px/1.5 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase}',
-      '.hf-six-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0 18px}',
-      '.hf-six-meta span{border-top:1px solid rgba(201,169,97,.28);padding-top:8px;color:var(--ash,#aaa59c);font:500 9px/1.35 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase}',
-      '.hf-six-meta b{display:block;color:var(--ivory,#f1ece2);font-size:11px;letter-spacing:0;text-transform:none;margin-top:3px}',
-      '.hf-six-subtitle{color:var(--brass-lit,#d9bd7b)!important;font-style:normal!important}',
-      '@media(max-width:720px){.hf-six-meta{grid-template-columns:1fr 1fr 1fr}.hf-six-hero{aspect-ratio:4/3}.ae-book-nav{overflow-x:auto;scrollbar-width:none}}'
-    ].join('');
+  function addStyles(){
+    if(document.getElementById('hf-six-style'))return;
+    var s=document.createElement('style');s.id='hf-six-style';
+    s.textContent='.hf-six-hero{position:relative;aspect-ratio:16/9;overflow:hidden;margin:14px 0 16px;background:linear-gradient(135deg,#182018,#090b09);border:1px solid rgba(201,169,97,.24)}.hf-six-hero img{width:100%;height:100%;object-fit:cover;display:block}.hf-six-placeholder{height:100%;display:grid;place-items:center;text-align:center;padding:22px;color:#d9bd7b;font:500 12px/1.5 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase}.hf-six-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0 18px}.hf-six-meta span{border-top:1px solid rgba(201,169,97,.28);padding-top:8px;color:var(--ash,#aaa59c);font:500 9px/1.35 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase}.hf-six-meta b{display:block;color:var(--ivory,#f1ece2);font-size:11px;letter-spacing:0;text-transform:none;margin-top:3px}.hf-six-subtitle{color:var(--brass-lit,#d9bd7b)!important;font-style:normal!important}@media(max-width:720px){.hf-six-meta{grid-template-columns:1fr 1fr 1fr}.hf-six-hero{aspect-ratio:4/3}.ae-book-nav{overflow-x:auto;scrollbar-width:none}}';
     document.head.appendChild(s);
   }
 
-  function render() {
-    var d = state.dialog || document.getElementById('artifact-experience');
-    if (!d || !d.open) return;
-    var body = d.querySelector('.ae-body');
-    var title = d.querySelector('#ae-title');
-    if (!body) return;
-    state.dialog = d;
-    state.ready = true;
-    var r = recipes[state.page];
-    if (title) title.textContent = 'Six recipes. One standing invitation.';
-    var hero = r.image
-      ? '<figure class="hf-six-hero"><img src="' + esc(r.image) + '" alt="' + esc(r.name) + '" loading="eager"></figure>'
-      : '<figure class="hf-six-hero"><div class="hf-six-placeholder">HelloFresh × Paris Pullen<br>' + esc(r.name) + '</div></figure>';
-
-    body.innerHTML = '' +
-      '<div class="ae-book-nav" aria-label="Recipe chapters">' + recipes.map(function (x, i) {
-        return '<button type="button" data-hf-page="' + i + '" aria-pressed="' + (i === state.page) + '">' + num(i + 1) + ' · ' + esc(x.tag) + '</button>';
-      }).join('') + '</div>' +
-      '<div class="ae-book">' +
-        '<section class="ae-page">' +
-          '<span class="ae-kicker ae-kicker--brand"><span class="ae-brand-chip"><img src="assets/img/brand-logos/hellofresh.png" alt="HelloFresh"></span> × Paris Pullen · The house edit</span>' +
-          '<div class="ae-book-mark">' + num(state.page + 1) + '</div>' +
-          hero +
-          '<h3>' + esc(r.name) + '</h3>' +
-          '<p><em class="hf-six-subtitle">' + esc(r.subtitle) + '</em></p>' +
-          '<p>' + esc(r.story) + '</p>' +
-          '<span class="ae-page-number">' + num(state.page * 2 + 1) + '</span>' +
-        '</section>' +
-        '<section class="ae-page">' +
-          '<span class="ae-kicker">Recipe details</span>' +
-          '<h3>' + esc(r.time) + '</h3>' +
-          '<div class="hf-six-meta"><span>Calories<b>' + esc(r.calories) + '</b></span><span>Protein<b>' + esc(r.protein) + '</b></span><span>Difficulty<b>' + esc(r.difficulty) + '</b></span></div>' +
-          '<span class="ae-kicker">On the counter</span>' +
-          '<ul class="ae-ingredients">' + r.ingredients.map(function (v) { return '<li><label><input type="checkbox">' + esc(v) + '</label></li>'; }).join('') + '</ul>' +
-          '<span class="ae-page-number">' + num(state.page * 2 + 2) + '</span>' +
-        '</section>' +
-      '</div>' +
-      '<div class="ae-book-controls"><button class="ae-small" type="button" data-hf-prev ' + (state.page === 0 ? 'disabled' : '') + '>← Turn back</button><span aria-live="polite">Recipe ' + (state.page + 1) + ' of ' + recipes.length + '</span><button class="ae-small" type="button" data-hf-next ' + (state.page === recipes.length - 1 ? 'disabled' : '') + '>Turn the page →</button></div>' +
-      '<div class="ae-actions"><a class="ae-action ae-action--quiet" href="' + esc(r.link) + '" target="_blank" rel="noopener">Get this recipe ↗</a><a class="ae-action ae-action--quiet" href="pantry.html">Visit the Pantry ↗</a></div>';
+  function render(){
+    var d=state.dialog||document.getElementById('artifact-experience');if(!d||!d.open)return;
+    var body=d.querySelector('.ae-body'),title=d.querySelector('#ae-title');if(!body)return;
+    state.dialog=d;state.ready=true;var r=recipes[state.page];
+    if(title)title.textContent='Six recipes. One standing invitation.';
+    var hero=r.image?'<figure class="hf-six-hero"><img src="'+esc(r.image)+'" alt="'+esc(r.name)+'" loading="eager"></figure>':'<figure class="hf-six-hero"><div class="hf-six-placeholder">HelloFresh × Paris Pullen<br>'+esc(r.name)+'</div></figure>';
+    body.innerHTML='<div class="ae-book-nav" aria-label="Recipe chapters">'+recipes.map(function(x,i){return '<button type="button" data-hf-page="'+i+'" aria-pressed="'+(i===state.page)+'">'+num(i+1)+' · '+esc(x.tag)+'</button>';}).join('')+'</div><div class="ae-book"><section class="ae-page"><span class="ae-kicker ae-kicker--brand"><span class="ae-brand-chip"><img src="assets/img/brand-logos/hellofresh.png" alt="HelloFresh"></span> × Paris Pullen · The house edit</span><div class="ae-book-mark">'+num(state.page+1)+'</div>'+hero+'<h3>'+esc(r.name)+'</h3><p><em class="hf-six-subtitle">'+esc(r.subtitle)+'</em></p><p>'+esc(r.story)+'</p><span class="ae-page-number">'+num(state.page*2+1)+'</span></section><section class="ae-page"><span class="ae-kicker">Recipe details</span><h3>'+esc(r.time)+'</h3><div class="hf-six-meta"><span>Calories<b>'+esc(r.calories)+'</b></span><span>Protein<b>'+esc(r.protein)+'</b></span><span>Difficulty<b>'+esc(r.difficulty)+'</b></span></div><span class="ae-kicker">On the counter</span><ul class="ae-ingredients">'+r.ingredients.map(function(v){return '<li><label><input type="checkbox">'+esc(v)+'</label></li>';}).join('')+'</ul><span class="ae-page-number">'+num(state.page*2+2)+'</span></section></div><div class="ae-book-controls"><button class="ae-small" type="button" data-hf-prev '+(state.page===0?'disabled':'')+'>← Turn back</button><span aria-live="polite">Recipe '+(state.page+1)+' of '+recipes.length+'</span><button class="ae-small" type="button" data-hf-next '+(state.page===recipes.length-1?'disabled':'')+'>Turn the page →</button></div><div class="ae-actions"><a class="ae-action ae-action--quiet" href="'+esc(r.link)+'" target="_blank" rel="noopener">Get this recipe ↗</a><a class="ae-action ae-action--quiet" href="pantry.html">Visit the Pantry ↗</a></div>';
   }
+  function step(delta){var next=Math.max(0,Math.min(recipes.length-1,state.page+delta));if(next!==state.page){state.page=next;render();}}
 
-  function step(delta) {
-    var next = Math.max(0, Math.min(recipes.length - 1, state.page + delta));
-    if (next !== state.page) { state.page = next; render(); }
-  }
-
-  document.addEventListener('click', function (e) {
-    var trigger = e.target.closest && e.target.closest('[data-artifact="hellofresh"]');
-    if (trigger) {
-      state.page = 0;
-      setTimeout(render, 0);
-      return;
-    }
-    if (!state.ready || !state.dialog || !state.dialog.open) return;
-    var page = e.target.closest && e.target.closest('[data-hf-page]');
-    if (page) { state.page = Number(page.getAttribute('data-hf-page')); render(); return; }
-    if (e.target.closest && e.target.closest('[data-hf-prev]')) { step(-1); return; }
-    if (e.target.closest && e.target.closest('[data-hf-next]')) { step(1); }
+  document.addEventListener('click',function(e){
+    var trigger=e.target.closest&&e.target.closest('[data-artifact="hellofresh"]');
+    if(trigger){state.page=0;setTimeout(render,0);return;}
+    if(!state.ready||!state.dialog||!state.dialog.open)return;
+    var page=e.target.closest&&e.target.closest('[data-hf-page]');
+    if(page){state.page=Number(page.getAttribute('data-hf-page'));render();return;}
+    if(e.target.closest&&e.target.closest('[data-hf-prev]')){step(-1);return;}
+    if(e.target.closest&&e.target.closest('[data-hf-next]'))step(1);
   });
-
-  document.addEventListener('keydown', function (e) {
-    if (!state.ready || !state.dialog || !state.dialog.open) return;
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-      e.stopImmediatePropagation();
-      e.preventDefault();
-      step(e.key === 'ArrowRight' ? 1 : -1);
-    }
-  }, true);
+  document.addEventListener('keydown',function(e){if(!state.ready||!state.dialog||!state.dialog.open)return;if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.stopImmediatePropagation();e.preventDefault();step(e.key==='ArrowRight'?1:-1);}},true);
 
   addStyles();
+  function catchAutoOpen(){
+    var d=document.getElementById('artifact-experience');
+    if(!d||!d.open)return false;
+    var requested=new URLSearchParams(location.search).get('open');
+    if(requested==='hellofresh'||(d.dataset.kind==='book'&&d.querySelector('#ae-title'))){state.dialog=d;state.page=0;render();return true;}
+    return false;
+  }
+  if(!catchAutoOpen()){
+    var tries=0,timer=setInterval(function(){tries++;if(catchAutoOpen()||tries>40)clearInterval(timer);},100);
+  }
 })();
