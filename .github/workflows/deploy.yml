@@ -25,14 +25,15 @@ jobs:
           cp closet-v7.jpeg assets/img/room-closet@sm.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7@sm.jpg
-          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7f"/' build_house.py
-          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7f';/" assets/js/penthouse.js
+          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7g"/' build_house.py
+          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7g';/" assets/js/penthouse.js
 
       - name: Rebuild generated pages
         run: |
           python3 build_journal.py
           python3 scripts/patch_city_artifacts.py
           python3 scripts/patch_mockup_room_nodes.py
+          python3 scripts/patch_kitchen_v7_nodes.py
           python3 build_house.py
           python3 build_casefiles.py
           python3 build_charlotte.py
@@ -45,13 +46,13 @@ jobs:
 
       - name: Pin v7 assets and bust Penthouse runtime cache
         run: |
-          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7f#assets/img/room-living-v7@sm.jpg?v=20260924v7f#g' house.html
-          sed -i 's#assets/img/room-living.jpg?v=20260924v7f#assets/img/room-living-v7.jpg?v=20260924v7f#g' house.html
-          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7f#assets/img/room-closet-v7@sm.jpg?v=20260924v7f#g' house.html
-          sed -i 's#assets/img/room-closet.jpg?v=20260924v7f#assets/img/room-closet-v7.jpg?v=20260924v7f#g' house.html
-          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7f#g' index.html
+          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7g#assets/img/room-living-v7@sm.jpg?v=20260924v7g#g' house.html
+          sed -i 's#assets/img/room-living.jpg?v=20260924v7g#assets/img/room-living-v7.jpg?v=20260924v7g#g' house.html
+          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7g#assets/img/room-closet-v7@sm.jpg?v=20260924v7g#g' house.html
+          sed -i 's#assets/img/room-closet.jpg?v=20260924v7g#assets/img/room-closet-v7.jpg?v=20260924v7g#g' house.html
+          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7g#g' index.html
 
-      - name: Verify Living Room and Study v7 desktop and mobile output
+      - name: Verify Living Room, Study and Kitchen v7 desktop and mobile output
         run: |
           python3 - <<'PY'
           import re
@@ -73,16 +74,15 @@ jobs:
               assert retired not in living, f'{retired} still present in Living Room'
           artifact_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', living)
           assert len(artifact_buttons) == 5, f'Living Room must contain exactly five drawer artifact buttons, found {len(artifact_buttons)}'
-          assert 'room-living-v7.jpg?v=20260924v7f' in living
-          assert 'room-living-v7@sm.jpg?v=20260924v7f' in living
+          assert 'room-living-v7.jpg?v=20260924v7g' in living
+          assert 'room-living-v7@sm.jpg?v=20260924v7g' in living
           for xy in ['--x:75.0%;--y:10.0%', '--x:79.5%;--y:51.5%', '--x:91.5%;--y:68.5%', '--x:44.5%;--y:66.5%', '--x:9.0%;--y:87.5%']:
               assert xy in living, f'Living Room marker {xy} missing'
           assert '--x:15.0%;--y:35.0%' in living, 'Living Room City Guide position missing'
           assert '--x:51.0%;--y:26.375%;--w:16.0%;--h:13.0%' in living
           assert "x:'51.0%', y:'26.375%', w:'16.0%', h:'13.0%'" in js
 
-          # Study verification: exactly the three annotated drawer artifacts
-          # plus the separate City Guide portal node on the window.
+          # Study verification.
           section = re.search(r'<section class="floor-scene[^>]*id="study".*?</section>', house, re.S)
           assert section, 'Study section missing from house.html'
           study = section.group(0)
@@ -104,9 +104,30 @@ jobs:
               assert retired not in runtime_block, f'{retired} still present in Study runtime'
           assert "'study':            ['85.0%', '25.2%']" in js
 
-          assert 'penthouse.js?v=20260924lr7f' in index
+          # Kitchen verification: exactly the four artifacts in the approved mockup.
+          section = re.search(r'<section class="floor-scene[^>]*id="kitchen".*?</section>', house, re.S)
+          assert section, 'Kitchen section missing from house.html'
+          kitchen = section.group(0)
+          for name in ['The Artwork', 'The Blueprint Game', 'The Gentleman’s Guide to HelloFresh', 'The Journal']:
+              assert name in kitchen, f'{name} missing from Kitchen'
+          for retired in ['The Jacket', 'The Delivery']:
+              assert retired not in kitchen, f'{retired} still present in Kitchen'
+          kitchen_buttons = re.findall(r'<button[^>]*class="artifact[^>]*data-artifact=', kitchen)
+          assert len(kitchen_buttons) == 4, f'Kitchen must contain exactly four drawer artifact buttons, found {len(kitchen_buttons)}'
+          for xy in ['--x:23.1%;--y:10.5%', '--x:58.3%;--y:42.1%', '--x:58.5%;--y:63.8%', '--x:80.0%;--y:87.0%']:
+              assert xy in kitchen, f'Kitchen marker {xy} missing'
+
+          kitchen_runtime = re.search(r"'kitchen': \[.*?\n    \],\n    'study'", js, re.S)
+          assert kitchen_runtime, 'Homepage Kitchen runtime block missing'
+          kr = kitchen_runtime.group(0).lower()
+          assert 'jacket' not in kr, 'Old Kitchen jacket still present in runtime'
+          assert "key:'suits'" in kitchen_runtime.group(0), 'Kitchen Blueprint runtime node missing'
+          assert "key:'hellofresh'" in kitchen_runtime.group(0), 'Kitchen HelloFresh runtime node missing'
+          assert "roomId === 'kitchen'" in js, 'Kitchen Blueprint CTA is not wired'
+
+          assert 'penthouse.js?v=20260924lr7g' in index
           assert '.floor-scene__view img{' in css and 'height:100%;width:auto' in css
-          print('Living Room + Study v7 desktop/mobile verification passed')
+          print('Living Room + Study + Kitchen v7 desktop/mobile verification passed')
           PY
 
       - name: Deploy to Cloudflare Pages
