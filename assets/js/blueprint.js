@@ -282,3 +282,5 @@
   renderStrip();
   renderCurrent();
 })();
+
+(function(){var s=document.createElement('script');s.src='/assets/js/site-audio.js?v=1';s.defer=true;document.head.appendChild(s);}());
