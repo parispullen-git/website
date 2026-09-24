@@ -26,8 +26,8 @@ jobs:
           cp closet-v7.jpeg assets/img/room-closet@sm.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7@sm.jpg
-          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7j"/' build_house.py
-          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7j';/" assets/js/penthouse.js
+          sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7k"/' build_house.py
+          sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7k';/" assets/js/penthouse.js
 
       - name: Rebuild generated pages
         run: |
@@ -35,6 +35,7 @@ jobs:
           python3 scripts/patch_city_artifacts.py
           python3 scripts/patch_mockup_room_nodes.py
           python3 scripts/patch_kitchen_v7_nodes.py
+          python3 scripts/patch_v7_position_corrections.py
           python3 build_house.py
           python3 build_casefiles.py
           python3 build_charlotte.py
@@ -47,11 +48,11 @@ jobs:
 
       - name: Pin v7 assets and bust Penthouse runtime cache
         run: |
-          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7j#assets/img/room-living-v7@sm.jpg?v=20260924v7j#g' house.html
-          sed -i 's#assets/img/room-living.jpg?v=20260924v7j#assets/img/room-living-v7.jpg?v=20260924v7j#g' house.html
-          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7j#assets/img/room-closet-v7@sm.jpg?v=20260924v7j#g' house.html
-          sed -i 's#assets/img/room-closet.jpg?v=20260924v7j#assets/img/room-closet-v7.jpg?v=20260924v7j#g' house.html
-          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7j#g' index.html
+          sed -i 's#assets/img/room-living@sm.jpg?v=20260924v7k#assets/img/room-living-v7@sm.jpg?v=20260924v7k#g' house.html
+          sed -i 's#assets/img/room-living.jpg?v=20260924v7k#assets/img/room-living-v7.jpg?v=20260924v7k#g' house.html
+          sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7k#assets/img/room-closet-v7@sm.jpg?v=20260924v7k#g' house.html
+          sed -i 's#assets/img/room-closet.jpg?v=20260924v7k#assets/img/room-closet-v7.jpg?v=20260924v7k#g' house.html
+          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260924lr7k#g' index.html
 
       - name: Verify Penthouse v7 desktop and mobile output
         run: python3 scripts/verify_penthouse_v7.py
