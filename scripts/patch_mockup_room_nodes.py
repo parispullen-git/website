@@ -81,11 +81,15 @@ def patch_build():
     ):
         text = text.replace(old, '"penthouse-living": ("15.0%", "35.0%")')
 
-    # Center the TV directly above the fireplace inside the main gold frame.
+    # Center the TV directly above the fireplace and lower it so the interactive
+    # screen sits completely over the framed image area in Living Room v7.
     old_tv = '''    "penthouse-living": dict(\n        x="55.7%", y="24.0%", w="17%", h="14%",\n        box="0.4740,0.1704,0.6406,0.3093",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
     wrong_tv = '''    "penthouse-living": dict(\n        x="41.1%", y="21.7%", w="13.1%", h="12.6%",\n        box="0.3455,0.1545,0.4766,0.2804",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
-    new_tv = '''    "penthouse-living": dict(\n        x="51.0%", y="22.0%", w="16.0%", h="13.0%",\n        box="0.4300,0.1550,0.5900,0.2850",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
-    if wrong_tv in text:
+    previous_tv = '''    "penthouse-living": dict(\n        x="51.0%", y="22.0%", w="16.0%", h="13.0%",\n        box="0.4300,0.1550,0.5900,0.2850",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
+    new_tv = '''    "penthouse-living": dict(\n        x="51.0%", y="24.5%", w="16.0%", h="13.0%",\n        box="0.4300,0.1800,0.5900,0.3100",\n        channel_set="living", id="kDK8-psUjzY", label="FOMO — Drake",\n    ),'''
+    if previous_tv in text:
+        text = text.replace(previous_tv, new_tv, 1)
+    elif wrong_tv in text:
         text = text.replace(wrong_tv, new_tv, 1)
     else:
         text = replace_required(text, old_tv, new_tv, "Living Room TV screen")
@@ -150,10 +154,15 @@ def patch_runtime():
     wrong_tv = """    'penthouse-living': { x:'41.1%', y:'21.7%', w:'13.1%', h:'12.6%',
       box:'0.3455,0.1545,0.4766,0.2804', channelSet:'living',
       id:'4xVVFJuycww', label:'The Gentlemen' },"""
-    new_tv = """    'penthouse-living': { x:'51.0%', y:'22.0%', w:'16.0%', h:'13.0%',
+    previous_tv = """    'penthouse-living': { x:'51.0%', y:'22.0%', w:'16.0%', h:'13.0%',
       box:'0.4300,0.1550,0.5900,0.2850', channelSet:'living',
       id:'4xVVFJuycww', label:'The Gentlemen' },"""
-    if wrong_tv in text:
+    new_tv = """    'penthouse-living': { x:'51.0%', y:'24.5%', w:'16.0%', h:'13.0%',
+      box:'0.4300,0.1800,0.5900,0.3100', channelSet:'living',
+      id:'4xVVFJuycww', label:'The Gentlemen' },"""
+    if previous_tv in text:
+        text = text.replace(previous_tv, new_tv, 1)
+    elif wrong_tv in text:
         text = text.replace(wrong_tv, new_tv, 1)
     else:
         text = replace_required(text, old_tv, new_tv, "runtime Living Room TV screen")
@@ -162,8 +171,6 @@ def patch_runtime():
     new_cta = "var wardrobeCta = (((roomId === 'closet' || roomId === 'penthouse-living') && key === 'suits') || (roomId === 'bedroom' && key === 'suit')) ? SUITS_CTA : '';"
     text = replace_required(text, old_cta, new_cta, "runtime Blueprint CTA condition")
 
-    # Remove any legacy Living Room Remote marker and all cached Candle/Polo
-    # artifact definitions from the Living Room by virtue of replacing ARTS.
     for remote_line in (
         "    'penthouse-living': ['55.2%', '35.3%'],\n",
         "    'penthouse-living': ['50.770%', '32.627%'],\n",
@@ -186,7 +193,7 @@ def main():
     patch_build()
     patch_runtime()
     patch_blueprint_dispatch()
-    print("Approved Living Room v7 positions, centered TV and mobile runtime applied")
+    print("Approved Living Room v7 positions, lowered centered TV and mobile runtime applied")
 
 
 if __name__ == "__main__":
