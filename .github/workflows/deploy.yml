@@ -1,8 +1,14 @@
 name: Build and Deploy
 
-# Manual only -- triggered by the dashboard's "Deploy Live" button or GitHub Actions.
+# Normal deploys remain manual. A push to the single .deploy-trigger file
+# is also allowed so an authorized repository tool can launch the same
+# production workflow without changing site source files.
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.deploy-trigger'
 
 jobs:
   deploy:
