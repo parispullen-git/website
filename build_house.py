@@ -546,7 +546,7 @@ html = f'''<!DOCTYPE html>
 <script src="assets/js/room-pager.js?v=17" defer></script>
 <script src="assets/js/nav-panel.js?v=16" defer></script>
 <script src="assets/js/world.js?v=16" defer></script>
-<script src="assets/js/tv-remote.js?v=16" defer></script>
+<script src="assets/js/tv-remote.js?v=17" defer></script>
 <script src="assets/js/guide-portal.js?v=16" defer></script>
 <script src="assets/js/gym-portal.js?v=16" defer></script>
 <script src="assets/js/vault-entrance.js?v=16" defer></script>

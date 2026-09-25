@@ -838,6 +838,11 @@
             state.updateMuteLabel();
             promptForSound();
           } else {
+            // The living room TV is the house soundtrack -- it plays on
+            // through every room, so it never auto-mutes on the way out.
+            // (It still pauses for the cinema/music lounge via the house
+            // audio director below.)
+            if (state.key === 'living') return;
             if (!everEnteredRoom || state.muted) return;
             state.muted = true;
             state.autoMuted = true;
@@ -1213,6 +1218,75 @@
 
     render();
   }
+
+  /* ---------- house audio director ----------
+     The living room TV is the house soundtrack: it plays on through every
+     room (it no longer auto-mutes on leave, see the observer above) and is
+     never reloaded, so switching rooms never restarts it. Two rooms have
+     their own private audio, so the living TV yields while you're in them:
+       - cinema: the cinema's own video sound (living TV pauses on entry,
+         resumes on exit -- but only if it was actually playing with sound;
+         a manual pause or mute is never overridden).
+       - music-lounge: the lounge's own Spotify playlist (same pause/resume
+         deal; the lounge piano is also silenced on departure so it can't
+         bleed over the TV in the next room).
+     The cinema's own enter/leave mute behavior is untouched. */
+  (function houseAudioDirector() {
+    var LIVING = 'living', CINEMA = 'cinema', LOUNGE = 'music-lounge';
+    var livingHeld = false; // true only while WE paused the living TV
+    var lastRoom = null;
+
+    function living() { return STATE_BY_KEY[LIVING]; }
+
+    function pauseLiving() {
+      var st = living();
+      if (!st || st.isOff || st.isPaused || st.muted) return;
+      st.isPaused = true;
+      post(st.iframe, 'pauseVideo');
+      livingHeld = true;
+      notifyState(st);
+    }
+
+    function resumeLiving() {
+      var st = living();
+      if (!livingHeld) return;
+      livingHeld = false;
+      if (!st || st.isOff) return;
+      st.isPaused = false;
+      post(st.iframe, 'playVideo');
+      notifyState(st);
+    }
+
+    function silenceLounge() {
+      Array.prototype.forEach.call(document.querySelectorAll('[data-piano-player]'), function (el) {
+        try { if (el._piano && el._piano.controller) el._piano.controller.pause(); } catch (e) {}
+      });
+    }
+
+    function primeRoom() {
+      try {
+        var pager = window.PPRoomPagers && window.PPRoomPagers[0];
+        if (pager && pager.getCurrentId) lastRoom = pager.getCurrentId();
+      } catch (e) {}
+      if (!lastRoom) lastRoom = (document.body && document.body.dataset.room) || null;
+    }
+
+    document.addEventListener('pp:room-change', function (e) {
+      var id = e.detail && e.detail.id;
+      var prev = lastRoom;
+      lastRoom = id || lastRoom;
+      if (!id || id === prev) return;
+      if (id === CINEMA || id === LOUNGE) {
+        pauseLiving();
+      } else {
+        if (prev === LOUNGE) silenceLounge();
+        // cinema's own observer already mutes its video on departure
+        resumeLiving();
+      }
+    });
+
+    primeRoom();
+  })();
 
   // Room-native programme cards use this bridge into the existing player.
   window.PPTheatre = {
