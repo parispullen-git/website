@@ -33,7 +33,7 @@ FLOORS = json.loads((Path(__file__).resolve().parent / "data" / "house-rooms.jso
 # serving the old file for hours after a swap unless the URL itself
 # changes. Bumping this on every image update forces a fresh fetch --
 # mirror any change here in assets/js/penthouse.js's IMG_VER too.
-IMG_VER = "20260917a"
+IMG_VER = "20260925v7m"
 
 def esc(t):
     return t.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("'","&#8217;")
@@ -202,13 +202,14 @@ BARBERSHOP_NODE_POS = {
 }
 
 KITCHEN_HELLOFRESH_UNLOCK = '''<div class="hf-unlock">
-                  <p class="hf-unlock__eyebrow">Unlocked &#183; 5 Recipes Every Man Should Own</p>
+                  <p class="hf-unlock__eyebrow">Unlocked &#183; 6 Recipes &#183; The House Edit</p>
                   <ul class="hf-recipe-list">
-                    <li><span class="hf-recipe-list__name">Pan-Seared Filet, Peppercorn Sauce</span><span class="hf-recipe-list__note">The one that never needs an occasion.</span></li>
-                    <li><span class="hf-recipe-list__name">Miso-Glazed Salmon, Charred Broccolini</span><span class="hf-recipe-list__note">Fifteen minutes, looks like an hour.</span></li>
-                    <li><span class="hf-recipe-list__name">French Onion Steak Frites</span><span class="hf-recipe-list__note">For the night you're not ordering in.</span></li>
-                    <li><span class="hf-recipe-list__name">Rigatoni alla Vodka, Torn Basil</span><span class="hf-recipe-list__note">Cooks in one pan. Photographs in every light.</span></li>
-                    <li><span class="hf-recipe-list__name">Smoked Paprika Chicken, Root Vegetables</span><span class="hf-recipe-list__note">The one you actually make twice a week.</span></li>
+                    <li><span class="hf-recipe-list__name">Turkey &amp; Mushroom Shepherd&#8217;s Pie</span><span class="hf-recipe-list__note">The comfort.</span></li>
+                    <li><span class="hf-recipe-list__name">Bacon, Egg &amp; Cheese on Brioche</span><span class="hf-recipe-list__note">The morning.</span></li>
+                    <li><span class="hf-recipe-list__name">Southwest Shrimp Tacos</span><span class="hf-recipe-list__note">The quick one.</span></li>
+                    <li><span class="hf-recipe-list__name">Sausage &amp; Cheesy Eggplant Flatbreads</span><span class="hf-recipe-list__note">The flatbread.</span></li>
+                    <li><span class="hf-recipe-list__name">BBQ Chicken Quesadillas</span><span class="hf-recipe-list__note">The fifteen-minute.</span></li>
+                    <li><span class="hf-recipe-list__name">Lamb Chops au Poivre</span><span class="hf-recipe-list__note">The showstopper.</span></li>
                   </ul>
                   <a class="cta cta--ghost hf-unlock__cta" href="pantry.html"><span>Get the Box &#8212; HelloFresh &#215; Paris Pullen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
                 </div>'''
@@ -218,10 +219,10 @@ KITCHEN_HELLOFRESH_UNLOCK = '''<div class="hf-unlock">
 # elevator, recurring, produce) but that room isn't one of the 9 actually
 # open right now (see _PENTHOUSE_ORDER above), so this lands on the Study's
 # Cocktail Guide instead -- already open, already Level 27, and its own
-# six-drinks rule ("never consulted in company") makes a private aside
+# eleven-drinks rule ("never consulted in company") makes a private aside
 # about tonight's menu a natural fit rather than a bolted-on mention.
 STUDY_COCKTAILS_TRACE = ('<p class="body" style="margin-top:var(--s2);color:var(--ash)">'
-    'One of the six has a way of turning up next to whatever&#8217;s coming out of the Kitchen &#8212; '
+    'One of the eleven has a way of turning up next to whatever&#8217;s coming out of the Kitchen &#8212; '
     '<a class="link-under" href="house.html#kitchen">see what that is this week</a>.</p>')
 
 # The Jacket's own description (left over the chair, not hung, "wasn't
