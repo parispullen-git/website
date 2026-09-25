@@ -612,6 +612,17 @@ def build_journal_index():
 <title>The Journal &#8212; Paris Pullen</title>
 <meta name="description" content="Style, strategy, culture, Charlotte, music, fragrance, business, philosophy and life. Written the way it is lived.">
 <meta name="theme-color" content="#0A0A0B">
+<link rel="canonical" href="https://parispullen.com/journal.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Journal &#8212; Paris Pullen">
+<meta property="og:description" content="Style, strategy, culture, Charlotte, music, fragrance, business, philosophy and life. Written the way it is lived.">
+<meta property="og:url" content="https://parispullen.com/journal.html">
+<meta property="og:image" content="https://parispullen.com/assets/img/paris-pinstripe.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Journal &#8212; Paris Pullen">
+<meta name="twitter:description" content="Style, strategy, culture, Charlotte, music, fragrance, business, philosophy and life. Written the way it is lived.">
+<meta name="twitter:image" content="https://parispullen.com/assets/img/paris-pinstripe.jpg">
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"Blog","name":"The Journal — Paris Pullen","description":"Style, strategy, culture, Charlotte, music, fragrance, business, philosophy and life. Written the way it is lived.","url":"https://parispullen.com/journal.html","author":{{"@type":"Person","name":"Paris Pullen","alternateName":"Agent Foxx","url":"https://parispullen.com/"}},"isPartOf":{{"@type":"WebSite","name":"Paris Pullen","url":"https://parispullen.com/"}}}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -667,6 +678,7 @@ def build_journal_index():
 </section>
 </main>
 {SITE_FOOT}
+<script src="/assets/js/site-audio.js?v=1" defer></script>
 <script src="assets/js/journal.js" defer></script>
 <script src="assets/js/world.js" defer></script>
 </body>

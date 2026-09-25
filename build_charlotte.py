@@ -361,6 +361,7 @@ html = f'''<!DOCTYPE html>
 
 {SITE_FOOT}
 
+<script src="/assets/js/site-audio.js?v=1" defer></script>
 <script src="assets/js/charlotte-guide.js" defer></script>
 <script src="assets/js/city-explorer.js" defer></script>
 <script src="assets/js/city.js" defer></script>

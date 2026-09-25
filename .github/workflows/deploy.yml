@@ -32,6 +32,12 @@ jobs:
           cp closet-v7.jpeg assets/img/room-closet@sm.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7.jpg
           cp closet-v7.jpeg assets/img/room-closet-v7@sm.jpg
+          # The @sm variants must be real 1200px downsizes, not full-size
+          # copies -- otherwise the 1200w srcset descriptors lie and
+          # house.html ships ~25MB of images to every visitor.
+          for f in assets/img/room-living@sm.jpg assets/img/room-living-v7@sm.jpg assets/img/room-closet@sm.jpg assets/img/room-closet-v7@sm.jpg; do
+            ffmpeg -y -v error -i "$f" -vf scale=1200:-1 -q:v 4 "$f.tmp.jpg" && mv "$f.tmp.jpg" "$f"
+          done
           sed -i -E 's/IMG_VER = "[^"]+"/IMG_VER = "20260924v7k"/' build_house.py
           sed -i -E "s/var IMG_VER = '[^']+';/var IMG_VER = '20260924v7k';/" assets/js/penthouse.js
 

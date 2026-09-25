@@ -1,6 +1,8 @@
 /* Generic CRUD for the site's editable content collections.
    Public GET (list) so the live pages can render it; authed POST/DELETE
-   so only the dashboard can change it.
+   so only the dashboard can change it. Dashboard-only collections
+   (pitches, goals, social-analytics, newsletter, daily-news,
+   tracked-brands, dispatch-briefs) require auth even for GET.
    Collections: vault-reserve, vault-links, journal, casefiles, wardrobe,
    curations (personalized wardrobe lookbooks, see dashboard.html's Lookbook
    tab and lookbook.html), playlists (the Piano's Spotify rotation -- see
@@ -27,6 +29,13 @@ const ALLOWED = new Set([
   'tracked-brands', 'daily-news',
 ]);
 
+// Dashboard-only collections: never served to the public, even for reads.
+// (curations stays public — lookbook.html renders it for visitors.)
+const PRIVATE = new Set([
+  'pitches', 'goals', 'social-analytics', 'newsletter',
+  'daily-news', 'tracked-brands', 'dispatch-briefs',
+]);
+
 export async function onRequest(context) {
   const { request, env } = context;
   const event = await toEvent(request);
@@ -38,6 +47,9 @@ export async function onRequest(context) {
   }
 
   if (event.httpMethod === 'GET') {
+    if (PRIVATE.has(collection) && !checkAuth(env, { passphraseHash: params.passphraseHash })) {
+      return json(401, { error: 'Not authorized.' });
+    }
     if (params.id) {
       const record = await getRecord(env, collection, params.id);
       if (!record) return json(404, { error: 'Not found' });
