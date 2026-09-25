@@ -110,3 +110,41 @@
   s.setAttribute('data-hf-six-guide', '');
   document.head.appendChild(s);
 })();
+
+/* Cocktail Menu image repair. cocktail-menu.html renders real <img> elements but
+   its original inline stylesheet never positioned/sized .card-image. Keep this
+   here because site-audio.js is already loaded by the standalone menu and is not
+   replaced by the Penthouse generated-page rebuild. */
+(function () {
+  'use strict';
+  if (!/\/cocktail-menu\.html$/.test(location.pathname)) return;
+
+  var COCKTAIL_ROOT = '/assets/img/cocktails/';
+  var style = document.createElement('style');
+  style.id = 'pp-cocktail-image-fix';
+  style.textContent = [
+    '.card{isolation:isolate;background:#171310!important}',
+    '.card-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:center!important;z-index:0!important;opacity:1!important}',
+    '.card:before{z-index:1!important;pointer-events:none!important;opacity:.18!important}',
+    '.card:after{z-index:1!important;pointer-events:none!important;background:linear-gradient(180deg,rgba(0,0,0,.02) 34%,rgba(14,11,8,.84) 100%)!important}',
+    '.card-body,.card-mark{z-index:2!important}',
+    '.card-mark{color:rgba(255,255,255,.72)!important;text-shadow:0 1px 12px rgba(0,0,0,.4)}'
+  ].join('');
+  document.head.appendChild(style);
+
+  function normalizeImages() {
+    document.querySelectorAll('.card-image').forEach(function (img) {
+      var raw = img.getAttribute('src') || '';
+      var filename = raw.split('/').pop();
+      if (filename) img.src = COCKTAIL_ROOT + filename;
+      img.decoding = 'async';
+      img.addEventListener('error', function () {
+        img.style.display = 'none';
+        img.closest('.card').classList.add('cocktail-image-error');
+      }, { once: true });
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', normalizeImages);
+  else normalizeImages();
+})();
