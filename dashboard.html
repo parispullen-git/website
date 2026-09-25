@@ -1100,7 +1100,7 @@
     var loading = document.getElementById('orders-loading');
     var list = document.getElementById('orders-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/api/orders?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/orders', {headers: authHeaders()})
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -1152,7 +1152,7 @@
     if (delBtn) {
       if (!armDelete(delBtn)) return;
       var invoiceId = delBtn.getAttribute('data-delete-order');
-      fetch('/api/orders?invoiceId=' + encodeURIComponent(invoiceId) + '&passphraseHash=' + encodeURIComponent(storedHash), {
+      fetch('/api/orders?invoiceId=' + encodeURIComponent(invoiceId), {headers: authHeaders(),
         method: 'DELETE'
       }).then(function(){ loadOrders(); });
     }
@@ -1200,7 +1200,7 @@
     var loading = document.getElementById('invoices-loading');
     var list = document.getElementById('invoices-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/api/invoices?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/invoices', {headers: authHeaders()})
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -1239,7 +1239,7 @@
     var loading = document.getElementById('proposals-loading');
     var list = document.getElementById('proposals-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/api/proposals?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/proposals', {headers: authHeaders()})
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -1329,7 +1329,7 @@
     var loading = document.getElementById('inquiries-loading');
     var list = document.getElementById('inquiries-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/api/inquiries?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/inquiries', {headers: authHeaders()})
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -1355,7 +1355,7 @@
     var loading = document.getElementById('clients-loading');
     var list = document.getElementById('clients-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/api/clients?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/clients', {headers: authHeaders()})
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -1610,9 +1610,14 @@
       .replace(/^-+|-+$/g, '')
       .slice(0, 60);
   }
+  // Dashboard auth rides the Authorization header -- never the URL.
+  // (Hashes in query strings end up in edge logs.)
+  function authHeaders(){
+    return {'Authorization': 'Bearer ' + storedHash};
+  }
   function authedFetch(url, opts){
     opts = opts || {};
-    var headers = Object.assign({'Content-Type': 'application/json'}, opts.headers || {});
+    var headers = Object.assign({'Content-Type': 'application/json'}, authHeaders(), opts.headers || {});
     return fetch(url, Object.assign({}, opts, {headers: headers}))
       .then(function(r){ return r.json().then(function(d){ return {ok: r.ok, status: r.status, data: d}; }); });
   }
@@ -1787,7 +1792,7 @@
           data: {slug: slug2, deleted: true},
         })}).then(function(){ loadJourCategories(); });
       } else if (existing2) {
-        fetch('/api/content?collection=journal-categories&id=' + encodeURIComponent(existing2.id) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+        fetch('/api/content?collection=journal-categories&id=' + encodeURIComponent(existing2.id), {headers: authHeaders(),method:'DELETE'})
           .then(function(){ loadJourCategories(); });
       }
     }
@@ -1969,7 +1974,7 @@
     var delBtn = e.target.closest('[data-delete-jour]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/api/content?collection=journal&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-jour')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=journal&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-jour')), {headers: authHeaders(),method:'DELETE'})
         .then(function(){ loadJournalDash(); });
     }
   });
@@ -3297,7 +3302,7 @@
     var delBtn = e.target.closest('[data-delete-disp]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/api/content?collection=dispatch-briefs&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-disp')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=dispatch-briefs&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-disp')), {headers: authHeaders(),method:'DELETE'})
         .then(function(){ loadDispatchDash(); });
     }
   });
@@ -3387,7 +3392,7 @@
     var delBtn = e.target.closest('[data-delete-music]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/api/content?collection=playlists&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-music')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=playlists&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-music')), {headers: authHeaders(),method:'DELETE'})
         .then(function(){ loadMusicDash(); });
       return;
     }
@@ -3613,7 +3618,7 @@
     var delBtn = e.target.closest('[data-delete-pitch]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/api/content?collection=pitches&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-pitch')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=pitches&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-pitch')), {headers: authHeaders(),method:'DELETE'})
         .then(function(){ loadPitchesDash(); });
     }
   });
@@ -3710,7 +3715,7 @@
     var delBtn = e.target.closest('[data-delete-goal]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/api/content?collection=goals&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-goal')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=goals&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-goal')), {headers: authHeaders(),method:'DELETE'})
         .then(function(){ loadGoalsDash(); });
     }
   });
@@ -3844,7 +3849,7 @@
     var delBtn = e.target.closest('[data-delete-social]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/api/content?collection=social-analytics&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-social')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=social-analytics&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-social')), {headers: authHeaders(),method:'DELETE'})
         .then(function(){ loadSocialDash(); });
     }
   });
@@ -3943,7 +3948,7 @@
     var delBtn = e.target.closest('[data-delete-nl]');
     if (delBtn) {
       if (!armDelete(delBtn)) return;
-      fetch('/api/content?collection=newsletter&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-nl')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      fetch('/api/content?collection=newsletter&id=' + encodeURIComponent(delBtn.getAttribute('data-delete-nl')), {headers: authHeaders(),method:'DELETE'})
         .then(function(){ loadNewsletterDash(); });
     }
   });
@@ -4150,7 +4155,7 @@
     var loading = document.getElementById('network-loading');
     var list = document.getElementById('network-list');
     loading.hidden = false; list.innerHTML = '';
-    fetch('/api/network?passphraseHash=' + encodeURIComponent(storedHash))
+    fetch('/api/network', {headers: authHeaders()})
       .then(function(r){ return r.json(); })
       .then(function(data){
         loading.hidden = true;
@@ -4179,7 +4184,7 @@
     var delBtn = e.target.closest('[data-delete-net]');
     if (!delBtn) return;
     if (!armDelete(delBtn)) return;
-    fetch('/api/network?id=' + encodeURIComponent(delBtn.getAttribute('data-delete-net')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+    fetch('/api/network?id=' + encodeURIComponent(delBtn.getAttribute('data-delete-net')), {headers: authHeaders(),method:'DELETE'})
       .then(function(){ loadNetworkDash(); });
   });
 

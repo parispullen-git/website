@@ -33,7 +33,7 @@ export async function onRequest(context) {
   } catch (e) {
     return json(400, { error: 'Bad request body' });
   }
-  if (!checkAuth(env, payload)) {
+  if (!checkAuth(env, payload, event.headers)) {
     return json(401, { error: 'Not authorized.' });
   }
 

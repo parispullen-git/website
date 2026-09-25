@@ -29,8 +29,7 @@ export async function onRequest(context) {
   }
 
   if (event.httpMethod === 'GET') {
-    const auth = event.queryStringParameters && event.queryStringParameters.passphraseHash;
-    if (!checkAuth(env, { passphraseHash: auth })) {
+    if (!checkAuth(env, null, event.headers)) {
       return json(401, { error: 'Not authorized.' });
     }
     const records = await listRecords(env, COLLECTION);

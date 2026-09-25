@@ -19,7 +19,7 @@ export async function onRequest(context) {
       if (!record) return json(404, { error: 'Not found' });
       return json(200, record);
     }
-    if (!checkAuth(env, { passphraseHash: params.passphraseHash })) {
+    if (!checkAuth(env, null, event.headers)) {
       return json(401, { error: 'Not authorized.' });
     }
     const records = await listRecords(env, COLLECTION);
@@ -33,7 +33,7 @@ export async function onRequest(context) {
     return json(400, { error: 'Bad request body' });
   }
 
-  if (!checkAuth(env, payload)) {
+  if (!checkAuth(env, payload, event.headers)) {
     return json(401, { error: 'Not authorized.' });
   }
 

@@ -22,7 +22,7 @@ export async function onRequest(context) {
     return json(405, { error: 'Method not allowed' });
   }
   const params = event.queryStringParameters || {};
-  if (!checkAuth(env, { passphraseHash: params.passphraseHash })) {
+  if (!checkAuth(env, null, event.headers)) {
     return json(401, { error: 'Not authorized.' });
   }
 

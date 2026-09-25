@@ -44,10 +44,25 @@ async function deleteRecord(env, collection, id) {
   await env.PP_DATA.delete(`${collection}/${id}`);
 }
 
-function checkAuth(env, payload) {
+// Fail closed: with no INVOICE_PASSPHRASE_HASH configured, deny everything
+// rather than leaving the dashboard (and private collections) wide open.
+// Accepts the passphrase via JSON body (payload.passphraseHash) or the
+// Authorization: Bearer <hash> header. Never via query string -- hashes in
+// URLs end up in edge logs.
+function checkAuth(env, payload, headers) {
   const expected = env.INVOICE_PASSPHRASE_HASH;
-  if (!expected) return true; // no gate configured -- fail open only if unset
-  return payload && payload.passphraseHash === expected;
+  if (!expected) return false;
+  let provided = payload && payload.passphraseHash;
+  if (!provided && headers) {
+    const raw = typeof headers.get === 'function'
+      ? headers.get('authorization')
+      : (headers['authorization'] || headers['Authorization']);
+    if (raw) {
+      const m = /^\s*Bearer\s+(.+?)\s*$/.exec(raw);
+      if (m) provided = m[1];
+    }
+  }
+  return !!provided && provided === expected;
 }
 
 function json(status, body) {

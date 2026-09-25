@@ -1,0 +1,18 @@
+# Security headers for Cloudflare Pages (canonical host -- see wrangler.toml).
+# The CSP is intentionally permissive on script/style sources: the site
+# relies on inline scripts/styles plus third-party embeds (YouTube,
+# Instagram, Spotify, Google Fonts, Formspree). It still blocks plugins,
+# base-tag hijacking, and off-site framing. Framing is same-origin only
+# (SAMEORIGIN) because the cocktail portal intentionally frames the
+# site's own /cocktail-menu.html in an overlay iframe.
+#
+# NOTE: _headers only ships if it is in the deployed output directory.
+# The deploy pipeline runs `pages deploy .` (repo root), so this file must
+# stay at the repo root.
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000
+  Content-Security-Policy: default-src 'self' https: data:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; media-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https:; frame-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://formspree.io mailto:

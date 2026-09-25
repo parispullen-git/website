@@ -21,7 +21,7 @@ export async function onRequest(context) {
   const url = new URL(request.url);
 
   if (request.method === 'GET') {
-    if (!checkAuth(env, { passphraseHash: url.searchParams.get('passphraseHash') })) {
+    if (!checkAuth(env, null, request.headers)) {
       return json(401, { error: 'Not authorized.' });
     }
     const records = await listRecords(env, COLLECTION);
@@ -29,7 +29,7 @@ export async function onRequest(context) {
   }
 
   if (request.method === 'DELETE') {
-    if (!checkAuth(env, { passphraseHash: url.searchParams.get('passphraseHash') })) {
+    if (!checkAuth(env, null, request.headers)) {
       return json(401, { error: 'Not authorized.' });
     }
     const id = url.searchParams.get('id');

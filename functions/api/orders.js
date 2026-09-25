@@ -47,7 +47,7 @@ export async function onRequest(context) {
 
   if (event.httpMethod === 'GET') {
     const q = event.queryStringParameters || {};
-    if (!checkAuth(env, { passphraseHash: q.passphraseHash })) return json(401, { error: 'unauthorized' });
+    if (!checkAuth(env, null, event.headers)) return json(401, { error: 'unauthorized' });
 
     const records = await listRecords(env, COLLECTION);
     const orders = records.map((o) => ({ ...o, statusLabel: STATUS_LABEL[o.status], message: messageFor(o) }));
@@ -66,7 +66,7 @@ export async function onRequest(context) {
     } catch (e) {
       return json(400, { error: 'invalid json' });
     }
-    if (!checkAuth(env, body)) return json(401, { error: 'unauthorized' });
+    if (!checkAuth(env, body, event.headers)) return json(401, { error: 'unauthorized' });
 
     const { invoiceId, clientName, clientEmail, item, status, tracking, sendEmail } = body;
     if (!invoiceId) return json(400, { error: 'invoiceId required' });
@@ -103,7 +103,7 @@ export async function onRequest(context) {
 
   if (event.httpMethod === 'DELETE') {
     const q = event.queryStringParameters || {};
-    if (!checkAuth(env, { passphraseHash: q.passphraseHash })) return json(401, { error: 'unauthorized' });
+    if (!checkAuth(env, null, event.headers)) return json(401, { error: 'unauthorized' });
     if (!q.invoiceId) return json(400, { error: 'invoiceId required' });
     await deleteRecord(env, COLLECTION, q.invoiceId);
     return json(200, { ok: true });

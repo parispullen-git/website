@@ -47,7 +47,7 @@ export async function onRequest(context) {
   }
 
   if (event.httpMethod === 'GET') {
-    if (PRIVATE.has(collection) && !checkAuth(env, { passphraseHash: params.passphraseHash })) {
+    if (PRIVATE.has(collection) && !checkAuth(env, null, event.headers)) {
       return json(401, { error: 'Not authorized.' });
     }
     if (params.id) {
@@ -66,7 +66,7 @@ export async function onRequest(context) {
     return json(400, { error: 'Bad request body' });
   }
 
-  if (!checkAuth(env, payload)) {
+  if (!checkAuth(env, payload, event.headers)) {
     return json(401, { error: 'Not authorized.' });
   }
 
