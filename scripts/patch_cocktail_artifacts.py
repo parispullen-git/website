@@ -1,10 +1,41 @@
 #!/usr/bin/env python3
 from pathlib import Path
+import re
 
 ROOT=Path(__file__).resolve().parents[1]
+VER='20260924v6'
 
-CARD='''\n    <a class="lib__card" href="/cocktail-menu.html" data-cocktail-portal>\n      <img src="/assets/img/room-study@sm.jpg?v=20260913g" srcset="/assets/img/room-study@sm.jpg?v=20260913g 700w, /assets/img/room-study.jpg?v=20260913g 1400w" sizes="420px" alt="" loading="lazy">\n      <span class="lib__card-body">\n        <span class="lib__card-text">\n          <span class="lib__card-name">The Gentleman’s Cocktail Menu</span>\n          <span class="lib__card-sub">11 house classics · recipes</span>\n        </span>\n        <span class="lib__card-arrow" aria-hidden="true">&#8594;</span>\n      </span>\n    </a>\n'''
-SCRIPT='\n<script src="/assets/js/cocktail-portal.js?v=1" defer></script>\n'
+CARD=f'''\n    <a class="lib__card" href="/cocktail-menu.html?v={VER}" data-cocktail-portal>\n      <img src="/assets/img/room-study@sm.jpg?v=20260913g" srcset="/assets/img/room-study@sm.jpg?v=20260913g 700w, /assets/img/room-study.jpg?v=20260913g 1400w" sizes="420px" alt="" loading="lazy">\n      <span class="lib__card-body">\n        <span class="lib__card-text">\n          <span class="lib__card-name">The Gentleman’s Cocktail Menu</span>\n          <span class="lib__card-sub">11 house classics · recipes</span>\n        </span>\n        <span class="lib__card-arrow" aria-hidden="true">&#8594;</span>\n      </span>\n    </a>\n'''
+SCRIPT=f'\n<script src="/assets/js/cocktail-portal.js?v={VER}" defer></script>\n'
+CACHE_BUSTER=f'''
+<script>
+/* PP_COCKTAIL_PORTAL_CACHE_BUSTER_V6 */
+(function(){{
+  var VER='{VER}';
+  function freshen(){{
+    var frame=document.querySelector('.pp-cocktail-portal__frame');
+    if(!frame) return;
+    var wanted='/cocktail-menu.html?v='+VER+'&t='+Date.now();
+    if(frame.getAttribute('data-pp-fresh')!=='1'){{
+      frame.setAttribute('data-pp-fresh','1');
+      frame.src=wanted;
+    }}
+  }}
+  new MutationObserver(function(){{freshen();}}).observe(document.documentElement,{{childList:true,subtree:true}});
+  document.addEventListener('click',function(e){{
+    if(e.target.closest('[data-cocktail-portal],[data-artifact="cocktails"],[data-artifact="whiskey-glass"]')){{
+      setTimeout(function(){{
+        var frame=document.querySelector('.pp-cocktail-portal__frame');
+        if(frame){{
+          frame.removeAttribute('data-pp-fresh');
+          freshen();
+        }}
+      }},0);
+    }}
+  }},true);
+}})();
+</script>
+'''
 ROUTER='''
 <script>
 /* PP_PENTHOUSE_ARTIFACT_ROUTES_V1
@@ -31,6 +62,15 @@ document.addEventListener('click', function (event) {
 </script>
 '''
 
+def normalize_portal_script(s):
+    s=re.sub(r'<script src="/assets/js/cocktail-portal\.js\?v=[^"]+" defer></script>',
+             f'<script src="/assets/js/cocktail-portal.js?v={VER}" defer></script>',s)
+    if 'cocktail-portal.js' not in s:
+        s=s.replace('</body>',SCRIPT+'</body>',1)
+    if 'PP_COCKTAIL_PORTAL_CACHE_BUSTER_V6' not in s:
+        s=s.replace('</body>',CACHE_BUSTER+'</body>',1)
+    return s
+
 def patch_links():
     p=ROOT/'links'/'index.html'
     s=p.read_text(encoding='utf-8')
@@ -38,24 +78,17 @@ def patch_links():
         city='''    <a class="lib__card" href="/charlotte.html">'''
         pos=s.find(city)
         if pos!=-1:
-            # Put the Cocktail Menu immediately before City Guide so the hospitality artifacts sit together.
             s=s[:pos]+CARD+s[pos:]
         else:
-            marker='  </nav>'
-            s=s.replace(marker,CARD+marker,1)
-    if 'cocktail-portal.js' not in s:
-        s=s.replace('</body>',SCRIPT+'</body>',1)
+            s=s.replace('  </nav>',CARD+'  </nav>',1)
+    s=s.replace('href="/cocktail-menu.html" data-cocktail-portal',f'href="/cocktail-menu.html?v={VER}" data-cocktail-portal')
+    s=normalize_portal_script(s)
     p.write_text(s,encoding='utf-8')
 
 def patch_house():
     p=ROOT/'house.html'
     s=p.read_text(encoding='utf-8')
-    # Every cocktail artifact is intercepted by cocktail-portal.js and opens
-    # the full Gentleman's Cocktail Menu in the existing room-native overlay.
-    if 'cocktail-portal.js' not in s:
-        s=s.replace('</body>',SCRIPT+'</body>',1)
-    # Journal artifacts go straight to the Journal; the approved Living Room
-    # INDOCHINO/Suit Supply hotspot goes straight to The Blueprint game.
+    s=normalize_portal_script(s)
     if 'PP_PENTHOUSE_ARTIFACT_ROUTES_V1' not in s:
         s=s.replace('</body>',ROUTER+'</body>',1)
     p.write_text(s,encoding='utf-8')
@@ -72,4 +105,4 @@ if __name__=='__main__':
     patch_data_copy()
     patch_links()
     patch_house()
-    print('Cocktail, Journal and Living Room Blueprint artifact routes patched')
+    print(f'Cocktail portal cache-busted to {VER}; room and links routes patched')
