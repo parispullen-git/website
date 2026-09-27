@@ -349,5 +349,11 @@
     // Offscreen rooms must not remain in keyboard and screen-reader navigation.
     $$('.floor-scene').forEach(r=>{r.inert=r.id!==e.detail.id;});
   });
-  if(current())$$('.floor-scene').forEach(r=>{r.inert=r!==current();});
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-style-portal]');
+    if (!trigger || event.button && event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    blueprintPortal(trigger);
+  });
+  if(current())$('.floor-scene').forEach(r=>{r.inert=r!==current();});
 })();
