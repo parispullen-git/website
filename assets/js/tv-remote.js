@@ -892,6 +892,16 @@
     toggleBtn.textContent = 'Remote';
     document.body.appendChild(toggleBtn);
 
+    // A persistent house-audio control sits directly to the right of Remote.
+    // It mutes the active source: the Living Room TV in ordinary rooms, the
+    // Lounge playlist in Music Lounge/Gym, or Cinema when that room is open.
+    var houseMuteBtn = document.createElement('button');
+    houseMuteBtn.type = 'button';
+    houseMuteBtn.className = 'house-mute-toggle';
+    houseMuteBtn.setAttribute('aria-label', 'Mute house audio');
+    houseMuteBtn.textContent = 'Mute';
+    document.body.appendChild(houseMuteBtn);
+
     // One-tap play/pause for whichever screen the current room owns --
     // sits in the corner where the old (non-functional, no-op) "Sound
     // on/off" button used to be. Hidden in rooms with no screen at all
@@ -955,6 +965,7 @@
 
     var activeSource = 'tv'; // 'tv' | 'music' | 'cinema'
     var contextualKey = null; // the current room's own channel-set, if any
+    var currentRoomId = '';
 
     function keyForSource(src) { return src === 'tv' ? 'living' : src === 'cinema' ? 'cinema' : null; }
     // Named to avoid any confusion with the fullscreen modal's own
@@ -978,11 +989,14 @@
     document.addEventListener('pp:ambient-playback', function () {
       if (activeSource === 'music') render();
       renderPP();
+      renderHouseMute();
     });
     document.addEventListener('pp:ambient-change', function () {
       if (activeSource === 'music') render();
       renderPP();
+      renderHouseMute();
     });
+    document.addEventListener('pp:ambient-mute', renderHouseMute);
 
     // Simple now-playing card: album art, song title, room title -- built
     // with DOM methods rather than innerHTML since the title text comes
@@ -1066,6 +1080,21 @@
     // own screen when it has one; rooms with no screen fall back to
     // that room's own ambient track (window.PPAmbient) instead, so every
     // room gets a one-tap play/pause, not just TV/Cinema rooms.
+    function renderHouseMute() {
+      var st;
+      if (currentRoomId === 'cinema') st = STATE_BY_KEY.cinema;
+      else if (currentRoomId === 'music-lounge' || currentRoomId === 'gym') {
+        var lounge = ambient();
+        var loungeMuted = !!(lounge && lounge.controller && lounge.controller.muted);
+        houseMuteBtn.textContent = loungeMuted ? 'Unmute' : 'Mute';
+        houseMuteBtn.setAttribute('aria-label', loungeMuted ? 'Unmute house audio' : 'Mute house audio');
+        return;
+      } else st = STATE_BY_KEY.living;
+      var muted = !!(st && st.muted);
+      houseMuteBtn.textContent = muted ? 'Unmute' : 'Mute';
+      houseMuteBtn.setAttribute('aria-label', muted ? 'Unmute house audio' : 'Mute house audio');
+    }
+
     function renderPP() {
       var st = contextualKey && STATE_BY_KEY[contextualKey];
       if (st) {
@@ -1089,11 +1118,13 @@
     // screen's tab; every other room defaults to Music, since that's the
     // only source it actually has.
     document.addEventListener('pp:room-change', function (e) {
-      var scene = e.detail && e.detail.id && document.getElementById(e.detail.id);
+      currentRoomId = (e.detail && e.detail.id) || '';
+      var scene = currentRoomId && document.getElementById(currentRoomId);
       var screen = scene && scene.querySelector('.floor-scene__screen[data-tv]');
       contextualKey = screen ? screen.dataset.channelSet : null;
       if (!panel.classList.contains('is-open')) activeSource = contextualSource() || 'music';
       renderPP();
+      renderHouseMute();
     });
     // room-pager.js has already landed on the starting room by the time
     // this script runs (it loads first) -- that initial pp:room-change
@@ -1102,12 +1133,26 @@
     (function primeContext() {
       var pager = window.PPRoomPagers && window.PPRoomPagers[0];
       var id = pager && pager.getCurrentId();
+      currentRoomId = id || '';
       var scene = id && document.getElementById(id);
       var screen = scene && scene.querySelector('.floor-scene__screen[data-tv]');
       contextualKey = screen ? screen.dataset.channelSet : null;
     })();
     activeSource = contextualSource() || 'music';
     renderPP();
+    renderHouseMute();
+
+    houseMuteBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (currentRoomId === 'music-lounge' || currentRoomId === 'gym') {
+        var lounge = ambient();
+        if (lounge && lounge.controller && lounge.controller.toggleMute) lounge.controller.toggleMute();
+      } else {
+        var state = currentRoomId === 'cinema' ? STATE_BY_KEY.cinema : STATE_BY_KEY.living;
+        if (state) state.toggleMute();
+      }
+      renderHouseMute();
+    });
 
     ppBtn.addEventListener('click', function (e) {
       e.stopPropagation();
@@ -1124,6 +1169,7 @@
       var st = currentState();
       if (panel.classList.contains('is-open') && st && e.detail && e.detail.key === st.key) render();
       if (contextualKey && e.detail && e.detail.key === contextualKey) renderPP();
+      renderHouseMute();
     });
 
     function renderGuide(st) {
