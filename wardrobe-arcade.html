@@ -26,6 +26,10 @@
       if (!popup || !guideButton) throw new Error('Game not ready');
       if (room) room.remove();
       doc.body.style.background = '#0a0a0b';
+      const brand = doc.querySelector('.portal-brand');
+      const byline = doc.querySelector('.portal-byline');
+      if (brand && brand.firstChild) brand.firstChild.nodeValue = 'THE WARDROBE ';
+      if (byline) byline.textContent = 'by Paris Pullen';
       if (returnButton) returnButton.remove();
       guideButton.onclick = () => window.location.assign('/style-artifacts.html?embed=1&view=blueprints');
       if (!popup.open) doc.getElementById('launch')?.click();
