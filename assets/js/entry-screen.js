@@ -85,7 +85,8 @@
       guides.showModal();
     }
 
-    q('[data-entry-open-guides]', main).addEventListener('click', function (event) { openGuides(event.currentTarget); });
+    var guidesButton = q('[data-entry-open-guides]', main);
+    if (guidesButton) guidesButton.addEventListener('click', function (event) { openGuides(event.currentTarget); });
     var enter = q('[data-entry-enter]', main);
     if (enter) enter.addEventListener('click', closeEntry);
     if (returnButton) returnButton.addEventListener('click', closeEntry);
