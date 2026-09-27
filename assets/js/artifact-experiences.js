@@ -271,7 +271,7 @@
     const portal = document.createElement('dialog');
     portal.id = 'blueprint-room-portal';
     portal.className = 'ae-dialog';
-    portal.innerHTML = '<header class="ae-header"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE BLUEPRINT · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to room ×</button></header><iframe title="The Blueprint wardrobe game" src="/blueprint.html?embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#0a0a0b"></iframe>';
+    portal.innerHTML = '<header class="ae-header"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE STYLE · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to room ×</button></header><iframe title="The Style artifacts" src="/style-artifacts.html?embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#18140f"></iframe>';
     document.body.appendChild(portal);
     portal.querySelector('.ae-close').addEventListener('click', () => portal.close());
     portal.addEventListener('click', event => { if (event.target === portal) portal.close(); });
