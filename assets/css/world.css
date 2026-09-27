@@ -1146,14 +1146,14 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 /* The persistent sound control sits immediately to the right of Remote. */
 .house-mute-toggle{
   position:fixed;bottom:var(--s5);right:var(--gutter);z-index:850;
-  display:flex;align-items:center;gap:var(--s3);
-  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
+  display:grid;place-items:center;width:2.9rem;height:2.9rem;padding:0;cursor:pointer;
   color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
-  border-radius:999px;padding:.6em 1em;cursor:pointer;
-  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  border-radius:50%;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
   transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast);
 }
+.house-mute-toggle svg{width:1.05rem;height:1.05rem;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
 .house-mute-toggle:hover{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
+.house-mute-toggle.is-muted{color:var(--brass)}
 .house-mute-toggle[hidden]{display:none}
 
 /* ---------- 21. SCROLL REVEAL ---------- */
