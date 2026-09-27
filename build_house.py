@@ -550,7 +550,7 @@ html = f'''<!DOCTYPE html>
 <script src="assets/js/gym-portal.js?v=16" defer></script>
 <script src="assets/js/vault-entrance.js?v=16" defer></script>
 <script src="assets/js/piano-player.js?v=17" defer></script>
-<script src="assets/js/artifact-experiences.js?v=6" defer></script>
+<script src="assets/js/artifact-experiences.js?v=6" defer></script>\n<script src="assets/js/site-audio.js?v=2" defer></script>
 </body>
 </html>
 '''
