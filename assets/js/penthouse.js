@@ -85,11 +85,11 @@
     ],
     'bedroom': [
       { key:'artwork', name:'The Artwork', x:'36.5%', y:'17.5%', body:'Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.', specs:[['Acquired', 'Early, badly timed'], ['Subject', 'Unexplained'], ['Moved with him', 'Every time']] },
-      { key:'suit', name:'The Suit', x:'62%', y:'39%', body:"Black tie, laid out before he's even decided if tonight calls for it. Everything he owns is arranged by occasion &#8212; this one's already made the case for itself.", specs:[['Laid out', 'Before the invitation'], ['Occasion', 'Undecided'], ['See the rest', 'The Boutique']] },
+      { key:'suit', name:'The Style', x:'62%', y:'39%', body:"Black tie, laid out before he's even decided if tonight calls for it. Everything he owns is arranged by occasion &#8212; this one's already made the case for itself.", specs:[['Laid out', 'Before the invitation'], ['Occasion', 'Undecided'], ['See the rest', 'The Boutique']] },
     ],
     'bath': [],
     'closet': [
-      { key:'suits', name:'The Suits &amp; Tuxedos', x:'19%', y:'16.9%', body:'Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like. Two dinner jackets at the centre, black-tie and white-tie, either one pressed and ready before he has to ask.', specs:[['Ordered by', 'Occasion'], ['Navy suits', 'Twelve'], ['Tuxedos', 'Two, black-tie and white-tie']] },
+      { key:'suits', name:'The Style', x:'19%', y:'16.9%', body:'Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like. Two dinner jackets at the centre, black-tie and white-tie, either one pressed and ready before he has to ask.', specs:[['Ordered by', 'Occasion'], ['Navy suits', 'Twelve'], ['Tuxedos', 'Two, black-tie and white-tie']] },
       { key:'shoes', name:'The Shoes', x:'9%', y:'32.9%', body:'Cedar-treed, rotated, never worn two days running. The oldest pair on the shelf is fourteen years old and still the best thing in the room.', specs:[['Rotation', 'Enforced'], ['Oldest pair', '14 years'], ['Trees', 'Cedar']] },
       { key:'ties', name:'The Ties', x:'85%', y:'31.2%', body:'Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.', specs:[['Hung', 'Never rolled'], ['Worn regularly', 'Six'], ['Owned', 'Considerably more']] },
     ],
