@@ -114,38 +114,6 @@
       q('[data-entry-open="network"]', main).focus();
     };
 
-    // The hero portrait behaves like the Penthouse scenes: drag or swipe the
-    // open background to reveal more of the city and tailoring.
-    var background = q('.entry-screen__bg', root);
-    if (background) {
-      var startX = 0, startY = 0, offsetX = 0, offsetY = 0, active = false;
-      function paint() {
-        background.style.transform = 'scale(1.07) translate3d(' + offsetX + 'px,' + offsetY + 'px,0)';
-      }
-      root.addEventListener('pointerdown', function (event) {
-        if (event.target.closest('a,button,input,dialog')) return;
-        active = true;
-        startX = event.clientX - offsetX;
-        startY = event.clientY - offsetY;
-        root.classList.add('is-panning');
-        root.setPointerCapture(event.pointerId);
-      });
-      root.addEventListener('pointermove', function (event) {
-        if (!active) return;
-        event.preventDefault();
-        offsetX = Math.max(-54, Math.min(54, event.clientX - startX));
-        offsetY = Math.max(-38, Math.min(38, event.clientY - startY));
-        paint();
-      });
-      function stop(event) {
-        if (!active) return;
-        active = false;
-        root.classList.remove('is-panning');
-        if (root.hasPointerCapture(event.pointerId)) root.releasePointerCapture(event.pointerId);
-      }
-      root.addEventListener('pointerup', stop);
-      root.addEventListener('pointercancel', stop);
-    }
   }
 
   document.querySelectorAll('[data-entry-screen]').forEach(boot);
