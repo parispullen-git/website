@@ -265,7 +265,7 @@
     const portal = document.createElement('dialog');
     portal.id = 'cocktail-guide-portal';
     portal.className = 'ae-dialog';
-    portal.innerHTML = '<header class="ae-header"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE GENTLEMAN’S GUIDE TO COCKTAILS · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to room ×</button></header><iframe title="The Gentleman’s Guide to Cocktails" src="/cocktail-menu.html?v=a347de5&amp;embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#efe6d5"></iframe>';
+    portal.innerHTML = '<header class="ae-header"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE GENTLEMAN’S GUIDE TO COCKTAILS · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to room ×</button></header><iframe title="The Gentleman’s Guide to Cocktails" src="/cocktail-menu.html?v=2cf9656&amp;embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#efe6d5"></iframe>';
     document.body.appendChild(portal);
     portal.querySelector('.ae-close').addEventListener('click', () => portal.close());
     portal.addEventListener('click', event => { if (event.target === portal) portal.close(); });
