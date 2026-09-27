@@ -913,7 +913,7 @@
     ppBtn.className = 'playpause-toggle';
     ppBtn.hidden = true;
     ppBtn.innerHTML = '<span class="playpause-toggle__icon" aria-hidden="true"></span><span class="playpause-toggle__label">Pause</span>';
-    document.body.appendChild(ppBtn);
+    // Retained only as an internal state mirror for the Suite Remote; never mounted.
     var ppLabel = ppBtn.querySelector('.playpause-toggle__label');
 
     var panel = document.createElement('div');
