@@ -9,7 +9,7 @@
     var dialog = document.createElement('dialog');
     dialog.id = 'entry-guide-modal';
     dialog.className = 'entry-modal';
-    dialog.innerHTML = '<div class="entry-modal__bar"><p class="entry-modal__title"></p><button class="entry-modal__close" type="button">Return to Start ×</button></div><iframe loading="eager"></iframe>';
+    dialog.innerHTML = '<div class="entry-modal__bar"><p class="entry-modal__title"></p><button class="entry-modal__close" type="button">Return</button></div><iframe loading="eager"></iframe>';
     q('.entry-modal__title', dialog).textContent = title;
     q('iframe', dialog).src = src;
     q('iframe', dialog).title = title;

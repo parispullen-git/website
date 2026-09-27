@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/world.css?v=22">
 <link rel="stylesheet" href="assets/css/artifact-experiences.css?v=5">
-<link rel="stylesheet" href="assets/css/entry-screen.css?v=2">
+<link rel="stylesheet" href="assets/css/entry-screen.css?v=3">
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Paris Pullen","alternateName":"Agent Foxx",
@@ -36,16 +36,16 @@
 <!-- ============ THE GATE ============ -->
 <section class="entry-screen entry-screen--main" id="gate" data-entry-screen aria-label="Paris Pullen entry screen">
   <div class="entry-screen__bg" aria-hidden="true"></div>
+  <button class="entry-room-return" type="button" data-entry-return hidden>← Return</button>
   <div class="entry-screen__inner" data-entry-main>
     <h1 class="entry-title">Choose your way in.</h1>
     <p class="entry-copy">The world is built around how you show up. Start with the room, the guide, or the network.</p>
     <nav class="entry-actions" aria-label="Entry options">
-      <button class="entry-action" type="button" data-entry-open="network"><span class="entry-action__title">The Network</span><span class="entry-action__sub">Get connected with Paris</span></button>
-      <a class="entry-action" href="#penthouse" data-entry-enter><span class="entry-action__title">Enter the Penthouse</span><span class="entry-action__sub">Begin in the Living Room</span></a>
-      <button class="entry-action" type="button" data-entry-open-guides><span class="entry-action__title">Gentlemen Guides</span><span class="entry-action__sub">Style · City · Cocktails · Kitchen</span></button>
-      <a class="entry-action" href="journal.html"><span class="entry-action__title">The Journal</span><span class="entry-action__sub">From the word of the Gentleman</span></a>
-      <button class="entry-action" type="button" disabled aria-disabled="true"><span class="entry-action__title">Key to the City</span><span class="entry-action__sub">Restricted · Coming soon</span></button>
-      <button class="entry-action entry-action--return" type="button" data-entry-return hidden><span class="entry-action__title">Return to Room</span><span class="entry-action__sub">Continue the Penthouse</span></button>
+      <button class="entry-action" type="button" data-entry-open="network" style="--entry-image:url('/assets/img/env-network@sm.jpg')"><span class="entry-action__title">The Network</span><span class="entry-action__sub">Get connected with Paris</span></button>
+      <a class="entry-action" href="#penthouse" data-entry-enter style="--entry-image:url('/assets/img/room-living@sm.jpg')"><span class="entry-action__title">Enter the Penthouse</span><span class="entry-action__sub">Begin in the Living Room</span></a>
+      <button class="entry-action" type="button" data-entry-open-guides style="--entry-image:url('/assets/img/room-closet@sm.jpg')"><span class="entry-action__title">Gentlemen Guides</span><span class="entry-action__sub">Style · City · Cocktails · Kitchen</span></button>
+      <a class="entry-action" href="journal.html" style="--entry-image:url('/assets/img/room-study@sm.jpg')"><span class="entry-action__title">The Journal</span><span class="entry-action__sub">From the word of the Gentleman</span></a>
+      <button class="entry-action" type="button" disabled aria-disabled="true" style="--entry-image:url('/assets/img/citymap-plate@sm.jpg')"><span class="entry-action__title">Key to the City</span><span class="entry-action__sub">Restricted · Coming soon</span></button>
     </nav>
     <div class="entry-brand entry-brand--bottom"><img class="entry-brand__mark" src="/assets/img/monogram-mark.svg" alt=""><p class="entry-brand__name">Paris Pullen</p></div>
   </div>
@@ -53,7 +53,7 @@
     <div class="entry-screen entry-screen--guides">
       <div class="entry-screen__bg" aria-hidden="true"></div>
       <div class="entry-screen__inner">
-        <button class="entry-action entry-action--back" type="button" data-entry-back>← Return to Start</button>
+        <button class="entry-action entry-action--back" type="button" data-entry-back>← Return</button>
         <h2 class="entry-title">Select a guide.</h2>
         <div class="entry-guide-grid" aria-label="Gentlemen guides">
           <button class="entry-guide" style="--guide-image:url('/assets/img/entry/style-hero.webp')" data-entry-open="guide" data-entry-title="The Gentleman’s Guide to Suits" data-entry-src="/blueprint.html?embed=1"><span>Style<small>Suit combinations · fit · the Blueprint</small></span></button>
@@ -238,6 +238,6 @@
 <script src="assets/js/piano-player.js?v=17" defer></script>
 <script src="assets/js/artifact-experiences.js?v=6" defer></script>
 <script src="/assets/js/site-audio.js?v=1" defer></script>
-<script src="/assets/js/entry-screen.js?v=2" defer></script>
+<script src="/assets/js/entry-screen.js?v=3" defer></script>
 </body>
 </html>
