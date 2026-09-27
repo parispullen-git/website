@@ -899,7 +899,7 @@
     houseMuteBtn.type = 'button';
     houseMuteBtn.className = 'house-mute-toggle';
     houseMuteBtn.setAttribute('aria-label', 'Mute house audio');
-    houseMuteBtn.textContent = 'Mute';
+    houseMuteBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6l-5 4H3z"></path><path d="M15 9.5a4 4 0 0 1 0 5"></path><path d="M17.5 7a7.5 7.5 0 0 1 0 10"></path></svg>';
     document.body.appendChild(houseMuteBtn);
 
     // One-tap play/pause for whichever screen the current room owns --
@@ -1080,19 +1080,24 @@
     // own screen when it has one; rooms with no screen fall back to
     // that room's own ambient track (window.PPAmbient) instead, so every
     // room gets a one-tap play/pause, not just TV/Cinema rooms.
+    function setHouseMuteButton(muted) {
+      houseMuteBtn.classList.toggle('is-muted', muted);
+      houseMuteBtn.setAttribute('aria-label', muted ? 'Unmute house audio' : 'Mute house audio');
+      houseMuteBtn.setAttribute('title', muted ? 'Unmute house audio' : 'Mute house audio');
+      houseMuteBtn.innerHTML = muted
+        ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6l-5 4H3z"></path><path d="M3 3l18 18"></path></svg>'
+        : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6l-5 4H3z"></path><path d="M15 9.5a4 4 0 0 1 0 5"></path><path d="M17.5 7a7.5 7.5 0 0 1 0 10"></path></svg>';
+    }
+
     function renderHouseMute() {
       var st;
       if (currentRoomId === 'cinema') st = STATE_BY_KEY.cinema;
       else if (currentRoomId === 'music-lounge' || currentRoomId === 'gym') {
         var lounge = ambient();
-        var loungeMuted = !!(lounge && lounge.controller && lounge.controller.muted);
-        houseMuteBtn.textContent = loungeMuted ? 'Unmute' : 'Mute';
-        houseMuteBtn.setAttribute('aria-label', loungeMuted ? 'Unmute house audio' : 'Mute house audio');
+        setHouseMuteButton(!!(lounge && lounge.controller && lounge.controller.muted));
         return;
       } else st = STATE_BY_KEY.living;
-      var muted = !!(st && st.muted);
-      houseMuteBtn.textContent = muted ? 'Unmute' : 'Mute';
-      houseMuteBtn.setAttribute('aria-label', muted ? 'Unmute house audio' : 'Mute house audio');
+      setHouseMuteButton(!!(st && st.muted));
     }
 
     function renderPP() {
