@@ -14,7 +14,7 @@
 button{font:inherit} .book{height:100dvh;background:var(--paper);position:relative;overflow:hidden;box-shadow:0 0 100px rgba(0,0,0,.45) inset}
 .book:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.24;background-image:radial-gradient(rgba(78,60,36,.14) .65px,transparent .65px);background-size:4px 4px}
 .chrome{height:64px;position:relative;z-index:20;display:grid;grid-template-columns:1fr auto;align-items:center;border-bottom:1px solid rgba(23,19,16,.2);padding-left:18px;background:rgba(239,230,213,.92);backdrop-filter:blur(14px)}
-.brand small{display:block;font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)} .brand strong{font:400 20px var(--display);letter-spacing:.01em}
+.brand small{display:block;font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)} .brand strong{display:block;font:400 clamp(14px,2.1vw,20px)/1.1 var(--display);letter-spacing:.01em;overflow-wrap:anywhere}
 .close{width:64px;height:64px;border:0;border-left:1px solid rgba(23,19,16,.2);background:transparent;font-size:26px;color:var(--ink)} 
 .pages{height:calc(100dvh - 64px);position:relative;overflow:hidden}
 .index,.recipe{position:absolute;inset:0;overflow:auto;transition:transform .42s cubic-bezier(.22,.8,.23,1),opacity .3s}
@@ -36,7 +36,7 @@ button{font:inherit} .book{height:100dvh;background:var(--paper);position:relati
 .poster{background:#d5c8b5;display:grid;place-items:center;padding:18px;border-right:1px solid rgba(23,19,16,.25);min-height:0}
 .poster img{display:block;max-width:100%;max-height:calc(100dvh - 100px);object-fit:contain;box-shadow:0 18px 50px rgba(53,39,22,.22)}
 .detail{padding:clamp(24px,4vw,56px);overflow:auto;position:relative}
-.back{border:0;background:transparent;padding:0;margin-bottom:24px;text-transform:uppercase;letter-spacing:.18em;font-size:8px;color:var(--muted)} .back span{font-size:16px;margin-right:8px}
+.back{border:0;background:transparent;padding:0;margin-bottom:18px;text-transform:uppercase;letter-spacing:.18em;font-size:8px;color:var(--muted);cursor:pointer} .back span{font-size:16px;margin-right:8px}.recipe-nav{display:flex;justify-content:space-between;gap:10px;margin:0 0 20px}.recipe-nav button{border:1px solid rgba(23,19,16,.3);background:transparent;padding:8px 10px;color:var(--ink);font-size:8px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}.recipe-nav button:hover:not(:disabled){background:var(--ink);color:var(--paper)}.recipe-nav button:disabled{opacity:.35;cursor:default}
 .detail .eyebrow{font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass)} .detail h2{font:400 clamp(44px,6vw,86px)/.95 var(--display);margin:8px 0 18px}
 .meta{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(23,19,16,.25);border-bottom:1px solid rgba(23,19,16,.25);margin-bottom:24px}
 .meta div{padding:10px 12px 10px 0} .meta div+div{border-left:1px solid rgba(23,19,16,.18);padding-left:12px} .meta small{display:block;font-size:7px;text-transform:uppercase;letter-spacing:.17em;color:var(--muted)} .meta strong{font:400 16px var(--display)}
@@ -44,7 +44,7 @@ button{font:inherit} .book{height:100dvh;background:var(--paper);position:relati
 .house-note{margin-top:24px;border-top:1px solid rgba(23,19,16,.22);padding-top:14px;font:italic 15px/1.55 var(--display);color:var(--muted)}
 .footline{margin-top:24px;padding-top:14px;border-top:1px solid rgba(23,19,16,.22);font-size:7px;text-transform:uppercase;letter-spacing:.28em;color:var(--muted);text-align:center}
 @media(max-width:900px){.chrome{height:58px;padding-left:12px}.close{width:58px;height:58px}.pages{height:calc(100dvh - 58px)}.grid{grid-template-columns:repeat(2,1fr)}.card{min-height:0}.recipe-inner{grid-template-columns:1fr;display:block}.poster{height:44dvh;padding:10px;border-right:0;border-bottom:1px solid rgba(23,19,16,.2)}.poster img{max-height:100%;max-width:100%}.detail{height:56dvh;padding:18px 16px 36px}.detail h2{font-size:46px}.cols{grid-template-columns:1fr;gap:24px}}
-@media(max-width:520px){.index{padding:12px 10px 24px}.mast{padding:18px 12px 19px;margin-bottom:13px}.mast:before,.mast:after{width:20%}.mast h1{font-size:43px;margin-top:22px}.mast p{font-size:11px}.grid{grid-template-columns:1fr 1fr;gap:7px}.card{min-height:0}.card-name{font-size:20px}.card-body{padding:10px}.poster{height:42dvh}.detail{height:58dvh}.meta{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.index{padding:12px 10px 24px}.chrome{padding-left:10px}.brand small{font-size:6px;letter-spacing:.16em}.brand strong{font-size:clamp(12px,3.8vw,16px)}.mast{padding:18px 12px 19px;margin-bottom:13px}.mast:before,.mast:after{width:20%}.mast h1{font-size:40px;margin-top:22px}.mast p{font-size:11px}.grid{grid-template-columns:1fr 1fr;gap:7px}.card{min-height:0}.card-name{font-size:20px}.card-body{padding:10px}.poster{height:42dvh}.detail{height:58dvh;padding:16px 14px 30px}.detail h2{font-size:clamp(32px,10vw,42px);overflow-wrap:anywhere}.cols{gap:20px}.meta{grid-template-columns:1fr 1fr}.recipe-nav{margin-bottom:16px}.recipe-nav button{font-size:7px;padding:8px}}
 @media(prefers-reduced-motion:reduce){.index,.recipe,.card img{transition:none!important}}
 </style>
 </head>
@@ -62,6 +62,7 @@ button{font:inherit} .book{height:100dvh;background:var(--paper);position:relati
   <div class="poster"><img id="rImg" alt=""></div>
   <div class="detail">
    <button class="back" id="back"><span>←</span>Back to menu</button>
+   <div class="recipe-nav" aria-label="Browse cocktails"><button type="button" id="prevDrink">← Previous</button><button type="button" id="nextDrink">Next →</button></div>
    <div class="eyebrow" id="rNum">House Classic 01</div>
    <h2 id="rName"></h2>
    <div class="meta"><div><small>Glassware</small><strong id="rGlass"></strong></div><div><small>Garnish</small><strong id="rGarnish"></strong></div></div>
@@ -77,10 +78,12 @@ const DRINKS=[{"name": "Old Fashioned", "img": "data:image/jpeg;base64,/9j/4AAQS
 const grid=document.getElementById('grid'),index=document.getElementById('index'),recipe=document.getElementById('recipe');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 grid.innerHTML=DRINKS.map((d,i)=>`<button class="card" data-i="${i}" aria-label="Open ${esc(d.name)}"><img src="${d.img}" alt="${esc(d.name)}" loading="${i<4?'eager':'lazy'}"></button>`).join('');
-function openDrink(i){const d=DRINKS[i];document.getElementById('rImg').src=d.img;document.getElementById('rImg').alt=d.name+' recipe artwork';document.getElementById('rNum').textContent='House Classic '+String(i+1).padStart(2,'0');document.getElementById('rName').textContent=d.name;document.getElementById('rGlass').textContent=d.glass;document.getElementById('rGarnish').textContent=d.garnish;document.getElementById('rIngredients').innerHTML=d.ingredients.map(x=>'<li>'+esc(x)+'</li>').join('');document.getElementById('rSteps').innerHTML=d.steps.map(x=>'<li>'+esc(x)+'</li>').join('');document.getElementById('rNote').textContent=d.note;index.classList.add('is-away');recipe.classList.add('is-open');recipe.scrollTop=0}
+let currentDrink=0;function openDrink(i){currentDrink=i;const d=DRINKS[i];document.getElementById('rImg').src=d.img;document.getElementById('rImg').alt=d.name+' recipe artwork';document.getElementById('rNum').textContent='House Classic '+String(i+1).padStart(2,'0');document.getElementById('rName').textContent=d.name;document.getElementById('rGlass').textContent=d.glass;document.getElementById('rGarnish').textContent=d.garnish;document.getElementById('rIngredients').innerHTML=d.ingredients.map(x=>'<li>'+esc(x)+'</li>').join('');document.getElementById('rSteps').innerHTML=d.steps.map(x=>'<li>'+esc(x)+'</li>').join('');document.getElementById('rNote').textContent=d.note;document.getElementById('prevDrink').disabled=i===0;document.getElementById('nextDrink').disabled=i===DRINKS.length-1;index.classList.add('is-away');recipe.classList.add('is-open');recipe.scrollTop=0}
 function back(){recipe.classList.remove('is-open');index.classList.remove('is-away')}
 grid.addEventListener('click',e=>{const b=e.target.closest('.card');if(b)openDrink(+b.dataset.i)});
 document.getElementById('back').onclick=back;
+document.getElementById('prevDrink').onclick=()=>openDrink(Math.max(0,currentDrink-1));
+document.getElementById('nextDrink').onclick=()=>openDrink(Math.min(DRINKS.length-1,currentDrink+1));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&recipe.classList.contains('is-open'))back();});
 </script>
 </body>
