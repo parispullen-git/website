@@ -22,6 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/world.css?v=22">
 <link rel="stylesheet" href="assets/css/artifact-experiences.css?v=5">
+<link rel="stylesheet" href="assets/css/entry-screen.css?v=1">
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Paris Pullen","alternateName":"Agent Foxx",
@@ -33,20 +34,34 @@
 <body>
 
 <!-- ============ THE GATE ============ -->
-<div class="gate" id="gate" role="dialog" aria-label="Enter the world of Paris Pullen">
-  <div class="gate__seq">
-    <p class="classified gate__line gate__line--1">File 00 &#183; Open</p>
-    <p class="classified gate__line gate__line--2">Charlotte / America</p>
-    <div class="gate__line--3">
-      <span class="foxx" aria-hidden="true" style="--foxx-size:72px;width:72px;margin:0 auto var(--s5)"></span>
-      <p class="gate__name">Paris Pullen</p>
-      <div class="gate__enter">
-        <button class="cta" id="gate-enter"><span>Open the File</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>
-      </div>
-    </div>
+<section class="entry-screen entry-screen--main" id="gate" data-entry-screen aria-label="Paris Pullen entry screen">
+  <div class="entry-screen__bg" aria-hidden="true"></div>
+  <div class="entry-screen__inner" data-entry-main>
+    <div class="entry-brand"><img class="entry-brand__mark" src="/assets/img/monogram-mark.svg" alt=""><p class="entry-brand__name">Paris Pullen · The Compliment Hotel</p></div>
+    <p class="entry-eyebrow">Charlotte, North Carolina</p>
+    <h1 class="entry-title">Choose your way in.</h1>
+    <p class="entry-copy">The world is built around how you show up. Start with the room, the guide, or the network.</p>
+    <nav class="entry-actions" aria-label="Entry options">
+      <button class="entry-action" type="button" data-entry-open="network">The Network<span class="entry-action__sub">Get connected with Paris</span></button>
+      <a class="entry-action" href="#penthouse" data-entry-enter>Enter the Penthouse<span class="entry-action__sub">Begin in the Living Room</span></a>
+      <button class="entry-action" type="button" data-entry-open-guides>Gentlemen Guides<span class="entry-action__sub">Style · City · Cocktails · Kitchen</span></button>
+      <a class="entry-action" href="journal.html">The Journal<span class="entry-action__sub">From the word of the Gentleman</span></a>
+      <button class="entry-action" type="button" disabled aria-disabled="true">Key to the City<span class="entry-action__sub">Restricted · Coming soon</span></button>
+    </nav>
+    <p class="entry-utility">The American Gentleman</p>
   </div>
-  <button class="gate__skip" id="gate-skip">Skip &#183; Esc</button>
-</div>
+  <div class="entry-screen__inner" data-entry-guides hidden>
+    <button class="entry-action entry-action--back" type="button" data-entry-back>← Return to Start</button>
+    <p class="entry-eyebrow">The Compliment Hotel</p><h2 class="entry-title">Select a guide.</h2>
+    <div class="entry-guide-grid" aria-label="Gentlemen guides">
+      <button class="entry-guide" style="--guide-image:url('/assets/img/entry/style-hero.webp')" data-entry-open="guide" data-entry-title="The Gentleman’s Guide to Suits" data-entry-src="/blueprint.html?embed=1"><span>Style<small>Suit combinations · fit · the Blueprint</small></span></button>
+      <button class="entry-guide" style="--guide-image:url('/assets/img/entry/guide-map.webp')" data-entry-open="guide" data-entry-title="The Gentleman’s Guide to Charlotte" data-entry-src="/city-guide-popup.html"><span>City<small>Charlotte · the rooms worth knowing</small></span></button>
+      <button class="entry-guide" style="--guide-image:url('/assets/img/cocktails/old-fashioned.jpg')" data-entry-open="guide" data-entry-title="The Gentleman’s Guide to Cocktails" data-entry-src="/cocktail-menu.html?embed=1"><span>Cocktails<small>The house pour, properly made</small></span></button>
+      <button class="entry-guide" style="--guide-image:url('/assets/img/room-kitchen.jpg')" data-entry-open="guide" data-entry-title="The Gentleman’s Guide to HelloFresh" data-entry-src="/pantry.html"><span>HelloFresh<small>The kitchen edit</small></span></button>
+    </div>
+    <p class="entry-utility">ParisPullen.com</p>
+  </div>
+</section>
 
 <div class="grain" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
@@ -220,5 +235,6 @@
 <script src="assets/js/piano-player.js?v=17" defer></script>
 <script src="assets/js/artifact-experiences.js?v=6" defer></script>
 <script src="/assets/js/site-audio.js?v=1" defer></script>
+<script src="/assets/js/entry-screen.js?v=1" defer></script>
 </body>
 </html>

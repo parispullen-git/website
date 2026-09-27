@@ -13,6 +13,9 @@
   function gate() {
     var el = $('#gate');
     if (!el) return;
+    // The new entry hub owns its own navigation and must appear on every
+    // direct visit, rather than being dismissed by the legacy gate cookie.
+    if (el.hasAttribute('data-entry-screen')) return;
 
     var KEY = 'pp_gate_seen';
     var seen = false;
