@@ -892,13 +892,13 @@
     toggleBtn.textContent = 'Remote';
     document.body.appendChild(toggleBtn);
 
-    // A persistent house-audio control sits directly to the right of Remote.
-    // It mutes the active source: the Living Room TV in ordinary rooms, the
-    // Lounge playlist in Music Lounge/Gym, or Cinema when that room is open.
+    // A persistent video-audio control sits directly to the right of Remote.
+    // It controls the Living Room TV, or Cinema's screen while in Cinema;
+    // the Music Lounge playlist remains independent.
     var houseMuteBtn = document.createElement('button');
     houseMuteBtn.type = 'button';
     houseMuteBtn.className = 'house-mute-toggle';
-    houseMuteBtn.setAttribute('aria-label', 'Mute house audio');
+    houseMuteBtn.setAttribute('aria-label', 'Mute video audio');
     houseMuteBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6l-5 4H3z"></path><path d="M15 9.5a4 4 0 0 1 0 5"></path><path d="M17.5 7a7.5 7.5 0 0 1 0 10"></path></svg>';
     document.body.appendChild(houseMuteBtn);
 
@@ -996,7 +996,6 @@
       renderPP();
       renderHouseMute();
     });
-    document.addEventListener('pp:ambient-mute', renderHouseMute);
 
     // Simple now-playing card: album art, song title, room title -- built
     // with DOM methods rather than innerHTML since the title text comes
@@ -1082,7 +1081,7 @@
     // room gets a one-tap play/pause, not just TV/Cinema rooms.
     function setHouseMuteButton(muted) {
       houseMuteBtn.classList.toggle('is-muted', muted);
-      houseMuteBtn.setAttribute('aria-label', muted ? 'Unmute house audio' : 'Mute house audio');
+      houseMuteBtn.setAttribute('aria-label', muted ? 'Unmute video audio' : 'Mute video audio');
       houseMuteBtn.setAttribute('title', muted ? 'Unmute house audio' : 'Mute house audio');
       houseMuteBtn.innerHTML = muted
         ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6l-5 4H3z"></path><path d="M3 3l18 18"></path></svg>'
@@ -1090,13 +1089,9 @@
     }
 
     function renderHouseMute() {
-      var st;
-      if (currentRoomId === 'cinema') st = STATE_BY_KEY.cinema;
-      else if (currentRoomId === 'music-lounge' || currentRoomId === 'gym') {
-        var lounge = ambient();
-        setHouseMuteButton(!!(lounge && lounge.controller && lounge.controller.muted));
-        return;
-      } else st = STATE_BY_KEY.living;
+      // Never changes the Lounge playlist. Cinema uses its own video screen;
+      // every other room reflects the persistent Living Room TV state.
+      var st = currentRoomId === 'cinema' ? STATE_BY_KEY.cinema : STATE_BY_KEY.living;
       setHouseMuteButton(!!(st && st.muted));
     }
 
@@ -1149,13 +1144,8 @@
 
     houseMuteBtn.addEventListener('click', function (e) {
       e.stopPropagation();
-      if (currentRoomId === 'music-lounge' || currentRoomId === 'gym') {
-        var lounge = ambient();
-        if (lounge && lounge.controller && lounge.controller.toggleMute) lounge.controller.toggleMute();
-      } else {
-        var state = currentRoomId === 'cinema' ? STATE_BY_KEY.cinema : STATE_BY_KEY.living;
-        if (state) state.toggleMute();
-      }
+      var state = currentRoomId === 'cinema' ? STATE_BY_KEY.cinema : STATE_BY_KEY.living;
+      if (state) state.toggleMute();
       renderHouseMute();
     });
 
