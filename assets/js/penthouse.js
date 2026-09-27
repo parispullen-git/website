@@ -48,7 +48,7 @@
     { id:'cinema',  lvl:'Level 26', name:'The Cinema',
       note:'Nine seats, one screen, and a rule about phones that is actually enforced.', img:'room-cinema' },
     { id:'gym', lvl:'Level 26', name:'The Gym',
-      note:"Steel and rope, one flight from the record wall, with a skyline that doesn't care if you skip a set.", img:'room-gym' }
+      note:"Steel and rope, one flight from the record wall, with a skyline that doesn't care if you skip a set.", img:'room-gym', imgVersion:'20260927-gymv7' }
   ];
 
   // Room-to-room navigation is a real 2D layout -- each room's up/down
@@ -426,8 +426,8 @@
       '<div class="floor-scene__surface">' +
         '<div class="floor-scene__canvas">' +
           '<div class="floor-scene__view">' +
-            '<img src="assets/img/' + room.img + '.jpg?v=' + IMG_VER + '" ' +
-            'srcset="assets/img/' + room.img + '@sm.jpg?v=' + IMG_VER + ' 1200w, assets/img/' + room.img + '.jpg?v=' + IMG_VER + ' 2400w" ' +
+            '<img src="assets/img/' + room.img + '.jpg?v=' + (room.imgVersion || IMG_VER) + '" ' +
+            'srcset="assets/img/' + room.img + '@sm.jpg?v=' + (room.imgVersion || IMG_VER) + ' 1200w, assets/img/' + room.img + '.jpg?v=' + (room.imgVersion || IMG_VER) + ' 2400w" ' +
             'sizes="100vw" alt="' + esc(room.name) + '" loading="lazy" width="2400" height="1350">' +
             buildTVHTML(TV_SCREENS[room.id], room.id) +
             '<div class="artifacts">' + artsHTML + remoteNodeHTML(room.id) + cityLinkHTML(room.id) + '</div>' +
