@@ -32,7 +32,10 @@
       if (byline) byline.textContent = 'by Paris Pullen';
       if (returnButton) returnButton.remove();
       guideButton.onclick = () => window.location.assign('/style-artifacts.html?embed=1&view=blueprints');
-      if (!popup.open) doc.getElementById('launch')?.click();
+      if (!popup.open) {
+        try { popup.showModal(); }
+        catch (_) { popup.setAttribute('open', ''); }
+      }
       requestAnimationFrame(() => frame.classList.add('is-ready'));
     } catch (error) {
       if (++attempts < 80) setTimeout(configureGame, 50);
