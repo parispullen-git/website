@@ -812,6 +812,9 @@
       var everEnteredRoom = false;
       var soundObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
+          // House-level routing owns continuity; visibility must not mute TV
+          // when the guest moves between ordinary rooms.
+          if (window.PPHouseAudioManaged) return;
           if (state.isOff) return;
           if (entry.isIntersecting) {
             // A screen outside the start room was baked with no src at all
@@ -1229,6 +1232,14 @@
       if (window.PPAmbient && window.PPAmbient.get()) window.PPAmbient.get().controller.pause();
       openModal(state);
       return true;
+    },
+    setHouseRoom: function (roomId) {
+      var living=STATE_BY_KEY.living, cinema=STATE_BY_KEY.cinema;
+      function silence(state){if(!state||!state.iframe)return;state.muted=true;state.autoMuted=true;post(state.iframe,'mute');post(state.iframe,'pauseVideo');if(state.updateMuteLabel)state.updateMuteLabel();notifyState(state);}
+      function activate(state){if(!state||!state.iframe)return;if(!state.iframe.getAttribute('src')&&state.loadChannel)state.loadChannel(0);state.muted=false;state.autoMuted=false;state.isPaused=false;post(state.iframe,'playVideo');post(state.iframe,'unMute');post(state.iframe,'setVolume',[state.volume||100]);if(state.updateMuteLabel)state.updateMuteLabel();notifyState(state);}
+      if(roomId==='cinema'){silence(living);activate(cinema);return;}
+      if(roomId==='music-lounge'||roomId==='gym'){silence(living);silence(cinema);return;}
+      silence(cinema);activate(living);
     }
   };
 
