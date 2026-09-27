@@ -11,37 +11,34 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@0,400;0,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/entry-screen.css?v=1">
+<link rel="stylesheet" href="/assets/css/entry-screen.css?v=2">
 </head>
 <body>
 <main class="entry-screen entry-screen--main" data-entry-screen aria-label="Paris Pullen start here">
   <div class="entry-screen__bg" aria-hidden="true"></div>
   <div class="entry-screen__inner" data-entry-main>
-    <div class="entry-brand"><img class="entry-brand__mark" src="/assets/img/monogram-mark.svg" alt=""><p class="entry-brand__name">Paris Pullen · The Compliment Hotel</p></div>
-    <p class="entry-eyebrow">Start Here</p>
     <h1 class="entry-title">Choose your way in.</h1>
     <p class="entry-copy">The world is built around how you show up. Start with the room, the guide, or the network.</p>
     <nav class="entry-actions" aria-label="Start here options">
-      <button class="entry-action" type="button" data-entry-open="network">The Network<span class="entry-action__sub">Get connected with Paris</span></button>
-      <a class="entry-action" href="https://parispullen.com/#penthouse">Enter the Penthouse<span class="entry-action__sub">Begin in the Living Room</span></a>
-      <button class="entry-action" type="button" data-entry-open-guides>Gentlemen Guides<span class="entry-action__sub">Style · City · Cocktails · Kitchen</span></button>
-      <a class="entry-action" href="https://parispullen.com/journal.html">The Journal<span class="entry-action__sub">From the word of the Gentleman</span></a>
-      <button class="entry-action" type="button" disabled aria-disabled="true">Key to the City<span class="entry-action__sub">Restricted · Coming soon</span></button>
+      <button class="entry-action" type="button" data-entry-open="network"><span class="entry-action__title">The Network</span><span class="entry-action__sub">Get connected with Paris</span></button>
+      <a class="entry-action" href="https://parispullen.com/#penthouse"><span class="entry-action__title">Enter the Penthouse</span><span class="entry-action__sub">Begin in the Living Room</span></a>
+      <button class="entry-action" type="button" data-entry-open-guides><span class="entry-action__title">Gentlemen Guides</span><span class="entry-action__sub">Style · City · Cocktails · Kitchen</span></button>
+      <a class="entry-action" href="https://parispullen.com/journal.html"><span class="entry-action__title">The Journal</span><span class="entry-action__sub">From the word of the Gentleman</span></a>
+      <button class="entry-action" type="button" disabled aria-disabled="true"><span class="entry-action__title">Key to the City</span><span class="entry-action__sub">Restricted · Coming soon</span></button>
     </nav>
-    <p class="entry-utility">The American Gentleman</p>
+    <div class="entry-brand entry-brand--bottom"><img class="entry-brand__mark" src="/assets/img/monogram-mark.svg" alt=""><p class="entry-brand__name">Paris Pullen</p></div>
   </div>
-  <div class="entry-screen__inner" data-entry-guides hidden>
+  <dialog class="entry-guides-modal" data-entry-guides aria-label="Select a guide"><div class="entry-screen entry-screen--guides"><div class="entry-screen__bg" aria-hidden="true"></div><div class="entry-screen__inner">
     <button class="entry-action entry-action--back" type="button" data-entry-back>← Return to Start</button>
-    <p class="entry-eyebrow">The Compliment Hotel</p><h2 class="entry-title">Select a guide.</h2>
+    <h2 class="entry-title">Select a guide.</h2>
     <div class="entry-guide-grid" aria-label="Gentlemen guides">
       <button class="entry-guide" style="--guide-image:url('/assets/img/entry/style-hero.webp')" data-entry-open="guide" data-entry-title="The Gentleman’s Guide to Suits" data-entry-src="https://parispullen.com/blueprint.html?embed=1"><span>Style<small>Suit combinations · fit · the Blueprint</small></span></button>
       <button class="entry-guide" style="--guide-image:url('/assets/img/entry/guide-map.webp')" data-entry-open="guide" data-entry-title="The Gentleman’s Guide to Charlotte" data-entry-src="https://parispullen.com/city-guide-popup.html"><span>City<small>Charlotte · the rooms worth knowing</small></span></button>
       <button class="entry-guide" style="--guide-image:url('/assets/img/cocktails/old-fashioned.jpg')" data-entry-open="guide" data-entry-title="The Gentleman’s Guide to Cocktails" data-entry-src="https://parispullen.com/cocktail-menu.html?embed=1"><span>Cocktails<small>The house pour, properly made</small></span></button>
       <button class="entry-guide" style="--guide-image:url('/assets/img/room-kitchen.jpg')" data-entry-open="guide" data-entry-title="The Gentleman’s Guide to HelloFresh" data-entry-src="https://parispullen.com/pantry.html"><span>HelloFresh<small>The kitchen edit</small></span></button>
     </div>
-    <p class="entry-utility">ParisPullen.com</p>
-  </div>
+  </div></div></dialog>
 </main>
-<script src="/assets/js/entry-screen.js?v=1" defer></script>
+<script src="/assets/js/entry-screen.js?v=2" defer></script>
 </body>
 </html>

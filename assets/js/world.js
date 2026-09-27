@@ -60,6 +60,14 @@
     }
 
     btn.addEventListener('click', function () {
+      // Inside the Penthouse, the Menu button returns to the same entry
+      // experience visitors used to arrive here, rather than opening the
+      // legacy full-site navigation sheet.
+      if (window.ParisPullenEntry && window.ParisPullenEntry.openRoomMenu) {
+        set(false);
+        window.ParisPullenEntry.openRoomMenu();
+        return;
+      }
       set(!panel.classList.contains('is-open'));
     });
     panel.addEventListener('click', function (e) {
