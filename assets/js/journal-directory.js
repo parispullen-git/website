@@ -1,7 +1,7 @@
 /* Penthouse Directory — Journal */
 (function () {
   'use strict';
-  var trigger = document.querySelector('[data-journal-directory-toggle]');
+  var trigger = document.querySelector('[data-journal-directory-toggle], #menu-toggle');
   if (!trigger) return;
 
   var levels = [
@@ -48,7 +48,11 @@
     document.documentElement.style.overflow = open ? 'hidden' : '';
     if (open) panel.querySelector('.journal-directory__close').focus({preventScroll:true});
   }
-  trigger.addEventListener('click', function () { setOpen(!panel.classList.contains('is-open')); });
+  trigger.addEventListener('click', function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    setOpen(!panel.classList.contains('is-open'));
+  }, true);
   panel.addEventListener('click', function (event) {
     if (event.target === panel || event.target.closest('.journal-directory__close')) setOpen(false);
   });
