@@ -250,6 +250,7 @@
           <button type="button" class="dashnav__item" data-tab="invoices">Invoices</button>
           <button type="button" class="dashnav__item" data-tab="proposals">Proposals</button>
           <button type="button" class="dashnav__item" data-tab="inquiries">Inquiries</button>
+          <button type="button" class="dashnav__item" data-tab="digital-leads">Digital Product Leads</button>
           <button type="button" class="dashnav__item" data-tab="clients">Clients</button>
         </div>
       </div>
@@ -377,6 +378,16 @@
       <p class="body">Boutique inquiry submissions.</p>
       <p class="dash__loading" id="inquiries-loading">Loading&#8230;</p>
       <div id="inquiries-list"></div>
+    </div>
+
+    <!-- DIGITAL PRODUCT LEADS -->
+    <div class="dash__panel" id="panel-digital-leads">
+      <p class="body">Contact details submitted to access Paris Pullen digital products. This data is private and is never available through the public site.</p>
+      <div class="card__row" style="margin:var(--s4) 0">
+        <button type="button" class="btn-sm" id="digital-leads-export">Export CSV</button>
+      </div>
+      <p class="dash__loading" id="digital-leads-loading">Loading&#8230;</p>
+      <div id="digital-leads-list"></div>
     </div>
 
     <!-- CLIENTS -->
@@ -1090,6 +1101,7 @@
     loadPitchesDash();
     loadGoalsDash();
     loadNetworkDash();
+    loadDigitalLeadsDash();
     renderWebsitesDash();
   }
 
@@ -4181,6 +4193,54 @@
     if (!armDelete(delBtn)) return;
     fetch('/api/network?id=' + encodeURIComponent(delBtn.getAttribute('data-delete-net')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
       .then(function(){ loadNetworkDash(); });
+  });
+
+  // ================= DIGITAL PRODUCT LEADS =================
+  var digitalLeadRecords = [];
+
+  function loadDigitalLeadsDash(){
+    var loading = document.getElementById('digital-leads-loading');
+    var list = document.getElementById('digital-leads-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/api/digital-leads?passphraseHash=' + encodeURIComponent(storedHash))
+      .then(function(r){ return r.json().then(function(data){ return {ok:r.ok,data:data}; }); })
+      .then(function(res){
+        if (!res.ok) throw new Error(res.data.error || 'Could not load leads.');
+        digitalLeadRecords = (res.data.records || []).sort(function(a,b){ return (b.createdAt||0) - (a.createdAt||0); });
+        loading.hidden = true;
+        if (!digitalLeadRecords.length) { list.innerHTML = '<p class="dash__empty">No digital-product leads yet.</p>'; return; }
+        list.innerHTML = digitalLeadRecords.map(function(lead){
+          return '<div class="card">' +
+            '<div class="card__top"><span class="card__title">' + esc(lead.firstName || '') + ' ' + esc(lead.lastName || '') + '</span>' +
+            '<span class="badge badge--brass">' + esc(lead.product || 'Digital Product') + '</span></div>' +
+            '<p class="card__meta">' + esc(lead.email || '') + ' &#183; ' + fmtDate(lead.createdAt) + '</p>' +
+            (lead.source ? '<p class="card__meta">Source: ' + esc(lead.source) + '</p>' : '') +
+            '<div class="card__row"><button type="button" class="btn-sm" data-copy-lead-email="' + encodeURIComponent(lead.email || '') + '">Copy Email</button>' +
+            '<button type="button" class="btn-sm" data-delete-digital-lead="' + esc(lead.id) + '">Delete</button></div></div>';
+        }).join('');
+      })
+      .catch(function(err){ loading.hidden = false; loading.textContent = err.message || 'Could not load digital-product leads.'; });
+  }
+
+  document.getElementById('digital-leads-list').addEventListener('click', function(e){
+    var copyBtn = e.target.closest('[data-copy-lead-email]');
+    if (copyBtn) { navigator.clipboard.writeText(decodeURIComponent(copyBtn.getAttribute('data-copy-lead-email'))); return; }
+    var delBtn = e.target.closest('[data-delete-digital-lead]');
+    if (!delBtn || !armDelete(delBtn)) return;
+    fetch('/api/digital-leads?id=' + encodeURIComponent(delBtn.getAttribute('data-delete-digital-lead')) + '&passphraseHash=' + encodeURIComponent(storedHash), {method:'DELETE'})
+      .then(function(){ loadDigitalLeadsDash(); });
+  });
+
+  document.getElementById('digital-leads-export').addEventListener('click', function(){
+    var headers = ['First name','Last name','Email','Product','Source','Submitted'];
+    var cells = function(value){ return '"' + String(value == null ? '' : value).replace(/"/g, '""') + '"'; };
+    var rows = [headers].concat(digitalLeadRecords.map(function(lead){
+      return [lead.firstName, lead.lastName, lead.email, lead.product, lead.source, lead.createdAt ? new Date(lead.createdAt).toISOString() : ''];
+    }));
+    var blob = new Blob([rows.map(function(row){ return row.map(cells).join(','); }).join('\n')], {type:'text/csv;charset=utf-8'});
+    var url = URL.createObjectURL(blob), link = document.createElement('a');
+    link.href = url; link.download = 'paris-pullen-digital-product-leads.csv'; link.click();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 0);
   });
 
   // ================= WEBSITES =================
