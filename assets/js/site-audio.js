@@ -15,4 +15,3 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
 
-(function(){'use strict';if(document.querySelector('script[data-hf-six-guide]'))return;var s=document.createElement('script');s.src='/assets/js/hellofresh-guide.js?v=1';s.defer=true;s.setAttribute('data-hf-six-guide','');document.head.appendChild(s);})();

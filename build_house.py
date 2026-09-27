@@ -210,7 +210,7 @@ KITCHEN_HELLOFRESH_UNLOCK = '''<div class="hf-unlock">
                     <li><span class="hf-recipe-list__name">Rigatoni alla Vodka, Torn Basil</span><span class="hf-recipe-list__note">Cooks in one pan. Photographs in every light.</span></li>
                     <li><span class="hf-recipe-list__name">Smoked Paprika Chicken, Root Vegetables</span><span class="hf-recipe-list__note">The one you actually make twice a week.</span></li>
                   </ul>
-                  <a class="cta cta--ghost hf-unlock__cta" href="pantry.html"><span>Get the Box &#8212; HelloFresh &#215; Paris Pullen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+                  <a class="cta cta--ghost hf-unlock__cta" href="hellofresh-menu.html?embed=1"><span>Get the Box &#8212; HelloFresh &#215; Paris Pullen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
                 </div>'''
 
 # A deliberately soft second touch, not a second unlock -- the Corridor's
