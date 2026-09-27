@@ -1133,7 +1133,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
    untouched. */
 .remote-toggle{
   position:fixed;bottom:var(--s5);right:calc(var(--gutter) + 6.4rem);z-index:850;
-  display:flex;align-items:center;gap:var(--s3);
+  display:flex;align-items:center;gap:var(--s3);height:2.9rem;box-sizing:border-box;
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
   color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
   border-radius:999px;padding:.6em 1em;cursor:pointer;
@@ -1507,7 +1507,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
    Pause pills) at every breakpoint. */
 .nav-panel{position:fixed;bottom:var(--s5);left:var(--gutter);z-index:45}
 .nav-panel__tab{
-  display:flex;align-items:center;gap:.5em;
+  display:flex;align-items:center;gap:.5em;height:2.9rem;box-sizing:border-box;
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
   color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
   border-radius:999px;padding:.6em 1em;cursor:pointer;
@@ -3098,9 +3098,10 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 
   /* Play/Pause/Remote/Guide Info controls out of the content's way */
   .playpause-toggle{bottom:var(--s4);right:var(--s4)}
-  .house-mute-toggle{bottom:var(--s4);right:var(--s4)}
-  .remote-toggle{bottom:var(--s4);right:calc(var(--s4) + 5.2rem)}
+  .house-mute-toggle{bottom:var(--s4);right:var(--s4);width:2.9rem;height:2.9rem}
+  .remote-toggle{bottom:var(--s4);right:calc(var(--s4) + 5.2rem);height:2.9rem}
   .nav-panel{bottom:var(--s4);left:var(--s4)}
+  .nav-panel__tab{height:2.9rem}
   .guide-info-toggle{bottom:var(--s4);right:var(--s4)}
   /* The centered floor-down arrow shares this same bottom row on a narrow
      viewport -- the Floors/Remote/Pause pills above sit exactly wide
