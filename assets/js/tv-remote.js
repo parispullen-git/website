@@ -544,16 +544,9 @@
     applySheetMode(remote, isMobile());
 
     var channels = CHANNEL_SETS[screen.dataset.channelSet] || CHANNEL_SETS[DEFAULT_SET];
-    // The baked src now requests mute=0 (unmuted autoplay) rather than
-    // mute=1 -- but whether that's actually honored is entirely up to the
-    // browser's autoplay policy, and there's no reliable postMessage way to
-    // ask YouTube's embed whether it silently fell back to muted. Tracking
-    // state.muted as true here (rather than matching the optimistic mute=0
-    // request) keeps the enter-room logic below making its own unmute
-    // attempt, backed by the guaranteed "Tap for Sound" fallback, on first
-    // view -- if mute=0 already worked, that attempt is just a harmless
-    // no-op; if it didn't, this is what actually gets sound on.
-    var state = { key: screen.dataset.channelSet, chIndex: 0, volume: 100, muted: true, iframe: iframe,
+    // The Living Room iframe is baked with mute=0. The state starts unmuted
+    // so arrival uses the same real sound state as the player request.
+    var state = { key: screen.dataset.channelSet, chIndex: 0, volume: 100, muted: false, iframe: iframe,
       channels: channels, currentTime: 0, isPaused: false,
       autoMuted: false }; // true only when OUR leave-the-room logic muted it, never on a manual mute --
                           // that distinction is what lets re-entering unmute again without overriding
