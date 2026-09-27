@@ -248,7 +248,7 @@
 
   /* Special-case artifact content -- feeds the pre-rendered drawer panels
      buildFloorSceneHTML() writes for each artifact further down. */
-  var SUITS_CTA = '<a class="cta pent__open" href="wardrobe-arcade.html" style="margin-top:var(--s2)"><span>The Style</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
+  var SUITS_CTA = '<a class="cta pent__open" href="/style-artifacts.html?embed=1" data-style-portal style="margin-top:var(--s2)"><span>The Style</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   var HELLOFRESH_UNLOCK = '<div class="hf-unlock">' +
       '<p class="hf-unlock__eyebrow">Unlocked &#183; 5 Recipes Every Man Should Own</p>' +
       '<ul class="hf-recipe-list">' +
