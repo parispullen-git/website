@@ -26,8 +26,8 @@ button{font:inherit} .book{height:100dvh;background:var(--paper);position:relati
 .mast h1{font:400 clamp(43px,7vw,92px)/.94 var(--display);margin:32px 0 8px} .mast p{margin:0;font:400 clamp(12px,1.2vw,17px) var(--display);color:var(--muted);letter-spacing:.04em}
 .menu-title{max-width:1280px;margin:0 auto 13px;display:flex;align-items:center;gap:14px;font-size:8px;text-transform:uppercase;letter-spacing:.3em;color:var(--muted)}.menu-title:before,.menu-title:after{content:"";height:1px;flex:1;background:rgba(23,19,16,.28)}
 .grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-bottom:32px}
-.card{position:relative;min-height:170px;border:1px solid rgba(23,19,16,.25);background:#eae0cf;overflow:hidden;text-align:left;padding:0;cursor:pointer}
-.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(.78) contrast(.95);transition:transform .55s ease}
+.card{position:relative;aspect-ratio:364/210;min-height:0;border:1px solid rgba(23,19,16,.25);background:#eae0cf;overflow:hidden;text-align:left;padding:0;cursor:pointer}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;filter:none;transition:transform .55s ease}
 .card:after{display:none}
 .card-body{display:none;position:absolute;z-index:2;left:0;right:0;bottom:0;padding:14px 15px;color:#f3eadb}
 .card-num{font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:#d9c5a0} .card-name{display:block;font:400 25px var(--display);margin-top:3px}
@@ -43,8 +43,8 @@ button{font:inherit} .book{height:100dvh;background:var(--paper);position:relati
 .cols{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px} h3{font:400 22px var(--display);margin:0 0 12px} ul,ol{padding-left:18px;margin:0} li{margin:0 0 9px;font-size:12px;line-height:1.55}
 .house-note{margin-top:24px;border-top:1px solid rgba(23,19,16,.22);padding-top:14px;font:italic 15px/1.55 var(--display);color:var(--muted)}
 .footline{margin-top:24px;padding-top:14px;border-top:1px solid rgba(23,19,16,.22);font-size:7px;text-transform:uppercase;letter-spacing:.28em;color:var(--muted);text-align:center}
-@media(max-width:900px){.chrome{height:58px;padding-left:12px}.close{width:58px;height:58px}.pages{height:calc(100dvh - 58px)}.grid{grid-template-columns:repeat(2,1fr)}.card{min-height:155px}.recipe-inner{grid-template-columns:1fr;display:block}.poster{height:44dvh;padding:10px;border-right:0;border-bottom:1px solid rgba(23,19,16,.2)}.poster img{max-height:100%;max-width:100%}.detail{height:56dvh;padding:18px 16px 36px}.detail h2{font-size:46px}.cols{grid-template-columns:1fr;gap:24px}}
-@media(max-width:520px){.index{padding:12px 10px 24px}.mast{padding:18px 12px 19px;margin-bottom:13px}.mast:before,.mast:after{width:20%}.mast h1{font-size:43px;margin-top:22px}.mast p{font-size:11px}.grid{grid-template-columns:1fr 1fr;gap:7px}.card{min-height:132px}.card-name{font-size:20px}.card-body{padding:10px}.poster{height:42dvh}.detail{height:58dvh}.meta{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.chrome{height:58px;padding-left:12px}.close{width:58px;height:58px}.pages{height:calc(100dvh - 58px)}.grid{grid-template-columns:repeat(2,1fr)}.card{min-height:0}.recipe-inner{grid-template-columns:1fr;display:block}.poster{height:44dvh;padding:10px;border-right:0;border-bottom:1px solid rgba(23,19,16,.2)}.poster img{max-height:100%;max-width:100%}.detail{height:56dvh;padding:18px 16px 36px}.detail h2{font-size:46px}.cols{grid-template-columns:1fr;gap:24px}}
+@media(max-width:520px){.index{padding:12px 10px 24px}.mast{padding:18px 12px 19px;margin-bottom:13px}.mast:before,.mast:after{width:20%}.mast h1{font-size:43px;margin-top:22px}.mast p{font-size:11px}.grid{grid-template-columns:1fr 1fr;gap:7px}.card{min-height:0}.card-name{font-size:20px}.card-body{padding:10px}.poster{height:42dvh}.detail{height:58dvh}.meta{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){.index,.recipe,.card img{transition:none!important}}
 </style>
 </head>
