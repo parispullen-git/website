@@ -368,18 +368,11 @@ f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
         # (see the "entering" branch in initScreen) lazily assigns the real,
         # muted src at that point -- see loadChannel there.
         #
-        # mute=1, not the optimistic mute=0 this used to request: unmuted
-        # autoplay in a cross-origin iframe is reliably blocked on mobile
-        # regardless of the allow policy below, and unlike desktop (where
-        # YouTube's player quietly falls back to muted-and-playing),
-        # mobile browsers were sometimes just refusing to autoplay AT ALL
-        # rather than falling back -- so the video never started moving.
-        # Guaranteed-muted autoplay is the one mode every browser actually
-        # honors; getting real sound on is entirely the job of the
-        # postMessage 'unMute' attempt + guaranteed Tap-for-Sound fallback
-        # in tv-remote.js's enter-room logic, same as every other screen.
+        # The Living Room is intentionally requested unmuted. Browser autoplay
+        # policy can still require a user gesture on some devices, but the house
+        # should never deliberately begin its first room muted.
         iframe_src = (
-            f'https://www.youtube.com/embed/{ts["id"]}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1'
+            f'https://www.youtube.com/embed/{ts["id"]}?autoplay=1&mute=0&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1'
             if f["id"] == START_ROOM else ''
         )
         tv = f'''  <div class="floor-scene__screen" style="--x:{ts["x"]};--y:{ts["y"]};--w:{ts["w"]};--h:{ts["h"]}" data-tv data-channel-set="{ts["channel_set"]}" data-box="{ts["box"]}">
