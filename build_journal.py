@@ -627,7 +627,8 @@ def build_journal_index():
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/pp-monogram-favicon.png?v=20260928c" type="image/png" sizes="any">
+<link rel="apple-touch-icon" href="/assets/img/pp-monogram-favicon.png?v=20260928c">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Journal &#8212; Paris Pullen</title>
 <meta name="description" content="Style, strategy, culture, Charlotte, music, fragrance, business, philosophy and life. Written the way it is lived.">
@@ -637,11 +638,14 @@ def build_journal_index():
 <meta property="og:title" content="The Journal &#8212; Paris Pullen">
 <meta property="og:description" content="Style, strategy, culture, Charlotte, music, fragrance, business, philosophy and life. Written the way it is lived.">
 <meta property="og:url" content="https://parispullen.com/journal.html">
-<meta property="og:image" content="https://parispullen.com/assets/img/paris-pinstripe.jpg">
+<meta property="og:image" content="https://parispullen.com/assets/img/pp-seo.png?v=20260928c">
+<meta property="og:image:width" content="1366">
+<meta property="og:image:height" content="768">
+<meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Journal &#8212; Paris Pullen">
 <meta name="twitter:description" content="Style, strategy, culture, Charlotte, music, fragrance, business, philosophy and life. Written the way it is lived.">
-<meta name="twitter:image" content="https://parispullen.com/assets/img/paris-pinstripe.jpg">
+<meta name="twitter:image" content="https://parispullen.com/assets/img/pp-seo.png?v=20260928c">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"Blog","name":"The Journal — Paris Pullen","description":"Style, strategy, culture, Charlotte, music, fragrance, business, philosophy and life. Written the way it is lived.","url":"https://parispullen.com/journal.html","author":{{"@type":"Person","name":"Paris Pullen","alternateName":"Agent Foxx","url":"https://parispullen.com/"}},"isPartOf":{{"@type":"WebSite","name":"Paris Pullen","url":"https://parispullen.com/"}}}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -787,7 +791,8 @@ def build_article_pages():
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/pp-monogram-favicon.png?v=20260928c" type="image/png" sizes="any">
+<link rel="apple-touch-icon" href="/assets/img/pp-monogram-favicon.png?v=20260928c">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(post['title'])} &#8212; The Journal &#8212; Paris Pullen</title>
 <meta name="description" content="{esc(post.get('meta_description', post['stand']))}">
@@ -797,11 +802,17 @@ def build_article_pages():
 <meta property="og:description" content="{esc(post.get('meta_description', post['stand']))}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://parispullen.com/{article_url(post)}">
-<meta property="og:image" content="{hero_url}">
+<meta property="og:image" content="https://parispullen.com/assets/img/pp-seo.png?v=20260928c">
+<meta property="og:image:width" content="1366">
+<meta property="og:image:height" content="768">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1366">
+<meta property="og:image:height" content="768">
+<meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(post['title'])}">
 <meta name="twitter:description" content="{esc(post.get('meta_description', post['stand']))}">
-<meta name="twitter:image" content="{hero_url}">
+<meta name="twitter:image" content="https://parispullen.com/assets/img/pp-seo.png?v=20260928c">
 {ld_block}
 <meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
