@@ -623,7 +623,8 @@ def build_journal_index():
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css">\n<link rel="stylesheet" href="assets/css/entry-screen.css?v=5">
+<link rel="stylesheet" href="assets/css/world.css">
+<link rel="stylesheet" href="assets/css/entry-screen.css?v=5">\n<link rel="stylesheet" href="assets/css/entry-screen.css?v=5">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -676,6 +677,7 @@ def build_journal_index():
 </main>
 {SITE_FOOT}
 <script src="assets/js/journal.js" defer></script>
+<script src="assets/js/entry-screen.js?v=1" defer></script>
 <script src="assets/js/world.js" defer></script>
 </body>
 </html>
