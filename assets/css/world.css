@@ -482,7 +482,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   align-items:end;
 }
 .city-guide-hero .display--mega{
-  font-size:clamp(3.7rem,8.1vw,9.25rem);
+  font-size:clamp(3.7rem,6.4vw,7.75rem);
   max-width:7.5ch;
 }
 .city-guide-hero__lede{max-width:31ch}
