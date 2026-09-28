@@ -104,9 +104,9 @@ for needle in [
     "key:'suits', name:'The Blueprint Game', x:'14.9%', y:'38.5%'",
     "key:'boxer', name:'The After Hours Boxing Game', x:'46.2%', y:'27.6%'",
     "key:'journal', name:'The Journal', x:'59.2%', y:'15.6%'",
-    'key:\'suits\', name:"The Gentlemen’s Guide to Suits", x:\'44.5%\', y:\'66.5%\'',
+    'key:\'suits\', name:\'The Gentlemen’s Guide to Suits\', x:\'44.5%\', y:\'66.5%\'',
     "key:'suit', name:'The Wardrobe', x:'58.3%', y:'42.1%'",
-    'key:\'hellofresh\', name:"The Gentlemen’s CookBook", x:\'58.5%\', y:\'63.8%\'',
+    'key:\'hellofresh\', name:\'The Gentlemen’s CookBook\', x:\'58.5%\', y:\'63.8%\'',
 ]:
     assert needle in js, f'Runtime missing {needle}'
 assert "(room.id === 'gym' || room.id === 'closet') && a.key === 'boxer'" in js, 'Runtime Closet After Hours portal wiring missing'
