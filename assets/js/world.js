@@ -48,7 +48,17 @@
   function menu() {
     var btn = $('#menu-toggle');
     var panel = $('#menu');
-    if (!btn || !panel) return;
+    if (!btn) return;
+    // Pages such as the Journal can use the shared entry navigation without
+    // retaining the retired full-site menu sheet in their markup.
+    if (!panel) {
+      btn.addEventListener('click', function () {
+        if (window.ParisPullenEntry && window.ParisPullenEntry.openRoomMenu) {
+          window.ParisPullenEntry.openRoomMenu();
+        }
+      });
+      return;
+    }
 
     function set(open) {
       panel.classList.toggle('is-open', open);
