@@ -7,7 +7,8 @@
   var labels = [
     { room: 'penthouse-living', artifact: 'suits', title: 'The Gentlemen’s Guide to Suits' },
     { room: 'kitchen', artifact: 'hellofresh', title: 'The Gentlemen’s CookBook' },
-    { room: 'kitchen', artifact: 'suit', title: 'The Wardrobe' }
+    { room: 'kitchen', artifact: 'suit', title: 'The Wardrobe' },
+    { room: 'kitchen', artifact: 'suits', title: 'The Wardrobe' }
   ];
 
   function apply() {
