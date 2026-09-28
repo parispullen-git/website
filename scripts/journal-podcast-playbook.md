@@ -112,3 +112,13 @@ As of 2026-09-28 this returns **401 not connected**. Paris must connect
 Spotify in **Settings → Connections → Spotify** first, then confirm the show
 name before anything is uploaded. Uploads write to his account — confirm
 title, show, and summary with him first, every time.
+
+## Standing rule — thumbnails (Paris, Sept 28, 2026)
+- **Every podcast upload ships with a thumbnail. No exceptions.** An episode is never uploaded to Spotify (or any platform) without cover art, and a show is never created without a show cover.
+- Episode covers: generated per episode via `--cover-prompt` at generate time (editorial, entry-themed). Verify the file exists before running `save-to-spotify`.
+- Show cover: `workspace/podcasts/show-assets/` holds the approved show art. Setting a new show cover: `podcast-helper update-cover` (check flags) or via the Spotify show settings after Paris approves the image.
+- Paris approves all show-level art before it goes live. Episode art follows the editorial standard; flag anything off-model to him.
+
+## Pronunciation guide (Paris, Sept 28, 2026)
+- **Druski** (the comedian) is pronounced **"Drew Ski"**. In every spoken script, write his name as "Drew Ski" / "Drew Ski's" so TTS says it right. Written titles/descriptions keep the correct spelling "Druski".
+- Add new entries here whenever Paris corrects a pronunciation.
