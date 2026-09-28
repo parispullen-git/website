@@ -3171,3 +3171,6 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   .grain{animation:none}
   .scene__media img,.scene__media video{transform:none}
 }
+
+/* Audited City Guide photography */
+.vcard__media > img,.vquick__media > img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}

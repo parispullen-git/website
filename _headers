@@ -1,0 +1,3 @@
+/assets/img/city-guide/*
+  Cross-Origin-Resource-Policy: same-site
+  X-Content-Type-Options: nosniff

@@ -14,11 +14,9 @@ Header/menu/footer are pulled live from index.html at build time (same
 approach as build_house.py) so they never drift out of sync with the
 rest of the site.
 
-Images: every media slot on every listing is a styled placeholder
-(no photography is embedded). Verifying reuse-safe, properly licensed
-photography for ~60 real businesses was out of scope for this pass —
-see the build report. Swap in press-kit or owner-supplied images later
-by replacing the .vcard__ph / .vquick__ph markup with <img> tags.
+Images: supplied audit photography is stored locally under assets/img/city-guide.
+Listings without a verified local asset retain the existing styled placeholder.
+Do not hotlink or substitute imagery outside the audited manifest.
 
 Neighborhood/venue data lives in data/charlotte-locations.json (edit
 directly, or via the local Operator Console) -- then re-run:
@@ -105,6 +103,12 @@ NEIGHBORHOODS = json.loads((Path(__file__).resolve().parent / "data" / "charlott
 def venue_id(nid, v):
     return nid + "-" + slug(v["name"])
 
+def venue_media(v, label):
+    image = v.get("image_file", "")
+    if image:
+        return f'<img src="assets/img/city-guide/{esc(image)}" alt="{esc(v["name"])}" loading="lazy" decoding="async">'
+    return f'<span class="vcard__ph">{esc(v["name"])} &#183; {esc(label)}</span>'
+
 def venue_card(nid, v):
     vid = venue_id(nid, v)
     cat = v["cat"]
@@ -119,8 +123,11 @@ def venue_card(nid, v):
     note = v.get("access_note", "")
     best = "|".join(v.get("best", []))
     spec = "|".join(v.get("spec", []))
+    image = v.get("image_file", "")
+    media = venue_media(v, "Exterior")
     return f'''      <article class="vcard" id="{vid}"
         data-id="{vid}" data-cat="{esc(cat)}" data-filters="{esc(filters)}"
+        data-image="{esc(image)}"
         data-name="{esc(v["name"])}" data-catline="{catline}"
         data-addr="{esc(v["addr"])}" data-price="{esc(v["price"])}"
         data-access="{esc(v["access"])}" data-access-slug="{access_slug}"
@@ -129,7 +136,7 @@ def venue_card(nid, v):
         data-mapq="{esc(v["mapq"])}" data-site="{esc(site)}"
         data-media-label="{esc(media_label)}">
         <button class="vcard__open" type="button">
-          <span class="vcard__media"><span class="vcard__ph">{esc(v["name"])} &#183; Exterior</span></span>
+          <span class="vcard__media">{media}</span>
           <span class="vcard__cat">{catline}</span>
           <span class="vcard__name">{esc(v["name"])}</span>
           <span class="vcard__note">{esc(teaser)}</span>
@@ -308,7 +315,7 @@ html = f'''<!DOCTYPE html>
     <div class="split reveal" style="margin-top:var(--s9);border-top:1px solid var(--rule);padding-top:var(--s7)">
       <div class="stack">
         <p class="eyebrow">A note on images</p>
-        <p class="body">Photography for these listings is intentionally left as placeholders rather than sourced from the open web without clear reuse rights. Each card is ready for an owner-supplied or press-kit image when one is confirmed.</p>
+        <p class="body">Audit-supplied venue photography is served locally for the listings where a verified asset is available. When no verified Charlotte image exists, the listing deliberately keeps its styled placeholder rather than using an unverified substitute.</p>
       </div>
       <div class="stack">
         <a class="cta" href="house.html"><span>The Compliment</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
