@@ -19,7 +19,7 @@ def buttons(block):
 
 # Living Room
 living = section('penthouse-living')
-for name in ['The Artwork','The Journal','The Vault','The Style','The Gentlemen’s Cocktail Menu']:
+for name in ['The Artwork','The Journal','The Vault','The Gentlemen’s Guide to Suits','The Gentlemen’s Cocktail Menu']:
     assert name in living, f'{name} missing from Living Room'
 for retired in ['The Candle','The Polo']:
     assert retired not in living, f'{retired} still present in Living Room'
@@ -45,7 +45,7 @@ assert '--x:85.3%;--y:25.2%' in study and 'The City Guide' in study
 
 # Kitchen
 kitchen = section('kitchen')
-for name in ['The Artwork','The Blueprint Game','The Gentleman’s Guide to HelloFresh','The Journal']:
+for name in ['The Artwork','The Wardrobe','The Gentlemen’s CookBook','The Journal']:
     assert name in kitchen
 for retired in ['The Jacket','The Delivery']:
     assert retired not in kitchen
@@ -104,10 +104,13 @@ for needle in [
     "key:'suits', name:'The Blueprint Game', x:'14.9%', y:'38.5%'",
     "key:'boxer', name:'The After Hours Boxing Game', x:'46.2%', y:'27.6%'",
     "key:'journal', name:'The Journal', x:'59.2%', y:'15.6%'",
+    'key:\'suits\', name:"The Gentlemen’s Guide to Suits", x:\'44.5%\', y:\'66.5%\'',
+    "key:'suit', name:'The Wardrobe', x:'58.3%', y:'42.1%'",
+    'key:\'hellofresh\', name:"The Gentlemen’s CookBook", x:\'58.5%\', y:\'63.8%\'',
 ]:
     assert needle in js, f'Runtime missing {needle}'
 assert "(room.id === 'gym' || room.id === 'closet') && a.key === 'boxer'" in js, 'Runtime Closet After Hours portal wiring missing'
-assert 'penthouse.js?v=20260924lr7k' in index
+assert 'penthouse.js?v=20260928-artifact-tags' in index
 assert '.floor-scene__view img{' in css and 'height:100%;width:auto' in css
 
 print('Penthouse v7 desktop/mobile verification passed')
