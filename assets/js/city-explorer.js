@@ -115,7 +115,8 @@
     if (cqAll) {
       cqAll.href = groupHref(groupId);
       var meta = GROUPS[groupId];
-      cqAll.querySelector('span:first-child').textContent = meta ? 'All ' + meta.name : 'All Charlotte Listings';
+      cqAll.querySelector('span:first-child').textContent = 'View all places';
+      cqAll.setAttribute('aria-label', meta ? 'View all places in ' + meta.name : 'View all Charlotte places');
     }
     cq.classList.add('is-open');
     cq.setAttribute('aria-hidden', 'false');
@@ -163,7 +164,7 @@
 
     var meta = GROUPS[d.group];
     var seeAll = meta
-      ? '<a class="cityread__seeall link-under" href="' + groupHref(d.group) + '">See all ' + meta.count + ' in ' + esc(meta.name) + ' &#8594;</a>'
+      ? '<a class="cityread__seeall link-under" aria-label="View all places in ' + esc(meta.name) + '" href="' + groupHref(d.group) + '">View all places &#8594;</a>'
       : '';
 
     host.innerHTML = rows + seeAll;
