@@ -20,8 +20,8 @@ def artifact(id_, name, x, y, desc, specs=()):
 
 KITCHEN_ARTS = [
     artifact("artwork", "The Artwork", "23.1%", "10.5%", "The framed portrait beside the fireplace and skyline.", (("Collection", "Paris Pullen"),)),
-    artifact("suits", "The Blueprint Game", "58.3%", "42.1%", "The Blueprint Game follows the same system used in the Closet — choose the look, then own it.", (("Experience", "The Blueprint"),)),
-    artifact("hellofresh", "The Gentleman’s Guide to HelloFresh", "58.5%", "63.8%", "The recipe card and ingredients on the island — the Gentleman’s Guide to HelloFresh.", (("Partner", "HelloFresh"),)),
+    artifact("suit", "The Wardrobe", "58.3%", "42.1%", "The Wardrobe: a focused system for getting dressed with intention.", (("Artifact", "The Wardrobe"),)),
+    artifact("hellofresh", "The Gentlemen’s CookBook", "58.5%", "63.8%", "The recipe card and ingredients on the island.", (("Partner", "HelloFresh"),)),
     artifact("journal", "The Journal", "80.0%", "87.0%", "The journal at the dining place setting, ready for the next note.", (("Read it", "The Journal"),)),
 ]
 
@@ -90,8 +90,8 @@ def patch_runtime():
     replacements = [
         (r"    'kitchen': \[.*?\n    \],\n    'study': \[", """    'kitchen': [
       { key:'artwork', name:'The Artwork', x:'23.1%', y:'10.5%', body:'The framed portrait beside the fireplace and skyline.', specs:[['Collection', 'Paris Pullen']] },
-      { key:'suits', name:'The Blueprint Game', x:'58.3%', y:'42.1%', body:'The Blueprint Game follows the same system used in the Closet — choose the look, then own it.', specs:[['Experience', 'The Blueprint']] },
-      { key:'hellofresh', name:'The Gentleman&#8217;s Guide to HelloFresh', x:'58.5%', y:'63.8%', body:'The recipe card and ingredients on the island — the Gentleman&#8217;s Guide to HelloFresh.', specs:[['Partner', 'HelloFresh']] },
+      { key:'suit', name:'The Wardrobe', x:'58.3%', y:'42.1%', body:'The Wardrobe: a focused system for getting dressed with intention.', specs:[['Artifact', 'The Wardrobe']] },
+      { key:'hellofresh', name:'The Gentlemen’s CookBook', x:'58.5%', y:'63.8%', body:'The recipe card and ingredients on the island.', specs:[['Partner', 'HelloFresh']] },
       { key:'journal', name:'The Journal', x:'80.0%', y:'87.0%', body:'The journal at the dining place setting, ready for the next note.', specs:[['Read it', 'The Journal']] },
     ],
     'study': ["""),
