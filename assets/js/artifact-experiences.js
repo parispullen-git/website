@@ -285,7 +285,7 @@
     if(!panel)return false;
     const key=id;
     if(key==='hellofresh')helloFreshPortal(spot);
-    else if((room.id==='closet'&&key==='suits')||key==='suit'||(room.id==='closet'&&key==='journal'))blueprintPortal(spot);
+    else if(((room.id==='closet'||room.id==='penthouse-living')&&key==='suits')||key==='suit'||(room.id==='closet'&&key==='journal'))blueprintPortal(spot);
     else if(key.includes('oxknit'))capsule(spot,panel,true);
     else if(key==='jacket'||key==='polo')capsule(spot,panel,false);
     else if(key==='cocktails')cocktailPortal(spot);
