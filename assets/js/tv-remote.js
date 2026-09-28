@@ -57,6 +57,15 @@
      "listening" handshake -- we do that on every iframe load, track the
      latest currentTime per screen/modal here, and seek relative to that. */
   var ALL_STATES = [];
+  // A deliberate mute is a house-wide preference. It survives room changes
+  // (and a page refresh in the same tab) until the visitor explicitly unmutes.
+  var houseMuted = false;
+  try { houseMuted = sessionStorage.getItem('pp-house-muted') === '1'; } catch (_) {}
+  function setHouseMuted(muted) {
+    houseMuted = !!muted;
+    try { sessionStorage.setItem('pp-house-muted', houseMuted ? '1' : '0'); } catch (_) {}
+    document.dispatchEvent(new CustomEvent('pp:house-mute', { detail: { muted: houseMuted } }));
+  }
   // Every screen's state, keyed by its channel-set id ("living", "cinema")
   // -- lets the global Suite Remote (see initSuiteRemote) reach a given
   // screen's iframe/state from anywhere on the page, not just from inside
@@ -496,9 +505,9 @@
     // Full screen is opened via a direct click, a strong enough user gesture
     // that autoplay-with-sound is reliably allowed -- so open unmuted rather
     // than forcing the visitor to hit Mute -> Unmute for no reason.
-    state.muted = false;
+    state.muted = houseMuted;
     state.isPaused = false;
-    setModalIframe(ch.id, false);
+    setModalIframe(ch.id, houseMuted);
     post(modalIframe, 'setVolume', [state.volume || 100]);
     showLowerThird(modalLowerThird, modalLowerThirdTitle, ch.label);
     updateModalMuteLabel();
@@ -575,8 +584,11 @@
     // global Suite Remote looks a state up by key rather than duplicating
     // this logic against a second iframe reference).
     state.toggleMute = function () {
+      // Any explicit mute/unmute control sets the shared preference so a
+      // room transition can never bring sound back unexpectedly.
       state.muted = !state.muted;
       state.autoMuted = false;
+      setHouseMuted(state.muted);
       post(iframe, state.muted ? 'mute' : 'unMute');
       if (!state.muted) post(iframe, 'setVolume', [state.volume || 50]);
       state.updateMuteLabel();
@@ -713,14 +725,14 @@
           break;
         case 'vol-up':
           state.volume = Math.min(100, state.volume + 10);
-          if (state.muted) { state.muted = false; post(iframe, 'unMute'); }
+          if (state.muted) { state.muted = false; setHouseMuted(false); post(iframe, 'unMute'); }
           post(iframe, 'setVolume', [state.volume]);
           state.updateMuteLabel();
           break;
         case 'vol-down':
           state.volume = Math.max(0, state.volume - 10);
           post(iframe, 'setVolume', [state.volume]);
-          if (state.volume === 0 && !state.muted) { state.muted = true; post(iframe, 'mute'); state.updateMuteLabel(); }
+          if (state.volume === 0 && !state.muted) { state.muted = true; setHouseMuted(true); post(iframe, 'mute'); state.updateMuteLabel(); }
           break;
         case 'mute':
           state.toggleMute();
@@ -788,6 +800,7 @@
       soundPrompt.addEventListener('click', function (e) {
         e.stopPropagation();
         state.muted = false;
+        setHouseMuted(false);
         post(iframe, 'unMute');
         post(iframe, 'setVolume', [state.volume || 100]);
         state.updateMuteLabel();
@@ -1270,7 +1283,7 @@
     setHouseRoom: function (roomId) {
       var living=STATE_BY_KEY.living, cinema=STATE_BY_KEY.cinema;
       function silence(state){if(!state||!state.iframe)return;state.muted=true;state.autoMuted=true;post(state.iframe,'mute');post(state.iframe,'pauseVideo');if(state.updateMuteLabel)state.updateMuteLabel();notifyState(state);}
-      function activate(state){if(!state||!state.iframe)return;if(!state.iframe.getAttribute('src')&&state.loadChannel)state.loadChannel(0);state.muted=false;state.autoMuted=false;state.isPaused=false;post(state.iframe,'playVideo');post(state.iframe,'unMute');post(state.iframe,'setVolume',[state.volume||100]);if(state.updateMuteLabel)state.updateMuteLabel();notifyState(state);}
+      function activate(state){if(!state||!state.iframe)return;if(!state.iframe.getAttribute('src')&&state.loadChannel)state.loadChannel(0);state.muted=houseMuted;state.autoMuted=false;state.isPaused=false;post(state.iframe,'playVideo');post(state.iframe,houseMuted?'mute':'unMute');if(!houseMuted)post(state.iframe,'setVolume',[state.volume||100]);if(state.updateMuteLabel)state.updateMuteLabel();notifyState(state);}
       if(roomId==='cinema'){silence(living);activate(cinema);return;}
       if(roomId==='music-lounge'||roomId==='gym'){silence(living);silence(cinema);return;}
       silence(cinema);activate(living);
