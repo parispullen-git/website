@@ -1102,10 +1102,9 @@
     }
 
     function renderHouseMute() {
-      // Never changes the Lounge playlist. Cinema uses its own video screen;
-      // every other room reflects the persistent Living Room TV state.
-      var st = currentRoomId === 'cinema' ? STATE_BY_KEY.cinema : STATE_BY_KEY.living;
-      setHouseMuteButton(!!(st && st.muted));
+      // The corner control is a deliberate house-wide TV/Cinema setting.
+      // Do not infer it from an inactive screen that was auto-muted.
+      setHouseMuteButton(houseMuted);
     }
 
     function renderPP() {
@@ -1157,8 +1156,17 @@
 
     houseMuteBtn.addEventListener('click', function (e) {
       e.stopPropagation();
-      var state = currentRoomId === 'cinema' ? STATE_BY_KEY.cinema : STATE_BY_KEY.living;
-      if (state) state.toggleMute();
+      var muted = !houseMuted;
+      setHouseMuted(muted);
+      [STATE_BY_KEY.living, STATE_BY_KEY.cinema].forEach(function (state) {
+        if (!state || !state.iframe) return;
+        state.muted = muted;
+        state.autoMuted = false;
+        post(state.iframe, muted ? 'mute' : 'unMute');
+        if (!muted) post(state.iframe, 'setVolume', [state.volume || 50]);
+        if (state.updateMuteLabel) state.updateMuteLabel();
+        notifyState(state);
+      });
       renderHouseMute();
     });
 
