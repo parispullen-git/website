@@ -26,10 +26,10 @@ window.CHARLOTTE = {
       note:'Banks, boardrooms and the hotel. Business gets agreed here and celebrated somewhere else.',
       best:'Weeknights', dress:'Jacket, always',
       venues:[
-        {name:'Church and Union', cat:'Restaurant', note:'A converted bank hall turned restaurant and bar, all marble and reclaimed brass.'},
+        {name:'Church and Union', cat:'Restaurant', note:'A converted bank hall turned restaurant and bar, all marble and reclaimed brass.', image:'uptown-church-and-union.jpg'},
         {name:'The Capital Grille', cat:'Steak & Seafood', note:'The national chophouse formula, executed with enough polish nobody thinks about the other twenty locations.'},
-        {name:'Sophia’s Lounge', cat:'Cocktail Bar', note:'A hotel lounge with the confidence to lean fully into velvet and gilt.'},
-        {name:'Fahrenheit', cat:'Rooftop Bar', note:'One of Charlotte’s signature skyline dinner-and-drinks settings.'}
+        {name:'Sophia’s Lounge', cat:'Cocktail Bar', note:'A hotel lounge with the confidence to lean fully into velvet and gilt.', image:'uptown-sophias-lounge.jpg'},
+        {name:'Fahrenheit', cat:'Rooftop Bar', note:'One of Charlotte’s signature skyline dinner-and-drinks settings.', image:'uptown-fahrenheit.jpg'}
       ] },
 
     { id:'camp-north-end', name:'Camp North End', kind:'Adaptive reuse', group:'west-charlotte', lx:820, ly:270,
@@ -37,8 +37,8 @@ window.CHARLOTTE = {
       note:'A former factory turned into studios and event space. The city’s best rooms for a launch.',
       best:'Event nights', dress:'Considered',
       venues:[
-        {name:'Camp North End', cat:'District / Neighborhood', note:'Seventy-plus businesses inside a former munitions and streetcar plant, Charlotte’s clearest adaptive-reuse campus.'},
-        {name:'HEX Coffee, Kitchen & Natural Wines', cat:'Coffee', note:'A Japanese-inflected all-day café — coffee by morning, natural wine by evening.'}
+        {name:'Camp North End', cat:'District / Neighborhood', note:'Seventy-plus businesses inside a former munitions and streetcar plant, Charlotte’s clearest adaptive-reuse campus.', image:'west-charlotte-camp-north-end.jpg'},
+        {name:'HEX Coffee, Kitchen & Natural Wines', cat:'Coffee', note:'A Japanese-inflected all-day café — coffee by morning, natural wine by evening.', image:'west-charlotte-hex-coffee.jpg'}
       ] },
 
     { id:'university', name:'University City', kind:'North of everything', group:'noda', lx:1210, ly:250,
@@ -46,8 +46,8 @@ window.CHARLOTTE = {
       note:'Students, research and the cheapest good food in the county if you know where to look.',
       best:'Term time', dress:'Anything',
       venues:[
-        {name:'Fumée Kitchen & Cocktails', cat:'Cocktail Bar', note:'High-energy vibe dining — crafted cocktails, tapas-style plates and premium glass shisha running late.'},
-        {name:'Vavela', cat:'Coffee', note:'A late-night Turkish coffee and tea lounge built for the hours after everything else has closed.'}
+        {name:'Fumée Kitchen & Cocktails', cat:'Cocktail Bar', note:'High-energy vibe dining — crafted cocktails, tapas-style plates and premium glass shisha running late.', image:'noda-fumee-kitchen-cocktails.jpg'},
+        {name:'Vavela Cafe', cat:'Coffee', note:'A late-night Turkish coffee and tea lounge built for the hours after everything else has closed.', image:'noda-vavela.jpg'}
       ] },
 
     { id:'noda', name:'NoDa', kind:'Arts district', group:'noda', lx:1680, ly:300,
@@ -55,9 +55,9 @@ window.CHARLOTTE = {
       note:'Murals, live rooms and the best crowd in the city for actually listening to a band.',
       best:'Late', dress:'Yourself, but pressed',
       venues:[
-        {name:'Haberdish', cat:'Restaurant', note:'Southern cooking with a fried chicken reputation, set in a converted NoDa mill building.'},
-        {name:'The Evening Muse', cat:'Live Music', note:'An intimate original-music room where the crowd came to listen, not to be seen listening.'},
-        {name:'Idlewild', cat:'Cocktail Bar', note:'No printed cocktail menu — you describe the mood and the bar builds it.'}
+        {name:'Haberdish', cat:'Restaurant', note:'Southern cooking with a fried chicken reputation, set in a converted NoDa mill building.', image:'noda-haberdish.jpg'},
+        {name:'The Evening Muse', cat:'Live Music', note:'An intimate original-music room where the crowd came to listen, not to be seen listening.', image:'noda-the-evening-muse.jpg'},
+        {name:'Idlewild', cat:'Cocktail Bar', note:'No printed cocktail menu — you describe the mood and the bar builds it.', image:'noda-idlewild.jpg'}
       ] },
 
     { id:'plaza-midwood', name:'Plaza Midwood', kind:'The dive belt', group:'plaza-midwood', lx:1585, ly:500,
@@ -65,8 +65,8 @@ window.CHARLOTTE = {
       note:'Where the tattooed and the tenured drink at the same bar and nobody minds.',
       best:'Any night', dress:'Nothing that tries',
       venues:[
-        {name:'Supperland', cat:'Restaurant', note:'A midcentury church turned steakhouse, stained glass intact above the dining room.'},
-        {name:'The Bar at Supperland', cat:'Cocktail Bar', note:'The standalone bar attached to the church-turned-restaurant next door, built for a drink.'}
+        {name:'Supperland', cat:'Restaurant', note:'A midcentury church turned steakhouse, stained glass intact above the dining room.', image:'plaza-midwood-supperland.jpg'},
+        {name:'The Bar at Supperland', cat:'Cocktail Bar', note:'The standalone bar attached to the church-turned-restaurant next door, built for a drink.', image:'plaza-midwood-the-bar-at-supperland.jpg'}
       ] },
 
     { id:'elizabeth', name:'Elizabeth', kind:'Old shade', group:'plaza-midwood', lx:1310, ly:672,
@@ -74,9 +74,9 @@ window.CHARLOTTE = {
       note:'Bungalows and big trees. Quiet tables, quiet money, and one of the better wine lists.',
       best:'Sunday', dress:'Soft tailoring',
       venues:[
-        {name:'The Crunkleton', cat:'Cocktail Bar', note:'A spirits library disguised as a bar — the room that put Charlotte’s cocktail scene on the map.'},
+        {name:'The Crunkleton', cat:'Cocktail Bar', note:'A spirits library disguised as a bar — the room that put Charlotte’s cocktail scene on the map.', image:'plaza-midwood-the-crunkleton.jpg'},
         {name:'Sneak CLT', cat:'Speakeasy', note:'A modernized speakeasy in Elizabeth, hidden-door aesthetic without the password theater.'},
-        {name:'Puerta', cat:'Restaurant', note:'Stylish dinner-and-drinks on East 7th Street — tequila, mezcal and an elevated Mexican menu.'}
+        {name:'Puerta', cat:'Restaurant', note:'Stylish dinner-and-drinks on East 7th Street — tequila, mezcal and an elevated Mexican menu.', image:'plaza-midwood-puerta.jpg'}
       ] },
 
     { id:'west-end', name:'West End', kind:'Historic corridor', group:'west-charlotte', lx:420, ly:545,
@@ -84,8 +84,8 @@ window.CHARLOTTE = {
       note:'Beatties Ford and the institutions along it. The city’s deepest roots and its sharpest barbers.',
       best:'Daytime', dress:'Fresh',
       venues:[
-        {name:'Leah & Louise', cat:'Restaurant', note:'A celebrated Black-owned Southern kitchen, relocating from Camp North End into a larger West End building.'},
-        {name:'Noble Smoke', cat:'Restaurant', note:'Whole-hog barbecue and a bourbon list long enough to make the wait worthwhile.'}
+        {name:'Restaurant Constance', cat:'Restaurant', note:'An intimate Wesley Heights farm-to-table dinner room with a curated wine and zero-proof cocktail program.', image:'west-charlotte-restaurant-constance.jpg'},
+        {name:'Maiz Agua Sal', cat:'Restaurant · Cocktail Bar', note:'A modern Mexican scratch kitchen with a craft agave cocktail program, patio and fire pit.', image:'west-charlotte-maiz-agua-sal.jpg'}
       ] },
 
     { id:'steele-creek', name:'Steele Creek', kind:'Southwest', group:'ballantyne', lx:480, ly:890,
@@ -93,7 +93,7 @@ window.CHARLOTTE = {
       note:'Lake access, the airport approach, and a long stretch of road with a few worthwhile stops.',
       best:'Summer', dress:'Off duty',
       venues:[
-        {name:'The Palisades Country Club', cat:'Golf & Country Club', note:'A Jack Nicklaus design out near Steele Creek, with river-adjacent views.'}
+        {name:'The Palisades Country Club', cat:'Golf & Country Club', note:'A Jack Nicklaus design out near Steele Creek, with river-adjacent views.', image:'ballantyne-the-palisades-country-club.jpg'}
       ] },
 
     { id:'south-end', name:'South End', kind:'The rail line', group:'south-end', lx:665, ly:690,
@@ -101,9 +101,9 @@ window.CHARLOTTE = {
       note:'Rooftops, breweries and the loudest brunch in the county. Young money, spending it.',
       best:'Saturday, early', dress:'Sharp casual',
       venues:[
-        {name:'Orosoko Sound Bar', cat:'Cocktail Bar', note:'Latin-inflected cocktails and tapas under a sound system that earns the name.'},
-        {name:'Barcelona Wine Bar', cat:'Wine Bar', note:'Spanish tapas and a wine list built for grazing rather than committing to one bottle.'},
-        {name:'Sixty Vines', cat:'Wine Bar', note:'A bright, design-led wine-country restaurant built around an expansive wine program.'}
+        {name:'Orosoko Sound Bar', cat:'Cocktail Bar', note:'Latin-inflected cocktails and tapas under a sound system that earns the name.', image:'south-end-orosoko-sound-bar.jpg'},
+        {name:'Barcelona Wine Bar', cat:'Wine Bar', note:'Spanish tapas and a wine list built for grazing rather than committing to one bottle.', image:'south-end-barcelona-wine-bar.jpg'},
+        {name:'Sixty Vines', cat:'Wine Bar', note:'A bright, design-led wine-country restaurant built around an expansive wine program.', image:'south-end-sixty-vines.jpg'}
       ] },
 
     { id:'dilworth', name:'Dilworth', kind:'The first suburb', group:'south-end', lx:915, ly:800,
@@ -111,8 +111,8 @@ window.CHARLOTTE = {
       note:'Porches and prams by day. After eight it belongs to people who have already made it.',
       best:'Early evening', dress:'Understated',
       venues:[
-        {name:'Kid Cashew', cat:'Restaurant', note:'Wood-fire cooking built around a whole rotisserie chicken good enough to anchor the menu.'},
-        {name:'Dilworth Tasting Room', cat:'Wine Bar', note:'A neighborhood wine bar with a list long enough to reward regulars.'}
+        {name:'Kid Cashew', cat:'Restaurant', note:'Wood-fire cooking built around a whole rotisserie chicken good enough to anchor the menu.', image:'south-end-kid-cashew.jpg'},
+        {name:'Dilworth Tasting Room', cat:'Wine Bar', note:'A neighborhood wine bar with a list long enough to reward regulars.', image:'south-end-dilworth-tasting-room.jpg'}
       ] },
 
     { id:'myers-park', name:'Myers Park', kind:'Old Charlotte', group:'myers-park', lx:1270, ly:855,
@@ -120,8 +120,8 @@ window.CHARLOTTE = {
       note:'Willow oaks and long driveways. The city’s oldest money, and it does not advertise.',
       best:'By invitation', dress:'Club rules',
       venues:[
-        {name:'Myers Park Country Club', cat:'Golf & Country Club', note:'Old Charlotte’s home course, set into the neighborhood it’s named for.'},
-        {name:'Quail Hollow Club', cat:'Golf & Country Club', note:'Host of the PGA Tour’s Charlotte stop — the closest thing the city has to a golf landmark.'}
+        {name:'Myers Park Country Club', cat:'Golf & Country Club', note:'Old Charlotte’s home course, set into the neighborhood it’s named for.', image:'myers-park-myers-park-country-club.jpg'},
+        {name:'Quail Hollow Club', cat:'Golf & Country Club', note:'Host of the PGA Tour’s Charlotte stop — the closest thing the city has to a golf landmark.', image:'myers-park-quail-hollow-club.jpg'}
       ] },
 
     { id:'southpark', name:'SouthPark', kind:'Retail and dining', group:'myers-park', lx:1795, ly:790,
@@ -129,8 +129,8 @@ window.CHARLOTTE = {
       note:'The shopping is the reason people say they came. The steakhouse is the actual reason.',
       best:'Thursday', dress:'Jacket',
       venues:[
-        {name:'Steak 48', cat:'Steak & Seafood', note:'An open kitchen and a raw bar working in full view of the dining room.'},
-        {name:'Oak Steakhouse', cat:'Steak & Seafood', note:'A regional steakhouse group’s Charlotte flagship — modern and unfussy.'}
+        {name:'Steak 48', cat:'Steak & Seafood', note:'An open kitchen and a raw bar working in full view of the dining room.', image:'myers-park-steak-48.jpg'},
+        {name:'Oak Steakhouse', cat:'Steak & Seafood', note:'A regional steakhouse group’s Charlotte flagship — modern and unfussy.', image:'myers-park-oak-steakhouse.jpg'}
       ] },
 
     { id:'ballantyne', name:'Ballantyne', kind:'The far south', group:'ballantyne', lx:1290, ly:1030,
@@ -138,8 +138,8 @@ window.CHARLOTTE = {
       note:'Golf, corporate campuses and clubs with waiting lists. Deals close over eighteen holes.',
       best:'Weekend mornings', dress:'Country club',
       venues:[
-        {name:'Hestia Rooftop', cat:'Rooftop Bar', note:'Modern Asian cooking sixteen floors up in Ballantyne Village, the rare rooftop this far south.'},
-        {name:'TPC Piper Glen', cat:'Golf & Country Club', note:'An Arnold Palmer design run under the Invited network, Har-Tru tennis alongside the course.'}
+        {name:'Hestia Rooftop', cat:'Rooftop Bar', note:'Modern Asian cooking sixteen floors up in Ballantyne Village, the rare rooftop this far south.', image:'ballantyne-hestia-rooftop.jpg'},
+        {name:'TPC Piper Glen', cat:'Golf & Country Club', note:'An Arnold Palmer design run under the Invited network, Har-Tru tennis alongside the course.', image:'ballantyne-tpc-piper-glen.jpg'}
       ] }
   ]
 };
