@@ -151,7 +151,7 @@ def patch_runtime():
       { key:'artwork', name:'The Artwork', x:'75.0%', y:'10.0%', body:'The framed piece overlooking the room from the upper gallery.', specs:[['Collection', 'Paris Pullen']] },
       { key:'journal', name:'The Journal', x:'79.5%', y:'51.5%', body:'The journal resting on the right-side console.', specs:[['Read it', 'The Journal']] },
       { key:'vault', name:'The Vault', x:'91.5%', y:'68.5%', body:'Brass wheel, black steel, set into the wall and deliberately visible.', specs:[['Contents', 'UR Welcome']] },
-      { key:'suits', name:'The Style', x:'44.5%', y:'66.5%', body:'The Style sits on the ottoman with the SuitSupply and Indochino boxes: the working system for getting dressed with intention.', specs:[['Artifact', 'The Style'], ['Explore', 'The Blueprints and The Wardrobe']] },
+      { key:'suits', name:'The Gentlemen’s Guide to Suits', x:'44.5%', y:'66.5%', body:'The Gentlemen’s Guide to Suits sits on the ottoman with the SuitSupply and Indochino boxes: the working system for getting dressed with intention.', specs:[['Artifact', 'The Gentlemen’s Guide to Suits'], ['Explore', 'The Blueprints and The Wardrobe']] },
       { key:'cocktails', name:'The Gentlemen&#8217;s Cocktail Menu', x:'9.0%', y:'87.5%', body:'The house cocktail menu placed beside the drink table.', specs:[['House classics', 'Eleven']] },
     ],
     'music-lounge': ["""
