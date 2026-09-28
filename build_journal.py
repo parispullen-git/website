@@ -769,6 +769,10 @@ def build_article_pages():
         }
         if post.get("date"):
             ld["datePublished"] = post["date"]
+        # Keyword wiring: the per-article targets from the SEO arsenal
+        # (data/journal.json "keywords") go into the structured data.
+        if post.get("keywords"):
+            ld["keywords"] = ", ".join(post["keywords"])
         ld_block = ('<script type="application/ld+json">\n'
                     + json.dumps(ld, ensure_ascii=False)
                     + '\n</script>')
@@ -787,6 +791,7 @@ def build_article_pages():
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(post['title'])} &#8212; The Journal &#8212; Paris Pullen</title>
 <meta name="description" content="{esc(post.get('meta_description', post['stand']))}">
+<meta name="keywords" content="{esc(', '.join(post.get('keywords', [])))}">
 <link rel="canonical" href="https://parispullen.com/{article_url(post)}">
 <meta property="og:title" content="{esc(post['title'])}">
 <meta property="og:description" content="{esc(post.get('meta_description', post['stand']))}">
