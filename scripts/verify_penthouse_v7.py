@@ -19,7 +19,7 @@ def buttons(block):
 
 # Living Room
 living = section('penthouse-living')
-for name in ['The Artwork','The Journal','The Vault','The Blueprint Game','The Gentlemen’s Cocktail Menu']:
+for name in ['The Artwork','The Journal','The Vault','The Style','The Gentlemen’s Cocktail Menu']:
     assert name in living, f'{name} missing from Living Room'
 for retired in ['The Candle','The Polo']:
     assert retired not in living, f'{retired} still present in Living Room'
