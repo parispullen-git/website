@@ -205,16 +205,16 @@ html = f'''<!DOCTYPE html>
 <main>
 
 <!-- ============ HERO ============ -->
-<section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,13rem);padding-bottom:clamp(3rem,6vh,5rem)">
+<section class="scene city-guide-hero">
   <div class="wrap">
-    <header class="split reveal" style="align-items:end">
+    <header class="split city-guide-hero__split reveal">
       <div class="stack stack--tight">
         <p class="eyebrow">Charlotte, North Carolina</p>
         <h1 class="display display--mega">A Gentleman&#8217;s<br>Guide</h1>
       </div>
       <div class="stack">
-        <p class="lede">A banking city that dresses conservatively and negotiates hard. Quiet money, loud weekends. This is a working guide, not a mood board &#8212; {total_venues} real, current listings across seven districts, every address and access rule checked before it went on the page.</p>
-        <p class="classified">{total_venues} verified listings &#183; Seven districts &#183; Sourced and checked, not invented</p>
+        <p class="lede city-guide-hero__lede">A working guide to Charlotte&#8217;s rooms &#8212; {total_venues} verified places across seven districts.</p>
+        <p class="classified">{total_venues} verified places &#183; Seven districts</p>
       </div>
     </header>
   </div>
@@ -225,7 +225,7 @@ html = f'''<!DOCTYPE html>
   <div class="cityscape__head reveal">
     <p class="eyebrow">The Map</p>
     <h2 class="display display--h2" style="margin-block:var(--s3)">Seven districts.</h2>
-    <p class="lede">Each with its own hours, its own dress code and its own reason to go. Select a district and its venues surface as hotspots on the map itself &#8212; select a venue, and it opens right here.</p>
+    <p class="lede cityscape__lede">Choose a district. Its best places appear on the map &#8212; select one to open it here.</p>
   </div>
 
   <div class="cityscape__surface reveal reveal-d1">
