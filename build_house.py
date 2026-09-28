@@ -315,9 +315,9 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
         </button>''')
         spec = "".join(f'<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>' for k,v in specs)
         wardrobe_cta = (
-            '<a class="cta pent__open" href="blueprint.html" style="margin-top:var(--s2)">'
-            '<span>Play The Blueprint</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
-            if (f["id"] == "closet" and key == "suits") or (f["id"] == "bedroom" and key == "suit") else ""
+            '<a class="cta pent__open" href="/style-artifacts.html?embed=1" data-style-portal style="margin-top:var(--s2)">'
+            '<span>The Style</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
+            if (key == "suit") or (f["id"] == "closet" and key == "suits") else ""
         )
         tag = f'Level {f["lvl"]} &#183; Artifact'
         if f["id"] == "kitchen" and key == "hellofresh":
