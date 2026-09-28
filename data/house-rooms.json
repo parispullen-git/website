@@ -186,11 +186,11 @@
         ]
       },
       {
-        "id": "suit",
+        "id": "suits",
         "name": "The Style",
-        "x": "18%",
-        "y": "47%",
-        "desc": "The SuitSupply and Indochino pieces are kept together here: a working wardrobe, ready when the room calls for more than an entrance.",
+        "x": "44.5%",
+        "y": "66.5%",
+        "desc": "The Style sits on the ottoman with the SuitSupply and Indochino boxes: the working system for getting dressed with intention.",
         "specs": [
           [
             "Artifact",
