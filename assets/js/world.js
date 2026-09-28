@@ -13,6 +13,9 @@
   function gate() {
     var el = $('#gate');
     if (!el) return;
+    // The new entry hub owns its own navigation and must appear on every
+    // direct visit, rather than being dismissed by the legacy gate cookie.
+    if (el.hasAttribute('data-entry-screen')) return;
 
     var KEY = 'pp_gate_seen';
     var seen = false;
@@ -45,7 +48,17 @@
   function menu() {
     var btn = $('#menu-toggle');
     var panel = $('#menu');
-    if (!btn || !panel) return;
+    if (!btn) return;
+    // Pages such as the Journal can use the shared entry navigation without
+    // retaining the retired full-site menu sheet in their markup.
+    if (!panel) {
+      btn.addEventListener('click', function () {
+        if (window.ParisPullenEntry && window.ParisPullenEntry.openRoomMenu) {
+          window.ParisPullenEntry.openRoomMenu();
+        }
+      });
+      return;
+    }
 
     function set(open) {
       panel.classList.toggle('is-open', open);
@@ -57,6 +70,14 @@
     }
 
     btn.addEventListener('click', function () {
+      // Inside the Penthouse, the Menu button returns to the same entry
+      // experience visitors used to arrive here, rather than opening the
+      // legacy full-site navigation sheet.
+      if (window.ParisPullenEntry && window.ParisPullenEntry.openRoomMenu) {
+        set(false);
+        window.ParisPullenEntry.openRoomMenu();
+        return;
+      }
       set(!panel.classList.contains('is-open'));
     });
     panel.addEventListener('click', function (e) {

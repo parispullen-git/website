@@ -166,27 +166,6 @@
       draw();
     } catch (_) { fill('<p>The rail is unavailable right now.</p><a class="ae-action" href="wardrobe.html">Open the Boutique ↗</a>', token); }
   }
-  const recipes = [
-    {name:'Gouda Vibes Burgers with Tomato Onion Jam & Potato Wedges',tag:'The standby',note:'Beef patty, nutty gouda, and a jam that does more work than it should.',time:'35 minutes',ingredients:['Ground beef','Gouda cheese','Potato buns','Tomato & onion jam','Potato wedges'],story:'The good vibes are in the jam. Smoky sauce underneath, gouda melted past the point of resistance, and fries on the side that were never really optional.',image:'assets/img/collabs/hellofresh/00.jpg',link:'https://www.hellofresh.com/recipes/gouda-vibes-burgers-5eb9aeccd2f80a637e0e4e5d'},
-    {name:'Southwest Shrimp Tacos with Pico de Gallo & Hot Sauce Crema',tag:'The quick one',note:'Twenty-five minutes, tastes like it took longer.',time:'25 minutes',ingredients:['Shrimp','Southwest spice blend','Poblano pepper','Pico de gallo','Hot sauce crema'],story:'Seared shrimp, warm tortillas, a crema with enough heat to matter. The kind of Tuesday dinner that argues its own case.',image:'assets/img/collabs/hellofresh/01.jpg',link:'https://www.hellofresh.com/recipes/southwest-shrimp-tacos-61a789cad3877c660a03a872'},
-    {name:'Honey Sriracha Pork Tenderloin with Roasted Sesame Carrots & Cilantro-Lime Rice',tag:'The occasion',note:'Sesame, ginger, honey, sriracha — the sauce does the talking.',time:'45 minutes',ingredients:['Pork tenderloin','Sesame carrots','Cilantro-lime rice','Honey','Sriracha'],story:'A lick-the-plate glaze over rested pork, rice bright with lime, carrots roasted past just-tender. Worth clearing the evening for.',image:'assets/img/collabs/hellofresh/02.jpg',link:'https://www.hellofresh.com/recipes/honey-sriracha-pork-tenderloin-5fa07b6801edba49463cf224'},
-    {name:'Chimichurri Lamb & Hot Honey Brussels Sprouts',tag:'The showstopper',note:'Seared lamb chops, bold herby chimichurri, no apology required.',time:'35 minutes',ingredients:['Lamb chops','Chimichurri','Brussels sprouts','Hot honey','Feta & pepitas'],story:'The lamb does the showing off. The Brussels sprouts, roasted with hot honey and finished with feta, are the reason people ask for the recipe.',image:'assets/img/collabs/hellofresh/03.jpg',link:'https://www.hellofresh.com/recipes/chimichurri-lamb-and-hot-honey-brussels-sprouts-69f21d783ace2ca2f08f08ba'},
-    {name:"Turkey & Mushroom Shepherd's Pie",tag:'The weekly',note:'A lighter shepherd’s pie that still eats like the original.',time:'50 minutes',ingredients:['Ground turkey','Button mushrooms','Mashed potatoes','White cheddar','Fresh thyme'],story:'Meaty mushrooms stand in for the beef nobody misses. Broiled cheddar on top, a spoon that goes straight through to the bottom of the dish.',image:'assets/img/collabs/hellofresh/04.jpg',link:'https://www.hellofresh.com/recipes/turkey-mushroom-shepherd-s-pie-649c8b124387a88e63f51410'}
-  ];
-  function cookbook(spot) {
-    begin('book','Five recipes. One standing invitation.',spot);
-    let page=0;
-    const checked = recipes.map(()=>new Set());
-    function draw() {
-      const r=recipes[page];
-      fill(`<div class="ae-book-nav" aria-label="Recipe chapters">${recipes.map((r,i)=>`<button data-action="chapter" data-index="${i}" aria-pressed="${i===page}">${num(i+1)} · ${esc(r.tag)}</button>`).join('')}</div><div class="ae-book is-turning"><section class="ae-page"><span class="ae-kicker ae-kicker--brand"><span class="ae-brand-chip"><img src="assets/img/brand-logos/hellofresh.png" alt="HelloFresh"></span> × Paris Pullen · The house edit</span><div class="ae-book-mark">${num(page+1)}</div><h3>${esc(r.name)}</h3><p><em>${esc(r.note)}</em></p><p>${esc(r.story)}</p><span class="ae-page-number">${num(page*2+1)}</span></section><section class="ae-page"><span class="ae-kicker">On the counter</span><h3>${esc(r.time)}</h3><ul class="ae-ingredients">${r.ingredients.map((v,i)=>`<li><label><input type="checkbox" data-ingredient="${i}" ${checked[page].has(i)?'checked':''}>${esc(v)}</label></li>`).join('')}</ul>${saveButton('recipe:'+page)}<span class="ae-page-number">${num(page*2+2)}</span></section></div><div class="ae-book-controls"><button class="ae-small" data-action="previous" ${page===0?'disabled':''}>← Turn back</button><span aria-live="polite">Recipe ${page+1} of ${recipes.length} · Swipe or use arrows</span><button class="ae-small" data-action="next" ${page===recipes.length-1?'disabled':''}>Turn the page →</button></div>${actions(goButton('study','Find the Cocktail Guide')+`<a class="ae-action ae-action--quiet" href="${esc(r.link)}" target="_blank" rel="noopener">Get this recipe ↗</a>`+'<a class="ae-action ae-action--quiet" href="pantry.html">Visit the Pantry ↗</a>')}`);
-      $$('.ae-ingredients input',dialog).forEach(input=>input.addEventListener('change',()=>{ const i=Number(input.dataset.ingredient); input.checked?checked[page].add(i):checked[page].delete(i); }));
-    }
-    sequence = direction => { const next=Math.max(0,Math.min(recipes.length-1,page+direction));if(next!==page){page=next;draw();} };
-    actionHandlers.previous=()=>sequence(-1);actionHandlers.next=()=>sequence(1);
-    actionHandlers.chapter=b=>{page=Number(b.dataset.index);draw();};
-    draw();
-  }
   function capsule(spot, panel, isOxknit) {
     begin('capsule',isOxknit?'Knit into the evening.':'What he reaches for.',spot);
     const items=isOxknit?[
@@ -259,13 +238,40 @@
     fill(`<div class="ae-split"><div>${focusMarkup(current(),spot,'The evening ritual')}</div><div><span class="ae-kicker">The Bathroom · A moment to yourself</span><p class="ae-lede">Three moments, chosen slowly. A ritual tray for future grooming, fragrance and linen collaborations.</p><div class="ae-ritual"><button data-action="ritual" aria-pressed="false"><strong>01 · Unwind</strong><span>Warm stone, quiet light. Start with a breath.</span></button><button data-action="ritual" aria-pressed="false"><strong>02 · Reset</strong><span>The vanity, cleared to the essentials.</span></button><button data-action="ritual" aria-pressed="false"><strong>03 · Return</strong><span>Choose what the rest of the evening feels like.</span></button></div>${actions(goButton('bedroom','Back to the Bedroom')+saveButton('bath:ritual'))}<p class="ae-note">A house ritual concept. No grooming products or brand availability are implied.</p></div></div>`);
     actionHandlers.ritual=b=>{ $$('.ae-ritual button',dialog).forEach(el=>el.setAttribute('aria-pressed',String(el===b)));$('.ae-focus',dialog).style.setProperty('--ae-zoom',['1.2','1.6','1'].at($$('.ae-ritual button',dialog).indexOf(b))); };
   }
+  function cocktailPortal(spot) {
+    const existing = document.getElementById('cocktail-guide-portal');
+    if (existing) { existing.showModal(); return; }
+    const portal = document.createElement('dialog');
+    portal.id = 'cocktail-guide-portal';
+    portal.className = 'ae-dialog';
+    portal.innerHTML = '<header class="ae-header ae-header--guide ae-header--cocktails"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE GENTLEMAN’S GUIDE TO COCKTAILS · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to room ×</button></header><iframe title="The Gentleman’s Guide to Cocktails" src="/cocktail-menu.html?v=2cf9656&amp;embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#efe6d5"></iframe>';
+    document.body.appendChild(portal);
+    portal.querySelector('.ae-close').addEventListener('click', () => portal.close());
+    portal.addEventListener('click', event => { if (event.target === portal) portal.close(); });
+    portal.addEventListener('close', () => { portal.remove(); if (spot?.isConnected) spot.focus({preventScroll:true}); });
+    portal.showModal();
+  }
+  function helloFreshPortal(spot) {
+    const existing = document.getElementById('hellofresh-guide-portal');
+    if (existing) { existing.showModal(); return; }
+    const portal = document.createElement('dialog');
+    portal.id = 'hellofresh-guide-portal';
+    portal.className = 'ae-dialog';
+    portal.innerHTML = '<header class="ae-header ae-header--guide ae-header--hellofresh"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE GENTLEMAN’S COOKBOOK · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to room ×</button></header><iframe title="The Gentleman’s Cookbook" src="/hellofresh-menu.html?v=1&amp;embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#efe6d5"></iframe>';
+    document.body.appendChild(portal);
+    portal.querySelector('.ae-close').addEventListener('click', () => portal.close());
+    portal.addEventListener('click', event => { if (event.target === portal) portal.close(); });
+    portal.addEventListener('close', () => { portal.remove(); if (spot?.isConnected) spot.focus({preventScroll:true}); });
+    portal.showModal();
+  }
+
   function blueprintPortal(spot) {
     const existing = document.getElementById('blueprint-room-portal');
     if (existing) { existing.showModal(); return; }
     const portal = document.createElement('dialog');
     portal.id = 'blueprint-room-portal';
     portal.className = 'ae-dialog';
-    portal.innerHTML = '<header class="ae-header"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE BLUEPRINT · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to room ×</button></header><iframe title="The Blueprint wardrobe game" src="/blueprint.html?embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#0a0a0b"></iframe>';
+    portal.innerHTML = '<header class="ae-header"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE STYLE · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to room ×</button></header><iframe title="The Style artifacts" src="/style-artifacts.html?embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#18140f"></iframe>';
     document.body.appendChild(portal);
     portal.querySelector('.ae-close').addEventListener('click', () => portal.close());
     portal.addEventListener('click', event => { if (event.target === portal) portal.close(); });
@@ -278,13 +284,14 @@
     const panel=$$('.drawer__panel',room).find(p=>p.dataset.artifact===id);
     if(!panel)return false;
     const key=id;
-    if(key==='hellofresh')cookbook(spot);
-    else if((room.id==='closet'&&key==='suits')||key==='suit')blueprintPortal(spot);
+    if(key==='hellofresh')helloFreshPortal(spot);
+    else if(((room.id==='closet'||room.id==='penthouse-living')&&key==='suits')||key==='suit'||(room.id==='closet'&&key==='journal'))blueprintPortal(spot);
     else if(key.includes('oxknit'))capsule(spot,panel,true);
     else if(key==='jacket'||key==='polo')capsule(spot,panel,false);
+    else if(key==='cocktails')cocktailPortal(spot);
     else if(key==='recordplayer')records(spot);
     else if(key==='posters')cinema(spot);
-    else if(['journal','cocktails','pullenlaws'].includes(key))reading(spot,panel,key);
+    else if(['journal','pullenlaws'].includes(key))reading(spot,panel,key);
     else gallery(spot,panel,key);
     return true;
   }
@@ -342,5 +349,11 @@
     // Offscreen rooms must not remain in keyboard and screen-reader navigation.
     $$('.floor-scene').forEach(r=>{r.inert=r.id!==e.detail.id;});
   });
-  if(current())$$('.floor-scene').forEach(r=>{r.inert=r!==current();});
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-style-portal]');
+    if (!trigger || event.button && event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    blueprintPortal(trigger);
+  });
+  if(current())$('.floor-scene').forEach(r=>{r.inert=r!==current();});
 })();

@@ -92,8 +92,25 @@
   var qSpec = document.getElementById('vquick-spec');
   var qMap = document.getElementById('vquick-map');
   var qSite = document.getElementById('vquick-site');
-  var qPh1 = document.getElementById('vquick-ph1');
+  var qMedia = quick.querySelector('.vquick__media');
   var qPh3 = document.getElementById('vquick-ph3');
+
+  function setPrimaryMedia(image, name) {
+    if (!qMedia) return;
+    qMedia.replaceChildren();
+    if (image) {
+      var img = document.createElement('img');
+      img.src = 'assets/img/city-guide/' + image;
+      img.alt = name || '';
+      img.decoding = 'async';
+      qMedia.appendChild(img);
+      return;
+    }
+    var placeholder = document.createElement('span');
+    placeholder.className = 'vquick__ph';
+    placeholder.textContent = (name || '') + ' · Exterior';
+    qMedia.appendChild(placeholder);
+  }
 
   function siteURL(raw) {
     if (!raw) return '';
@@ -116,9 +133,9 @@
     }
 
     qDesc.textContent = d.desc || '';
+    setPrimaryMedia(d.image || '', d.name || '');
 
     var mediaLabel = d.mediaLabel || 'Signature';
-    qPh1.textContent = (d.name || '') + ' · Exterior';
     qPh3.textContent = (d.name || '') + ' · ' + mediaLabel;
 
     var best = (d.best || '').split('|').filter(Boolean);

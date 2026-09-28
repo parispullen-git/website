@@ -1,150 +1,116 @@
+/* Room-aware Spotify playback: the playlist exists only in the Music Lounge
+   and Gym. The player is created only upon entering either room and is removed
+   completely when leaving, preventing Spotify's embed from appearing below
+   ordinary room imagery. TV and Cinema audio are managed separately. */
 (function () {
   'use strict';
+  if (!document.querySelector('[data-room-pager]')) return;
 
   var PLAYLIST = 'spotify:playlist:7b46c5syjtG86a77R7SnMs';
-  var EXCLUDED = { 'penthouse-living': true, 'music-lounge': true };
-  var button, controller, activeRoom = null, ready = false, wanted = false;
+  var api = null, controller = null, host = null, activeRoom = '', loading = false;
 
-  function inject() {
-    if (document.getElementById('pp-site-audio')) return;
-    var style = document.createElement('style');
-    style.id = 'pp-site-audio-style';
-    style.textContent = '#pp-site-audio{position:fixed;right:18px;bottom:18px;z-index:100000;width:46px;height:46px;border:1px solid rgba(201,169,97,.7);border-radius:50%;background:rgba(10,10,11,.9);color:#d9bd7b;box-shadow:0 8px 24px rgba(0,0,0,.35);font:16px/1 Inter,Arial,sans-serif;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(10px)}#pp-site-audio:hover,#pp-site-audio:focus-visible{background:#d9bd7b;color:#0a0a0b;outline:2px solid #d9bd7b;outline-offset:3px}@media(max-width:600px){#pp-site-audio{right:12px;bottom:12px;width:44px;height:44px}}';
-    document.head.appendChild(style);
-    button = document.createElement('button');
-    button.id = 'pp-site-audio';
-    button.type = 'button';
-    button.setAttribute('aria-label', 'Play music');
-    button.textContent = '▶';
-    button.addEventListener('click', function () {
-      wanted = !wanted;
-      if (controller) {
-        if (wanted) controller.play();
-        else controller.pause();
-      }
-      update();
-    });
-    document.body.appendChild(button);
+  function isPlaylistRoom(id) {
+    return id === 'music-lounge' || id === 'gym';
   }
-
-  function update() {
-    if (!button) return;
-    var playing = !!wanted;
-    button.textContent = playing ? '❚❚' : '▶';
-    button.setAttribute('aria-label', playing ? 'Pause music' : 'Play music');
-    button.setAttribute('aria-pressed', playing ? 'true' : 'false');
-  }
-
-  function shouldPlay(room) {
-    return !EXCLUDED[room || ''];
-  }
-
   function roomId() {
-    try {
-      if (window.PPRoomPagers && window.PPRoomPagers[0]) return window.PPRoomPagers[0].getCurrentId();
-    } catch (e) {}
-    return document.body.dataset.room || '';
+    try { return window.PPRoomPagers && window.PPRoomPagers[0] && window.PPRoomPagers[0].getCurrentId(); }
+    catch (_) { return ''; }
   }
-
-  function attemptPlay() {
-    if (!controller || !shouldPlay(activeRoom)) return;
-    wanted = true;
-    try { controller.play(); } catch (e) {}
-    update();
+  function clearPlayer() {
+    if (controller) {
+      try { controller.pause(); } catch (_) {}
+    }
+    controller = null;
+    if (host && host.parentNode) host.parentNode.removeChild(host);
+    host = null;
   }
-
-  function initSpotify() {
-    if (ready) return;
-    ready = true;
-    var wait = setInterval(function () {
-      if (!window.SpotifyIframeApi) return;
-      clearInterval(wait);
-      window.SpotifyIframeApi.createController(document.getElementById('pp-site-audio-frame'), { uri: PLAYLIST }, function (c) {
-        controller = c;
-        attemptPlay();
-      });
-    }, 100);
-    var s = document.createElement('script');
-    s.src = 'https://open.spotify.com/embed/iframe-api/v1';
-    s.async = true;
-    var previousReady = window.onSpotifyIframeApiReady; window.onSpotifyIframeApiReady = function (api) { if (typeof previousReady === 'function') previousReady(api); window.SpotifyIframeApi = api; };
-    document.head.appendChild(s);
+  function makeHost() {
+    if (host) return host;
+    host = document.createElement('div');
+    host.id = 'pp-house-audio-frame';
+    host.setAttribute('aria-hidden', 'true');
+    host.style.cssText = [
+      'position:fixed', 'width:0', 'height:0', 'min-width:0', 'min-height:0',
+      'left:-9999px', 'top:-9999px', 'overflow:hidden', 'visibility:hidden',
+      'opacity:0', 'pointer-events:none', 'contain:strict', 'z-index:-1'
+    ].join(';');
+    document.body.appendChild(host);
+    return host;
   }
-
-  function addFrame() {
-    var frame = document.createElement('div');
-    frame.id = 'pp-site-audio-frame';
-    frame.style.cssText = 'position:fixed;width:1px;height:1px;left:-10px;bottom:-10px;opacity:0;pointer-events:none;overflow:hidden';
-    document.body.appendChild(frame);
+  function createPlayer() {
+    if (!api || controller || !isPlaylistRoom(activeRoom)) return;
+    api.createController(makeHost(), { uri: PLAYLIST }, function (raw) {
+      if (!isPlaylistRoom(activeRoom)) {
+        try { raw.pause(); } catch (_) {}
+        clearPlayer();
+        return;
+      }
+      controller = {
+        muted: false,
+        isPaused: false,
+        play: function () { this.isPaused = false; raw.play(); },
+        pause: function () { this.isPaused = true; raw.pause(); },
+        togglePlay: function () { raw.togglePlay(); this.isPaused = !this.isPaused; },
+        toggleMute: function () {
+          this.muted = !this.muted;
+          if (raw.setVolume) raw.setVolume(this.muted ? 0 : 100);
+          document.dispatchEvent(new CustomEvent('pp:ambient-playback'));
+        }
+      };
+      controller.play();
+      document.dispatchEvent(new CustomEvent('pp:ambient-change'));
+    });
   }
-
-  function setRoom(id) {
-    activeRoom = id || roomId();
-    if (shouldPlay(activeRoom)) attemptPlay();
-    else {
-      wanted = false;
-      if (controller) controller.pause();
-      update();
+  function loadApi() {
+    if (api || loading) { createPlayer(); return; }
+    loading = true;
+    var prior = window.onSpotifyIframeApiReady;
+    window.onSpotifyIframeApiReady = function (loadedApi) {
+      if (typeof prior === 'function') prior(loadedApi);
+      api = loadedApi;
+      loading = false;
+      createPlayer();
+    };
+    var script = document.createElement('script');
+    script.src = 'https://open.spotify.com/embed/iframe-api/v1';
+    script.async = true;
+    document.head.appendChild(script);
+  }
+  function apply(id) {
+    activeRoom = id || roomId() || '';
+    if (isPlaylistRoom(activeRoom)) {
+      if (controller) controller.play();
+      else loadApi();
+    } else {
+      clearPlayer();
+    }
+    if (window.PPTheatre && window.PPTheatre.setHouseRoom) {
+      window.PPTheatre.setHouseRoom(activeRoom);
     }
   }
-
+  window.PPAmbient = {
+    get: function () {
+      return controller ? { controller: controller, roomId: activeRoom, isPaused: !!controller.isPaused } : null;
+    },
+    label: function (id) {
+      return id === 'music-lounge' ? 'The Music Lounge' : id === 'gym' ? 'The Gym' : '';
+    },
+    meta: function () { return null; }
+  };
+  function removeGlobalToggle() {
+    var toggle = document.querySelector('.playpause-toggle');
+    if (toggle) toggle.remove();
+  }
   function boot() {
-    inject();
-    addFrame();
-    activeRoom = roomId();
-    initSpotify();
-    document.addEventListener('pp:room-change', function (e) { setRoom(e.detail && e.detail.id); });
-    if (shouldPlay(activeRoom)) attemptPlay();
-  }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-})();
-
-(function () {
-  'use strict';
-  if (document.querySelector('script[data-hf-six-guide]')) return;
-  var s = document.createElement('script');
-  s.src = '/assets/js/hellofresh-guide.js?v=1';
-  s.defer = true;
-  s.setAttribute('data-hf-six-guide', '');
-  document.head.appendChild(s);
-})();
-
-/* Cocktail Menu image repair. cocktail-menu.html renders real <img> elements but
-   its original inline stylesheet never positioned/sized .card-image. Keep this
-   here because site-audio.js is already loaded by the standalone menu and is not
-   replaced by the Penthouse generated-page rebuild. */
-(function () {
-  'use strict';
-  if (!/\/cocktail-menu\.html$/.test(location.pathname)) return;
-
-  var COCKTAIL_ROOT = '/assets/img/cocktails/';
-  var style = document.createElement('style');
-  style.id = 'pp-cocktail-image-fix';
-  style.textContent = [
-    '.card{isolation:isolate;background:#171310!important}',
-    '.card-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;object-fit:cover!important;object-position:center!important;z-index:0!important;opacity:1!important}',
-    '.card:before{z-index:1!important;pointer-events:none!important;opacity:.18!important}',
-    '.card:after{z-index:1!important;pointer-events:none!important;background:linear-gradient(180deg,rgba(0,0,0,.02) 34%,rgba(14,11,8,.84) 100%)!important}',
-    '.card-body,.card-mark{z-index:2!important}',
-    '.card-mark{color:rgba(255,255,255,.72)!important;text-shadow:0 1px 12px rgba(0,0,0,.4)}'
-  ].join('');
-  document.head.appendChild(style);
-
-  function normalizeImages() {
-    document.querySelectorAll('.card-image').forEach(function (img) {
-      var raw = img.getAttribute('src') || '';
-      var filename = raw.split('/').pop();
-      if (filename) img.src = COCKTAIL_ROOT + filename;
-      img.decoding = 'async';
-      img.addEventListener('error', function () {
-        img.style.display = 'none';
-        img.closest('.card').classList.add('cocktail-image-error');
-      }, { once: true });
+    window.PPHouseAudioManaged = true;
+    activeRoom = roomId() || 'penthouse-living';
+    document.addEventListener('pp:room-change', function (event) {
+      apply(event.detail && event.detail.id);
     });
+    apply(activeRoom);
+    removeGlobalToggle();
+    setTimeout(removeGlobalToggle, 600);
   }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', normalizeImages);
-  else normalizeImages();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once:true });
+  else boot();
 })();

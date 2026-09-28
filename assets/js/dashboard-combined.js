@@ -6,7 +6,7 @@
     ['Hotel & sites', [['hrooms','Rooms & objects'],['penthouse','Open rooms'],['floors','Floor directory'],['charlottemap','Charlotte map'],['websites','Websites']]],
     ['Content & media', [['journal-live','Journal · Site edition'],['journal','Journal · Dashboard entries'],['housemusic','Music · Record shelf'],['music','Music · Remote rotation'],['housechannels','Video · Site programme'],['video','Video · Runtime overrides'],['dispatch','Dispatch briefs'],['dailynews','Daily news']]],
     ['Shop & collaborations', [['boutique','Products'],['lookbook','Lookbooks'],['partnerships','Collaborations'],['pitches','Pitches & goals'],['trackedbrands','Tracked brands']]],
-    ['Business', [['inquiries','Inquiries'],['clients','Clients'],['proposals','Proposals'],['orders','Orders'],['invoices','Invoices'],['casefiles','Case files'],['network','Network'],['social','Social analytics'],['newsletter','Newsletter']]],
+    ['Business', [['inquiries','Inquiries'],['digital-leads','Digital product leads'],['clients','Clients'],['proposals','Proposals'],['orders','Orders'],['invoices','Invoices'],['casefiles','Case files'],['network','Network'],['social','Social analytics'],['newsletter','Newsletter']]],
     ['Settings & publishing', [['content','Publishing & resources']]]
   ];
   const original = document.querySelector('.dashnav');

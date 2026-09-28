@@ -8,7 +8,7 @@
       {
         "name": "Church and Union",
         "cat": "Restaurant",
-        "addr": "127 N Tryon St, Ste 8, Charlotte, North Carolina",
+        "addr": "127 N Tryon St, Suite 8, Charlotte, North Carolina",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "A converted bank hall turned restaurant and bar, all marble and reclaimed brass, built for the kind of dinner that starts as business and finishes as something looser. The kitchen runs Lowcountry-leaning American; the bar keeps pace. Smart casual, and the room expects an effort.",
@@ -25,7 +25,7 @@
           "Weekend brunch",
           "Full bar"
         ],
-        "mapq": "Church and Union Charlotte NC",
+        "mapq": "Church and Union, 127 N Tryon St, Suite 8, Charlotte, North Carolina",
         "site": "churchandunion.com",
         "filters": [
           "business-dinner",
@@ -33,12 +33,15 @@
           "date-night",
           "late-night",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "uptown-church-and-union.jpg",
+        "image_source_url": "https://www.theinfatuation.com/charlotte/cuisines/american",
+        "audit_status": "kept"
       },
       {
         "name": "The Asbury",
         "cat": "Restaurant",
-        "addr": "237 N Tryon St, Charlotte, North Carolina",
+        "addr": "235 N Tryon St, Charlotte, North Carolina",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "Set into the lobby of Charlotte's oldest surviving hotel, a small Southern dining room that has outlasted most of what opened around it. Breakfast meetings run into lunch meetings; dinner is quieter, candlelit, and unhurried in a way most Uptown kitchens don't bother with anymore.",
@@ -55,14 +58,17 @@
           "Breakfast meetings",
           "Full bar"
         ],
-        "mapq": "The Asbury Dunhill Hotel Charlotte NC",
+        "mapq": "The Asbury, 235 N Tryon St, Charlotte, North Carolina",
         "site": "theasbury.com",
         "filters": [
           "business-dinner",
           "weekend-brunch",
           "date-night",
           "client-entertainment"
-        ]
+        ],
+        "image_file": "uptown-the-asbury.jpg",
+        "image_source_url": "https://www.theasbury.com/events/savor-charlotte-specials/",
+        "audit_status": "kept"
       },
       {
         "name": "The Capital Grille",
@@ -84,14 +90,17 @@
           "Bar seating",
           "Client dinners"
         ],
-        "mapq": "The Capital Grille Charlotte NC",
+        "mapq": "The Capital Grille, 201 N Tryon St, Charlotte, North Carolina",
         "site": "thecapitalgrille.com",
         "filters": [
           "business-dinner",
           "client-entertainment",
           "date-night",
           "late-night"
-        ]
+        ],
+        "image_file": "",
+        "image_source_url": "",
+        "audit_status": "kept"
       },
       {
         "name": "Sea Level NC",
@@ -112,19 +121,22 @@
           "Coastal small plates",
           "Wine pairings"
         ],
-        "mapq": "Sea Level NC Charlotte",
+        "mapq": "Sea Level NC, 129 E 5th St, Charlotte, North Carolina",
         "site": "sealevelnc.com",
         "filters": [
           "date-night",
           "after-work",
           "client-entertainment",
           "late-night"
-        ]
+        ],
+        "image_file": "uptown-sea-level-nc.jpg",
+        "image_source_url": "https://familydestinationsguide.com/inviting-restaurants-north-carolina/",
+        "audit_status": "kept"
       },
       {
         "name": "Sophia's Lounge",
         "cat": "Cocktail Bar",
-        "addr": "127 N Tryon St, Ste D, Charlotte, North Carolina (The Ivey's Hotel)",
+        "addr": "127 N Tryon St, Suite D, Charlotte, North Carolina (The Ivey's Hotel)",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "A hotel lounge with the confidence to lean fully into velvet and gilt rather than apologize for it. Cocktails are classically built, the piano plays most nights it should, and casual-elegant is enforced without anyone having to say so out loud.",
@@ -140,14 +152,17 @@
           "Hotel lounge",
           "Weekend brunch"
         ],
-        "mapq": "Sophia's Lounge The Ivey's Hotel Charlotte",
+        "mapq": "Sophia's Lounge, 127 N Tryon St, Suite D, Charlotte, North Carolina (The Ivey's Hotel)",
         "site": "theiveyshotel.com/dining/sophias-lounge",
         "filters": [
           "date-night",
           "after-work",
           "late-night",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "uptown-sophias-lounge.jpg",
+        "image_source_url": "http://blog.stashrewards.com/2018/12/04/2018-new-partner-hotels/",
+        "audit_status": "kept"
       },
       {
         "name": "Merchant & Trade",
@@ -168,19 +183,22 @@
           "Outdoor seating",
           "Group tables"
         ],
-        "mapq": "Merchant and Trade Charlotte NC",
+        "mapq": "Merchant & Trade, 303 S Church St, Charlotte, North Carolina (19th floor, Kimpton Tryon Park Hotel)",
         "site": "merchantandtrade.com",
         "filters": [
           "after-work",
           "date-night",
           "rooftop",
           "late-night"
-        ]
+        ],
+        "image_file": "uptown-merchant-and-trade.jpg",
+        "image_source_url": "https://merchantandtrade.com/photos",
+        "audit_status": "kept"
       },
       {
         "name": "Novelty House",
         "cat": "Rooftop Bar",
-        "addr": "123 E 5th St, Ste 400, Charlotte, North Carolina",
+        "addr": "123 E 5th St, Suite 500, Charlotte, North Carolina",
         "price": "$$$",
         "access": "Public",
         "desc": "The younger, louder sibling on the same 5th Street tower as the neighborhood's cigar room — a flower-draped terrace built for photographs and late nights in roughly equal measure. Come before nine for the view, after for the crowd.",
@@ -194,39 +212,16 @@
           "DJ nights",
           "Craft cocktails"
         ],
-        "mapq": "Novelty House Rooftop Charlotte NC",
+        "mapq": "Novelty House, 123 E 5th St, Suite 500, Charlotte, North Carolina",
         "site": "noveltyhouseclt.com",
         "filters": [
           "after-work",
           "late-night",
           "rooftop"
-        ]
-      },
-      {
-        "name": "The Punch Room",
-        "cat": "Hotel Bar",
-        "addr": "201 E Trade St, Charlotte, North Carolina (The Ritz-Carlton, Charlotte)",
-        "price": "$$$$",
-        "access": "Reservation Recommended",
-        "desc": "Thirty-seven seats on the hotel's upper floor, built around the kind of punch service most bars gave up on a century ago. Small, serious about ice, and quiet enough that the conversation is the actual point of coming.",
-        "best": [
-          "Date Night",
-          "Business Dinner",
-          "Late Night"
         ],
-        "spec": [
-          "Punch service",
-          "Small-batch cocktails",
-          "Hotel bar",
-          "Limited seating"
-        ],
-        "mapq": "The Punch Room Ritz-Carlton Charlotte",
-        "site": "ritzcarlton.com/en/hotels/charlotte/dining/punch-room",
-        "filters": [
-          "date-night",
-          "business-dinner",
-          "late-night"
-        ]
+        "image_file": "uptown-novelty-house.jpg",
+        "image_source_url": "https://www.top-rated.online/cities/Charlotte/place/p/10344302/Novelty+House+Rooftop",
+        "audit_status": "kept"
       },
       {
         "name": "The Cellar at Duckworth's",
@@ -248,18 +243,21 @@
           "Gastropub fare",
           "Beer list"
         ],
-        "mapq": "The Cellar at Duckworth's Charlotte NC",
+        "mapq": "The Cellar at Duckworth's, 330 N Tryon St, Charlotte, North Carolina",
         "site": "thecellaratduckworths.com",
         "filters": [
           "date-night",
           "late-night",
           "after-work"
-        ]
+        ],
+        "image_file": "uptown-the-cellar-at-duckworths.jpg",
+        "image_source_url": "https://autoreserve.com/en/restaurants/tNu9oLAVoz26mzt11XVk",
+        "audit_status": "kept"
       },
       {
         "name": "Havana Smoke & Reserve",
         "cat": "Cigar Lounge",
-        "addr": "123 E 5th St, 4th level, Charlotte, North Carolina",
+        "addr": "123 E 5th St, Suite 400, Charlotte, North Carolina",
         "price": "Member",
         "access": "Member or Guest Access",
         "access_note": "Day, weekly, monthly and annual memberships offered; walk-ins pay a day rate at the door (reported around $10 at last check — confirm current pricing directly with the lounge). No reservations — first-come seating once inside.",
@@ -275,14 +273,17 @@
           "Walk-in day rate",
           "Private events"
         ],
-        "mapq": "Havana Smoke and Reserve Charlotte NC",
+        "mapq": "Havana Smoke & Reserve, 123 E 5th St, Suite 400, Charlotte, North Carolina",
         "site": "havanasmokeandreserve.com",
         "filters": [
           "cigars",
           "after-work",
           "client-entertainment",
           "private-club"
-        ]
+        ],
+        "image_file": "uptown-havana-smoke-reserve.jpg",
+        "image_source_url": "https://www.buyblackmainstreet.com/black-owned-city-guide-charlotte/",
+        "audit_status": "kept"
       },
       {
         "name": "Charlotte Cigar Culture",
@@ -303,13 +304,16 @@
           "Wide cigar selection",
           "Skyline patio"
         ],
-        "mapq": "Charlotte Cigar Culture Morehead St",
+        "mapq": "Charlotte Cigar Culture, 105 E Morehead St, Charlotte, North Carolina",
         "site": "charlottecigars.com",
         "filters": [
           "cigars",
           "after-work",
           "late-night"
-        ]
+        ],
+        "image_file": "uptown-charlotte-cigar-culture.jpg",
+        "image_source_url": "https://charlottesmokeout.com/cigar-scene/",
+        "audit_status": "kept"
       },
       {
         "name": "Not Just Coffee — 7th Street",
@@ -328,14 +332,17 @@
           "Pastry case",
           "Laptop-friendly"
         ],
-        "mapq": "Not Just Coffee 7th Street Charlotte",
+        "mapq": "Not Just Coffee — 7th Street, 224 E 7th St, Charlotte, North Carolina",
         "site": "notjust.coffee",
         "filters": [
           "solo-coffee"
-        ]
+        ],
+        "image_file": "uptown-not-just-coffee.jpg",
+        "image_source_url": "https://american-eats.com/charlotte/best-coffee-shops-charlotte-nc/",
+        "audit_status": "kept"
       },
       {
-        "name": "Belk Theater at Blumenthal Performing Arts",
+        "name": "Belk Theater",
         "cat": "Live Music",
         "addr": "130 N Tryon St, Charlotte, North Carolina",
         "price": "$$–$$$$",
@@ -353,19 +360,22 @@
           "Touring Broadway",
           "Formal dress expected"
         ],
-        "mapq": "Belk Theater Blumenthal Performing Arts Charlotte",
+        "mapq": "Belk Theater, 130 N Tryon St, Charlotte, North Carolina",
         "site": "blumenthalarts.org",
         "filters": [
           "live-music",
           "date-night",
           "client-entertainment"
-        ]
+        ],
+        "image_file": "uptown-belk-theater.jpg",
+        "image_source_url": "https://www.blumenthalarts.org/venues/detail/belk-theater",
+        "audit_status": "kept"
       },
       {
         "name": "The Conspiracy",
         "cat": "Speakeasy",
         "cat2": "Cocktail Bar",
-        "addr": "412 W. 5th Street, Suite C-120, Charlotte, North Carolina",
+        "addr": "412 W 5th St, Suite C-120, Charlotte, North Carolina",
         "price": "$$$",
         "access": "Reservation Recommended",
         "access_note": "Walk-ins welcome for smaller parties; reservations recommended for groups.",
@@ -382,18 +392,21 @@
           "Small plates",
           "Group reservations"
         ],
-        "mapq": "The Conspiracy Charlotte NC",
+        "mapq": "The Conspiracy, 412 W 5th St, Suite C-120, Charlotte, North Carolina",
         "filters": [
           "date-night",
           "after-work",
           "late-night"
-        ]
+        ],
+        "image_file": "uptown-the-conspiracy.jpg",
+        "image_source_url": "https://vuecharlotte.com/neighborhood/",
+        "audit_status": "kept"
       },
       {
         "name": "SAVÚ",
         "cat": "Restaurant",
         "cat2": "Cocktail Bar",
-        "addr": "445 W. Trade Street, Charlotte, North Carolina",
+        "addr": "445 W Trade St, Charlotte, North Carolina",
         "price": "$$$",
         "access": "Reservation Recommended",
         "access_note": "Two levels, evenings only — closed Monday and Tuesday. Book ahead for Friday and Saturday, when the room runs until 2 a.m.",
@@ -409,19 +422,22 @@
           "Two levels",
           "Evenings only, Wed–Sun"
         ],
-        "mapq": "SAVU Charlotte 445 W Trade St",
+        "mapq": "SAVÚ, 445 W Trade St, Charlotte, North Carolina",
         "site": "savuclt.com",
         "filters": [
           "late-night",
           "after-work",
           "group-dining"
-        ]
+        ],
+        "image_file": "uptown-savu.jpg",
+        "image_source_url": "http://savuclt.com",
+        "audit_status": "kept"
       },
       {
         "name": "Fahrenheit",
         "cat": "Rooftop Bar",
         "cat2": "Restaurant",
-        "addr": "Uptown, Charlotte, North Carolina — exact street address unconfirmed",
+        "addr": "222 S Caldwell St, Suite 2100, Charlotte, North Carolina (21st floor)",
         "price": "$$$$",
         "access": "Confirm Before Visiting",
         "access_note": "One of Charlotte's signature skyline dinner-and-drinks rooms; reservations recommended. Exact street address wasn't confirmed at last check — verify before planning a visit.",
@@ -437,18 +453,21 @@
           "Client entertainment",
           "Celebration dining"
         ],
-        "mapq": "Fahrenheit Restaurant Charlotte NC",
+        "mapq": "Fahrenheit, 222 S Caldwell St, Suite 2100, Charlotte, North Carolina (21st floor)",
         "filters": [
           "date-night",
           "client-entertainment",
           "rooftop",
           "late-night"
-        ]
+        ],
+        "image_file": "uptown-fahrenheit.jpg",
+        "image_source_url": "https://fahrenheitrestaurants.com/private-events/charlotte/",
+        "audit_status": "kept"
       },
       {
         "name": "STK Steakhouse",
         "cat": "Steak & Seafood",
-        "addr": "201 S. College Street, Charlotte, North Carolina",
+        "addr": "201 S College St, Charlotte, North Carolina",
         "price": "$$$$",
         "access": "Reservation Recommended",
         "desc": "Not a quiet classic steakhouse — a high-energy social-dining room built for celebrations, client dinners and dates that want a pulse rather than hushed tables. Steaks and oysters through dinner, brunch on weekends, and a DJ-driven Social Hour at the bar.",
@@ -465,18 +484,21 @@
           "High-energy dining room",
           "Full bar"
         ],
-        "mapq": "STK Steakhouse Charlotte NC",
+        "mapq": "STK Steakhouse, 201 S College St, Charlotte, North Carolina",
         "filters": [
           "date-night",
           "client-entertainment",
           "late-night",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "uptown-stk-steakhouse.jpg",
+        "image_source_url": "https://stksteakhouse.com/en-gb/location/charlotte/",
+        "audit_status": "kept"
       },
       {
         "name": "La Belle Helene",
         "cat": "Restaurant",
-        "addr": "300 S. Tryon Street, Suite 100, Charlotte, North Carolina",
+        "addr": "300 S Tryon St, Suite 100, Charlotte, North Carolina",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "A handsome Uptown brasserie devoted to timeless French cooking, warm service and a polished dining-room rhythm. The room for a business dinner that wants unhurried Continental technique instead of another chophouse, or a date built around classic plates done properly.",
@@ -491,18 +513,21 @@
           "Polished service",
           "Uptown dining room"
         ],
-        "mapq": "La Belle Helene Charlotte NC",
+        "mapq": "La Belle Helene, 300 S Tryon St, Suite 100, Charlotte, North Carolina",
         "filters": [
           "business-dinner",
           "date-night",
           "client-entertainment"
-        ]
+        ],
+        "image_file": "uptown-la-belle-helene.jpg",
+        "image_source_url": "https://www.medicineandmanicures.com/la-belle-helene-charlotte/",
+        "audit_status": "kept"
       },
       {
-        "name": "Mico Restaurant",
+        "name": "MICO",
         "cat": "Restaurant",
         "cat2": "Steak & Seafood",
-        "addr": "201 W. Trade Street, Charlotte, North Carolina (inside the Grand Bohemian Hotel)",
+        "addr": "201 W Trade St, Charlotte, North Carolina (inside the Grand Bohemian Hotel)",
         "price": "$$$",
         "access": "Reservation Recommended",
         "access_note": "Reservations recommended for dinner; the all-day format also runs breakfast, lunch and cocktail hours.",
@@ -519,18 +544,21 @@
           "Cocktail program",
           "Weekend brunch"
         ],
-        "mapq": "Mico Restaurant Grand Bohemian Charlotte NC",
+        "mapq": "MICO, 201 W Trade St, Charlotte, North Carolina (inside the Grand Bohemian Hotel)",
         "filters": [
           "business-dinner",
           "client-entertainment",
           "weekend-brunch",
           "after-work"
-        ]
+        ],
+        "image_file": "uptown-mico.jpg",
+        "image_source_url": "http://marriott.com/en-us/hotels/cltak-grand-bohemian-charlotte-autograph-collection/dining/",
+        "audit_status": "kept"
       },
       {
         "name": "Angeline's",
         "cat": "Restaurant",
-        "addr": "Uptown, Charlotte, North Carolina — exact street address unconfirmed",
+        "addr": "303 S Church St, Charlotte, North Carolina (Kimpton Tryon Park Hotel)",
         "price": "$$$",
         "access": "Confirm Before Visiting",
         "access_note": "A hotel-based Italian dining room; reservations recommended. Exact street address wasn't confirmed at last check — verify before planning a visit.",
@@ -544,16 +572,19 @@
           "Hotel dining room",
           "Italian wine list"
         ],
-        "mapq": "Angeline's Restaurant Charlotte NC",
+        "mapq": "Angeline's, 303 S Church St, Charlotte, North Carolina (Kimpton Tryon Park Hotel)",
         "filters": [
           "date-night",
           "business-dinner"
-        ]
+        ],
+        "image_file": "uptown-angelines.jpg",
+        "image_source_url": "https://www.tryonparkhotel.com/private-dining-charlotte-nc/",
+        "audit_status": "kept"
       },
       {
         "name": "Eddie V's",
         "cat": "Steak & Seafood",
-        "addr": "101 S. Tryon Street, Suite 100, Charlotte, North Carolina 28280",
+        "addr": "101 S Tryon St, Suite 100, Charlotte, North Carolina 28280",
         "price": "$$$$",
         "access": "Reservation Recommended",
         "desc": "Prime seafood and steaks paired with a serious wine list and live music most nights, in the kind of room built for an elevated evening out rather than a quick dinner. A safe, well-executed choice for a business dinner that needs to impress.",
@@ -569,18 +600,21 @@
           "Live music",
           "Bar lounge"
         ],
-        "mapq": "Eddie V's Charlotte NC",
+        "mapq": "Eddie V's, 101 S Tryon St, Suite 100, Charlotte, North Carolina 28280",
         "filters": [
           "business-dinner",
           "client-entertainment",
           "date-night",
           "live-music"
-        ]
+        ],
+        "image_file": "uptown-eddie-vs.jpg",
+        "image_source_url": "https://dpaarchitectz.com/eddie-vs-charlotte/",
+        "audit_status": "kept"
       },
       {
         "name": "Forchetta",
         "cat": "Restaurant",
-        "addr": "Uptown, Charlotte, North Carolina — exact street address unconfirmed",
+        "addr": "230 N College St, Charlotte, North Carolina",
         "price": "$$$",
         "access": "Public",
         "access_note": "Exact street address wasn't confirmed at last check — verify before planning a visit.",
@@ -593,40 +627,18 @@
           "Intimate dining room",
           "Italian wine list"
         ],
-        "mapq": "Forchetta Restaurant Charlotte NC",
+        "mapq": "Forchetta, 230 N College St, Charlotte, North Carolina",
         "filters": [
           "date-night"
-        ]
+        ],
+        "image_file": "uptown-forchetta.jpg",
+        "image_source_url": "https://www.forchettacharlotte.com/",
+        "audit_status": "kept"
       },
       {
-        "name": "401 Social",
-        "cat": "Hotel Bar",
-        "cat2": "Cocktail Bar",
-        "addr": "Uptown, Charlotte, North Carolina (Embassy Suites by Hilton Charlotte Uptown) — exact street address unconfirmed",
-        "price": "$$–$$$",
-        "access": "Confirm Before Visiting",
-        "access_note": "A hotel lounge inside the Embassy Suites Uptown; exact street address wasn't confirmed at last check — verify before planning a visit.",
-        "desc": "A hotel cocktail lounge built for after-work drinks and a pre-game before the rest of Uptown gets going — craft cocktails, handhelds, shareables and salads in a room that doesn't demand a reservation to feel worth the stop.",
-        "best": [
-          "After Work",
-          "Late Night"
-        ],
-        "spec": [
-          "Craft cocktails",
-          "Handhelds and shareables",
-          "Hotel lounge",
-          "Salads"
-        ],
-        "mapq": "401 Social Embassy Suites Uptown Charlotte NC",
-        "filters": [
-          "after-work",
-          "late-night"
-        ]
-      },
-      {
-        "name": "Chima",
+        "name": "Chima Steakhouse",
         "cat": "Steak & Seafood",
-        "addr": "Uptown, Charlotte, North Carolina — exact street address unconfirmed",
+        "addr": "139 S Tryon St, Charlotte, North Carolina",
         "price": "$$$$",
         "access": "Confirm Before Visiting",
         "access_note": "Exact street address wasn't confirmed at last check — verify before planning a visit.",
@@ -642,18 +654,21 @@
           "Salad bar",
           "Wine list"
         ],
-        "mapq": "Chima Brazilian Steakhouse Charlotte NC",
+        "mapq": "Chima Steakhouse, 139 S Tryon St, Charlotte, North Carolina",
         "filters": [
           "client-entertainment",
           "date-night",
           "business-dinner"
-        ]
+        ],
+        "image_file": "uptown-chima-steakhouse.jpg",
+        "image_source_url": "https://www.eventective.com/charlotte-nc/chima-brazilian-steakhouse-473753.html",
+        "audit_status": "kept"
       },
       {
         "name": "Fleming's",
         "cat": "Steak & Seafood",
         "cat2": "Wine Bar",
-        "addr": "210 E. Trade Street, Charlotte, North Carolina",
+        "addr": "210 E Trade St, Suite C-110, Charlotte, North Carolina",
         "price": "$$$$",
         "access": "Public",
         "desc": "A solid business-dinner fallback when the destination steakhouses are booked — prime steak, seafood and a serious wine program executed reliably rather than memorably. The safe move, and there's real value in that.",
@@ -667,16 +682,19 @@
           "Wine program",
           "Bar seating"
         ],
-        "mapq": "Fleming's Prime Steakhouse Charlotte NC",
+        "mapq": "Fleming's, 210 E Trade St, Suite C-110, Charlotte, North Carolina",
         "filters": [
           "business-dinner",
           "client-entertainment"
-        ]
+        ],
+        "image_file": "uptown-flemings.jpg",
+        "image_source_url": "https://wanderlog.com/pt/place/details/796828/flemings-prime-steakhouse--wine-bar",
+        "audit_status": "kept"
       },
       {
         "name": "Monarch Market",
         "cat": "Food Hall",
-        "addr": "101 N. Tryon Street, Charlotte, North Carolina",
+        "addr": "101 N Tryon St, Charlotte, North Carolina",
         "price": "$$",
         "access": "Public",
         "desc": "Nine food stalls, a full-service sushi restaurant and three bars under one Uptown roof — a district-style food-and-drink destination built for a casual group lunch or an easy after-work stop rather than a single elite table.",
@@ -690,11 +708,100 @@
           "Three bars",
           "Group-friendly seating"
         ],
-        "mapq": "Monarch Market Charlotte NC",
+        "mapq": "Monarch Market, 101 N Tryon St, Charlotte, North Carolina",
         "filters": [
           "after-work",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "uptown-monarch-market.jpg",
+        "image_source_url": "https://www.connectcre.com/stories/18m-food-court-debuts-in-charlotte/",
+        "audit_status": "kept"
+      },
+      {
+        "name": "Amina",
+        "cat": "Restaurant",
+        "cat2": "",
+        "addr": "225 E 6th St, Suite C, Charlotte, North Carolina 28202",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "confirmed active September 26, 2026 via official site aminaclt.com (225 East 6th Street, Suite C) and OpenTable listing.",
+        "best": [],
+        "spec": [],
+        "mapq": "Amina, 225 E 6th St, Suite C, Charlotte, North Carolina 28202",
+        "site": "",
+        "filters": [
+          "date-night",
+          "business-dinner",
+          "client-entertainment"
+        ],
+        "image_file": "",
+        "image_source_url": "",
+        "audit_status": "added"
+      },
+      {
+        "name": "Sweet July Cafe",
+        "cat": "Coffee",
+        "cat2": "",
+        "addr": "201 E Trade St, Charlotte, North Carolina (The Ritz-Carlton, Charlotte)",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "opened July 21, 2026, confirmed via Black Enterprise and Trazee Travel.",
+        "best": [],
+        "spec": [],
+        "mapq": "Sweet July Cafe, 201 E Trade St, Charlotte, North Carolina (The Ritz-Carlton, Charlotte)",
+        "site": "",
+        "filters": [
+          "solo-coffee"
+        ],
+        "image_file": "",
+        "image_source_url": "",
+        "audit_status": "added"
+      },
+      {
+        "name": "The Eighth Rule",
+        "cat": "Cocktail Bar",
+        "cat2": "",
+        "addr": "201 E Trade St, Charlotte, North Carolina (The Ritz-Carlton, Charlotte)",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "Coming soon — opening timing is unconfirmed.",
+        "desc": "scheduled to open late 2026 [UNCONFIRMED]. Stephen Curry / MINA Group bourbon-forward lounge replacing the Punch Room's slot at the Ritz-Carlton Charlotte.",
+        "best": [],
+        "spec": [],
+        "mapq": "The Eighth Rule, 201 E Trade St, Charlotte, North Carolina (The Ritz-Carlton, Charlotte)",
+        "site": "",
+        "filters": [
+          "after-work",
+          "date-night",
+          "late-night"
+        ],
+        "image_file": "",
+        "image_source_url": "",
+        "audit_status": "coming-soon"
+      },
+      {
+        "name": "Bourbon Steak",
+        "cat": "Steak & Seafood",
+        "cat2": "",
+        "addr": "201 E Trade St, Charlotte, NC (The Ritz-Carlton, Charlotte, 15th floor — replacing The Punch Room)",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "Michael Mina steakhouse; official Mina Group site says opening early 2027 [UNCONFIRMED — delayed from earlier 2026 reports]. No Charlotte imagery exists yet.",
+        "best": [],
+        "spec": [],
+        "mapq": "Bourbon Steak, 201 E Trade St, Charlotte, NC (The Ritz-Carlton, Charlotte, 15th floor — replacing The Punch Room)",
+        "site": "",
+        "filters": [
+          "date-night",
+          "business-dinner",
+          "client-entertainment"
+        ],
+        "image_file": "",
+        "image_source_url": "",
+        "audit_status": "added"
       }
     ]
   },
@@ -707,7 +814,7 @@
       {
         "name": "Kid Cashew",
         "cat": "Restaurant",
-        "addr": "1608 East Blvd, Charlotte, North Carolina (Dilworth)",
+        "addr": "1608 East Blvd, Charlotte, NC 28203",
         "price": "$$",
         "access": "Reservation Recommended",
         "desc": "Wood-fire cooking in a Dilworth storefront, built around a whole rotisserie chicken good enough to anchor the menu on its own. Loud, warm, and unbothered by fuss — works equally well for a first date or a Tuesday with the dog on the patio.",
@@ -722,18 +829,21 @@
           "Patio seating",
           "Dog-friendly"
         ],
-        "mapq": "Kid Cashew Charlotte NC",
+        "mapq": "Kid Cashew, 1608 East Blvd, Charlotte, NC 28203",
         "site": "kidcashew.com",
         "filters": [
           "date-night",
           "weekend-brunch",
           "after-work"
-        ]
+        ],
+        "image_file": "south-end-kid-cashew.jpg",
+        "image_source_url": "kidcashew.com (official site, Charlotte patio)",
+        "audit_status": "kept"
       },
       {
         "name": "Yunta Nikkei",
         "cat": "Restaurant",
-        "addr": "2201 South Blvd, Ste 130, Charlotte, North Carolina (South End)",
+        "addr": "2201 South Blvd, Suite 130, Charlotte, NC 28203",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "Peruvian-Japanese cooking, ceviche and pisco doing most of the talking, in a dining room built for a table of six rather than a quiet two. Book ahead on weekends — the crowd here is regular and knows it.",
@@ -749,19 +859,22 @@
           "Pisco cocktails",
           "Group dining"
         ],
-        "mapq": "Yunta Nikkei Charlotte NC",
+        "mapq": "Yunta Nikkei, 2201 South Blvd, Suite 130, Charlotte, NC 28203",
         "site": "yuntanikkei.com",
         "filters": [
           "date-night",
           "client-entertainment",
           "weekend-brunch",
           "late-night"
-        ]
+        ],
+        "image_file": "south-end-yunta-nikkei.jpg",
+        "image_source_url": "theroadtakento.com (Charlotte neighborhood dining article)",
+        "audit_status": "kept"
       },
       {
         "name": "Barcelona Wine Bar",
         "cat": "Wine Bar",
-        "addr": "101 W Worthington Ave, Charlotte, North Carolina (South End)",
+        "addr": "101 W Worthington Ave, Suite 110, Charlotte, NC 28203",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "Spanish tapas and a wine list built for grazing rather than committing to one bottle. The national formula, done well enough that South End claimed it as a local fixture almost immediately. Good for a table of four working through the menu slowly.",
@@ -777,19 +890,22 @@
           "Jamón bar",
           "Weekend brunch"
         ],
-        "mapq": "Barcelona Wine Bar South End Charlotte",
+        "mapq": "Barcelona Wine Bar, 101 W Worthington Ave, Suite 110, Charlotte, NC 28203",
         "site": "barcelonawinebar.com",
         "filters": [
           "date-night",
           "after-work",
           "client-entertainment",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "south-end-barcelona-wine-bar.jpg",
+        "image_source_url": "squarefeetstudio.com (design firm portfolio, Barcelona Charlotte project)",
+        "audit_status": "kept"
       },
       {
         "name": "Dilworth Tasting Room",
         "cat": "Wine Bar",
-        "addr": "300 E Tremont Ave, Charlotte, North Carolina (Dilworth)",
+        "addr": "300 E Tremont Ave, Charlotte, NC 28203",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "A neighborhood wine bar with a list long enough to reward regulars and a kitchen serious enough that it isn't just an accessory to the pours. Closed Mondays, which tells you something about the kind of place it's trying to be.",
@@ -804,18 +920,21 @@
           "Cellar selections",
           "Patio seating"
         ],
-        "mapq": "Dilworth Tasting Room Charlotte NC",
+        "mapq": "Dilworth Tasting Room, 300 E Tremont Ave, Charlotte, NC 28203",
         "site": "dilworthtr.com",
         "filters": [
           "date-night",
           "after-work",
           "business-dinner"
-        ]
+        ],
+        "image_file": "south-end-dilworth-tasting-room.jpg",
+        "image_source_url": "thevendry.com (venue-provided listing photo, Dilworth location)",
+        "audit_status": "kept"
       },
       {
         "name": "Orosoko Sound Bar",
         "cat": "Cocktail Bar",
-        "addr": "130 W Bland St, Charlotte, North Carolina (South End)",
+        "addr": "130 W Bland St, Charlotte, NC 28203",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "Latin-inflected cocktails and tapas under a sound system that earns the name — a listening room dressed as a restaurant. Later hours skew toward the bar and the music; earlier ones toward the food. Closed Sunday and Monday.",
@@ -830,18 +949,21 @@
           "Small plates",
           "Sound-designed room"
         ],
-        "mapq": "Orosoko Sound Bar Charlotte NC",
+        "mapq": "Orosoko Sound Bar, 130 W Bland St, Charlotte, NC 28203",
         "site": "orosoko.com",
         "filters": [
           "date-night",
           "late-night",
           "after-work"
-        ]
+        ],
+        "image_file": "south-end-orosoko-sound-bar.jpg",
+        "image_source_url": "lilesconstruction.com (contractor portfolio, Orosoko build-out)",
+        "audit_status": "kept"
       },
       {
         "name": "The Vintage Whiskey & Cigar Bar",
         "cat": "Cigar Lounge",
-        "addr": "215 E Worthington Ave, Charlotte, North Carolina (South End)",
+        "addr": "215 E Worthington Ave, Charlotte, NC 28203",
         "price": "Member",
         "access": "Member or Guest Access",
         "access_note": "Non-members can buy a day pass at the door (reported around $25 at last check — confirm current rate), applicable toward membership if you join within thirty days.",
@@ -857,19 +979,22 @@
           "Espresso bar",
           "Day-pass access"
         ],
-        "mapq": "The Vintage Whiskey and Cigar Bar Charlotte",
+        "mapq": "The Vintage Whiskey & Cigar Bar, 215 E Worthington Ave, Charlotte, NC 28203",
         "site": "thevintageclt.com",
         "filters": [
           "cigars",
           "after-work",
           "client-entertainment",
           "private-club"
-        ]
+        ],
+        "image_file": "south-end-the-vintage-whiskey-cigar-bar.jpg",
+        "image_source_url": "charlotteagenda.com (The Vintage venue listing photo)",
+        "audit_status": "kept"
       },
       {
-        "name": "Not Just Coffee — Atherton Mill",
+        "name": "Not Just Coffee - Atherton Mill",
         "cat": "Coffee",
-        "addr": "2000 South Blvd, Charlotte, North Carolina (South End)",
+        "addr": "2000 South Blvd, Charlotte, NC 28203",
         "price": "$",
         "access": "Public",
         "desc": "The South End outpost of Charlotte's steadiest local roaster, tucked into a converted mill building with room to actually sit down. Reliable rather than novel, which after a certain number of trend-chasing coffee shops becomes its own kind of relief.",
@@ -882,18 +1007,21 @@
           "Mill-building setting",
           "Outdoor seating"
         ],
-        "mapq": "Not Just Coffee Atherton Mill Charlotte",
+        "mapq": "Not Just Coffee - Atherton Mill, 2000 South Blvd, Charlotte, NC 28203",
         "site": "notjust.coffee",
         "filters": [
           "solo-coffee",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "south-end-not-just-coffee-atherton-mill.jpg",
+        "image_source_url": "edens.com (Atherton Mill developer feature on Not Just Coffee)",
+        "audit_status": "kept"
       },
       {
         "name": "Sixty Vines",
         "cat": "Wine Bar",
         "cat2": "Restaurant",
-        "addr": "1415 Vantage Park Drive, Suite 100, Charlotte, North Carolina (South End)",
+        "addr": "1415 Vantage Park Drive, Suite 100, Charlotte, NC 28203",
         "price": "$$$",
         "access": "Reservation Recommended",
         "access_note": "Reservations recommended for dinner and weekend brunch; walk-ins welcome otherwise.",
@@ -910,12 +1038,81 @@
           "Weekend brunch",
           "Patio seating"
         ],
-        "mapq": "Sixty Vines South End Charlotte NC",
+        "mapq": "Sixty Vines, 1415 Vantage Park Drive, Suite 100, Charlotte, NC 28203",
         "filters": [
           "date-night",
           "business-dinner",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "south-end-sixty-vines.jpg",
+        "image_source_url": "lilesconstruction.com (contractor portfolio, Sixty Vines Charlotte)",
+        "audit_status": "kept"
+      },
+      {
+        "name": "DeepCuts HiFi",
+        "cat": "Cocktail Bar",
+        "cat2": "",
+        "addr": "2433 South Blvd, Charlotte, NC 28203",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "2026 opening (social posts April-May 2026: '3 days till we hit play,' opened ~May 1, 2026). Vinyl-driven listening bar from The Music Yard team in the former Backstage Lounge space; Void Acoustics hi-fi, craft cocktails, Mediterranean small plates, dress code.",
+        "best": [],
+        "spec": [],
+        "mapq": "DeepCuts HiFi, 2433 South Blvd, Charlotte, NC 28203",
+        "site": "",
+        "filters": [
+          "after-work",
+          "date-night",
+          "late-night"
+        ],
+        "image_file": "south-end-deepcuts-hifi.jpg",
+        "image_source_url": "deepcutshifi.com (official site)",
+        "audit_status": "added"
+      },
+      {
+        "name": "flora",
+        "cat": "Restaurant",
+        "cat2": "",
+        "addr": "2120 South Blvd, Suite 1, Charlotte, NC 28203",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "2026 opening (IG @qclife @realizecharlotte, July 2026 - opened in the former Eagle Chicken space at Atherton Mill; Hamptons-based seasonal New American, cocktails, 50+ wines).",
+        "best": [],
+        "spec": [],
+        "mapq": "flora, 2120 South Blvd, Suite 1, Charlotte, NC 28203",
+        "site": "",
+        "filters": [
+          "date-night",
+          "business-dinner",
+          "client-entertainment"
+        ],
+        "image_file": "south-end-flora.jpg",
+        "image_source_url": "eatdrinkloveflora.com (official flora brand site)",
+        "audit_status": "added"
+      },
+      {
+        "name": "Zamindar's Clubhouse",
+        "cat": "Restaurant",
+        "cat2": "",
+        "addr": "155 New Bern St, Charlotte, NC 28203",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "2026 opening (Axios Charlotte June 2026 preview, QC Exclusive Sept 25, 2026 showcase; former Link & Pin space). Regional Indian fine dining by Michelin Bib Gourmand chef Vamshi Krishna Adi (Ishq NYC), founder David Pandoria; carved wood, brass, Jaipur carpets, olive velvet, warm lighting; Regiment One55 British-Indian lounge concept.",
+        "best": [],
+        "spec": [],
+        "mapq": "Zamindar's Clubhouse, 155 New Bern St, Charlotte, NC 28203",
+        "site": "",
+        "filters": [
+          "date-night",
+          "business-dinner",
+          "client-entertainment"
+        ],
+        "image_file": "south-end-zamindars.jpg",
+        "image_source_url": "zamindarsclubhouse.com (official site)",
+        "audit_status": "added"
       }
     ]
   },
@@ -928,7 +1125,7 @@
       {
         "name": "Steak 48",
         "cat": "Steak & Seafood",
-        "addr": "4425 Sharon Rd, Charlotte, North Carolina (SouthPark)",
+        "addr": "4425 Sharon Rd, Charlotte, NC 28211",
         "price": "$$$$",
         "access": "Reservation Recommended",
         "desc": "An open kitchen, a raw bar working in full view of the dining room, and a wine list built to match the check. The SouthPark branch of a national steakhouse group that has, so far, resisted feeling like a chain. Book ahead — the good tables go fast.",
@@ -943,19 +1140,22 @@
           "Extensive wine list",
           "Open kitchen"
         ],
-        "mapq": "Steak 48 Charlotte NC",
+        "mapq": "Steak 48, 4425 Sharon Rd, Charlotte, NC 28211",
         "site": "steak48.com",
         "filters": [
           "business-dinner",
           "client-entertainment",
           "date-night",
           "late-night"
-        ]
+        ],
+        "image_file": "myers-park-steak-48.jpg",
+        "image_source_url": "https://thevendry.com/venue/168175/steak-48-charlotte-charlotte-nc/space/63471",
+        "audit_status": "kept"
       },
       {
         "name": "Oak Steakhouse",
         "cat": "Steak & Seafood",
-        "addr": "4777 Sharon Rd, Charlotte, North Carolina (SouthPark)",
+        "addr": "4777 Sharon Rd, Charlotte, NC 28210",
         "price": "$$$$",
         "access": "Reservation Recommended",
         "desc": "A regional steakhouse group's Charlotte flagship, set into the Sharon Square retail block with a modern, unfussy take on the format. Reliable rather than showy — a good choice when the point of the dinner is the conversation, not the room.",
@@ -970,18 +1170,21 @@
           "Bar program",
           "Private dining"
         ],
-        "mapq": "Oak Steakhouse SouthPark Charlotte",
+        "mapq": "Oak Steakhouse, 4777 Sharon Rd, Charlotte, NC 28210",
         "site": "oaksteakhouse.com",
         "filters": [
           "business-dinner",
           "client-entertainment",
           "date-night"
-        ]
+        ],
+        "image_file": "myers-park-oak-steakhouse.jpg",
+        "image_source_url": "https://www.opentable.co.th/private-dining/profile/oak-steakhouse-charlotte",
+        "audit_status": "kept"
       },
       {
         "name": "Calle Sol Latin Café & Cevicheria",
         "cat": "Restaurant",
-        "addr": "3100 Apex Dr, Charlotte, North Carolina (SouthPark)",
+        "addr": "3100 Apex Dr, Charlotte, NC 28211",
         "price": "$$",
         "access": "Reservation Recommended",
         "desc": "Ceviche and ropa vieja in a SouthPark strip that doesn't otherwise offer much worth walking into. Family-run energy inside a fast-casual footprint, and one of the few tables in the neighborhood that isn't trying to be a steakhouse.",
@@ -996,18 +1199,21 @@
           "Sangria",
           "Family-run"
         ],
-        "mapq": "Calle Sol Latin Cafe SouthPark Charlotte",
+        "mapq": "Calle Sol Latin Café & Cevicheria, 3100 Apex Dr, Charlotte, NC 28211",
         "site": "callesolcafe.com",
         "filters": [
           "weekend-brunch",
           "after-work",
           "date-night"
-        ]
+        ],
+        "image_file": "myers-park-calle-sol-latin-cafe-cevicheria.jpg",
+        "image_source_url": null,
+        "audit_status": "kept"
       },
       {
         "name": "Dilworth Tasting Room — SouthPark",
         "cat": "Wine Bar",
-        "addr": "4905 Ashley Park Ln, Ste J, Charlotte, North Carolina",
+        "addr": "4905 Ashley Park Ln, Ste J, Charlotte, NC 28210",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "The larger, kitchen-equipped sibling of the Dilworth original, with a food menu built to stand on its own rather than just soak up the wine. A dependable SouthPark stop for two who don't want to commit to a full steakhouse dinner.",
@@ -1021,18 +1227,21 @@
           "By-the-glass list",
           "Weekend hours"
         ],
-        "mapq": "Dilworth Tasting Room SouthPark Charlotte",
+        "mapq": "Dilworth Tasting Room — SouthPark, 4905 Ashley Park Ln, Ste J, Charlotte, NC 28210",
         "site": "dilworthtr.com",
         "filters": [
           "date-night",
           "after-work",
           "business-dinner"
-        ]
+        ],
+        "image_file": "myers-park-dilworth-tasting-room-southpark.jpg",
+        "image_source_url": "https://thevendry.com/venue/179770/dilworth-tasting-room-charlotte-nc",
+        "audit_status": "kept"
       },
       {
         "name": "Summit Coffee — SouthPark",
         "cat": "Coffee",
-        "addr": "4625 Piedmont Row Dr, Ste 115C, Charlotte, North Carolina",
+        "addr": "4625 Piedmont Row Dr, Ste 115C, Charlotte, NC 28210",
         "price": "$",
         "access": "Public",
         "desc": "A Davidson-born roaster's SouthPark counter, doing the quiet, competent version of a coffee shop rather than the performative one. Good for reading the paper or reading a term sheet — either way, nobody bothers you.",
@@ -1044,16 +1253,19 @@
           "Pour-over",
           "Laptop-friendly seating"
         ],
-        "mapq": "Summit Coffee SouthPark Charlotte",
+        "mapq": "Summit Coffee — SouthPark, 4625 Piedmont Row Dr, Ste 115C, Charlotte, NC 28210",
         "site": "summitcoffee.com",
         "filters": [
           "solo-coffee"
-        ]
+        ],
+        "image_file": "myers-park-summit-coffee-southpark.jpg",
+        "image_source_url": "https://summit-coffee-south-park.menufyy.com",
+        "audit_status": "kept"
       },
       {
         "name": "Quail Hollow Club",
         "cat": "Golf & Country Club",
-        "addr": "3700 Gleneagles Rd, Charlotte, North Carolina",
+        "addr": "3700 Gleneagles Rd, Charlotte, NC 28210",
         "price": "Member",
         "access": "Member or Guest Access",
         "access_note": "Highly exclusive; membership is by current-member recommendation only. All guests must be accompanied by a member in the clubhouse and on the course.",
@@ -1069,18 +1281,21 @@
           "Clubhouse dining",
           "Member-guest events"
         ],
-        "mapq": "Quail Hollow Club Charlotte NC",
+        "mapq": "Quail Hollow Club, 3700 Gleneagles Rd, Charlotte, NC 28210",
         "site": "quailhollowclub.com",
         "filters": [
           "golf",
           "client-entertainment",
           "private-club"
-        ]
+        ],
+        "image_file": "myers-park-quail-hollow-club.jpg",
+        "image_source_url": "https://wallpaperaccess.com/quail-hollow",
+        "audit_status": "kept"
       },
       {
         "name": "Myers Park Country Club",
         "cat": "Golf & Country Club",
-        "addr": "2415 Roswell Ave, Charlotte, North Carolina",
+        "addr": "2415 Roswell Ave, Charlotte, NC 28209",
         "price": "Member",
         "access": "Member or Guest Access",
         "access_note": "Nonmember functions run only through a sponsoring member, who remains responsible for guests throughout the visit.",
@@ -1096,18 +1311,21 @@
           "Tennis",
           "Member-sponsored events"
         ],
-        "mapq": "Myers Park Country Club Charlotte NC",
+        "mapq": "Myers Park Country Club, 2415 Roswell Ave, Charlotte, NC 28209",
         "site": "myersparkcc.com",
         "filters": [
           "golf",
           "private-club",
           "client-entertainment"
-        ]
+        ],
+        "image_file": "myers-park-myers-park-country-club.jpg",
+        "image_source_url": "https://www.joinplaytennis.com/charlotte",
+        "audit_status": "kept"
       },
       {
         "name": "Charlotte Country Club",
         "cat": "Golf & Country Club",
-        "addr": "2465 Mecklenburg Ave, Charlotte, North Carolina",
+        "addr": "2465 Mecklenburg Ave, Charlotte, NC 28205",
         "price": "Member",
         "access": "Member or Guest Access",
         "access_note": "Exact street address and current guest policy should be confirmed directly with the club before any planned visit.",
@@ -1123,18 +1341,21 @@
           "Tennis",
           "Dress code enforced"
         ],
-        "mapq": "Charlotte Country Club NC",
+        "mapq": "Charlotte Country Club, 2465 Mecklenburg Ave, Charlotte, NC 28205",
         "site": "charlottecountryclub.org",
         "filters": [
           "golf",
           "private-club",
           "business-dinner"
-        ]
+        ],
+        "image_file": "myers-park-charlotte-country-club.jpg",
+        "image_source_url": "https://listings.listhub.net/pages/LC1BN/22810-228105175/?channel=transparenseesystems",
+        "audit_status": "kept"
       },
       {
         "name": "Carmel Country Club",
         "cat": "Golf & Country Club",
-        "addr": "Charlotte, North Carolina (North and South campuses)",
+        "addr": "4735 Carmel Rd, Charlotte, NC 28226",
         "price": "Member",
         "access": "Member or Guest Access",
         "access_note": "Two-campus club; exact campus addresses and guest terms should be confirmed directly with the club.",
@@ -1149,16 +1370,19 @@
           "Pool",
           "Member events"
         ],
-        "mapq": "Carmel Country Club Charlotte NC",
+        "mapq": "Carmel Country Club, 4735 Carmel Rd, Charlotte, NC 28226",
         "filters": [
           "golf",
           "private-club"
-        ]
+        ],
+        "image_file": "myers-park-carmel-country-club.jpg",
+        "image_source_url": "https://www.teeoff.com/courses/1033001-carmel-country-club-details",
+        "audit_status": "kept"
       },
       {
         "name": "Olde Providence Racquet Club",
         "cat": "Tennis",
-        "addr": "5630 Sharon View Rd, Charlotte, North Carolina",
+        "addr": "5630 Sharon View Rd, Charlotte, NC 28226",
         "price": "Member",
         "access": "Member or Guest Access",
         "access_note": "Guests are capped at ten club visits a year and no more than twice in a fourteen-day period; no guests on Memorial Day, July 4th, or Labor Day.",
@@ -1173,18 +1397,21 @@
           "Guest visit limits",
           "Pickleball"
         ],
-        "mapq": "Olde Providence Racquet Club Charlotte",
+        "mapq": "Olde Providence Racquet Club, 5630 Sharon View Rd, Charlotte, NC 28226",
         "site": "oprctennis.com",
         "filters": [
           "tennis",
           "private-club"
-        ]
+        ],
+        "image_file": "myers-park-olde-providence-racquet-club.jpg",
+        "image_source_url": null,
+        "audit_status": "kept"
       },
       {
         "name": "Freedom Park",
         "cat": "Public Recreation",
         "cat2": "Tennis",
-        "addr": "1900 East Blvd, Charlotte, North Carolina",
+        "addr": "1900 East Blvd, Charlotte, NC 28203",
         "price": "Public",
         "access": "Confirm Before Visiting",
         "access_note": "Confirm city reservation and court-access rules — courts 1–6 are reservable through Mecklenburg County Park and Recreation; courts 7–10 are first-come open play.",
@@ -1198,16 +1425,19 @@
           "Greenway access",
           "County-run"
         ],
-        "mapq": "Freedom Park Tennis Courts Charlotte NC",
+        "mapq": "Freedom Park, 1900 East Blvd, Charlotte, NC 28203",
         "site": "parkandrec.mecknc.gov",
         "filters": [
           "tennis"
-        ]
+        ],
+        "image_file": "myers-park-freedom-park.jpg",
+        "image_source_url": "https://www.hopedalebuilders.com/blog/most-beautiful-neighborhoods-streets-charlotte-nc?hs_amp=true",
+        "audit_status": "kept"
       },
       {
-        "name": "Dressler's",
+        "name": "Dressler's Restaurant",
         "cat": "Restaurant",
-        "addr": "1100 Metropolitan Avenue, Charlotte, North Carolina (Midtown)",
+        "addr": "1100 Metropolitan Ave, Ste 125, Charlotte, NC 28204",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "Dependable, grown-up American fine dining in Midtown's Metropolitan district — less scene-driven than the Uptown rooms, but built for a client dinner or an anniversary where the food is expected to carry the evening on its own.",
@@ -1222,12 +1452,80 @@
           "Wine list",
           "Private dining"
         ],
-        "mapq": "Dressler's Metropolitan Charlotte NC",
+        "mapq": "Dressler's Restaurant, 1100 Metropolitan Ave, Ste 125, Charlotte, NC 28204",
         "filters": [
           "business-dinner",
           "date-night",
           "client-entertainment"
-        ]
+        ],
+        "image_file": "myers-park-dresslers.jpg",
+        "image_source_url": "https://cltbourbonsociety.com/2021/08/10/dresslers-metro/",
+        "audit_status": "kept"
+      },
+      {
+        "name": "Del Frisco's Double Eagle Steakhouse",
+        "cat": "Steak & Seafood",
+        "cat2": "",
+        "addr": "4725 Piedmont Row Dr, Ste 170, Charlotte, NC 28210",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "Open and booking Sept 2026; fine-dining steakhouse, business casual, mezzanine bar + private wine cellar, 4.8-star rating.",
+        "best": [],
+        "spec": [],
+        "mapq": "Del Frisco's Double Eagle Steakhouse, 4725 Piedmont Row Dr, Ste 170, Charlotte, NC 28210",
+        "site": "",
+        "filters": [
+          "date-night",
+          "business-dinner",
+          "client-entertainment"
+        ],
+        "image_file": "myers-park-del-friscos-double-eagle-steakhouse.jpg",
+        "image_source_url": "https://www.delfriscos.com/location/del-friscos-double-eagle-steakhouse-charlotte-nc/?fbclid=IwAR0IYUsz24Mk6i_7BNLwAqtKA-4Q9tza90B1rewveMuqMw9WPgbCcYfrd1A",
+        "audit_status": "added"
+      },
+      {
+        "name": "Mizu",
+        "cat": "Rooftop Bar",
+        "cat2": "Japanese / Robata",
+        "addr": "3100 Apex Dr, 9th Floor, Charlotte, NC 28211",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "Open; 9th-floor rooftop atop Hyatt Centric SouthPark — Japanese wood-fired Robata, craft cocktails, terrace. Official brand image (rejected a first candidate showing the wrong city's skyline).",
+        "best": [],
+        "spec": [],
+        "mapq": "Mizu, 3100 Apex Dr, 9th Floor, Charlotte, NC 28211",
+        "site": "",
+        "filters": [
+          "rooftop",
+          "date-night"
+        ],
+        "image_file": "myers-park-mizu.jpg",
+        "image_source_url": "https://www.mizu.restaurant/private-events/",
+        "audit_status": "added"
+      },
+      {
+        "name": "The Loft at Duckworth's",
+        "cat": "Cocktail Bar",
+        "cat2": "",
+        "addr": "4625 Piedmont Row Dr, Ste 115A, Charlotte, NC 28210",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "Open Thu-Sat; mid-century-modern cocktail lounge above Duckworth's at Piedmont Town Center — classics-focused menu (smoked Old Fashioned, Last Word), business-casual date-night room.",
+        "best": [],
+        "spec": [],
+        "mapq": "The Loft at Duckworth's, 4625 Piedmont Row Dr, Ste 115A, Charlotte, NC 28210",
+        "site": "",
+        "filters": [
+          "after-work",
+          "date-night",
+          "late-night"
+        ],
+        "image_file": "myers-park-the-loft-at-duckworths.jpg",
+        "image_source_url": "https://www.theloftatduckworths.com/",
+        "audit_status": "added"
       }
     ]
   },
@@ -1240,7 +1538,7 @@
       {
         "name": "Supperland",
         "cat": "Restaurant",
-        "addr": "1212 The Plaza, Charlotte, North Carolina",
+        "addr": "1212 The Plaza, Charlotte, NC 28205",
         "price": "$$$$",
         "access": "Reservation Recommended",
         "desc": "A midcentury church turned steakhouse, stained glass intact above a dining room built for special occasions rather than habit. The kitchen runs a serious chophouse menu; the building does a lot of the rest of the work on its own. Book ahead — this is a destination table.",
@@ -1255,71 +1553,22 @@
           "Extensive bar program",
           "Private events"
         ],
-        "mapq": "Supperland Charlotte NC",
+        "mapq": "Supperland, 1212 The Plaza, Charlotte, NC 28205",
         "site": "supper.land",
         "filters": [
           "date-night",
           "business-dinner",
           "client-entertainment",
           "late-night"
-        ]
-      },
-      {
-        "name": "Dish",
-        "cat": "Restaurant",
-        "addr": "1220 Thomas Ave, Charlotte, North Carolina",
-        "price": "$$",
-        "access": "Reservation Recommended",
-        "desc": "Meat-and-three Southern cooking with no pretense about being anything else, open into the early hours on weekends for whoever needs it after everything else has closed. Unfussy charm in a neighborhood that otherwise moved on from it years ago.",
-        "best": [
-          "Late Night",
-          "Weekend Brunch",
-          "After Work"
         ],
-        "spec": [
-          "Southern comfort food",
-          "Late-night kitchen",
-          "Weekend brunch",
-          "Local institution"
-        ],
-        "mapq": "Dish Charlotte NC Thomas Ave",
-        "site": "eatatdish.com",
-        "filters": [
-          "late-night",
-          "weekend-brunch",
-          "after-work"
-        ]
-      },
-      {
-        "name": "Calle Sol Latin Café & Cevicheria",
-        "cat": "Restaurant",
-        "addr": "1205 Thomas Ave, Charlotte, North Carolina (Plaza Midwood)",
-        "price": "$$",
-        "access": "Reservation Recommended",
-        "desc": "The original location, smaller and louder than its SouthPark offspring, doing the same ceviche and sangria for a Plaza Midwood crowd that treats it like a neighborhood canteen. Good for a fast dinner before the bars along Thomas Avenue take over.",
-        "best": [
-          "Weekend Brunch",
-          "After Work",
-          "Date Night"
-        ],
-        "spec": [
-          "Ceviche",
-          "Latin American plates",
-          "Sangria",
-          "Neighborhood institution"
-        ],
-        "mapq": "Calle Sol Latin Cafe Plaza Midwood Charlotte",
-        "site": "callesolcafe.com",
-        "filters": [
-          "weekend-brunch",
-          "after-work",
-          "date-night"
-        ]
+        "image_file": "plaza-midwood-supperland.jpg",
+        "image_source_url": "https://supper.land/",
+        "audit_status": "kept"
       },
       {
         "name": "The Bar at Supperland",
         "cat": "Cocktail Bar",
-        "addr": "1212 The Plaza, Charlotte, North Carolina",
+        "addr": "1212 The Plaza, Charlotte, NC 28205",
         "price": "$$$",
         "access": "Reservation Recommended",
         "access_note": "Walk-ins accepted, first-come; reservations recommended on busy nights.",
@@ -1335,18 +1584,21 @@
           "Walk-in seating",
           "Church-building setting"
         ],
-        "mapq": "The Bar at Supperland Charlotte",
+        "mapq": "The Bar at Supperland, 1212 The Plaza, Charlotte, NC 28205",
         "site": "supper.land",
         "filters": [
           "after-work",
           "date-night",
           "late-night"
-        ]
+        ],
+        "image_file": "plaza-midwood-the-bar-at-supperland.jpg",
+        "image_source_url": "https://secretcharlotte.co/supperland-top-10-best-restaurants-bon-appetit/",
+        "audit_status": "kept"
       },
       {
         "name": "The Crunkleton",
         "cat": "Cocktail Bar",
-        "addr": "1957 E 7th St, Charlotte, North Carolina (Elizabeth)",
+        "addr": "1957 E 7th St, Charlotte, NC 28204",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "A spirits library disguised as a bar, with a back-bar deep enough to reward regulars who let the bartender choose. The room that put Charlotte's cocktail scene on the map a decade ago, and it hasn't coasted on the reputation since.",
@@ -1362,19 +1614,22 @@
           "Weekend brunch",
           "Bartender's choice"
         ],
-        "mapq": "The Crunkleton Charlotte NC",
+        "mapq": "The Crunkleton, 1957 E 7th St, Charlotte, NC 28204",
         "site": "thecrunkleton.com",
         "filters": [
           "date-night",
           "after-work",
           "late-night",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "plaza-midwood-the-crunkleton.jpg",
+        "image_source_url": "https://www.waitlistwizard.com/restaurants/cities%2Fcharlotte-nc%2Fvenues%2Fthe-crunkleton",
+        "audit_status": "kept"
       },
       {
         "name": "Sneak CLT",
         "cat": "Speakeasy",
-        "addr": "2001 E 7th St, Ste F, Charlotte, North Carolina (Elizabeth)",
+        "addr": "2001 E 7th St, Suite F, Charlotte, NC 28204",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "A modernized speakeasy in Elizabeth, hidden-door aesthetic without the password theater some of the genre still insists on. Business casual is enforced, workout clothes and backward hats are not welcome, and reservations are the smarter route on weekends.",
@@ -1388,18 +1643,21 @@
           "Craft cocktails",
           "Dress code enforced"
         ],
-        "mapq": "Sneak CLT Charlotte NC",
+        "mapq": "Sneak CLT, 2001 E 7th St, Suite F, Charlotte, NC 28204",
         "site": "sneakclt.com",
         "filters": [
           "date-night",
           "late-night",
           "after-work"
-        ]
+        ],
+        "image_file": "",
+        "image_source_url": "",
+        "audit_status": "kept"
       },
       {
         "name": "Supperland Speakeasy",
         "cat": "Speakeasy",
-        "addr": "1212 The Plaza, Charlotte, North Carolina (basement level)",
+        "addr": "1212 The Plaza, Charlotte, NC 28205",
         "price": "$$$$",
         "access": "Reservation Required",
         "access_note": "Prepaid reservation only, via Tock. Ten seats. Thursday through Saturday.",
@@ -1414,18 +1672,21 @@
           "Themed cocktail program",
           "Reservation-only"
         ],
-        "mapq": "Supperland Speakeasy Charlotte NC",
+        "mapq": "Supperland Speakeasy, 1212 The Plaza, Charlotte, NC 28205",
         "site": "supper.land/supperland-speakeasy",
         "filters": [
           "date-night",
           "late-night"
-        ]
+        ],
+        "image_file": "plaza-midwood-supperland-speakeasy.jpg",
+        "image_source_url": "https://secretcharlotte.co/supperland-speakeasy-charlotte/",
+        "audit_status": "kept"
       },
       {
         "name": "Puerta",
         "cat": "Restaurant",
         "cat2": "Cocktail Bar",
-        "addr": "Elizabeth, Charlotte, North Carolina (East 7th Street) — exact street address unconfirmed",
+        "addr": "1961 E 7th St, Charlotte, NC 28204",
         "price": "$$$",
         "access": "Confirm Before Visiting",
         "access_note": "Exact street address wasn't confirmed at last check — verify before planning a visit.",
@@ -1441,12 +1702,78 @@
           "Agave bar program",
           "East 7th Street nightlife"
         ],
-        "mapq": "Puerta Charlotte NC East 7th Street",
+        "mapq": "Puerta, 1961 E 7th St, Charlotte, NC 28204",
         "filters": [
           "date-night",
           "after-work",
           "late-night"
-        ]
+        ],
+        "image_file": "plaza-midwood-puerta.jpg",
+        "image_source_url": "https://sagemenu.com/charlotte/puerta-charlotte/",
+        "audit_status": "kept"
+      },
+      {
+        "name": "Rosemont Market & Wine Bar",
+        "cat": "Wine Bar",
+        "cat2": "",
+        "addr": "1942 E 7th St #107, Charlotte, NC 28204",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "Open in Sept 2026. Image: official Resy venue photograph (Charlotte Resy gallery).",
+        "best": [],
+        "spec": [],
+        "mapq": "Rosemont Market & Wine Bar, 1942 E 7th St #107, Charlotte, NC 28204",
+        "site": "",
+        "filters": [
+          "after-work",
+          "date-night"
+        ],
+        "image_file": "plaza-midwood-rosemont.jpg",
+        "image_source_url": "https://resy.com/cities/charlotte-nc",
+        "audit_status": "added"
+      },
+      {
+        "name": "Cajun Queen",
+        "cat": "Live Music",
+        "cat2": "Jazz",
+        "addr": "1800 E 7th St, Charlotte, NC 28204",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "Coming soon — opening timing is unconfirmed.",
+        "desc": "Confirmed open Sept 2026 via the venue's own site (live music seven nights, hours, address). Established (serving since 1985), added to strengthen the jazz/live-music category. [UNCONFIRMED] no verified environment image secured — venue gallery images were not directly fetchable and available review photos were food close-ups.",
+        "best": [],
+        "spec": [],
+        "mapq": "Cajun Queen, 1800 E 7th St, Charlotte, NC 28204",
+        "site": "",
+        "filters": [
+          "live-music",
+          "date-night"
+        ],
+        "image_file": "",
+        "image_source_url": "",
+        "audit_status": "coming-soon"
+      },
+      {
+        "name": "Flight",
+        "cat": "Wine Bar",
+        "cat2": "",
+        "addr": "1949 E 7th St, Charlotte, NC 28204",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "Confirmed open Sept 2026 via the venue's own site (flightwineclt.com) and current hours.",
+        "best": [],
+        "spec": [],
+        "mapq": "Flight, 1949 E 7th St, Charlotte, NC 28204",
+        "site": "",
+        "filters": [
+          "after-work",
+          "date-night"
+        ],
+        "image_file": "plaza-midwood-flight.jpg",
+        "image_source_url": "https://wanderlog.com/list/geoCategory/78632/",
+        "audit_status": "added"
       }
     ]
   },
@@ -1459,7 +1786,7 @@
       {
         "name": "Haberdish",
         "cat": "Restaurant",
-        "addr": "3106 N Davidson St, Charlotte, North Carolina",
+        "addr": "3106 N Davidson St, Charlotte, NC 28205",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "Southern cooking with a fried chicken reputation that precedes it, set in a converted mill building that NoDa has mostly built its identity around. Closed Mondays, and the wait on weekend nights is real — book ahead if the schedule allows it.",
@@ -1474,18 +1801,21 @@
           "Mill-building setting",
           "Full bar"
         ],
-        "mapq": "Haberdish NoDa Charlotte",
+        "mapq": "Haberdish, 3106 N Davidson St, Charlotte, NC 28205",
         "site": "haberdish.com",
         "filters": [
           "date-night",
           "weekend-brunch",
           "after-work"
-        ]
+        ],
+        "image_file": "noda-haberdish.jpg",
+        "image_source_url": "https://scoutplaces.com/arizona/charlotte/food (bar interior editorial)",
+        "audit_status": "kept"
       },
       {
         "name": "The Goodyear House",
         "cat": "Restaurant",
-        "addr": "3032 N Davidson St, Charlotte, North Carolina",
+        "addr": "3032 N Davidson St, Charlotte, NC 28205",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "Set in a century-old mill house with a wraparound porch that does as much work as the kitchen. Small plates built for sharing, a cocktail list that doesn't try too hard, and one of NoDa's better warm-weather outdoor seating counts.",
@@ -1500,17 +1830,20 @@
           "Small plates",
           "Craft cocktails"
         ],
-        "mapq": "The Goodyear House NoDa Charlotte",
+        "mapq": "The Goodyear House, 3032 N Davidson St, Charlotte, NC 28205",
         "filters": [
           "date-night",
           "weekend-brunch",
           "after-work"
-        ]
+        ],
+        "image_file": "noda-the-goodyear-house.jpg",
+        "image_source_url": "https://unpretentiouspalate.com/charlotte-restaurants-and-bars-with-live-music-nights/ (patio)",
+        "audit_status": "kept"
       },
       {
         "name": "Idlewild",
         "cat": "Cocktail Bar",
-        "addr": "424 E 36th St, Charlotte, North Carolina",
+        "addr": "424 E 36th St [Unit 2 or 3 — sources vary; official site lists no unit], Charlotte, NC 28205",
         "price": "$$$",
         "access": "Public",
         "access_note": "Walk-ins welcome; no printed menu; parties capped at six; adults only.",
@@ -1526,41 +1859,21 @@
           "Adults-only",
           "Walk-in only"
         ],
-        "mapq": "Idlewild Bar Charlotte NC",
+        "mapq": "Idlewild, 424 E 36th St [Unit 2 or 3 — sources vary; official site lists no unit], Charlotte, NC 28205",
         "site": "idlewildbar.com",
         "filters": [
           "date-night",
           "late-night",
           "after-work"
-        ]
-      },
-      {
-        "name": "The Degenerate",
-        "cat": "Wine Bar",
-        "addr": "2116 N Davidson St, Ste A, Charlotte, North Carolina",
-        "price": "$$",
-        "access": "Public",
-        "desc": "A natural-wine room a few blocks off NoDa's main strip, closer in temperament to Plaza Midwood's unhurried pace than the murals nearby. Walk-in friendly, and the list rewards asking staff what's open and interesting that week rather than reaching for something familiar.",
-        "best": [
-          "Date Night",
-          "After Work"
         ],
-        "spec": [
-          "Natural wine list",
-          "Walk-in seating",
-          "Small-batch selections"
-        ],
-        "mapq": "The Degenerate NoDa Charlotte",
-        "site": "thedegenerateclt.com",
-        "filters": [
-          "date-night",
-          "after-work"
-        ]
+        "image_file": "noda-idlewild.jpg",
+        "image_source_url": "http://amateurconsumption.com/cocktail-bars/cocktailbar-idlewild.html (author's own photo from a verified visit, 424 E 36th St Unit 2)",
+        "audit_status": "kept"
       },
       {
         "name": "The Evening Muse",
         "cat": "Live Music",
-        "addr": "3227 N Davidson St, Charlotte, North Carolina",
+        "addr": "3227 N Davidson St, Charlotte, NC 28205",
         "price": "$$",
         "access": "Reservation Recommended",
         "access_note": "Ticketed by show; check the calendar before assuming a given night is open.",
@@ -1575,18 +1888,21 @@
           "Singer-songwriter bookings",
           "Full bar"
         ],
-        "mapq": "The Evening Muse Charlotte NC",
+        "mapq": "The Evening Muse, 3227 N Davidson St, Charlotte, NC 28205",
         "site": "eveningmuse.com",
         "filters": [
           "live-music",
           "date-night",
           "late-night"
-        ]
+        ],
+        "image_file": "noda-the-evening-muse.jpg",
+        "image_source_url": "https://www.charlottesgotalot.com live-music venues guide (press interior)",
+        "audit_status": "kept"
       },
       {
         "name": "Neighborhood Theatre",
         "cat": "Live Music",
-        "addr": "511 E 36th St, Charlotte, North Carolina",
+        "addr": "511 E 36th St, Charlotte, NC 28205",
         "price": "$$",
         "access": "Reservation Recommended",
         "access_note": "Ticketed by show; check the calendar before assuming a given night is open.",
@@ -1600,17 +1916,20 @@
           "Touring acts",
           "Historic arts district venue"
         ],
-        "mapq": "Neighborhood Theatre NoDa Charlotte",
+        "mapq": "Neighborhood Theatre, 511 E 36th St, Charlotte, NC 28205",
         "site": "neighborhoodtheatre.com",
         "filters": [
           "live-music",
           "late-night"
-        ]
+        ],
+        "image_file": "noda-neighborhood-theatre.jpg",
+        "image_source_url": "https://www.camdenliving.com/apartments/charlotte-nc/camden-noda (exterior with marquee)",
+        "audit_status": "kept"
       },
       {
-        "name": "Summit Coffee — NoDa",
+        "name": "Summit Coffee NoDa",
         "cat": "Coffee",
-        "addr": "416 E 36th St, Ste 300, Charlotte, North Carolina",
+        "addr": "416 E 36th St, Suite 300, Charlotte, NC 28205",
         "price": "$",
         "access": "Public",
         "desc": "A Davidson-born roaster's NoDa counter, open early and steady through the afternoon in a neighborhood that otherwise runs on later hours. Good for a solo morning before the murals fill up with tourists photographing them.",
@@ -1623,17 +1942,20 @@
           "Pour-over",
           "Morning hours"
         ],
-        "mapq": "Summit Coffee NoDa Charlotte",
+        "mapq": "Summit Coffee NoDa, 416 E 36th St, Suite 300, Charlotte, NC 28205",
         "site": "summitcoffee.com",
         "filters": [
           "solo-coffee",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "noda-summit-coffee-noda.jpg",
+        "image_source_url": "http://www.summitcoffee.com/cafes (official interior photo)",
+        "audit_status": "kept"
       },
       {
-        "name": "Vavela",
+        "name": "Vavela Cafe",
         "cat": "Coffee",
-        "addr": "440 E. McCullough Drive, Charlotte, North Carolina (University City)",
+        "addr": "440 E McCullough Dr, Suite 210, Charlotte, NC 28262",
         "price": "$$",
         "access": "Public",
         "access_note": "Open as late as 1–2 a.m. on some nights — hours can vary, confirm before a late visit.",
@@ -1648,17 +1970,20 @@
           "Desserts",
           "Late-night hours"
         ],
-        "mapq": "Vavela University City Charlotte NC",
+        "mapq": "Vavela Cafe, 440 E McCullough Dr, Suite 210, Charlotte, NC 28262",
         "filters": [
           "late-night",
           "solo-coffee"
-        ]
+        ],
+        "image_file": "noda-vavela.jpg",
+        "image_source_url": "https://scoutplaces.com/arizona/charlotte/food (interior; VAVELA signage visible)",
+        "audit_status": "kept"
       },
       {
         "name": "Fumée Kitchen & Cocktails",
         "cat": "Cocktail Bar",
         "cat2": "Restaurant",
-        "addr": "9539 Pinnacle Drive, Suite 203, Charlotte, North Carolina 28262 (University City)",
+        "addr": "9539 Pinnacle Dr, Suite 203, Charlotte, NC 28262",
         "price": "$$–$$$",
         "access": "Reservation Recommended",
         "access_note": "Reservations recommended for evenings, groups and weekend brunch. Closed Tuesday; Mon-Fri 5pm-2am, Sat-Sun noon-2am, brunch noon-5pm weekends. Phone (980) 219-7836.",
@@ -1675,12 +2000,37 @@
           "Late-night service",
           "Weekend brunch"
         ],
-        "mapq": "Fumee Kitchen and Cocktails University City Charlotte NC",
+        "mapq": "Fumée Kitchen & Cocktails, 9539 Pinnacle Dr, Suite 203, Charlotte, NC 28262",
         "filters": [
           "after-work",
           "late-night",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "noda-fumee-kitchen-cocktails.jpg",
+        "image_source_url": "http://www.fumeeusa.com/gallery/",
+        "audit_status": "kept"
+      },
+      {
+        "name": "All Purpose Bar",
+        "cat": "Cocktail Bar",
+        "cat2": "",
+        "addr": "3123 N Davidson St, Suite 104, Charlotte, NC 28205",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "Larry Suggs-led cocktail bar in the former Protagonist Beer space; experimental cocktails plus nonalcoholic options, nightly Night Cap Comedy Series (Sept/Oct 2026 events verified).",
+        "best": [],
+        "spec": [],
+        "mapq": "All Purpose Bar, 3123 N Davidson St, Suite 104, Charlotte, NC 28205",
+        "site": "",
+        "filters": [
+          "after-work",
+          "date-night",
+          "late-night"
+        ],
+        "image_file": "",
+        "image_source_url": "",
+        "audit_status": "added"
       }
     ]
   },
@@ -1694,7 +2044,7 @@
         "name": "Hestia Rooftop",
         "cat": "Rooftop Bar",
         "cat2": "Restaurant",
-        "addr": "14819 Ballantyne Village Way, Floor 16, Charlotte, North Carolina",
+        "addr": "14819 Ballantyne Village Way, 16th Floor, Charlotte, NC 28277",
         "price": "$$$",
         "access": "Reservation Recommended",
         "desc": "Modern Asian cooking sixteen floors up in Ballantyne Village, the rare rooftop this far south of Uptown. A cocktail-forward menu and a view that, this deep in the suburbs, has almost no competition. Check hours before driving out — Sunday and Monday run limited.",
@@ -1709,19 +2059,22 @@
           "Cocktail program",
           "Private events"
         ],
-        "mapq": "Hestia Rooftop Ballantyne Charlotte",
+        "mapq": "Hestia Rooftop, 14819 Ballantyne Village Way, 16th Floor, Charlotte, NC 28277",
         "site": "hestiarooftop.com",
         "filters": [
           "date-night",
           "client-entertainment",
           "rooftop",
           "after-work"
-        ]
+        ],
+        "image_file": "ballantyne-hestia-rooftop.jpg",
+        "image_source_url": "https://www.hestiarooftop.com/private-dining-charlotte",
+        "audit_status": "kept"
       },
       {
         "name": "Aroma Cigars Etc. Lounge",
         "cat": "Cigar Lounge",
-        "addr": "9007 Monroe Rd, Charlotte, North Carolina",
+        "addr": "9007 Monroe Rd, Charlotte, NC 28270",
         "price": "Member",
         "access": "Member or Guest Access",
         "access_note": "Annual memberships and day access both offered; confirm current guest policy and pricing directly with the lounge before visiting.",
@@ -1735,18 +2088,21 @@
           "Day access",
           "Late weekend hours"
         ],
-        "mapq": "Aroma Cigars Etc Lounge Charlotte NC",
+        "mapq": "Aroma Cigars Etc. Lounge, 9007 Monroe Rd, Charlotte, NC 28270",
         "filters": [
           "cigars",
           "late-night",
           "private-club"
-        ]
+        ],
+        "image_file": "ballantyne-aroma-cigars-etc-lounge.jpg",
+        "image_source_url": "https://localitybiz.com/29171646/aroma-cigars-etc-lounge-charlotte",
+        "audit_status": "kept"
       },
       {
         "name": "TPC Piper Glen",
         "cat": "Golf & Country Club",
         "cat2": "Tennis",
-        "addr": "4300 Piper Glen Dr, Charlotte, North Carolina",
+        "addr": "4300 Piper Glen Dr, Charlotte, NC 28277",
         "price": "Member",
         "access": "Member or Guest Access",
         "access_note": "Operated by Invited (formerly ClubCorp); members carry reciprocal access to the broader club network. Confirm current guest fees directly with the club.",
@@ -1762,19 +2118,22 @@
           "Pickleball",
           "Reciprocal club network"
         ],
-        "mapq": "TPC Piper Glen Charlotte NC",
+        "mapq": "TPC Piper Glen, 4300 Piper Glen Dr, Charlotte, NC 28277",
         "site": "tpc.com/piperglen",
         "filters": [
           "golf",
           "tennis",
           "private-club"
-        ]
+        ],
+        "image_file": "ballantyne-tpc-piper-glen.jpg",
+        "image_source_url": "https://www.invitedclubs.com/clubs/tpc-piper-glen/club-life/traditions-community/",
+        "audit_status": "kept"
       },
       {
         "name": "Raintree Country Club",
         "cat": "Golf & Country Club",
         "cat2": "Tennis",
-        "addr": "8600 Raintree Ln, Charlotte, North Carolina",
+        "addr": "8600 Raintree Ln, Charlotte, NC 28277",
         "price": "Member",
         "access": "Member or Guest Access",
         "desc": "Thirty-six holes across two courses and a family-first posture that sets it apart from the more formal clubs closer to Myers Park. Tennis and a full aquatics program round it out — built for a membership that uses the whole facility, not just the back nine.",
@@ -1789,17 +2148,20 @@
           "Aquatics program",
           "Family-oriented"
         ],
-        "mapq": "Raintree Country Club Charlotte NC",
+        "mapq": "Raintree Country Club, 8600 Raintree Ln, Charlotte, NC 28277",
         "filters": [
           "golf",
           "tennis",
           "private-club"
-        ]
+        ],
+        "image_file": "ballantyne-raintree-country-club.jpg",
+        "image_source_url": "https://www.golfpass.com/travel-advisor/courses/9932-south-at-raintree-country-club",
+        "audit_status": "kept"
       },
       {
         "name": "The Palisades Country Club",
         "cat": "Golf & Country Club",
-        "addr": "13704 Grand Palisades Pkwy, Charlotte, North Carolina",
+        "addr": "13704 Grand Palisades Pkwy, Charlotte, NC 28278",
         "price": "Member",
         "access": "Member or Guest Access",
         "access_note": "Guest and house-guest fees apply for accompanied visits; confirm current rates directly with the club.",
@@ -1814,17 +2176,20 @@
           "Tennis",
           "Pool"
         ],
-        "mapq": "The Palisades Country Club Charlotte NC",
+        "mapq": "The Palisades Country Club, 13704 Grand Palisades Pkwy, Charlotte, NC 28278",
         "filters": [
           "golf",
           "private-club"
-        ]
+        ],
+        "image_file": "ballantyne-the-palisades-country-club.jpg",
+        "image_source_url": "https://thepalisadescc.com/contact/",
+        "audit_status": "kept"
       },
       {
         "name": "Ballantyne Country Club",
         "cat": "Golf & Country Club",
         "cat2": "Tennis",
-        "addr": "11120 Ballantyne Crossing Ave, Charlotte, North Carolina",
+        "addr": "11120 Ballantyne Crossing Ave, Charlotte, NC 28277",
         "price": "Member",
         "access": "Member or Guest Access",
         "desc": "The club the neighborhood is named for, family-focused and fully built out — golf, tennis, aquatics and fitness under one membership. Newer than its Myers Park counterparts by decades, and it wears that with a different, more casual kind of confidence.",
@@ -1839,12 +2204,81 @@
           "Aquatics",
           "Fitness facilities"
         ],
-        "mapq": "Ballantyne Country Club Charlotte NC",
+        "mapq": "Ballantyne Country Club, 11120 Ballantyne Crossing Ave, Charlotte, NC 28277",
         "filters": [
           "golf",
           "tennis",
           "private-club"
-        ]
+        ],
+        "image_file": "ballantyne-ballantyne-country-club.jpg",
+        "image_source_url": "http://www.ballantyneclub.com/",
+        "audit_status": "kept"
+      },
+      {
+        "name": "C&W Steakhouse",
+        "cat": "Steak & Seafood",
+        "cat2": "Wine Bar",
+        "addr": "14825 Ballantyne Village Way, Suite 135, Charlotte, NC 28277",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "family-owned fine-dining steakhouse/wine bar in Ballantyne Village, opened Nov 2024; prime cuts, full wine list, craft cocktails, live jazz (2nd Sundays), Bourbon & Cigar events, cigar room, business-casual dress; bookable on OpenTable with verified-diner reviews through Aug 2026. Suite number: 135 per OpenTable; venue contact page lists Suite 130. Image: venue private-dining room via the OpenTable listing photo set. OpenTable rating 3.7 - elevated atmosphere, fit is by format not score.",
+        "best": [],
+        "spec": [],
+        "mapq": "C&W Steakhouse, 14825 Ballantyne Village Way, Suite 135, Charlotte, NC 28277",
+        "site": "",
+        "filters": [
+          "date-night",
+          "business-dinner",
+          "client-entertainment"
+        ],
+        "image_file": "ballantyne-cw-steakhouse.jpg",
+        "image_source_url": "https://www.opentable.com/r/cnw-steakhouse-charlotte",
+        "audit_status": "added"
+      },
+      {
+        "name": "The Ryal Bar",
+        "cat": "Cocktail Bar",
+        "cat2": "Whiskey Bar",
+        "addr": "10000 Ballantyne Commons Pkwy, Charlotte, NC 28277 (The Ballantyne, a Luxury Collection Hotel)",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "Scottish-inspired luxury hotel cocktail bar inside The Ballantyne - whiskey club, 750-label wine program, fine cigars; the area's strongest luxury-hotel bar fit, verified active Sept 26, 2026.",
+        "best": [],
+        "spec": [],
+        "mapq": "The Ryal Bar, 10000 Ballantyne Commons Pkwy, Charlotte, NC 28277 (The Ballantyne, a Luxury Collection Hotel)",
+        "site": "",
+        "filters": [
+          "after-work",
+          "date-night",
+          "late-night"
+        ],
+        "image_file": "ballantyne-the-ryal-bar.jpg",
+        "image_source_url": "https://marriott.com/en-us/hotels/cltlc-the-ballantyne-a-luxury-collection-hotel-charlotte/photos/",
+        "audit_status": "added"
+      },
+      {
+        "name": "Zinicola",
+        "cat": "Restaurant",
+        "cat2": "",
+        "addr": "14835 Ballantyne Village Way, Suite 140, Charlotte, NC 28277",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "family-owned upscale modern Italian in Ballantyne Village - scratch-made pastas, wood-fired pizzas, seasonal menu, full bar with wine and cocktail list, patio with its own bar, free Ballantyne valet Thu-Sat; 4.7 on OpenTable (1,300+ reviews), bookable, verified active Sept 26, 2026.",
+        "best": [],
+        "spec": [],
+        "mapq": "Zinicola, 14835 Ballantyne Village Way, Suite 140, Charlotte, NC 28277",
+        "site": "",
+        "filters": [
+          "date-night",
+          "business-dinner",
+          "client-entertainment"
+        ],
+        "image_file": "ballantyne-zinicola.jpg",
+        "image_source_url": "http://zinicolaitalian.com/",
+        "audit_status": "added"
       }
     ]
   },
@@ -1855,61 +2289,10 @@
     "blurb": "A former industrial belt turning into the city's most interesting adaptive reuse, one converted warehouse at a time. Thinner on the tables this guide usually covers, and honestly better for it — the interest here is in what's being built, not what's already arrived.",
     "venues": [
       {
-        "name": "Leah & Louise",
-        "cat": "Restaurant",
-        "addr": "West End, Charlotte, North Carolina — exact street address unconfirmed",
-        "price": "$$$",
-        "access": "Confirm Before Visiting",
-        "access_note": "This celebrated Black-owned Southern kitchen closed its original Camp North End location and relocated to a larger West End building; the finished street address was not yet public at last check. Confirm via the restaurant's website before planning a visit.",
-        "desc": "A celebrated Black-owned Southern kitchen that closed its original Camp North End space and relocated into a larger West End building. The move was public and well covered; the finished address, at last check, was not yet confirmed publicly — check the website before visiting.",
-        "best": [
-          "Date Night",
-          "Client Entertainment"
-        ],
-        "spec": [
-          "Southern cuisine",
-          "Black-owned kitchen",
-          "Relocated flagship"
-        ],
-        "mapq": "Leah and Louise Charlotte NC",
-        "site": "leahandlouise.com",
-        "filters": [
-          "date-night",
-          "client-entertainment"
-        ]
-      },
-      {
-        "name": "Noble Smoke",
-        "cat": "Restaurant",
-        "cat2": "Steak & Seafood",
-        "addr": "2216 Freedom Dr, Charlotte, North Carolina",
-        "price": "$$",
-        "access": "Public",
-        "desc": "Whole-hog barbecue and a bourbon list long enough to make the wait worthwhile, from the same family behind Midwood Smokehouse. Unfussy, generous portions, and exactly the kind of room where a jacket would be the wrong call entirely.",
-        "best": [
-          "Weekend Brunch",
-          "After Work",
-          "Late Night"
-        ],
-        "spec": [
-          "Whole-hog barbecue",
-          "Bourbon selection",
-          "Casual dining",
-          "Family-run"
-        ],
-        "mapq": "Noble Smoke Freedom Drive Charlotte",
-        "site": "noblesmokebarbecue.com",
-        "filters": [
-          "weekend-brunch",
-          "after-work",
-          "late-night"
-        ]
-      },
-      {
         "name": "HEX Coffee, Kitchen & Natural Wines",
         "cat": "Coffee",
         "cat2": "Wine Bar",
-        "addr": "201 Camp Rd, Ste 103, Charlotte, North Carolina (Camp North End)",
+        "addr": "201 Camp Rd, Ste 103, Charlotte, NC 28206",
         "price": "$$",
         "access": "Public",
         "desc": "A Japanese-inflected all-day café inside Camp North End, coffee in the morning and natural wine by evening under the same roof. The kind of room that rewards showing up without a plan and staying longer than intended.",
@@ -1924,18 +2307,21 @@
           "All-day kitchen",
           "Camp North End setting"
         ],
-        "mapq": "HEX Coffee Kitchen Natural Wines Camp North End Charlotte",
+        "mapq": "HEX Coffee, Kitchen & Natural Wines, 201 Camp Rd, Ste 103, Charlotte, NC 28206",
         "site": "hexclt.com",
         "filters": [
           "solo-coffee",
           "after-work",
           "date-night"
-        ]
+        ],
+        "image_file": "west-charlotte-hex-coffee.jpg",
+        "image_source_url": "https://sprudge.com/coffee-trends-highlights-and-observations-on-new-cafe-destinations-in-2023-219618.html",
+        "audit_status": "kept"
       },
       {
         "name": "Enderly Coffee Co.",
         "cat": "Coffee",
-        "addr": "2620 Tuckaseegee Rd, Charlotte, North Carolina",
+        "addr": "2620 Tuckaseegee Rd, Charlotte, NC 28208",
         "price": "$",
         "access": "Public",
         "desc": "A wholesale roaster that grew a storefront out of it, deep enough into west Charlotte that most Uptown regulars have never made the drive. Early hours and short weekend windows — check before going, especially on Sundays.",
@@ -1947,16 +2333,19 @@
           "Wholesale roastery",
           "Neighborhood storefront"
         ],
-        "mapq": "Enderly Coffee Co Charlotte NC",
+        "mapq": "Enderly Coffee Co., 2620 Tuckaseegee Rd, Charlotte, NC 28208",
         "site": "enderlycoffee.com",
         "filters": [
           "solo-coffee"
-        ]
+        ],
+        "image_file": "west-charlotte-enderly-coffee.jpg",
+        "image_source_url": "https://joe.coffee/locations/nc/charlotte/enderly-coffee-co-cafe-coffee-roaster-charlotte/",
+        "audit_status": "kept"
       },
       {
         "name": "Queen City Grounds",
         "cat": "Coffee",
-        "addr": "1213 W Morehead St, Charlotte, North Carolina (Wesley Heights)",
+        "addr": "1213 W Morehead St, Charlotte, NC 28208",
         "price": "$",
         "access": "Confirm Before Visiting",
         "access_note": "Recent listings disagree on whether this location is still operating — confirm current hours and status before making the trip.",
@@ -1970,16 +2359,19 @@
           "Espresso",
           "Neighborhood counter"
         ],
-        "mapq": "Queen City Grounds Wesley Heights Charlotte",
+        "mapq": "Queen City Grounds, 1213 W Morehead St, Charlotte, NC 28208",
         "filters": [
           "solo-coffee",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "west-charlotte-queen-city-grounds.jpg",
+        "image_source_url": "https://www.cluckdesign.com/work/",
+        "audit_status": "kept"
       },
       {
         "name": "Camp North End",
         "cat": "District / Neighborhood",
-        "addr": "300 Camp Rd, Charlotte, North Carolina",
+        "addr": "300 Camp Rd, Charlotte, NC 28206",
         "price": "Public",
         "access": "Public",
         "access_note": "Grounds are open to the public around the clock; individual tenant businesses keep their own hours.",
@@ -1995,13 +2387,59 @@
           "Event space",
           "Public art"
         ],
-        "mapq": "Camp North End Charlotte NC",
+        "mapq": "Camp North End, 300 Camp Rd, Charlotte, NC 28206",
         "site": "camp.nc",
         "filters": [
           "solo-coffee",
           "after-work",
           "weekend-brunch"
-        ]
+        ],
+        "image_file": "west-charlotte-camp-north-end.jpg",
+        "image_source_url": "https://chat.edabit.com/trendingentertainment92/camp-north-end/image03",
+        "audit_status": "kept"
+      },
+      {
+        "name": "Restaurant Constance",
+        "cat": "Restaurant",
+        "cat2": "",
+        "addr": "2200 Thrift Rd, Charlotte, NC 28208",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "intimate 10-table farm-to-table restaurant in Wesley Heights (Tue-Sat dinner), Michelin Guide 'Good cooking' 2025, $65 prix fixe, curated wine + zero-proof cocktails. The corridor's strongest upscale dinner fit.",
+        "best": [],
+        "spec": [],
+        "mapq": "Restaurant Constance, 2200 Thrift Rd, Charlotte, NC 28208",
+        "site": "",
+        "filters": [
+          "date-night",
+          "business-dinner",
+          "client-entertainment"
+        ],
+        "image_file": "west-charlotte-restaurant-constance.jpg",
+        "image_source_url": "https://carolinatraveler.com/the-8-best-restaurants-in-charlotte-nc/",
+        "audit_status": "added"
+      },
+      {
+        "name": "Maiz Agua Sal",
+        "cat": "Restaurant",
+        "cat2": "Cocktail Bar",
+        "addr": "1018 Jay St, Ste 110, Charlotte, NC 28208",
+        "price": "—",
+        "access": "Confirm Before Visiting",
+        "access_note": "",
+        "desc": "modern Mexican scratch kitchen + craft agave cocktail bar in Wesley Heights (opened Apr 2024, 4.5 on OpenTable, bookable). Mezcal/tequila-focused program with covered patio and fire pit - date-night worthy, strongest cocktail-bar-adjacent fit in the corridor.",
+        "best": [],
+        "spec": [],
+        "mapq": "Maiz Agua Sal, 1018 Jay St, Ste 110, Charlotte, NC 28208",
+        "site": "",
+        "filters": [
+          "date-night",
+          "after-work"
+        ],
+        "image_file": "west-charlotte-maiz-agua-sal.jpg",
+        "image_source_url": "https://www.opentable.com/r/maiz-agua-sal-charlotte?corrid=e6232efc-d72a-4c4e-9b9f-6c2946d",
+        "audit_status": "added"
       }
     ]
   }

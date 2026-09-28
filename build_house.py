@@ -211,7 +211,7 @@ KITCHEN_HELLOFRESH_UNLOCK = '''<div class="hf-unlock">
                     <li><span class="hf-recipe-list__name">BBQ Chicken Quesadillas</span><span class="hf-recipe-list__note">The fifteen-minute.</span></li>
                     <li><span class="hf-recipe-list__name">Lamb Chops au Poivre</span><span class="hf-recipe-list__note">The showstopper.</span></li>
                   </ul>
-                  <a class="cta cta--ghost hf-unlock__cta" href="pantry.html"><span>Get the Box &#8212; HelloFresh &#215; Paris Pullen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
+                  <a class="cta cta--ghost hf-unlock__cta" href="hellofresh-menu.html?embed=1"><span>Get the Box &#8212; HelloFresh &#215; Paris Pullen</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>
                 </div>'''
 
 # A deliberately soft second touch, not a second unlock -- the Corridor's
@@ -316,9 +316,9 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
         </button>''')
         spec = "".join(f'<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>' for k,v in specs)
         wardrobe_cta = (
-            '<a class="cta pent__open" href="blueprint.html" style="margin-top:var(--s2)">'
-            '<span>Play The Blueprint</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
-            if (f["id"] == "closet" and key == "suits") or (f["id"] == "bedroom" and key == "suit") else ""
+            '<a class="cta pent__open" href="/style-artifacts.html?embed=1" data-style-portal style="margin-top:var(--s2)">'
+            '<span>The Style</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
+            if (key == "suit") or (f["id"] in ("closet", "penthouse-living") and key == "suits") else ""
         )
         tag = f'Level {f["lvl"]} &#183; Artifact'
         if f["id"] == "kitchen" and key == "hellofresh":
@@ -369,18 +369,11 @@ f'''          <div class="drawer__panel" data-artifact="{key}" hidden>
         # (see the "entering" branch in initScreen) lazily assigns the real,
         # muted src at that point -- see loadChannel there.
         #
-        # mute=1, not the optimistic mute=0 this used to request: unmuted
-        # autoplay in a cross-origin iframe is reliably blocked on mobile
-        # regardless of the allow policy below, and unlike desktop (where
-        # YouTube's player quietly falls back to muted-and-playing),
-        # mobile browsers were sometimes just refusing to autoplay AT ALL
-        # rather than falling back -- so the video never started moving.
-        # Guaranteed-muted autoplay is the one mode every browser actually
-        # honors; getting real sound on is entirely the job of the
-        # postMessage 'unMute' attempt + guaranteed Tap-for-Sound fallback
-        # in tv-remote.js's enter-room logic, same as every other screen.
+        # The Living Room is intentionally requested unmuted. Browser autoplay
+        # policy can still require a user gesture on some devices, but the house
+        # should never deliberately begin its first room muted.
         iframe_src = (
-            f'https://www.youtube.com/embed/{ts["id"]}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1'
+            f'https://www.youtube.com/embed/{ts["id"]}?autoplay=1&mute=0&controls=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&iv_load_policy=3&enablejsapi=1'
             if f["id"] == START_ROOM else ''
         )
         tv = f'''  <div class="floor-scene__screen" style="--x:{ts["x"]};--y:{ts["y"]};--w:{ts["w"]};--h:{ts["h"]}" data-tv data-channel-set="{ts["channel_set"]}" data-box="{ts["box"]}">
@@ -551,7 +544,7 @@ html = f'''<!DOCTYPE html>
 <script src="assets/js/gym-portal.js?v=16" defer></script>
 <script src="assets/js/vault-entrance.js?v=16" defer></script>
 <script src="assets/js/piano-player.js?v=17" defer></script>
-<script src="assets/js/artifact-experiences.js?v=6" defer></script>
+<script src="assets/js/artifact-experiences.js?v=6" defer></script>\n<script src="assets/js/site-audio.js?v=2" defer></script>
 </body>
 </html>
 '''

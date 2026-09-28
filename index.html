@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/PP-Favcon.png?v=20260928" type="image/png" sizes="any">
+<link rel="apple-touch-icon" href="/assets/img/PP-Favcon.png?v=20260928">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Paris Pullen — American Gentleman</title>
 <meta name="description" content="The world of Paris Pullen. Style, strategy, culture and access, built at the intersection of American luxury and Charlotte, North Carolina.">
@@ -12,8 +13,9 @@
 <meta property="og:description" content="The city thinks he's selling luxury. The people who matter know he's selling access.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://parispullen.com/">
-<meta property="og:image" content="https://parispullen.com/assets/img/hero-boardroom.jpg">
+<meta property="og:image" content="https://parispullen.com/assets/img/PP-Favcon.png?v=20260928">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://parispullen.com/assets/img/PP-Favcon.png?v=20260928">
 <link rel="canonical" href="https://parispullen.com/">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +24,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/world.css?v=22">
 <link rel="stylesheet" href="assets/css/artifact-experiences.css?v=5">
+<link rel="stylesheet" href="assets/css/entry-screen.css?v=5">
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Paris Pullen","alternateName":"Agent Foxx",
@@ -33,20 +36,39 @@
 <body>
 
 <!-- ============ THE GATE ============ -->
-<div class="gate" id="gate" role="dialog" aria-label="Enter the world of Paris Pullen">
-  <div class="gate__seq">
-    <p class="classified gate__line gate__line--1">File 00 &#183; Open</p>
-    <p class="classified gate__line gate__line--2">Charlotte / America</p>
-    <div class="gate__line--3">
-      <span class="foxx" aria-hidden="true" style="--foxx-size:72px;width:72px;margin:0 auto var(--s5)"></span>
-      <p class="gate__name">Paris Pullen</p>
-      <div class="gate__enter">
-        <button class="cta" id="gate-enter"><span>Open the File</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>
+<section class="entry-screen entry-screen--main" id="gate" data-entry-screen aria-label="Paris Pullen entry screen">
+  <div class="entry-screen__bg" aria-hidden="true"></div>
+  <button class="entry-room-return" type="button" data-entry-return hidden>← Return</button>
+  <div class="entry-screen__inner" data-entry-main>
+    <h1 class="entry-title">Choose your way in.</h1>
+    <p class="entry-copy">The world is built around how you show up. Start with the room, the guide, or the network.</p>
+    <nav class="entry-actions" aria-label="Entry options">
+      <button class="entry-action" type="button" data-entry-open="network" style="--entry-image:url('/assets/img/env-network@sm.jpg')"><span class="entry-action__title">The Network</span><span class="entry-action__sub">Get connected with Paris</span></button>
+      <a class="entry-action" href="#penthouse" data-entry-enter style="--entry-image:url('/assets/img/room-living@sm.jpg')"><span class="entry-action__title">The Penthouse</span><span class="entry-action__sub">Begin in the Living Room</span></a>
+      <button class="entry-action" type="button" data-entry-open-guides style="--entry-image:url('/assets/img/room-closet@sm.jpg')"><span class="entry-action__title">The Artifacts</span><span class="entry-action__sub">Books · Wardrobe · Games · Guides</span></button>
+      <a class="entry-action" href="journal.html" style="--entry-image:url('/assets/img/room-study@sm.jpg')"><span class="entry-action__title">The Journal</span><span class="entry-action__sub">From the word of the Gentleman</span></a>
+      <button class="entry-action" type="button" disabled aria-disabled="true" style="--entry-image:url('/assets/img/citymap-plate@sm.jpg')"><span class="entry-action__title">The Key</span><span class="entry-action__sub">Restricted · Coming soon</span></button>
+    </nav>
+    <div class="entry-brand entry-brand--bottom"><img class="entry-brand__mark" src="/assets/img/monogram-mark.svg" alt=""><p class="entry-brand__name">Paris Pullen</p></div>
+  </div>
+  <dialog class="entry-guides-modal" data-entry-guides aria-label="Select a guide">
+    <div class="entry-screen entry-screen--guides">
+      <div class="entry-screen__bg" aria-hidden="true"></div>
+      <div class="entry-screen__inner">
+        <button class="entry-action entry-action--back" type="button" data-entry-back>← Return</button>
+        <h2 class="entry-title">Choose an Artifact.</h2>
+        <div class="entry-guide-grid" aria-label="Artifacts">
+          <button class="entry-guide" style="--guide-image:url('/assets/img/room-closet-v7.jpg')" data-entry-open="guide" data-entry-title="The Blueprints" data-entry-src="/style-artifacts.html?embed=1&view=blueprints"><span>The Blueprints<small>Five foundational suits · digital guides</small></span></button>
+          <button class="entry-guide" style="--guide-image:url('/assets/img/entry/wardrobe-suit-collection.webp')" data-entry-open="guide" data-entry-title="The Wardrobe" data-entry-src="/wardrobe-arcade.html?embed=1"><span>The Wardrobe<small>The interactive Blueprint game</small></span></button>
+          <button class="entry-guide" style="--guide-image:url('/assets/img/entry/guide-map.webp')" data-entry-open="guide" data-entry-title="The Gentleman’s Guide to Charlotte" data-entry-src="/city-guide-popup.html"><span>The City<small>Charlotte · the rooms worth knowing</small></span></button>
+          <button class="entry-guide" style="--guide-image:url('/assets/img/entry/after-hours-boxing-card.webp')" data-entry-open="guide" data-entry-title="The After Hours" data-entry-src="/gym/index.html?embed=1"><span>The After Hours<small>Enter the game</small></span></button>
+          <button class="entry-guide" style="--guide-image:url('/assets/img/entry/cocktail-guide-card.png')" data-entry-open="guide" data-entry-title="The Cocktail Guide" data-entry-src="/cocktail-menu.html?v=2cf9656&embed=1"><span>The Cocktail Guide<small>Eleven classics · properly made</small></span></button>
+          <button class="entry-guide" style="--guide-image:url('/assets/img/entry/cookbook-steak-card.webp')" data-entry-open="guide" data-entry-title="The Gentleman’s Cookbook" data-entry-src="/hellofresh-menu.html?v=1&embed=1"><span>The Gentleman’s Cookbook<small>The kitchen edit</small></span></button>
+        </div>        </div>
       </div>
     </div>
-  </div>
-  <button class="gate__skip" id="gate-skip">Skip &#183; Esc</button>
-</div>
+  </dialog>
+</section>
 
 <div class="grain" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
@@ -209,17 +231,41 @@
      tv-remote.js's initSuiteRemote() -- one instance regardless of how
      many rooms have a screen. -->
 
-<script src="assets/js/penthouse.js?v=16" defer></script>
+<script src="assets/js/penthouse.js?v=20260928-artifact-tags2" defer></script>
+<script src="assets/js/penthouse-artifact-labels.js?v=3" defer></script>
+<script>
+(function () {
+  var labels = [
+    ['penthouse-living', 'suits', 'The Gentlemen’s Guide to Suits'],
+    ['kitchen', 'hellofresh', 'The Gentlemen’s CookBook'],
+    ['kitchen', 'suit', 'The Wardrobe'],
+    ['kitchen', 'suits', 'The Wardrobe']
+  ];
+  function applyArtifactLabels() {
+    labels.forEach(function (item) {
+      var room = document.getElementById(item[0]);
+      if (!room) return;
+      var marker = room.querySelector('[data-artifact="' + item[1] + '"] .artifact__label');
+      if (marker && marker.textContent !== item[2]) marker.textContent = item[2];
+      var drawer = room.querySelector('.drawer__panel[data-artifact="' + item[1] + '"] .drawer__name');
+      if (drawer && drawer.textContent !== item[2]) drawer.textContent = item[2];
+    });
+  }
+  window.addEventListener('load', applyArtifactLabels);
+  setInterval(applyArtifactLabels, 250);
+}());
+</script>
 <script src="assets/js/room-pager.js?v=17" defer></script>
 <script src="assets/js/nav-panel.js?v=16" defer></script>
 <script src="assets/js/tv-remote.js?v=16" defer></script>
 <script src="assets/js/vault.js?v=16" defer></script>
-<script src="assets/js/world.js?v=16" defer></script>
+<script src="assets/js/world.js?v=17" defer></script>
 <script src="assets/js/guide-portal.js?v=16" defer></script>
 <script src="assets/js/gym-portal.js?v=16" defer></script>
 <script src="assets/js/vault-entrance.js?v=16" defer></script>
 <script src="assets/js/piano-player.js?v=17" defer></script>
 <script src="assets/js/artifact-experiences.js?v=6" defer></script>
 <script src="/assets/js/site-audio.js?v=1" defer></script>
+<script src="/assets/js/entry-screen.js?v=5" defer></script>
 </body>
 </html>

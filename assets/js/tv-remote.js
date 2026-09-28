@@ -57,6 +57,15 @@
      "listening" handshake -- we do that on every iframe load, track the
      latest currentTime per screen/modal here, and seek relative to that. */
   var ALL_STATES = [];
+  // A deliberate mute is a house-wide preference. It survives room changes
+  // (and a page refresh in the same tab) until the visitor explicitly unmutes.
+  var houseMuted = false;
+  try { houseMuted = sessionStorage.getItem('pp-house-muted') === '1'; } catch (_) {}
+  function setHouseMuted(muted) {
+    houseMuted = !!muted;
+    try { sessionStorage.setItem('pp-house-muted', houseMuted ? '1' : '0'); } catch (_) {}
+    document.dispatchEvent(new CustomEvent('pp:house-mute', { detail: { muted: houseMuted } }));
+  }
   // Every screen's state, keyed by its channel-set id ("living", "cinema")
   // -- lets the global Suite Remote (see initSuiteRemote) reach a given
   // screen's iframe/state from anywhere on the page, not just from inside
@@ -496,9 +505,9 @@
     // Full screen is opened via a direct click, a strong enough user gesture
     // that autoplay-with-sound is reliably allowed -- so open unmuted rather
     // than forcing the visitor to hit Mute -> Unmute for no reason.
-    state.muted = false;
+    state.muted = houseMuted;
     state.isPaused = false;
-    setModalIframe(ch.id, false);
+    setModalIframe(ch.id, houseMuted);
     post(modalIframe, 'setVolume', [state.volume || 100]);
     showLowerThird(modalLowerThird, modalLowerThirdTitle, ch.label);
     updateModalMuteLabel();
@@ -544,16 +553,9 @@
     applySheetMode(remote, isMobile());
 
     var channels = CHANNEL_SETS[screen.dataset.channelSet] || CHANNEL_SETS[DEFAULT_SET];
-    // The baked src now requests mute=0 (unmuted autoplay) rather than
-    // mute=1 -- but whether that's actually honored is entirely up to the
-    // browser's autoplay policy, and there's no reliable postMessage way to
-    // ask YouTube's embed whether it silently fell back to muted. Tracking
-    // state.muted as true here (rather than matching the optimistic mute=0
-    // request) keeps the enter-room logic below making its own unmute
-    // attempt, backed by the guaranteed "Tap for Sound" fallback, on first
-    // view -- if mute=0 already worked, that attempt is just a harmless
-    // no-op; if it didn't, this is what actually gets sound on.
-    var state = { key: screen.dataset.channelSet, chIndex: 0, volume: 100, muted: true, iframe: iframe,
+    // The Living Room iframe is baked with mute=0. The state starts unmuted
+    // so arrival uses the same real sound state as the player request.
+    var state = { key: screen.dataset.channelSet, chIndex: 0, volume: 100, muted: false, iframe: iframe,
       channels: channels, currentTime: 0, isPaused: false,
       autoMuted: false }; // true only when OUR leave-the-room logic muted it, never on a manual mute --
                           // that distinction is what lets re-entering unmute again without overriding
@@ -582,8 +584,11 @@
     // global Suite Remote looks a state up by key rather than duplicating
     // this logic against a second iframe reference).
     state.toggleMute = function () {
+      // Any explicit mute/unmute control sets the shared preference so a
+      // room transition can never bring sound back unexpectedly.
       state.muted = !state.muted;
       state.autoMuted = false;
+      setHouseMuted(state.muted);
       post(iframe, state.muted ? 'mute' : 'unMute');
       if (!state.muted) post(iframe, 'setVolume', [state.volume || 50]);
       state.updateMuteLabel();
@@ -720,14 +725,14 @@
           break;
         case 'vol-up':
           state.volume = Math.min(100, state.volume + 10);
-          if (state.muted) { state.muted = false; post(iframe, 'unMute'); }
+          if (state.muted) { state.muted = false; setHouseMuted(false); post(iframe, 'unMute'); }
           post(iframe, 'setVolume', [state.volume]);
           state.updateMuteLabel();
           break;
         case 'vol-down':
           state.volume = Math.max(0, state.volume - 10);
           post(iframe, 'setVolume', [state.volume]);
-          if (state.volume === 0 && !state.muted) { state.muted = true; post(iframe, 'mute'); state.updateMuteLabel(); }
+          if (state.volume === 0 && !state.muted) { state.muted = true; setHouseMuted(true); post(iframe, 'mute'); state.updateMuteLabel(); }
           break;
         case 'mute':
           state.toggleMute();
@@ -795,6 +800,7 @@
       soundPrompt.addEventListener('click', function (e) {
         e.stopPropagation();
         state.muted = false;
+        setHouseMuted(false);
         post(iframe, 'unMute');
         post(iframe, 'setVolume', [state.volume || 100]);
         state.updateMuteLabel();
@@ -812,6 +818,9 @@
       var everEnteredRoom = false;
       var soundObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
+          // House-level routing owns continuity; visibility must not mute TV
+          // when the guest moves between ordinary rooms.
+          if (window.PPHouseAudioManaged) return;
           if (state.isOff) return;
           if (entry.isIntersecting) {
             // A screen outside the start room was baked with no src at all
@@ -901,6 +910,16 @@
     toggleBtn.textContent = 'Remote';
     document.body.appendChild(toggleBtn);
 
+    // A persistent video-audio control sits directly to the right of Remote.
+    // It controls the Living Room TV, or Cinema's screen while in Cinema;
+    // the Music Lounge playlist remains independent.
+    var houseMuteBtn = document.createElement('button');
+    houseMuteBtn.type = 'button';
+    houseMuteBtn.className = 'house-mute-toggle';
+    houseMuteBtn.setAttribute('aria-label', 'Mute video audio');
+    houseMuteBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6l-5 4H3z"></path><path d="M15 9.5a4 4 0 0 1 0 5"></path><path d="M17.5 7a7.5 7.5 0 0 1 0 10"></path></svg>';
+    document.body.appendChild(houseMuteBtn);
+
     // One-tap play/pause for whichever screen the current room owns --
     // sits in the corner where the old (non-functional, no-op) "Sound
     // on/off" button used to be. Hidden in rooms with no screen at all
@@ -912,7 +931,7 @@
     ppBtn.className = 'playpause-toggle';
     ppBtn.hidden = true;
     ppBtn.innerHTML = '<span class="playpause-toggle__icon" aria-hidden="true"></span><span class="playpause-toggle__label">Pause</span>';
-    document.body.appendChild(ppBtn);
+    // Retained only as an internal state mirror for the Suite Remote; never mounted.
     var ppLabel = ppBtn.querySelector('.playpause-toggle__label');
 
     var panel = document.createElement('div');
@@ -964,6 +983,7 @@
 
     var activeSource = 'tv'; // 'tv' | 'music' | 'cinema'
     var contextualKey = null; // the current room's own channel-set, if any
+    var currentRoomId = '';
 
     function keyForSource(src) { return src === 'tv' ? 'living' : src === 'cinema' ? 'cinema' : null; }
     // Named to avoid any confusion with the fullscreen modal's own
@@ -987,10 +1007,12 @@
     document.addEventListener('pp:ambient-playback', function () {
       if (activeSource === 'music') render();
       renderPP();
+      renderHouseMute();
     });
     document.addEventListener('pp:ambient-change', function () {
       if (activeSource === 'music') render();
       renderPP();
+      renderHouseMute();
     });
 
     // Simple now-playing card: album art, song title, room title -- built
@@ -1075,6 +1097,21 @@
     // own screen when it has one; rooms with no screen fall back to
     // that room's own ambient track (window.PPAmbient) instead, so every
     // room gets a one-tap play/pause, not just TV/Cinema rooms.
+    function setHouseMuteButton(muted) {
+      houseMuteBtn.classList.toggle('is-muted', muted);
+      houseMuteBtn.setAttribute('aria-label', muted ? 'Unmute video audio' : 'Mute video audio');
+      houseMuteBtn.setAttribute('title', muted ? 'Unmute house audio' : 'Mute house audio');
+      houseMuteBtn.innerHTML = muted
+        ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6l-5 4H3z"></path><path d="M3 3l18 18"></path></svg>'
+        : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6l-5 4H3z"></path><path d="M15 9.5a4 4 0 0 1 0 5"></path><path d="M17.5 7a7.5 7.5 0 0 1 0 10"></path></svg>';
+    }
+
+    function renderHouseMute() {
+      // The corner control is a deliberate house-wide TV/Cinema setting.
+      // Do not infer it from an inactive screen that was auto-muted.
+      setHouseMuteButton(houseMuted);
+    }
+
     function renderPP() {
       var st = contextualKey && STATE_BY_KEY[contextualKey];
       if (st) {
@@ -1098,11 +1135,13 @@
     // screen's tab; every other room defaults to Music, since that's the
     // only source it actually has.
     document.addEventListener('pp:room-change', function (e) {
-      var scene = e.detail && e.detail.id && document.getElementById(e.detail.id);
+      currentRoomId = (e.detail && e.detail.id) || '';
+      var scene = currentRoomId && document.getElementById(currentRoomId);
       var screen = scene && scene.querySelector('.floor-scene__screen[data-tv]');
       contextualKey = screen ? screen.dataset.channelSet : null;
       if (!panel.classList.contains('is-open')) activeSource = contextualSource() || 'music';
       renderPP();
+      renderHouseMute();
     });
     // room-pager.js has already landed on the starting room by the time
     // this script runs (it loads first) -- that initial pp:room-change
@@ -1111,12 +1150,30 @@
     (function primeContext() {
       var pager = window.PPRoomPagers && window.PPRoomPagers[0];
       var id = pager && pager.getCurrentId();
+      currentRoomId = id || '';
       var scene = id && document.getElementById(id);
       var screen = scene && scene.querySelector('.floor-scene__screen[data-tv]');
       contextualKey = screen ? screen.dataset.channelSet : null;
     })();
     activeSource = contextualSource() || 'music';
     renderPP();
+    renderHouseMute();
+
+    houseMuteBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var muted = !houseMuted;
+      setHouseMuted(muted);
+      [STATE_BY_KEY.living, STATE_BY_KEY.cinema].forEach(function (state) {
+        if (!state || !state.iframe) return;
+        state.muted = muted;
+        state.autoMuted = false;
+        post(state.iframe, muted ? 'mute' : 'unMute');
+        if (!muted) post(state.iframe, 'setVolume', [state.volume || 50]);
+        if (state.updateMuteLabel) state.updateMuteLabel();
+        notifyState(state);
+      });
+      renderHouseMute();
+    });
 
     ppBtn.addEventListener('click', function (e) {
       e.stopPropagation();
@@ -1133,6 +1190,7 @@
       var st = currentState();
       if (panel.classList.contains('is-open') && st && e.detail && e.detail.key === st.key) render();
       if (contextualKey && e.detail && e.detail.key === contextualKey) renderPP();
+      renderHouseMute();
     });
 
     function renderGuide(st) {
@@ -1303,6 +1361,14 @@
       if (window.PPAmbient && window.PPAmbient.get()) window.PPAmbient.get().controller.pause();
       openModal(state);
       return true;
+    },
+    setHouseRoom: function (roomId) {
+      var living=STATE_BY_KEY.living, cinema=STATE_BY_KEY.cinema;
+      function silence(state){if(!state||!state.iframe)return;state.muted=true;state.autoMuted=true;post(state.iframe,'mute');post(state.iframe,'pauseVideo');if(state.updateMuteLabel)state.updateMuteLabel();notifyState(state);}
+      function activate(state){if(!state||!state.iframe)return;if(!state.iframe.getAttribute('src')&&state.loadChannel)state.loadChannel(0);state.muted=houseMuted;state.autoMuted=false;state.isPaused=false;post(state.iframe,'playVideo');post(state.iframe,houseMuted?'mute':'unMute');if(!houseMuted)post(state.iframe,'setVolume',[state.volume||100]);if(state.updateMuteLabel)state.updateMuteLabel();notifyState(state);}
+      if(roomId==='cinema'){silence(living);activate(cinema);return;}
+      if(roomId==='music-lounge'||roomId==='gym'){silence(living);silence(cinema);return;}
+      silence(cinema);activate(living);
     }
   };
 

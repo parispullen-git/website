@@ -48,7 +48,7 @@
     { id:'cinema',  lvl:'Level 26', name:'The Cinema',
       note:'Nine seats, one screen, and a rule about phones that is actually enforced.', img:'room-cinema' },
     { id:'gym', lvl:'Level 26', name:'The Gym',
-      note:"Steel and rope, one flight from the record wall, with a skyline that doesn't care if you skip a set.", img:'room-gym' }
+      note:"Steel and rope, one flight from the record wall, with a skyline that doesn't care if you skip a set.", img:'room-gym', imgVersion:'20260927-gymv7' }
   ];
 
   // Room-to-room navigation is a real 2D layout -- each room's up/down
@@ -78,6 +78,7 @@
       { key:'vault', name:'The Vault', x:'81%', y:'48%', body:"Brass wheel, black steel, set into the wall and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.", specs:[['Concealed', 'No'], ['Contents', 'UR Welcome'], ['Combination', 'One person']] },
       { key:'candle', name:'The Candle', x:'62%', y:'46%', body:'Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome &#8212; coming soon.', specs:[['Status', 'Coming soon'], ['Lit', 'Not yet']] },
       { key:'oxknit', name:'The Polo', x:'29%', y:'21%', body:"Knit and collared, dark as the room around it &#8212; the one piece on him tonight that isn't from the Closet. OXKNIT cut this one to his spec, and he wears it the same way he wears everything else: like it was always his.", specs:[['Collection', 'OXKNIT × Paris Pullen'], ['Fit', 'Tailored'], ['Worn', 'Off the rack, on him only']] },
+      { key:'suits', name:"The Gentlemen’s Guide to Suits", x:'44.5%', y:'66.5%', body:"The Gentlemen’s Guide to Suits sits on the ottoman with the SuitSupply and Indochino boxes: the working system for getting dressed with intention.", specs:[['Artifact', "The Gentlemen’s Guide to Suits"], ['Explore', 'The Blueprints and The Wardrobe']] },
     ],
     'music-lounge': [
       { key:'recordplayer', name:'The Record Player', x:'37%', y:'32%', body:'ATF to OVO &#8212; the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.', specs:[['Plays', 'One playlist, shuffled'], ['Manual skips', 'Yes']] },
@@ -85,17 +86,17 @@
     ],
     'bedroom': [
       { key:'artwork', name:'The Artwork', x:'36.5%', y:'17.5%', body:'Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.', specs:[['Acquired', 'Early, badly timed'], ['Subject', 'Unexplained'], ['Moved with him', 'Every time']] },
-      { key:'suit', name:'The Suit', x:'62%', y:'39%', body:"Black tie, laid out before he's even decided if tonight calls for it. Everything he owns is arranged by occasion &#8212; this one's already made the case for itself.", specs:[['Laid out', 'Before the invitation'], ['Occasion', 'Undecided'], ['See the rest', 'The Boutique']] },
+      { key:'suit', name:'The Style', x:'62%', y:'39%', body:"Black tie, laid out before he's even decided if tonight calls for it. Everything he owns is arranged by occasion &#8212; this one's already made the case for itself.", specs:[['Laid out', 'Before the invitation'], ['Occasion', 'Undecided'], ['See the rest', 'The Boutique']] },
     ],
     'bath': [],
     'closet': [
-      { key:'suits', name:'The Suits &amp; Tuxedos', x:'19%', y:'16.9%', body:'Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like. Two dinner jackets at the centre, black-tie and white-tie, either one pressed and ready before he has to ask.', specs:[['Ordered by', 'Occasion'], ['Navy suits', 'Twelve'], ['Tuxedos', 'Two, black-tie and white-tie']] },
+      { key:'suits', name:'The Style', x:'19%', y:'16.9%', body:'Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like. Two dinner jackets at the centre, black-tie and white-tie, either one pressed and ready before he has to ask.', specs:[['Ordered by', 'Occasion'], ['Navy suits', 'Twelve'], ['Tuxedos', 'Two, black-tie and white-tie']] },
       { key:'shoes', name:'The Shoes', x:'9%', y:'32.9%', body:'Cedar-treed, rotated, never worn two days running. The oldest pair on the shelf is fourteen years old and still the best thing in the room.', specs:[['Rotation', 'Enforced'], ['Oldest pair', '14 years'], ['Trees', 'Cedar']] },
       { key:'ties', name:'The Ties', x:'85%', y:'31.2%', body:'Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.', specs:[['Hung', 'Never rolled'], ['Worn regularly', 'Six'], ['Owned', 'Considerably more']] },
     ],
     'kitchen': [
-      { key:'hellofresh', name:'The Delivery', x:'37%', y:'44%', body:'It arrived before he did. No note, no ceremony &#8212; just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.', specs:[] },
-      { key:'jacket', name:'The Jacket', x:'35%', y:'66%', body:"Brown tweed, hung over the back of the chair the second he sat down to eat. Off duty doesn't mean off brand &#8212; the same collaboration as the one in the Music Lounge, just left somewhere it wasn't supposed to be.", specs:[['Collection', 'Fashion Nova × Paris Pullen'], ['Hung', 'No'], ['Also worn', 'The Music Lounge']] },
+      { key:'suit', name:'The Wardrobe', x:'58.3%', y:'42.1%', body:'The Wardrobe: a focused system for getting dressed with intention.', specs:[['Artifact', 'The Wardrobe']] },
+      { key:'hellofresh', name:"The Gentlemen’s CookBook", x:'58.5%', y:'63.8%', body:'The recipe card and ingredients on the island.', specs:[['Partner', 'HelloFresh']] },
     ],
     'study': [
       { key:'monogram', name:'The Monogram', x:'47%', y:'11%', body:'Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.', specs:[['Material', 'Brass'], ['Other branding here', 'None'], ['Self-aware', 'Entirely']] },
@@ -108,7 +109,7 @@
       { key:'posters', name:'The Posters', x:'10%', y:'32%', body:'All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.', specs:[['Register', 'One'], ['Claimed purpose', 'Research'], ['Actual', 'Partly']] },
     ],
     'gym': [
-      { key:'boxer', name:'Training After Dark', x:'89%', y:'33%', body:"Black leather, brass monogram, hung dead centre of the room. He doesn't skip this one, ever &#8212; the rest of the gym is maintenance, this is the part he actually shows up for.", specs:[['Material', 'Leather'], ['Skipped', 'Never'], ['Open a challenge', 'After Hours']] },
+      { key:'boxer', name:'The After Hours', x:'89%', y:'33%', body:"Black leather, brass monogram, hung dead centre of the room. He doesn't skip this one, ever &#8212; the rest of the gym is maintenance, this is the part he actually shows up for.", specs:[['Material', 'Leather'], ['Skipped', 'Never'], ['Open a challenge', 'After Hours']] },
     ],
   };
 
@@ -248,7 +249,7 @@
 
   /* Special-case artifact content -- feeds the pre-rendered drawer panels
      buildFloorSceneHTML() writes for each artifact further down. */
-  var SUITS_CTA = '<a class="cta pent__open" href="blueprint.html" style="margin-top:var(--s2)"><span>Play The Blueprint</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
+  var SUITS_CTA = '<a class="cta pent__open" href="/style-artifacts.html?embed=1" data-style-portal style="margin-top:var(--s2)"><span>The Style</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>';
   var HELLOFRESH_UNLOCK = '<div class="hf-unlock">' +
       '<p class="hf-unlock__eyebrow">Unlocked &#183; 5 Recipes Every Man Should Own</p>' +
       '<ul class="hf-recipe-list">' +
@@ -426,8 +427,8 @@
       '<div class="floor-scene__surface">' +
         '<div class="floor-scene__canvas">' +
           '<div class="floor-scene__view">' +
-            '<img src="assets/img/' + room.img + '.jpg?v=' + IMG_VER + '" ' +
-            'srcset="assets/img/' + room.img + '@sm.jpg?v=' + IMG_VER + ' 1200w, assets/img/' + room.img + '.jpg?v=' + IMG_VER + ' 2400w" ' +
+            '<img src="assets/img/' + room.img + '.jpg?v=' + (room.imgVersion || IMG_VER) + '" ' +
+            'srcset="assets/img/' + room.img + '@sm.jpg?v=' + (room.imgVersion || IMG_VER) + ' 1200w, assets/img/' + room.img + '.jpg?v=' + (room.imgVersion || IMG_VER) + ' 2400w" ' +
             'sizes="100vw" alt="' + esc(room.name) + '" loading="lazy" width="2400" height="1350">' +
             buildTVHTML(TV_SCREENS[room.id], room.id) +
             '<div class="artifacts">' + artsHTML + remoteNodeHTML(room.id) + cityLinkHTML(room.id) + '</div>' +

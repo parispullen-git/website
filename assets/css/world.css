@@ -470,6 +470,23 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .scene--full{min-height:100svh;display:grid;align-items:center}
 .scene--pad{padding-block:clamp(5rem,12vh,11rem)}
 
+/* City Guide opening: the first screen needs a composed title, concise
+   orientation and a visible portion of the map — not a wall of copy. */
+.city-guide-hero{
+  padding-top:clamp(6.5rem,13vh,9rem);
+  padding-bottom:clamp(1.25rem,2.5vh,2.25rem);
+}
+.city-guide-hero__split{
+  grid-template-columns:minmax(0,1.15fr) minmax(18rem,.85fr);
+  gap:clamp(var(--s5),4vw,var(--s8));
+  align-items:end;
+}
+.city-guide-hero .display--mega{
+  font-size:clamp(3.7rem,4.8vw,6.2rem);
+  max-width:7.5ch;
+}
+.city-guide-hero__lede{max-width:31ch}
+
 .scene__media{position:absolute;inset:0;z-index:-2;overflow:hidden}
 .scene__media img,.scene__media video{
   width:100%;height:100%;object-fit:cover;
@@ -1133,7 +1150,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
    untouched. */
 .remote-toggle{
   position:fixed;bottom:var(--s5);right:calc(var(--gutter) + 6.4rem);z-index:850;
-  display:flex;align-items:center;gap:var(--s3);
+  display:flex;align-items:center;gap:var(--s3);height:2.9rem;box-sizing:border-box;
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;
   color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
   border-radius:999px;padding:.6em 1em;cursor:pointer;
@@ -1142,6 +1159,19 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 }
 .remote-toggle:hover{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
 .remote-toggle[hidden]{display:none}
+
+/* The persistent sound control sits immediately to the right of Remote. */
+.house-mute-toggle{
+  position:fixed;bottom:var(--s5);right:var(--gutter);z-index:850;
+  display:grid;place-items:center;width:2.9rem;height:2.9rem;padding:0;cursor:pointer;
+  color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
+  border-radius:50%;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  transition:color var(--d-fast),border-color var(--d-fast),background var(--d-fast);
+}
+.house-mute-toggle svg{width:1.05rem;height:1.05rem;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.house-mute-toggle:hover{color:var(--obsidian);background:var(--brass);border-color:var(--brass)}
+.house-mute-toggle.is-muted{color:var(--brass)}
+.house-mute-toggle[hidden]{display:none}
 
 /* ---------- 21. SCROLL REVEAL ---------- */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity var(--d-slow) var(--ease-out),transform var(--d-slow) var(--ease-out)}
@@ -1494,7 +1524,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
    Pause pills) at every breakpoint. */
 .nav-panel{position:fixed;bottom:var(--s5);left:var(--gutter);z-index:45}
 .nav-panel__tab{
-  display:flex;align-items:center;gap:.5em;
+  display:flex;align-items:center;gap:.5em;height:2.9rem;box-sizing:border-box;
   font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;
   color:var(--bone);background:rgba(10,10,11,.6);border:1px solid rgba(201,169,97,.32);
   border-radius:999px;padding:.6em 1em;cursor:pointer;
@@ -2649,7 +2679,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
    26. THE CITYSCAPE — Charlotte as an interactive map surface
    ============================================================ */
 .cityscape{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  background:var(--obsidian);padding-top:clamp(2rem,4.4vh,3.2rem);padding-bottom:clamp(5rem,11vh,8rem);overflow:hidden}
+  background:var(--obsidian);padding-top:clamp(1rem,2.1vh,1.5rem);padding-bottom:clamp(5rem,11vh,8rem);overflow:hidden}
 /* The section's own content (intro text + map + info panel) usually runs
    taller than one screen, so it grows past 100svh -- position:fixed here
    (rather than .room-pager__nav's own position:absolute, which would
@@ -2667,6 +2697,7 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 .cityscape .nav-panel.is-in-view{opacity:1;pointer-events:auto}
 .cityscape__head{position:relative;z-index:4;max-width:var(--maxw);margin-inline:auto;
   padding-inline:var(--gutter);margin-bottom:calc(var(--s4) * .4)}
+.cityscape__lede{max-width:48ch}
 
 /* full-bleed surface; narrow screens pan it sideways instead of squashing it */
 .cityscape__surface{position:relative;width:100%;overflow-x:auto;overflow-y:hidden;
@@ -3076,6 +3107,17 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   .pullquote,.pullquote--wide{max-width:none}
   .statement{max-width:none}
 
+  /* City Guide: stack cleanly on a phone and keep the map in the first
+     viewport. The title remains editorial without colliding with its deck. */
+  .city-guide-hero{padding-top:clamp(5.8rem,12vh,7rem);padding-bottom:var(--s4)}
+  .city-guide-hero__split{grid-template-columns:1fr;gap:var(--s4);align-items:start}
+  .city-guide-hero .display--mega{font-size:clamp(3.7rem,16.5vw,5.6rem);line-height:.9}
+  .city-guide-hero__lede{max-width:34ch}
+  .cityscape{min-height:auto;padding-top:var(--s5)}
+  .cityscape__head{margin-bottom:var(--s3)}
+  .cityscape__head .display--h2{margin-block:var(--s2) !important}
+  .cityscape__lede{max-width:35ch}
+
   /* Loadout rows stack their function label */
   .loadout__row{grid-template-columns:auto 1fr;row-gap:var(--s2)}
   .loadout__fn{grid-column:2;justify-self:start}
@@ -3085,8 +3127,10 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
 
   /* Play/Pause/Remote/Guide Info controls out of the content's way */
   .playpause-toggle{bottom:var(--s4);right:var(--s4)}
-  .remote-toggle{bottom:var(--s4);right:calc(var(--s4) + 5.2rem)}
+  .house-mute-toggle{bottom:var(--s4);right:var(--s4);width:2.9rem;height:2.9rem}
+  .remote-toggle{bottom:var(--s4);right:calc(var(--s4) + 5.2rem);height:2.9rem}
   .nav-panel{bottom:var(--s4);left:var(--s4)}
+  .nav-panel__tab{height:2.9rem}
   .guide-info-toggle{bottom:var(--s4);right:var(--s4)}
   /* The centered floor-down arrow shares this same bottom row on a narrow
      viewport -- the Floors/Remote/Pause pills above sit exactly wide
@@ -3156,3 +3200,6 @@ a:hover > .foxx{--foxx-color:var(--champagne)}
   .grain{animation:none}
   .scene__media img,.scene__media video{transform:none}
 }
+
+/* Audited City Guide photography */
+.vcard__media > img,.vquick__media > img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
