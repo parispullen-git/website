@@ -56,7 +56,7 @@ jobs:
           sed -i 's#assets/img/room-living.jpg?v=20260924v7k#assets/img/room-living-v7.jpg?v=20260924v7k#g' house.html
           sed -i 's#assets/img/room-closet@sm.jpg?v=20260924v7k#assets/img/room-closet-v7@sm.jpg?v=20260924v7k#g' house.html
           sed -i 's#assets/img/room-closet.jpg?v=20260924v7k#assets/img/room-closet-v7.jpg?v=20260924v7k#g' house.html
-          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260928-artifact-tags#g' index.html
+          sed -i -E 's#assets/js/penthouse\.js\?v=[^" ]+#assets/js/penthouse.js?v=20260928-artifact-tags2#g' index.html
 
       - name: Verify Penthouse v7 desktop and mobile output
         run: python3 scripts/verify_penthouse_v7.py
