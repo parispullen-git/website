@@ -250,6 +250,7 @@
           <button type="button" class="dashnav__item" data-tab="invoices">Invoices</button>
           <button type="button" class="dashnav__item" data-tab="proposals">Proposals</button>
           <button type="button" class="dashnav__item" data-tab="inquiries">Inquiries</button>
+          <button type="button" class="dashnav__item" data-tab="guide-signups">Guide Signups</button>
           <button type="button" class="dashnav__item" data-tab="clients">Clients</button>
         </div>
       </div>
@@ -377,6 +378,13 @@
       <p class="body">Boutique inquiry submissions.</p>
       <p class="dash__loading" id="inquiries-loading">Loading&#8230;</p>
       <div id="inquiries-list"></div>
+    </div>
+
+    <!-- GUIDE SIGNUPS -->
+    <div class="dash__panel" id="panel-guide-signups">
+      <p class="body">Blueprint Book 01 guide downloads — names and emails from the site funnel.</p>
+      <p class="dash__loading" id="guide-signups-loading">Loading&#8230;</p>
+      <div id="guide-signups-list"></div>
     </div>
 
     <!-- CLIENTS -->
@@ -1078,6 +1086,7 @@
     loadInvoices();
     loadProposals();
     loadInquiries();
+    loadGuideSignups();
     loadClients();
     loadCurations();
     curWardrobeReady().then(function(){ curRenderCatFilter(); curRenderResults(''); });
@@ -1348,6 +1357,31 @@
         }).join('');
       })
       .catch(function(){ loading.textContent = 'Could not load inquiries.'; });
+  }
+
+  // ---------- GUIDE SIGNUPS ----------
+  function loadGuideSignups(){
+    var loading = document.getElementById('guide-signups-loading');
+    var list = document.getElementById('guide-signups-list');
+    loading.hidden = false; list.innerHTML = '';
+    fetch('/api/guide-signups', {headers: authHeaders()})
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        loading.hidden = true;
+        var signups = data.records || [];
+        if (!signups.length) { list.innerHTML = '<p class="dash__empty">No guide signups yet.</p>'; return; }
+        list.innerHTML = signups.map(function(s){
+          var name = ((s.firstName || '') + ' ' + (s.lastName || '')).trim() || 'Unnamed';
+          return '<div class="card">' +
+            '<div class="card__top">' +
+              '<span class="card__title">' + esc(name) + '</span>' +
+              '<span class="card__meta">' + fmtDate(s.createdAt) + '</span>' +
+            '</div>' +
+            '<p class="card__meta">' + esc(s.email || '') + (s.phone ? ' &#183; ' + esc(s.phone) : '') + '</p>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ loading.textContent = 'Could not load guide signups.'; });
   }
 
   // ---------- CLIENTS ----------
