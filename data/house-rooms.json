@@ -106,20 +106,25 @@
     "note": "Two storeys of it, and somebody was sitting here twenty minutes ago. The glass is still cold.",
     "arts": [
       {
-        "id": "journal",
-        "name": "The Journal",
-        "x": "54%",
-        "y": "48%",
-        "desc": "Left face-down and open, which he knows ruins a spine. Everything written in it eventually turns up here, several drafts later — dispatches, not diary entries.",
+        "id": "artwork",
+        "name": "The Artwork",
+        "x": "75.0%",
+        "y": "10.0%",
+        "desc": "The framed piece overlooking the room from the upper gallery.",
         "specs": [
           [
-            "Position",
-            "Face-down"
-          ],
-          [
-            "Draft or final",
-            "Several drafts later"
-          ],
+            "Collection",
+            "Paris Pullen"
+          ]
+        ]
+      },
+      {
+        "id": "journal",
+        "name": "The Journal",
+        "x": "79.5%",
+        "y": "51.5%",
+        "desc": "The journal resting on the right-side console.",
+        "specs": [
           [
             "Read it",
             "The Journal"
@@ -129,59 +134,13 @@
       {
         "id": "vault",
         "name": "The Vault",
-        "x": "81%",
-        "y": "48%",
-        "desc": "Brass wheel, black steel, set into the wall and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.",
+        "x": "91.5%",
+        "y": "68.5%",
+        "desc": "Brass wheel, black steel, set into the wall and deliberately visible.",
         "specs": [
-          [
-            "Concealed",
-            "No"
-          ],
           [
             "Contents",
             "UR Welcome"
-          ],
-          [
-            "Combination",
-            "One person"
-          ]
-        ]
-      },
-      {
-        "id": "candle",
-        "name": "The Candle",
-        "x": "62%",
-        "y": "46%",
-        "desc": "Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome — coming soon.",
-        "specs": [
-          [
-            "Status",
-            "Coming soon"
-          ],
-          [
-            "Lit",
-            "Not yet"
-          ]
-        ]
-      },
-      {
-        "id": "oxknit",
-        "name": "The Polo",
-        "x": "29%",
-        "y": "21%",
-        "desc": "Knit and collared, dark as the room around it — the one piece on him tonight that isn't from the Closet. OXKNIT cut this one to his spec, and he wears it the same way he wears everything else: like it was always his.",
-        "specs": [
-          [
-            "Collection",
-            "OXKNIT × Paris Pullen"
-          ],
-          [
-            "Fit",
-            "Tailored"
-          ],
-          [
-            "Worn",
-            "Off the rack, on him only"
           ]
         ]
       },
@@ -190,7 +149,7 @@
         "name": "The Style",
         "x": "44.5%",
         "y": "66.5%",
-        "desc": "The Style sits on the ottoman with the SuitSupply and Indochino boxes: the working system for getting dressed with intention.",
+        "desc": "The Style sits on the ottoman with the SuitSupply and Indochino boxes.",
         "specs": [
           [
             "Artifact",
@@ -199,6 +158,19 @@
           [
             "Explore",
             "The Blueprints and The Wardrobe"
+          ]
+        ]
+      },
+      {
+        "id": "cocktails",
+        "name": "The Gentlemen’s Cocktail Menu",
+        "x": "9.0%",
+        "y": "87.5%",
+        "desc": "The house cocktail menu placed beside the drink table.",
+        "specs": [
+          [
+            "House classics",
+            "Eleven"
           ]
         ]
       }
@@ -217,42 +189,52 @@
       {
         "id": "artwork",
         "name": "The Artwork",
-        "x": "36.5%",
-        "y": "17.5%",
-        "desc": "Bought a long time before he could afford it, and hung on every wall he has had since. A man on a road at dusk, walking away from whatever the painter could not be bothered to explain. It hangs behind the headboard, so he only sees it when he turns around.",
+        "x": "37.2%",
+        "y": "21.9%",
+        "desc": "The portrait beside the fireplace anchors the room’s personal collection.",
         "specs": [
           [
-            "Acquired",
-            "Early, badly timed"
-          ],
-          [
-            "Subject",
-            "Unexplained"
-          ],
-          [
-            "Moved with him",
-            "Every time"
+            "Collection",
+            "Paris Pullen"
           ]
         ]
       },
       {
         "id": "suit",
-        "name": "The Suit",
-        "x": "62%",
-        "y": "39%",
-        "desc": "Black tie, laid out before he's even decided if tonight calls for it. Everything he owns is arranged by occasion — this one's already made the case for itself.",
+        "name": "The Style",
+        "x": "64.5%",
+        "y": "47.1%",
+        "desc": "The look laid across the bed opens The Style.",
         "specs": [
           [
-            "Laid out",
-            "Before the invitation"
-          ],
+            "Artifact",
+            "The Style"
+          ]
+        ]
+      },
+      {
+        "id": "cocktails",
+        "name": "The Gentlemen’s Cocktail Guide",
+        "x": "16.2%",
+        "y": "57.3%",
+        "desc": "The house cocktail guide sits beside the lounge seating.",
+        "specs": [
           [
-            "Occasion",
-            "Undecided"
-          ],
+            "House classics",
+            "Eleven"
+          ]
+        ]
+      },
+      {
+        "id": "journal",
+        "name": "The Journal",
+        "x": "87.2%",
+        "y": "86.5%",
+        "desc": "The open journal on the writing desk.",
+        "specs": [
           [
-            "See the rest",
-            "The Boutique"
+            "Read it",
+            "The Journal"
           ]
         ]
       }
@@ -281,64 +263,40 @@
     "arts": [
       {
         "id": "suits",
-        "name": "The Suits & Tuxedos",
-        "x": "19%",
-        "y": "16.9%",
-        "desc": "Arranged by occasion rather than colour, so getting dressed is a question of where you are going rather than what you feel like. Two dinner jackets at the centre, black-tie and white-tie, either one pressed and ready before he has to ask.",
+        "name": "The Style",
+        "x": "14.9%",
+        "y": "38.5%",
+        "desc": "The wardrobe opens The Style: foundational tailoring, combinations, and the decisions behind them.",
         "specs": [
           [
-            "Ordered by",
-            "Occasion"
-          ],
-          [
-            "Navy suits",
-            "Twelve"
-          ],
-          [
-            "Tuxedos",
-            "Two, black-tie and white-tie"
+            "Artifact",
+            "The Style"
           ]
         ]
       },
       {
-        "id": "shoes",
-        "name": "The Shoes",
-        "x": "9%",
-        "y": "32.9%",
-        "desc": "Cedar-treed, rotated, never worn two days running. The oldest pair on the shelf is fourteen years old and still the best thing in the room.",
+        "id": "boxer",
+        "name": "The After Hours Boxing Game",
+        "x": "46.2%",
+        "y": "27.6%",
+        "desc": "The gloves on the center shelving open After Hours.",
         "specs": [
           [
-            "Rotation",
-            "Enforced"
-          ],
-          [
-            "Oldest pair",
-            "14 years"
-          ],
-          [
-            "Trees",
-            "Cedar"
+            "Experience",
+            "After Hours"
           ]
         ]
       },
       {
-        "id": "ties",
-        "name": "The Ties",
-        "x": "85%",
-        "y": "31.2%",
-        "desc": "Hung rather than rolled. He owns more than he wears and knows it, and has stopped pretending that will change.",
+        "id": "journal",
+        "name": "The Journal",
+        "x": "59.2%",
+        "y": "15.6%",
+        "desc": "The journal sits within the dressing room.",
         "specs": [
           [
-            "Hung",
-            "Never rolled"
-          ],
-          [
-            "Worn regularly",
-            "Six"
-          ],
-          [
-            "Owned",
-            "Considerably more"
+            "Read it",
+            "The Journal"
           ]
         ]
       }
@@ -355,31 +313,54 @@
     "note": "Black marble, brass, and one box that showed up on the counter this morning.",
     "arts": [
       {
-        "id": "hellofresh",
-        "name": "The Delivery",
-        "x": "37%",
-        "y": "44%",
-        "desc": "It arrived before he did. No note, no ceremony — just the box, already unpacked onto the marble like it had always been there. He does not cook often. He cooks well when he does, and never asks how the box knew that.",
-        "specs": []
-      },
-      {
-        "id": "jacket",
-        "name": "The Jacket",
-        "x": "35%",
-        "y": "66%",
-        "desc": "Brown tweed, hung over the back of the chair the second he sat down to eat. Off duty doesn't mean off brand — the same collaboration as the one in the Music Lounge, just left somewhere it wasn't supposed to be.",
+        "id": "artwork",
+        "name": "The Artwork",
+        "x": "23.1%",
+        "y": "10.5%",
+        "desc": "The framed portrait beside the fireplace and skyline.",
         "specs": [
           [
             "Collection",
-            "Fashion Nova × Paris Pullen"
-          ],
+            "Paris Pullen"
+          ]
+        ]
+      },
+      {
+        "id": "suit",
+        "name": "The Style",
+        "x": "58.3%",
+        "y": "42.1%",
+        "desc": "The Style: a focused system for getting dressed with intention.",
+        "specs": [
           [
-            "Hung",
-            "No"
-          ],
+            "Artifact",
+            "The Style"
+          ]
+        ]
+      },
+      {
+        "id": "hellofresh",
+        "name": "The Gentleman’s Cookbook",
+        "x": "58.5%",
+        "y": "63.8%",
+        "desc": "The recipe card and ingredients on the island.",
+        "specs": [
           [
-            "Also worn",
-            "The Music Lounge"
+            "Partner",
+            "HelloFresh"
+          ]
+        ]
+      },
+      {
+        "id": "journal",
+        "name": "The Journal",
+        "x": "80.0%",
+        "y": "87.0%",
+        "desc": "The journal at the dining place setting.",
+        "specs": [
+          [
+            "Read it",
+            "The Journal"
           ]
         ]
       }
@@ -396,107 +377,41 @@
     "note": "The room where the answer is usually no, and where it gets said politely.",
     "arts": [
       {
-        "id": "monogram",
-        "name": "The Monogram",
-        "x": "47%",
-        "y": "11%",
-        "desc": "Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.",
+        "id": "artwork",
+        "name": "The Artwork",
+        "x": "40.8%",
+        "y": "19.5%",
+        "desc": "The central artwork wall — the visual reference point behind the desk.",
         "specs": [
           [
-            "Material",
-            "Brass"
-          ],
-          [
-            "Other branding here",
-            "None"
-          ],
-          [
-            "Self-aware",
-            "Entirely"
+            "Collection",
+            "Paris Pullen"
           ]
         ]
       },
       {
-        "id": "pullenlaws",
-        "name": "The Pullen Laws",
-        "x": "65%",
-        "y": "13%",
-        "desc": "Fourteen of them, on the left-hand shelf, written down over eleven years because a rule you have to remember is a rule you will eventually forget. The first one is about arriving early. The fourteenth has never been read aloud.",
+        "id": "cocktails",
+        "name": "The Gentlemen’s Cocktail Menu",
+        "x": "37.7%",
+        "y": "46.5%",
+        "desc": "The house cocktail menu set on the left side of the desk.",
         "specs": [
           [
-            "Count",
-            "Fourteen"
-          ],
-          [
-            "Written over",
-            "Eleven years"
-          ],
-          [
-            "Read aloud",
-            "Thirteen of them"
+            "House classics",
+            "Eleven"
           ]
         ]
       },
       {
         "id": "journal",
         "name": "The Journal",
-        "x": "47%",
-        "y": "37%",
-        "desc": "This week's pages, face-up on the blotter for once, marked in pencil rather than ink so that nothing is decided yet. What survives the pencil goes out as a dispatch. Most of it does not survive the pencil.",
+        "x": "50.0%",
+        "y": "43.4%",
+        "desc": "The journal placed on the right side of the desk within reach.",
         "specs": [
           [
-            "State",
-            "Draft"
-          ],
-          [
-            "Marked in",
-            "Pencil"
-          ],
-          [
-            "Survival rate",
-            "Low"
-          ]
-        ]
-      },
-      {
-        "id": "cocktails",
-        "name": "The Cocktail Guide",
-        "x": "23%",
-        "y": "10%",
-        "desc": "Six drinks, written on a card and kept behind the bottles, because a man looking up an Old Fashioned in front of guests has already lost the evening. Six is the entire list. There has never been a seventh.",
-        "specs": [
-          [
-            "Drinks",
-            "Six"
-          ],
-          [
-            "Kept",
-            "Behind the bottles"
-          ],
-          [
-            "Consulted in company",
-            "Never"
-          ]
-        ]
-      },
-      {
-        "id": "oxknit-study",
-        "name": "The Polo",
-        "x": "49%",
-        "y": "31%",
-        "desc": "Dark green cable knit, sleeves pushed to the forearm — the version of him that answers email after the desk lamp is the only light left on. OXKNIT again, the same collaboration as the one on the stairs downstairs, cut for a colder register.",
-        "specs": [
-          [
-            "Collection",
-            "OXKNIT × Paris Pullen"
-          ],
-          [
-            "Knit",
-            "Cable"
-          ],
-          [
-            "Also worn",
-            "The Living Room"
+            "Read it",
+            "The Journal"
           ]
         ]
       }
@@ -1664,11 +1579,24 @@
     "note": "Vinyl floor to ceiling on one wall, a turntable that never gets left idle, and a couch built for people who came to listen, not to talk over it.",
     "arts": [
       {
+        "id": "artwork",
+        "name": "The Artwork",
+        "x": "48.4%",
+        "y": "15.0%",
+        "desc": "The artwork wall above the record console.",
+        "specs": [
+          [
+            "Collection",
+            "Paris Pullen"
+          ]
+        ]
+      },
+      {
         "id": "recordplayer",
         "name": "The Record Player",
-        "x": "37%",
-        "y": "32%",
-        "desc": "ATF to OVO — the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.",
+        "x": "38.6%",
+        "y": "34.1%",
+        "desc": "ATF to OVO — the complete list, queued on shuffle and left running.",
         "specs": [
           [
             "Plays",
@@ -1681,23 +1609,28 @@
         ]
       },
       {
-        "id": "polo",
-        "name": "The Polo",
-        "x": "11%",
-        "y": "65.5%",
-        "desc": "Cream knit, chocolate collar, worn open at the throat now that the tie's had its day. Off duty doesn't mean off brand.",
+        "id": "journal",
+        "name": "The Journal",
+        "x": "39.4%",
+        "y": "59.9%",
+        "desc": "The journal rests on the coffee table beside the books and candlelight.",
         "specs": [
           [
-            "Collar",
-            "Open"
-          ],
+            "Read it",
+            "The Journal"
+          ]
+        ]
+      },
+      {
+        "id": "cocktails",
+        "name": "The Gentlemen’s Cocktail Guide",
+        "x": "72.1%",
+        "y": "70.3%",
+        "desc": "The house cocktail guide sits within reach of the sofa.",
+        "specs": [
           [
-            "Collection",
-            "Fashion Nova × Paris Pullen"
-          ],
-          [
-            "Also worn",
-            "The Kitchen"
+            "House classics",
+            "Eleven"
           ]
         ]
       }
