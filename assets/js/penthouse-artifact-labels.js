@@ -38,4 +38,7 @@
     });
   });
   observer.observe(document.documentElement, { childList: true, subtree: true });
+  // A legacy room enhancer can write labels after initial render; keep this
+  // inexpensive invariant active while the Penthouse is open.
+  setInterval(apply, 250);
 }());
