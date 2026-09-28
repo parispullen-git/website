@@ -227,7 +227,11 @@
       <p class="lede">Thirty complete navy-suit combinations, the morning system behind them, the foundation of the whole Blueprint. Yours free.</p>
     </header>
 
-    
+        <aside class="jread-listen reveal">
+      <p>Listen to this entry &#8212; Paris and Foxx talk through it</p>
+      <audio controls preload="metadata" src="assets/audio/journal-blueprint-book-01-navy-suit.mp3"></audio>
+    </aside>
+
 
     <div class="jread-hero jread-hero--cover"><img src="assets/img/blueprint-book-01-navy@sm.webp" srcset="assets/img/blueprint-book-01-navy@sm.webp 1200w, assets/img/blueprint-book-01-navy.webp 2400w" sizes="100vw" alt="The Blueprint Book 01: The Navy Suit cover" loading="eager"></div>
 
@@ -295,7 +299,7 @@ if(form){form.addEventListener('submit',async function(e){
 e.preventDefault();
 var f=e.target,st=document.getElementById('formStatus');
 st.textContent='Sending your guide…';
-try{await fetch('/api/digital-leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:f.firstName.value,lastName:f.lastName.value,email:f.email.value,phone:f.phone.value,company:f.company.value,product:'The Blueprint Book 001 \u2014 The Navy Suit',source:'journal-blueprint-book-01-navy-suit.html'})});}catch(_){}
+try{await fetch('/api/digital-leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:f.firstName.value,lastName:f.lastName.value,email:f.email.value,phone:f.phone.value,company:f.company.value,product:'The Blueprint Book 001 — The Navy Suit',source:'journal-blueprint-book-01-navy-suit.html'})});}catch(_){}
 document.getElementById('pdfLink').hidden=false;
 st.textContent='Your guide is ready. Download it below.';
 });}
