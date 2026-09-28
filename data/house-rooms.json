@@ -184,6 +184,23 @@
             "Off the rack, on him only"
           ]
         ]
+      },
+      {
+        "id": "suit",
+        "name": "The Style",
+        "x": "18%",
+        "y": "47%",
+        "desc": "The SuitSupply and Indochino pieces are kept together here: a working wardrobe, ready when the room calls for more than an entrance.",
+        "specs": [
+          [
+            "Artifact",
+            "The Style"
+          ],
+          [
+            "Explore",
+            "The Blueprints and The Wardrobe"
+          ]
+        ]
       }
     ]
   },
