@@ -1,0 +1,53 @@
+# Daily journal import: pulls queued entries from the "Journal Queue" Google
+# Sheet (CSV export), merges them into data/journal.json, rebuilds the
+# journal pages, and pushes -- only when there is something new.
+#
+# Runs 6:30 AM ET daily and on manual dispatch. The merge script is
+# idempotent: it dedupes on slug against data/journal.json, so re-runs and
+# overlapping schedules never double-publish.
+name: Journal daily import
+
+on:
+  schedule:
+    - cron: "30 10 * * *" # 6:30 AM America/New_York (EDT)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Merge queued sheet entries
+        run: python3 scripts/journal_from_sheet.py
+
+      - name: Rebuild journal pages
+        run: |
+          if git diff --quiet -- data/journal.json; then
+            echo "journal.json unchanged -- skipping build"
+          else
+            python3 build_journal.py
+          fi
+
+      - name: Commit and push
+        run: |
+          git config user.name "Agent Foxx"
+          git config user.email "foxx@parispullen.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+          else
+            git commit -m "Journal: daily sheet import"
+            git push
+          fi
