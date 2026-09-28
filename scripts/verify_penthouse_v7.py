@@ -110,7 +110,7 @@ for needle in [
 ]:
     assert needle in js, f'Runtime missing {needle}'
 assert "(room.id === 'gym' || room.id === 'closet') && a.key === 'boxer'" in js, 'Runtime Closet After Hours portal wiring missing'
-assert 'penthouse.js?v=20260928-artifact-tags' in index
+assert 'penthouse.js?v=20260928-artifact-tags2' in index
 assert '.floor-scene__view img{' in css and 'height:100%;width:auto' in css
 
 print('Penthouse v7 desktop/mobile verification passed')
