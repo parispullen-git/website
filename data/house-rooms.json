@@ -146,7 +146,7 @@
       },
       {
         "id": "suits",
-        "name": "The Style",
+        "name": "The Gentlemen's Guide to Suits",
         "x": "44.5%",
         "y": "66.5%",
         "desc": "The Style sits on the ottoman with the SuitSupply and Indochino boxes.",
@@ -327,7 +327,7 @@
       },
       {
         "id": "suit",
-        "name": "The Style",
+        "name": "The Wardrobe",
         "x": "58.3%",
         "y": "42.1%",
         "desc": "The Style: a focused system for getting dressed with intention.",
@@ -340,7 +340,7 @@
       },
       {
         "id": "hellofresh",
-        "name": "The Gentleman’s Cookbook",
+        "name": "The Gentlemen's CookBook",
         "x": "58.5%",
         "y": "63.8%",
         "desc": "The recipe card and ingredients on the island.",
