@@ -33,7 +33,15 @@ from pathlib import Path
 
 _index_src = open("index.html", encoding="utf-8").read()
 SITE_HEADER = re.search(r'<header class="worldnav">.*?</header>', _index_src, re.S).group(0)
-SITE_MENU = re.search(r'<nav class="menu".*?</nav>', _index_src, re.S).group(0)
+# The Journal uses the same “Choose your way in” entry experience as the
+# homepage.  Keep it in the generator, not only journal.html, so deploys
+# cannot recreate the retired full-site menu.
+_entry_start = _index_src.index('<section class="entry-screen entry-screen--main" id="gate"')
+_entry_end = _index_src.index('\n\n<div class="grain"', _entry_start)
+JOURNAL_ENTRY = _index_src[_entry_start:_entry_end]
+JOURNAL_ENTRY = JOURNAL_ENTRY.replace('id="gate"', 'id="journal-entry-menu"', 1)
+JOURNAL_ENTRY = JOURNAL_ENTRY.replace('data-entry-screen aria-label="Paris Pullen entry screen"', 'data-entry-screen hidden aria-label="Paris Pullen navigation"', 1)
+JOURNAL_ENTRY = JOURNAL_ENTRY.replace('href="#penthouse"', 'href="index.html#penthouse"', 1)
 SITE_FOOT = re.search(r'<footer class="foot foot--film">.*?</footer>', _index_src, re.S).group(0)
 
 def esc(t):
@@ -615,13 +623,13 @@ def build_journal_index():
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css">
+<link rel="stylesheet" href="assets/css/world.css">\n<link rel="stylesheet" href="assets/css/entry-screen.css?v=5">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
 {SITE_HEADER}
-{SITE_MENU}
+{JOURNAL_ENTRY}
 <main>
 {render_jhero(hero_posts)}
 <section class="scene scene--pad" style="padding-top:clamp(3rem,7vh,5rem)">
@@ -725,14 +733,14 @@ def build_article_pages():
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/world.css">
+<link rel="stylesheet" href="assets/css/world.css">\n<link rel="stylesheet" href="assets/css/entry-screen.css?v=5">
 {ARTICLE_CSS}
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
 {SITE_HEADER}
-{SITE_MENU}
+{JOURNAL_ENTRY}
 <main>
 <section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,14rem)">
   <div class="wrap wrap--narrow">
