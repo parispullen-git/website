@@ -29,7 +29,10 @@ Operator Console) -- then re-run:  python3 build_journal.py
 """
 import json
 import re
+import datetime
+import email.utils
 from pathlib import Path
+from xml.sax.saxutils import escape as xesc
 
 _index_src = open("index.html", encoding="utf-8").read()
 SITE_HEADER = re.search(r'<header class="worldnav">.*?</header>', _index_src, re.S).group(0)
@@ -748,6 +751,34 @@ def build_article_pages():
         next_post = next_published_after(i)
         has_ig_embed = any(b.startswith("PQA_IG::") for b in post["body"])
         ig_script = '\n<script async src="https://www.instagram.com/embed.js"></script>' if has_ig_embed else ""
+        hero_url = f"https://parispullen.com/assets/img/{post['hero']['img']}.{post['hero']['ext']}"
+        # JSON-LD Article schema -- the machine-readable layer Google prefers
+        # for article content (headline, art, author, publish date).
+        ld = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": post["title"],
+            "image": [hero_url],
+            "author": {"@type": "Person", "name": "Paris Pullen"},
+            "publisher": {
+                "@type": "Organization",
+                "name": "Paris Pullen",
+                "logo": {"@type": "ImageObject",
+                         "url": "https://parispullen.com/assets/img/PP-Favcon.png"},
+            },
+        }
+        if post.get("date"):
+            ld["datePublished"] = post["date"]
+        ld_block = ('<script type="application/ld+json">\n'
+                    + json.dumps(ld, ensure_ascii=False)
+                    + '\n</script>')
+        # Visible dateline for the byline, e.g. "September 28, 2026".
+        dateline = ""
+        if post.get("date"):
+            try:
+                dateline = datetime.datetime.strptime(post["date"], "%Y-%m-%d").strftime("%B %d, %Y") + " &#183; "
+            except ValueError:
+                pass
         html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -761,11 +792,12 @@ def build_article_pages():
 <meta property="og:description" content="{esc(post.get('meta_description', post['stand']))}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://parispullen.com/{article_url(post)}">
-<meta property="og:image" content="https://parispullen.com/assets/img/{post['hero']['img']}.{post['hero']['ext']}">
+<meta property="og:image" content="{hero_url}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(post['title'])}">
 <meta name="twitter:description" content="{esc(post.get('meta_description', post['stand']))}">
-<meta name="twitter:image" content="https://parispullen.com/assets/img/{post['hero']['img']}.{post['hero']['ext']}">
+<meta name="twitter:image" content="{hero_url}">
+{ld_block}
 <meta name="theme-color" content="#0A0A0B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -782,7 +814,7 @@ def build_article_pages():
 <section class="scene scene--pad" style="padding-top:clamp(8rem,20vh,14rem)">
   <div class="wrap wrap--narrow">
     <header class="stack stack--tight reveal">
-      <p class="eyebrow jread-byline">By <b>Paris Pullen</b> &#183; {post['catlabel']} &#183; {post['read']}</p>
+      <p class="eyebrow jread-byline">By <b>Paris Pullen</b> &#183; {dateline}{post['catlabel']} &#183; {post['read']}</p>
       <h1 class="display display--h1">{esc(post['title'])}</h1>
       <p class="lede">{post['stand']}</p>
     </header>
@@ -823,6 +855,115 @@ def build_article_pages():
             removed += 1
     print(f"wrote {n} article pages" + (f", removed {removed} stale one(s)" if removed else ""))
 
+def build_feed():
+    # RSS 2.0 feed for The Journal -- regenerated on every build so new
+    # posts (and their hero art, via enclosure + media:content) flow to
+    # feed readers and syndication automatically. Written to both feed.xml
+    # and rss.xml so either conventional URL resolves to the real feed.
+    root = Path(__file__).resolve().parent
+    mime = {"webp": "image/webp", "jpg": "image/jpeg",
+            "jpeg": "image/jpeg", "png": "image/png"}
+    items = []
+    for post in PUBLISHED_POSTS:
+        hero = post.get("hero") or {}
+        img, ext = hero.get("img"), (hero.get("ext") or "").lower()
+        hero_url = (f"https://parispullen.com/assets/img/{img}.{ext}"
+                    if img and ext else "")
+        length = 0
+        if img and ext:
+            local = root / "assets" / "img" / f"{img}.{ext}"
+            if local.exists():
+                length = local.stat().st_size
+        pubdate = ""
+        sortkey = "0000-00-00"
+        if post.get("date"):
+            sortkey = post["date"]
+            try:
+                dt = datetime.datetime.strptime(post["date"], "%Y-%m-%d").replace(
+                    hour=12, tzinfo=datetime.timezone(datetime.timedelta(hours=-4)))
+                pubdate = email.utils.format_datetime(dt)
+            except ValueError:
+                pass
+        enclosure = ""
+        if hero_url:
+            enclosure = (
+                f'\n    <enclosure url="{hero_url}" '
+                f'type="{mime.get(ext, "image/jpeg")}" length="{length}" />'
+                f'\n    <media:content url="{hero_url}" medium="image" '
+                f'type="{mime.get(ext, "image/jpeg")}" />')
+        items.append((sortkey, f"""  <item>
+    <title>{xesc(post['title'])}</title>
+    <link>https://parispullen.com/{article_url(post)}</link>
+    <guid isPermaLink="true">https://parispullen.com/{article_url(post)}</guid>"""
+    + (f"\n    <pubDate>{pubdate}</pubDate>" if pubdate else "") + f"""
+    <description>{xesc(post.get('meta_description', post['stand']))}</description>{enclosure}
+  </item>"""))
+    items.sort(key=lambda t: t[0], reverse=True)
+    body = "\n".join(t[1] for t in items)
+    feed = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+  <title>The Journal &#8212; Paris Pullen</title>
+  <link>https://parispullen.com/journal.html</link>
+  <description>Style, strategy, culture and the examined life. The Journal of Paris Pullen.</description>
+  <language>en-us</language>
+  <lastBuildDate>{email.utils.format_datetime(datetime.datetime.now(datetime.timezone.utc))}</lastBuildDate>
+{body}
+</channel>
+</rss>
+"""
+    for name in ("feed.xml", "rss.xml"):
+        (root / name).write_text(feed, encoding="utf-8")
+    print(f"wrote feed.xml + rss.xml ({len(items)} items)")
+
+
+def update_sitemap():
+    # Keeps sitemap.xml's journal entries honest on every build: adds any
+    # missing article URLs and injects <image:image> blocks so Google learns
+    # each article's hero art directly. Idempotent -- strips old image
+    # blocks before re-injecting from current journal data.
+    root = Path(__file__).resolve().parent
+    sp = root / "sitemap.xml"
+    xml = sp.read_text(encoding="utf-8")
+    if "xmlns:image=" not in xml:
+        xml = xml.replace(
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+            '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
+            1)
+    by_slug = {p["slug"]: p for p in PUBLISHED_POSTS}
+    have = set(re.findall(r"<loc>https://parispullen\.com/(journal-[^<]+\.html)</loc>", xml))
+    missing = [f'  <url><loc>https://parispullen.com/{article_url(by_slug[s])}</loc>'
+               f"<changefreq>yearly</changefreq><priority>0.6</priority></url>"
+               for s in by_slug if article_url(by_slug[s]) not in have]
+    if missing:
+        xml = xml.replace("</urlset>", "\n".join(missing) + "\n</urlset>", 1)
+
+    def repl(m):
+        loc, rest = m.group(1), m.group(2)
+        rest = re.sub(r"<image:image>.*?</image:image>", "", rest)
+        sm = re.match(r"journal-(.+)\.html$", loc.split("/")[-1])
+        img_block = ""
+        if sm and sm.group(1) in by_slug:
+            post = by_slug[sm.group(1)]
+            hero = post.get("hero") or {}
+            if hero.get("img") and hero.get("ext"):
+                img_block = (
+                    "<image:image>"
+                    f"<image:loc>https://parispullen.com/assets/img/{hero['img']}.{hero['ext']}</image:loc>"
+                    f"<image:title>{xesc(post['title'])}</image:title>"
+                    "</image:image>")
+        return f"<url><loc>{loc}</loc>{rest}{img_block}</url>"
+
+    xml = re.sub(
+        r"<url><loc>(https://parispullen\.com/journal-[^<]+\.html)</loc>(.*?)</url>",
+        repl, xml)
+    sp.write_text(xml, encoding="utf-8")
+    print(f"sitemap.xml updated ({len(by_slug)} journal urls, +{len(missing)} added)")
+
+
 if __name__ == "__main__":
     build_journal_index()
     build_article_pages()
+    build_feed()
+    update_sitemap()
