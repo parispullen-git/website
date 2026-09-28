@@ -317,7 +317,7 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
         wardrobe_cta = (
             '<a class="cta pent__open" href="/style-artifacts.html?embed=1" data-style-portal style="margin-top:var(--s2)">'
             '<span>The Style</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>'
-            if (key == "suit") or (f["id"] == "closet" and key == "suits") else ""
+            if (key == "suit") or (f["id"] in ("closet", "penthouse-living") and key == "suits") else ""
         )
         tag = f'Level {f["lvl"]} &#183; Artifact'
         if f["id"] == "kitchen" and key == "hellofresh":
