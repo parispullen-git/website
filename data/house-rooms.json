@@ -429,22 +429,22 @@
     "arts": [
       {
         "id": "posters",
-        "name": "The Posters",
+        "name": "The Watch List",
         "x": "10%",
         "y": "32%",
-        "desc": "All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.",
+        "desc": "A private register of films and series: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.",
         "specs": [
           [
-            "Register",
-            "One"
+            "Collection",
+            "Films and series"
           ],
           [
-            "Claimed purpose",
-            "Research"
+            "Open",
+            "The Watch List"
           ],
           [
-            "Actual",
-            "Partly"
+            "Programming",
+            "Always evolving"
           ]
         ]
       }

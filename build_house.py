@@ -287,6 +287,9 @@ CANDLE_COMING_SOON = '''<div class="coming-soon">
 GUIDE_PORTAL_CTA = ('<button type="button" class="cta pent__open" data-guide-portal style="margin-top:var(--s2)">'
     '<span>Explore the City Guide</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></button>')
 
+WATCH_LIST_CTA = ('<a class="cta pent__open" href="/the-watch-list.html?embed=1" data-watch-list-portal style="margin-top:var(--s2)">'
+    '<span>Open The Watch List</span><span class="cta__arrow" aria-hidden="true">&#8594;</span></a>')
+
 def floor_html(f):
     grade = (" "+f["grade"]) if f.get("grade") else ""
     arts, panels = [], []
@@ -326,6 +329,8 @@ f'''        <button class="artifact" style="--x:{x};--y:{y}" data-artifact="{key
             tag = f'Level {f["lvl"]} &#183; Artifact &#183; HelloFresh &#215; Paris Pullen'
         elif key == "window":
             wardrobe_cta = GUIDE_PORTAL_CTA
+        elif f["id"] == "cinema" and key == "posters":
+            wardrobe_cta = WATCH_LIST_CTA
         elif key == "journal":
             # Both the Living Room's face-down journal and the Study's
             # pencil-marked draft point at the same published dispatches.
@@ -539,12 +544,12 @@ html = f'''<!DOCTYPE html>
 <script src="assets/js/room-pager.js?v=17" defer></script>
 <script src="assets/js/nav-panel.js?v=16" defer></script>
 <script src="assets/js/world.js?v=16" defer></script>
-<script src="assets/js/tv-remote.js?v=17" defer></script>
+<script src="assets/js/tv-remote.js?v=18" defer></script>
 <script src="assets/js/guide-portal.js?v=16" defer></script>
 <script src="assets/js/gym-portal.js?v=16" defer></script>
 <script src="assets/js/vault-entrance.js?v=16" defer></script>
 <script src="assets/js/piano-player.js?v=17" defer></script>
-<script src="assets/js/artifact-experiences.js?v=6" defer></script>\n<script src="assets/js/site-audio.js?v=2" defer></script>
+<script src="assets/js/artifact-experiences.js?v=7" defer></script>\n<script src="assets/js/site-audio.js?v=2" defer></script>
 </body>
 </html>
 '''

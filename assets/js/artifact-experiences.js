@@ -265,6 +265,20 @@
     portal.showModal();
   }
 
+  function watchListPortal(spot) {
+    const existing = document.getElementById('watch-list-portal');
+    if (existing) { existing.showModal(); return; }
+    const portal = document.createElement('dialog');
+    portal.id = 'watch-list-portal';
+    portal.className = 'ae-dialog';
+    portal.innerHTML = '<header class="ae-header ae-header--guide"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE WATCH LIST · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to room ×</button></header><iframe title="The Watch List" src="/the-watch-list.html?embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#080a0d"></iframe>';
+    document.body.appendChild(portal);
+    portal.querySelector('.ae-close').addEventListener('click', () => portal.close());
+    portal.addEventListener('click', event => { if (event.target === portal) portal.close(); });
+    portal.addEventListener('close', () => { portal.remove(); if (spot?.isConnected) spot.focus({preventScroll:true}); });
+    portal.showModal();
+  }
+
   function blueprintPortal(spot) {
     const existing = document.getElementById('blueprint-room-portal');
     if (existing) { existing.showModal(); return; }
@@ -290,7 +304,7 @@
     else if(key==='jacket'||key==='polo')capsule(spot,panel,false);
     else if(key==='cocktails')cocktailPortal(spot);
     else if(key==='recordplayer')records(spot);
-    else if(key==='posters')cinema(spot);
+    else if(key==='posters')watchListPortal(spot);
     else if(['journal','pullenlaws'].includes(key))reading(spot,panel,key);
     else gallery(spot,panel,key);
     return true;

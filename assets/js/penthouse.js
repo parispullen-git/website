@@ -106,7 +106,7 @@
       { key:'oxknit-study', name:'The Polo', x:'49%', y:'31%', body:"Dark green cable knit, sleeves pushed to the forearm &#8212; the version of him that answers email after the desk lamp is the only light left on. OXKNIT again, the same collaboration as the one on the stairs downstairs, cut for a colder register.", specs:[['Collection', 'OXKNIT × Paris Pullen'], ['Knit', 'Cable'], ['Also worn', 'The Living Room']] },
     ],
     'cinema': [
-      { key:'posters', name:'The Posters', x:'10%', y:'32%', body:'All one register: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.', specs:[['Register', 'One'], ['Claimed purpose', 'Research'], ['Actual', 'Partly']] },
+      { key:'posters', name:'The Watch List', x:'10%', y:'32%', body:'A private register of films and series: men in tailoring, making decisions, usually badly. He will tell you it is research. It is partly research.', specs:[['Collection', 'Films and series'], ['Open', 'The Watch List'], ['Programming', 'Always evolving']] },
     ],
     'gym': [
       { key:'boxer', name:'The After Hours', x:'89%', y:'33%', body:"Black leather, brass monogram, hung dead centre of the room. He doesn't skip this one, ever &#8212; the rest of the gym is maintenance, this is the part he actually shows up for.", specs:[['Material', 'Leather'], ['Skipped', 'Never'], ['Open a challenge', 'After Hours']] },

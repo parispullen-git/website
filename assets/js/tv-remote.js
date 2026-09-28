@@ -1085,6 +1085,24 @@
 
     function setSource(src) { activeSource = src; render(); }
 
+    // Cinema's Guide is not another short YouTube channel list. It is the
+    // hotel's complete curated library, presented in the same full Watch
+    // List experience as the Cinema artifact and the Artifact selector.
+    function openWatchList() {
+      close();
+      var old = document.getElementById('remote-watch-list-portal');
+      if (old) { old.showModal(); return; }
+      var portal = document.createElement('dialog');
+      portal.id = 'remote-watch-list-portal';
+      portal.className = 'ae-dialog';
+      portal.innerHTML = '<header class="ae-header ae-header--guide"><div class="ae-brand"><span class="foxx" aria-hidden="true"></span><span class="ae-kicker">THE WATCH LIST · PARIS PULLEN</span></div><button class="ae-close" type="button">Return to remote ×</button></header><iframe title="The Watch List" src="/the-watch-list.html?embed=1" style="display:block;width:100%;height:calc(100% - 58px);min-height:72vh;border:0;background:#080a0d"></iframe>';
+      document.body.appendChild(portal);
+      portal.querySelector('.ae-close').addEventListener('click', function () { portal.close(); });
+      portal.addEventListener('click', function (event) { if (event.target === portal) portal.close(); });
+      portal.addEventListener('close', function () { portal.remove(); toggleBtn.focus({ preventScroll: true }); });
+      portal.showModal();
+    }
+
     function open(src) {
       if (src) setSource(src);
       else render();
@@ -1255,6 +1273,7 @@
         case 'ff': if (st) st.seekFf(); break;
         case 'guide':
           if (!st) break;
+          if (activeSource === 'cinema') { openWatchList(); break; }
           renderGuide(st);
           guidePanel.hidden = false;
           break;
