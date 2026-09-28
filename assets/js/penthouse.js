@@ -78,7 +78,7 @@
       { key:'vault', name:'The Vault', x:'81%', y:'48%', body:"Brass wheel, black steel, set into the wall and not hidden behind anything. A safe nobody can see is a safe somebody goes looking for. What's inside isn't paper.", specs:[['Concealed', 'No'], ['Contents', 'UR Welcome'], ['Combination', 'One person']] },
       { key:'candle', name:'The Candle', x:'62%', y:'46%', body:'Unlit, on the back counter, waiting on a launch date nobody will confirm yet. UR Welcome &#8212; coming soon.', specs:[['Status', 'Coming soon'], ['Lit', 'Not yet']] },
       { key:'oxknit', name:'The Polo', x:'29%', y:'21%', body:"Knit and collared, dark as the room around it &#8212; the one piece on him tonight that isn't from the Closet. OXKNIT cut this one to his spec, and he wears it the same way he wears everything else: like it was always his.", specs:[['Collection', 'OXKNIT × Paris Pullen'], ['Fit', 'Tailored'], ['Worn', 'Off the rack, on him only']] },
-      { key:'suits', name:"The Gentlemen's Guide to Suits", x:'44.5%', y:'66.5%', body:"The Gentlemen's Guide to Suits sits on the ottoman with the SuitSupply and Indochino boxes: the working system for getting dressed with intention.", specs:[['Artifact', "The Gentlemen's Guide to Suits"], ['Explore', 'The Blueprints and The Wardrobe']] },
+      { key:'suits', name:"The Gentlemen’s Guide to Suits", x:'44.5%', y:'66.5%', body:"The Gentlemen’s Guide to Suits sits on the ottoman with the SuitSupply and Indochino boxes: the working system for getting dressed with intention.", specs:[['Artifact', "The Gentlemen’s Guide to Suits"], ['Explore', 'The Blueprints and The Wardrobe']] },
     ],
     'music-lounge': [
       { key:'recordplayer', name:'The Record Player', x:'37%', y:'32%', body:'ATF to OVO &#8212; the complete list, every song in chronological order, every mixtape he could track down. Queued on shuffle and left running.', specs:[['Plays', 'One playlist, shuffled'], ['Manual skips', 'Yes']] },
@@ -96,7 +96,7 @@
     ],
     'kitchen': [
       { key:'suit', name:'The Wardrobe', x:'58.3%', y:'42.1%', body:'The Wardrobe: a focused system for getting dressed with intention.', specs:[['Artifact', 'The Wardrobe']] },
-      { key:'hellofresh', name:"The Gentlemen's CookBook", x:'58.5%', y:'63.8%', body:'The recipe card and ingredients on the island.', specs:[['Partner', 'HelloFresh']] },
+      { key:'hellofresh', name:"The Gentlemen’s CookBook", x:'58.5%', y:'63.8%', body:'The recipe card and ingredients on the island.', specs:[['Partner', 'HelloFresh']] },
     ],
     'study': [
       { key:'monogram', name:'The Monogram', x:'47%', y:'11%', body:'Brass, wall-mounted, deliberately the only branded object in the entire apartment. He is aware of the contradiction and finds it funny.', specs:[['Material', 'Brass'], ['Other branding here', 'None'], ['Self-aware', 'Entirely']] },
