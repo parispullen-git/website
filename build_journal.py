@@ -169,6 +169,15 @@ ARTICLE_CSS = '''<style>
   .jread-credit{margin-top:var(--s4);font-family:var(--font-mono);font-size:var(--t-micro);
     letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
 
+  /* Companion podcast player ("Listen to this entry -- Paris and Foxx talk
+     through it"). Rendered only when assets/audio/journal-<slug>.mp3 exists;
+     see scripts/journal-podcast-playbook.md. */
+  .jread-listen{margin-top:var(--s6);border:1px solid var(--rule);border-radius:2px;
+    padding:var(--s4) var(--s5);background:var(--charcoal);max-width:var(--measure)}
+  .jread-listen p{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.14em;
+    text-transform:uppercase;color:var(--brass);margin:0 0 var(--s3)}
+  .jread-listen audio{width:100%;display:block}
+
   /* Multiple in-body images (MENWITH-style: stacked pair up top, or a
      single full-width frame), interleaved between text via IMG(). */
   .jread-media{margin-top:var(--s7);max-width:var(--measure)}
@@ -703,6 +712,20 @@ def next_published_after(index):
             return candidate
     return None
 
+def audio_html(post):
+    # Companion podcast episode for this entry, generated per
+    # scripts/journal-podcast-playbook.md. The player only renders when the
+    # MP3 actually exists in the checkout -- entries without one yet simply
+    # get no player, so the backfill can proceed entry by entry.
+    audio = Path(__file__).resolve().parent / "assets" / "audio" / f"journal-{post['slug']}.mp3"
+    if not audio.exists():
+        return ""
+    return ('''    <aside class="jread-listen reveal">
+      <p>Listen to this entry &#8212; Paris and Foxx talk through it</p>
+      <audio controls preload="metadata" src="assets/audio/journal-''' + post["slug"] + '''.mp3"></audio>
+    </aside>
+''')
+
 def build_article_pages():
     # Every post gets a real journal-<slug>.html page -- including drafts,
     # so "Preview" in the dashboard can link to the actual page instead of
@@ -753,6 +776,8 @@ def build_article_pages():
       <h1 class="display display--h1">{esc(post['title'])}</h1>
       <p class="lede">{post['stand']}</p>
     </header>
+
+    {audio_html(post)}
 
     {hero_html(post, forpage=True)}
 
