@@ -20,3 +20,9 @@
 /assets/img/city-guide/*
   Cross-Origin-Resource-Policy: same-site
   X-Content-Type-Options: nosniff
+
+# The Book 001 reader assembles the PDF in-browser from chunk-*.b64 files
+# and renders it via a blob: URL, so blob: is allowed for frame-src and
+# object-src on the reader page only. The global policy above is unchanged.
+/blueprint-book-001-reader
+  Content-Security-Policy: default-src 'self' https: data:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data:; media-src 'self' https: data:; font-src 'self' https: data:; connect-src 'self' https:; frame-src 'self' https: blob:; object-src 'self' blob:; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://formspree.io mailto:
