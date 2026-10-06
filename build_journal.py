@@ -630,7 +630,7 @@ def build_journal_index():
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3BGWGF9E8"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){{dataLayer.push(arguments);}}
   gtag('js', new Date());
 
   gtag('config', 'G-D3BGWGF9E8');
@@ -803,7 +803,7 @@ def build_article_pages():
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3BGWGF9E8"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){{dataLayer.push(arguments);}}
   gtag('js', new Date());
 
   gtag('config', 'G-D3BGWGF9E8');
