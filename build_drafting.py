@@ -144,6 +144,15 @@ def proposal_page(c):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->"
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3BGWGF9E8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D3BGWGF9E8');
+</script>
 {HEAD}
 <title>{c['client']} &#8212; Proposal</title>
 <style>{BASE_CSS}{PROPOSAL_CSS}</style>
@@ -385,6 +394,15 @@ potential = open_pipeline * BUILD_FEE
 index_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->"
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3BGWGF9E8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D3BGWGF9E8');
+</script>
 {HEAD}
 <title>Level 19 &#8212; The Drafting Room</title>
 <style>{BASE_CSS}
