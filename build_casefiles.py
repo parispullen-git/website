@@ -87,7 +87,7 @@ html = f"""<!DOCTYPE html>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3BGWGF9E8"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){{dataLayer.push(arguments);}}
   gtag('js', new Date());
 
   gtag('config', 'G-D3BGWGF9E8');
