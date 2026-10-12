@@ -423,12 +423,18 @@
       return adj[d] ? ' data-' + d + '="' + adj[d] + '"' : '';
     }).join('');
 
+    var originalImage = {
+      src: 'assets/img/' + room.img + '.jpg?v=' + (room.imgVersion || IMG_VER),
+      srcset: 'assets/img/' + room.img + '@sm.jpg?v=' + (room.imgVersion || IMG_VER) + ' 1200w, assets/img/' + room.img + '.jpg?v=' + (room.imgVersion || IMG_VER) + ' 2400w'
+    };
+    var image = window.PenthouseSeason ? window.PenthouseSeason.sources(room.id, originalImage) : originalImage;
+
     return '<section class="floor-scene" id="' + room.id + '" tabindex="-1" aria-label="' + esc(room.lvl) + ' — ' + esc(room.name) + '"' + dirAttrs + '>' +
       '<div class="floor-scene__surface">' +
         '<div class="floor-scene__canvas">' +
           '<div class="floor-scene__view">' +
-            '<img src="assets/img/' + room.img + '.jpg?v=' + (room.imgVersion || IMG_VER) + '" ' +
-            'srcset="assets/img/' + room.img + '@sm.jpg?v=' + (room.imgVersion || IMG_VER) + ' 1200w, assets/img/' + room.img + '.jpg?v=' + (room.imgVersion || IMG_VER) + ' 2400w" ' +
+            '<img src="' + esc(image.src) + '" srcset="' + esc(image.srcset) + '" ' +
+            'data-original-src="' + esc(originalImage.src) + '" data-original-srcset="' + esc(originalImage.srcset) + '" ' +
             'sizes="100vw" alt="' + esc(room.name) + '" loading="lazy" width="2400" height="1350">' +
             buildTVHTML(TV_SCREENS[room.id], room.id) +
             '<div class="artifacts">' + artsHTML + remoteNodeHTML(room.id) + cityLinkHTML(room.id) + '</div>' +

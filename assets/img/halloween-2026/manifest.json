@@ -1,0 +1,77 @@
+{
+  "season": "Halloween 2026",
+  "timezone": "America/New_York",
+  "ends_at": "2026-11-01T00:00:00-04:00",
+  "rooms": [
+    {
+      "room": "living",
+      "original_url": "https://parispullen.com/assets/img/room-living-v7.jpg",
+      "original_sha256": "ae5b300a353f4f58022e36627717a1a656a83374157db7899ebc09a74ab829cd",
+      "halloween_image": "room-living.jpg",
+      "mobile_image": "room-living@sm.jpg"
+    },
+    {
+      "room": "closet",
+      "original_url": "https://parispullen.com/assets/img/room-closet-v7.jpg",
+      "original_sha256": "0ecec6632e55ca439ff4d9af191c16a23f544086a1e8afacdd098434eaf1c5c6",
+      "halloween_image": "room-closet.jpg",
+      "mobile_image": "room-closet@sm.jpg"
+    },
+    {
+      "room": "bedroom",
+      "original_url": "https://parispullen.com/assets/img/room-bedroom.jpg",
+      "original_sha256": "d9c940ef45fa7a5ba32843f3e8d4c053a6ddea3963da3c9a6eea57ec0bcc30b0",
+      "halloween_image": "room-bedroom.jpg",
+      "mobile_image": "room-bedroom@sm.jpg"
+    },
+    {
+      "room": "bath",
+      "original_url": "https://parispullen.com/assets/img/room-bath.jpg",
+      "original_sha256": "e89f60f210d8288804d1d665dfbcb0601336f1ddc64a001a46c6e4ad6871d5ee",
+      "halloween_image": "room-bath.jpg",
+      "mobile_image": "room-bath@sm.jpg"
+    },
+    {
+      "room": "kitchen",
+      "original_url": "https://parispullen.com/assets/img/room-kitchen.jpg",
+      "original_sha256": "5af18330a9f5d23c9400144fb862bab5ae74765f97573ad711a8ce03e44f8728",
+      "halloween_image": "room-kitchen.jpg",
+      "mobile_image": "room-kitchen@sm.jpg"
+    },
+    {
+      "room": "study",
+      "original_url": "https://parispullen.com/assets/img/room-study.jpg",
+      "original_sha256": "15f43818ed27ce51fe82b2f9f3922eefc8d2488a9bc85261b889af4286fa0450",
+      "halloween_image": "room-study.jpg",
+      "mobile_image": "room-study@sm.jpg"
+    },
+    {
+      "room": "musiclounge",
+      "original_url": "https://parispullen.com/assets/img/room-musiclounge.jpg",
+      "original_sha256": "b7baad0d58e6eb988d90314126936ddfadeaa0e66d3b133ab329c7e0a604e8eb",
+      "halloween_image": "room-musiclounge.jpg",
+      "mobile_image": "room-musiclounge@sm.jpg"
+    },
+    {
+      "room": "cinema",
+      "original_url": "https://parispullen.com/assets/img/room-cinema.jpg",
+      "original_sha256": "c80f9d0365030975314c1a408f41a83cfb1b5d344ca6573ec5b8b646b6dee0a0",
+      "halloween_image": "room-cinema.jpg",
+      "mobile_image": "room-cinema@sm.jpg"
+    },
+    {
+      "room": "gym",
+      "original_url": "https://parispullen.com/assets/img/room-gym.jpg",
+      "original_sha256": "92c58566ef59f5a5cb63dac39682136c7d2259fefeb9469c35d36cf2b8bbb1bc",
+      "halloween_image": "room-gym.jpg",
+      "mobile_image": "room-gym@sm.jpg"
+    },
+    {
+      "room": "barbershop",
+      "original_url": "https://parispullen.com/assets/img/room-barbershop.jpg",
+      "original_sha256": "3280a2a5c04f64dace6b5056750b8407d48f248c1fddce95014eae2f92817371",
+      "halloween_image": "room-barbershop.jpg",
+      "mobile_image": "room-barbershop@sm.jpg"
+    }
+  ]
+}

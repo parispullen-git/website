@@ -512,6 +512,7 @@ html = f'''<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/world.css?v=22">
 <link rel="stylesheet" href="assets/css/artifact-experiences.css?v=5">
+<script src="assets/js/penthouse-season.js?v=halloween-2026-1" defer></script>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
